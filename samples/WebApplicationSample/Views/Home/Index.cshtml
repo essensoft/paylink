@@ -1,0 +1,898 @@
+﻿@{
+    ViewData["Title"] = ".Net Core 支付产品示例";
+}
+<div id="wrapper">
+
+    <div id="header">
+        <h2>.Net Core 支付产品示例</h2>
+    </div>
+
+    <div id="tabs-api">
+        <ul>
+            <li><a href="#tabs-api-1">前言</a></li>
+            <li><a href="#tabs-api-alipay">支付宝示例</a></li>
+            <li><a href="#tabs-api-wechatpay">微信支付示例</a></li>
+            <li><a href="#tabs-api-qpay">QQ钱包示例</a></li>
+            <li><a href="#tabs-api-jdpay">京东支付示例</a></li>
+        </ul>
+        <div id="tabs-api-1">
+            <h3>官方文档/帮助：</h3>
+            <p>支付宝：<a href="https://openhome.alipay.com/developmentDocument.htm" target="_blank">文档中心</a>、<a href="https://open.alipay.com/support/supportCenter.htm" target="_blank">技术支持中心</a>、<a href="https://openclub.alipay.com/index.php" target="_blank">开发者社区</a></p>
+            <p>微信支付：<a href="https://pay.weixin.qq.com/wiki/doc/api/index.html" target="_blank">开发文档</a>、<a href="http://wxpay.wxutil.com/qa/index.php" target="_blank">问答中心</a>、<a href="http://kf.qq.com/product/wechatpaymentmerchant.html" target="_blank">帮助中心</a></p>
+            <p>QQ钱包：<a href="https://qpay.qq.com/qpaywiki.shtml" target="_blank">开发文档</a>、<a href="http://kf.qq.com/product/qq_enterprise.html" target="_blank">帮助中心</a></p>
+            <p>京东支付：<a href="http://payapi.jd.com/" target="_blank">开发文档</a></p>
+            <h3>*参数配置(3选1,推荐使用3)：</h3>
+            <p>1.使用代码配置如：services.AddAlipay(Options => { Options.AppId = ""; });</p>
+            <p>2.使用<a href="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/configuration?tabs=basicconfiguration" target="_blank">"配置文件"</a>的方式，可在appsetting.json、appsettings.Development.json设置参数</p>
+            <p>3.使用<a href="https://docs.microsoft.com/zh-cn/aspnet/core/security/app-secrets?tabs=visual-studio" target="_blank">"用户机密"</a>的方式，可在VS中右键项目->管理用户机密，再设置参数(与2相似)。</p>
+            <p>*参数详情可见Startup.cs文件的ConfigureServices方法下的注释代码"配置参数"。</p>
+            <h3>*注意：</h3>
+            <p>1.示例开发环境：Windows10、VS2017 15.4.4、.Net Core 2.0.3</p>
+            <p>2.支持渠道:支付宝、微信支付、QQ钱包、京东支付(仅扫码支付)。</p>
+            <p>3.示例使用了依赖注入与用户机密(见Startup.cs文件的ConfigureServices方法)，需要自行配置(可以参考上方"参数配置")。当然你不使用依赖注入方式，自己new AlipayClient(...,...)/new WeChatPayClient(...,...)再调用也可以。</p>
+            <p>4.部分API未做示例，可根据现有示例与官网API参数文档自行调用(除京东支付外其他支付的API基本齐全了)。</p>
+            <p>5.接收支付渠道通知(NotifyController.cs文件)需要公网环境运行(另外记得修改notify_url参数)。</p>
+        </div>
+        <div id="tabs-api-alipay">
+            <div id="tabs-purchase-alipay">
+                <ul>
+                    <li><a href="#tabs-purchase-1">网页支付</a></li>
+                    <li><a href="#tabs-purchase-2">扫码支付</a></li>
+                    <li><a href="#tabs-purchase-3">交易查询</a></li>
+                    <li><a href="#tabs-purchase-4">交易退款</a></li>
+                    <li><a href="#tabs-purchase-5">退款查询</a></li>
+                    <li><a href="#tabs-purchase-6">交易关闭</a></li>
+                    <li><a href="#tabs-purchase-7">单笔转账</a></li>
+                    <li><a href="#tabs-purchase-8">转账查询</a></li>
+                    <li><a href="#tabs-purchase-9">对账查询</a></li>
+                </ul>
+                <div id="tabs-purchase-1">
+                    <form class="api-form" asp-controller="Alipay" asp-action="PagePay" method="post" target="_blank">
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>subject：</label>
+                            <input type="text" name="subject" value="支付宝网页支付测试">
+                        </p>
+                        <p>
+                            <label>total_amount：</label>
+                            <input type="text" name="total_amount" value="0.01" title="单位为元，精确至小数点后2位。">
+                        </p>
+                        <p>
+                            <label>body：</label>
+                            <input type="text" name="body">
+                        </p>
+                        <p>
+                            <label>product_code：</label>
+                            <input type="text" name="product_code" value="FAST_INSTANT_TRADE_PAY">
+                        </p>
+                        <p>
+                            <label>notify_url：</label>
+                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/alipay/pagepay">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://docs.open.alipay.com/270/alipay.trade.page.pay" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+
+                <div id="tabs-purchase-2">
+                    <form class="api-form" asp-controller="Alipay" asp-action="PreCreate" method="post" target="_blank">
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>subject：</label>
+                            <input type="text" name="subject" value="支付宝扫码支付测试">
+                        </p>
+                        <p>
+                            <label>total_amount：</label>
+                            <input type="text" name="total_amount" value="0.01" title="单位为元，精确至小数点后2位。">
+                        </p>
+                        <p>
+                            <label>body：</label>
+                            <input type="text" name="body">
+                        </p>
+                        <p>
+                            <label>notify_url：</label>
+                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/alipay/precreate">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://docs.open.alipay.com/api_1/alipay.trade.precreate" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+
+                <div id="tabs-purchase-3">
+                    <form class="api-form" asp-controller="Alipay" asp-action="Query" method="post" target="_blank">
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no">
+                        </p>
+                        <p>
+                            <label>trade_no：</label>
+                            <input type="text" name="trade_no">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://docs.open.alipay.com/api_1/alipay.trade.query" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+
+                <div id="tabs-purchase-4">
+                    <form class="api-form" asp-controller="Alipay" asp-action="Refund" method="post" target="_blank">
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no">
+                        </p>
+                        <p>
+                            <label>trade_no：</label>
+                            <input type="text" name="trade_no">
+                        </p>
+                        <p>
+                            <label>out_request_no：</label>
+                            <input type="text" name="out_request_no" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>refund_amount：</label>
+                            <input type="text" name="refund_amount">
+                        </p>
+                        <p>
+                            <label>refund_reason：</label>
+                            <input type="text" name="refund_reason">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://docs.open.alipay.com/api_1/alipay.trade.refund" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+
+                <div id="tabs-purchase-5">
+                    <form class="api-form" asp-controller="Alipay" asp-action="RefundQuery" method="post" target="_blank">
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no">
+                        </p>
+                        <p>
+                            <label>trade_no：</label>
+                            <input type="text" name="trade_no">
+                        </p>
+                        <p>
+                            <label>out_request_no：</label>
+                            <input type="text" name="out_request_no">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://docs.open.alipay.com/api_1/alipay.trade.fastpay.refund.query" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+
+                <div id="tabs-purchase-6">
+                    <form class="api-form" asp-controller="Alipay" asp-action="Close" method="post" target="_blank">
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no">
+                        </p>
+                        <p>
+                            <label>trade_no：</label>
+                            <input type="text" name="trade_no">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://docs.open.alipay.com/api_1/alipay.trade.close" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+
+                <div id="tabs-purchase-7">
+                    <form class="api-form" asp-controller="Alipay" asp-action="Trans" method="post" target="_blank">
+                        <p>
+                            <label>out_biz_no：</label>
+                            <input type="text" name="out_biz_no" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>payee_type：</label>
+                            <input type="text" name="payee_type" value="ALIPAY_LOGONID">
+                        </p>
+                        <p>
+                            <label>payee_account：</label>
+                            <input type="text" name="payee_account">
+                        </p>
+                        <p>
+                            <label>amount：</label>
+                            <input type="text" name="amount">
+                        </p>
+                        <p>
+                            <label>remark：</label>
+                            <input type="text" name="remark">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://docs.open.alipay.com/api_28/alipay.fund.trans.toaccount.transfer" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+
+                <div id="tabs-purchase-8">
+                    <form class="api-form" asp-controller="Alipay" asp-action="TransQuery" method="post" target="_blank">
+                        <p>
+                            <label>out_biz_no：</label>
+                            <input type="text" name="out_biz_no">
+                        </p>
+                        <p>
+                            <label>order_id：</label>
+                            <input type="text" name="order_id">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://docs.open.alipay.com/api_28/alipay.fund.trans.order.query" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+
+                <div id="tabs-purchase-9">
+                    <form class="api-form" asp-controller="Alipay" asp-action="Close" method="post" target="_blank">
+                        <p>
+                            <label>bill_date：</label>
+                            <input type="text" name="bill_date">
+                        </p>
+                        <p>
+                            <label>bill_type：</label>
+                            <input type="text" name="bill_type">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://docs.open.alipay.com/api_15/alipay.data.dataservice.bill.downloadurl.query" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+        <div id="tabs-api-wechatpay">
+            <div id="tabs-purchase-wechatpay">
+                <ul>
+                    <li><a href="#tabs-purchase-1">扫码支付</a></li>
+                    <li><a href="#tabs-purchase-2">公众号支付</a></li>
+                    <li><a href="#tabs-purchase-3">查询订单</a></li>
+                    <li><a href="#tabs-purchase-4">关闭订单</a></li>
+                    <li><a href="#tabs-purchase-5">申请退款</a></li>
+                    <li><a href="#tabs-purchase-6">查询退款</a></li>
+                    <li><a href="#tabs-purchase-7">下载对账单</a></li>
+                    <li><a href="#tabs-purchase-8">企业付款到零钱</a></li>
+                    <li><a href="#tabs-purchase-9">查询付款</a></li>
+                    <li><a href="#tabs-purchase-10">获取RSA加密公钥</a></li>
+                    <li><a href="#tabs-purchase-11">企业付款到银行卡</a></li>
+                    <li><a href="#tabs-purchase-12">查询企业付款银行卡</a></li>
+                </ul>
+                <div id="tabs-purchase-1">
+                    <form class="api-form" asp-controller="WeChatPay" asp-action="UnifiedOrder" method="post" target="_blank">
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>body：</label>
+                            <input type="text" name="body" value="微信扫码支付测试">
+                        </p>
+                        <p>
+                            <label>total_fee：</label>
+                            <input type="text" name="total_fee" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>spbill_create_ip：</label>
+                            <input type="text" name="spbill_create_ip" value="127.0.0.1">
+                        </p>
+                        <p>
+                            <label>notify_url：</label>
+                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/wechatpay">
+                        </p>
+                        <p>
+                            <label>trade_type：</label>
+                            <input type="text" name="trade_type" value="NATIVE">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_1" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-2">
+                    <form class="api-form" asp-controller="WeChatPay" asp-action="UnifiedOrder" method="post" target="_blank">
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>body：</label>
+                            <input type="text" name="body" value="微信公众号支付支付测试">
+                        </p>
+                        <p>
+                            <label>total_fee：</label>
+                            <input type="text" name="total_fee" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>spbill_create_ip：</label>
+                            <input type="text" name="spbill_create_ip" value="127.0.0.1">
+                        </p>
+                        <p>
+                            <label>notify_url：</label>
+                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/wechatpay">
+                        </p>
+                        <p>
+                            <label>trade_type：</label>
+                            <input type="text" name="trade_type" value="JSAPI">
+                        </p>
+                        <p>
+                            <label>openid：</label>
+                            <input type="text" name="openid" value="">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-3">
+                    <form class="api-form" asp-controller="WeChatPay" asp-action="OrderQuery" method="post" target="_blank">
+                        <p>
+                            <label>transaction_id：</label>
+                            <input type="text" name="transaction_id">
+                        </p>
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_2" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-4">
+                    <form class="api-form" asp-controller="WeChatPay" asp-action="CloseOrder" method="post" target="_blank">
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_3" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-5">
+                    <form class="api-form" asp-controller="WeChatPay" asp-action="Refund" method="post" target="_blank">
+                        <p>
+                            <label>out_refund_no：</label>
+                            <input type="text" name="out_refund_no" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>transaction_id：</label>
+                            <input type="text" name="transaction_id">
+                        </p>
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no">
+                        </p>
+                        <p>
+                            <label>total_fee：</label>
+                            <input type="text" name="total_fee" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>refund_fee：</label>
+                            <input type="text" name="refund_fee" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>refund_desc：</label>
+                            <input type="text" name="refund_desc">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_4" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-6">
+                    <form class="api-form" asp-controller="WeChatPay" asp-action="RefundQuery" method="post" target="_blank">
+                        <p>
+                            <label>refund_id：</label>
+                            <input type="text" name="refund_id">
+                        </p>
+                        <p>
+                            <label>out_refund_no：</label>
+                            <input type="text" name="out_refund_no">
+                        </p>
+                        <p>
+                            <label>transaction_id：</label>
+                            <input type="text" name="transaction_id">
+                        </p>
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_5" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-7">
+                    <form class="api-form" asp-controller="WeChatPay" asp-action="DownloadBill" method="post" target="_blank">
+                        <p>
+                            <label>bill_date：</label>
+                            <input type="text" name="bill_date">
+                        </p>
+                        <p>
+                            <label>bill_type：</label>
+                            <input type="text" name="bill_type">
+                        </p>
+                        <p>
+                            <label>tar_type：</label>
+                            <input type="text" name="tar_type">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_6" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-8">
+                    <form class="api-form" asp-controller="WeChatPay" asp-action="Transfers" method="post" target="_blank">
+                        <p>
+                            <label>partner_trade_no：</label>
+                            <input type="text" name="partner_trade_no" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>openid：</label>
+                            <input type="text" name="openid">
+                        </p>
+                        <p>
+                            <label>check_name：</label>
+                            <input type="text" name="check_name" value="NO_CHECK">
+                        </p>
+                        <p>
+                            <label>re_user_name：</label>
+                            <input type="text" name="re_user_name">
+                        </p>
+                        <p>
+                            <label>amount：</label>
+                            <input type="text" name="amount" value="100">
+                        </p>
+                        <p>
+                            <label>desc：</label>
+                            <input type="text" name="desc" value="企业付款测试">
+                        </p>
+                        <p>
+                            <label>spbill_create_ip：</label>
+                            <input type="text" name="spbill_create_ip" value="127.0.0.1">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_2" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-9">
+                    <form class="api-form" asp-controller="WeChatPay" asp-action="GetTransferInfo" method="post" target="_blank">
+                        <p>
+                            <label>partner_trade_no：</label>
+                            <input type="text" name="partner_trade_no">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_3" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-10">
+                    <form class="api-form" asp-controller="WeChatPay" asp-action="GetPublicKey" method="post" target="_blank">
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=24_7&index=4" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-11">
+                    <form class="api-form" asp-controller="WeChatPay" asp-action="PayBank" method="post" target="_blank">
+                        <p>
+                            <label>partner_trade_no：</label>
+                            <input type="text" name="partner_trade_no" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>bank_no：</label>
+                            <input type="text" name="bank_no">
+                        </p>
+                        <p>
+                            <label>true_name：</label>
+                            <input type="text" name="true_name">
+                        </p>
+                        <p>
+                            <label>bank_code：</label>
+                            <input type="text" name="bank_code">
+                        </p>
+                        <p>
+                            <label>amount：</label>
+                            <input type="text" name="amount" value="100">
+                        </p>
+                        <p>
+                            <label>desc：</label>
+                            <input type="text" name="desc" value="企业付款到银行卡测试">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=24_2" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-12">
+                    <form class="api-form" asp-controller="WeChatPay" asp-action="QueryBank" method="post" target="_blank">
+                        <p>
+                            <label>partner_trade_no：</label>
+                            <input type="text" name="partner_trade_no">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=24_3" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="tabs-api-qpay">
+            <div id="tabs-purchase-qpay">
+                <ul>
+                    <li><a href="#tabs-purchase-1">扫码支付</a></li>
+                    <li><a href="#tabs-purchase-2">查询订单</a></li>
+                    <li><a href="#tabs-purchase-3">关闭订单</a></li>
+                    <li><a href="#tabs-purchase-4">申请退款</a></li>
+                    <li><a href="#tabs-purchase-5">查询退款</a></li>
+                </ul>
+                <div id="tabs-purchase-1">
+                    <form class="api-form" asp-controller="QPay" asp-action="UnifiedOrder" method="post" target="_blank">
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>body：</label>
+                            <input type="text" name="body" value="QQ钱包扫码支付测试">
+                        </p>
+                        <p>
+                            <label>total_fee：</label>
+                            <input type="text" name="total_fee" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>spbill_create_ip：</label>
+                            <input type="text" name="spbill_create_ip" value="127.0.0.1">
+                        </p>
+                        <p>
+                            <label>notify_url：</label>
+                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/qpay">
+                        </p>
+                        <p>
+                            <label>trade_type：</label>
+                            <input type="text" name="trade_type" value="NATIVE">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=58" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-2">
+                    <form class="api-form" asp-controller="QPay" asp-action="OrderQuery" method="post" target="_blank">
+                        <p>
+                            <label>transaction_id：</label>
+                            <input type="text" name="transaction_id">
+                        </p>
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=60" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-3">
+                    <form class="api-form" asp-controller="QPay" asp-action="CloseOrder" method="post" target="_blank">
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=61" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-4">
+                    <form class="api-form" asp-controller="QPay" asp-action="Refund" method="post" target="_blank">
+                        <p>
+                            <label>out_refund_no：</label>
+                            <input type="text" name="out_refund_no" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>QQtransaction_id：</label>
+                            <input type="text" name="transaction_id">
+                        </p>
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no">
+                        </p>
+                        <p>
+                            <label>refund_fee：</label>
+                            <input type="text" name="refund_fee" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>op_user_idID：</label>
+                            <input type="text" name="op_user_id">
+                        </p>
+                        <p>
+                            <label>op_user_passwd：</label>
+                            <input type="text" name="op_user_passwd">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=62" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-5">
+                    <form class="api-form" asp-controller="QPay" asp-action="RefundQuery" method="post" target="_blank">
+                        <p>
+                            <label>refund_id：</label>
+                            <input type="text" name="refund_id">
+                        </p>
+                        <p>
+                            <label>out_refund_no：</label>
+                            <input type="text" name="out_refund_no">
+                        </p>
+                        <p>
+                            <label>transaction_id：</label>
+                            <input type="text" name="transaction_id">
+                        </p>
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=63" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="tabs-api-jdpay">
+            <div id="tabs-purchase-jdpay">
+                <ul>
+                    <li><a href="#tabs-purchase-1">扫码支付</a></li>
+                    <li><a href="#tabs-purchase-2">交易查询</a></li>
+                    <li><a href="#tabs-purchase-3">退款申请</a></li>
+                    <li><a href="#tabs-purchase-4">退款查询</a></li>
+                </ul>
+                <div id="tabs-purchase-1">
+                    <form class="api-form" asp-controller="JdPay" asp-action="Uniorder" method="post" target="_blank">
+                        <p>
+                            <label>tradeNum:</label>
+                            <input type="text" name="tradeNum" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>tradeName:</label>
+                            <input type="text" name="tradeName" value="京东扫码支付测试">
+                        </p>
+                        <p>
+                            <label>tradeDesc:</label>
+                            <input type="text" name="tradeDesc" value="交易描述">
+                        </p>
+                        <p>
+                            <label>tradeTime:</label>
+                            <input type="text" name="tradeTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>amount:</label>
+                            <input type="text" name="amount" value="1">
+                        </p>
+                        <p>
+                            <label>orderType:</label>
+                            <input type="text" name="orderType" value="1">
+                        </p>
+                        <p>
+                            <label>currency:</label>
+                            <input type="text" name="currency" value="CNY">
+                        </p>
+                        <p>
+                            <label>note:</label>
+                            <input type="text" name="note" value="备注">
+                        </p>
+                        <p>
+                            <label>notifyUrl:</label>
+                            <input type="text" name="notifyUrl" value="http://www.baidu.com/notify/jdpay">
+                        </p>
+                        <p>
+                            <label>tradeType:</label>
+                            <input type="text" name="tradeType" value="QR">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="http://payapi.jd.com/docList.html" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-2">
+                    <form class="api-form" asp-controller="JdPay" asp-action="OrderQuery" method="post" target="_blank">
+                        <p>
+                            <label>tradeNum:</label>
+                            <input type="text" name="tradeNum">
+                        </p>
+                        <p>
+                            <label>oTradeNum:</label>
+                            <input type="text" name="oTradeNum">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="http://payapi.jd.com/docList.html" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-3">
+                    <form class="api-form" asp-controller="JdPay" asp-action="Refund" method="post" target="_blank">
+                        <p>
+                            <label>tradeNum:</label>
+                            <input type="text" name="tradeNum" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>oTradeNum:</label>
+                            <input type="text" name="oTradeNum">
+                        </p>
+                        <p>
+                            <label>amount:</label>
+                            <input type="text" name="amount" value="1">
+                        </p>
+                        <p>
+                            <label>currency:</label>
+                            <input type="text" name="currency" value="CNY">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="http://payapi.jd.com/docList.html" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-4">
+                    <form class="api-form" asp-controller="JdPay" asp-action="RefundQuery" method="post" target="_blank">
+                        <p>
+                            <label>tradeNum:</label>
+                            <input type="text" name="tradeNum">
+                        </p>
+                        <p>
+                            <label>oTradeNum:</label>
+                            <input type="text" name="oTradeNum">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <p class="faq">
+                        <a href="http://payapi.jd.com/docList.html" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+@section Scripts {
+    <script src="~/demo.js" asp-append-version="true"></script>
+}
+@section Styles {
+    <link rel="stylesheet" href="~/demo.css" asp-append-version="true">
+}

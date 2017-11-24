@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>a59ca38e-9b52-44fe-b3d2-8cb5a1641623</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Alipay\Essensoft.AspNetCore.Alipay.csproj" />
+    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.JdPay\Essensoft.AspNetCore.JdPay.csproj" />
+    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.QPay\Essensoft.AspNetCore.QPay.csproj" />
+    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.WeChatPay\Essensoft.AspNetCore.WeChatPay.csproj" />
+  </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
+
+</Project>
