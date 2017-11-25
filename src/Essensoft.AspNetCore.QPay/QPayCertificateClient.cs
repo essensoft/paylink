@@ -6,6 +6,7 @@ using System;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Essensoft.AspNetCore.QPay
 {
@@ -26,7 +27,12 @@ namespace Essensoft.AspNetCore.QPay
         {
             Options = optionsAccessor?.Value ?? new QPayOptions();
             ClientHandler = new HttpClientHandler();
-            ClientHandler.ClientCertificates.Add(new X509Certificate2(Convert.FromBase64String(Options.Certificate), Options.MchId));
+
+            if (File.Exists(Options.Certificate)) // 是文件则以文件名的形式创建，否则以Base64String方式
+                ClientHandler.ClientCertificates.Add(new X509Certificate2(Options.Certificate, Options.MchId));
+            else
+                ClientHandler.ClientCertificates.Add(new X509Certificate2(Convert.FromBase64String(Options.Certificate), Options.MchId));
+
             Client = new HttpClientEx(ClientHandler);
         }
 

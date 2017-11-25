@@ -60,13 +60,15 @@ namespace Essensoft.AspNetCore.Alipay
             }
 
             var sign = parameters["sign"];
-            if (!string.IsNullOrEmpty(sign))
+            if (string.IsNullOrEmpty(sign))
             {
-                var prestr = GetSignContent(parameters);
-                if (!AlipaySignature.RSACheckContent(prestr, sign, alipayPublicKey, signType))
-                {
-                    throw new AlipayException("sign check fail: check Sign and Data Fail JSON also");
-                }
+                throw new AlipayException("sign check fail: sign is Empty!");
+            }
+
+            var prestr = GetSignContent(parameters);
+            if (!AlipaySignature.RSACheckContent(prestr, sign, alipayPublicKey, signType))
+            {
+                throw new AlipayException("sign check fail: check Sign and Data Fail JSON also");
             }
         }
 
