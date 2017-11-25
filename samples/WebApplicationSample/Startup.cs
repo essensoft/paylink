@@ -53,6 +53,7 @@ namespace WebApplicationSample
             //    "MchId": "xxx",
             //    "Key": "xxx",
             //    "Certificate": "xxx",
+            //    "RsaPublicKey": "xxx",
             //  },
             //  "QPay": {
             //    "MchId": "xxx",

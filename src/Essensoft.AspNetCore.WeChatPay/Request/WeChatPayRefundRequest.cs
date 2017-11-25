@@ -67,22 +67,6 @@ namespace Essensoft.AspNetCore.WeChatPay.Request
             };
             return parameters;
         }
-
-        public bool GetIsTransfers()
-        {
-            return false;
-        }
-
-        public bool GetIsBank()
-        {
-            return false;
-        }
-
-        public bool GetIsPayBank()
-        {
-            return false;
-        }
-
         #endregion
     }
 }

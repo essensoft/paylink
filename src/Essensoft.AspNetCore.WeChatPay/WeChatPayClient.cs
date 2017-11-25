@@ -62,7 +62,7 @@ namespace Essensoft.AspNetCore.WeChatPay
                 throw new Exception("sign check fail: Body is Empty!");
             }
 
-            var sign = response.Sign;
+            var sign = response?.Sign;
             if (!response.IsError && !string.IsNullOrEmpty(sign))
             {
                 var cal_sign = Md5.GetMD5WithKey(response.Parameters, Options.Key);
