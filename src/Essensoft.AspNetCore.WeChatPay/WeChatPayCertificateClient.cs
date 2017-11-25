@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.IO;
+using Essensoft.AspNetCore.WeChatPay.Request;
 
 namespace Essensoft.AspNetCore.WeChatPay
 {
@@ -51,14 +52,25 @@ namespace Essensoft.AspNetCore.WeChatPay
         {
             // 字典排序
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
-            if (request.GetIsTransfers()) // 企业付款到零钱
+            if (request is WeChatPayTransfersRequest) // 企业付款到零钱
             {
                 sortedTxtParams.Add(MCHAPPID, Options.AppId);
                 sortedTxtParams.Add(MCHID, Options.MchId);
             }
-            else if (request.GetIsBank()) // 企业付款到银行卡相关接口
+            else if (request is WeChatPayGetPublicKeyRequest)
             {
                 sortedTxtParams.Add(MCH_ID, Options.MchId);
+                sortedTxtParams.Add(SIGN_TYPE, "MD5");
+            }
+            else if (request is WeChatPayPayBankRequest || request is WeChatPayQueryBankRequest)
+            {
+                sortedTxtParams.Add(MCH_ID, Options.MchId);
+            }
+            else if (request is WeChatPayGetTransferInfoRequest)
+            {
+                sortedTxtParams.Add(APPID, Options.AppId);
+                sortedTxtParams.Add(MCH_ID, Options.MchId);
+                sortedTxtParams.Add(SIGN_TYPE, "MD5");
             }
             else // 其他接口
             {
@@ -66,7 +78,7 @@ namespace Essensoft.AspNetCore.WeChatPay
                 sortedTxtParams.Add(MCH_ID, Options.MchId);
             }
 
-            if (request.GetIsPayBank()) // 企业付款到银行卡接口
+            if (request is WeChatPayPayBankRequest) // 企业付款到银行卡接口
             {
                 var no = WeChatPaySignature.Encrypt(sortedTxtParams.GetValue(ENC_BANK_NO), Options.RsaPublicKey);
                 sortedTxtParams.SetValue(ENC_BANK_NO, no);
@@ -76,8 +88,7 @@ namespace Essensoft.AspNetCore.WeChatPay
             }
 
             sortedTxtParams.Add(NONCE_STR, Guid.NewGuid().ToString("N"));
-            sortedTxtParams.Add(SIGN_TYPE, "MD5");
-            sortedTxtParams.Add(SIGN, Md5.GetMD5WithKey(sortedTxtParams, Options.Key));
+            sortedTxtParams.Add(SIGN, Md5.GetMD5WithKey(sortedTxtParams, Options.Key, !(request is WeChatPayGetPublicKeyRequest))); // 获取公钥 不排除sign_type
 
             var body = await Client.DoPostAsync(request.GetRequestUrl(), sortedTxtParams);
             var parser = new WeChatPayXmlParser<T>();

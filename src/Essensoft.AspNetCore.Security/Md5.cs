@@ -7,12 +7,12 @@ namespace Essensoft.AspNetCore.Security
 {
     public class Md5
     {
-        public static string GetMD5WithKey(SortedDictionary<string, string> parameters, string key)
+        public static string GetMD5WithKey(SortedDictionary<string, string> parameters, string key, bool excludeSignType = true)
         {
             var content = new StringBuilder();
             foreach (var iter in parameters)
             {
-                if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign")
+                if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign" && (excludeSignType ? iter.Key != "sign_type" : true))
                     content.Append(iter.Key).Append('=').Append(iter.Value).Append("&");
             }
             var signContent = content.Append("key=").Append(key).ToString();
