@@ -53,13 +53,11 @@ namespace WebApplicationSample
             //    "MchId": "xxx",
             //    "Key": "xxx",
             //    "Certificate": "xxx",
-            //    "Password": "xxx"
             //  },
             //  "QPay": {
             //    "MchId": "xxx",
             //    "Key": "xxx",
             //    "Certificate": "xxx",
-            //    "Password": "xxx"
             //  },
             //  "JdPay": {
             //    "Merchant": "xxx",

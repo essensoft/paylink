@@ -3,12 +3,26 @@
 <p>微信支付：<a href="https://pay.weixin.qq.com/wiki/doc/api/index.html" target="_blank">开发文档</a>、<a href="http://wxpay.wxutil.com/qa/index.php" target="_blank">问答中心</a>、<a href="http://kf.qq.com/product/wechatpaymentmerchant.html" target="_blank">帮助中心</a></p>
 <p>QQ钱包：<a href="https://qpay.qq.com/qpaywiki.shtml" target="_blank">开发文档</a>、<a href="http://kf.qq.com/product/qq_enterprise.html" target="_blank">帮助中心</a></p>
 <p>京东支付：<a href="http://payapi.jd.com/" target="_blank">开发文档</a></p>
-<h3>*参数配置(3选1,推荐使用3)：</h3>
+<h3>*添加依赖注入：</h3>
+<p>
+    services.AddAlipay();<br />
+    services.AddWeChatPay();<br />
+    services.AddQPay();<br />
+    services.AddJdPay();
+</p>
+<h3>*注册绑定配置(参数配置3)：</h3>
+<p>
+    services.Configure<AlipayOptions>(Configuration.GetSection("Alipay"));<br />
+    services.Configure<WeChatPayOptions>(Configuration.GetSection("WeChatPay"));<br />
+    services.Configure<QPayOptions>(Configuration.GetSection("QPay"));<br />
+    services.Configure<JdPayOptions>(Configuration.GetSection("JdPay"));
+</p>
+<h3>*参数配置方式(3选1,推荐使用3)：</h3>
 <p>1.使用代码配置如：services.AddAlipay(Options => { Options.AppId = ""; });</p>
 <p>2.使用<a href="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/configuration?tabs=basicconfiguration" target="_blank">"配置文件"</a>的方式，可在appsetting.json、appsettings.Development.json设置参数</p>
 <p>3.使用<a href="https://docs.microsoft.com/zh-cn/aspnet/core/security/app-secrets?tabs=visual-studio" target="_blank">"用户机密"</a>的方式，可在VS中右键项目->管理用户机密，再设置参数(与2相似)。</p>
 <p>*参数详情可见Startup.cs文件的ConfigureServices方法下的注释代码"配置参数"。</p>
-<p>*WeChatPay,QPay中的Certificate参数为证书文件转成的Base64字符串(方便配置存储)。</p>
+<p>*WeChatPay,QPay中的Certificate参数可以是文件名或者Base64字符串(将证书文件转成Base64，方便配置存储)。</p>
 <h3>*注意：</h3>
 <p>1.示例开发环境：Windows10、VS2017 15.4.4、.Net Core 2.0.3</p>
 <p>2.支持渠道:支付宝、微信支付、QQ钱包、京东支付(仅扫码支付)。</p>

@@ -41,13 +41,15 @@ namespace Essensoft.AspNetCore.QPay
             }
 
             var sign = response?.Sign;
-            if (!string.IsNullOrEmpty(sign))
+            if (string.IsNullOrEmpty(sign))
             {
-                var cal_sign = Md5.GetMD5WithKey(response.Parameters, Options.Key);
-                if (cal_sign != sign)
-                {
-                    throw new Exception("sign check fail: check Sign and Data Fail!");
-                }
+                throw new Exception("sign check fail: sign is Empty!");
+            }
+
+            var cal_sign = Md5.GetMD5WithKey(response.Parameters, Options.Key);
+            if (cal_sign != sign)
+            {
+                throw new Exception("sign check fail: check Sign and Data Fail!");
             }
         }
     }

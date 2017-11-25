@@ -231,13 +231,15 @@ namespace Essensoft.AspNetCore.Security.Security
 
         private static RSA CreateRSAProvider(RSAParameters rp)
         {
-            CspParameters csp = new CspParameters();
-            csp.KeyContainerName = string.Format("BouncyCastle-{0}", Guid.NewGuid());
-            RSACryptoServiceProvider rsaCsp = new RSACryptoServiceProvider(csp);
-            rsaCsp.ImportParameters(rp);
-            return rsaCsp;
+            //CspParameters csp = new CspParameters();
+            //csp.KeyContainerName = string.Format("BouncyCastle-{0}", Guid.NewGuid());
+            //RSACryptoServiceProvider rsaCsp = new RSACryptoServiceProvider(csp);
+            //rsaCsp.ImportParameters(rp);
+            var rsa = RSA.Create();
+            rsa.ImportParameters(rp);
+            return rsa;
         }
-	}
+    }
 }
 
 #endif
