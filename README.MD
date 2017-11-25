@@ -8,6 +8,7 @@
 <p>2.使用<a href="https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/configuration?tabs=basicconfiguration" target="_blank">"配置文件"</a>的方式，可在appsetting.json、appsettings.Development.json设置参数</p>
 <p>3.使用<a href="https://docs.microsoft.com/zh-cn/aspnet/core/security/app-secrets?tabs=visual-studio" target="_blank">"用户机密"</a>的方式，可在VS中右键项目->管理用户机密，再设置参数(与2相似)。</p>
 <p>*参数详情可见Startup.cs文件的ConfigureServices方法下的注释代码"配置参数"。</p>
+<p>*WeChatPay,QPay中的Certificate参数为证书文件转成的Base64字符串(方便配置存储)。</p>
 <h3>*注意：</h3>
 <p>1.示例开发环境：Windows10、VS2017 15.4.4、.Net Core 2.0.3</p>
 <p>2.支持渠道:支付宝、微信支付、QQ钱包、京东支付(仅扫码支付)。</p>
