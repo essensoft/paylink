@@ -3,19 +3,23 @@ using Essensoft.AspNetCore.Alipay.Domain;
 using Essensoft.AspNetCore.Alipay.Request;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using Essensoft.AspNetCore.Alipay.Notify;
 
 namespace WebApplicationSample.Controllers
 {
     public class AlipayController : Controller
     {
         public readonly AlipayClient _client = null;
-        public AlipayController(AlipayClient client)
+        private readonly AlipayNotifyClient _notifyClient = null;
+
+        public AlipayController(AlipayClient client, AlipayNotifyClient notifyClient)
         {
             _client = client;
+            _notifyClient = notifyClient;
         }
 
         [HttpPost]
-        public async Task<IActionResult> PagePay(string out_trade_no, string subject, string total_amount, string body, string product_code, string notify_url)
+        public async Task<IActionResult> PagePay(string out_trade_no, string subject, string total_amount, string body, string product_code, string notify_url, string return_url)
         {
             var model = new AlipayTradePagePayModel()
             {
@@ -28,6 +32,7 @@ namespace WebApplicationSample.Controllers
             var req = new AlipayTradePagePayRequest();
             req.SetBizModel(model);
             req.SetNotifyUrl(notify_url);
+            req.SetReturnUrl(return_url);
 
             var response = await _client.PageExecuteAsync(req, null, "GET");
             return Redirect(response.Body);
@@ -165,6 +170,21 @@ namespace WebApplicationSample.Controllers
             req.SetBizModel(builder);
             var response = await _client.ExecuteAsync(req);
             return Ok(response.Body);
+        }
+
+
+        [HttpGet]
+        public IActionResult Return()
+        {
+            try
+            {
+                var notify = _notifyClient.Execute<AlipayTradePagePayReturnResponse>(Request);
+                return Content("success", "text/plain");
+            }
+            catch
+            {
+                return Content("error", "text/plain");
+            }
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Essensoft.AspNetCore.Alipay.Notify
 {
     /// <summary>
     /// 电脑网站支付页面回跳参数
-    /// 更新时间：2017-09-05
+    /// 更新时间：2017-11-02
     /// </summary>
     public class AlipayTradePagePayReturnResponse : AlipayObject
     {

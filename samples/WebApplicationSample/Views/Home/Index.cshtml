@@ -30,10 +30,13 @@
             </p>
             <h3>*注册绑定配置(参数配置3)：</h3>
             <p>
-                services.Configure<AlipayOptions>(Configuration.GetSection("Alipay"));<br />
-                services.Configure<WeChatPayOptions>(Configuration.GetSection("WeChatPay"));<br />
-                services.Configure<QPayOptions>(Configuration.GetSection("QPay"));<br />
-                services.Configure<JdPayOptions>(Configuration.GetSection("JdPay"));
+                services.Configure<AlipayOptions>
+                    (Configuration.GetSection("Alipay"));<br />
+                    services.Configure<WeChatPayOptions>
+                        (Configuration.GetSection("WeChatPay"));<br />
+                        services.Configure<QPayOptions>
+                            (Configuration.GetSection("QPay"));<br />
+                            services.Configure<JdPayOptions>(Configuration.GetSection("JdPay"));
             </p>
             <h3>*参数配置方式(3选1,推荐使用3)：</h3>
             <p>1.使用代码配置如：services.AddAlipay(Options => { Options.AppId = ""; });</p>
@@ -86,6 +89,10 @@
                         <p>
                             <label>notify_url：</label>
                             <input type="text" name="notify_url" value="http://www.baidu.com/notify/alipay/pagepay">
+                        </p>
+                        <p>
+                            <label>return_url：</label>
+                            <input type="text" name="return_url" value="http://www.baidu.com/alipay/return">
                         </p>
                         <p>
                             <label>&nbsp;</label>
