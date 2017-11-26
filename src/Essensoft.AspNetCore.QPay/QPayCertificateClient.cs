@@ -19,21 +19,19 @@ namespace Essensoft.AspNetCore.QPay
 
         public QPayOptions Options { get; set; }
 
-        protected internal HttpClientHandler ClientHandler { get; set; }
-
         protected internal HttpClientEx Client { get; set; }
 
         public QPayCertificateClient(IOptions<QPayOptions> optionsAccessor)
         {
             Options = optionsAccessor?.Value ?? new QPayOptions();
-            ClientHandler = new HttpClientHandler();
 
+            var clientHandler = new HttpClientHandler();
             if (File.Exists(Options.Certificate)) // 是文件则以文件名的形式创建，否则以Base64String方式
-                ClientHandler.ClientCertificates.Add(new X509Certificate2(Options.Certificate, Options.MchId));
+                clientHandler.ClientCertificates.Add(new X509Certificate2(Options.Certificate, Options.MchId));
             else
-                ClientHandler.ClientCertificates.Add(new X509Certificate2(Convert.FromBase64String(Options.Certificate), Options.MchId));
+                clientHandler.ClientCertificates.Add(new X509Certificate2(Convert.FromBase64String(Options.Certificate), Options.MchId));
 
-            Client = new HttpClientEx(ClientHandler);
+            Client = new HttpClientEx(clientHandler);
         }
 
         public QPayCertificateClient(string appId, string appSecret, string mchId, string key, string certificate)
@@ -73,7 +71,7 @@ namespace Essensoft.AspNetCore.QPay
                 throw new Exception("sign check fail: Body is Empty!");
             }
 
-            var sign = response.Sign;
+            var sign = response?.Sign;
             if (!response.IsError && !string.IsNullOrEmpty(sign))
             {
                 var cal_sign = Md5.GetMD5WithKey(response.Parameters, Options.Key);
