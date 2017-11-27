@@ -61,5 +61,11 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         /// </summary>
         [JsonProperty("sku_min_consume")]
         public string SkuMinConsume { get; set; }
+
+        /// <summary>
+        /// 如果一个单品券适用A，B，C三个单品，若设置了该字段为2，则在一笔交易中，A，B，C三个单品加起来最多只有俩件能够享受优惠
+        /// </summary>
+        [JsonProperty("total_max_discount_num")]
+        public string TotalMaxDiscountNum { get; set; }
     }
 }

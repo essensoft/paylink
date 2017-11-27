@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
     public class SsdataFindataOperatorUserinfoCertifyModel : AlipayObject
     {
         /// <summary>
-        /// 系统业务流水号
+        /// 业务流水号，提交用户信息时系统返回
         /// </summary>
         [JsonProperty("biz_no")]
         public string BizNo { get; set; }

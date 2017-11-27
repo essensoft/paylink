@@ -9,6 +9,18 @@ namespace Essensoft.AspNetCore.Alipay.Domain
     public class Voucher : AlipayObject
     {
         /// <summary>
+        /// 是否允许拆分，券在核销的时候是否允许券的面额拆分使用。(仅限渠道类型为ISV企业福利：ISV_ENTERPRISE_BENIFIT的场景使用)
+        /// </summary>
+        [JsonProperty("allow_split")]
+        public bool AllowSplit { get; set; }
+
+        /// <summary>
+        /// 券剩余面额，单位元  券详情查询接口返回，可拆分券中的券详情展示用
+        /// </summary>
+        [JsonProperty("available_amount")]
+        public string AvailableAmount { get; set; }
+
+        /// <summary>
         /// 券副标题
         /// </summary>
         [JsonProperty("brand_name")]
@@ -111,7 +123,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string RelativeTime { get; set; }
 
         /// <summary>
-        /// 券核销时，抹零方式，目前支持：  NOT_AUTO_ROUNDING:不自动抹零  AUTO_ROUNDING_YUAN:自动抹零到元  AUTO_ROUNDING_JIAO: "自动抹零到角  ROUNDING_UP_YUAN:四舍五入到元  ROUNDING_UP_JIAO:四舍五入到角
+        /// 券核销时，抹零方式，目前支持： NOT_AUTO_ROUNDING:不自动抹零 AUTO_ROUNDING_YUAN:自动抹零到元 AUTO_ROUNDING_JIAO:自动抹零到角 ROUNDING_UP_YUAN:四舍五入到元 ROUNDING_UP_JIAO:四舍五入到角
         /// </summary>
         [JsonProperty("rounding_rule")]
         public string RoundingRule { get; set; }

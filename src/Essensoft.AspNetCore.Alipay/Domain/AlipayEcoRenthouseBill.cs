@@ -50,6 +50,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string DeadlineDate { get; set; }
 
         /// <summary>
+        /// 定金抵扣金额
+        /// </summary>
+        [JsonProperty("deduction_amount")]
+        public string DeductionAmount { get; set; }
+
+        /// <summary>
         /// 优惠金额
         /// </summary>
         [JsonProperty("discount_amount")]
@@ -72,6 +78,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         /// </summary>
         [JsonProperty("memo")]
         public string Memo { get; set; }
+
+        /// <summary>
+        /// 最低支付金额
+        /// </summary>
+        [JsonProperty("min_pay_amount")]
+        public string MinPayAmount { get; set; }
 
         /// <summary>
         /// 已支付金额

@@ -14,9 +14,21 @@ namespace Essensoft.AspNetCore.Alipay.Response
         public string BizNo { get; set; }
 
         /// <summary>
+        /// 决策结果，可空，取值当前为REJECT\REVIEW\PASS，产品定制使用。根据产品定制配置，对结果进行决策返回
+        /// </summary>
+        [JsonProperty("decision_result")]
+        public string DecisionResult { get; set; }
+
+        /// <summary>
         /// 申请欺诈评分，分数范围是[0,100]的整数,分数越高信息越真实
         /// </summary>
         [JsonProperty("score")]
         public long Score { get; set; }
+
+        /// <summary>
+        /// 方案ID，可空，产品定制使用。在线可能会存在多个方案并行，方案ID标识当前请求使用的在线方案
+        /// </summary>
+        [JsonProperty("solution_id")]
+        public string SolutionId { get; set; }
     }
 }

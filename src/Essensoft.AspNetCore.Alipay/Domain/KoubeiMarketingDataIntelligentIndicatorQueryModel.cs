@@ -26,6 +26,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public PromoOperatorInfo OperatorContext { get; set; }
 
         /// <summary>
+        /// 外部业务id，请保持足够的复杂，方便数据来源排查
+        /// </summary>
+        [JsonProperty("out_request_no")]
+        public string OutRequestNo { get; set; }
+
+        /// <summary>
         /// 获取的报告时间,格式:yyyy-MM-dd HH:mm:ss
         /// </summary>
         [JsonProperty("report_date")]

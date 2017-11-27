@@ -44,6 +44,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string CertNo { get; set; }
 
         /// <summary>
+        /// 信用业务服务，默认为空，商户入驻信用借还时，特定场景下由芝麻信用借还分配后传入即可，商户自助接入流程里不需要传入该字段，否则会对该字段进行合法性校验
+        /// </summary>
+        [JsonProperty("credit_biz")]
+        public string CreditBiz { get; set; }
+
+        /// <summary>
         /// 押金，金额单位：元。  注：不允许免押金的用户按此金额支付押金；当物品丢失时，赔偿金额不得高于该金额。
         /// </summary>
         [JsonProperty("deposit_amount")]

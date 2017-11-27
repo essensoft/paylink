@@ -25,7 +25,7 @@ namespace Essensoft.AspNetCore.Alipay.Request
         public FileItem BusinessLicenseAuthPic { get; set; }
 
         /// <summary>
-        /// 营业执照号码。该字段目前已无效
+        /// 营业执照号码。被代创建商户运营主体为个人账户必填，企业账户无需填写
         /// </summary>
         public string BusinessLicenseNo { get; set; }
 
@@ -45,7 +45,7 @@ namespace Essensoft.AspNetCore.Alipay.Request
         public string ContactMobile { get; set; }
 
         /// <summary>
-        /// 企业联系人名称
+        /// 联系人名称
         /// </summary>
         public string ContactName { get; set; }
 

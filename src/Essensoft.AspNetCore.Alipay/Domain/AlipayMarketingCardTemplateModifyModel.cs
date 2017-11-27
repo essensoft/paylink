@@ -27,6 +27,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public List<TemplateCardLevelConfDTO> CardLevelConf { get; set; }
 
         /// <summary>
+        /// 卡特定标签，只供特定业务使用，通常接入无需关注
+        /// </summary>
+        [JsonProperty("card_spec_tag")]
+        public string CardSpecTag { get; set; }
+
+        /// <summary>
         /// 栏位信息（卡包详情页面展现的栏位）
         /// </summary>
         [JsonProperty("column_info_list")]

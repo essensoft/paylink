@@ -27,6 +27,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public ConstraintInfo Constraint { get; set; }
 
         /// <summary>
+        /// 圈人限制条件
+        /// </summary>
+        [JsonProperty("crowd_constraint")]
+        public CrowdConstraintInfo CrowdConstraint { get; set; }
+
+        /// <summary>
         /// 智能营销活动的子活动
         /// </summary>
         [JsonProperty("desc")]

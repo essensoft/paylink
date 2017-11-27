@@ -38,6 +38,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string AssignItemId { get; set; }
 
         /// <summary>
+        /// 业务渠道
+        /// </summary>
+        [JsonProperty("biz_tag")]
+        public string BizTag { get; set; }
+
+        /// <summary>
         /// city
         /// </summary>
         [JsonProperty("city")]
@@ -86,10 +92,22 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string LogisticsNo { get; set; }
 
         /// <summary>
+        /// 生产指令描述
+        /// </summary>
+        [JsonProperty("memo")]
+        public string Memo { get; set; }
+
+        /// <summary>
         /// 收件人地址邮编; 收钱码吊牌和贴纸类型不为空
         /// </summary>
         [JsonProperty("postcode")]
         public string Postcode { get; set; }
+
+        /// <summary>
+        /// 生产单号
+        /// </summary>
+        [JsonProperty("produce_order")]
+        public string ProduceOrder { get; set; }
 
         /// <summary>
         /// 省
