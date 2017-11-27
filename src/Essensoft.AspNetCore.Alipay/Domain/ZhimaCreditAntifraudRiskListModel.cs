@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
     public class ZhimaCreditAntifraudRiskListModel : AlipayObject
     {
         /// <summary>
-        /// 地址信息。省+市+区/县+详细地址，其中 省+市+区/县可以为空，长度不超过256，不含",","/u0001"，"|","&","^","\\"
+        /// 地址信息。省+市+区/县+详细地址，长度不超过256，不含",","/u0001"，"|","&","^","\\"
         /// </summary>
         [JsonProperty("address")]
         public string Address { get; set; }

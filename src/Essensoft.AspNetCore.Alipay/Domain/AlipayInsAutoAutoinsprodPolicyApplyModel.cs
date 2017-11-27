@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string EnquiryBizId { get; set; }
 
         /// <summary>
-        /// 指定保险公司支付宝收款账户,一般为保险公司收款账号登录ID，最终以保险师给出示例为准
+        /// 指定保险公司支付宝收款账户,一般为保险公司收款账号登录ID
         /// </summary>
         [JsonProperty("income_account_no")]
         public string IncomeAccountNo { get; set; }

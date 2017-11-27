@@ -15,7 +15,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string AssetId { get; set; }
 
         /// <summary>
-        /// 有效期起
+        /// 资产生效时间
         /// </summary>
         [JsonProperty("effect_time")]
         public string EffectTime { get; set; }
@@ -33,7 +33,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public ForbbidenTime ForbbidenTime { get; set; }
 
         /// <summary>
-        /// 券过期时间
+        /// 资产过期时间
         /// </summary>
         [JsonProperty("invalid_time")]
         public string InvalidTime { get; set; }

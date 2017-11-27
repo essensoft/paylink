@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string AgentIdCardNo { get; set; }
 
         /// <summary>
-        /// 代理人保险师用户唯一标识
+        /// 代理人用户唯一标识
         /// </summary>
         [JsonProperty("agent_user_id")]
         public string AgentUserId { get; set; }

@@ -15,7 +15,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public bool AllowAutoDelay { get; set; }
 
         /// <summary>
-        /// 审批状态。APPROVING：审批中；REJECTED：已驳回；PASS：已通过；（注意：修改接口不能传递该值）
+        /// 审批状态。APPROVING：审批中；REJECTED：已驳回；PASS：已通过；（注意：修改接口无需传递审批状态）
         /// </summary>
         [JsonProperty("audit_status")]
         public string AuditStatus { get; set; }
@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string Desc { get; set; }
 
         /// <summary>
-        /// 活动扩展信息。活动推荐会返回扩展信息，推荐完以后，这里的信息要在活动效果预测，创建接口中带回来,  如果原方案已结束，需要将该方案进行续签，则需要传递该方案的promoId到扩展字段，key：parentSmartPromoId
+        /// 活动扩展信息。活动推荐会返回扩展信息，推荐完以后，这里的信息要在活动效果预测，创建接口中也需要原样带回来；
         /// </summary>
         [JsonProperty("ext_info")]
         public string ExtInfo { get; set; }
@@ -51,7 +51,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public IntelligentPromoEffect ForecastEffect { get; set; }
 
         /// <summary>
-        /// 活动关闭的时间
+        /// 智能营销活动下架的时间
         /// </summary>
         [JsonProperty("gmt_closed")]
         public string GmtClosed { get; set; }
@@ -111,7 +111,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public List<IntelligentPromoDetail> Promos { get; set; }
 
         /// <summary>
-        /// 智能营销活动状态。CREATED：已创建；ENABLED：已生效；CLOSED：已关闭；FINISHED：已完结（注意：修改接口不能传递该值）
+        /// 智能营销活动状态。CREATED：已创建；ENABLED：已生效；CLOSED：已关闭；FINISHED：已完结；DISABLED:已失效（有两种情况会是失效状态，一种是服务商创建方案，商户驳回，一种是服务商创建方案，商户未确认，活动到期。）（注意：修改方案的动作不需要传递方案状态）
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; set; }
@@ -123,7 +123,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public List<string> SubPromoIds { get; set; }
 
         /// <summary>
-        /// 活动展示状态。已创建：CREATED；  REJECTED：创建被驳回；ENABLING：生效中；ONLINE_WAIT_CONFIRM：上架待确认；PUBLISHED：已发布（活动未到开始时间）；ENABLED：已发布已开始；OFFLINE_WAIT_CONFIRM：下架待确认；CLOSING：下架中；CLOSED：已下架（人为干预下架）；FINISHED：已结束（活动到期自然结束）；MODIFYING：修改中；MODIFY_WAIT_CONFIRM：修改待确认；（注意：修改接口不能传递该值）
+        /// 活动展示状态。已创建：CREATED；  REJECTED：创建被驳回；ENABLING：生效中；ONLINE_WAIT_CONFIRM：上架待确认；PUBLISHED：已发布（活动未到开始时间）；ENABLED：已发布已开始；OFFLINE_WAIT_CONFIRM：下架待确认；CLOSING：下架中；CLOSED：已下架（人为干预下架）；FINISHED：已结束（活动到期自然结束）；MODIFYING：修改中；MODIFY_WAIT_CONFIRM：修改待确认；DISABLED：已失效  （注意：修改接口子状态参数不能传递）
         /// </summary>
         [JsonProperty("sub_status")]
         public string SubStatus { get; set; }
@@ -135,7 +135,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string TemplateId { get; set; }
 
         /// <summary>
-        /// 智能活动类型，值如下：RECOMMENDATION：系统推荐；REGISTRATION：报名。在创建时，这个字段需要ISV自己进行决策，在推荐接口会返回优惠力度，比如代金券面额等信息，ISV判断如果优惠力度比这个大或者相同，就用RECOMMENDATION，其他情况用REGISTRATION
+        /// 智能活动类型，值如下：RECOMMENDATION：系统推荐；REGISTRATION：报名。在创建时，这个字段需要ISV自己进行决策，在推荐接口会返回优惠力度，比如代金券面额等信息，ISV判断如果优惠力度比这个大或者相同，就用RECOMMENDATION，其他情况用REGISTRATION，如推荐力度大于实际创建传过来的优惠力度，则创建的时候系统会自动将RECOMMENDATION改为REGISTRATION
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }

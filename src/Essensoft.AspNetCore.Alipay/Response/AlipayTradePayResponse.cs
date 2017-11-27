@@ -40,6 +40,12 @@ namespace Essensoft.AspNetCore.Alipay.Response
         public string BuyerUserId { get; set; }
 
         /// <summary>
+        /// 买家用户类型。CORPORATE:企业用户；PRIVATE:个人用户。
+        /// </summary>
+        [JsonProperty("buyer_user_type")]
+        public string BuyerUserType { get; set; }
+
+        /// <summary>
         /// 支付宝卡余额
         /// </summary>
         [JsonProperty("card_balance")]

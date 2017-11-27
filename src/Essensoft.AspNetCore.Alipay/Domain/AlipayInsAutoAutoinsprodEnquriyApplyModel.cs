@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public InsPerson Agent { get; set; }
 
         /// <summary>
-        /// 保险师代理人userId
+        /// 代理人userId
         /// </summary>
         [JsonProperty("agent_user_id")]
         public string AgentUserId { get; set; }

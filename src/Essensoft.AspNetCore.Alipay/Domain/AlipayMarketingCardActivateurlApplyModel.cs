@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string Callback { get; set; }
 
         /// <summary>
-        /// 需要关注的生活号AppId。若需要在领卡页面展示“关注生活号”提示，可设置此参数为待关注的生活号AppId。生活号快速接入详见：https://doc.open.alipay.com/docs/doc.htm?treeId=193&articleId=105933&docType=1
+        /// 需要关注的生活号AppId。若需要在领卡页面展示“关注生活号”提示，需开通生活号并绑定会员卡。生活号快速接入详见：https://doc.open.alipay.com/docs/doc.htm?treeId=193&articleId=105933&docType=1
         /// </summary>
         [JsonProperty("follow_app_id")]
         public string FollowAppId { get; set; }

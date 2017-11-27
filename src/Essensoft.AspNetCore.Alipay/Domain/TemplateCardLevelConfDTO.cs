@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
     public class TemplateCardLevelConfDTO : AlipayObject
     {
         /// <summary>
-        /// 会员级别 该级别和开卡接口中的levle要一致
+        /// 会员级别 该级别和开卡接口中的level要一致
         /// </summary>
         [JsonProperty("level")]
         public string Level { get; set; }

@@ -9,6 +9,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
     public class AlipayInsSceneApplicationApplyModel : AlipayObject
     {
         /// <summary>
+        /// 用户参与的活动ID
+        /// </summary>
+        [JsonProperty("activity_id")]
+        public string ActivityId { get; set; }
+
+        /// <summary>
         /// 投保人
         /// </summary>
         [JsonProperty("applicant")]
@@ -31,6 +37,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         /// </summary>
         [JsonProperty("effect_start_time")]
         public string EffectStartTime { get; set; }
+
+        /// <summary>
+        /// 标的信息， 保险标的物，产品责任信息
+        /// </summary>
+        [JsonProperty("ins_objects")]
+        public List<InsObject> InsObjects { get; set; }
 
         /// <summary>
         /// 被保险人

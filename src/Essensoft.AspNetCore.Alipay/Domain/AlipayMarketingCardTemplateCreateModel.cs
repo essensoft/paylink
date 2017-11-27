@@ -15,7 +15,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string BizNoPrefix { get; set; }
 
         /// <summary>
-        /// 业务卡号后缀的长度  支付宝业务卡号生成规则：biz_no_prefix(商户指定)卡号前缀 + biz_no_suffix(实时生成）卡号后缀  由于业务卡号最长不超过32位，所以biz_no_suffix_len <= 32 - biz_no_prefix的位数
+        /// 业务卡号后缀的长度，取值范围为[8,32]  支付宝业务卡号生成规则：biz_no_prefix(商户指定)卡号前缀 + biz_no_suffix(实时生成）卡号后缀  由于业务卡号最长不超过32位，所以biz_no_suffix_len <= 32 - biz_no_prefix的位数
         /// </summary>
         [JsonProperty("biz_no_suffix_len")]
         public string BizNoSuffixLen { get; set; }
@@ -31,6 +31,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         /// </summary>
         [JsonProperty("card_level_conf")]
         public List<TemplateCardLevelConfDTO> CardLevelConf { get; set; }
+
+        /// <summary>
+        /// 卡特定标签，只供特定业务使用，通常接入无需关注
+        /// </summary>
+        [JsonProperty("card_spec_tag")]
+        public string CardSpecTag { get; set; }
 
         /// <summary>
         /// 卡类型为固定枚举类型，可选类型如下：  OUT_MEMBER_CARD：外部权益卡
