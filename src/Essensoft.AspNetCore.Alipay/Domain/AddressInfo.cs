@@ -8,19 +8,19 @@ namespace Essensoft.AspNetCore.Alipay.Domain
     public class AddressInfo : AlipayObject
     {
         /// <summary>
-        /// 商户详细经营地址
+        /// 地址。商户详细经营地址或人员所在地点
         /// </summary>
         [JsonProperty("address")]
         public string Address { get; set; }
 
         /// <summary>
-        /// 商户所在城市编码，城市编码是与国家统计局一致，请查询:  http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/  国标省市区号下载：http://aopsdkdownload.cn-hangzhou.alipay-pub.aliyun-inc.com/doc/2016.xls?spm=a219a.7629140.0.0.qRW4KQ&file=2016.xls
+        /// 城市编码，城市编码是与国家统计局一致，请查询:  http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/  国标省市区号下载：http://aopsdkdownload.cn-hangzhou.alipay-pub.aliyun-inc.com/doc/2016.xls?spm=a219a.7629140.0.0.qRW4KQ&file=2016.xls
         /// </summary>
         [JsonProperty("city_code")]
         public string CityCode { get; set; }
 
         /// <summary>
-        /// 商户所在区县编码，区县编码是与国家统计局一致，请查询: http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/ 国标省市区号下载：http://aopsdkdownload.cn-hangzhou.alipay-pub.aliyun-inc.com/doc/2016.xls?spm=a219a.7629140.0.0.qRW4KQ&file=2016.xls
+        /// 区县编码，区县编码是与国家统计局一致，请查询: http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/ 国标省市区号下载：http://aopsdkdownload.cn-hangzhou.alipay-pub.aliyun-inc.com/doc/2016.xls?spm=a219a.7629140.0.0.qRW4KQ&file=2016.xls
         /// </summary>
         [JsonProperty("district_code")]
         public string DistrictCode { get; set; }
@@ -38,7 +38,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string Longitude { get; set; }
 
         /// <summary>
-        /// 商户所在省份编码，  省份编码是与国家统计局一致，请查询:  http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/  国标省市区号下载：http://aopsdkdownload.cn-hangzhou.alipay-pub.aliyun-inc.com/doc/2016.xls?spm=a219a.7629140.0.0.qRW4KQ&file=2016.xls
+        /// 省份编码，  省份编码是与国家统计局一致，请查询:  http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/  国标省市区号下载：http://aopsdkdownload.cn-hangzhou.alipay-pub.aliyun-inc.com/doc/2016.xls?spm=a219a.7629140.0.0.qRW4KQ&file=2016.xls
         /// </summary>
         [JsonProperty("province_code")]
         public string ProvinceCode { get; set; }

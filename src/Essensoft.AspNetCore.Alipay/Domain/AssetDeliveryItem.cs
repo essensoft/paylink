@@ -32,6 +32,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string AssignOutOrderId { get; set; }
 
         /// <summary>
+        /// 物料渠道标识
+        /// </summary>
+        [JsonProperty("biz_tag")]
+        public string BizTag { get; set; }
+
+        /// <summary>
         /// 发送地址
         /// </summary>
         [JsonProperty("from_address")]
@@ -66,6 +72,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         /// </summary>
         [JsonProperty("memo")]
         public string Memo { get; set; }
+
+        /// <summary>
+        /// 面单信息
+        /// </summary>
+        [JsonProperty("print_data")]
+        public string PrintData { get; set; }
 
         /// <summary>
         /// 物料供应商id
