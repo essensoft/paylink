@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Alipay.Domain
 {
@@ -36,6 +37,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         /// </summary>
         [JsonProperty("phone")]
         public string Phone { get; set; }
+
+        /// <summary>
+        /// 商户联系人业务标识枚举，表示商户联系人的职责。异议处理接口人:02;商户关键联系人:06;数据反馈接口人:11;服务联动接口人:08
+        /// </summary>
+        [JsonProperty("tag")]
+        public List<string> Tag { get; set; }
 
         /// <summary>
         /// 联系人类型，取值范围：LEGAL_PERSON：法人；CONTROLLER：实际控制人；AGENT：代理人；OTHER：其他
