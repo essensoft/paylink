@@ -31,15 +31,16 @@
         <div id="tabs-api-alipay">
             <div id="tabs-purchase-alipay">
                 <ul>
-                    <li><a href="#tabs-purchase-1">网页支付</a></li>
-                    <li><a href="#tabs-purchase-2">扫码支付</a></li>
-                    <li><a href="#tabs-purchase-3">交易查询</a></li>
-                    <li><a href="#tabs-purchase-4">交易退款</a></li>
-                    <li><a href="#tabs-purchase-5">退款查询</a></li>
-                    <li><a href="#tabs-purchase-6">交易关闭</a></li>
-                    <li><a href="#tabs-purchase-7">单笔转账</a></li>
-                    <li><a href="#tabs-purchase-8">转账查询</a></li>
-                    <li><a href="#tabs-purchase-9">对账查询</a></li>
+                    <li><a href="#tabs-purchase-1">电脑网站支付</a></li>
+                    <li><a href="#tabs-purchase-2">手机网站支付</a></li>
+                    <li><a href="#tabs-purchase-3">扫码支付</a></li>
+                    <li><a href="#tabs-purchase-4">交易查询</a></li>
+                    <li><a href="#tabs-purchase-5">交易退款</a></li>
+                    <li><a href="#tabs-purchase-6">退款查询</a></li>
+                    <li><a href="#tabs-purchase-7">交易关闭</a></li>
+                    <li><a href="#tabs-purchase-8">单笔转账</a></li>
+                    <li><a href="#tabs-purchase-9">转账查询</a></li>
+                    <li><a href="#tabs-purchase-10">对账查询</a></li>
                 </ul>
                 <div id="tabs-purchase-1">
                     <form class="api-form" asp-controller="Alipay" asp-action="PagePay" method="post" target="_blank">
@@ -49,7 +50,7 @@
                         </p>
                         <p>
                             <label>subject：</label>
-                            <input type="text" name="subject" value="支付宝网页支付测试">
+                            <input type="text" name="subject" value="支付宝电脑网站支付测试">
                         </p>
                         <p>
                             <label>total_amount：</label>
@@ -69,7 +70,7 @@
                         </p>
                         <p>
                             <label>return_url：</label>
-                            <input type="text" name="return_url" value="http://www.baidu.com/alipay/return">
+                            <input type="text" name="return_url" value="http://www.baidu.com/alipay/pagepayreturn">
                         </p>
                         <p>
                             <label>&nbsp;</label>
@@ -81,8 +82,48 @@
                         <a href="https://docs.open.alipay.com/270/alipay.trade.page.pay" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
                 </div>
-
                 <div id="tabs-purchase-2">
+                    <form class="api-form" asp-controller="Alipay" asp-action="WapPay" method="post" target="_blank">
+                        <p>
+                            <label>out_trade_no：</label>
+                            <input type="text" name="out_trade_no" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>subject：</label>
+                            <input type="text" name="subject" value="支付宝手机网站支付测试">
+                        </p>
+                        <p>
+                            <label>total_amount：</label>
+                            <input type="text" name="total_amount" value="0.01" title="单位为元，精确至小数点后2位。">
+                        </p>
+                        <p>
+                            <label>body：</label>
+                            <input type="text" name="body">
+                        </p>
+                        <p>
+                            <label>product_code：</label>
+                            <input type="text" name="product_code" value="QUICK_WAP_WAY">
+                        </p>
+                        <p>
+                            <label>notify_url：</label>
+                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/alipay/wappay">
+                        </p>
+                        <p>
+                            <label>return_url：</label>
+                            <input type="text" name="return_url" value="http://www.baidu.com/alipay/wappayreturn">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://docs.open.alipay.com/203/107090/" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+
+                <div id="tabs-purchase-3">
                     <form class="api-form" asp-controller="Alipay" asp-action="PreCreate" method="post" target="_blank">
                         <p>
                             <label>out_trade_no：</label>
@@ -115,7 +156,7 @@
                     </p>
                 </div>
 
-                <div id="tabs-purchase-3">
+                <div id="tabs-purchase-4">
                     <form class="api-form" asp-controller="Alipay" asp-action="Query" method="post" target="_blank">
                         <p>
                             <label>out_trade_no：</label>
@@ -136,7 +177,7 @@
                     </p>
                 </div>
 
-                <div id="tabs-purchase-4">
+                <div id="tabs-purchase-5">
                     <form class="api-form" asp-controller="Alipay" asp-action="Refund" method="post" target="_blank">
                         <p>
                             <label>out_trade_no：</label>
@@ -169,7 +210,7 @@
                     </p>
                 </div>
 
-                <div id="tabs-purchase-5">
+                <div id="tabs-purchase-6">
                     <form class="api-form" asp-controller="Alipay" asp-action="RefundQuery" method="post" target="_blank">
                         <p>
                             <label>out_trade_no：</label>
@@ -194,7 +235,7 @@
                     </p>
                 </div>
 
-                <div id="tabs-purchase-6">
+                <div id="tabs-purchase-7">
                     <form class="api-form" asp-controller="Alipay" asp-action="Close" method="post" target="_blank">
                         <p>
                             <label>out_trade_no：</label>
@@ -215,7 +256,7 @@
                     </p>
                 </div>
 
-                <div id="tabs-purchase-7">
+                <div id="tabs-purchase-8">
                     <form class="api-form" asp-controller="Alipay" asp-action="Trans" method="post" target="_blank">
                         <p>
                             <label>out_biz_no：</label>
@@ -247,7 +288,7 @@
                     </p>
                 </div>
 
-                <div id="tabs-purchase-8">
+                <div id="tabs-purchase-9">
                     <form class="api-form" asp-controller="Alipay" asp-action="TransQuery" method="post" target="_blank">
                         <p>
                             <label>out_biz_no：</label>
@@ -268,7 +309,7 @@
                     </p>
                 </div>
 
-                <div id="tabs-purchase-9">
+                <div id="tabs-purchase-10">
                     <form class="api-form" asp-controller="Alipay" asp-action="Close" method="post" target="_blank">
                         <p>
                             <label>bill_date：</label>
