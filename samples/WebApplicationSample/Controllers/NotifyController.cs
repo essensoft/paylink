@@ -22,7 +22,7 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// 网页支付异步通知
+        /// 电脑网站支付异步通知
         /// </summary>
         /// <returns></returns>
         [Route("pagepay")]
@@ -32,6 +32,31 @@ namespace WebApplicationSample.Controllers
             try
             {
                 var notify = _client.Execute<AlipayTradePagePayNotifyResponse>(Request);
+                if ("TRADE_SUCCESS" == notify.TradeStatus)
+                {
+                    Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
+
+                    return Content("success", "text/plain");
+                }
+                return NoContent();
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
+        /// <summary>
+        /// 手机支付异步通知
+        /// </summary>
+        /// <returns></returns>
+        [Route("wappay")]
+        [HttpPost]
+        public IActionResult WapPay()
+        {
+            try
+            {
+                var notify = _client.Execute<AlipayTradeWapPayNotifyResponse>(Request);
                 if ("TRADE_SUCCESS" == notify.TradeStatus)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);

@@ -3,13 +3,11 @@
 namespace Essensoft.AspNetCore.Alipay.Notify
 {
     /// <summary>
-    /// 电脑网站支付结果异步通知
+    /// 手机网站支付结果异步通知
     /// 更新时间：2017/10/27
     /// </summary>
-    public class AlipayTradePagePayNotifyResponse : AlipayObject
+    public class AlipayTradeWapPayNotifyResponse : AlipayObject
     {
-        // 公共参数
-
         /// <summary>
         /// 通知时间
         /// </summary>
@@ -27,6 +25,12 @@ namespace Essensoft.AspNetCore.Alipay.Notify
         /// </summary>
         [JsonProperty("notify_id")]
         public string NotifyId { get; set; }
+
+        /// <summary>
+        /// 开发者的app_id
+        /// </summary>
+        [JsonProperty("app_id")]
+        public string AppId { get; set; }
 
         /// <summary>
         /// 编码格式
@@ -53,24 +57,10 @@ namespace Essensoft.AspNetCore.Alipay.Notify
         public string Sign { get; set; }
 
         /// <summary>
-        /// 授权方的app_id
-        /// </summary>
-        [JsonProperty("auth_app_id")]
-        public string AuthAppId { get; set; }
-
-        // 业务参数
-
-        /// <summary>
         /// 支付宝交易号
         /// </summary>
         [JsonProperty("trade_no")]
         public string TradeNo { get; set; }
-
-        /// <summary>
-        /// 开发者的app_id
-        /// </summary>
-        [JsonProperty("app_id")]
-        public string AppId { get; set; }
 
         /// <summary>
         /// 商户订单号
@@ -91,10 +81,22 @@ namespace Essensoft.AspNetCore.Alipay.Notify
         public string BuyerId { get; set; }
 
         /// <summary>
+        /// 买家支付宝账号
+        /// </summary>
+        [JsonProperty("buyer_logon_id")]
+        public string BuyerLogonId { get; set; }
+
+        /// <summary>
         /// 卖家支付宝用户号
         /// </summary>
         [JsonProperty("seller_id")]
         public string SellerId { get; set; }
+
+        /// <summary>
+        /// 卖家支付宝账号
+        /// </summary>
+        [JsonProperty("seller_email")]
+        public string SellerEmail { get; set; }
 
         /// <summary>
         /// 交易状态
@@ -181,15 +183,15 @@ namespace Essensoft.AspNetCore.Alipay.Notify
         public string FundBillList { get; set; }
 
         /// <summary>
-        /// 优惠券信息
-        /// </summary>
-        [JsonProperty("voucher_detail_list")]
-        public string VoucherDetailList { get; set; }
-
-        /// <summary>
         /// 回传参数
         /// </summary>
         [JsonProperty("passback_params")]
         public string PassbackParams { get; set; }
+
+        /// <summary>
+        /// 优惠券信息
+        /// </summary>
+        [JsonProperty("voucher_detail_list")]
+        public string VoucherDetailList { get; set; }
     }
 }

@@ -39,6 +39,26 @@ namespace WebApplicationSample.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> WapPay(string out_trade_no, string subject, string total_amount, string body, string product_code, string notify_url, string return_url)
+        {
+            var model = new AlipayTradeWapPayModel()
+            {
+                Body = body,
+                Subject = subject,
+                TotalAmount = total_amount,
+                OutTradeNo = out_trade_no,
+                ProductCode = product_code,
+            };
+            var req = new AlipayTradeWapPayRequest();
+            req.SetBizModel(model);
+            req.SetNotifyUrl(notify_url);
+            req.SetReturnUrl(return_url);
+
+            var response = await _client.PageExecuteAsync(req, null, "GET");
+            return Redirect(response.Body);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> PreCreate(string out_trade_no, string subject, string total_amount, string body, string notify_url)
         {
             var builder = new AlipayTradePrecreateModel()
@@ -172,13 +192,26 @@ namespace WebApplicationSample.Controllers
             return Ok(response.Body);
         }
 
-
         [HttpGet]
-        public IActionResult Return()
+        public IActionResult PagePayReturn()
         {
             try
             {
                 var notify = _notifyClient.Execute<AlipayTradePagePayReturnResponse>(Request);
+                return Content("success", "text/plain");
+            }
+            catch
+            {
+                return Content("error", "text/plain");
+            }
+        }
+
+        [HttpGet]
+        public IActionResult WapPayReturn()
+        {
+            try
+            {
+                var notify = _notifyClient.Execute<AlipayTradeWapPayReturnResponse>(Request);
                 return Content("success", "text/plain");
             }
             catch
