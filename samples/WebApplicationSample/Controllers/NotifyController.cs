@@ -47,7 +47,7 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// 手机支付异步通知
+        /// 手机网站支付异步通知
         /// </summary>
         /// <returns></returns>
         [Route("wappay")]
