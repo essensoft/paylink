@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Product>Payment</Product>
+    <Company>Essensoft</Company>
+    <Authors>Roc</Authors>
+    <Version>1.0.1</Version>
+    <Description>.Net Core 2.0 支付SDK依赖安全算法库(迁移自BouncyCastle).源码及例程: https://github.com/Essensoft/Payment</Description>
+    <AssemblyVersion>1.0.0.1</AssemblyVersion>
   </PropertyGroup>
 
 </Project>
