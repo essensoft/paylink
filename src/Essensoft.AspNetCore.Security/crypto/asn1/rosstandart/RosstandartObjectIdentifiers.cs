@@ -1,6 +1,8 @@
-﻿namespace Essensoft.AspNetCore.Security.Asn1.Rosstandart
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Asn1.Rosstandart
 {
-    public abstract class RosstandartObjectIdentifiers
+	public abstract class RosstandartObjectIdentifiers
     {
         public static readonly DerObjectIdentifier rosstandart = new DerObjectIdentifier("1.2.643.7");
 

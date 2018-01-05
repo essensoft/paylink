@@ -4,7 +4,7 @@ using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Agreement.Srp
+namespace Essensoft.AspNetCore.Security.Crypto.Agreement.Srp
 {
 	public class Srp6Utilities
 	{

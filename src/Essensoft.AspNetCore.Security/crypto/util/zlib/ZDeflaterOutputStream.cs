@@ -135,7 +135,7 @@ namespace Essensoft.AspNetCore.Security.Utilities.Zlib {
             z.free();
             z=null;
         }
-        
+
 #if PORTABLE
         protected override void Dispose(bool disposing)
         {

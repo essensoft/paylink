@@ -95,6 +95,32 @@ namespace WebApplicationSample.Controllers
                 return NoContent();
             }
         }
+
+        /// <summary>
+        /// 条码支付异步通知
+        /// </summary>
+        /// <returns></returns>
+        [Route("pay")]
+        [HttpPost]
+        public IActionResult Pay()
+        {
+            try
+            {
+                var notify = _client.Execute<AlipayTradePayNotifyResponse>(Request);
+                if ("TRADE_SUCCESS" == notify.TradeStatus)
+                {
+                    Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
+
+                    return Content("success", "text/plain");
+                }
+                return NoContent();
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
     }
 
     [Route("notify/wechatpay")]

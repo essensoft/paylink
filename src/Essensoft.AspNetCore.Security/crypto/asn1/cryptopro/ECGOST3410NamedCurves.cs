@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 
 using Essensoft.AspNetCore.Security.Asn1.Rosstandart;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Math.EC;
 using Essensoft.AspNetCore.Security.Utilities;

@@ -1,10 +1,10 @@
 ﻿using System;
 
-using Essensoft.AspNetCore.Security.Digests;
-using Essensoft.AspNetCore.Security.Parameters;
-using Essensoft.AspNetCore.Security.Utilities;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Macs
+namespace Essensoft.AspNetCore.Security.Crypto.Macs
 {
     /// <summary>
     /// Implementation of DSTU7564 mac mode

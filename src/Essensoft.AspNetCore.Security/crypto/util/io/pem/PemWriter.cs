@@ -1,14 +1,15 @@
 using System;
+using System.Collections;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Utilities.Encoders;
 
 namespace Essensoft.AspNetCore.Security.Utilities.IO.Pem
 {
-    /**
+	/**
 	* A generic PEM writer, based on RFC 1421
 	*/
-    public class PemWriter
+	public class PemWriter
 	{
 		private const int LineLength = 64;
 

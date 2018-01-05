@@ -1,13 +1,15 @@
 using System;
-using Essensoft.AspNetCore.Security.Parameters;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Macs
+namespace Essensoft.AspNetCore.Security.Crypto.Macs
 {
-    /**
+	/**
 	* implementation of GOST 28147-89 MAC
 	*/
-    public class Gost28147Mac : IMac
+	public class Gost28147Mac : IMac
 	{
 		private const int			blockSize = 8;
 		private const int			macSize = 4;

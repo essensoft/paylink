@@ -1,11 +1,14 @@
+using System;
 using System.Collections;
 using System.IO;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Math.EC;
 using Essensoft.AspNetCore.Security.Security;
+using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.IO;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /// <summary>(D)TLS ECDHE key exchange (see RFC 4492).</summary>
     public class TlsECDheKeyExchange

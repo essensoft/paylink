@@ -1,7 +1,9 @@
-namespace Essensoft.AspNetCore.Security
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto
 {
-    /// <remarks>Base interface for a public/private key block cipher.</remarks>
-    public interface IAsymmetricBlockCipher
+	/// <remarks>Base interface for a public/private key block cipher.</remarks>
+	public interface IAsymmetricBlockCipher
     {
 		/// <summary>The name of the algorithm this cipher implements.</summary>
         string AlgorithmName { get; }

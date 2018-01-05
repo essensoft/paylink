@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Asn1.BC
 {
-    public abstract class BCObjectIdentifiers
+	public abstract class BCObjectIdentifiers
 	{
 		// iso.org.dod.internet.private.enterprise.legion-of-the-bouncy-castle
 		// 1.3.6.1.4.1.22554

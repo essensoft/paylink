@@ -1,10 +1,11 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Encodings
+namespace Essensoft.AspNetCore.Security.Crypto.Encodings
 {
     /**
     * this does your basic Pkcs 1 v1.5 padding - whether or not you should be using this

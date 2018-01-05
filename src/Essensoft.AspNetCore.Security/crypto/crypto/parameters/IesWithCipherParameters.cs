@@ -1,4 +1,6 @@
-namespace Essensoft.AspNetCore.Security.Parameters
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
     public class IesWithCipherParameters : IesParameters
     {

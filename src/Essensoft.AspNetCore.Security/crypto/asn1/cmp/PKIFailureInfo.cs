@@ -1,3 +1,5 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Asn1.Cmp
 {
     /**
@@ -41,7 +43,7 @@ namespace Essensoft.AspNetCore.Security.Asn1.Cmp
      * duplicateCertReq    (26) 
      * </pre>
      */
-    public class PkiFailureInfo
+	public class PkiFailureInfo
 		: DerBitString
 	{
         public const int BadAlg               = (1 << 7); // unrecognized or unsupported Algorithm Identifier

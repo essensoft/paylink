@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Asn1.Anssi
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Asn1.Anssi
 {
     public sealed class AnssiObjectIdentifiers
     {

@@ -1,5 +1,7 @@
 using System;
 
+using Essensoft.AspNetCore.Security.Asn1;
+
 namespace Essensoft.AspNetCore.Security.Asn1.Misc
 {
     public class IdeaCbcPar

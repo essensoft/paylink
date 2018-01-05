@@ -1,6 +1,6 @@
 using System;
 
-namespace Essensoft.AspNetCore.Security.Parameters
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
     public class DesEdeParameters
 		: DesParameters

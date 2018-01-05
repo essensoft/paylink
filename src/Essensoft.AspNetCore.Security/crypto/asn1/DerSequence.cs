@@ -1,10 +1,12 @@
+using System;
+using System.Collections;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Asn1
 {
-    public class DerSequence
+	public class DerSequence
 		: Asn1Sequence
 	{
 		public static readonly DerSequence Empty = new DerSequence();

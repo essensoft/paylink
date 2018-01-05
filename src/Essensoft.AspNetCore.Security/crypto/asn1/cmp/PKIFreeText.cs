@@ -1,10 +1,11 @@
 using System;
+using System.Collections;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Asn1.Cmp
 {
-    public class PkiFreeText
+	public class PkiFreeText
 		: Asn1Encodable
 	{
 		internal Asn1Sequence strings;

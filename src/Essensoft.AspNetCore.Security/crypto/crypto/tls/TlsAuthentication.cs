@@ -1,6 +1,9 @@
-namespace Essensoft.AspNetCore.Security.Tls
+using System;
+using System.IO;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
-    public interface TlsAuthentication
+	public interface TlsAuthentication
 	{
 		/// <summary>
 		/// Called by the protocol handler to report the server certificate.

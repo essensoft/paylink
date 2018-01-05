@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Alipay.Domain
 {
@@ -7,6 +8,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
     /// </summary>
     public class AlipayTradeRefundModel : AlipayObject
     {
+        /// <summary>
+        /// 退款包含的商品列表信息，Json格式。  其它说明详见：“商品明细说明”
+        /// </summary>
+        [JsonProperty("goods_detail")]
+        public List<GoodsDetail> GoodsDetail { get; set; }
+
         /// <summary>
         /// 商户的操作员编号
         /// </summary>

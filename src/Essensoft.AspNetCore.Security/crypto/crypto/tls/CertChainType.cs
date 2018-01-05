@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Tls
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /*
      * RFC 3546 3.3.

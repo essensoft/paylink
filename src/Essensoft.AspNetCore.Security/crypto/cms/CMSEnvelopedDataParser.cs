@@ -1,12 +1,15 @@
+using System;
+using System.Collections;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Cms;
 using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Crypto;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    /**
+	/**
 	* Parsing class for an CMS Enveloped Data object from an input stream.
 	* <p>
 	* Note: that because we are in a streaming mode only one recipient can be tried and it is important
@@ -39,7 +42,7 @@ namespace Essensoft.AspNetCore.Security.Cms
 	*  where bufSize is a suitably large buffer size.
 	* </p>
 	*/
-    public class CmsEnvelopedDataParser
+	public class CmsEnvelopedDataParser
 		: CmsContentInfoParser
 	{
 		internal RecipientInformationStore	recipientInfoStore;

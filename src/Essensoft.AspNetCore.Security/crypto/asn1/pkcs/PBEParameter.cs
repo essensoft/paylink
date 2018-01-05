@@ -1,11 +1,12 @@
 using System;
+using System.Collections;
 
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Asn1.Pkcs
 {
-    public class PbeParameter
+	public class PbeParameter
 		: Asn1Encodable
 	{
 		private readonly Asn1OctetString	salt;

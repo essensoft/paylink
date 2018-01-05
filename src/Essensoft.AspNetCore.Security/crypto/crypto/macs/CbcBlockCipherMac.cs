@@ -1,9 +1,9 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Modes;
-using Essensoft.AspNetCore.Security.Paddings;
+using Essensoft.AspNetCore.Security.Crypto.Modes;
+using Essensoft.AspNetCore.Security.Crypto.Paddings;
 
-namespace Essensoft.AspNetCore.Security.Macs
+namespace Essensoft.AspNetCore.Security.Crypto.Macs
 {
     /**
     * standard CBC Block Cipher MAC - if no padding is specified the default of

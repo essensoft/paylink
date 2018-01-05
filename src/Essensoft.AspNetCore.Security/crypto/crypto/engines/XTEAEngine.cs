@@ -1,14 +1,15 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Engines
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
-    /**
+	/**
 	* An XTEA engine.
 	*/
-    public class XteaEngine
+	public class XteaEngine
 		: IBlockCipher
 	{
 		private const int

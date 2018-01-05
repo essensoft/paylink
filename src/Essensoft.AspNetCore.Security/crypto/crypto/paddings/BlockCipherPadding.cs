@@ -1,7 +1,9 @@
+using System;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Security;
 
 
-namespace Essensoft.AspNetCore.Security.Paddings
+namespace Essensoft.AspNetCore.Security.Crypto.Paddings
 {
     /**
      * Block cipher padders are expected to conform to this interface

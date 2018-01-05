@@ -1,6 +1,8 @@
+using System;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Paddings
+namespace Essensoft.AspNetCore.Security.Crypto.Paddings
 {
 
     /// <summary> A padder that adds Null byte padding to a block.</summary>

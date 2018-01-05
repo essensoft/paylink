@@ -1,6 +1,6 @@
 using System;
 
-namespace Essensoft.AspNetCore.Security.Engines
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
     /**
     * this does your basic RSA algorithm.

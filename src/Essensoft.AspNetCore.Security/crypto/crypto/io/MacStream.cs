@@ -1,10 +1,11 @@
+using System;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.IO
+namespace Essensoft.AspNetCore.Security.Crypto.IO
 {
-    public class MacStream
+	public class MacStream
 		: Stream
 	{
 		protected readonly Stream stream;

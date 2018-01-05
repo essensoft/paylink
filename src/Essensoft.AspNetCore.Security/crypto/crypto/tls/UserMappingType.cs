@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Tls
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /// <remarks>RFC 4681</remarks>
     public abstract class UserMappingType

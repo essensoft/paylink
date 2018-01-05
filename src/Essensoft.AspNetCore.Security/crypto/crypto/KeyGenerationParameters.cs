@@ -1,7 +1,7 @@
 using System;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Security.Crypto
 {
     /**
      * The base class for parameters to key generators.

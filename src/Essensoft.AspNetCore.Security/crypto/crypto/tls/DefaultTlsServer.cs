@@ -1,8 +1,11 @@
-﻿
-using Essensoft.AspNetCore.Security.Agreement;
-using Essensoft.AspNetCore.Security.Parameters;
+﻿using System;
+using System.Collections;
+using System.IO;
 
-namespace Essensoft.AspNetCore.Security.Tls
+using Essensoft.AspNetCore.Security.Crypto.Agreement;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public abstract class DefaultTlsServer
         :   AbstractTlsServer

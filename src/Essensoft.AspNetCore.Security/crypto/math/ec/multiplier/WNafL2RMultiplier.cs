@@ -1,3 +1,5 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Math.EC.Multiplier
 {
     /**

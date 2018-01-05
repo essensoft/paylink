@@ -1,16 +1,20 @@
+using System;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Cms;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Generators;
+using Essensoft.AspNetCore.Security.Crypto.IO;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.IO;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    /**
+	/**
 	 * General class for generating a CMS authenticated-data message.
 	 *
 	 * A simple example of usage.
@@ -23,7 +27,7 @@ namespace Essensoft.AspNetCore.Security.Cms
 	 *      CMSAuthenticatedData         data = fact.generate(content, algorithm, "BC");
 	 * </pre>
 	 */
-    public class CmsAuthenticatedDataGenerator
+	public class CmsAuthenticatedDataGenerator
 	    : CmsAuthenticatedGenerator
 	{
 	    /**

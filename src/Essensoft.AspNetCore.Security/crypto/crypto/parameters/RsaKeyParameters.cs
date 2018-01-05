@@ -1,9 +1,11 @@
 using System;
+
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Math;
 
-namespace Essensoft.AspNetCore.Security.Parameters
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
-    public class RsaKeyParameters
+	public class RsaKeyParameters
 		: AsymmetricKeyParameter
     {
         // the value is the product of the 132 smallest primes from 3 to 751

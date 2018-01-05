@@ -1,8 +1,11 @@
+using System;
+
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Security;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    internal class CounterSignatureDigestCalculator
+	internal class CounterSignatureDigestCalculator
 		: IDigestCalculator
 	{
 		private readonly string alg;

@@ -1,5 +1,7 @@
 using System;
 
+using Essensoft.AspNetCore.Security.Utilities;
+
 namespace Essensoft.AspNetCore.Security.Asn1.CryptoPro
 {
     public class Gost3410PublicKeyAlgParameters

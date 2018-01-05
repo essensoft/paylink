@@ -1,10 +1,11 @@
 using System;
+using System.Diagnostics;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Security.Crypto
 {
-    /**
+	/**
 	* A wrapper class that allows block ciphers to be used to process data in
 	* a piecemeal fashion. The BufferedBlockCipher outputs a block only when the
 	* buffer is full and more data is being added, or on a doFinal.
@@ -13,7 +14,7 @@ namespace Essensoft.AspNetCore.Security
 	* OFB one the last block may not be a multiple of the block size.
 	* </p>
 	*/
-    public class BufferedBlockCipher
+	public class BufferedBlockCipher
 		: BufferedCipherBase
 	{
 		internal byte[]			buf;

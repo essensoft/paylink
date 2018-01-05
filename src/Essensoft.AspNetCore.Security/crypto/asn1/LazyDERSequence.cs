@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
+using System.Diagnostics;
 
 namespace Essensoft.AspNetCore.Security.Asn1
 {
-    internal class LazyDerSequence
+	internal class LazyDerSequence
 		: DerSequence
 	{
 		private byte[] encoded;

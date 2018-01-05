@@ -1,5 +1,7 @@
 using System;
 
+using Essensoft.AspNetCore.Security.Math;
+
 namespace Essensoft.AspNetCore.Security.Bcpg.Sig
 {
     /**

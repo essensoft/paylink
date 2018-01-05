@@ -1,6 +1,9 @@
+using System;
+using System.IO;
+
 namespace Essensoft.AspNetCore.Security.Utilities.IO.Pem
 {
-    public interface PemObjectParser
+	public interface PemObjectParser
 	{
 		/// <param name="obj">
 		/// A <see cref="PemObject"/>

@@ -1,12 +1,15 @@
 using System;
 using System.Text;
 
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Security;
+
 namespace Essensoft.AspNetCore.Security.Pkix
 {
-    /// <summary>
-    /// Summary description for PkixCertPathValidatorResult.
-    /// </summary>
-    public class PkixCertPathValidatorResult
+	/// <summary>
+	/// Summary description for PkixCertPathValidatorResult.
+	/// </summary>
+	public class PkixCertPathValidatorResult
 		//: ICertPathValidatorResult
 	{
 		private TrustAnchor trustAnchor;

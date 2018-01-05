@@ -1,9 +1,10 @@
 using System;
 //using Essensoft.AspNetCore.Security.Math;
 //using Essensoft.AspNetCore.Security.Security;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 
-namespace Essensoft.AspNetCore.Security.Generators
+namespace Essensoft.AspNetCore.Security.Crypto.Generators
 {
     /**
     * Generator for MGF1 as defined in Pkcs 1v2

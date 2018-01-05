@@ -1,8 +1,9 @@
 using System;
+using System.IO;
 
 namespace Essensoft.AspNetCore.Security.Bcpg
 {
-    /// <remarks>Basic packet for a modification detection code packet.</remarks>
+	/// <remarks>Basic packet for a modification detection code packet.</remarks>
     public class ModDetectionCodePacket
         : ContainedPacket
     {

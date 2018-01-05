@@ -1,6 +1,8 @@
-namespace Essensoft.AspNetCore.Security.Modes.Gcm
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Modes.Gcm
 {
-    public interface IGcmMultiplier
+	public interface IGcmMultiplier
 	{
 		void Init(byte[] H);
 		void MultiplyH(byte[] x);

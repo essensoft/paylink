@@ -2,9 +2,10 @@ using System;
 
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Math.EC;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 
-namespace Essensoft.AspNetCore.Security.Agreement
+namespace Essensoft.AspNetCore.Security.Crypto.Agreement
 {
     /**
      * P1363 7.2.1 ECSVDP-DH

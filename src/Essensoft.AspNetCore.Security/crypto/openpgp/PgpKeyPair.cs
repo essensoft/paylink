@@ -1,17 +1,19 @@
 using System;
 
+using Essensoft.AspNetCore.Security.Crypto;
+
 namespace Essensoft.AspNetCore.Security.Bcpg.OpenPgp
 {
-    /// <remarks>
-    /// General class to handle JCA key pairs and convert them into OpenPGP ones.
-    /// <p>
-    /// A word for the unwary, the KeyId for an OpenPGP public key is calculated from
-    /// a hash that includes the time of creation, if you pass a different date to the
-    /// constructor below with the same public private key pair the KeyIs will not be the
-    /// same as for previous generations of the key, so ideally you only want to do
-    /// this once.
-    /// </p>
-    /// </remarks>
+	/// <remarks>
+	/// General class to handle JCA key pairs and convert them into OpenPGP ones.
+	/// <p>
+	/// A word for the unwary, the KeyId for an OpenPGP public key is calculated from
+	/// a hash that includes the time of creation, if you pass a different date to the
+	/// constructor below with the same public private key pair the KeyIs will not be the
+	/// same as for previous generations of the key, so ideally you only want to do
+	/// this once.
+	/// </p>
+	/// </remarks>
     public class PgpKeyPair
     {
         private readonly PgpPublicKey	pub;

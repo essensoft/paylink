@@ -1,14 +1,15 @@
+using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Engines
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
-    /**
+	/**
 	* this does your basic RSA algorithm.
 	*/
-    class RsaCoreEngine
+	class RsaCoreEngine
 	{
 		private RsaKeyParameters	key;
 		private bool				forEncryption;

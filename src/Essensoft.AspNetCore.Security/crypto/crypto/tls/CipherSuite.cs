@@ -1,4 +1,4 @@
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /// <summary>
     /// RFC 2246 A.5

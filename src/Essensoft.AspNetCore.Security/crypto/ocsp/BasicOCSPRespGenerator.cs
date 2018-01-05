@@ -5,18 +5,19 @@ using System.IO;
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Ocsp;
 using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Security.Certificates;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.X509;
-using Essensoft.AspNetCore.Security.Operators;
+using Essensoft.AspNetCore.Security.Crypto.Operators;
 
 namespace Essensoft.AspNetCore.Security.Ocsp
 {
-    /**
+	/**
 	 * Generator for basic OCSP response objects.
 	 */
-    public class BasicOcspRespGenerator
+	public class BasicOcspRespGenerator
 	{
 		private readonly IList list = Platform.CreateArrayList();
 

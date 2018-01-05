@@ -1,22 +1,24 @@
 using System;
 using System.Collections;
+using System.Diagnostics;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Cms;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Engines;
-using Essensoft.AspNetCore.Security.Signers;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Engines;
+using Essensoft.AspNetCore.Security.Crypto.Signers;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.X509;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    /**
+	/**
 	* an expanded SignerInfo block from a CMS Signed message
 	*/
-    public class SignerInformation
+	public class SignerInformation
 	{
 		private static readonly CmsSignedHelper Helper = CmsSignedHelper.Instance;
 

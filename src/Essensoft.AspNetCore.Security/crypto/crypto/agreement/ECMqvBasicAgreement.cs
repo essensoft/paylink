@@ -1,9 +1,11 @@
 using System;
-using Essensoft.AspNetCore.Security.Parameters;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Math.EC;
 
-namespace Essensoft.AspNetCore.Security.Agreement
+namespace Essensoft.AspNetCore.Security.Crypto.Agreement
 {
     public class ECMqvBasicAgreement
         : IBasicAgreement

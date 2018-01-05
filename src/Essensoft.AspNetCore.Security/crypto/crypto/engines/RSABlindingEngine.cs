@@ -1,16 +1,17 @@
+using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 
-namespace Essensoft.AspNetCore.Security.Engines
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
-    /**
+	/**
 	* This does your basic RSA Chaum's blinding and unblinding as outlined in
 	* "Handbook of Applied Cryptography", page 475. You need to use this if you are
 	* trying to get another party to generate signatures without them being aware
 	* of the message they are signing.
 	*/
-    public class RsaBlindingEngine
+	public class RsaBlindingEngine
 		: IAsymmetricBlockCipher
 	{
 		private readonly RsaCoreEngine core = new RsaCoreEngine();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 
 using Essensoft.AspNetCore.Security.Asn1;
@@ -13,7 +14,7 @@ using Essensoft.AspNetCore.Security.Utilities.Collections;
 
 namespace Essensoft.AspNetCore.Security.Ocsp
 {
-    class OcspUtilities
+	class OcspUtilities
 	{
 		private static readonly IDictionary algorithms = Platform.CreateHashtable();
         private static readonly IDictionary oids = Platform.CreateHashtable();

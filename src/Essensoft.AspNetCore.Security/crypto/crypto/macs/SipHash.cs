@@ -1,9 +1,9 @@
 ﻿using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
-using Essensoft.AspNetCore.Security.Utilities;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Macs
+namespace Essensoft.AspNetCore.Security.Crypto.Macs
 {
     /// <summary>
     /// Implementation of SipHash as specified in "SipHash: a fast short-input PRF", by Jean-Philippe

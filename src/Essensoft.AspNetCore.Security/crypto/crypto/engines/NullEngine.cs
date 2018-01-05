@@ -1,12 +1,14 @@
 using System;
 
-namespace Essensoft.AspNetCore.Security.Engines
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
-    /**
+	/**
 	* The no-op engine that just copies bytes through, irrespective of whether encrypting and decrypting.
 	* Provided for the sake of completeness.
 	*/
-    public class NullEngine
+	public class NullEngine
 		: IBlockCipher
 	{
 		private bool initialised;

@@ -1,14 +1,16 @@
 using System;
+using System.Text;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Engines
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
-    /// <summary>
-    /// Implementation of Daniel J. Bernstein's Salsa20 stream cipher, Snuffle 2005
-    /// </summary>
-    public class Salsa20Engine
+	/// <summary>
+	/// Implementation of Daniel J. Bernstein's Salsa20 stream cipher, Snuffle 2005
+	/// </summary>
+	public class Salsa20Engine
 		: IStreamCipher
 	{
 		public static readonly int DEFAULT_ROUNDS = 20;

@@ -1,12 +1,13 @@
 using System;
 using System.IO;
 
-using Essensoft.AspNetCore.Security.Engines;
+using Essensoft.AspNetCore.Security.Crypto.Engines;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Security.Crypto
 {
-    public class BufferedIesCipher
+	public class BufferedIesCipher
 		: BufferedCipherBase
 	{
 		private readonly IesEngine engine;

@@ -1,7 +1,8 @@
-﻿
+﻿using System;
+
 using Essensoft.AspNetCore.Security.Math;
 
-namespace Essensoft.AspNetCore.Security.Parameters
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
     public sealed class Srp6GroupParameters
     {

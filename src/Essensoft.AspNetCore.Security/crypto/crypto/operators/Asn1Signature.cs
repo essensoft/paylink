@@ -10,14 +10,15 @@ using Essensoft.AspNetCore.Security.Asn1.Pkcs;
 using Essensoft.AspNetCore.Security.Asn1.TeleTrust;
 using Essensoft.AspNetCore.Security.Asn1.X509;
 using Essensoft.AspNetCore.Security.Asn1.X9;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.IO;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.Collections;
 
-namespace Essensoft.AspNetCore.Security.Operators
+namespace Essensoft.AspNetCore.Security.Crypto.Operators
 {
-    internal class X509Utilities
+	internal class X509Utilities
 	{
         private static readonly Asn1Null derNull = DerNull.Instance;
 

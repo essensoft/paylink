@@ -1,11 +1,12 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Engines
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
-    /**
+	/**
 	* HC-256 is a software-efficient stream cipher created by Hongjun Wu. It 
 	* generates keystream from a 256-bit secret key and a 256-bit initialization 
 	* vector.
@@ -19,7 +20,7 @@ namespace Essensoft.AspNetCore.Security.Engines
 	* http://www.ecrypt.eu.org/stream/hcp3.html
 	* </p>
 	*/
-    public class HC256Engine
+	public class HC256Engine
 		: IStreamCipher
 	{
 		private uint[] p = new uint[1024];

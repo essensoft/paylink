@@ -1,9 +1,9 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Modes;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Modes;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Security.Crypto
 {
 	/**
 	* The AEAD block ciphers already handle buffering internally, so this class

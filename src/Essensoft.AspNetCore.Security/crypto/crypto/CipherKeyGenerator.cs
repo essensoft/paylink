@@ -2,7 +2,7 @@ using System;
 
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Security.Crypto
 {
 	/**
 	 * The base class for symmetric, or secret, cipher key generators.

@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Asn1.Cms
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Asn1.Cms
 {
     public class OtherRevocationInfoFormat
         : Asn1Encodable

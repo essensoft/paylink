@@ -1,10 +1,11 @@
-﻿
-using Essensoft.AspNetCore.Security.Parameters;
-using Essensoft.AspNetCore.Security.Utilities;
+﻿using System;
+
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities.Date;
 
-namespace Essensoft.AspNetCore.Security.Prng
+namespace Essensoft.AspNetCore.Security.Crypto.Prng
 {
     public class X931SecureRandomBuilder
     {

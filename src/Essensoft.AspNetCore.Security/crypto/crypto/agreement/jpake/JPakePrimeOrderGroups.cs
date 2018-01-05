@@ -1,6 +1,6 @@
 ﻿using Essensoft.AspNetCore.Security.Math;
 
-namespace Essensoft.AspNetCore.Security.Agreement.JPake
+namespace Essensoft.AspNetCore.Security.Crypto.Agreement.JPake
 {
     /// <summary>
     /// Standard pre-computed prime order groups for use by J-PAKE.

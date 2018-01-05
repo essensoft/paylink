@@ -1,13 +1,15 @@
 using System;
 using System.IO;
 using Essensoft.AspNetCore.Security.Asn1;
+
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.Date;
 
 namespace Essensoft.AspNetCore.Security.Bcpg.OpenPgp
 {
-    /// <remarks>A PGP signature object.</remarks>
+	/// <remarks>A PGP signature object.</remarks>
     public class PgpSignature
     {
         public const int BinaryDocument = 0x00;

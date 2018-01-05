@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /**
      * RFC 5246 7.4.1.4.1

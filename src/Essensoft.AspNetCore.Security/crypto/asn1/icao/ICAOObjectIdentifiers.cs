@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Asn1.Icao
 {
-    public abstract class IcaoObjectIdentifiers
+	public abstract class IcaoObjectIdentifiers
 	{
 		//
 		// base id

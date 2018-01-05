@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Asn1.Cms
 {
-    public class TimeStampedData
+	public class TimeStampedData
 		: Asn1Encodable
 	{
 		private DerInteger version;

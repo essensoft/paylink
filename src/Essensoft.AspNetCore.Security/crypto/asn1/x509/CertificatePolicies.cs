@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System;
+using System.Text;
 
 namespace Essensoft.AspNetCore.Security.Asn1.X509
 {

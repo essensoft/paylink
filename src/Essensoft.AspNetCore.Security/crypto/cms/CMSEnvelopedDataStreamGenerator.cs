@@ -1,17 +1,25 @@
+using System;
+using System.Collections;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Cms;
+using Essensoft.AspNetCore.Security.Asn1.Nist;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.IO;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Engines;
+using Essensoft.AspNetCore.Security.Crypto.Generators;
+using Essensoft.AspNetCore.Security.Crypto.IO;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Security;
+using Essensoft.AspNetCore.Security.Security.Certificates;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.IO;
+using Essensoft.AspNetCore.Security.X509;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    /**
+	/**
 	* General class for generating a CMS enveloped-data message stream.
 	* <p>
 	* A simple example of usage.
@@ -30,7 +38,7 @@ namespace Essensoft.AspNetCore.Security.Cms
 	* </pre>
 	* </p>
 	*/
-    public class CmsEnvelopedDataStreamGenerator
+	public class CmsEnvelopedDataStreamGenerator
 		: CmsEnvelopedGenerator
 	{
 		private object	_originatorInfo = null;
@@ -279,7 +287,7 @@ namespace Essensoft.AspNetCore.Security.Cms
 
                 // TODO Parent context(s) should really be closed explicitly
 
-				_eiGen.Close();
+                _eiGen.Close();
 
                 if (_outer.unprotectedAttributeGenerator != null)
                 {

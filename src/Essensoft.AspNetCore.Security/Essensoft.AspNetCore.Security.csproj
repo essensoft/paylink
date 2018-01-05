@@ -10,4 +10,14 @@
     <AssemblyVersion>1.0.0.1</AssemblyVersion>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants>TRACE;DEBUG;LIB;NETSTANDARD2_0</DefineConstants>
+    <NoWarn>1701;1702;1705</NoWarn>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DefineConstants>TRACE;LIB;RELEASE;NETSTANDARD2_0</DefineConstants>
+    <NoWarn>1591;618;672,168</NoWarn>
+  </PropertyGroup>
+
 </Project>

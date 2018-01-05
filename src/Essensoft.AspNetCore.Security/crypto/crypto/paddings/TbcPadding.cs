@@ -1,6 +1,8 @@
+using System;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Paddings
+namespace Essensoft.AspNetCore.Security.Crypto.Paddings
 {
 
     /// <summary> A padder that adds Trailing-Bit-Compliment padding to a block.

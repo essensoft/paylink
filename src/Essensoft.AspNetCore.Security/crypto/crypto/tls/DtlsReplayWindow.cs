@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /**
      * RFC 4347 4.1.2.5 Anti-replay

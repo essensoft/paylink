@@ -1,20 +1,25 @@
 using System;
 
-namespace Essensoft.AspNetCore.Security.Generators
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Macs;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Math;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Generators
 {
-    /// <summary>
-    /// Generates keys for the Poly1305 MAC.
-    /// </summary>
-    /// <remarks>
-    /// Poly1305 keys are 256 bit keys consisting of a 128 bit secret key used for the underlying block
-    /// cipher followed by a 128 bit {@code r} value used for the polynomial portion of the Mac. <br/>
-    /// The {@code r} value has a specific format with some bits required to be cleared, resulting in an
-    /// effective 106 bit key. <br/>
-    /// A separately generated 256 bit key can be modified to fit the Poly1305 key format by using the
-    /// {@link #clamp(byte[])} method to clear the required bits.
-    /// </remarks>
-    /// <seealso cref="Poly1305"/>
-    public class Poly1305KeyGenerator
+	/// <summary>
+	/// Generates keys for the Poly1305 MAC.
+	/// </summary>
+	/// <remarks>
+	/// Poly1305 keys are 256 bit keys consisting of a 128 bit secret key used for the underlying block
+	/// cipher followed by a 128 bit {@code r} value used for the polynomial portion of the Mac. <br/>
+	/// The {@code r} value has a specific format with some bits required to be cleared, resulting in an
+	/// effective 106 bit key. <br/>
+	/// A separately generated 256 bit key can be modified to fit the Poly1305 key format by using the
+	/// {@link #clamp(byte[])} method to clear the required bits.
+	/// </remarks>
+	/// <seealso cref="Poly1305"/>
+	public class Poly1305KeyGenerator
 		: CipherKeyGenerator
 	{
 		private const byte R_MASK_LOW_2 = (byte)0xFC;

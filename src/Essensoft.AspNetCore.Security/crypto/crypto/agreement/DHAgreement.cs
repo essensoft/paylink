@@ -1,13 +1,14 @@
 using System;
+using System.Diagnostics;
 
-using Essensoft.AspNetCore.Security.Generators;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Generators;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Agreement
+namespace Essensoft.AspNetCore.Security.Crypto.Agreement
 {
-    /**
+	/**
 	 * a Diffie-Hellman key exchange engine.
 	 * <p>
 	 * note: This uses MTI/A0 key agreement in order to make the key agreement
@@ -18,7 +19,7 @@ namespace Essensoft.AspNetCore.Security.Agreement
 	 * It's possible to extend this to more than two parties as well, for the moment
 	 * that is left as an exercise for the reader.</p>
 	 */
-    public class DHAgreement
+	public class DHAgreement
 	{
 		private DHPrivateKeyParameters  key;
 		private DHParameters			dhParams;

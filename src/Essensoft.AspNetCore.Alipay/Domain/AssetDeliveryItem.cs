@@ -80,10 +80,16 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string PrintData { get; set; }
 
         /// <summary>
-        /// 物料供应商id
+        /// 对应供应商pid
         /// </summary>
         [JsonProperty("supplier_id")]
         public string SupplierId { get; set; }
+
+        /// <summary>
+        /// 对应供应商名称
+        /// </summary>
+        [JsonProperty("supplier_name")]
+        public string SupplierName { get; set; }
 
         /// <summary>
         /// 接收地址(目的地址)

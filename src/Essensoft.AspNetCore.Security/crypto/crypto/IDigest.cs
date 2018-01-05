@@ -1,4 +1,6 @@
-namespace Essensoft.AspNetCore.Security
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto
 {
     /**
      * interface that a message digest conforms to.

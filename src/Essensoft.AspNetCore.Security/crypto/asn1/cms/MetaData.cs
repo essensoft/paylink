@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Asn1.Cms
 {
-    public class MetaData
+	public class MetaData
 		: Asn1Encodable
 	{
 		private DerBoolean hashProtected;

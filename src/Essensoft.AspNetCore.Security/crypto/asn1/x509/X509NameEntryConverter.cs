@@ -1,3 +1,7 @@
+using System;
+using System.Globalization;
+using System.IO;
+using System.Text;
 
 using Essensoft.AspNetCore.Security.Utilities.Encoders;
 

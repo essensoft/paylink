@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Math.EC.Endo
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Math.EC.Endo
 {
     public class GlvTypeBParameters
     {

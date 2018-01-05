@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Ocsp;
@@ -7,7 +8,7 @@ using Essensoft.AspNetCore.Security.X509;
 
 namespace Essensoft.AspNetCore.Security.Ocsp
 {
-    public class RespData
+	public class RespData
 		: X509ExtensionBase
 	{
 		internal readonly ResponseData data;

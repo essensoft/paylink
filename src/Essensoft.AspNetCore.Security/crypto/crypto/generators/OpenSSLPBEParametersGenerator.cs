@@ -1,10 +1,10 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Digests;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Generators
+namespace Essensoft.AspNetCore.Security.Crypto.Generators
 {
 	/**
 	 * Generator for PBE derived keys and ivs as usd by OpenSSL.

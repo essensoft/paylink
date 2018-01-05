@@ -1,19 +1,23 @@
 ﻿using System;
+using System.IO;
 using System.Collections;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Operators;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Operators;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
+using Essensoft.AspNetCore.Security.Security.Certificates;
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.X509
 {
-    /// <summary>
-    /// Class to Generate X509V1 Certificates.
-    /// </summary>
-    public class X509V1CertificateGenerator
+	/// <summary>
+	/// Class to Generate X509V1 Certificates.
+	/// </summary>
+	public class X509V1CertificateGenerator
 	{
 		private V1TbsCertificateGenerator   tbsGen;
 		private DerObjectIdentifier         sigOID;

@@ -1,5 +1,8 @@
 using System;
-using Essensoft.AspNetCore.Security.Digests;
+using System.Collections;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Utilities;
 

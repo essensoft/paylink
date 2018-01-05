@@ -4,7 +4,9 @@ using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Operators;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Operators;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Security.Certificates;
@@ -13,10 +15,10 @@ using Essensoft.AspNetCore.Security.Utilities.Collections;
 
 namespace Essensoft.AspNetCore.Security.X509
 {
-    /**
+	/**
 	* class to produce an X.509 Version 2 CRL.
 	*/
-    public class X509V2CrlGenerator
+	public class X509V2CrlGenerator
 	{
 		private readonly X509ExtensionsGenerator extGenerator = new X509ExtensionsGenerator();
 

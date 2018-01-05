@@ -1,4 +1,6 @@
-namespace Essensoft.AspNetCore.Security
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto
 {
     /**
      * Parameters for key/byte stream derivation classes

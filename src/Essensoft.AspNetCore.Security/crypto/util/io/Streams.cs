@@ -1,8 +1,9 @@
+using System;
 using System.IO;
 
 namespace Essensoft.AspNetCore.Security.Utilities.IO
 {
-    public sealed class Streams
+	public sealed class Streams
 	{
 		private const int BufferSize = 512;
 

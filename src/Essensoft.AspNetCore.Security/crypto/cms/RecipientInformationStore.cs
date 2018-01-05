@@ -1,10 +1,11 @@
+using System;
 using System.Collections;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    public class RecipientInformationStore
+	public class RecipientInformationStore
 	{
 		private readonly IList all; //ArrayList[RecipientInformation]
 		private readonly IDictionary table = Platform.CreateHashtable(); // Hashtable[RecipientID, ArrayList[RecipientInformation]]

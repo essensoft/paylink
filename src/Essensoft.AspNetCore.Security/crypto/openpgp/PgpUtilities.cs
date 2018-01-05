@@ -3,15 +3,17 @@ using System.IO;
 using System.Text;
 
 using Essensoft.AspNetCore.Security.Asn1;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.Encoders;
+using Essensoft.AspNetCore.Security.Utilities.IO;
 
 namespace Essensoft.AspNetCore.Security.Bcpg.OpenPgp
 {
-    /// <remarks>Basic utility class.</remarks>
+	/// <remarks>Basic utility class.</remarks>
     public sealed class PgpUtilities
     {
         private PgpUtilities()
@@ -345,7 +347,7 @@ namespace Essensoft.AspNetCore.Security.Bcpg.OpenPgp
             return MakeKey(algorithm, keyBytes);
         }
 
-#if !PORTABLE || DOTNET
+#if !PORTABLE || NETSTANDARD1_3
         /// <summary>Write out the passed in file as a literal data packet.</summary>
         public static void WriteFileToLiteralData(
             Stream		output,

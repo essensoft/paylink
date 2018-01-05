@@ -1,6 +1,8 @@
-namespace Essensoft.AspNetCore.Security.Engines
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
-    public class VmpcKsa3Engine
+	public class VmpcKsa3Engine
 		: VmpcEngine
 	{
 		public override string AlgorithmName

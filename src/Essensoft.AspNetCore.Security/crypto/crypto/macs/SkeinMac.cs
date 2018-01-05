@@ -1,26 +1,27 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Digests;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Macs
+namespace Essensoft.AspNetCore.Security.Crypto.Macs
 {
 
-    /// <summary>
-    /// Implementation of the Skein parameterised MAC function in 256, 512 and 1024 bit block sizes,
-    /// based on the <see cref="Essensoft.AspNetCore.Security.Engines.ThreefishEngine">Threefish</see> tweakable block cipher.
-    /// </summary>
-    /// <remarks>
-    /// This is the 1.3 version of Skein defined in the Skein hash function submission to the NIST SHA-3
-    /// competition in October 2010.
-    /// <p/>
-    /// Skein was designed by Niels Ferguson - Stefan Lucks - Bruce Schneier - Doug Whiting - Mihir
-    /// Bellare - Tadayoshi Kohno - Jon Callas - Jesse Walker.
-    /// </remarks>
-    /// <seealso cref="Essensoft.AspNetCore.Security.Digests.SkeinEngine"/>
-    /// <seealso cref="Essensoft.AspNetCore.Security.Parameters.SkeinParameters"/>
-    public class SkeinMac
+	/// <summary>
+	/// Implementation of the Skein parameterised MAC function in 256, 512 and 1024 bit block sizes,
+	/// based on the <see cref="Essensoft.AspNetCore.Security.Crypto.Engines.ThreefishEngine">Threefish</see> tweakable block cipher.
+	/// </summary>
+	/// <remarks>
+	/// This is the 1.3 version of Skein defined in the Skein hash function submission to the NIST SHA-3
+	/// competition in October 2010.
+	/// <p/>
+	/// Skein was designed by Niels Ferguson - Stefan Lucks - Bruce Schneier - Doug Whiting - Mihir
+	/// Bellare - Tadayoshi Kohno - Jon Callas - Jesse Walker.
+	/// </remarks>
+	/// <seealso cref="Essensoft.AspNetCore.Security.Crypto.Digests.SkeinEngine"/>
+	/// <seealso cref="Essensoft.AspNetCore.Security.Crypto.Parameters.SkeinParameters"/>
+	public class SkeinMac
 		: IMac
 	{
 		/// <summary>
@@ -63,7 +64,7 @@ namespace Essensoft.AspNetCore.Security.Macs
 		/// <summary>
 		/// Optionally initialises the Skein digest with the provided parameters.
 		/// </summary>
-		/// See <see cref="Essensoft.AspNetCore.Security.Parameters.SkeinParameters"></see> for details on the parameterisation of the Skein hash function.
+		/// See <see cref="Essensoft.AspNetCore.Security.Crypto.Parameters.SkeinParameters"></see> for details on the parameterisation of the Skein hash function.
 		/// <param name="parameters">the parameters to apply to this engine, or <code>null</code> to use no parameters.</param>
 		public void Init(ICipherParameters parameters)
 		{

@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
     /// <summary>
     /// Implementation of SHA-3 based on following KeccakNISTInterface.c from http://keccak.noekeon.org/

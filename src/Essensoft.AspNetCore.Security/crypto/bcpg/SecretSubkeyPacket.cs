@@ -1,6 +1,9 @@
+using System;
+using System.IO;
+
 namespace Essensoft.AspNetCore.Security.Bcpg
 {
-    /// <remarks>Basic packet for a PGP secret key.</remarks>
+	/// <remarks>Basic packet for a PGP secret key.</remarks>
     public class SecretSubkeyPacket
         : SecretKeyPacket
     {

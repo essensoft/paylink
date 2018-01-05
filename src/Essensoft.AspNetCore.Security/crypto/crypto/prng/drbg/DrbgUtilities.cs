@@ -3,7 +3,7 @@ using System.Collections;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Prng.Drbg
+namespace Essensoft.AspNetCore.Security.Crypto.Prng.Drbg
 {
 	internal class DrbgUtilities
 	{

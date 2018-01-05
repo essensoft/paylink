@@ -1,13 +1,15 @@
 using System;
+using System.Collections;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.CryptoPro;
 using Essensoft.AspNetCore.Security.Asn1.X9;
-using Essensoft.AspNetCore.Security.Generators;
+using Essensoft.AspNetCore.Security.Crypto.Generators;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
+using Essensoft.AspNetCore.Security.Utilities.Collections;
 
-namespace Essensoft.AspNetCore.Security.Parameters
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
     public abstract class ECKeyParameters
         : AsymmetricKeyParameter

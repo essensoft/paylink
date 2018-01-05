@@ -1,8 +1,9 @@
+using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X509;
 
 namespace Essensoft.AspNetCore.Security.Asn1.Pkcs
 {
-    public class KeyDerivationFunc
+	public class KeyDerivationFunc
 		: AlgorithmIdentifier
 	{
 		internal KeyDerivationFunc(Asn1Sequence seq)

@@ -1,9 +1,9 @@
 ﻿using System;
 
-using Essensoft.AspNetCore.Security.Prng.Drbg;
+using Essensoft.AspNetCore.Security.Crypto.Prng.Drbg;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Prng
+namespace Essensoft.AspNetCore.Security.Crypto.Prng
 {
     public class SP800SecureRandom
         :   SecureRandom

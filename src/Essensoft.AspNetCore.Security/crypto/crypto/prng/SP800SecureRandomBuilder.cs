@@ -1,8 +1,9 @@
-﻿
-using Essensoft.AspNetCore.Security.Prng.Drbg;
+﻿using System;
+
+using Essensoft.AspNetCore.Security.Crypto.Prng.Drbg;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Prng
+namespace Essensoft.AspNetCore.Security.Crypto.Prng
 {
     /**
      * Builder class for making SecureRandom objects based on SP 800-90A Deterministic Random Bit Generators (DRBG).

@@ -9,7 +9,8 @@ using Essensoft.AspNetCore.Security.Asn1.Nist;
 using Essensoft.AspNetCore.Security.Asn1.Ntt;
 using Essensoft.AspNetCore.Security.Asn1.Oiw;
 using Essensoft.AspNetCore.Security.Asn1.Pkcs;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Security

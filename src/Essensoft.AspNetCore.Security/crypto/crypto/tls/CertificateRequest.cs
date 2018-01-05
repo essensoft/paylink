@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.IO;
 
@@ -5,7 +6,7 @@ using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X509;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /**
      * Parsing and encoding of a <i>CertificateRequest</i> struct from RFC 4346.

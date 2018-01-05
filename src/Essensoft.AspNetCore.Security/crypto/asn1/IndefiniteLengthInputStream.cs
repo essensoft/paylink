@@ -1,8 +1,9 @@
+using System;
 using System.IO;
 
 namespace Essensoft.AspNetCore.Security.Asn1
 {
-    class IndefiniteLengthInputStream
+	class IndefiniteLengthInputStream
 		: LimitedInputStream
 	{
         private int _lookAhead;

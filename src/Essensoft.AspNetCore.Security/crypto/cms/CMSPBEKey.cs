@@ -2,14 +2,15 @@ using System;
 
 using Essensoft.AspNetCore.Security.Asn1.Pkcs;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Utilities;
 
 //import javax.crypto.interfaces.PBEKey;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    public abstract class CmsPbeKey
+	public abstract class CmsPbeKey
 		// TODO Create an equivalent interface somewhere?
 		//	: PBEKey
 		: ICipherParameters

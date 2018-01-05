@@ -2,7 +2,7 @@
 using System.Collections;
 using System.IO;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public abstract class AbstractTlsKeyExchange
         :   TlsKeyExchange

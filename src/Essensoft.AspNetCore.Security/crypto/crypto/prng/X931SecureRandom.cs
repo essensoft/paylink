@@ -2,7 +2,7 @@
 
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Prng
+namespace Essensoft.AspNetCore.Security.Crypto.Prng
 {
     public class X931SecureRandom
         :   SecureRandom

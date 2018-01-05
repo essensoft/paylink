@@ -1,10 +1,15 @@
 ﻿using System;
-using Essensoft.AspNetCore.Security.Utilities;
+
+using Essensoft.AspNetCore.Security.Crypto.Engines;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 //using Essensoft.AspNetCore.Security.Utilities;
 
 
+using Essensoft.AspNetCore.Security.Utilities.Encoders;
+using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
     /**
    * implementation of Ukrainian DSTU 7564 hash function

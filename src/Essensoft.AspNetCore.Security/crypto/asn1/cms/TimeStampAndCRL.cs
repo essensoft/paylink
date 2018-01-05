@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Asn1.Cms
 {
-    public class TimeStampAndCrl
+	public class TimeStampAndCrl
 		: Asn1Encodable
 	{
 		private ContentInfo timeStamp;

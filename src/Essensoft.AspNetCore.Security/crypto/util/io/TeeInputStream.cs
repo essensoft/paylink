@@ -1,9 +1,10 @@
+using System;
 using System.Diagnostics;
 using System.IO;
 
 namespace Essensoft.AspNetCore.Security.Utilities.IO
 {
-    public class TeeInputStream
+	public class TeeInputStream
 		: BaseInputStream
 	{
 		private readonly Stream input, tee;

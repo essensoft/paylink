@@ -1,8 +1,9 @@
 using System;
 
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
     /**
     * implementation of MD5 as outlined in "Handbook of Applied Cryptography", pages 346 - 347.

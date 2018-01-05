@@ -1,9 +1,10 @@
+using System;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    internal class BaseDigestCalculator
+	internal class BaseDigestCalculator
 		: IDigestCalculator
 	{
 		private readonly byte[] digest;

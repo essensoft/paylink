@@ -1,7 +1,9 @@
+using System;
 
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Modes.Gcm
+namespace Essensoft.AspNetCore.Security.Crypto.Modes.Gcm
 {
     public class Tables64kGcmMultiplier
         : IGcmMultiplier

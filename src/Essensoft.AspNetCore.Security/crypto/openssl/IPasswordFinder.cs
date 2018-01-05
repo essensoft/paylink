@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.OpenSsl
 {
-    public interface IPasswordFinder
+	public interface IPasswordFinder
 	{
 		char[] GetPassword();
 	}

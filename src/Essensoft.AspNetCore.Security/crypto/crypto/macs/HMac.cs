@@ -1,8 +1,11 @@
 using System;
-using Essensoft.AspNetCore.Security.Parameters;
+using System.Collections;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Macs
+namespace Essensoft.AspNetCore.Security.Crypto.Macs
 {
     /**
     * HMAC implementation based on RFC2104

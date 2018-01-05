@@ -1,8 +1,9 @@
+using System;
 using System.IO;
 
 namespace Essensoft.AspNetCore.Security.Asn1
 {
-    public class LazyAsn1InputStream
+	public class LazyAsn1InputStream
 		: Asn1InputStream
 	{
 		public LazyAsn1InputStream(

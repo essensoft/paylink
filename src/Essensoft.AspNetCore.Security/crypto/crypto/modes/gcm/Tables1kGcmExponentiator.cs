@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Modes.Gcm
+namespace Essensoft.AspNetCore.Security.Crypto.Modes.Gcm
 {
     public class Tables1kGcmExponentiator
         : IGcmExponentiator

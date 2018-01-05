@@ -1,7 +1,9 @@
 ﻿using System;
-using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Engines
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
     /**
      * Tnepres is a 128-bit 32-round block cipher with variable key lengths,

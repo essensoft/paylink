@@ -1,10 +1,12 @@
-namespace Essensoft.AspNetCore.Security.Modes
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Modes
 {
-    /// <summary>
-    /// A block cipher mode that includes authenticated encryption with a streaming mode
-    /// and optional associated data.</summary>
-    /// <see cref="AeadParameters"/>
-    public interface IAeadBlockCipher
+	/// <summary>
+	/// A block cipher mode that includes authenticated encryption with a streaming mode
+	/// and optional associated data.</summary>
+	/// <see cref="AeadParameters"/>
+	public interface IAeadBlockCipher
 	{
 		/// <summary>The name of the algorithm this cipher implements.</summary>
 		string AlgorithmName { get; }

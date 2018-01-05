@@ -6,16 +6,18 @@ using SystemX509 = System.Security.Cryptography.X509Certificates;
 
 using Essensoft.AspNetCore.Security.Asn1.Pkcs;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
+using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.X509;
 
 namespace Essensoft.AspNetCore.Security.Security
 {
-    /// <summary>
-    /// A class containing methods to interface the BouncyCastle world to the .NET Crypto world.
-    /// </summary>
-    public sealed class DotNetUtilities
+	/// <summary>
+	/// A class containing methods to interface the BouncyCastle world to the .NET Crypto world.
+	/// </summary>
+	public sealed class DotNetUtilities
 	{
 		private DotNetUtilities()
 		{
@@ -231,15 +233,13 @@ namespace Essensoft.AspNetCore.Security.Security
 
         private static RSA CreateRSAProvider(RSAParameters rp)
         {
-            //CspParameters csp = new CspParameters();
-            //csp.KeyContainerName = string.Format("BouncyCastle-{0}", Guid.NewGuid());
-            //RSACryptoServiceProvider rsaCsp = new RSACryptoServiceProvider(csp);
-            //rsaCsp.ImportParameters(rp);
-            var rsa = RSA.Create();
-            rsa.ImportParameters(rp);
-            return rsa;
+            CspParameters csp = new CspParameters();
+            csp.KeyContainerName = string.Format("BouncyCastle-{0}", Guid.NewGuid());
+            RSACryptoServiceProvider rsaCsp = new RSACryptoServiceProvider(csp);
+            rsaCsp.ImportParameters(rp);
+            return rsaCsp;
         }
-    }
+	}
 }
 
 #endif

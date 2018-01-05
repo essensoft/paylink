@@ -1,7 +1,8 @@
-﻿
-using Essensoft.AspNetCore.Security.Parameters;
+﻿using System;
 
-namespace Essensoft.AspNetCore.Security.Tls
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public interface TlsSrpGroupVerifier
     {

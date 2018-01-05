@@ -1,6 +1,6 @@
 using System;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Security.Crypto
 {
     /// <summary>
     /// Base interface for operators that serve as stream-based signature verifiers.

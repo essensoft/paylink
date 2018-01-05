@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Math.Field
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Math.Field
 {
     internal class PrimeField
         : IFiniteField

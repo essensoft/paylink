@@ -1,4 +1,15 @@
-namespace Essensoft.AspNetCore.Security.Tls
+using System;
+using System.Collections;
+using System.IO;
+
+using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
+using Essensoft.AspNetCore.Security.Crypto.Engines;
+using Essensoft.AspNetCore.Security.Crypto.Modes;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public abstract class DefaultTlsClient
         :   AbstractTlsClient

@@ -22,13 +22,14 @@
  * great code.
  */
 
+using System;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Apache.Bzip2
 {
-    /**
+	/**
     * An input stream that decompresses from the BZip2 format (with the file
     * header chars) to be read as any other stream.
     *

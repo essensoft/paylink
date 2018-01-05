@@ -1,11 +1,12 @@
-﻿
-using Essensoft.AspNetCore.Security.Agreement.Srp;
-using Essensoft.AspNetCore.Security.Macs;
-using Essensoft.AspNetCore.Security.Parameters;
+﻿using System;
+
+using Essensoft.AspNetCore.Security.Crypto.Agreement.Srp;
+using Essensoft.AspNetCore.Security.Crypto.Macs;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /**
      * An implementation of {@link TlsSRPIdentityManager} that simulates the existence of "unknown" identities

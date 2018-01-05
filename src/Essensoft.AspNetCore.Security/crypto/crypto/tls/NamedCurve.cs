@@ -1,4 +1,10 @@
-namespace Essensoft.AspNetCore.Security.Tls
+using System;
+
+using Essensoft.AspNetCore.Security.Asn1.Sec;
+using Essensoft.AspNetCore.Security.Asn1.X9;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /// <summary>
     /// RFC 4492 5.1.1

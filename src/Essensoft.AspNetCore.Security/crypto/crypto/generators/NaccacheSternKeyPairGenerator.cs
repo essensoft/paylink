@@ -1,17 +1,21 @@
+using System;
 using System.Collections;
-using Essensoft.AspNetCore.Security.Parameters;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
+using Essensoft.AspNetCore.Security.Utilities.Collections;
 
-namespace Essensoft.AspNetCore.Security.Generators
+namespace Essensoft.AspNetCore.Security.Crypto.Generators
 {
-    /**
+	/**
 	 * Key generation parameters for NaccacheStern cipher. For details on this cipher, please see
 	 *
 	 * http://www.gemplus.com/smart/rd/publications/pdf/NS98pkcs.pdf
 	 */
-    public class NaccacheSternKeyPairGenerator
+	public class NaccacheSternKeyPairGenerator
 		: IAsymmetricCipherKeyPairGenerator
 	{
 		private static readonly int[] smallPrimes =
@@ -30,7 +34,7 @@ namespace Essensoft.AspNetCore.Security.Generators
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see Essensoft.AspNetCore.Security.AsymmetricCipherKeyPairGenerator#init(Essensoft.AspNetCore.Security.KeyGenerationParameters)
+		 * @see Essensoft.AspNetCore.Security.crypto.AsymmetricCipherKeyPairGenerator#init(Essensoft.AspNetCore.Security.crypto.KeyGenerationParameters)
 		 */
 		public void Init(KeyGenerationParameters parameters)
 		{
@@ -40,7 +44,7 @@ namespace Essensoft.AspNetCore.Security.Generators
 		/*
 		 * (non-Javadoc)
 		 *
-		 * @see Essensoft.AspNetCore.Security.AsymmetricCipherKeyPairGenerator#generateKeyPair()
+		 * @see Essensoft.AspNetCore.Security.crypto.AsymmetricCipherKeyPairGenerator#generateKeyPair()
 		 */
 		public AsymmetricCipherKeyPair GenerateKeyPair()
 		{
@@ -48,7 +52,7 @@ namespace Essensoft.AspNetCore.Security.Generators
 			SecureRandom rand = param.Random;
 			int certainty = param.Certainty;
 
-            IList smallPrimes = findFirstPrimes(param.CountSmallPrimes);
+			IList smallPrimes = findFirstPrimes(param.CountSmallPrimes);
 
 			smallPrimes = permuteList(smallPrimes, rand);
 
@@ -83,7 +87,7 @@ namespace Essensoft.AspNetCore.Security.Generators
 
 			long tries = 0;
 
-            BigInteger _2au = a.Multiply(u).ShiftLeft(1);
+			BigInteger _2au = a.Multiply(u).ShiftLeft(1);
 			BigInteger _2bv = b.Multiply(v).ShiftLeft(1);
 
 			for (;;)
@@ -128,7 +132,7 @@ namespace Essensoft.AspNetCore.Security.Generators
 			BigInteger g;
 			tries = 0;
 
-            for (;;)
+			for (;;)
 			{
 				// TODO After the first loop, just regenerate one randomly-selected gPart each time?
 				IList gParts = Platform.CreateArrayList();
@@ -201,7 +205,7 @@ namespace Essensoft.AspNetCore.Security.Generators
 				break;
 			}
 
-            return new AsymmetricCipherKeyPair(new NaccacheSternKeyParameters(false, g, n, sigma.BitLength),
+			return new AsymmetricCipherKeyPair(new NaccacheSternKeyParameters(false, g, n, sigma.BitLength),
 				new NaccacheSternPrivateKeyParameters(g, n, sigma.BitLength, smallPrimes, phi_n));
 		}
 

@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 using Essensoft.AspNetCore.Security.Asn1.Pkcs;
 
 namespace Essensoft.AspNetCore.Security.Asn1.Crmf

@@ -1,3 +1,5 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Asn1.Microsoft
 {
     public abstract class MicrosoftObjectIdentifiers

@@ -1,8 +1,10 @@
 using System;
-using Essensoft.AspNetCore.Security.Parameters;
-using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Generators
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Generators
 {
     /**
     * Basic KDF generator for derived keys and ivs as defined by IEEE P1363a/ISO 18033

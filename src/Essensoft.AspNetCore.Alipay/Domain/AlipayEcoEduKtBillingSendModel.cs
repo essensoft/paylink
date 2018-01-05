@@ -27,6 +27,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public List<ChargeItems> ChargeItem { get; set; }
 
         /// <summary>
+        /// 缴费项模式：空或"N"，表示缴费项不可选，  "M"表示缴费项为可选 ，支持单选和多选。
+        /// </summary>
+        [JsonProperty("charge_type")]
+        public string ChargeType { get; set; }
+
+        /// <summary>
         /// 孩子名字
         /// </summary>
         [JsonProperty("child_name")]
@@ -63,7 +69,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string OutTradeNo { get; set; }
 
         /// <summary>
-        /// ISV_NO, 支付宝签约后，返回给ISV编号
+        /// Isv支付宝pid, 支付宝签约后，返回给ISV编号
         /// </summary>
         [JsonProperty("partner_id")]
         public string PartnerId { get; set; }
@@ -93,13 +99,13 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string StudentCode { get; set; }
 
         /// <summary>
-        /// 学生的身份证号，如果ISV有学生身份证号，则同步身份证号作为学生唯一标识。此字段与student_code、家长user_mobile至少选一个
+        /// 学生的身份证号，如果ISV有学生身份证号，则同步身份证号作为学生唯一标识。此字段与student_code、家长user_mobile至少选一个。  大陆身份证必须是18位 ， 其它地区或国家的身份证开头需要加"IC"开头区分并且不超过18位，但查询账单的时候不要带"IC"
         /// </summary>
         [JsonProperty("student_identify")]
         public string StudentIdentify { get; set; }
 
         /// <summary>
-        /// 孩子的家长信息，最多一次输入20个家长，此字段做为识别家长的孩子用，与student_identify、student_code至少选一个
+        /// 孩子的家长信息，最多一次输入10个家长，此字段做为识别家长的孩子用，与student_identify、student_code至少选一个
         /// </summary>
         [JsonProperty("users")]
         public List<UserDetails> Users { get; set; }

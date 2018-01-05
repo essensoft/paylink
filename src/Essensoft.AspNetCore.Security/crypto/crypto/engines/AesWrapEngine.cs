@@ -1,4 +1,4 @@
-namespace Essensoft.AspNetCore.Security.Engines
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
 	/// <remarks>
 	/// An implementation of the AES Key Wrapper from the NIST Key Wrap Specification.

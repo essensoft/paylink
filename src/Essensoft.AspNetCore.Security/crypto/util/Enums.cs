@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 #if NETCF_1_0 || NETCF_2_0 || SILVERLIGHT || PORTABLE
 using System.Collections;

@@ -1,10 +1,12 @@
 using System;
 using System.IO;
+
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Security;
 
 namespace Essensoft.AspNetCore.Security.Bcpg.OpenPgp
 {
-    /// <remarks>A one pass signature object.</remarks>
+	/// <remarks>A one pass signature object.</remarks>
     public class PgpOnePassSignature
     {
         private OnePassSignaturePacket sigPack;

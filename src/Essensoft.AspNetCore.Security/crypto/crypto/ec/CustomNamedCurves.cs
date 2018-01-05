@@ -15,7 +15,7 @@ using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.Collections;
 using Essensoft.AspNetCore.Security.Utilities.Encoders;
 
-namespace Essensoft.AspNetCore.Security.EC
+namespace Essensoft.AspNetCore.Security.Crypto.EC
 {
     public sealed class CustomNamedCurves
     {

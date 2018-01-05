@@ -1,4 +1,6 @@
-namespace Essensoft.AspNetCore.Security
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto
 {
     /**
      * The base interface for implementations of message authentication codes (MACs).

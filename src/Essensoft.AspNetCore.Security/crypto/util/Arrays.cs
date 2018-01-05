@@ -97,7 +97,6 @@ namespace Essensoft.AspNetCore.Security.Utilities
             return HaveSameContents(a, b);
         }
 
-        [CLSCompliantAttribute(false)]
         public static bool AreEqual(uint[] a, uint[] b)
         {
             if (a == b)
@@ -275,7 +274,6 @@ namespace Essensoft.AspNetCore.Security.Utilities
             return hc;
         }
 
-        [CLSCompliantAttribute(false)]
         public static int GetHashCode(uint[] data)
         {
             if (data == null)
@@ -293,7 +291,6 @@ namespace Essensoft.AspNetCore.Security.Utilities
             return hc;
         }
 
-        [CLSCompliantAttribute(false)]
         public static int GetHashCode(uint[] data, int off, int len)
         {
             if (data == null)
@@ -311,7 +308,6 @@ namespace Essensoft.AspNetCore.Security.Utilities
             return hc;
         }
 
-        [CLSCompliantAttribute(false)]
         public static int GetHashCode(ulong[] data)
         {
             if (data == null)
@@ -332,7 +328,6 @@ namespace Essensoft.AspNetCore.Security.Utilities
             return hc;
         }
 
-        [CLSCompliantAttribute(false)]
         public static int GetHashCode(ulong[] data, int off, int len)
         {
             if (data == null)
@@ -391,14 +386,12 @@ namespace Essensoft.AspNetCore.Security.Utilities
             return data == null ? null : (long[])data.Clone();
         }
 
-        [CLSCompliantAttribute(false)]
         public static ulong[] Clone(
             ulong[] data)
         {
             return data == null ? null : (ulong[]) data.Clone();
         }
 
-        [CLSCompliantAttribute(false)]
         public static ulong[] Clone(
             ulong[] data, 
             ulong[] existing)

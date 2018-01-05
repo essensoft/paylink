@@ -1,10 +1,11 @@
 using System;
+using System.Collections;
 
 using Essensoft.AspNetCore.Security.Asn1.X500;
 
 namespace Essensoft.AspNetCore.Security.Asn1.Esf
 {
-    /**
+	/**
 	* Signer-Location attribute (RFC3126).
 	*
 	* <pre>
@@ -16,7 +17,7 @@ namespace Essensoft.AspNetCore.Security.Asn1.Esf
 	*   PostalAddress ::= SEQUENCE SIZE(1..6) OF DirectoryString
 	* </pre>
 	*/
-    public class SignerLocation
+	public class SignerLocation
 		: Asn1Encodable
 	{
         private DirectoryString countryName;

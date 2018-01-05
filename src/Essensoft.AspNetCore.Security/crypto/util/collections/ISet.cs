@@ -1,8 +1,9 @@
+using System;
 using System.Collections;
 
 namespace Essensoft.AspNetCore.Security.Utilities.Collections
 {
-    public interface ISet
+	public interface ISet
 		: ICollection
 	{
 		void Add(object o);

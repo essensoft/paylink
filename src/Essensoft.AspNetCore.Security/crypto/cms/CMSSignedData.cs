@@ -4,12 +4,15 @@ using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Cms;
+using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Security.Certificates;
 using Essensoft.AspNetCore.Security.Utilities;
+using Essensoft.AspNetCore.Security.X509;
 using Essensoft.AspNetCore.Security.X509.Store;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    /**
+	/**
 	* general class for handling a pkcs7-signature message.
 	*
 	* A simple example of usage - note, in the example below the validity of
@@ -32,7 +35,7 @@ namespace Essensoft.AspNetCore.Security.Cms
 	*  }
 	* </pre>
 	*/
-    public class CmsSignedData
+	public class CmsSignedData
 	{
 		private static readonly CmsSignedHelper Helper = CmsSignedHelper.Instance;
 

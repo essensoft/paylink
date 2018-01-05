@@ -1,6 +1,9 @@
+using System;
+using System.IO;
+
 namespace Essensoft.AspNetCore.Security.Bcpg
 {
-    /// <remarks>Basic packet for an experimental packet.</remarks>
+	/// <remarks>Basic packet for an experimental packet.</remarks>
     public class ExperimentalPacket
         : ContainedPacket //, PublicKeyAlgorithmTag
     {

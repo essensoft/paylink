@@ -1,7 +1,10 @@
 using System;
 using System.Diagnostics;
 
-namespace Essensoft.AspNetCore.Security.Modes
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Modes
 {
     /**
     * A Cipher Text Stealing (CTS) mode cipher. CTS allows block ciphers to

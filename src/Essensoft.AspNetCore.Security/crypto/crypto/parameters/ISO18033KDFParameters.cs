@@ -1,9 +1,12 @@
-namespace Essensoft.AspNetCore.Security.Parameters
+using System;
+using Essensoft.AspNetCore.Security.Crypto;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
-    /**
+	/**
 	* parameters for Key derivation functions for ISO-18033
 	*/
-    public class Iso18033KdfParameters
+	public class Iso18033KdfParameters
 		: IDerivationParameters
 	{
 		byte[]  seed;

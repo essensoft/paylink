@@ -1,16 +1,18 @@
+using System;
+using System.Collections;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Cms;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    /**
+	/**
 	* containing class for an CMS AuthEnveloped Data object
 	*/
-    internal class CmsAuthEnvelopedData
+	internal class CmsAuthEnvelopedData
 	{
 		internal RecipientInformationStore recipientInfoStore;
 		internal ContentInfo contentInfo;

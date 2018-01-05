@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1.Pkcs;
@@ -6,7 +7,7 @@ using Essensoft.AspNetCore.Security.Utilities.IO;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    public class CmsTypedStream
+	public class CmsTypedStream
 	{
 		private const int BufferSize = 32 * 1024;
 

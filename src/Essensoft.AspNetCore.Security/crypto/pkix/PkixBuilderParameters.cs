@@ -1,3 +1,4 @@
+using System;
 using System.Text;
 
 using Essensoft.AspNetCore.Security.Security;
@@ -7,10 +8,10 @@ using Essensoft.AspNetCore.Security.Utilities.Collections;
 
 namespace Essensoft.AspNetCore.Security.Pkix
 {
-    /// <summary>
+	/// <summary>
     /// Summary description for PkixBuilderParameters.
-    /// </summary>
-    public class PkixBuilderParameters
+	/// </summary>
+	public class PkixBuilderParameters
 		: PkixParameters
 	{
 		private int maxPathLength = 5;

@@ -2,7 +2,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace Essensoft.AspNetCore.Security.Prng
+namespace Essensoft.AspNetCore.Security.Crypto.Prng
 {
     public class CryptoApiEntropySourceProvider
         :   IEntropySourceProvider

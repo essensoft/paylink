@@ -1,6 +1,10 @@
-namespace Essensoft.AspNetCore.Security.Parameters
+using System;
+
+using Essensoft.AspNetCore.Security.Crypto;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
-    public class ParametersWithSBox : ICipherParameters
+	public class ParametersWithSBox : ICipherParameters
 	{
 		private ICipherParameters  parameters;
 		private byte[] sBox;

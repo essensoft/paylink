@@ -1,3 +1,4 @@
+using System;
 /*
  * $Id: Tree.cs,v 1.2 2008-05-10 09:35:40 bouncy Exp $
  *
@@ -33,8 +34,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * and contributors of zlib.
  */
 
-namespace Essensoft.AspNetCore.Security.Utilities.Zlib
-{
+namespace Essensoft.AspNetCore.Security.Utilities.Zlib {
 
     internal sealed class Tree{
         private const int MAX_BITS=15;

@@ -8,14 +8,15 @@ using Essensoft.AspNetCore.Security.Asn1.Nist;
 using Essensoft.AspNetCore.Security.Asn1.Ntt;
 using Essensoft.AspNetCore.Security.Asn1.Oiw;
 using Essensoft.AspNetCore.Security.Asn1.Pkcs;
-using Essensoft.AspNetCore.Security.Agreement;
-using Essensoft.AspNetCore.Security.Digests;
-using Essensoft.AspNetCore.Security.Encodings;
-using Essensoft.AspNetCore.Security.Engines;
-using Essensoft.AspNetCore.Security.Generators;
-using Essensoft.AspNetCore.Security.Macs;
-using Essensoft.AspNetCore.Security.Modes;
-using Essensoft.AspNetCore.Security.Paddings;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Agreement;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
+using Essensoft.AspNetCore.Security.Crypto.Encodings;
+using Essensoft.AspNetCore.Security.Crypto.Engines;
+using Essensoft.AspNetCore.Security.Crypto.Generators;
+using Essensoft.AspNetCore.Security.Crypto.Macs;
+using Essensoft.AspNetCore.Security.Crypto.Modes;
+using Essensoft.AspNetCore.Security.Crypto.Paddings;
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Security

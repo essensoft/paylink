@@ -2,7 +2,7 @@ using System;
 
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /**
      * A combined hash, which implements md5(m) || sha1(m).
@@ -83,7 +83,7 @@ namespace Essensoft.AspNetCore.Security.Tls
         }
 
         /**
-         * @see Essensoft.AspNetCore.Security.Digest#update(byte[], int, int)
+         * @see Essensoft.AspNetCore.Security.crypto.Digest#update(byte[], int, int)
          */
         public virtual void BlockUpdate(byte[] input, int inOff, int len)
         {
@@ -92,7 +92,7 @@ namespace Essensoft.AspNetCore.Security.Tls
         }
 
         /**
-         * @see Essensoft.AspNetCore.Security.Digest#doFinal(byte[], int)
+         * @see Essensoft.AspNetCore.Security.crypto.Digest#doFinal(byte[], int)
          */
         public virtual int DoFinal(byte[] output, int outOff)
         {
@@ -108,7 +108,7 @@ namespace Essensoft.AspNetCore.Security.Tls
         }
 
         /**
-         * @see Essensoft.AspNetCore.Security.Digest#reset()
+         * @see Essensoft.AspNetCore.Security.crypto.Digest#reset()
          */
         public virtual void Reset()
         {

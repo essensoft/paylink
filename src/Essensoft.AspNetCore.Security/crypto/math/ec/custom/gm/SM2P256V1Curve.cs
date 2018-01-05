@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 using Essensoft.AspNetCore.Security.Utilities.Encoders;
 
 namespace Essensoft.AspNetCore.Security.Math.EC.Custom.GM

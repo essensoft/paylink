@@ -1,10 +1,10 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.Encoders;
 
-namespace Essensoft.AspNetCore.Security.Prng.Drbg
+namespace Essensoft.AspNetCore.Security.Crypto.Prng.Drbg
 {
 	/**
 	 * A SP800-90A CTR DRBG.

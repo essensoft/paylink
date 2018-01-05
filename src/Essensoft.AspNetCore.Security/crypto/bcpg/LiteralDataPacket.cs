@@ -1,9 +1,11 @@
+using System;
+using System.IO;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Bcpg
 {
-    /// <remarks>Generic literal data packet.</remarks>
+	/// <remarks>Generic literal data packet.</remarks>
     public class LiteralDataPacket
         : InputStreamPacket
 	{

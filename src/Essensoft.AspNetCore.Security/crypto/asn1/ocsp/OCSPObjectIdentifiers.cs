@@ -1,3 +1,5 @@
+using Essensoft.AspNetCore.Security.Asn1;
+
 namespace Essensoft.AspNetCore.Security.Asn1.Ocsp
 {
     public abstract class OcspObjectIdentifiers

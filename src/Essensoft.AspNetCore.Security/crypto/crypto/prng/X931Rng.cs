@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Essensoft.AspNetCore.Security.Prng
+namespace Essensoft.AspNetCore.Security.Crypto.Prng
 {
     internal class X931Rng
     {

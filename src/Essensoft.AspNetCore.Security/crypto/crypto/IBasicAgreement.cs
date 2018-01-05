@@ -1,6 +1,7 @@
+using System;
 using Essensoft.AspNetCore.Security.Math;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Security.Crypto
 {
     /**
      * The basic interface that basic Diffie-Hellman implementations

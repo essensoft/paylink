@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Tls
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /// <summary>RFC 4492 5.4. (Errata ID: 2389)</summary>
     public abstract class ECBasisType

@@ -6,15 +6,17 @@ using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Cmp;
 using Essensoft.AspNetCore.Security.Asn1.Tsp;
 using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Math;
+using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.X509;
 
 namespace Essensoft.AspNetCore.Security.Tsp
 {
-    /**
+	/**
 	 * Base class for an RFC 3161 Time Stamp Request.
 	 */
-    public class TimeStampRequest
+	public class TimeStampRequest
 		: X509ExtensionBase
 	{
 		private TimeStampReq req;

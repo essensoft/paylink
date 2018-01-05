@@ -1,8 +1,9 @@
+using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
-using Essensoft.AspNetCore.Security.Signers;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Signers;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public class TlsECDsaSigner
         :   TlsDsaSigner

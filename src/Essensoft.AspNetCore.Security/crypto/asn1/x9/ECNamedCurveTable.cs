@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 
 using Essensoft.AspNetCore.Security.Asn1.Anssi;
 using Essensoft.AspNetCore.Security.Asn1.CryptoPro;
@@ -6,7 +7,7 @@ using Essensoft.AspNetCore.Security.Asn1.GM;
 using Essensoft.AspNetCore.Security.Asn1.Nist;
 using Essensoft.AspNetCore.Security.Asn1.Sec;
 using Essensoft.AspNetCore.Security.Asn1.TeleTrust;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.Collections;
 

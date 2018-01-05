@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Cms;
@@ -9,7 +10,7 @@ using Essensoft.AspNetCore.Security.X509.Store;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    public class OriginatorInformation
+	public class OriginatorInformation
 	{
 		private readonly OriginatorInfo originatorInfo;
 

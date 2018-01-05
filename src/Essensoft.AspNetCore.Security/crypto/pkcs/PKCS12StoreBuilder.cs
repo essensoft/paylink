@@ -1,10 +1,11 @@
+using System;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Pkcs;
 
 namespace Essensoft.AspNetCore.Security.Pkcs
 {
-    public class Pkcs12StoreBuilder
+	public class Pkcs12StoreBuilder
 	{
 		private DerObjectIdentifier	keyAlgorithm = PkcsObjectIdentifiers.PbeWithShaAnd3KeyTripleDesCbc;
 		private DerObjectIdentifier	certAlgorithm = PkcsObjectIdentifiers.PbewithShaAnd40BitRC2Cbc;

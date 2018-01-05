@@ -1,3 +1,5 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Utilities.Encoders
 {
     /// <summary>

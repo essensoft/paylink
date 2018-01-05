@@ -1,7 +1,9 @@
 using System;
 using System.Diagnostics;
 using System.IO;
-using Essensoft.AspNetCore.Security.IO;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.IO;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.IO;

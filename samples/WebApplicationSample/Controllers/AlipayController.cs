@@ -76,6 +76,26 @@ namespace WebApplicationSample.Controllers
             return Ok(response.Body);
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Pay(string out_trade_no, string scene, string auth_code, string subject, string total_amount, string body, string notify_url)
+        {
+            var builder = new AlipayTradePayModel()
+            {
+                Scene = scene,
+                AuthCode = auth_code,
+                Body = body,
+                Subject = subject,
+                TotalAmount = total_amount,
+                OutTradeNo = out_trade_no,
+            };
+            var req = new AlipayTradePayRequest();
+            req.SetBizModel(builder);
+            req.SetNotifyUrl(notify_url);
+
+            var response = await _client.ExecuteAsync(req);
+            return Ok(response.Body);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Query(string out_trade_no, string trade_no)

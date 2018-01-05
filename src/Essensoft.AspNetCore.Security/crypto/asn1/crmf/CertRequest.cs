@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Asn1.Crmf
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Asn1.Crmf
 {
     public class CertRequest
         : Asn1Encodable

@@ -1,13 +1,14 @@
+using System;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Asn1
 {
-    /**
+	/**
 	 * A Der encoded set object
 	 */
-    public class DerSet
+	public class DerSet
 		: Asn1Set
 	{
 		public static readonly DerSet Empty = new DerSet();

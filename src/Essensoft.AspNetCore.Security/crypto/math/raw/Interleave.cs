@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Math.Raw
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Math.Raw
 {
     internal abstract class Interleave
     {

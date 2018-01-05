@@ -1,9 +1,11 @@
 using System;
 using System.IO;
 
+using Essensoft.AspNetCore.Security.Asn1.Utilities;
+
 namespace Essensoft.AspNetCore.Security.Utilities.IO
 {
-    public class PushbackStream
+	public class PushbackStream
 		: FilterStream
 	{
 		private int buf = -1;

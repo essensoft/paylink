@@ -9,14 +9,15 @@ using Essensoft.AspNetCore.Security.Asn1.Ntt;
 using Essensoft.AspNetCore.Security.Asn1.Pkcs;
 using Essensoft.AspNetCore.Security.Asn1.X509;
 using Essensoft.AspNetCore.Security.Asn1.X9;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.X509;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    /**
+	/**
 	* General class for generating a CMS enveloped-data message.
 	*
 	* A simple example of usage.
@@ -29,7 +30,7 @@ namespace Essensoft.AspNetCore.Security.Cms
 	*      CMSEnvelopedData         data = fact.generate(content, algorithm, "BC");
 	* </pre>
 	*/
-    public class CmsEnvelopedGenerator
+	public class CmsEnvelopedGenerator
 	{
 		// Note: These tables are complementary: If rc2Table[i]==j, then rc2Ekb[j]==i
 		internal static readonly short[] rc2Table =

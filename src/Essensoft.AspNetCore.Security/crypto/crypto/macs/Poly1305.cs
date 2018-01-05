@@ -1,8 +1,10 @@
 using System;
-using Essensoft.AspNetCore.Security.Parameters;
-using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Macs
+using Essensoft.AspNetCore.Security.Crypto.Generators;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Macs
 {
 
     /// <summary>
@@ -17,7 +19,7 @@ namespace Essensoft.AspNetCore.Security.Macs
     /// href="https://github.com/floodyberry/poly1305-donna">poly1305-donna-unrolled</a> C implementation
     /// by Andrew M (@floodyberry).
     /// </remarks>
-    /// <seealso cref="Essensoft.AspNetCore.Security.Generators.Poly1305KeyGenerator"/>
+    /// <seealso cref="Essensoft.AspNetCore.Security.Crypto.Generators.Poly1305KeyGenerator"/>
     public class Poly1305
         : IMac
     {

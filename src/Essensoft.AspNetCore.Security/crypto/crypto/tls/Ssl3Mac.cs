@@ -1,7 +1,10 @@
-using Essensoft.AspNetCore.Security.Parameters;
+using System;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /**
      * HMAC implementation based on original internet draft for HMAC (RFC 2104)

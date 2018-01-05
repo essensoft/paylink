@@ -1,7 +1,9 @@
 using System;
+using System.Collections;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Security.Certificates;
@@ -10,22 +12,22 @@ using Essensoft.AspNetCore.Security.X509.Store;
 
 namespace Essensoft.AspNetCore.Security.X509
 {
-    /// <remarks>
-    /// The Holder object.
-    /// <pre>
-    /// Holder ::= SEQUENCE {
-    ///		baseCertificateID   [0] IssuerSerial OPTIONAL,
-    ///			-- the issuer and serial number of
-    ///			-- the holder's Public Key Certificate
-    ///		entityName          [1] GeneralNames OPTIONAL,
-    ///			-- the name of the claimant or role
-    ///		objectDigestInfo    [2] ObjectDigestInfo OPTIONAL
-    ///			-- used to directly authenticate the holder,
-    ///			-- for example, an executable
-    /// }
-    /// </pre>
-    /// </remarks>
-    public class AttributeCertificateHolder
+	/// <remarks>
+	/// The Holder object.
+	/// <pre>
+ 	/// Holder ::= SEQUENCE {
+ 	///		baseCertificateID   [0] IssuerSerial OPTIONAL,
+ 	///			-- the issuer and serial number of
+ 	///			-- the holder's Public Key Certificate
+ 	///		entityName          [1] GeneralNames OPTIONAL,
+ 	///			-- the name of the claimant or role
+ 	///		objectDigestInfo    [2] ObjectDigestInfo OPTIONAL
+ 	///			-- used to directly authenticate the holder,
+ 	///			-- for example, an executable
+ 	/// }
+	/// </pre>
+	/// </remarks>
+	public class AttributeCertificateHolder
 		//: CertSelector, Selector
 		: IX509Selector
 	{

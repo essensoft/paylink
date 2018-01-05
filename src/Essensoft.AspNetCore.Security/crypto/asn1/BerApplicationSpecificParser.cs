@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Asn1
 {
-    public class BerApplicationSpecificParser
+	public class BerApplicationSpecificParser
 		: IAsn1ApplicationSpecificParser
 	{
 		private readonly int tag;

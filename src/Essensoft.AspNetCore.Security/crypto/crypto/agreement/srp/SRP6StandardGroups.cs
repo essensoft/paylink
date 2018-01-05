@@ -1,9 +1,10 @@
-﻿
-using Essensoft.AspNetCore.Security.Parameters;
+﻿using System;
+
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Utilities.Encoders;
 
-namespace Essensoft.AspNetCore.Security.Agreement.Srp
+namespace Essensoft.AspNetCore.Security.Crypto.Agreement.Srp
 {
     public class Srp6StandardGroups
     {

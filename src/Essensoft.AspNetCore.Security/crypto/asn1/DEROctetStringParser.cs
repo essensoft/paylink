@@ -1,9 +1,11 @@
 using System;
 using System.IO;
 
+using Essensoft.AspNetCore.Security.Utilities.IO;
+
 namespace Essensoft.AspNetCore.Security.Asn1
 {
-    public class DerOctetStringParser
+	public class DerOctetStringParser
 		: Asn1OctetStringParser
 	{
 		private readonly DefiniteLengthInputStream stream;

@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Tls
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /**
      * RFC 5246 7.4.1.4.1 (in RFC 2246, there were no specific values assigned)

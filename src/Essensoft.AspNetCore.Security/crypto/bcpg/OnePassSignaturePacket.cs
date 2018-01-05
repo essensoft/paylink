@@ -1,9 +1,10 @@
+using System;
 using System.IO;
 
 namespace Essensoft.AspNetCore.Security.Bcpg
 {
-    /// <remarks>Generic signature object</remarks>
-    public class OnePassSignaturePacket
+	/// <remarks>Generic signature object</remarks>
+	public class OnePassSignaturePacket
 		: ContainedPacket
 	{
 		private int version;

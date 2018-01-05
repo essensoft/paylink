@@ -1,7 +1,9 @@
 ﻿using System;
+
+using Essensoft.AspNetCore.Security.Crypto.Macs;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Parameters
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
     /**
      * Parameter class for the HkdfBytesGenerator class.

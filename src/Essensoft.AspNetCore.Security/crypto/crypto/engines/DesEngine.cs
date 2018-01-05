@@ -1,11 +1,12 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Engines
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
-    /// <remarks>A class that provides a basic DES engine.</remarks>
+	/// <remarks>A class that provides a basic DES engine.</remarks>
     public class DesEngine
 		: IBlockCipher
     {

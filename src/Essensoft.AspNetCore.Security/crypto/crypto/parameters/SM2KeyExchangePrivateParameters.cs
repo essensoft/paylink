@@ -2,7 +2,7 @@
 
 using Essensoft.AspNetCore.Security.Math.EC;
 
-namespace Essensoft.AspNetCore.Security.Parameters
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
     /// <summary>Private parameters for an SM2 key exchange.</summary>
     /// <remarks>The ephemeralPrivateKey is used to calculate the random point used in the algorithm.</remarks>

@@ -1,10 +1,14 @@
 using System;
-using Essensoft.AspNetCore.Security.Parameters;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Generators
+namespace Essensoft.AspNetCore.Security.Crypto.Generators
 {
-    /**
+	/**
 	* Generator for Pbe derived keys and ivs as defined by Pkcs 5 V2.0 Scheme 1.
 	* Note this generator is limited to the size of the hash produced by the
 	* digest used to drive it.
@@ -14,7 +18,7 @@ namespace Essensoft.AspNetCore.Security.Generators
 	* RSA's Pkcs5 Page</a>
 	* </p>
 	*/
-    public class Pkcs5S1ParametersGenerator
+	public class Pkcs5S1ParametersGenerator
 		: PbeParametersGenerator
 	{
 		private readonly IDigest digest;

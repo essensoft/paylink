@@ -1,3 +1,4 @@
+using System;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.CryptoPro;
@@ -7,10 +8,11 @@ using Essensoft.AspNetCore.Security.Asn1.Pkcs;
 using Essensoft.AspNetCore.Security.Asn1.TeleTrust;
 using Essensoft.AspNetCore.Security.Asn1.X509;
 using Essensoft.AspNetCore.Security.Asn1.X9;
+using Essensoft.AspNetCore.Security.Crypto;
 
 namespace Essensoft.AspNetCore.Security.X509
 {
-    internal class X509SignatureUtilities
+	internal class X509SignatureUtilities
 	{
 		private static readonly Asn1Null derNull = DerNull.Instance;
 

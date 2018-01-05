@@ -2,13 +2,14 @@ using System;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Security.Certificates;
 
 namespace Essensoft.AspNetCore.Security.X509.Extension
 {
-    /// <remarks>A high level authority key identifier.</remarks>
-    public class AuthorityKeyIdentifierStructure
+	/// <remarks>A high level authority key identifier.</remarks>
+	public class AuthorityKeyIdentifierStructure
 		: AuthorityKeyIdentifier
 	{
 		/**

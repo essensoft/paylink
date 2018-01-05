@@ -1,5 +1,7 @@
 using System;
-using Essensoft.AspNetCore.Security.Digests;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Asn1.X509

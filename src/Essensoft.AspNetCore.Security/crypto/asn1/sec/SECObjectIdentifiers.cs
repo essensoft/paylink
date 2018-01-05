@@ -1,8 +1,11 @@
+using System;
+
+using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X9;
 
 namespace Essensoft.AspNetCore.Security.Asn1.Sec
 {
-    public abstract class SecObjectIdentifiers
+	public abstract class SecObjectIdentifiers
 	{
 		/**
 		 *  EllipticCurve OBJECT IDENTIFIER ::= {

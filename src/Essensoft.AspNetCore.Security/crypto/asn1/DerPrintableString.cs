@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
