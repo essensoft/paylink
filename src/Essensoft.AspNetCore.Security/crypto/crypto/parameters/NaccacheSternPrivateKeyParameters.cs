@@ -3,7 +3,7 @@ using System.Collections;
 
 using Essensoft.AspNetCore.Security.Math;
 
-namespace Essensoft.AspNetCore.Security.Parameters
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
 	/**
 	 * Private key parameters for NaccacheStern cipher. For details on this cipher,

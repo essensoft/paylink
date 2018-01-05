@@ -1,12 +1,16 @@
-using Essensoft.AspNetCore.Security.Parameters;
+using System;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities.Date;
 
 namespace Essensoft.AspNetCore.Security.Bcpg.OpenPgp
 {
-    /// <remarks>Generator for old style PGP V3 Signatures.</remarks>
-    // TODO Should be able to implement ISigner?
-    public class PgpV3SignatureGenerator
+	/// <remarks>Generator for old style PGP V3 Signatures.</remarks>
+	// TODO Should be able to implement ISigner?
+	public class PgpV3SignatureGenerator
     {
         private PublicKeyAlgorithmTag keyAlgorithm;
         private HashAlgorithmTag hashAlgorithm;

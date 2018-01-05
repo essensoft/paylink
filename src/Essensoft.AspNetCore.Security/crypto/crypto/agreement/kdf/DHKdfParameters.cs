@@ -1,9 +1,10 @@
+using System;
 
 using Essensoft.AspNetCore.Security.Asn1;
 
-namespace Essensoft.AspNetCore.Security.Agreement.Kdf
+namespace Essensoft.AspNetCore.Security.Crypto.Agreement.Kdf
 {
-    public class DHKdfParameters
+	public class DHKdfParameters
 		: IDerivationParameters
 	{
 		private readonly DerObjectIdentifier algorithm;

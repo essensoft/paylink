@@ -2,7 +2,7 @@
 using System.Collections;
 using System.IO;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /**
      * RFC 5764 DTLS Extension to Establish Keys for SRTP.

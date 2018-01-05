@@ -1,20 +1,21 @@
 using System;
 using System.Collections;
 using System.IO;
+using System.Text;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Nist;
 using Essensoft.AspNetCore.Security.Asn1.Pkcs;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Digests;
-using Essensoft.AspNetCore.Security.Macs;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
+using Essensoft.AspNetCore.Security.Crypto.Macs;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.Date;
 using Essensoft.AspNetCore.Security.Utilities.IO;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /// <remarks>Some helper functions for MicroTLS.</remarks>
     public abstract class TlsUtilities

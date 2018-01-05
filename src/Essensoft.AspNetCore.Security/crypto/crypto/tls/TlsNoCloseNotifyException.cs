@@ -1,6 +1,7 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /// <summary>
     /// This exception will be thrown(only) when the connection is closed by the peer without sending a

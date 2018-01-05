@@ -40,6 +40,12 @@ namespace Essensoft.AspNetCore.Alipay.Response
         public string BuyerUserType { get; set; }
 
         /// <summary>
+        /// 平台优惠金额
+        /// </summary>
+        [JsonProperty("discount_amount")]
+        public string DiscountAmount { get; set; }
+
+        /// <summary>
         /// 本次交易支付所使用的单品券优惠的商品优惠信息
         /// </summary>
         [JsonProperty("discount_goods_detail")]
@@ -62,6 +68,12 @@ namespace Essensoft.AspNetCore.Alipay.Response
         /// </summary>
         [JsonProperty("invoice_amount")]
         public string InvoiceAmount { get; set; }
+
+        /// <summary>
+        /// 商家优惠金额
+        /// </summary>
+        [JsonProperty("mdiscount_amount")]
+        public string MdiscountAmount { get; set; }
 
         /// <summary>
         /// 买家支付宝用户号，该字段将废弃，不要使用

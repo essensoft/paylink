@@ -1,11 +1,12 @@
 using System;
+using System.Collections;
 
 using Essensoft.AspNetCore.Security.Asn1.X500;
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Asn1.X509.SigI
 {
-    /**
+	/**
 	* Structure for a name or pseudonym.
 	* 
 	* <pre>
@@ -21,7 +22,7 @@ namespace Essensoft.AspNetCore.Security.Asn1.X509.SigI
 	* @see Essensoft.AspNetCore.Security.asn1.x509.sigi.PersonalData
 	* 
 	*/
-    public class NameOrPseudonym
+	public class NameOrPseudonym
 		: Asn1Encodable, IAsn1Choice
 	{
 		private readonly DirectoryString	pseudonym;

@@ -1,6 +1,8 @@
-namespace Essensoft.AspNetCore.Security.Tls
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
-    public interface TlsCredentials
+	public interface TlsCredentials
 	{
 		Certificate Certificate { get; }
 	}

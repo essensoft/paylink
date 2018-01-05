@@ -5,6 +5,7 @@ using System.Text;
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Utilities;
 using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Security.Certificates;
@@ -13,11 +14,11 @@ using Essensoft.AspNetCore.Security.Utilities.Collections;
 using Essensoft.AspNetCore.Security.Utilities.Date;
 using Essensoft.AspNetCore.Security.Utilities.Encoders;
 using Essensoft.AspNetCore.Security.X509.Extension;
-using Essensoft.AspNetCore.Security.Operators;
+using Essensoft.AspNetCore.Security.Crypto.Operators;
 
 namespace Essensoft.AspNetCore.Security.X509
 {
-    /**
+	/**
 	 * The following extensions are listed in RFC 2459 as relevant to CRLs
 	 *
 	 * Authority Key Identifier
@@ -26,7 +27,7 @@ namespace Essensoft.AspNetCore.Security.X509
 	 * Delta CRL Indicator (critical)
 	 * Issuing Distribution Point (critical)
 	 */
-    public class X509Crl
+	public class X509Crl
 		: X509ExtensionBase
 		// TODO Add interface Crl?
 	{

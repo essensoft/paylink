@@ -8,6 +8,7 @@ using Essensoft.AspNetCore.Security.Asn1.Pkcs;
 using Essensoft.AspNetCore.Security.Asn1.Tsp;
 using Essensoft.AspNetCore.Security.Asn1.X509;
 using Essensoft.AspNetCore.Security.Cms;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Security.Certificates;
@@ -17,7 +18,7 @@ using Essensoft.AspNetCore.Security.X509.Store;
 
 namespace Essensoft.AspNetCore.Security.Tsp
 {
-    public class TimeStampTokenGenerator
+	public class TimeStampTokenGenerator
 	{
 		private int accuracySeconds = -1;
 		private int accuracyMillis = -1;

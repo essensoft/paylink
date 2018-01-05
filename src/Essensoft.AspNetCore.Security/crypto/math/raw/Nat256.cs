@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-using Essensoft.AspNetCore.Security.Utilities;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Math.Raw
 {

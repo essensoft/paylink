@@ -1,10 +1,10 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Generators
+namespace Essensoft.AspNetCore.Security.Crypto.Generators
 {
 	/**
 	 * generate suitable parameters for GOST3410.

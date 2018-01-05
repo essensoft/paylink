@@ -1,6 +1,6 @@
 using System;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Security.Crypto
 {
     /**
      * this exception is thrown if a buffer that is meant to have output

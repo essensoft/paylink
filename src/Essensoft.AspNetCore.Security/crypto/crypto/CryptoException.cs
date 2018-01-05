@@ -1,6 +1,6 @@
 using System;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Security.Crypto
 {
 #if !(NETCF_1_0 || NETCF_2_0 || SILVERLIGHT || PORTABLE)
     [Serializable]

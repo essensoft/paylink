@@ -1,4 +1,7 @@
-﻿namespace Essensoft.AspNetCore.Security.Math.Raw
+﻿using System;
+using System.Diagnostics;
+
+namespace Essensoft.AspNetCore.Security.Math.Raw
 {
     internal abstract class Nat384
     {

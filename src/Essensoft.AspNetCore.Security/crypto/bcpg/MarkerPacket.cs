@@ -1,6 +1,8 @@
+using System.IO;
+
 namespace Essensoft.AspNetCore.Security.Bcpg
 {
-    /// <remarks>Basic type for a marker packet.</remarks>
+	/// <remarks>Basic type for a marker packet.</remarks>
     public class MarkerPacket
         : ContainedPacket
     {

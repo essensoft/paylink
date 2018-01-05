@@ -1,4 +1,8 @@
-namespace Essensoft.AspNetCore.Security
+using System;
+
+using Essensoft.AspNetCore.Security.Crypto;
+
+namespace Essensoft.AspNetCore.Security.Crypto
 {
     public abstract class AsymmetricKeyParameter
 		: ICipherParameters

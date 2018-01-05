@@ -3,7 +3,7 @@ using System.IO;
 
 using Essensoft.AspNetCore.Security.Utilities.Date;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     internal class DtlsRecordLayer
         :   DatagramTransport

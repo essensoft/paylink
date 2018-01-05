@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Asn1
 {
-    public class BerApplicationSpecific
+	public class BerApplicationSpecific
 		: DerApplicationSpecific
 	{
 		public BerApplicationSpecific(

@@ -1,11 +1,12 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Macs;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Macs;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Modes
+namespace Essensoft.AspNetCore.Security.Crypto.Modes
 {
-    /**
+	/**
 	* A Two-Pass Authenticated-Encryption Scheme Optimized for Simplicity and 
 	* Efficiency - by M. Bellare, P. Rogaway, D. Wagner.
 	* 
@@ -18,7 +19,7 @@ namespace Essensoft.AspNetCore.Security.Modes
 	* 
 	* Of course, this implementations is NOT thread-safe.
 	*/
-    public class EaxBlockCipher
+	public class EaxBlockCipher
 		: IAeadBlockCipher
 	{
 		private enum Tag : byte { N, H, C };

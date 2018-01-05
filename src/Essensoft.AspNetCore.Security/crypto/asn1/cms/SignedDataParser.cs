@@ -1,10 +1,11 @@
+using System;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Asn1.Cms
 {
-    /**
+	/**
 	* <pre>
 	* SignedData ::= SEQUENCE {
 	*     version CMSVersion,
@@ -16,7 +17,7 @@ namespace Essensoft.AspNetCore.Security.Asn1.Cms
 	*   }
 	* </pre>
 	*/
-    public class SignedDataParser
+	public class SignedDataParser
 	{
 		private Asn1SequenceParser	_seq;
 		private DerInteger			_version;

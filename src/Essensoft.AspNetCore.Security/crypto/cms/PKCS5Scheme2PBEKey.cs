@@ -1,14 +1,17 @@
 using System;
+
+using Essensoft.AspNetCore.Security.Asn1.Pkcs;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Generators;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Generators;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    /// <summary>
-    /// PKCS5 scheme-2 - password converted to bytes assuming ASCII.
-    /// </summary>
-    public class Pkcs5Scheme2PbeKey
+	/// <summary>
+	/// PKCS5 scheme-2 - password converted to bytes assuming ASCII.
+	/// </summary>
+	public class Pkcs5Scheme2PbeKey
 		: CmsPbeKey
 	{
 		[Obsolete("Use version taking 'char[]' instead")]

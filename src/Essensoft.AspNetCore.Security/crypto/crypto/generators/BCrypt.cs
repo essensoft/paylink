@@ -1,8 +1,9 @@
 ﻿using System;
 
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Generators
+namespace Essensoft.AspNetCore.Security.Crypto.Generators
 {
     /**
      * Core of password hashing scheme Bcrypt,

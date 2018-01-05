@@ -1,13 +1,14 @@
+using System;
 
 using Essensoft.AspNetCore.Security.Asn1.X509;
 
 namespace Essensoft.AspNetCore.Security.Pkix
 {
-    /// <summary>
-    /// This class helps to handle CRL revocation reasons mask. Each CRL handles a
-    /// certain set of revocation reasons.
-    /// </summary>
-    internal class ReasonsMask
+	/// <summary>
+	/// This class helps to handle CRL revocation reasons mask. Each CRL handles a
+	/// certain set of revocation reasons.
+	/// </summary>
+	internal class ReasonsMask
 	{
 		private int _reasons;
 

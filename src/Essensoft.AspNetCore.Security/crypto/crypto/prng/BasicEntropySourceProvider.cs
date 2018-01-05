@@ -1,7 +1,8 @@
-﻿
+﻿using System;
+
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Prng
+namespace Essensoft.AspNetCore.Security.Crypto.Prng
 {
     /**
      * An EntropySourceProvider where entropy generation is based on a SecureRandom output using SecureRandom.generateSeed().

@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Text;
 
 namespace Essensoft.AspNetCore.Security.Utilities.Encoders
 {

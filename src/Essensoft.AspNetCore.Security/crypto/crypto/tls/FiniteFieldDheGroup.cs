@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Tls
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /*
      * draft-ietf-tls-negotiated-ff-dhe-01

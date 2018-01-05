@@ -1,8 +1,9 @@
 ﻿using System;
+using System.IO;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public sealed class ProtocolVersion
     {

@@ -1,15 +1,18 @@
 using System;
+using System.Collections;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Security;
+using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.X509.Store;
 
 namespace Essensoft.AspNetCore.Security.X509
 {
-    /**
+	/**
 	 * Carrying class for an attribute certificate issuer.
 	 */
-    public class AttributeCertificateIssuer
+	public class AttributeCertificateIssuer
 		//: CertSelector, Selector
 		: IX509Selector
 	{

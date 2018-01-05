@@ -1,9 +1,9 @@
 ﻿using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Engines
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
     public abstract class SerpentEngineBase
         :   IBlockCipher

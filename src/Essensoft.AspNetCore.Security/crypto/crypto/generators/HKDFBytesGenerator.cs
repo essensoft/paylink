@@ -1,9 +1,10 @@
 ﻿using System;
 
-using Essensoft.AspNetCore.Security.Macs;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Macs;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Generators
+namespace Essensoft.AspNetCore.Security.Crypto.Generators
 {
     /**
      * HMAC-based Extract-and-Expand Key Derivation Function (HKDF) implemented

@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Math.EC
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Math.EC
 {
     public class ScaleXPointMap
         : ECPointMap

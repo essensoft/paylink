@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Asn1.Cms
 {
-    public class TimeStampTokenEvidence
+	public class TimeStampTokenEvidence
 		: Asn1Encodable
 	{
 		private TimeStampAndCrl[] timeStampAndCrls;

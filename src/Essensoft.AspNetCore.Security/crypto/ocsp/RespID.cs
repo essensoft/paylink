@@ -3,15 +3,16 @@ using System;
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Ocsp;
 using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.X509;
 
 namespace Essensoft.AspNetCore.Security.Ocsp
 {
-    /**
+	/**
 	 * Carrier for a ResponderID.
 	 */
-    public class RespID
+	public class RespID
 	{
 		internal readonly ResponderID id;
 

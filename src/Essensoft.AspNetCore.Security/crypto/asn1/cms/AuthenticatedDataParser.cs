@@ -1,9 +1,10 @@
+using System;
 
 using Essensoft.AspNetCore.Security.Asn1.X509;
 
 namespace Essensoft.AspNetCore.Security.Asn1.Cms
 {
-    /**
+	/**
 	 * Produce an object suitable for an Asn1OutputStream.
 	 * <pre>
 	 * AuthenticatedData ::= SEQUENCE {
@@ -24,7 +25,7 @@ namespace Essensoft.AspNetCore.Security.Asn1.Cms
 	 * MessageAuthenticationCode ::= OCTET STRING
 	 * </pre>
 	 */
-    public class AuthenticatedDataParser
+	public class AuthenticatedDataParser
 	{
 	    private Asn1SequenceParser	seq;
 	    private DerInteger			version;

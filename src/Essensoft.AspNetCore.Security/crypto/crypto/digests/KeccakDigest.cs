@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Diagnostics;
 
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
     /// <summary>
     /// Implementation of Keccak based on following KeccakNISTInterface.c from http://keccak.noekeon.org/

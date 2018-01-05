@@ -4,7 +4,7 @@ using System.IO;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.IO
+namespace Essensoft.AspNetCore.Security.Crypto.IO
 {
     public class CipherStream
 		: Stream

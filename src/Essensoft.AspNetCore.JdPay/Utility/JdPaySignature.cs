@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Text;
-using Essensoft.AspNetCore.Security;
 using Essensoft.AspNetCore.Security.Asn1.Pkcs;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Security;
 
 namespace Essensoft.AspNetCore.JdPay.Utility

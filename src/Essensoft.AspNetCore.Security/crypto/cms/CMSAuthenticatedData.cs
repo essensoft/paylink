@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1;
@@ -7,10 +9,10 @@ using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    /**
+	/**
 	* containing class for an CMS Authenticated Data object
 	*/
-    public class CmsAuthenticatedData
+	public class CmsAuthenticatedData
 	{
 		internal RecipientInformationStore recipientInfoStore;
 		internal ContentInfo contentInfo;

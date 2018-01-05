@@ -1,7 +1,8 @@
+using System;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Modes.Gcm
+namespace Essensoft.AspNetCore.Security.Crypto.Modes.Gcm
 {
     public class BasicGcmExponentiator
         : IGcmExponentiator

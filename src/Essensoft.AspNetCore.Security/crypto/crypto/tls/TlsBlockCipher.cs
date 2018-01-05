@@ -1,10 +1,11 @@
 using System;
+using System.IO;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /// <summary>
     /// A generic TLS 1.0-1.2 / SSLv3 block cipher. This can be used for AES or 3DES for example.

@@ -1,9 +1,11 @@
-namespace Essensoft.AspNetCore.Security.Prng.Drbg
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Prng.Drbg
 {
-    /**
+	/**
 	 * Interface to SP800-90A deterministic random bit generators.
 	 */
-    public interface ISP80090Drbg
+	public interface ISP80090Drbg
 	{
 	    /**
 	     * Return the block size of the DRBG.

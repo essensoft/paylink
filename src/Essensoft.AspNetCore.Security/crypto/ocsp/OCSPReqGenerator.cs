@@ -5,7 +5,8 @@ using System.IO;
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Ocsp;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Security.Certificates;
 using Essensoft.AspNetCore.Security.Utilities;
@@ -13,7 +14,7 @@ using Essensoft.AspNetCore.Security.X509;
 
 namespace Essensoft.AspNetCore.Security.Ocsp
 {
-    public class OcspReqGenerator
+	public class OcspReqGenerator
 	{
 		private IList			list = Platform.CreateArrayList();
 		private GeneralName		requestorName = null;

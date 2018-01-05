@@ -1,8 +1,11 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
+
+using Essensoft.AspNetCore.Security.Crypto.Digests;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.Collections;
 
-namespace Essensoft.AspNetCore.Security.Signers
+namespace Essensoft.AspNetCore.Security.Crypto.Signers
 {
     public class IsoTrailers
     {

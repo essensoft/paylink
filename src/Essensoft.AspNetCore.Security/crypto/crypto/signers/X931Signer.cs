@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Signers
+namespace Essensoft.AspNetCore.Security.Crypto.Signers
 {
     /**
      * X9.31-1998 - signing using a hash.

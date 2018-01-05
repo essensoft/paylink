@@ -2,10 +2,11 @@ using System;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.CryptoPro;
+using Essensoft.AspNetCore.Security.Math;
 
-namespace Essensoft.AspNetCore.Security.Parameters
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
-    public abstract class Gost3410KeyParameters
+	public abstract class Gost3410KeyParameters
 		: AsymmetricKeyParameter
 	{
 		private readonly Gost3410Parameters parameters;

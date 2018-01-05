@@ -1,4 +1,8 @@
-﻿namespace Essensoft.AspNetCore.Security.Asn1
+﻿using System;
+
+using Essensoft.AspNetCore.Security.Utilities;
+
+namespace Essensoft.AspNetCore.Security.Asn1
 {
     public class BerBitString
         : DerBitString

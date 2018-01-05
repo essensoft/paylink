@@ -1,7 +1,7 @@
 using System;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 
-namespace Essensoft.AspNetCore.Security.Engines
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
 	/**
 	* Implementation of the SEED algorithm as described in RFC 4009

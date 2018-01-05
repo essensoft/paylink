@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 
 using Essensoft.AspNetCore.Security.Utilities.Collections;
@@ -5,7 +6,7 @@ using Essensoft.AspNetCore.Security.X509;
 
 namespace Essensoft.AspNetCore.Security.Pkix
 {
-    public abstract class PkixAttrCertChecker
+	public abstract class PkixAttrCertChecker
 	{
 		/**
 		 * Returns an immutable <code>Set</code> of X.509 attribute certificate

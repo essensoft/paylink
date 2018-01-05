@@ -1,12 +1,14 @@
 using System;
-using Essensoft.AspNetCore.Security.Generators;
-using Essensoft.AspNetCore.Security.Parameters;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Generators;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.OpenSsl
 {
-    internal sealed class PemUtilities
+	internal sealed class PemUtilities
 	{
 		private enum PemBaseAlg { AES_128, AES_192, AES_256, BF, DES, DES_EDE, DES_EDE3, RC2, RC2_40, RC2_64 };
 		private enum PemMode { CBC, CFB, ECB, OFB };

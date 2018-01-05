@@ -1,14 +1,18 @@
 using System;
+using System.Collections;
 
 using Essensoft.AspNetCore.Security.Asn1;
+using Essensoft.AspNetCore.Security.Asn1.Nist;
+using Essensoft.AspNetCore.Security.Asn1.Pkcs;
 using Essensoft.AspNetCore.Security.Asn1.X9;
-using Essensoft.AspNetCore.Security.Agreement.Kdf;
+using Essensoft.AspNetCore.Security.Crypto.Agreement.Kdf;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Agreement
+namespace Essensoft.AspNetCore.Security.Crypto.Agreement
 {
-    public class ECDHWithKdfBasicAgreement
+	public class ECDHWithKdfBasicAgreement
 		: ECDHBasicAgreement
 	{
 		private readonly string algorithm;

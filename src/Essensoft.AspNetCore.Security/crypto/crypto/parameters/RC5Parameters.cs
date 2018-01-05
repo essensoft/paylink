@@ -1,6 +1,7 @@
 using System;
+using Essensoft.AspNetCore.Security.Crypto;
 
-namespace Essensoft.AspNetCore.Security.Parameters
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
     public class RC5Parameters
 		: KeyParameter

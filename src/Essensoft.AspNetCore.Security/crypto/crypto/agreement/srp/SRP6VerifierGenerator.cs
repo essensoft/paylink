@@ -1,13 +1,14 @@
+using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 
-namespace Essensoft.AspNetCore.Security.Agreement.Srp
+namespace Essensoft.AspNetCore.Security.Crypto.Agreement.Srp
 {
-    /**
+	/**
 	 * Generates new SRP verifier for user
 	 */
-    public class Srp6VerifierGenerator
+	public class Srp6VerifierGenerator
 	{
 	    protected BigInteger N;
 	    protected BigInteger g;

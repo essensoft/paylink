@@ -1,8 +1,8 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Security.Crypto
 {
 	public class BufferedStreamCipher
 		: BufferedCipherBase

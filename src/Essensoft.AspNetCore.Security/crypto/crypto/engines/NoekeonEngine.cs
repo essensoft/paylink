@@ -1,14 +1,15 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Engines
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
-    /**
+	/**
 	* A Noekeon engine, using direct-key mode.
 	*/
-    public class NoekeonEngine
+	public class NoekeonEngine
 		: IBlockCipher
 	{
 		private const int GenericSize = 16; // Block and key size, as well as the amount of rounds.

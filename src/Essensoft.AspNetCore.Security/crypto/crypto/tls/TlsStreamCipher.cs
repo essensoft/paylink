@@ -1,8 +1,11 @@
-﻿
-using Essensoft.AspNetCore.Security.Parameters;
+﻿using System;
+using System.IO;
+
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Tls;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public class TlsStreamCipher
         :   TlsCipher

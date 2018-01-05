@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Essensoft.AspNetCore.Security.Utilities;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Engines
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
     /// <summary>
     /// Implementation of Daniel J. Bernstein's ChaCha stream cipher.

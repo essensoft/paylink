@@ -1,9 +1,10 @@
+using System;
 
 using Essensoft.AspNetCore.Security.Asn1.Nist;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    internal class CmsAuthEnvelopedGenerator
+	internal class CmsAuthEnvelopedGenerator
 	{
 		public static readonly string Aes128Ccm = NistObjectIdentifiers.IdAes128Ccm.Id;
 		public static readonly string Aes192Ccm = NistObjectIdentifiers.IdAes192Ccm.Id;

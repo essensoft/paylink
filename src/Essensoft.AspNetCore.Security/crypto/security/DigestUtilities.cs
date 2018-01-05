@@ -7,7 +7,9 @@ using Essensoft.AspNetCore.Security.Asn1.Nist;
 using Essensoft.AspNetCore.Security.Asn1.Pkcs;
 using Essensoft.AspNetCore.Security.Asn1.Oiw;
 using Essensoft.AspNetCore.Security.Asn1.TeleTrust;
-using Essensoft.AspNetCore.Security.Digests;
+using Essensoft.AspNetCore.Security.Security;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Security

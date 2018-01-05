@@ -1,8 +1,10 @@
+using System;
+using System.IO;
 
-using Essensoft.AspNetCore.Security.Engines;
-using Essensoft.AspNetCore.Security.Modes;
+using Essensoft.AspNetCore.Security.Crypto.Engines;
+using Essensoft.AspNetCore.Security.Crypto.Modes;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public class DefaultTlsCipherFactory
         :   AbstractTlsCipherFactory

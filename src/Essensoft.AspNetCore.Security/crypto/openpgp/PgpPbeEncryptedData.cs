@@ -1,13 +1,15 @@
 using System;
 using System.IO;
-using Essensoft.AspNetCore.Security.IO;
-using Essensoft.AspNetCore.Security.Parameters;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.IO;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities.IO;
 
 namespace Essensoft.AspNetCore.Security.Bcpg.OpenPgp
 {
-    /// <remarks>A password based encryption object.</remarks>
+	/// <remarks>A password based encryption object.</remarks>
     public class PgpPbeEncryptedData
         : PgpEncryptedData
     {

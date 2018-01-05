@@ -1,9 +1,10 @@
+using System;
 
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 
-namespace Essensoft.AspNetCore.Security.Generators
+namespace Essensoft.AspNetCore.Security.Crypto.Generators
 {
     public class DHParametersGenerator
     {

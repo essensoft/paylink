@@ -1,10 +1,11 @@
+using System;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Utilities.IO;
 
 namespace Essensoft.AspNetCore.Security.Asn1
 {
-    public class BerOctetStringParser
+	public class BerOctetStringParser
 		: Asn1OctetStringParser
 	{
 		private readonly Asn1StreamParser _parser;

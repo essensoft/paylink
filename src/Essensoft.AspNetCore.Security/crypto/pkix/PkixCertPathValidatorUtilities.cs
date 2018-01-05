@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.IO;
+using System.Text;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.IsisMtt;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
@@ -17,10 +19,10 @@ using Essensoft.AspNetCore.Security.X509.Store;
 
 namespace Essensoft.AspNetCore.Security.Pkix
 {
-    /// <summary>
-    /// Summary description for PkixCertPathValidatorUtilities.
-    /// </summary>
-    public class PkixCertPathValidatorUtilities
+	/// <summary>
+	/// Summary description for PkixCertPathValidatorUtilities.
+	/// </summary>
+	public class PkixCertPathValidatorUtilities
 	{
 		private static readonly PkixCrlUtilities CrlUtilities = new PkixCrlUtilities();
 

@@ -2,15 +2,15 @@ using System;
 using System.Collections;
 using System.IO;
 
-using Essensoft.AspNetCore.Security.Agreement;
-using Essensoft.AspNetCore.Security.Generators;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Agreement;
+using Essensoft.AspNetCore.Security.Crypto.Generators;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.Encoders;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public abstract class TlsDHUtilities
     {

@@ -9,6 +9,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
     public class AlipayEcoRenthouseRoomConcentrationSyncModel : AlipayObject
     {
         /// <summary>
+        /// 阿里短号
+        /// </summary>
+        [JsonProperty("ali_short_num")]
+        public string AliShortNum { get; set; }
+
+        /// <summary>
         /// 户型-房  数值范围：1-26
         /// </summary>
         [JsonProperty("bedroom_count")]
@@ -21,7 +27,13 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string CheckinTime { get; set; }
 
         /// <summary>
-        /// 小区Code，详见文档  http://ecopublic.oss-cn-hangzhou.aliyuncs.com/eco/tpmogo/CommunityInfos/CommunityInfos.xls
+        /// 小区同步请求号
+        /// </summary>
+        [JsonProperty("comm_req_id")]
+        public string CommReqId { get; set; }
+
+        /// <summary>
+        /// 小区Code和小区请求号必输入其一  小区Code，详见文档  http://ecopublic.oss-cn-hangzhou.aliyuncs.com/eco/tpmogo/CommunityInfos/CommunityInfos.xls
         /// </summary>
         [JsonProperty("community_code")]
         public string CommunityCode { get; set; }
@@ -67,6 +79,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         /// </summary>
         [JsonProperty("max_amount")]
         public string MaxAmount { get; set; }
+
+        /// <summary>
+        /// 集中式房源最大押金
+        /// </summary>
+        [JsonProperty("max_deposit_amount")]
+        public string MaxDepositAmount { get; set; }
 
         /// <summary>
         /// 公寓别名  是否必须:（新增）是/（修改）否
@@ -139,6 +157,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         /// </summary>
         [JsonProperty("room_configs")]
         public List<string> RoomConfigs { get; set; }
+
+        /// <summary>
+        /// 集中式房间列表
+        /// </summary>
+        [JsonProperty("room_info_list")]
+        public List<EcoRenthouseRoomInfoList> RoomInfoList { get; set; }
 
         /// <summary>
         /// 房源初始上下架状态  上架状态租房平台会展示该房间信息，下架状态反之

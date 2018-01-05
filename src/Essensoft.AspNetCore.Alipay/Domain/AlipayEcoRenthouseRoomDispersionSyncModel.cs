@@ -9,6 +9,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
     public class AlipayEcoRenthouseRoomDispersionSyncModel : AlipayObject
     {
         /// <summary>
+        /// 阿里短号
+        /// </summary>
+        [JsonProperty("ali_short_num")]
+        public string AliShortNum { get; set; }
+
+        /// <summary>
         /// 户型-房  数值范围：1-26
         /// </summary>
         [JsonProperty("bedroom_count")]
@@ -21,7 +27,13 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string CheckinTime { get; set; }
 
         /// <summary>
-        /// 小区Code,详见文档  http://ecopublic.oss-cn-hangzhou.aliyuncs.com/eco/tpmogo/CommunityInfos/CommunityInfos.xls
+        /// 小区同步请求号
+        /// </summary>
+        [JsonProperty("comm_req_id")]
+        public string CommReqId { get; set; }
+
+        /// <summary>
+        /// 小区Code和小区请求号必输入其一  小区Code,详见文档  http://ecopublic.oss-cn-hangzhou.aliyuncs.com/eco/tpmogo/CommunityInfos/CommunityInfos.xls
         /// </summary>
         [JsonProperty("community_code")]
         public string CommunityCode { get; set; }

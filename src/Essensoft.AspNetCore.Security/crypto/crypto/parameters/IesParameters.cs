@@ -1,4 +1,7 @@
-namespace Essensoft.AspNetCore.Security.Parameters
+using System;
+using Essensoft.AspNetCore.Security.Crypto;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
     /**
      * parameters for using an integrated cipher in stream mode.

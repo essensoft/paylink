@@ -1,9 +1,11 @@
 using System;
+
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Math;
 
-namespace Essensoft.AspNetCore.Security.Parameters
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
-    public class Gost3410Parameters
+	public class Gost3410Parameters
 		: ICipherParameters
 	{
 		private readonly BigInteger p, q, a;

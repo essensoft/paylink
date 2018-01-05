@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    internal interface IDigestCalculator
+	internal interface IDigestCalculator
 	{
 		byte[] GetDigest();
 	}

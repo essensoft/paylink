@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 
+using Essensoft.AspNetCore.Security.Utilities.Collections;
+
 namespace Essensoft.AspNetCore.Security.Utilities.IO.Pem
 {
-    public class PemObject
+	public class PemObject
 		: PemObjectGenerator
 	{
 		private string		type;

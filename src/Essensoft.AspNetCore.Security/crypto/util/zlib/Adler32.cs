@@ -1,3 +1,4 @@
+using System;
 /*
  * $Id: Adler32.cs,v 1.1 2006-07-31 13:59:25 bouncy Exp $
  *
@@ -33,8 +34,7 @@ EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  * and contributors of zlib.
  */
 
-namespace Essensoft.AspNetCore.Security.Utilities.Zlib
-{
+namespace Essensoft.AspNetCore.Security.Utilities.Zlib {
 
     internal sealed class Adler32{
 

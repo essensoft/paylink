@@ -33,7 +33,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string Content { get; set; }
 
         /// <summary>
-        /// 飞猪内容id
+        /// 内容id
         /// </summary>
         [JsonProperty("content_id")]
         public string ContentId { get; set; }
@@ -51,19 +51,19 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string DetailUrl { get; set; }
 
         /// <summary>
-        /// 图片链接列表
+        /// 图片链接列表，单个image大小不超过4096，image个数不超过50
         /// </summary>
         [JsonProperty("image_list")]
         public List<string> ImageList { get; set; }
 
         /// <summary>
-        /// 内容修改时间
+        /// 内容修改时间，请确保本次修改的时间大于上一次修改的时间
         /// </summary>
         [JsonProperty("modified_date")]
         public long ModifiedDate { get; set; }
 
         /// <summary>
-        /// poi列表
+        /// poi列表，单个poi名称大小不超过512，poi个数不超过50个
         /// </summary>
         [JsonProperty("poi_list")]
         public List<ContentPoiData> PoiList { get; set; }
@@ -75,7 +75,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public long PublishDate { get; set; }
 
         /// <summary>
-        /// 标签列表
+        /// 标签列表，单个tag大小不超过128，tag个数不超过1000
         /// </summary>
         [JsonProperty("tag_list")]
         public List<string> TagList { get; set; }

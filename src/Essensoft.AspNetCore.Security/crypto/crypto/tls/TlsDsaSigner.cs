@@ -1,10 +1,11 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Digests;
-using Essensoft.AspNetCore.Security.Parameters;
-using Essensoft.AspNetCore.Security.Signers;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Signers;
+using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public abstract class TlsDsaSigner
         :	AbstractTlsSigner

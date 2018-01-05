@@ -1,4 +1,7 @@
 using System;
+using System.Collections;
+
+using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Ocsp;
 using Essensoft.AspNetCore.Security.Asn1.X509;
 using Essensoft.AspNetCore.Security.Utilities.Date;
@@ -6,7 +9,7 @@ using Essensoft.AspNetCore.Security.X509;
 
 namespace Essensoft.AspNetCore.Security.Ocsp
 {
-    public class SingleResp
+	public class SingleResp
 		: X509ExtensionBase
 	{
 		internal readonly SingleResponse resp;

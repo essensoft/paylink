@@ -1,7 +1,8 @@
+using System;
 
-using Essensoft.AspNetCore.Security.Utilities;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Prng
+namespace Essensoft.AspNetCore.Security.Crypto.Prng
 {
     public class VmpcRandomGenerator
         : IRandomGenerator 

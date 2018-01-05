@@ -1,4 +1,5 @@
-﻿
+﻿using System;
+
 using Essensoft.AspNetCore.Security.Math.Raw;
 using Essensoft.AspNetCore.Security.Utilities.Encoders;
 

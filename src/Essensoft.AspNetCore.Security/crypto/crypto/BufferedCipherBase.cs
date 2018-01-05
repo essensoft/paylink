@@ -1,6 +1,8 @@
-namespace Essensoft.AspNetCore.Security
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto
 {
-    public abstract class BufferedCipherBase
+	public abstract class BufferedCipherBase
 		: IBufferedCipher
 	{
 		protected static readonly byte[] EmptyBuffer = new byte[0];

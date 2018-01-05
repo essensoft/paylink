@@ -1,6 +1,8 @@
-namespace Essensoft.AspNetCore.Security.Parameters
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
-    public class AeadParameters
+	public class AeadParameters
 		: ICipherParameters
 	{
 		private readonly byte[] associatedText;

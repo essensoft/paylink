@@ -2,7 +2,7 @@ using System;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
     /**
     * implementation of MD4 as RFC 1320 by R. Rivest, MIT Laboratory for

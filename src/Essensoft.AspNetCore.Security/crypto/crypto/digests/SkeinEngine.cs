@@ -1,16 +1,16 @@
 using System;
 using System.Collections;
 
-using Essensoft.AspNetCore.Security.Engines;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Engines;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
 
     /// <summary>
     /// Implementation of the Skein family of parameterised hash functions in 256, 512 and 1024 bit block
-    /// sizes, based on the <see cref="Essensoft.AspNetCore.Security.Engines.ThreefishEngine">Threefish</see> tweakable block cipher.
+    /// sizes, based on the <see cref="Essensoft.AspNetCore.Security.Crypto.Engines.ThreefishEngine">Threefish</see> tweakable block cipher.
     /// </summary>
     /// <remarks>
     /// This is the 1.3 version of Skein defined in the Skein hash function submission to the NIST SHA-3
@@ -19,9 +19,9 @@ namespace Essensoft.AspNetCore.Security.Digests
     /// Skein was designed by Niels Ferguson - Stefan Lucks - Bruce Schneier - Doug Whiting - Mihir
     /// Bellare - Tadayoshi Kohno - Jon Callas - Jesse Walker.
     /// <p/>
-    /// This implementation is the basis for <see cref="Essensoft.AspNetCore.Security.Digests.SkeinDigest"/> and <see cref="Essensoft.AspNetCore.Security.Macs.SkeinMac"/>, implementing the
+    /// This implementation is the basis for <see cref="Essensoft.AspNetCore.Security.Crypto.Digests.SkeinDigest"/> and <see cref="Essensoft.AspNetCore.Security.Crypto.Macs.SkeinMac"/>, implementing the
     /// parameter based configuration system that allows Skein to be adapted to multiple applications. <br/>
-    /// Initialising the engine with <see cref="Essensoft.AspNetCore.Security.Parameters.SkeinParameters"/> allows standard and arbitrary parameters to
+    /// Initialising the engine with <see cref="Essensoft.AspNetCore.Security.Crypto.Parameters.SkeinParameters"/> allows standard and arbitrary parameters to
     /// be applied during the Skein hash function.
     /// <p/>
     /// Implemented:
@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Security.Digests
     /// <li>Tree hashing.</li>
     /// </ul>
     /// </remarks>
-    /// <seealso cref="Essensoft.AspNetCore.Security.Parameters.SkeinParameters"/>
+    /// <seealso cref="Essensoft.AspNetCore.Security.Crypto.Parameters.SkeinParameters"/>
     public class SkeinEngine
         : IMemoable
     {
@@ -591,7 +591,7 @@ namespace Essensoft.AspNetCore.Security.Digests
         }
 
         /// <summary>
-        /// Initialises the Skein engine with the provided parameters. See <see cref="Essensoft.AspNetCore.Security.Parameters.SkeinParameters"/> for
+        /// Initialises the Skein engine with the provided parameters. See <see cref="Essensoft.AspNetCore.Security.Crypto.Parameters.SkeinParameters"/> for
         /// details on the parameterisation of the Skein hash function.
         /// </summary>
         /// <param name="parameters">the parameters to apply to this engine, or <code>null</code> to use no parameters.</param>

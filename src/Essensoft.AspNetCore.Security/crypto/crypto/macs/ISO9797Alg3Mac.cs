@@ -1,11 +1,11 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Engines;
-using Essensoft.AspNetCore.Security.Modes;
-using Essensoft.AspNetCore.Security.Paddings;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Engines;
+using Essensoft.AspNetCore.Security.Crypto.Modes;
+using Essensoft.AspNetCore.Security.Crypto.Paddings;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 
-namespace Essensoft.AspNetCore.Security.Macs
+namespace Essensoft.AspNetCore.Security.Crypto.Macs
 {
 	/**
 	* DES based CBC Block Cipher MAC according to ISO9797, algorithm 3 (ANSI X9.19 Retail MAC)

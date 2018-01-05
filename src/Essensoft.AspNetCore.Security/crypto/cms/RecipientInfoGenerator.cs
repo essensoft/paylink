@@ -1,11 +1,12 @@
+using System;
 
 using Essensoft.AspNetCore.Security.Asn1.Cms;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Security;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    interface RecipientInfoGenerator
+	interface RecipientInfoGenerator
 	{
 		/// <summary>
 		/// Generate a RecipientInfo object for the given key.

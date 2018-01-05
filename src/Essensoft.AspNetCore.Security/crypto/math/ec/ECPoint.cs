@@ -1,6 +1,9 @@
 using System;
 using System.Collections;
+using System.Diagnostics;
 using System.Text;
+
+using Essensoft.AspNetCore.Security.Math.EC.Multiplier;
 
 namespace Essensoft.AspNetCore.Security.Math.EC
 {

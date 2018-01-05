@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Pkcs

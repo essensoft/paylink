@@ -1,6 +1,10 @@
+using System;
+
+using Essensoft.AspNetCore.Security.Asn1;
+
 namespace Essensoft.AspNetCore.Security.Asn1.Eac
 {
-    public abstract class EacObjectIdentifiers
+	public abstract class EacObjectIdentifiers
 	{
 		// bsi-de OBJECT IDENTIFIER ::= {
 		//         itu-t(0) identified-organization(4) etsi(0)

@@ -1,10 +1,13 @@
-using Essensoft.AspNetCore.Security.Parameters;
+using System;
+
+using Essensoft.AspNetCore.Security.Crypto.Digests;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Math.EC;
 using Essensoft.AspNetCore.Security.Math.EC.Multiplier;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Signers
+namespace Essensoft.AspNetCore.Security.Crypto.Signers
 {
     /**
      * EC-DSA as described in X9.62

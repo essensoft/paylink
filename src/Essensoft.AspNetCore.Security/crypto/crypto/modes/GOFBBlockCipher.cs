@@ -1,12 +1,14 @@
 using System;
-using Essensoft.AspNetCore.Security.Parameters;
 
-namespace Essensoft.AspNetCore.Security.Modes
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Modes
 {
-    /**
+	/**
 	* implements the GOST 28147 OFB counter mode (GCTR).
 	*/
-    public class GOfbBlockCipher
+	public class GOfbBlockCipher
 		: IBlockCipher
 	{
 		private byte[]	IV;

@@ -1,7 +1,8 @@
-﻿
+﻿using System;
+
 using Essensoft.AspNetCore.Security.Math;
 
-namespace Essensoft.AspNetCore.Security.Agreement.JPake
+namespace Essensoft.AspNetCore.Security.Crypto.Agreement.JPake
 {
     /// <summary>
     /// The payload sent/received during the optional third round of a J-PAKE exchange,
@@ -27,7 +28,7 @@ namespace Essensoft.AspNetCore.Security.Agreement.JPake
         /// <summary>
         /// The value of MacTag, as computed by round 3.
         /// 
-        /// See JPAKEUtil#calculateMacTag(string, string, BigInteger, BigInteger, BigInteger, BigInteger, BigInteger, Essensoft.AspNetCore.Security.Digest)
+        /// See JPAKEUtil#calculateMacTag(string, string, BigInteger, BigInteger, BigInteger, BigInteger, BigInteger, Essensoft.AspNetCore.Security.crypto.Digest)
         /// </summary>
         private readonly BigInteger macTag;
 

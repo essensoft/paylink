@@ -1,13 +1,14 @@
+using System;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X509;
 
 namespace Essensoft.AspNetCore.Security.X509
 {
-    /**
+	/**
 	 * Class for carrying the values in an X.509 Attribute.
 	 */
-    public class X509Attribute
+	public class X509Attribute
 		: Asn1Encodable
 	{
 		private readonly AttributeX509 attr;

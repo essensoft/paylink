@@ -1,10 +1,13 @@
 using System;
 using System.Collections;
 using System.IO;
+using System.Text;
 
 using Essensoft.AspNetCore.Security.Asn1;
+using Essensoft.AspNetCore.Security.Asn1.Cms;
 using Essensoft.AspNetCore.Security.Asn1.X509;
 using Essensoft.AspNetCore.Security.Asn1.Pkcs;
+using Essensoft.AspNetCore.Security.Cms;
 using Essensoft.AspNetCore.Security.X509;
 using Essensoft.AspNetCore.Security.OpenSsl;
 using Essensoft.AspNetCore.Security.Security.Certificates;
@@ -13,7 +16,7 @@ using Essensoft.AspNetCore.Security.Utilities.Collections;
 
 namespace Essensoft.AspNetCore.Security.Pkix
 {
-    /**
+	/**
 	 * An immutable sequence of certificates (a certification path).<br />
 	 * <br />
 	 * This is an abstract class that defines the methods common to all CertPaths.
@@ -72,10 +75,10 @@ namespace Essensoft.AspNetCore.Security.Pkix
 	 * @see CertificateFactory
 	 * @see CertPathBuilder
 	 */
-    /// <summary>
-    /// CertPath implementation for X.509 certificates.
-    /// </summary>
-    public class PkixCertPath
+	/// <summary>
+	/// CertPath implementation for X.509 certificates.
+	/// </summary>
+	public class PkixCertPath
 //		: CertPath
 	{
 		internal static readonly IList certPathEncodings;

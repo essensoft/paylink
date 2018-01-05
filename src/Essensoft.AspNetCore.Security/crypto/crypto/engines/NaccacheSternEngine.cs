@@ -1,11 +1,11 @@
 using System;
 using System.Collections;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Engines
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
 	/**
 	* NaccacheStern Engine. For details on this cipher, please see
@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Security.Engines
 
 		private IList[] lookup = null;
 
-        public string AlgorithmName
+		public string AlgorithmName
 		{
 			get { return "NaccacheStern"; }
 		}
@@ -28,8 +28,8 @@ namespace Essensoft.AspNetCore.Security.Engines
 		/**
 		* Initializes this algorithm. Must be called before all other Functions.
 		*
-		* @see Essensoft.AspNetCore.Security.AsymmetricBlockCipher#init(bool,
-		*      Essensoft.AspNetCore.Security.CipherParameters)
+		* @see Essensoft.AspNetCore.Security.crypto.AsymmetricBlockCipher#init(bool,
+		*      Essensoft.AspNetCore.Security.crypto.CipherParameters)
 		*/
 		public virtual void Init(
 			bool				forEncryption,
@@ -78,10 +78,10 @@ namespace Essensoft.AspNetCore.Security.Engines
 			set {}
 		}
 
-        /**
+		/**
 		* Returns the input block size of this algorithm.
 		*
-		* @see Essensoft.AspNetCore.Security.AsymmetricBlockCipher#GetInputBlockSize()
+		* @see Essensoft.AspNetCore.Security.crypto.AsymmetricBlockCipher#GetInputBlockSize()
 		*/
         public virtual int GetInputBlockSize()
 		{
@@ -101,7 +101,7 @@ namespace Essensoft.AspNetCore.Security.Engines
 		/**
 		* Returns the output block size of this algorithm.
 		*
-		* @see Essensoft.AspNetCore.Security.AsymmetricBlockCipher#GetOutputBlockSize()
+		* @see Essensoft.AspNetCore.Security.crypto.AsymmetricBlockCipher#GetOutputBlockSize()
 		*/
         public virtual int GetOutputBlockSize()
 		{
@@ -121,7 +121,7 @@ namespace Essensoft.AspNetCore.Security.Engines
 		/**
 		* Process a single Block using the Naccache-Stern algorithm.
 		*
-		* @see Essensoft.AspNetCore.Security.AsymmetricBlockCipher#ProcessBlock(byte[],
+		* @see Essensoft.AspNetCore.Security.crypto.AsymmetricBlockCipher#ProcessBlock(byte[],
 		*      int, int)
 		*/
         public virtual byte[] ProcessBlock(
@@ -261,7 +261,7 @@ namespace Essensoft.AspNetCore.Security.Engines
 			BigInteger m1m2Crypt = m1Crypt.Multiply(m2Crypt);
 			m1m2Crypt = m1m2Crypt.Mod(key.Modulus);
 
-            //byte[] output = key.Modulus.ToByteArray();
+			//byte[] output = key.Modulus.ToByteArray();
 			//Array.Clear(output, 0, output.Length);
 			byte[] output = new byte[key.Modulus.BitLength / 8 + 1];
 

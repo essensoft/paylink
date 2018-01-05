@@ -1,6 +1,9 @@
+using System;
+using System.IO;
+
 namespace Essensoft.AspNetCore.Security.Asn1
 {
-    public class DerExternalParser
+	public class DerExternalParser
 		: Asn1Encodable
 	{
 		private readonly Asn1StreamParser _parser;

@@ -1,10 +1,10 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Modes;
-using Essensoft.AspNetCore.Security.Paddings;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Modes;
+using Essensoft.AspNetCore.Security.Crypto.Paddings;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 
-namespace Essensoft.AspNetCore.Security.Macs
+namespace Essensoft.AspNetCore.Security.Crypto.Macs
 {
     /**
     * CMAC - as specified at www.nuee.nagoya-u.ac.jp/labs/tiwata/omac/omac.html

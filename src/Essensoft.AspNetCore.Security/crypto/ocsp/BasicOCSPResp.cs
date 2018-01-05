@@ -5,6 +5,7 @@ using System.IO;
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Ocsp;
 using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Security.Certificates;
 using Essensoft.AspNetCore.Security.Utilities;
@@ -13,17 +14,17 @@ using Essensoft.AspNetCore.Security.X509.Store;
 
 namespace Essensoft.AspNetCore.Security.Ocsp
 {
-    /// <remarks>
-    /// <code>
-    /// BasicOcspResponse ::= SEQUENCE {
-    ///		tbsResponseData		ResponseData,
-    ///		signatureAlgorithm	AlgorithmIdentifier,
-    ///		signature			BIT STRING,
-    ///		certs				[0] EXPLICIT SEQUENCE OF Certificate OPTIONAL
-    /// }
-    /// </code>
-    /// </remarks>
-    public class BasicOcspResp
+	/// <remarks>
+	/// <code>
+	/// BasicOcspResponse ::= SEQUENCE {
+	///		tbsResponseData		ResponseData,
+	///		signatureAlgorithm	AlgorithmIdentifier,
+	///		signature			BIT STRING,
+	///		certs				[0] EXPLICIT SEQUENCE OF Certificate OPTIONAL
+	/// }
+	/// </code>
+	/// </remarks>
+	public class BasicOcspResp
 		: X509ExtensionBase
 	{
 		private readonly BasicOcspResponse	resp;

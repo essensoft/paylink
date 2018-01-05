@@ -1,13 +1,13 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
-using Essensoft.AspNetCore.Security.Digests;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.Encoders;
 
-namespace Essensoft.AspNetCore.Security.Generators
+namespace Essensoft.AspNetCore.Security.Crypto.Generators
 {
     /**
      * Generate suitable parameters for DSA, in line with FIPS 186-2, or FIPS 186-3.

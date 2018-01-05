@@ -1,7 +1,10 @@
 using System;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
     /**
     * Base class for SHA-384 and SHA-512.

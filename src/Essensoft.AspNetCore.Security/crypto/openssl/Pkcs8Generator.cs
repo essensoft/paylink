@@ -1,12 +1,20 @@
 using System;
+using System.Collections;
+using System.IO;
+
+using Essensoft.AspNetCore.Security.Asn1;
+using Essensoft.AspNetCore.Security.Asn1.Nist;
 using Essensoft.AspNetCore.Security.Asn1.Pkcs;
+using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Pkcs;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities.IO.Pem;
 
 namespace Essensoft.AspNetCore.Security.OpenSsl
 {
-    public class Pkcs8Generator
+	public class Pkcs8Generator
 		: PemObjectGenerator
 	{
 		// FIXME See PbeUtilities static constructor

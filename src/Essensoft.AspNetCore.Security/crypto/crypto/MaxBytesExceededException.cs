@@ -1,6 +1,6 @@
 using System;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Security.Crypto
 {
 	/// <summary>
 	/// This exception is thrown whenever a cipher requires a change of key, iv

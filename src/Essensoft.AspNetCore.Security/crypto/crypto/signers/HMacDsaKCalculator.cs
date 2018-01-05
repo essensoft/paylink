@@ -1,12 +1,12 @@
 ﻿using System;
 
-using Essensoft.AspNetCore.Security.Macs;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Macs;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Signers
+namespace Essensoft.AspNetCore.Security.Crypto.Signers
 {
     /**
      * A deterministic K calculator based on the algorithm in section 3.2 of RFC 6979.

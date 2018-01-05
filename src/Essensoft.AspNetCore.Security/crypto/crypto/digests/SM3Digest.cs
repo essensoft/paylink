@@ -1,24 +1,25 @@
 using System;
 
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
 
-    /// <summary>
-    /// Implementation of Chinese SM3 digest as described at
-    /// http://tools.ietf.org/html/draft-shen-sm3-hash-00
-    /// and at .... ( Chinese PDF )
-    /// </summary>
-    /// <remarks>
-    /// The specification says "process a bit stream",
-    /// but this is written to process bytes in blocks of 4,
-    /// meaning this will process 32-bit word groups.
-    /// But so do also most other digest specifications,
-    /// including the SHA-256 which was a origin for
-    /// this specification.
-    /// </remarks>
-    public class SM3Digest
+	/// <summary>
+	/// Implementation of Chinese SM3 digest as described at
+	/// http://tools.ietf.org/html/draft-shen-sm3-hash-00
+	/// and at .... ( Chinese PDF )
+	/// </summary>
+	/// <remarks>
+	/// The specification says "process a bit stream",
+	/// but this is written to process bytes in blocks of 4,
+	/// meaning this will process 32-bit word groups.
+	/// But so do also most other digest specifications,
+	/// including the SHA-256 which was a origin for
+	/// this specification.
+	/// </remarks>
+	public class SM3Digest
 		: GeneralDigest
 	{
 		private const int DIGEST_LENGTH = 32;   // bytes

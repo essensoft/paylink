@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Bcpg
 {
-    /// <remarks>Base interface for a PGP key.</remarks>
+	/// <remarks>Base interface for a PGP key.</remarks>
     public interface IBcpgKey
     {
 		/// <summary>

@@ -1,3 +1,7 @@
+using System;
+
+using Essensoft.AspNetCore.Security.Asn1;
+
 namespace Essensoft.AspNetCore.Security.Asn1.X509.Qualified
 {
     public sealed class Rfc3739QCObjectIdentifiers

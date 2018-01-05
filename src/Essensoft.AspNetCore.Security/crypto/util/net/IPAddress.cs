@@ -1,9 +1,11 @@
 using System;
 using System.Globalization;
 
+using Essensoft.AspNetCore.Security.Math;
+
 namespace Essensoft.AspNetCore.Security.Utilities.Net
 {
-    public class IPAddress
+	public class IPAddress
 	{
 		/**
 		 * Validate the given IPv4 or IPv6 address.

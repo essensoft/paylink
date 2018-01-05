@@ -1,12 +1,15 @@
 ﻿using System;
+using System.IO;
 
-using Essensoft.AspNetCore.Security.Engines;
-using Essensoft.AspNetCore.Security.Macs;
-using Essensoft.AspNetCore.Security.Parameters;
-using Essensoft.AspNetCore.Security.Utilities;
+using Essensoft.AspNetCore.Security.Crypto.Engines;
+using Essensoft.AspNetCore.Security.Crypto.Generators;
+using Essensoft.AspNetCore.Security.Crypto.Macs;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Security;
+using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /**
      * draft-ietf-tls-chacha20-poly1305-04

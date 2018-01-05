@@ -1,9 +1,10 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
+using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Agreement
+namespace Essensoft.AspNetCore.Security.Crypto.Agreement
 {
     /**
      * a Diffie-Hellman key agreement class.

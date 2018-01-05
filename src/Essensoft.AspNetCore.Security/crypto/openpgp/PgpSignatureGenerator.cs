@@ -2,14 +2,16 @@ using System;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Bcpg.Sig;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Bcpg.OpenPgp
 {
-    /// <remarks>Generator for PGP signatures.</remarks>
-    // TODO Should be able to implement ISigner?
+	/// <remarks>Generator for PGP signatures.</remarks>
+	// TODO Should be able to implement ISigner?
     public class PgpSignatureGenerator
     {
 		private static readonly SignatureSubpacket[] EmptySignatureSubpackets = new SignatureSubpacket[0];

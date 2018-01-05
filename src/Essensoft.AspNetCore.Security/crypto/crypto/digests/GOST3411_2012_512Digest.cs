@@ -1,6 +1,7 @@
-﻿using Essensoft.AspNetCore.Security.Utilities;
+﻿using System;
+using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
     public class GOST3411_2012_512Digest:GOST3411_2012Digest
     {

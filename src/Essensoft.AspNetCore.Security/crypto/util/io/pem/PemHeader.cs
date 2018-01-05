@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Utilities.IO.Pem
 {
-    public class PemHeader
+	public class PemHeader
 	{
 		private string name;
 		private string val;

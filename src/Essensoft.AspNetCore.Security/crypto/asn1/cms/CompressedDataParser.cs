@@ -1,8 +1,11 @@
+using System;
+
+using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X509;
 
 namespace Essensoft.AspNetCore.Security.Asn1.Cms
 {
-    /**
+	/**
 	* RFC 3274 - CMS Compressed Data.
 	* <pre>
 	* CompressedData ::= SEQUENCE {
@@ -12,7 +15,7 @@ namespace Essensoft.AspNetCore.Security.Asn1.Cms
 	* }
 	* </pre>
 	*/
-    public class CompressedDataParser
+	public class CompressedDataParser
 	{
 		private DerInteger			_version;
 		private AlgorithmIdentifier	_compressionAlgorithm;

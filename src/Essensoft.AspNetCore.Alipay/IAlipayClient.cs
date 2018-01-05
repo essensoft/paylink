@@ -58,6 +58,6 @@ namespace Essensoft.AspNetCore.Alipay
         /// <typeparam name="T">领域对象</typeparam>
         /// <param name="request">具体的Alipay API请求</param>
         /// <returns>领域对象</returns>
-        T SdkExecute<T>(IAlipayRequest<T> request) where T : AlipayResponse;
+        Task<T> SdkExecuteAsync<T>(IAlipayRequest<T> request) where T : AlipayResponse;
     }
 }

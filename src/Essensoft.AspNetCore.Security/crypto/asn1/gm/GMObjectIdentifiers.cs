@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Asn1.GM
 {
-    public abstract class GMObjectIdentifiers
+	public abstract class GMObjectIdentifiers
 	{
         public static readonly DerObjectIdentifier sm_scheme = new DerObjectIdentifier("1.2.156.10197.1");
 

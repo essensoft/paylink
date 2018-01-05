@@ -1,6 +1,6 @@
 using System;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Security.Crypto
 {
     /// <summary>
     /// Base interface for a provider to support the dynamic creation of signature verifiers.

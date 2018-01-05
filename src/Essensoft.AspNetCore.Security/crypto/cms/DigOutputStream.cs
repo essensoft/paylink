@@ -1,8 +1,11 @@
+using System;
+
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Utilities.IO;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    internal class DigOutputStream
+	internal class DigOutputStream
 		: BaseOutputStream
 	{
 		private readonly IDigest dig;

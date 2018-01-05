@@ -1,9 +1,10 @@
+using System;
 
 using Essensoft.AspNetCore.Security.Asn1.X509;
 
 namespace Essensoft.AspNetCore.Security.Asn1.Cms
 {
-    /**
+	/**
 	* <pre>
 	* EncryptedContentInfo ::= SEQUENCE {
 	*     contentType ContentType,
@@ -12,7 +13,7 @@ namespace Essensoft.AspNetCore.Security.Asn1.Cms
 	* }
 	* </pre>
 	*/
-    public class EncryptedContentInfoParser
+	public class EncryptedContentInfoParser
 	{
 		private DerObjectIdentifier		_contentType;
 		private AlgorithmIdentifier		_contentEncryptionAlgorithm;

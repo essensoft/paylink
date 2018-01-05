@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
 
 using Essensoft.AspNetCore.Security.Bcpg.Sig;
+using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Bcpg.OpenPgp
 {
-    /// <remarks>Container for a list of signature subpackets.</remarks>
+	/// <remarks>Container for a list of signature subpackets.</remarks>
     public class PgpSignatureSubpacketVector
     {
         private readonly SignatureSubpacket[] packets;

@@ -1,19 +1,23 @@
+using System;
 using System.Collections;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Cms;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.IO;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.IO;
 using Essensoft.AspNetCore.Security.Security;
+using Essensoft.AspNetCore.Security.Security.Certificates;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.Collections;
 using Essensoft.AspNetCore.Security.Utilities.IO;
+using Essensoft.AspNetCore.Security.X509;
 using Essensoft.AspNetCore.Security.X509.Store;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    /**
+	/**
 	* Parsing class for an CMS Signed Data object from an input stream.
 	* <p>
 	* Note: that because we are in a streaming mode only one signer can be tried and it is important
@@ -51,7 +55,7 @@ namespace Essensoft.AspNetCore.Security.Cms
 	*  </pre>
 	*  where bufSize is a suitably large buffer size.
 	*/
-    public class CmsSignedDataParser
+	public class CmsSignedDataParser
 		: CmsContentInfoParser
 	{
 		private static readonly CmsSignedHelper Helper = CmsSignedHelper.Instance;

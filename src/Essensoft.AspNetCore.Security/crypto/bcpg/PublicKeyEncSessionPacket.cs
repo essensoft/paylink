@@ -1,11 +1,14 @@
+using System;
 using System.IO;
+
+using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.IO;
 
 namespace Essensoft.AspNetCore.Security.Bcpg
 {
-    /// <remarks>Basic packet for a PGP public key.</remarks>
-    public class PublicKeyEncSessionPacket
+	/// <remarks>Basic packet for a PGP public key.</remarks>
+	public class PublicKeyEncSessionPacket
 		: ContainedPacket //, PublicKeyAlgorithmTag
 	{
 		private int version;

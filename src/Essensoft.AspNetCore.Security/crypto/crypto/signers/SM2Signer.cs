@@ -1,8 +1,10 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1;
-using Essensoft.AspNetCore.Security.Digests;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Math.EC;
 using Essensoft.AspNetCore.Security.Math.EC.Multiplier;
@@ -10,7 +12,7 @@ using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.Encoders;
 
-namespace Essensoft.AspNetCore.Security.Signers
+namespace Essensoft.AspNetCore.Security.Crypto.Signers
 {
     /// <summary>The SM2 Digital Signature algorithm.</summary>
     public class SM2Signer

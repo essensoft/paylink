@@ -1,15 +1,16 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Engines;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Engines;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
-    /**
+	/**
 	* implementation of GOST R 34.11-94
 	*/
-    public class Gost3411Digest
+	public class Gost3411Digest
 		: IDigest, IMemoable
 	{
 		private const int DIGEST_LENGTH = 32;

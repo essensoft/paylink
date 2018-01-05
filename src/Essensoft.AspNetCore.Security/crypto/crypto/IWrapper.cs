@@ -1,4 +1,8 @@
-namespace Essensoft.AspNetCore.Security
+using System;
+
+using Essensoft.AspNetCore.Security.Security;
+
+namespace Essensoft.AspNetCore.Security.Crypto
 {
     public interface IWrapper
     {

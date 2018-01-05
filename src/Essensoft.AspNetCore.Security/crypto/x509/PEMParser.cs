@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Text;
 
@@ -7,7 +8,7 @@ using Essensoft.AspNetCore.Security.Utilities.Encoders;
 
 namespace Essensoft.AspNetCore.Security.X509
 {
-    class PemParser
+	class PemParser
 	{
 		private readonly string _header1;
 		private readonly string _header2;

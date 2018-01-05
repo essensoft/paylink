@@ -1,4 +1,8 @@
-namespace Essensoft.AspNetCore.Security
+
+using System;
+using System.Text;
+
+namespace Essensoft.AspNetCore.Security.Crypto
 {
     public interface ISigner
     {

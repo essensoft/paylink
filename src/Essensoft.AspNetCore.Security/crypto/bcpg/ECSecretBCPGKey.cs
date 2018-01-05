@@ -1,9 +1,11 @@
 ﻿using System;
+
+using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Math;
 
 namespace Essensoft.AspNetCore.Security.Bcpg
 {
-    /// <remarks>Base class for an EC Secret Key.</remarks>
+	/// <remarks>Base class for an EC Secret Key.</remarks>
     public class ECSecretBcpgKey
         : BcpgObject, IBcpgKey
     {

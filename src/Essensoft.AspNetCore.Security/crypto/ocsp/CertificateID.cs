@@ -3,13 +3,14 @@ using System;
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Ocsp;
 using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.X509;
 
 namespace Essensoft.AspNetCore.Security.Ocsp
 {
-    public class CertificateID
+	public class CertificateID
 	{
 		public const string HashSha1 = "1.3.14.3.2.26";
 

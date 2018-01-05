@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
     public class AlipayOverseasTravelContentCancelModel : AlipayObject
     {
         /// <summary>
-        /// 飞猪内容id
+        /// 内容id
         /// </summary>
         [JsonProperty("content_id")]
         public string ContentId { get; set; }

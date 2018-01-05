@@ -1,8 +1,11 @@
+using System;
+
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Utilities.IO;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    internal class MacOutputStream
+	internal class MacOutputStream
 		: BaseOutputStream
 	{
 		private readonly IMac mac;

@@ -1,6 +1,7 @@
+using System;
 using System.IO;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /// <summary>
     /// A generic interface for key exchange implementations in (D)TLS.

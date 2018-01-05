@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
 
 using Essensoft.AspNetCore.Security.Asn1.X9;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Math.EC;
+using Essensoft.AspNetCore.Security.Math.EC.Endo;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.Collections;
 using Essensoft.AspNetCore.Security.Utilities.Encoders;

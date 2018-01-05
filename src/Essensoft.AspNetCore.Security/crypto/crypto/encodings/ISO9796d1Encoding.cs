@@ -1,17 +1,18 @@
 using System;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 
-namespace Essensoft.AspNetCore.Security.Encodings
+namespace Essensoft.AspNetCore.Security.Crypto.Encodings
 {
-    /**
+	/**
 	* ISO 9796-1 padding. Note in the light of recent results you should
 	* only use this with RSA (rather than the "simpler" Rabin keys) and you
 	* should never use it with anything other than a hash (ie. even if the
 	* message is small don't sign the message, sign it's hash) or some "random"
 	* value. See your favorite search engine for details.
 	*/
-    public class ISO9796d1Encoding
+	public class ISO9796d1Encoding
 		: IAsymmetricBlockCipher
 	{
 		private static readonly BigInteger Sixteen = BigInteger.ValueOf(16);

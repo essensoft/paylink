@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 
 using Essensoft.AspNetCore.Security.Asn1;
@@ -6,10 +7,10 @@ using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    /**
+	/**
 	 * Default authenticated attributes generator.
 	 */
-    public class DefaultAuthenticatedAttributeTableGenerator
+	public class DefaultAuthenticatedAttributeTableGenerator
 		: CmsAttributeTableGenerator
 	{
 		private readonly IDictionary table;

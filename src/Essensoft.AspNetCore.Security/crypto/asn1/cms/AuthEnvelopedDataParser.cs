@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Asn1.Cms
 {
-    /**
+	/**
 	 * Produce an object suitable for an Asn1OutputStream.
 	 * 
 	 * <pre>
@@ -14,7 +16,7 @@ namespace Essensoft.AspNetCore.Security.Asn1.Cms
 	 *   unauthAttrs [2] IMPLICIT UnauthAttributes OPTIONAL }
 	 * </pre>
 	*/
-    public class AuthEnvelopedDataParser
+	public class AuthEnvelopedDataParser
 	{
 		private Asn1SequenceParser	seq;
 		private DerInteger			version;

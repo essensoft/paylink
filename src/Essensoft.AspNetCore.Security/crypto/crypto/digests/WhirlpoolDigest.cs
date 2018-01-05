@@ -1,14 +1,16 @@
 using System;
+
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
-    /**
+	/**
 	* Implementation of WhirlpoolDigest, based on Java source published by Barreto
 	* and Rijmen.
 	*
 	*/
-    public sealed class WhirlpoolDigest
+	public sealed class WhirlpoolDigest
 		: IDigest, IMemoable
 	{
 		private const int BYTE_LENGTH = 64;

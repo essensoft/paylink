@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Alipay.Response
         public string CurrentPrice { get; set; }
 
         /// <summary>
-        /// 优惠金额，含商家补贴金额和口碑补贴金额，单位为元，精确到小数点后两位
+        /// 商家优惠金额，单位为元，精确到小数点后两位
         /// </summary>
         [JsonProperty("discount_amount")]
         public string DiscountAmount { get; set; }

@@ -1,24 +1,26 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
+using System.Text;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Pkcs;
 using Essensoft.AspNetCore.Security.Asn1.X509;
 using Essensoft.AspNetCore.Security.Security.Certificates;
 using Essensoft.AspNetCore.Security.Utilities;
+using Essensoft.AspNetCore.Security.Utilities.Encoders;
 using Essensoft.AspNetCore.Security.Utilities.IO;
 
 namespace Essensoft.AspNetCore.Security.X509
 {
-    /**
+	/**
 	 * class for dealing with X509 certificates.
 	 * <p>
 	 * At the moment this will deal with "-----BEGIN CERTIFICATE-----" to "-----END CERTIFICATE-----"
 	 * base 64 encoded certs, as well as the BER binaries of certificates and some classes of PKCS#7
 	 * objects.</p>
 	 */
-    public class X509CertificateParser
+	public class X509CertificateParser
 	{
 		private static readonly PemParser PemCertParser = new PemParser("CERTIFICATE");
 

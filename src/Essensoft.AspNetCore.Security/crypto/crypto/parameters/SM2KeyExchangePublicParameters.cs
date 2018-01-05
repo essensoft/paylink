@@ -1,6 +1,8 @@
 ﻿using System;
 
-namespace Essensoft.AspNetCore.Security.Parameters
+using Essensoft.AspNetCore.Security.Math.EC;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
     /// <summary>Public parameters for an SM2 key exchange.</summary>
     /// <remarks>In this case the ephemeralPublicKey provides the random point used in the algorithm.</remarks>

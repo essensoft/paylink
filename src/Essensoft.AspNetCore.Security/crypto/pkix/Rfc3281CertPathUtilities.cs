@@ -1,8 +1,11 @@
 using System;
 using System.Collections;
+using System.Globalization;
+using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Security.Certificates;
 using Essensoft.AspNetCore.Security.Utilities.Collections;
 using Essensoft.AspNetCore.Security.X509;
@@ -10,7 +13,7 @@ using Essensoft.AspNetCore.Security.X509.Store;
 
 namespace Essensoft.AspNetCore.Security.Pkix
 {
-    internal class Rfc3281CertPathUtilities
+	internal class Rfc3281CertPathUtilities
 	{
 		internal static void ProcessAttrCert7(
 			IX509AttributeCertificate	attrCert,

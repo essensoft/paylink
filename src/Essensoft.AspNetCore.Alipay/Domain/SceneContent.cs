@@ -9,6 +9,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
     public class SceneContent : AlipayObject
     {
         /// <summary>
+        /// 文章分类
+        /// </summary>
+        [JsonProperty("article_classify")]
+        public long ArticleClassify { get; set; }
+
+        /// <summary>
         /// 文章作者
         /// </summary>
         [JsonProperty("author")]

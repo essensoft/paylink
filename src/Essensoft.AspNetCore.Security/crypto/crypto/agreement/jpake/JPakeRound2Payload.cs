@@ -1,8 +1,9 @@
 ﻿using System;
 
 using Essensoft.AspNetCore.Security.Math;
+using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Agreement.JPake
+namespace Essensoft.AspNetCore.Security.Crypto.Agreement.JPake
 {
     /// <summary>
     /// The payload sent/received during the second round of a J-PAKE exchange.

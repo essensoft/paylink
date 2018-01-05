@@ -1,11 +1,12 @@
+using System;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Generators;
-using Essensoft.AspNetCore.Security.Parameters;
-using Essensoft.AspNetCore.Security.Utilities;
+using Essensoft.AspNetCore.Security.Crypto.Generators;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Agreement.Kdf
+namespace Essensoft.AspNetCore.Security.Crypto.Agreement.Kdf
 {
     /**
     * X9.63 based key derivation function for ECDH CMS.

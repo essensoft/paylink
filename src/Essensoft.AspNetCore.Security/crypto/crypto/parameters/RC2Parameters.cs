@@ -1,6 +1,8 @@
-namespace Essensoft.AspNetCore.Security.Parameters
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
-    public class RC2Parameters
+	public class RC2Parameters
 		: KeyParameter
 	{
 		private readonly int bits;

@@ -1,14 +1,17 @@
 using System;
+using System.Collections;
 using System.IO;
+using System.Text;
 
 using Essensoft.AspNetCore.Security.Asn1;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Signers;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Signers
+namespace Essensoft.AspNetCore.Security.Crypto.Signers
 {
-    public class DsaDigestSigner
+	public class DsaDigestSigner
 		: ISigner
 	{
 		private readonly IDigest digest;

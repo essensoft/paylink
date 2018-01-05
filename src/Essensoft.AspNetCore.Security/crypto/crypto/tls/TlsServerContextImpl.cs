@@ -1,7 +1,8 @@
-﻿
+﻿using System;
+
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     internal class TlsServerContextImpl
         : AbstractTlsContext, TlsServerContext

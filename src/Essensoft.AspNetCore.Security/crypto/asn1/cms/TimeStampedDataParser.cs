@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Asn1.Cms
 {
-    public class TimeStampedDataParser
+	public class TimeStampedDataParser
 	{
 		private DerInteger version;
 		private DerIA5String dataUri;

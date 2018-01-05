@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Asn1.Cmp
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Asn1.Cmp
 {
     public class PkiMessage
         : Asn1Encodable

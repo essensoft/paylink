@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Tls
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /// <summary>RFC 4680</summary>
     public abstract class SupplementalDataType

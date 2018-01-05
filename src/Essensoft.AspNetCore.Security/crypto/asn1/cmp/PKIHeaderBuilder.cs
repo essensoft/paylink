@@ -1,9 +1,10 @@
+using System;
 
 using Essensoft.AspNetCore.Security.Asn1.X509;
 
 namespace Essensoft.AspNetCore.Security.Asn1.Cmp
 {
-    public class PkiHeaderBuilder
+	public class PkiHeaderBuilder
 	{
 		private DerInteger pvno;
 		private GeneralName sender;

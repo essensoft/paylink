@@ -1,4 +1,9 @@
-﻿namespace Essensoft.AspNetCore.Security.Tls
+﻿using System;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public abstract class AbstractTlsSigner
         :   TlsSigner

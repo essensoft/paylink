@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Asn1.Cmp
 {
-    public abstract class CmpObjectIdentifiers
+	public abstract class CmpObjectIdentifiers
 	{
 		// RFC 4210
 

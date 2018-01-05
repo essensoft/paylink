@@ -4,7 +4,7 @@ using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.CryptoPro;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Parameters
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
 	public class Gost3410KeyGenerationParameters
 		: KeyGenerationParameters

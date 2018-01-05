@@ -5,13 +5,13 @@ using Essensoft.AspNetCore.Alipay.Utility;
 using Microsoft.Extensions.Options;
 using System;
 using System.IO;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Alipay
 {
     public class AlipayMobilePublicMultiMediaClient : IAlipayClient
     {
-
         public const string APP_ID = "app_id";
         public const string FORMAT = "format";
         public const string METHOD = "method";
@@ -134,7 +134,7 @@ namespace Essensoft.AspNetCore.Alipay
 
             using (var clientResponse = await Client.GetAsync(url))
             {
-                if (clientResponse.StatusCode == System.Net.HttpStatusCode.OK)
+                if (clientResponse.StatusCode == HttpStatusCode.OK)
                 {
                     using (var content = clientResponse.Content)
                     {
@@ -165,8 +165,7 @@ namespace Essensoft.AspNetCore.Alipay
         {
             throw new NotImplementedException();
         }
-
-        public T SdkExecute<T>(IAlipayRequest<T> request) where T : AlipayResponse
+        public Task<T> SdkExecuteAsync<T>(IAlipayRequest<T> request) where T : AlipayResponse
         {
             throw new NotImplementedException();
         }

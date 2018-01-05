@@ -1,44 +1,54 @@
 using System;
+using System.Collections;
+using System.Globalization;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1;
+using Essensoft.AspNetCore.Security.Asn1.CryptoPro;
+using Essensoft.AspNetCore.Security.Asn1.Nist;
+using Essensoft.AspNetCore.Security.Asn1.Oiw;
 using Essensoft.AspNetCore.Security.Asn1.Pkcs;
+using Essensoft.AspNetCore.Security.Asn1.TeleTrust;
 using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Asn1.X9;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
+using Essensoft.AspNetCore.Security.Utilities.Collections;
 using Essensoft.AspNetCore.Security.X509;
 
 namespace Essensoft.AspNetCore.Security.Pkcs
 {
-    /// <remarks>
-    /// A class for creating and verifying Pkcs10 Certification requests (this is an extension on <see cref="Pkcs10CertificationRequest"/>).
-    /// The requests are made using delay signing. This is useful for situations where
-    /// the private key is in another environment and not directly accessible (e.g. HSM)
-    /// So the first step creates the request, then the signing is done outside this
-    /// object and the signature is then used to complete the request.
-    /// </remarks>
-    /// <code>
-    /// CertificationRequest ::= Sequence {
-    ///   certificationRequestInfo  CertificationRequestInfo,
-    ///   signatureAlgorithm        AlgorithmIdentifier{{ SignatureAlgorithms }},
-    ///   signature                 BIT STRING
-    /// }
-    ///
-    /// CertificationRequestInfo ::= Sequence {
-    ///   version             Integer { v1(0) } (v1,...),
-    ///   subject             Name,
-    ///   subjectPKInfo   SubjectPublicKeyInfo{{ PKInfoAlgorithms }},
-    ///   attributes          [0] Attributes{{ CRIAttributes }}
-    ///  }
-    ///
-    ///  Attributes { ATTRIBUTE:IOSet } ::= Set OF Attr{{ IOSet }}
-    ///
-    ///  Attr { ATTRIBUTE:IOSet } ::= Sequence {
-    ///    type    ATTRIBUTE.&amp;id({IOSet}),
-    ///    values  Set SIZE(1..MAX) OF ATTRIBUTE.&amp;Type({IOSet}{\@type})
-    ///  }
-    /// </code>
-    /// see <a href="http://www.rsasecurity.com/rsalabs/node.asp?id=2132"/>
-    public class Pkcs10CertificationRequestDelaySigned : Pkcs10CertificationRequest
+	/// <remarks>
+	/// A class for creating and verifying Pkcs10 Certification requests (this is an extension on <see cref="Pkcs10CertificationRequest"/>).
+	/// The requests are made using delay signing. This is useful for situations where
+	/// the private key is in another environment and not directly accessible (e.g. HSM)
+	/// So the first step creates the request, then the signing is done outside this
+	/// object and the signature is then used to complete the request.
+	/// </remarks>
+	/// <code>
+	/// CertificationRequest ::= Sequence {
+	///   certificationRequestInfo  CertificationRequestInfo,
+	///   signatureAlgorithm        AlgorithmIdentifier{{ SignatureAlgorithms }},
+	///   signature                 BIT STRING
+	/// }
+	///
+	/// CertificationRequestInfo ::= Sequence {
+	///   version             Integer { v1(0) } (v1,...),
+	///   subject             Name,
+	///   subjectPKInfo   SubjectPublicKeyInfo{{ PKInfoAlgorithms }},
+	///   attributes          [0] Attributes{{ CRIAttributes }}
+	///  }
+	///
+	///  Attributes { ATTRIBUTE:IOSet } ::= Set OF Attr{{ IOSet }}
+	///
+	///  Attr { ATTRIBUTE:IOSet } ::= Sequence {
+	///    type    ATTRIBUTE.&amp;id({IOSet}),
+	///    values  Set SIZE(1..MAX) OF ATTRIBUTE.&amp;Type({IOSet}{\@type})
+	///  }
+	/// </code>
+	/// see <a href="http://www.rsasecurity.com/rsalabs/node.asp?id=2132"/>
+	public class Pkcs10CertificationRequestDelaySigned : Pkcs10CertificationRequest
 	{
 		protected Pkcs10CertificationRequestDelaySigned()
 			: base()

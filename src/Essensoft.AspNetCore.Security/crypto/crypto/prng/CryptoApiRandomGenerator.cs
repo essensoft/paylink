@@ -3,7 +3,7 @@
 using System;
 using System.Security.Cryptography;
 
-namespace Essensoft.AspNetCore.Security.Prng
+namespace Essensoft.AspNetCore.Security.Crypto.Prng
 {
     /// <summary>
     /// Uses RandomNumberGenerator.Create() to get randomness generator

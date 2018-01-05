@@ -1,14 +1,15 @@
+using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Signers
+namespace Essensoft.AspNetCore.Security.Crypto.Signers
 {
-    /**
+	/**
 	 * Gost R 34.10-94 Signature Algorithm
 	 */
-    public class Gost3410Signer
+	public class Gost3410Signer
 		: IDsa
 	{
 		private Gost3410KeyParameters key;

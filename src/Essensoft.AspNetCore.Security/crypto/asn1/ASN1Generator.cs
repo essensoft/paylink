@@ -1,3 +1,4 @@
+using System.Collections;
 using System.IO;
 
 namespace Essensoft.AspNetCore.Security.Asn1

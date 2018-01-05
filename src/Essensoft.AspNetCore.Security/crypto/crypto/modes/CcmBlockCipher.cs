@@ -1,10 +1,12 @@
 using System;
 using System.IO;
-using Essensoft.AspNetCore.Security.Macs;
-using Essensoft.AspNetCore.Security.Parameters;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Macs;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Modes
+namespace Essensoft.AspNetCore.Security.Crypto.Modes
 {
     /**
     * Implements the Counter with Cipher Block Chaining mode (CCM) detailed in

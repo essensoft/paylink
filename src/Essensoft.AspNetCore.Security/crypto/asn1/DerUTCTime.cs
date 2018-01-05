@@ -1,5 +1,6 @@
 using System;
 using System.Globalization;
+using System.Text;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
@@ -92,7 +93,7 @@ namespace Essensoft.AspNetCore.Security.Asn1
 #endif
         }
 
-        internal DerUtcTime(
+		internal DerUtcTime(
             byte[] bytes)
         {
             //

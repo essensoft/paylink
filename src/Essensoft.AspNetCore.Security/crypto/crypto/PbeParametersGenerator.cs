@@ -3,7 +3,7 @@ using System.Text;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Security.Crypto
 {
     /**
      * super class for all Password Based Encyrption (Pbe) parameter generator classes.

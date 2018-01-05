@@ -1,9 +1,11 @@
-﻿namespace Essensoft.AspNetCore.Security
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto
 {
-    /// <summary>
-    /// Base interface describing an entropy source for a DRBG.
-    /// </summary>
-    public interface IEntropySource
+	/// <summary>
+	/// Base interface describing an entropy source for a DRBG.
+	/// </summary>
+	public interface IEntropySource
 	{
 		/// <summary>
 		/// Return whether or not this entropy source is regarded as prediction resistant.

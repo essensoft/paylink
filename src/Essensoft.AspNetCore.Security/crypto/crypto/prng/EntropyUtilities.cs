@@ -1,6 +1,8 @@
 ﻿using System;
 
-namespace Essensoft.AspNetCore.Security.Prng
+using Essensoft.AspNetCore.Security.Security;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Prng
 {
     public abstract class EntropyUtilities
     {

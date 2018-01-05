@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Asn1.Cms
 {
-    /**
+	/**
 	* Produce an object suitable for an Asn1OutputStream.
 	* <pre>
 	* EnvelopedData ::= SEQUENCE {
@@ -12,7 +14,7 @@ namespace Essensoft.AspNetCore.Security.Asn1.Cms
 	* }
 	* </pre>
 	*/
-    public class EnvelopedDataParser
+	public class EnvelopedDataParser
 	{
 		private Asn1SequenceParser	_seq;
 		private DerInteger			_version;

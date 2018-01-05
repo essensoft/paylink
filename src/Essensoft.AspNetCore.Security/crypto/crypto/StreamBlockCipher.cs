@@ -1,12 +1,14 @@
 using System;
 
-namespace Essensoft.AspNetCore.Security
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+
+namespace Essensoft.AspNetCore.Security.Crypto
 {
-    /**
+	/**
 	 * a wrapper for block ciphers with a single byte block size, so that they
 	 * can be treated like stream ciphers.
 	 */
-    public class StreamBlockCipher
+	public class StreamBlockCipher
 		: IStreamCipher
 	{
 		private readonly IBlockCipher cipher;

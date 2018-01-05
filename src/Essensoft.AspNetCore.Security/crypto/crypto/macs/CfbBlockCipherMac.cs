@@ -1,8 +1,10 @@
 using System;
-using Essensoft.AspNetCore.Security.Paddings;
-using Essensoft.AspNetCore.Security.Parameters;
 
-namespace Essensoft.AspNetCore.Security.Macs
+using Essensoft.AspNetCore.Security.Crypto.Modes;
+using Essensoft.AspNetCore.Security.Crypto.Paddings;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Macs
 {
     /**
     * implements a Cipher-FeedBack (CFB) mode on top of a simple cipher.

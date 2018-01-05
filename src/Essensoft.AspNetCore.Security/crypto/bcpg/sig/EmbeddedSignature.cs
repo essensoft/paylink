@@ -1,9 +1,11 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Bcpg.Sig
 {
-    /**
+	/**
 	 * Packet embedded signature
 	 */
-    public class EmbeddedSignature
+	public class EmbeddedSignature
 		: SignatureSubpacket
 	{
 		public EmbeddedSignature(

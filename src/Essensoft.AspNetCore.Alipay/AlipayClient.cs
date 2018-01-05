@@ -33,8 +33,6 @@ namespace Essensoft.AspNetCore.Alipay
         private const string APP_AUTH_TOKEN = "app_auth_token";
         private const string RETURN_URL = "return_url";
 
-        private JsonSerializerSettings Settings { get; set; }
-
         public AlipayOptions Options { get; set; }
 
         protected internal HttpClientEx Client { get; set; }
@@ -44,7 +42,6 @@ namespace Essensoft.AspNetCore.Alipay
         public AlipayClient(IOptions<AlipayOptions> optionsAccessor)
         {
             Options = optionsAccessor?.Value ?? new AlipayOptions();
-            Settings = new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore };
             Client = new HttpClientEx();
         }
 
@@ -100,18 +97,21 @@ namespace Essensoft.AspNetCore.Alipay
         {
 
             return await ExecuteAsync<T>(request, accessToken, null);
-
         }
+
         #endregion
 
         #region IAlipayClient Members
+
         public async Task<T> PageExecuteAsync<T>(IAlipayRequest<T> request) where T : AlipayResponse
         {
             return await PageExecuteAsync<T>(request, null, "POST");
         }
+
         #endregion
 
         #region IAlipayClient Members
+
         public async Task<T> PageExecuteAsync<T>(IAlipayRequest<T> request, string accessToken, string reqMethod) where T : AlipayResponse
         {
             string apiVersion = null;
@@ -128,7 +128,7 @@ namespace Essensoft.AspNetCore.Alipay
             var txtParams = new AlipayDictionary(request.GetParameters())
             {
                 // 序列化BizModel
-                { BIZ_CONTENT, JsonConvert.SerializeObject(request.GetBizModel(), Settings) },
+                { BIZ_CONTENT, JsonConvert.SerializeObject(request.GetBizModel(), new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }) },
                 // 添加协议级请求参数
                 { METHOD, request.GetApiName() },
                 { VERSION, apiVersion },
@@ -196,6 +196,7 @@ namespace Essensoft.AspNetCore.Alipay
         #endregion
 
         #region IAlipayClient Members
+
         public async Task<T> ExecuteAsync<T>(IAlipayRequest<T> request, string accessToken, string appAuthToken) where T : AlipayResponse
         {
             string apiVersion = null;
@@ -212,7 +213,7 @@ namespace Essensoft.AspNetCore.Alipay
             // 添加协议级请求参数
             var txtParams = new AlipayDictionary(request.GetParameters())
             {
-                { BIZ_CONTENT, JsonConvert.SerializeObject(request.GetBizModel(), Settings) },
+                { BIZ_CONTENT, JsonConvert.SerializeObject(request.GetBizModel(), new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }) },
                 { METHOD, request.GetApiName() },
                 { VERSION, apiVersion },
                 { APP_ID, Options.AppId },
@@ -372,7 +373,7 @@ namespace Essensoft.AspNetCore.Alipay
 
         #region SDK Execute
 
-        public T SdkExecute<T>(IAlipayRequest<T> request) where T : AlipayResponse
+        public Task<T> SdkExecuteAsync<T>(IAlipayRequest<T> request) where T : AlipayResponse
         {
             // 构造请求参数
             var requestParams = BuildRequestParams(request, null, null);
@@ -393,7 +394,7 @@ namespace Essensoft.AspNetCore.Alipay
             // 构造结果
             var rsp = (T)Activator.CreateInstance(typeof(T));
             rsp.Body = signedResult;
-            return rsp;
+            return Task.FromResult(rsp);
         }
 
         #endregion
@@ -406,7 +407,7 @@ namespace Essensoft.AspNetCore.Alipay
             var result = new AlipayDictionary(request.GetParameters())
             {
                 // 序列化BizModel
-                { BIZ_CONTENT, JsonConvert.SerializeObject(request.GetBizModel(), Settings) },
+                { BIZ_CONTENT, JsonConvert.SerializeObject(request.GetBizModel(), new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore }) },
                 // 添加协议级请求参数，为空的参数后面会自动过滤，这里不做处理。
                 { METHOD, request.GetApiName() },
                 // 获取参数

@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+
+using Essensoft.AspNetCore.Security.Asn1.X509;
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Asn1.X509.Qualified

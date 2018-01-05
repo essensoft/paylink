@@ -1,8 +1,12 @@
 using System;
-using Essensoft.AspNetCore.Security.Modes;
-using Essensoft.AspNetCore.Security.Parameters;
+using System.Collections;
 
-namespace Essensoft.AspNetCore.Security.Macs
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Modes;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Utilities;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Macs
 {
     /// <summary>
     /// The GMAC specialisation of Galois/Counter mode (GCM) detailed in NIST Special Publication
@@ -46,8 +50,8 @@ namespace Essensoft.AspNetCore.Security.Macs
         }
 
         /// <summary>
-        /// Initialises the GMAC - requires a <see cref="Essensoft.AspNetCore.Security.Parameters.ParametersWithIV"/> 
-        /// providing a <see cref="Essensoft.AspNetCore.Security.Parameters.KeyParameter"/> and a nonce.
+        /// Initialises the GMAC - requires a <see cref="Essensoft.AspNetCore.Security.Crypto.Parameters.ParametersWithIV"/> 
+        /// providing a <see cref="Essensoft.AspNetCore.Security.Crypto.Parameters.KeyParameter"/> and a nonce.
         /// </summary>
         public void Init(ICipherParameters parameters)
         {

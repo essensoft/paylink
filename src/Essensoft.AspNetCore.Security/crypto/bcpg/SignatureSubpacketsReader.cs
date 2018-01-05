@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Bcpg.Sig;
@@ -6,10 +7,10 @@ using Essensoft.AspNetCore.Security.Utilities.IO;
 
 namespace Essensoft.AspNetCore.Security.Bcpg
 {
-    /**
+	/**
 	* reader for signature sub-packets
 	*/
-    public class SignatureSubpacketsParser
+	public class SignatureSubpacketsParser
 	{
 		private readonly Stream input;
 

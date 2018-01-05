@@ -1,12 +1,13 @@
 using System;
 using System.IO;
+using System.Text;
 
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.Date;
 
 namespace Essensoft.AspNetCore.Security.Bcpg.OpenPgp
 {
-    /// <remarks>Class for producing literal data packets.</remarks>
+	/// <remarks>Class for producing literal data packets.</remarks>
     public class PgpLiteralDataGenerator
 		: IStreamGenerator
 	{
@@ -140,7 +141,7 @@ namespace Essensoft.AspNetCore.Security.Bcpg.OpenPgp
 			return new WrappedGeneratorStream(this, pkOut);
 		}
 
-#if !PORTABLE || DOTNET
+#if !PORTABLE || NETSTANDARD1_3
         /// <summary>
 		/// <p>
 		/// Open a literal data packet for the passed in <c>FileInfo</c> object, returning

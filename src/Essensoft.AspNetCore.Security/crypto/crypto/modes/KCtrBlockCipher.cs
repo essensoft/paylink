@@ -1,8 +1,8 @@
 ﻿using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 
-namespace Essensoft.AspNetCore.Security.Modes
+namespace Essensoft.AspNetCore.Security.Crypto.Modes
 {
     /**
     * Implements a Gamming or Counter (CTR) mode on top of a DSTU 7624 block cipher.

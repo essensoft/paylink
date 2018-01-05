@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
     /**
      * Wrapper removes exposure to the IMemoable interface on an IDigest implementation.

@@ -22,10 +22,11 @@
  * great code.
  */
 
+using System;
 
 namespace Essensoft.AspNetCore.Security.Apache.Bzip2
 {
-    /**
+	/**
     * A simple class the hold and calculate the CRC for sanity checking
     * of the data.
     *

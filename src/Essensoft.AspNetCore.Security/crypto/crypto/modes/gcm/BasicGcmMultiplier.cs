@@ -1,4 +1,6 @@
-namespace Essensoft.AspNetCore.Security.Modes.Gcm
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Modes.Gcm
 {
     public class BasicGcmMultiplier
         : IGcmMultiplier

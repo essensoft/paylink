@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Math.EC.Multiplier
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Math.EC.Multiplier
 {
     public class FixedPointUtilities
     {

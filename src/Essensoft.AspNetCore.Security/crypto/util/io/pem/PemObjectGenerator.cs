@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Utilities.IO.Pem
 {
-    public interface PemObjectGenerator
+	public interface PemObjectGenerator
 	{
 		/// <returns>
 		/// A <see cref="PemObject"/>

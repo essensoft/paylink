@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1;
@@ -9,7 +10,7 @@ using Essensoft.AspNetCore.Security.Utilities.Zlib;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    /**
+	/**
 	* General class for generating a compressed CMS message stream.
 	* <p>
 	* A simple example of usage.
@@ -24,7 +25,7 @@ namespace Essensoft.AspNetCore.Security.Cms
 	*      cOut.Close();
 	* </pre>
 	*/
-    public class CmsCompressedDataStreamGenerator
+	public class CmsCompressedDataStreamGenerator
 	{
 		public const string ZLib = "1.2.840.113549.1.9.16.3.8";
 

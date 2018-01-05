@@ -1,18 +1,20 @@
 using System;
 using System.Collections;
+using System.IO;
 using System.Text;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Misc;
 using Essensoft.AspNetCore.Security.Asn1.Utilities;
 using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Security.Certificates;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.Utilities.Encoders;
 using Essensoft.AspNetCore.Security.X509.Extension;
-using Essensoft.AspNetCore.Security.Operators;
+using Essensoft.AspNetCore.Security.Crypto.Operators;
 
 namespace Essensoft.AspNetCore.Security.X509
 {

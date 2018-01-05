@@ -5,14 +5,16 @@ using System.IO;
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Ocsp;
 using Essensoft.AspNetCore.Security.Asn1.X509;
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Security;
+using Essensoft.AspNetCore.Security.Security.Certificates;
 using Essensoft.AspNetCore.Security.Utilities;
 using Essensoft.AspNetCore.Security.X509;
 using Essensoft.AspNetCore.Security.X509.Store;
 
 namespace Essensoft.AspNetCore.Security.Ocsp
 {
-    /**
+	/**
 	 * <pre>
 	 * OcspRequest     ::=     SEQUENCE {
 	 *       tbsRequest                  TBSRequest,
@@ -42,7 +44,7 @@ namespace Essensoft.AspNetCore.Security.Ocsp
 	 *       serialNumber        CertificateSerialNumber }
 	 * </pre>
 	 */
-    public class OcspReq
+	public class OcspReq
 		: X509ExtensionBase
 	{
 		private OcspRequest req;

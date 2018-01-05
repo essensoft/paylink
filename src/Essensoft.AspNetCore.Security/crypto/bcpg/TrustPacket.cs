@@ -1,8 +1,9 @@
+using System;
 using System.IO;
 
 namespace Essensoft.AspNetCore.Security.Bcpg
 {
-    /// <summary>Basic type for a trust packet.</summary>
+	/// <summary>Basic type for a trust packet.</summary>
     public class TrustPacket
         : ContainedPacket
     {

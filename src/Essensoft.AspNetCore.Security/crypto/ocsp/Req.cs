@@ -1,10 +1,15 @@
+using System;
+using System.Collections;
+using System.IO;
+
+using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.Ocsp;
 using Essensoft.AspNetCore.Security.Asn1.X509;
 using Essensoft.AspNetCore.Security.X509;
 
 namespace Essensoft.AspNetCore.Security.Ocsp
 {
-    public class Req
+	public class Req
 		: X509ExtensionBase
 	{
 		private Request req;

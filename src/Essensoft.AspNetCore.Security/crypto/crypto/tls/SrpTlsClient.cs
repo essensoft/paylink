@@ -1,8 +1,10 @@
+using System;
 using System.Collections;
+using System.IO;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public class SrpTlsClient
         :   AbstractTlsClient

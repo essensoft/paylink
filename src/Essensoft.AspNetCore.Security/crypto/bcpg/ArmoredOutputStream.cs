@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
+using System.Text;
 
 #if PORTABLE
 using System.Linq;
@@ -100,7 +103,10 @@ namespace Essensoft.AspNetCore.Security.Bcpg
         private static readonly string    footerStart = "-----END PGP ";
         private static readonly string    footerTail = "-----";
 
-        private static readonly string Version = "bc-csharp-pcl-v1.8.1.3";
+        /// <summary>
+        /// Portable.BouncyCastle 2017/12/3 https://github.com/onovotny/bc-csharp
+        /// </summary>
+        private static readonly string Version = "Portable.BouncyCastle_2017/12/3_https://github.com/onovotny/bc-csharp";
 
         private readonly IDictionary headers;
 

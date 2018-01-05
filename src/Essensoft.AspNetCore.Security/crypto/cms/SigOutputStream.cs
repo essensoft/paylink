@@ -1,9 +1,12 @@
+using System;
+
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Utilities.IO;
 using Essensoft.AspNetCore.Security.Security;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {
-    internal class SigOutputStream
+	internal class SigOutputStream
 		: BaseOutputStream
 	{
 		private readonly ISigner sig;

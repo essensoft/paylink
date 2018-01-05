@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Text;
-using Essensoft.AspNetCore.Security;
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Security;
 
 namespace Essensoft.AspNetCore.WeChatPay.Utility

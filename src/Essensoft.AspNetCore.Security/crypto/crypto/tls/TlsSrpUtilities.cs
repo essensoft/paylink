@@ -5,7 +5,7 @@ using System.IO;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public abstract class TlsSrpUtilities
     {

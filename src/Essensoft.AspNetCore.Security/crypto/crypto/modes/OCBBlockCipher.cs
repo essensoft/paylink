@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Modes
+namespace Essensoft.AspNetCore.Security.Crypto.Modes
 {
     /**
      * An implementation of <a href="http://tools.ietf.org/html/rfc7253">RFC 7253 on The OCB

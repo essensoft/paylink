@@ -1,6 +1,8 @@
+using System;
+
 namespace Essensoft.AspNetCore.Security.Utilities
 {
-    public interface IMemoable
+	public interface IMemoable
 	{
 		/// <summary>
 		/// Produce a copy of this object with its configuration and in its current state.

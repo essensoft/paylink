@@ -3,10 +3,10 @@ using System.Collections;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     /// <summary>(D)TLS ECDH key exchange (see RFC 4492).</summary>
     public class TlsECDHKeyExchange

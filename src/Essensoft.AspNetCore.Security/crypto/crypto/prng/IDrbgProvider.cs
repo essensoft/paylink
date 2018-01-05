@@ -1,7 +1,8 @@
-﻿
-using Essensoft.AspNetCore.Security.Prng.Drbg;
+﻿using System;
 
-namespace Essensoft.AspNetCore.Security.Prng
+using Essensoft.AspNetCore.Security.Crypto.Prng.Drbg;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Prng
 {
     internal interface IDrbgProvider
     {

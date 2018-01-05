@@ -1,9 +1,11 @@
 ﻿using System;
-using Essensoft.AspNetCore.Security.Digests;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Agreement.JPake
+namespace Essensoft.AspNetCore.Security.Crypto.Agreement.JPake
 {
     /// <summary>
     /// A participant in a Password Authenticated Key Exchange by Juggling (J-PAKE) exchange.

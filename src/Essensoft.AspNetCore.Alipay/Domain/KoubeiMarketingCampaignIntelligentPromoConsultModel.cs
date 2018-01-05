@@ -9,6 +9,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
     public class KoubeiMarketingCampaignIntelligentPromoConsultModel : AlipayObject
     {
         /// <summary>
+        /// 扩展信息，以key-value的形式传递
+        /// </summary>
+        [JsonProperty("ext_info")]
+        public string ExtInfo { get; set; }
+
+        /// <summary>
         /// 操作人信息
         /// </summary>
         [JsonProperty("operator_context")]
@@ -19,6 +25,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         /// </summary>
         [JsonProperty("out_request_no")]
         public string OutRequestNo { get; set; }
+
+        /// <summary>
+        /// 原智能方案id
+        /// </summary>
+        [JsonProperty("parent_promo_id")]
+        public string ParentPromoId { get; set; }
 
         /// <summary>
         /// 商户和支付宝交互时，用于代表支付宝分配给商户ID

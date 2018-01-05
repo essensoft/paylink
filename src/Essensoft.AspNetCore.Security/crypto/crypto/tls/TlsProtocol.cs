@@ -2,11 +2,11 @@
 using System.Collections;
 using System.IO;
 
-using Essensoft.AspNetCore.Security.Prng;
+using Essensoft.AspNetCore.Security.Crypto.Prng;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public abstract class TlsProtocol
     {

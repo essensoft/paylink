@@ -1,4 +1,6 @@
-namespace Essensoft.AspNetCore.Security.Utilities
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Utilities
 {
     internal sealed class Pack
     {

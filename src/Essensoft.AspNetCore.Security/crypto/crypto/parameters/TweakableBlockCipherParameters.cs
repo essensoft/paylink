@@ -1,12 +1,13 @@
+using System;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Parameters
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
 
-    /// <summary>
-    /// Parameters for tweakable block ciphers.
-    /// </summary>
-    public class TweakableBlockCipherParameters
+	/// <summary>
+	/// Parameters for tweakable block ciphers.
+	/// </summary>
+	public class TweakableBlockCipherParameters
 		: ICipherParameters
 	{
 		private readonly byte[] tweak;

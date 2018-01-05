@@ -1,5 +1,5 @@
 ﻿
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Security.Crypto
 {
     /// <summary>
     /// Operators that reduce their input to a single block return an object

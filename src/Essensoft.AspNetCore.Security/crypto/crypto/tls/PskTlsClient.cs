@@ -1,4 +1,7 @@
-namespace Essensoft.AspNetCore.Security.Tls
+using System;
+using System.Collections;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public class PskTlsClient
         :   AbstractTlsClient

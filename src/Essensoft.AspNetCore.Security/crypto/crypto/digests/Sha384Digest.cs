@@ -1,7 +1,9 @@
+using System;
 
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
     /**
      * Draft FIPS 180-2 implementation of SHA-384. <b>Note:</b> As this is

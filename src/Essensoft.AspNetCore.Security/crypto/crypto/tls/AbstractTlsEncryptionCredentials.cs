@@ -1,4 +1,7 @@
-﻿namespace Essensoft.AspNetCore.Security.Tls
+﻿using System;
+using System.IO;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public abstract class AbstractTlsEncryptionCredentials
         : AbstractTlsCredentials, TlsEncryptionCredentials

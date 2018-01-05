@@ -1,16 +1,17 @@
 ﻿using System;
 
 using Essensoft.AspNetCore.Security.Utilities;
-using Essensoft.AspNetCore.Security.Engines;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Engines;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 
 
-namespace Essensoft.AspNetCore.Security.Macs
+namespace Essensoft.AspNetCore.Security.Crypto.Macs
 {
-    /**
-    * implementation of DSTU 7624 MAC
-    */
-    public class Dstu7624Mac : IMac
+     /**
+     * implementation of DSTU 7624 MAC
+     */
+     public class Dstu7624Mac : IMac
      {
           private int macSize;
                     

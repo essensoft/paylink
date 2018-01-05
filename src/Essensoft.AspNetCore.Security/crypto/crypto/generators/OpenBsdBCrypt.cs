@@ -4,7 +4,7 @@ using System.Text;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Generators
+namespace Essensoft.AspNetCore.Security.Crypto.Generators
 {
     /**
      * Password hashing scheme BCrypt,

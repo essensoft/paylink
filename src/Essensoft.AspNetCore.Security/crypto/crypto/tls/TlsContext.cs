@@ -1,8 +1,9 @@
-﻿
-using Essensoft.AspNetCore.Security.Prng;
+﻿using System;
+
+using Essensoft.AspNetCore.Security.Crypto.Prng;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public interface TlsContext
     {

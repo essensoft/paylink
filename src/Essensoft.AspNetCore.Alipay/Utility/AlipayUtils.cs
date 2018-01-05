@@ -28,18 +28,11 @@ namespace Essensoft.AspNetCore.Alipay.Utility
         public static IDictionary<string, T> CleanupDictionary<T>(IDictionary<string, T> dict)
         {
             var newDict = new Dictionary<string, T>(dict.Count);
-            var dem = dict.GetEnumerator();
-
-            while (dem.MoveNext())
+            foreach (var dem in dict)
             {
-                var name = dem.Current.Key;
-                var value = dem.Current.Value;
-                if (value != null)
-                {
-                    newDict.Add(name, value);
-                }
+                if (dem.Value != null)
+                    newDict.Add(dem.Key, dem.Value);
             }
-
             return newDict;
         }
 

@@ -1,15 +1,18 @@
-using Essensoft.AspNetCore.Security.Utilities;
+using System;
 
-namespace Essensoft.AspNetCore.Security.Prng
+using Essensoft.AspNetCore.Security.Crypto.Digests;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Prng
 {
-    /**
+	/**
 	 * Random generation based on the digest with counter. Calling AddSeedMaterial will
 	 * always increase the entropy of the hash.
 	 * <p>
 	 * Internal access to the digest is synchronized so a single one of these can be shared.
 	 * </p>
 	 */
-    public class DigestRandomGenerator
+	public class DigestRandomGenerator
 		: IRandomGenerator
 	{
 		private const long CYCLE_COUNT = 10;

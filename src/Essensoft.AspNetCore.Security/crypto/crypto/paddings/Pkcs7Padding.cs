@@ -1,6 +1,9 @@
+using System;
+
+using Essensoft.AspNetCore.Security.Crypto;
 using Essensoft.AspNetCore.Security.Security;
 
-namespace Essensoft.AspNetCore.Security.Paddings
+namespace Essensoft.AspNetCore.Security.Crypto.Paddings
 {
     /**
     * A padder that adds Pkcs7/Pkcs5 padding to a block.

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     internal class DtlsEpoch
     {

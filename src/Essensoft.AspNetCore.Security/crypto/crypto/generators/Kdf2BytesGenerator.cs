@@ -1,11 +1,16 @@
-namespace Essensoft.AspNetCore.Security.Generators
+using System;
+
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Generators
 {
-    /**
+	/**
 	 * KDF2 generator for derived keys and ivs as defined by IEEE P1363a/ISO 18033
 	 * <br/>
 	 * This implementation is based on IEEE P1363/ISO 18033.
 	 */
-    public class Kdf2BytesGenerator
+	public class Kdf2BytesGenerator
 		: BaseKdfBytesGenerator
 	{
 		/**

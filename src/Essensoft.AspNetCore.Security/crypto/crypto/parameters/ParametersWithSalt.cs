@@ -1,6 +1,8 @@
 using System;
 
-namespace Essensoft.AspNetCore.Security.Parameters
+using Essensoft.AspNetCore.Security.Crypto;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
 
     /// <summary> Cipher parameters with a fixed salt value associated with them.</summary>

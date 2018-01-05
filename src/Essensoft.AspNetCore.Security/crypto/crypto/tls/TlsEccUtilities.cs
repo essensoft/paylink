@@ -3,17 +3,18 @@ using System.Collections;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1.X9;
-using Essensoft.AspNetCore.Security.Agreement;
-using Essensoft.AspNetCore.Security.EC;
-using Essensoft.AspNetCore.Security.Generators;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Agreement;
+using Essensoft.AspNetCore.Security.Crypto.EC;
+using Essensoft.AspNetCore.Security.Crypto.Generators;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Math.EC;
 using Essensoft.AspNetCore.Security.Math.Field;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public abstract class TlsEccUtilities
     {

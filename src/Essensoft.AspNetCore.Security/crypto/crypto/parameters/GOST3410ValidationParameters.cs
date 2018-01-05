@@ -1,6 +1,8 @@
-namespace Essensoft.AspNetCore.Security.Parameters
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
-    public class Gost3410ValidationParameters
+	public class Gost3410ValidationParameters
 	{
 		private int x0;
 		private int c;

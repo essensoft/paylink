@@ -1,8 +1,9 @@
+using System;
 using System.IO;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
-    public class NullDigest : IDigest
+	public class NullDigest : IDigest
 	{
 		private readonly MemoryStream bOut = new MemoryStream();
 

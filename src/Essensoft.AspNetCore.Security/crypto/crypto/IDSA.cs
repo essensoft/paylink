@@ -1,6 +1,7 @@
+using System;
 using Essensoft.AspNetCore.Security.Math;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Security.Crypto
 {
     /**
      * interface for classes implementing the Digital Signature Algorithm

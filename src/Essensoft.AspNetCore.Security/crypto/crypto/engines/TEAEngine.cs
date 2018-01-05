@@ -1,14 +1,15 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Engines
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
-    /**
+	/**
 	* An TEA engine.
 	*/
-    public class TeaEngine
+	public class TeaEngine
 		: IBlockCipher
 	{
 		private const int

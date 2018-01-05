@@ -2,7 +2,7 @@ using System;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
     /**
     * base implementation of MD4 family style digest as outlined in

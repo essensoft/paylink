@@ -1,6 +1,8 @@
+using System.IO;
+
 namespace Essensoft.AspNetCore.Security.Bcpg
 {
-    /// <remarks>Generic compressed data object.</remarks>
+	/// <remarks>Generic compressed data object.</remarks>
     public class CompressedDataPacket
         : InputStreamPacket
     {

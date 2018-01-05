@@ -1,6 +1,8 @@
-namespace Essensoft.AspNetCore.Security.Tls
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
-    public interface TlsPskIdentity
+	public interface TlsPskIdentity
 	{
 		void SkipIdentityHint();
 

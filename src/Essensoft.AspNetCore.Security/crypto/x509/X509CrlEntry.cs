@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.IO;
 using System.Text;
 
 using Essensoft.AspNetCore.Security.Asn1;
@@ -12,13 +13,13 @@ using Essensoft.AspNetCore.Security.X509.Extension;
 
 namespace Essensoft.AspNetCore.Security.X509
 {
-    /**
+	/**
 	 * The following extensions are listed in RFC 2459 as relevant to CRL Entries
 	 *
 	 * ReasonCode Hode Instruction Code Invalidity Date Certificate Issuer
 	 * (critical)
 	 */
-    public class X509CrlEntry
+	public class X509CrlEntry
 		: X509ExtensionBase
 	{
 		private CrlEntry	c;

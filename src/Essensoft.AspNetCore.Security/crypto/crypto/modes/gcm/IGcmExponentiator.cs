@@ -1,6 +1,8 @@
-namespace Essensoft.AspNetCore.Security.Modes.Gcm
+using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Modes.Gcm
 {
-    public interface IGcmExponentiator
+	public interface IGcmExponentiator
 	{
 		void Init(byte[] x);
 		void ExponentiateX(long pow, byte[] output);

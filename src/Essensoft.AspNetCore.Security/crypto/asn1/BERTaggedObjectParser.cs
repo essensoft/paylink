@@ -1,9 +1,11 @@
 using System;
 using System.IO;
 
+using Essensoft.AspNetCore.Security.Utilities;
+
 namespace Essensoft.AspNetCore.Security.Asn1
 {
-    public class BerTaggedObjectParser
+	public class BerTaggedObjectParser
 		: Asn1TaggedObjectParser
 	{
 		private bool				_constructed;

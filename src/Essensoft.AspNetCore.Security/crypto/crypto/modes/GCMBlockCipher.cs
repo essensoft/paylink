@@ -1,9 +1,12 @@
 using System;
-using Essensoft.AspNetCore.Security.Modes.Gcm;
-using Essensoft.AspNetCore.Security.Parameters;
+
+using Essensoft.AspNetCore.Security.Crypto.Macs;
+using Essensoft.AspNetCore.Security.Crypto.Modes.Gcm;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Modes
+namespace Essensoft.AspNetCore.Security.Crypto.Modes
 {
     /// <summary>
     /// Implements the Galois/Counter mode (GCM) detailed in

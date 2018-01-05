@@ -2,10 +2,15 @@ using System;
 using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1;
+using Essensoft.AspNetCore.Security.Asn1.Nist;
+using Essensoft.AspNetCore.Security.Asn1.Pkcs;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.IO;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
+using Essensoft.AspNetCore.Security.Utilities.Collections;
 
 namespace Essensoft.AspNetCore.Security.Cms
 {

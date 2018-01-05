@@ -1,11 +1,12 @@
 using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Engines
+namespace Essensoft.AspNetCore.Security.Crypto.Engines
 {
-    /**
+	/**
 	* HC-128 is a software-efficient stream cipher created by Hongjun Wu. It
 	* generates keystream from a 128-bit secret key and a 128-bit initialization
 	* vector.
@@ -18,7 +19,7 @@ namespace Essensoft.AspNetCore.Security.Engines
 	* http://www.ecrypt.eu.org/stream/hcp3.html
 	* </p>
 	*/
-    public class HC128Engine
+	public class HC128Engine
 		: IStreamCipher
 	{
 		private uint[] p = new uint[512];

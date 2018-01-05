@@ -22,6 +22,7 @@
  * great code.
  */
 
+using System;
 
 namespace Essensoft.AspNetCore.Security.Apache.Bzip2
 {

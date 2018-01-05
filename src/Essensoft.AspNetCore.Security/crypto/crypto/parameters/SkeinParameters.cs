@@ -5,7 +5,7 @@ using System.IO;
 
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Parameters
+namespace Essensoft.AspNetCore.Security.Crypto.Parameters
 {
 
 	/// <summary>
@@ -25,9 +25,9 @@ namespace Essensoft.AspNetCore.Security.Parameters
 	/// <see cref="SkeinParameters.Builder.SetPersonalisation(byte[])">arbitrary</see> personalisation string.</li>
 	/// </ul>
 	/// </remarks>
-	/// <seealso cref="Essensoft.AspNetCore.Security.Digests.SkeinEngine"/>
-	/// <seealso cref="Essensoft.AspNetCore.Security.Digests.SkeinDigest"/>
-	/// <seealso cref="Essensoft.AspNetCore.Security.Macs.SkeinMac"/>
+	/// <seealso cref="Essensoft.AspNetCore.Security.Crypto.Digests.SkeinEngine"/>
+	/// <seealso cref="Essensoft.AspNetCore.Security.Crypto.Digests.SkeinDigest"/>
+	/// <seealso cref="Essensoft.AspNetCore.Security.Crypto.Macs.SkeinMac"/>
 	public class SkeinParameters
 		: ICipherParameters
 	{

@@ -4,7 +4,8 @@ using System.IO;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X509;
-using Essensoft.AspNetCore.Security.Operators;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Operators;
 using Essensoft.AspNetCore.Security.Math;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Security.Certificates;
@@ -12,8 +13,8 @@ using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.X509
 {
-    /// <summary>An implementation of a version 2 X.509 Attribute Certificate.</summary>
-    public class X509V2AttributeCertificate
+	/// <summary>An implementation of a version 2 X.509 Attribute Certificate.</summary>
+	public class X509V2AttributeCertificate
 		: X509ExtensionBase, IX509AttributeCertificate
 	{
 		private readonly AttributeCertificate cert;

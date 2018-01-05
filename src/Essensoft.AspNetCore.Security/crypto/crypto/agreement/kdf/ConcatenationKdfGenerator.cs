@@ -1,9 +1,9 @@
 ﻿using System;
 
-using Essensoft.AspNetCore.Security.Parameters;
-using Essensoft.AspNetCore.Security.Utilities;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
+using Essensoft.AspNetCore.Security.Crypto.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Agreement.Kdf
+namespace Essensoft.AspNetCore.Security.Crypto.Agreement.Kdf
 {
     /**
      * Generator for Concatenation Key Derivation Function defined in NIST SP 800-56A, Sect 5.8.1

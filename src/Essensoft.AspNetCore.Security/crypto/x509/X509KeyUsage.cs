@@ -1,10 +1,11 @@
+using System;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X509;
 
 namespace Essensoft.AspNetCore.Security.X509
 {
-    /**
+	/**
 	 * A holding class for constructing an X509 Key Usage extension.
 	 *
 	 * <pre>
@@ -22,7 +23,7 @@ namespace Essensoft.AspNetCore.Security.X509
 	 *         decipherOnly            (8) }
 	 * </pre>
 	 */
-    public class X509KeyUsage
+	public class X509KeyUsage
 		: Asn1Encodable
 	{
 		public const int DigitalSignature = 1 << 7;

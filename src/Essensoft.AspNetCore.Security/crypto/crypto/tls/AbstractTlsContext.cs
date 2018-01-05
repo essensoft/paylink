@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Threading;
 
-using Essensoft.AspNetCore.Security.Prng;
+using Essensoft.AspNetCore.Security.Crypto.Prng;
 using Essensoft.AspNetCore.Security.Security;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Tls
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     internal abstract class AbstractTlsContext
         : TlsContext

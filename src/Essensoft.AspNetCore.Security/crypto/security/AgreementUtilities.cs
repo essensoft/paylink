@@ -2,17 +2,18 @@ using System.Collections;
 
 using Essensoft.AspNetCore.Security.Asn1;
 using Essensoft.AspNetCore.Security.Asn1.X9;
-using Essensoft.AspNetCore.Security.Agreement;
-using Essensoft.AspNetCore.Security.Agreement.Kdf;
-using Essensoft.AspNetCore.Security.Digests;
+using Essensoft.AspNetCore.Security.Crypto;
+using Essensoft.AspNetCore.Security.Crypto.Agreement;
+using Essensoft.AspNetCore.Security.Crypto.Agreement.Kdf;
+using Essensoft.AspNetCore.Security.Crypto.Digests;
 using Essensoft.AspNetCore.Security.Utilities;
 
 namespace Essensoft.AspNetCore.Security.Security
 {
-    /// <remarks>
-    ///  Utility class for creating IBasicAgreement objects from their names/Oids
-    /// </remarks>
-    public sealed class AgreementUtilities
+	/// <remarks>
+	///  Utility class for creating IBasicAgreement objects from their names/Oids
+	/// </remarks>
+	public sealed class AgreementUtilities
 	{
 		private AgreementUtilities()
 		{

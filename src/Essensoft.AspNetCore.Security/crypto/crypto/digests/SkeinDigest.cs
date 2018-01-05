@@ -1,24 +1,27 @@
 using System;
-using Essensoft.AspNetCore.Security.Parameters;
+using System.Collections;
+
+using Essensoft.AspNetCore.Security.Crypto.Engines;
+using Essensoft.AspNetCore.Security.Crypto.Parameters;
 using Essensoft.AspNetCore.Security.Utilities;
 
-namespace Essensoft.AspNetCore.Security.Digests
+namespace Essensoft.AspNetCore.Security.Crypto.Digests
 {
 
-    /// <summary>
-    /// Implementation of the Skein parameterised hash function in 256, 512 and 1024 bit block sizes,
-    /// based on the <see cref="Essensoft.AspNetCore.Security.Engines.ThreefishEngine">Threefish</see> tweakable block cipher.
-    /// </summary>
-    /// <remarks>
-    /// This is the 1.3 version of Skein defined in the Skein hash function submission to the NIST SHA-3
-    /// competition in October 2010.
-    /// <p/>
-    /// Skein was designed by Niels Ferguson - Stefan Lucks - Bruce Schneier - Doug Whiting - Mihir
-    /// Bellare - Tadayoshi Kohno - Jon Callas - Jesse Walker.
-    /// </remarks>
-    /// <seealso cref="Essensoft.AspNetCore.Security.Digests.SkeinEngine"/>
-    /// <seealso cref="Essensoft.AspNetCore.Security.Parameters.SkeinParameters"/>
-    public class SkeinDigest
+	/// <summary>
+	/// Implementation of the Skein parameterised hash function in 256, 512 and 1024 bit block sizes,
+	/// based on the <see cref="Essensoft.AspNetCore.Security.Crypto.Engines.ThreefishEngine">Threefish</see> tweakable block cipher.
+	/// </summary>
+	/// <remarks>
+	/// This is the 1.3 version of Skein defined in the Skein hash function submission to the NIST SHA-3
+	/// competition in October 2010.
+	/// <p/>
+	/// Skein was designed by Niels Ferguson - Stefan Lucks - Bruce Schneier - Doug Whiting - Mihir
+	/// Bellare - Tadayoshi Kohno - Jon Callas - Jesse Walker.
+	/// </remarks>
+	/// <seealso cref="Essensoft.AspNetCore.Security.Crypto.Digests.SkeinEngine"/>
+	/// <seealso cref="Essensoft.AspNetCore.Security.Crypto.Parameters.SkeinParameters"/>
+	public class SkeinDigest
 		: IDigest, IMemoable
 	{
 		/// <summary>
@@ -83,7 +86,7 @@ namespace Essensoft.AspNetCore.Security.Digests
 		/// <summary>
 		/// Optionally initialises the Skein digest with the provided parameters.
 		/// </summary>
-		/// See <see cref="Essensoft.AspNetCore.Security.Parameters.SkeinParameters"></see> for details on the parameterisation of the Skein hash function.
+		/// See <see cref="Essensoft.AspNetCore.Security.Crypto.Parameters.SkeinParameters"></see> for details on the parameterisation of the Skein hash function.
 		/// <param name="parameters">the parameters to apply to this engine, or <code>null</code> to use no parameters.</param>
 		public void Init(SkeinParameters parameters)
 		{

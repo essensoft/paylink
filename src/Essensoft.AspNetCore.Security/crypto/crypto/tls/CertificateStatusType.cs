@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Security.Tls
+﻿using System;
+
+namespace Essensoft.AspNetCore.Security.Crypto.Tls
 {
     public abstract class CertificateStatusType
     {
