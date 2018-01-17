@@ -1,11 +1,12 @@
-﻿using Essensoft.AspNetCore.Security;
-using Essensoft.AspNetCore.WeChatPay.Parser;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
-using System;
+﻿using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Essensoft.AspNetCore.Security;
+using Essensoft.AspNetCore.WeChatPay.Notify;
+using Essensoft.AspNetCore.WeChatPay.Parser;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
 
 namespace Essensoft.AspNetCore.WeChatPay
 {
@@ -29,14 +30,15 @@ namespace Essensoft.AspNetCore.WeChatPay
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
             var parser = new WeChatPayXmlParser<T>();
             var rsp = parser.Parse(body);
-            CheckNotifySign(rsp);
-
-            if (rsp.IsRefundNotify())
+            if (rsp is WeChatPayRefundNotifyResponse)
             {
-                // AES-256-ECB
                 var key = Md5.GetMD5(Options.Key).ToLower();
-                var data = Aes.AesDecrypt(rsp.ReqInfo, key);
+                var data = Aes.AesDecrypt(rsp.ReqInfo, key); // AES-256-ECB
                 rsp = parser.Parse(rsp, data);
+            }
+            else
+            {
+                CheckNotifySign(rsp);
             }
             return rsp;
         }

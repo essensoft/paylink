@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+VisualStudioVersion = 15.0.27130.2003
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Alipay", "src\Essensoft.AspNetCore.Alipay\Essensoft.AspNetCore.Alipay.csproj", "{1F5C8A10-52FE-4318-AEAD-3CA66F8ECC3D}"
 EndProject
@@ -18,6 +18,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Security", "src\Essensoft.AspNetCore.Security\Essensoft.AspNetCore.Security.csproj", "{714A694B-A469-4F2D-9518-5CE7F9593401}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.JdPay", "src\Essensoft.AspNetCore.JdPay\Essensoft.AspNetCore.JdPay.csproj", "{8F9568B7-329F-423A-ADBD-B153AF2B8E1B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{679E0B13-B26E-455A-909A-01D100121084}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MigrationAopSdk", "tools\MigrationAopSdk\MigrationAopSdk.csproj", "{235EEBA8-397C-4B1A-B203-529CD3565DA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GetCertificateBase64String", "tools\GetCertificateBase64String\GetCertificateBase64String.csproj", "{F1F07E97-3A95-45E3-9AE9-E83B18AFCE31}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +55,14 @@ Global
 		{8F9568B7-329F-423A-ADBD-B153AF2B8E1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8F9568B7-329F-423A-ADBD-B153AF2B8E1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8F9568B7-329F-423A-ADBD-B153AF2B8E1B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{235EEBA8-397C-4B1A-B203-529CD3565DA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{235EEBA8-397C-4B1A-B203-529CD3565DA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{235EEBA8-397C-4B1A-B203-529CD3565DA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{235EEBA8-397C-4B1A-B203-529CD3565DA1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1F07E97-3A95-45E3-9AE9-E83B18AFCE31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1F07E97-3A95-45E3-9AE9-E83B18AFCE31}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1F07E97-3A95-45E3-9AE9-E83B18AFCE31}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1F07E97-3A95-45E3-9AE9-E83B18AFCE31}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +74,8 @@ Global
 		{F05F8977-42D0-435B-85CB-D1CCE5A95DD9} = {C9564537-1390-47F8-AEA4-6E76F3C57E4B}
 		{714A694B-A469-4F2D-9518-5CE7F9593401} = {C9564537-1390-47F8-AEA4-6E76F3C57E4B}
 		{8F9568B7-329F-423A-ADBD-B153AF2B8E1B} = {C9564537-1390-47F8-AEA4-6E76F3C57E4B}
+		{235EEBA8-397C-4B1A-B203-529CD3565DA1} = {679E0B13-B26E-455A-909A-01D100121084}
+		{F1F07E97-3A95-45E3-9AE9-E83B18AFCE31} = {679E0B13-B26E-455A-909A-01D100121084}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {793B69BC-D173-4B88-9DAD-72861AD84858}
