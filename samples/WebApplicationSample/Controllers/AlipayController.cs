@@ -61,7 +61,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> PreCreate(string out_trade_no, string subject, string total_amount, string body, string notify_url)
         {
-            var builder = new AlipayTradePrecreateModel()
+            var model = new AlipayTradePrecreateModel()
             {
                 Body = body,
                 Subject = subject,
@@ -69,7 +69,7 @@ namespace WebApplicationSample.Controllers
                 OutTradeNo = out_trade_no,
             };
             var req = new AlipayTradePrecreateRequest();
-            req.SetBizModel(builder);
+            req.SetBizModel(model);
             req.SetNotifyUrl(notify_url);
 
             var response = await _client.ExecuteAsync(req);
@@ -79,7 +79,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Pay(string out_trade_no, string scene, string auth_code, string subject, string total_amount, string body, string notify_url)
         {
-            var builder = new AlipayTradePayModel()
+            var model = new AlipayTradePayModel()
             {
                 Scene = scene,
                 AuthCode = auth_code,
@@ -89,7 +89,7 @@ namespace WebApplicationSample.Controllers
                 OutTradeNo = out_trade_no,
             };
             var req = new AlipayTradePayRequest();
-            req.SetBizModel(builder);
+            req.SetBizModel(model);
             req.SetNotifyUrl(notify_url);
 
             var response = await _client.ExecuteAsync(req);
@@ -100,14 +100,14 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Query(string out_trade_no, string trade_no)
         {
-            var builder = new AlipayTradeQueryModel()
+            var model = new AlipayTradeQueryModel()
             {
                 OutTradeNo = out_trade_no,
                 TradeNo = trade_no
             };
 
             var req = new AlipayTradeQueryRequest();
-            req.SetBizModel(builder);
+            req.SetBizModel(model);
 
             var response = await _client.ExecuteAsync(req);
             return Ok(response.Body);
@@ -116,7 +116,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Refund(string out_trade_no, string trade_no, string refund_amount, string refund_reason, string out_request_no)
         {
-            var builder = new AlipayTradeRefundModel()
+            var model = new AlipayTradeRefundModel()
             {
                 OutTradeNo = out_trade_no,
                 TradeNo = trade_no,
@@ -126,7 +126,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var req = new AlipayTradeRefundRequest();
-            req.SetBizModel(builder);
+            req.SetBizModel(model);
 
             var response = await _client.ExecuteAsync(req);
             return Ok(response.Body);
@@ -135,7 +135,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> RefundQuery(string out_trade_no, string trade_no, string out_request_no)
         {
-            var builder = new AlipayTradeFastpayRefundQueryModel()
+            var model = new AlipayTradeFastpayRefundQueryModel()
             {
                 OutTradeNo = out_trade_no,
                 TradeNo = trade_no,
@@ -143,7 +143,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var req = new AlipayTradeFastpayRefundQueryRequest();
-            req.SetBizModel(builder);
+            req.SetBizModel(model);
 
             var response = await _client.ExecuteAsync(req);
             return Ok(response.Body);
@@ -152,14 +152,14 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Close(string out_trade_no, string trade_no)
         {
-            var builder = new AlipayTradeCloseModel()
+            var model = new AlipayTradeCloseModel()
             {
                 OutTradeNo = out_trade_no,
                 TradeNo = trade_no,
             };
 
             var req = new AlipayTradeCloseRequest();
-            req.SetBizModel(builder);
+            req.SetBizModel(model);
 
             var response = await _client.ExecuteAsync(req);
             return Ok(response.Body);
@@ -168,7 +168,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Trans(string out_biz_no, string payee_account, string payee_type, string amount, string remark)
         {
-            var builder = new AlipayFundTransToaccountTransferModel()
+            var model = new AlipayFundTransToaccountTransferModel()
             {
                 OutBizNo = out_biz_no,
                 PayeeType = payee_type,
@@ -177,7 +177,7 @@ namespace WebApplicationSample.Controllers
                 Remark = remark
             };
             var req = new AlipayFundTransToaccountTransferRequest();
-            req.SetBizModel(builder);
+            req.SetBizModel(model);
             var response = await _client.ExecuteAsync(req);
             return Ok(response.Body);
         }
@@ -185,14 +185,14 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> TransQuery(string out_biz_no, string order_id)
         {
-            var builder = new AlipayFundTransOrderQueryModel()
+            var model = new AlipayFundTransOrderQueryModel()
             {
                 OutBizNo = out_biz_no,
                 OrderId = order_id,
             };
 
             var req = new AlipayFundTransOrderQueryRequest();
-            req.SetBizModel(builder);
+            req.SetBizModel(model);
             var response = await _client.ExecuteAsync(req);
             return Ok(response.Body);
         }
@@ -200,14 +200,14 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> BillDownloadurlQuery(string bill_date, string bill_type)
         {
-            var builder = new AlipayDataDataserviceBillDownloadurlQueryModel()
+            var model = new AlipayDataDataserviceBillDownloadurlQueryModel()
             {
                 BillDate = bill_date,
                 BillType = bill_type
             };
 
             var req = new AlipayDataDataserviceBillDownloadurlQueryRequest();
-            req.SetBizModel(builder);
+            req.SetBizModel(model);
             var response = await _client.ExecuteAsync(req);
             return Ok(response.Body);
         }

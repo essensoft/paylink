@@ -2,13 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>.Net Core 2.0 支付宝服务端SDK.源码及例程: https://github.com/Essensoft/Payment</Description>
+    <Description>源代码及例程: https://github.com/Essensoft/Payment</Description>
     <Authors>Roc</Authors>
     <Company>Essensoft</Company>
-    <Product>Payment</Product>
-    <Version>1.0.1</Version>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
+    <Product>.NET Core Payment</Product>
+    <Version>1.0.2</Version>
+    <AssemblyVersion>1.0.2.0</AssemblyVersion>
+    <FileVersion>1.0.2.0</FileVersion>
+    <Copyright>Copyright © Roc</Copyright>
+    <PackageProjectUrl>https://github.com/Essensoft/Payment</PackageProjectUrl>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

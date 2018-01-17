@@ -113,8 +113,6 @@ namespace Essensoft.AspNetCore.WeChatPay
         /// </summary>
         public bool IsError { get { return returnCode != "SUCCESS"; } }
 
-        public virtual bool IsRefundNotify() { return false; }
-
         /// <summary>
         /// 加密信息
         /// </summary>

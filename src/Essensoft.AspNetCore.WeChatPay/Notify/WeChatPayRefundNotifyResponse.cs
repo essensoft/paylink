@@ -83,14 +83,5 @@ namespace Essensoft.AspNetCore.WeChatPay.Notify
         /// </summary>
         [XmlElement("refund_request_source")]
         public string RefundRequestSource { get; set; }
-
-        #region WeChatPayNotifyResponse Members
-
-        public override bool IsRefundNotify()
-        {
-            return true;
-        }
-
-        #endregion
     }
 }
