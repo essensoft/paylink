@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string AuthCodeType { get; set; }
 
         /// <summary>
-        /// 业务扩展参数，用于商户的特定业务信息的传递，json格式
+        /// 业务扩展参数，用于商户的特定业务信息的传递，json格式。   1.间联模式必须传入二级商户ID，key为secondaryMerchantId;  2. 当面资金授权业务对应的类目，key为category，value由支付宝分配，酒店业务传 "HOTEL"；  3. 外部商户的门店编号，key为outStoreCode，可选；  4. 外部商户的门店简称，key为outStoreAlias，可选。
         /// </summary>
         [JsonProperty("extra_param")]
         public string ExtraParam { get; set; }

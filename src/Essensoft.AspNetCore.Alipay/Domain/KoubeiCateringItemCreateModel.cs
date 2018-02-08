@@ -135,6 +135,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string Subject { get; set; }
 
         /// <summary>
+        /// 商品首图(1:1)版本，作为商品在淘宝渠道露出的首图。支持bmp，png，jpeg，jpg，gif格式的图片。如果某个商品的本字段为空，则该商品无法再淘宝渠道露出
+        /// </summary>
+        [JsonProperty("taobao_cover_image")]
+        public string TaobaoCoverImage { get; set; }
+
+        /// <summary>
         /// 商品购买凭证核销方式。枚举值为：USER_PAY_CODE代表付款码核销方式，如果选择付款码核销，则sku_id必填。TICKET_CODE代表券码核销方式，如果选择券码核销，则sku_id必须为空
         /// </summary>
         [JsonProperty("ticket_display_mode")]
