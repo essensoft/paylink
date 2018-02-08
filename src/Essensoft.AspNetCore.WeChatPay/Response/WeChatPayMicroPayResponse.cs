@@ -2,7 +2,7 @@
 
 namespace Essensoft.AspNetCore.WeChatPay.Response
 {
-    public class WeChatPayOrderQueryResponse : WeChatPayResponse
+    public class WeChatPayMicroPayResponse : WeChatPayResponse
     {
         /// <summary>
         /// 用户标识	
@@ -11,70 +11,58 @@ namespace Essensoft.AspNetCore.WeChatPay.Response
         public string OpenId { get; set; }
 
         /// <summary>
-        /// 是否关注公众账号
+        /// 是否关注公众账号	
         /// </summary>
         [XmlElement("is_subscribe")]
         public string IsSubscribe { get; set; }
 
         /// <summary>
-        /// 交易类型	
+        /// 交易类型
         /// </summary>
         [XmlElement("trade_type")]
         public string TradeType { get; set; }
 
         /// <summary>
-        /// 交易状态
-        /// </summary>
-        [XmlElement("trade_state")]
-        public string TradeState { get; set; }
-
-        /// <summary>
-        /// 付款银行
+        /// 付款银行	
         /// </summary>
         [XmlElement("bank_type")]
         public string BankType { get; set; }
 
         /// <summary>
-        /// 订单金额
-        /// </summary>
-        [XmlElement("total_fee")]
-        public int TotalFee { get; set; }
-
-        /// <summary>
-        /// 应结订单金额
-        /// </summary>
-        [XmlElement("settlement_total_fee")]
-        public int SettlementTotalFee { get; set; }
-
-        /// <summary>
-        /// 货币种类
+        /// 货币类型	
         /// </summary>
         [XmlElement("fee_type")]
         public string FeeType { get; set; }
 
         /// <summary>
-        /// 现金支付金额	
+        /// 订单金额	
         /// </summary>
-        [XmlElement("cash_fee")]
-        public int CashFee { get; set; }
+        [XmlElement("total_fee")]
+        public string TotalFee { get; set; }
 
         /// <summary>
-        /// 现金支付货币类型
+        /// 应结订单金额	
         /// </summary>
-        [XmlElement("cash_fee_type")]
-        public string CashFeeType { get; set; }
+        [XmlElement("settlement_total_fee")]
+        public string SettlementTotalFee { get; set; }
 
         /// <summary>
         /// 代金券金额	
         /// </summary>
         [XmlElement("coupon_fee")]
-        public int CouponFee { get; set; }
+        public string CouponFee { get; set; }
 
         /// <summary>
-        /// 代金券使用数量	
+        /// 现金支付货币类型	
         /// </summary>
-        [XmlElement("coupon_count")]
-        public int CouponCount { get; set; }
+        [XmlElement("cash_fee_type")]
+        public string CashFeeType { get; set; }
+
+        /// <summary>
+        /// 现金支付金额	
+        /// </summary>
+        [XmlElement("cash_fee")]
+        public string CashFee { get; set; }
 
         /// <summary>
         /// 微信支付订单号	
@@ -89,7 +77,7 @@ namespace Essensoft.AspNetCore.WeChatPay.Response
         public string OutTradeNo { get; set; }
 
         /// <summary>
-        /// 附加数据	
+        /// 商家数据包	
         /// </summary>
         [XmlElement("attach")]
         public string Attach { get; set; }
@@ -101,9 +89,9 @@ namespace Essensoft.AspNetCore.WeChatPay.Response
         public string TimeEnd { get; set; }
 
         /// <summary>
-        /// 交易状态描述
+        /// 营销详情	
         /// </summary>
-        [XmlElement("trade_state_desc")]
-        public string TradeStateDesc { get; set; }
+        [XmlElement("promotion_detail")]
+        public string PromotionDetail { get; set; }
     }
 }

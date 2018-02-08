@@ -5,12 +5,6 @@ namespace Essensoft.AspNetCore.WeChatPay.Response
     public class WeChatPayUnifiedOrderResponse : WeChatPayResponse
     {
         /// <summary>
-        /// 设备号
-        /// </summary>
-        [XmlElement("device_info")]
-        public string DeviceInfo { get; set; }
-
-        /// <summary>
         /// 交易类型
         /// </summary>
         [XmlElement("trade_type")]

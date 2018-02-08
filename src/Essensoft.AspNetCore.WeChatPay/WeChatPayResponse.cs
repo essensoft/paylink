@@ -8,6 +8,7 @@ namespace Essensoft.AspNetCore.WeChatPay
         private string returnMsg;
         private string appId;
         private string mchId;
+        private string deviceInfo;
         private string nonceStr;
         private string sign;
         private string resultCode;
@@ -58,6 +59,18 @@ namespace Essensoft.AspNetCore.WeChatPay
             get { return mchId; }
             set { mchId = value; }
         }
+
+        /// <summary>
+        /// 设备号
+        /// </summary>
+        [XmlElement("device_info")]
+        public string DeviceInfo
+        {
+            get { return deviceInfo; }
+            set { deviceInfo = value; }
+        }
+
+
 
         /// <summary>
         /// 随机字符串
