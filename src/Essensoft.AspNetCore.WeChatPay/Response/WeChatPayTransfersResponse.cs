@@ -17,12 +17,6 @@ namespace Essensoft.AspNetCore.WeChatPay.Response
         public new string MchId { get; set; }
 
         /// <summary>
-        /// 设备号
-        /// </summary>
-        [XmlElement("device_info")]
-        public string DeviceInfo { get; set; }
-
-        /// <summary>
         /// 商户订单号
         /// </summary>
         [XmlElement("partner_trade_no")]
