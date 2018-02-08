@@ -105,6 +105,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string Subject { get; set; }
 
         /// <summary>
+        /// 商品1:1首图，该封面图将展示在淘抢购、聚划算等商品售卖渠道。支持bmp、png、jpeg、jpg、gif格式，建议宽高比1:1，建议宽高1500*1500px，图片大小≤5M。图片大小超过5M，接口会报错。若图片尺寸不符，口碑服务器自身不会做压缩，但在口碑客户端展现时，会自动做性能优化（等比缩放，以图片中心为基准裁剪）。
+        /// </summary>
+        [JsonProperty("tb_cover")]
+        public string TbCover { get; set; }
+
+        /// <summary>
         /// 交易凭证类商品模板信息
         /// </summary>
         [JsonProperty("trade_voucher_item_template")]

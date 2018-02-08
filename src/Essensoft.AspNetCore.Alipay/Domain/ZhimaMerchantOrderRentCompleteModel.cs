@@ -8,6 +8,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
     public class ZhimaMerchantOrderRentCompleteModel : AlipayObject
     {
         /// <summary>
+        /// 扩展信息。商户发起借用服务时的扩展信息字段，格式：json，注意，如果字符串对应的json对象包含中文字符，需要对包含中文的字段进行编码
+        /// </summary>
+        [JsonProperty("extend_info")]
+        public string ExtendInfo { get; set; }
+
+        /// <summary>
         /// 信用借还订单号
         /// </summary>
         [JsonProperty("order_no")]
@@ -38,7 +44,7 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string RestoreShopName { get; set; }
 
         /// <summary>
-        /// 物品归还时间
+        /// 物品实际归还时间，borrow_time<restore_time<当前时间+24小时，即该时间不能早于借还订单创建时的borrow_time，且最晚不能晚于当前时间后24小时。
         /// </summary>
         [JsonProperty("restore_time")]
         public string RestoreTime { get; set; }

@@ -1,3 +1,5 @@
+using Newtonsoft.Json;
+
 namespace Essensoft.AspNetCore.Alipay.Response
 {
     /// <summary>
@@ -5,5 +7,10 @@ namespace Essensoft.AspNetCore.Alipay.Response
     /// </summary>
     public class AlipayOpenPublicAdvertCreateResponse : AlipayResponse
     {
+        /// <summary>
+        /// 广告位id
+        /// </summary>
+        [JsonProperty("advert_id")]
+        public string AdvertId { get; set; }
     }
 }

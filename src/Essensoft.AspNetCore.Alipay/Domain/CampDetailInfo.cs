@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Alipay.Domain
 {
@@ -38,6 +39,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string CampGuide { get; set; }
 
         /// <summary>
+        /// 活动id
+        /// </summary>
+        [JsonProperty("camp_id")]
+        public string CampId { get; set; }
+
+        /// <summary>
         /// 活动结束时间
         /// </summary>
         [JsonProperty("end_time")]
@@ -48,6 +55,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         /// </summary>
         [JsonProperty("ext_info")]
         public string ExtInfo { get; set; }
+
+        /// <summary>
+        /// 活动规则标识列表，列表中存在的标识，代表该活动包含对应的规则。目前只有人群规则一种。标识说明：  CROWD：人群规则
+        /// </summary>
+        [JsonProperty("rule_flag_list")]
+        public List<string> RuleFlagList { get; set; }
 
         /// <summary>
         /// 每人每日参与次数 -1为不限制

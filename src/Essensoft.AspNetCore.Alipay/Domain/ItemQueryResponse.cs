@@ -105,6 +105,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string Subject { get; set; }
 
         /// <summary>
+        /// 淘宝首图
+        /// </summary>
+        [JsonProperty("tb_cover")]
+        public string TbCover { get; set; }
+
+        /// <summary>
         /// 交易凭证类商品模板信息
         /// </summary>
         [JsonProperty("trade_voucher_item_template")]

@@ -4,12 +4,12 @@ using Essensoft.AspNetCore.Alipay.Response;
 namespace Essensoft.AspNetCore.Alipay.Request
 {
     /// <summary>
-    /// AOP API: alipay.commerce.air.xfg.dsg.modify
+    /// AOP API: alipay.open.public.message.content.modify
     /// </summary>
-    public class AlipayCommerceAirXfgDsgModifyRequest : IAlipayRequest<AlipayCommerceAirXfgDsgModifyResponse>
+    public class AlipayOpenPublicMessageContentModifyRequest : IAlipayRequest<AlipayOpenPublicMessageContentModifyResponse>
     {
         /// <summary>
-        /// 吃饭更好
+        /// 修改图文消息素材接口
         /// </summary>
         public string BizContent { get; set; }
 
@@ -74,7 +74,7 @@ namespace Essensoft.AspNetCore.Alipay.Request
 
         public string GetApiName()
         {
-            return "alipay.commerce.air.xfg.dsg.modify";
+            return "alipay.open.public.message.content.modify";
         }
 
         public void SetApiVersion(string apiVersion){
