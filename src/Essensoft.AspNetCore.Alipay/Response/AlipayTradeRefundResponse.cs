@@ -64,6 +64,12 @@ namespace Essensoft.AspNetCore.Alipay.Response
         public string PresentRefundMdiscountAmount { get; set; }
 
         /// <summary>
+        /// 退款币种信息
+        /// </summary>
+        [JsonProperty("refund_currency")]
+        public string RefundCurrency { get; set; }
+
+        /// <summary>
         /// 退款使用的资金渠道
         /// </summary>
         [JsonProperty("refund_detail_item_list")]

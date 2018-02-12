@@ -16,6 +16,12 @@ namespace Essensoft.AspNetCore.Alipay.Response
         public string AlipayStoreId { get; set; }
 
         /// <summary>
+        /// 预授权支付模式，该参数仅在信用预授权支付场景下返回。信用预授权支付：CREDIT_PREAUTH_PAY
+        /// </summary>
+        [JsonProperty("auth_trade_pay_mode")]
+        public string AuthTradePayMode { get; set; }
+
+        /// <summary>
         /// 买家支付宝账号
         /// </summary>
         [JsonProperty("buyer_logon_id")]
@@ -88,6 +94,18 @@ namespace Essensoft.AspNetCore.Alipay.Response
         public string OutTradeNo { get; set; }
 
         /// <summary>
+        /// 支付币种订单金额
+        /// </summary>
+        [JsonProperty("pay_amount")]
+        public string PayAmount { get; set; }
+
+        /// <summary>
+        /// 订单支付币种
+        /// </summary>
+        [JsonProperty("pay_currency")]
+        public string PayCurrency { get; set; }
+
+        /// <summary>
         /// 积分支付的金额，单位为元，两位小数。该金额代表该笔交易中用户使用积分支付的金额，比如集分宝或者支付宝实时优惠等
         /// </summary>
         [JsonProperty("point_amount")]
@@ -104,6 +122,24 @@ namespace Essensoft.AspNetCore.Alipay.Response
         /// </summary>
         [JsonProperty("send_pay_date")]
         public string SendPayDate { get; set; }
+
+        /// <summary>
+        /// 结算币种订单金额
+        /// </summary>
+        [JsonProperty("settle_amount")]
+        public string SettleAmount { get; set; }
+
+        /// <summary>
+        /// 订单结算币种，对应支付接口传入的settle_currency，支持英镑：GBP、港币：HKD、美元：USD、新加坡元：SGD、日元：JPY、加拿大元：CAD、澳元：AUD、欧元：EUR、新西兰元：NZD、韩元：KRW、泰铢：THB、瑞士法郎：CHF、瑞典克朗：SEK、丹麦克朗：DKK、挪威克朗：NOK、马来西亚林吉特：MYR、印尼卢比：IDR、菲律宾比索：PHP、毛里求斯卢比：MUR、以色列新谢克尔：ILS、斯里兰卡卢比：LKR、俄罗斯卢布：RUB、阿联酋迪拉姆：AED、捷克克朗：CZK、南非兰特：ZAR
+        /// </summary>
+        [JsonProperty("settle_currency")]
+        public string SettleCurrency { get; set; }
+
+        /// <summary>
+        /// 结算币种兑换标价币种汇率
+        /// </summary>
+        [JsonProperty("settle_trans_rate")]
+        public string SettleTransRate { get; set; }
 
         /// <summary>
         /// 商户门店编号
@@ -140,6 +176,18 @@ namespace Essensoft.AspNetCore.Alipay.Response
         /// </summary>
         [JsonProperty("trade_status")]
         public string TradeStatus { get; set; }
+
+        /// <summary>
+        /// 标价币种，该参数的值为支付时传入的trans_currency，支持英镑：GBP、港币：HKD、美元：USD、新加坡元：SGD、日元：JPY、加拿大元：CAD、澳元：AUD、欧元：EUR、新西兰元：NZD、韩元：KRW、泰铢：THB、瑞士法郎：CHF、瑞典克朗：SEK、丹麦克朗：DKK、挪威克朗：NOK、马来西亚林吉特：MYR、印尼卢比：IDR、菲律宾比索：PHP、毛里求斯卢比：MUR、以色列新谢克尔：ILS、斯里兰卡卢比：LKR、俄罗斯卢布：RUB、阿联酋迪拉姆：AED、捷克克朗：CZK、南非兰特：ZAR、人民币：CNY、新台币：TWD。当trans_currency 和 settle_currency 不一致时，trans_currency支持人民币：CNY、新台币：TWD
+        /// </summary>
+        [JsonProperty("trans_currency")]
+        public string TransCurrency { get; set; }
+
+        /// <summary>
+        /// 标价币种兑换支付币种汇率
+        /// </summary>
+        [JsonProperty("trans_pay_rate")]
+        public string TransPayRate { get; set; }
 
         /// <summary>
         /// 本交易支付时使用的所有优惠券信息

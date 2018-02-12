@@ -24,5 +24,11 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         /// </summary>
         [JsonProperty("template_id")]
         public string TemplateId { get; set; }
+
+        /// <summary>
+        /// 模板小程序的版本号
+        /// </summary>
+        [JsonProperty("template_version")]
+        public string TemplateVersion { get; set; }
     }
 }
