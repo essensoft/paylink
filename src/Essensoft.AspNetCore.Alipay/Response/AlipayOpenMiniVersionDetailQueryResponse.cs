@@ -142,7 +142,7 @@ namespace Essensoft.AspNetCore.Alipay.Response
         public string ServiceRegionType { get; set; }
 
         /// <summary>
-        /// 小程序版本状态，INIT-开发中，AUDITING-审核中，WAIT_RELEASE-审核通过，AUDIT_REJECT-审核驳回，RELEASE-已上架，GRAY-灰度中，OFFLINE-下架，ONLINE-上架
+        /// 小程序版本状态，INIT-开发中，AUDITING-审核中，WAIT_RELEASE-审核通过，AUDIT_REJECT-审核驳回，RELEASE-已上架，GRAY-灰度中，OFFLINE-下架
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; set; }

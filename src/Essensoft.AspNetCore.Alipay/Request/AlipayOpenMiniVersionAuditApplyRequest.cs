@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Alipay.Request
     public class AlipayOpenMiniVersionAuditApplyRequest : IAlipayUploadRequest<AlipayOpenMiniVersionAuditApplyResponse>
     {
         /// <summary>
-        /// 小程序类目，格式为 第一个一级类目_第一个二级类目;第二个一级类目_第二个二级类目
+        /// 小程序类目，格式为 第一个一级类目_第一个二级类目;第二个一级类目_第二个二级类目，详细类目可以参考https://docs.alipay.com/isv/10325
         /// </summary>
         public string AppCategoryIds { get; set; }
 
@@ -51,7 +51,7 @@ namespace Essensoft.AspNetCore.Alipay.Request
         public FileItem FifthScreenShot { get; set; }
 
         /// <summary>
-        /// 小程序第一张应用截图，不能超过4MB，图片格式只支持jpg，png
+        /// 实例化的小程序可以不用传第一张应用截图，小程序第一张应用截图，不能超过4MB，图片格式只支持jpg，png
         /// </summary>
         public FileItem FirstScreenShot { get; set; }
 
@@ -71,7 +71,7 @@ namespace Essensoft.AspNetCore.Alipay.Request
         public string RegionType { get; set; }
 
         /// <summary>
-        /// 小程序第二张应用截图，不能超过4MB，图片格式只支持jpg，png
+        /// 实例化的小程序可以不用传第二张应用截图，小程序第二张应用截图，不能超过4MB，图片格式只支持jpg，png
         /// </summary>
         public FileItem SecondScreenShot { get; set; }
 
@@ -86,7 +86,7 @@ namespace Essensoft.AspNetCore.Alipay.Request
         public string ServicePhone { get; set; }
 
         /// <summary>
-        /// 省市区信息，当区域类型为LOCATION时，不能为空，province_code不能为空，当填写city_code时，province_code不能为空，当填写area_code时，province_code和city_code不能为空
+        /// 省市区信息，当区域类型为LOCATION时，不能为空，province_code不能为空，当填写city_code时，province_code不能为空，当填写area_code时，province_code和city_code不能为空。只填province_code时，该省全部选择；province_code和city_code都填时，该市全部选择。province_code，city_code和area_code都填时，该县全部选择。具体code可以参考https://docs.alipay.com/isv/10327
         /// </summary>
         public List<RegionInfo> ServiceRegionInfo { get; set; }
 

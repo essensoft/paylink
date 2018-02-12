@@ -26,6 +26,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string CertType { get; set; }
 
         /// <summary>
+        /// 芝麻平台服务商模式下的二级商户标识，如果是直连商户调用该接口，不需要设置
+        /// </summary>
+        [JsonProperty("linked_merchant_id")]
+        public string LinkedMerchantId { get; set; }
+
+        /// <summary>
         /// 用户姓名 当证件类型为ALIPAY_USER_ID时不需要传入
         /// </summary>
         [JsonProperty("name")]

@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Alipay.Response
         public string ExpQrCodeUrl { get; set; }
 
         /// <summary>
-        /// 体验版打包状态，success-打包成功，failed-打包失败
+        /// 体验版打包状态，expVersionPackged-体验版打包成功，expVersionPackaging-体验版打包中，notExpVersion-非体验版
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; set; }

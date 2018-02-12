@@ -62,10 +62,16 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string DepositState { get; set; }
 
         /// <summary>
-        /// 到期时间，是指最晚归还时间，表示借用用户如果超过此时间还未完结订单（未归还物品或者未支付租金）将会进入逾期状态，芝麻会给借用用户发送催收提醒。如果此时间不传入或传空，将视为无限期借用
+        /// 到期时间，请根据实际业务合理设置该值，不允许为空，格式：YYYY-MM-DD HH:MM:SS，是指最晚归还时间，表示借用用户如果超过此时间还未完结订单（未归还物品或者未支付租金）将会进入逾期状态，芝麻会给借用用户发送催收提醒；需要晚于borrow_time。
         /// </summary>
         [JsonProperty("expiry_time")]
         public string ExpiryTime { get; set; }
+
+        /// <summary>
+        /// 扩展信息。商户发起借用服务时的扩展信息字段，格式：json，注意，如果字符串对应的json对象包含中文字符，需要对包含中文的字段进行编码
+        /// </summary>
+        [JsonProperty("extend_info")]
+        public string ExtendInfo { get; set; }
 
         /// <summary>
         /// 物品名称,最长不能超过14个汉字

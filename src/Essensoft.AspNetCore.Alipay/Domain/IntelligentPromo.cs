@@ -21,13 +21,13 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string AuditStatus { get; set; }
 
         /// <summary>
-        /// 创建活动时填入的外部流水号，这个只在查询时使用，创建和修改无效
+        /// 请求幂等控制请求参数，该参数尽量比较复杂，建议使用uuid，否则触发幂等返回。
         /// </summary>
         [JsonProperty("create_request_no")]
         public string CreateRequestNo { get; set; }
 
         /// <summary>
-        /// 创建人信息
+        /// 当前创建人信息，如服务商替商户创建，则为服务商信息，销售小二创建，则为销售小二信息，商户小二创建，则为商户小二信息。（为了追溯创建人信息，请务必仔细填写）
         /// </summary>
         [JsonProperty("creator_info")]
         public PromoOperatorInfo CreatorInfo { get; set; }
@@ -39,13 +39,13 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string Desc { get; set; }
 
         /// <summary>
-        /// 活动扩展信息。活动推荐会返回扩展信息，推荐完以后，这里的信息要在活动效果预测，创建接口中也需要原样带回来；
+        /// 活动扩展信息，通过《koubei.marketing.campaign.intelligent.promo.consult智能方案咨询接口》推荐出的方案扩展信息字段，调用《koubei.marketing.campaign.intelligent.promo.create创建智能方案》接口必须要原路带回，不能删减字段。
         /// </summary>
         [JsonProperty("ext_info")]
         public string ExtInfo { get; set; }
 
         /// <summary>
-        /// 方案级别的效果预测
+        /// 方案级别的效果预测，《koubei.marketing.campaign.intelligent.promo.create》创建接口中不需要传递
         /// </summary>
         [JsonProperty("forecast_effect")]
         public IntelligentPromoEffect ForecastEffect { get; set; }
@@ -75,13 +75,19 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string GmtStart { get; set; }
 
         /// <summary>
+        /// 智能营销商户子活动列表
+        /// </summary>
+        [JsonProperty("merchant_promos")]
+        public List<InteligentMerchantPromo> MerchantPromos { get; set; }
+
+        /// <summary>
         /// 智能营销活动对应的名称
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// 智能活动对应的归属人信息
+        /// 智能活动对应的归属人信息，商户活动对应商户信息
         /// </summary>
         [JsonProperty("owner_info")]
         public PromoOperatorInfo OwnerInfo { get; set; }
@@ -99,13 +105,13 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string PlanId { get; set; }
 
         /// <summary>
-        /// 智能营销活动的id。创建接口中这个参数不用填，仅在查询接口中返回
+        /// 智能营销方案id。《koubei.marketing.campaign.intelligent.promo.create》创建接口中这个参数不必传递，仅在查询接口中返回
         /// </summary>
         [JsonProperty("promo_id")]
         public string PromoId { get; set; }
 
         /// <summary>
-        /// 营销活动详情列表
+        /// 营销活动详情列表，注意：（该参数20180125开始已不在维护，替代参数详见merchant_promos，如需接入替代参数，接之前先找开发负责人申请appid白名单）
         /// </summary>
         [JsonProperty("promos")]
         public List<IntelligentPromoDetail> Promos { get; set; }

@@ -8,9 +8,15 @@ namespace Essensoft.AspNetCore.Alipay.Domain
     public class SubMerchant : AlipayObject
     {
         /// <summary>
-        /// 二级商户的支付宝id
+        /// 间连受理商户的支付宝商户编号，通过间连商户入驻后得到。间连业务下必传，并且需要按规范传递受理商户编号。
         /// </summary>
         [JsonProperty("merchant_id")]
         public string MerchantId { get; set; }
+
+        /// <summary>
+        /// 商户id类型，
+        /// </summary>
+        [JsonProperty("merchant_type")]
+        public string MerchantType { get; set; }
     }
 }

@@ -18,5 +18,11 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         /// </summary>
         [JsonProperty("contact_info")]
         public ContactModel ContactInfo { get; set; }
+
+        /// <summary>
+        /// 订单授权凭证，填写都则对应事务提交进入预授权模式
+        /// </summary>
+        [JsonProperty("order_ticket")]
+        public string OrderTicket { get; set; }
     }
 }

@@ -129,6 +129,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string SellerId { get; set; }
 
         /// <summary>
+        /// 商户指定的结算币种，支持英镑：GBP、港币：HKD、美元：USD、新加坡元：SGD、日元：JPY、加拿大元：CAD、澳元：AUD、欧元：EUR、新西兰元：NZD、韩元：KRW、泰铢：THB、瑞士法郎：CHF、瑞典克朗：SEK、丹麦克朗：DKK、挪威克朗：NOK、马来西亚林吉特：MYR、印尼卢比：IDR、菲律宾比索：PHP、毛里求斯卢比：MUR、以色列新谢克尔：ILS、斯里兰卡卢比：LKR、俄罗斯卢布：RUB、阿联酋迪拉姆：AED、捷克克朗：CZK、南非兰特：ZAR、人民币：CNY
+        /// </summary>
+        [JsonProperty("settle_currency")]
+        public string SettleCurrency { get; set; }
+
+        /// <summary>
         /// 商户门店编号
         /// </summary>
         [JsonProperty("store_id")]
@@ -163,6 +169,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         /// </summary>
         [JsonProperty("total_amount")]
         public string TotalAmount { get; set; }
+
+        /// <summary>
+        /// 标价币种,  total_amount 对应的币种单位。支持英镑：GBP、港币：HKD、美元：USD、新加坡元：SGD、日元：JPY、加拿大元：CAD、澳元：AUD、欧元：EUR、新西兰元：NZD、韩元：KRW、泰铢：THB、瑞士法郎：CHF、瑞典克朗：SEK、丹麦克朗：DKK、挪威克朗：NOK、马来西亚林吉特：MYR、印尼卢比：IDR、菲律宾比索：PHP、毛里求斯卢比：MUR、以色列新谢克尔：ILS、斯里兰卡卢比：LKR、俄罗斯卢布：RUB、阿联酋迪拉姆：AED、捷克克朗：CZK、南非兰特：ZAR、人民币：CNY
+        /// </summary>
+        [JsonProperty("trans_currency")]
+        public string TransCurrency { get; set; }
 
         /// <summary>
         /// 不参与优惠计算的金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]。如果该值未传入，但传入了【订单总金额】和【可打折金额】，则该值默认为【订单总金额】-【可打折金额】
