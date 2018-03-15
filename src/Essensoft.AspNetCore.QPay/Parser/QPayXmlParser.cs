@@ -21,7 +21,7 @@ namespace Essensoft.AspNetCore.QPay.Parser
 
             var propertiesMap = DicProperties[typeof(T)];
 
-            var result = (T)Activator.CreateInstance(typeof(T));
+            var result = Activator.CreateInstance<T>();
 
             result.Body = body;
             var parameters = (result as QPayObject).Parameters;

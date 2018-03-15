@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Alipay.Request
     {
 
         public string BizContent { get; set; }
-        public Stream Stream { set; get; }
+        public Stream Stream { get; set; }
 
         #region IAlipayRequest Members
 

@@ -80,6 +80,12 @@ namespace Essensoft.AspNetCore.Alipay.Response
         public string PayerUserId { get; set; }
 
         /// <summary>
+        /// 预授权类型，目前支持 CREDIT_AUTH(信用预授权);  商户可根据该标识来判断该笔预授权的类型，当返回值为"CREDIT_AUTH"表明该笔预授权为信用预授权，没有真实冻结资金；当返回值为空或者不为"CREDIT_AUTH"则表明该笔预授权为普通资金预授权，会冻结用户资金。
+        /// </summary>
+        [JsonProperty("pre_auth_type")]
+        public string PreAuthType { get; set; }
+
+        /// <summary>
         /// 商户对本次操作的附言描述，长度不超过100个字母或50个汉字
         /// </summary>
         [JsonProperty("remark")]

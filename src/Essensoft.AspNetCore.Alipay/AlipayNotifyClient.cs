@@ -3,33 +3,46 @@ using Essensoft.AspNetCore.Alipay.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Alipay
 {
     public class AlipayNotifyClient
     {
+        private RSAParameters RSAPublicParameters;
+
         public AlipayOptions Options { get; set; }
+
+        public AlipayNotifyClient(AlipayOptions options)
+        {
+            Options = options;
+
+            if (!string.IsNullOrEmpty(Options.RsaPublicKey))
+            {
+                RSAPublicParameters = AlipaySignature.GetPublicParameters(Options.RsaPublicKey);
+            }
+        }
+
         public AlipayNotifyClient(IOptions<AlipayOptions> optionsAccessor)
+            : this(optionsAccessor?.Value ?? new AlipayOptions())
         {
-            Options = optionsAccessor?.Value ?? new AlipayOptions();
         }
 
-        public AlipayNotifyClient(string signType, string alipayPublicKey)
-            : this(null)
+        public AlipayNotifyClient(string signType, string publicKey)
+            : this(new AlipayOptions { SignType = signType, RsaPublicKey = publicKey })
         {
-            Options.SignType = signType;
-            Options.RsaPublicKey = alipayPublicKey;
         }
 
-        public T Execute<T>(HttpRequest request) where T : AlipayObject
+        public Task<T> ExecuteAsync<T>(HttpRequest request) where T : AlipayNotifyResponse
         {
             var parameters = GetParameters(request);
             var parser = new AlipayDictionaryParser<T>();
             var rsp = parser.Parse(parameters);
 
-            CheckNotifySign(parameters, Options.RsaPublicKey, Options.SignType);
-            return rsp;
+            CheckNotifySign(parameters, RSAPublicParameters, Options.SignType);
+            return Task.FromResult(rsp);
         }
 
         private SortedDictionary<string, string> GetParameters(HttpRequest request)
@@ -37,12 +50,12 @@ namespace Essensoft.AspNetCore.Alipay
             var parameters = new SortedDictionary<string, string>();
             if (request.Method == "POST")
             {
-                foreach (var item in request?.Form)
+                foreach (var item in request.Form)
                 {
                     parameters.Add(item.Key, item.Value);
                 }
             }
-            else if (request.Method == "GET")
+            else
             {
                 foreach (var item in request?.Query)
                 {
@@ -52,21 +65,21 @@ namespace Essensoft.AspNetCore.Alipay
             return parameters;
         }
 
-        private void CheckNotifySign(IDictionary<string, string> parameters, string alipayPublicKey, string signType)
+        private void CheckNotifySign(IDictionary<string, string> content, RSAParameters parameters, string signType)
         {
-            if (parameters.Count == 0)
+            if (content.Count == 0)
             {
                 throw new AlipayException("sign check fail: Body is Empty!");
             }
 
-            var sign = parameters["sign"];
+            var sign = content["sign"];
             if (string.IsNullOrEmpty(sign))
             {
                 throw new AlipayException("sign check fail: sign is Empty!");
             }
 
-            var prestr = GetSignContent(parameters);
-            if (!AlipaySignature.RSACheckContent(prestr, sign, alipayPublicKey, signType))
+            var prestr = GetSignContent(content);
+            if (!AlipaySignature.RSACheckContent(prestr, sign, parameters, signType))
             {
                 throw new AlipayException("sign check fail: check Sign and Data Fail JSON also");
             }

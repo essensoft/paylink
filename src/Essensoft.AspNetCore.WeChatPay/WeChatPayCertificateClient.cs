@@ -1,13 +1,11 @@
-﻿using Essensoft.AspNetCore.Security;
-using Essensoft.AspNetCore.WeChatPay.Parser;
+﻿using Essensoft.AspNetCore.WeChatPay.Parser;
+using Essensoft.AspNetCore.WeChatPay.Request;
 using Essensoft.AspNetCore.WeChatPay.Utility;
 using Microsoft.Extensions.Options;
 using System;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using System.IO;
-using Essensoft.AspNetCore.WeChatPay.Request;
 
 namespace Essensoft.AspNetCore.WeChatPay
 {
@@ -27,35 +25,60 @@ namespace Essensoft.AspNetCore.WeChatPay
 
         protected internal HttpClientEx Client { get; set; }
 
-        public WeChatPayCertificateClient(IOptions<WeChatPayOptions> optionsAccessor)
+        public WeChatPayCertificateClient(WeChatPayOptions options)
         {
-            Options = optionsAccessor?.Value ?? new WeChatPayOptions();
+            Options = options;
+
+            if (string.IsNullOrEmpty(Options.Certificate) || string.IsNullOrEmpty(Options.MchId))
+            {
+                throw new Exception("Error Certificate or MchId is Empty!");
+            }
 
             var clientHandler = new HttpClientHandler();
-            if (File.Exists(Options.Certificate)) // 是文件则以文件名的形式创建，否则以Base64String方式
-                clientHandler.ClientCertificates.Add(new X509Certificate2(Options.Certificate, Options.MchId));
-            else
-                clientHandler.ClientCertificates.Add(new X509Certificate2(Convert.FromBase64String(Options.Certificate), Options.MchId));
-
+            clientHandler.ClientCertificates.Add(new X509Certificate2(Convert.FromBase64String(Options.Certificate), Options.MchId, X509KeyStorageFlags.MachineKeySet));
             Client = new HttpClientEx(clientHandler);
         }
 
-        public WeChatPayCertificateClient(string appId, string appSecret, string mchId, string key, string certificate)
-            : this(null)
+        public WeChatPayCertificateClient(IOptions<WeChatPayOptions> optionsAccessor)
+            : this(optionsAccessor?.Value ?? new WeChatPayOptions())
         {
-            Options.Certificate = certificate;
+        }
+
+        public WeChatPayCertificateClient(string appId, string appSecret, string mchId, string key, string certificate)
+            : this(new WeChatPayOptions { AppId = appId, AppSecret = appSecret, MchId = mchId, Key = key, Certificate = certificate })
+        {
         }
 
         public async Task<T> ExecuteAsync<T>(IWeChatPayCertificateRequest<T> request) where T : WeChatPayResponse
         {
+            var useMD5 = true;
+            var excludeSignType = true;
+
             // 字典排序
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
-            if (request is WeChatPayTransfersRequest) // 企业付款到零钱
+            if (request is WeChatPayTransfersRequest)
             {
                 sortedTxtParams.Add(MCHAPPID, Options.AppId);
                 sortedTxtParams.Add(MCHID, Options.MchId);
             }
-            else if (request is WeChatPayGetPublicKeyRequest || request is WeChatPayPayBankRequest || request is WeChatPayQueryBankRequest)
+            else if (request is WeChatPayGetPublicKeyRequest)
+            {
+                sortedTxtParams.Add(MCH_ID, Options.MchId);
+                sortedTxtParams.Add(SIGN_TYPE, "MD5");
+                excludeSignType = false;
+            }
+            else if (request is WeChatPayPayBankRequest)
+            {
+                var no = WeChatPaySignature.Encrypt(sortedTxtParams.GetValue(ENC_BANK_NO), Options.RsaPublicParameters);
+                sortedTxtParams.SetValue(ENC_BANK_NO, no);
+
+                var name = WeChatPaySignature.Encrypt(sortedTxtParams.GetValue(ENC_TRUE_NAME), Options.RsaPublicParameters);
+                sortedTxtParams.SetValue(ENC_TRUE_NAME, name);
+
+                sortedTxtParams.Add(MCH_ID, Options.MchId);
+                sortedTxtParams.Add(SIGN_TYPE, "MD5");
+            }
+            else if (request is WeChatPayQueryBankRequest)
             {
                 sortedTxtParams.Add(MCH_ID, Options.MchId);
                 sortedTxtParams.Add(SIGN_TYPE, "MD5");
@@ -66,32 +89,31 @@ namespace Essensoft.AspNetCore.WeChatPay
                 sortedTxtParams.Add(MCH_ID, Options.MchId);
                 sortedTxtParams.Add(SIGN_TYPE, "MD5");
             }
+            else if (request is WeChatPayDownloadFundFlowRequest)
+            {
+                sortedTxtParams.Add(APPID, Options.AppId);
+                sortedTxtParams.Add(MCH_ID, Options.MchId);
+                sortedTxtParams.Add(SIGN_TYPE, "HMAC-SHA256");
+                useMD5 = false;
+                excludeSignType = false;
+            }
             else // 其他接口
             {
                 sortedTxtParams.Add(APPID, Options.AppId);
                 sortedTxtParams.Add(MCH_ID, Options.MchId);
             }
 
-            if (request is WeChatPayPayBankRequest) // 企业付款到银行卡接口
-            {
-                var no = WeChatPaySignature.Encrypt(sortedTxtParams.GetValue(ENC_BANK_NO), Options.RsaPublicKey);
-                sortedTxtParams.SetValue(ENC_BANK_NO, no);
-
-                var name = WeChatPaySignature.Encrypt(sortedTxtParams.GetValue(ENC_TRUE_NAME), Options.RsaPublicKey);
-                sortedTxtParams.SetValue(ENC_TRUE_NAME, name);
-            }
-
             sortedTxtParams.Add(NONCE_STR, Guid.NewGuid().ToString("N"));
-            sortedTxtParams.Add(SIGN, Md5.GetMD5WithKey(sortedTxtParams, Options.Key, !(request is WeChatPayGetPublicKeyRequest))); // 获取公钥 不排除sign_type
+            sortedTxtParams.Add(SIGN, WeChatPaySignature.SignWithKey(sortedTxtParams, Options.Key, useMD5, excludeSignType));
 
             var body = await Client.DoPostAsync(request.GetRequestUrl(), sortedTxtParams);
             var parser = new WeChatPayXmlParser<T>();
             var rsp = parser.Parse(body);
-            CheckResponseSign(rsp);
+            CheckResponseSign(rsp, useMD5, excludeSignType);
             return rsp;
         }
 
-        private void CheckResponseSign(WeChatPayResponse response)
+        private void CheckResponseSign(WeChatPayResponse response, bool useMD5, bool excludeSignType)
         {
             if (string.IsNullOrEmpty(response.Body))
             {
@@ -101,7 +123,7 @@ namespace Essensoft.AspNetCore.WeChatPay
             var sign = response?.Sign;
             if (!response.IsError && !string.IsNullOrEmpty(sign))
             {
-                var cal_sign = Md5.GetMD5WithKey(response.Parameters, Options.Key);
+                var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, Options.Key, useMD5, excludeSignType);
                 if (cal_sign != sign)
                 {
                     throw new Exception("sign check fail: check Sign and Data Fail!");

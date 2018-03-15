@@ -160,5 +160,18 @@ namespace WebApplicationSample.Controllers
             var response = await _certClient.ExecuteAsync(request);
             return Ok(response.Body);
         }
+
+        [HttpPost]
+        public async Task<IActionResult> DownloadFundFlow(string bill_date, string account_type, string tar_type)
+        {
+            var request = new WeChatPayDownloadFundFlowRequest()
+            {
+                BillDate = bill_date,
+                AccountType = account_type,
+                TarType = tar_type,
+            };
+            var response = await _certClient.ExecuteAsync(request);
+            return Ok(response.Body);
+        }
     }
 }

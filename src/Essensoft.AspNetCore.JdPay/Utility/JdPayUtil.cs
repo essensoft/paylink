@@ -9,13 +9,13 @@ namespace Essensoft.AspNetCore.JdPay.Utility
 {
     public class JdPayUtil
     {
-        public static T Deserialize<T>(Type type, string xml)
+        public static T Deserialize<T>(string xml)
         {
             try
             {
                 using (var sr = new StringReader(xml))
                 {
-                    var xmldes = new XmlSerializer(type);
+                    var xmldes = new XmlSerializer(typeof(T));
                     return (T)xmldes.Deserialize(sr);
                 }
             }

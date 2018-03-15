@@ -4,6 +4,8 @@ using Essensoft.AspNetCore.JdPay;
 using Essensoft.AspNetCore.JdPay.Notify;
 using Essensoft.AspNetCore.QPay;
 using Essensoft.AspNetCore.QPay.Notify;
+using Essensoft.AspNetCore.UnionPay;
+using Essensoft.AspNetCore.UnionPay.Notify;
 using Essensoft.AspNetCore.WeChatPay;
 using Essensoft.AspNetCore.WeChatPay.Notify;
 using Microsoft.AspNetCore.Mvc;
@@ -27,11 +29,11 @@ namespace WebApplicationSample.Controllers
         /// <returns></returns>
         [Route("pagepay")]
         [HttpPost]
-        public IActionResult PagePay()
+        public async Task<IActionResult> PagePayAsync()
         {
             try
             {
-                var notify = _client.Execute<AlipayTradePagePayNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<AlipayTradePagePayNotifyResponse>(Request);
                 if ("TRADE_SUCCESS" == notify.TradeStatus)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -52,11 +54,11 @@ namespace WebApplicationSample.Controllers
         /// <returns></returns>
         [Route("wappay")]
         [HttpPost]
-        public IActionResult WapPay()
+        public async Task<IActionResult> WapPayAsync()
         {
             try
             {
-                var notify = _client.Execute<AlipayTradeWapPayNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<AlipayTradeWapPayNotifyResponse>(Request);
                 if ("TRADE_SUCCESS" == notify.TradeStatus)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -77,11 +79,11 @@ namespace WebApplicationSample.Controllers
         /// <returns></returns>
         [Route("precreate")]
         [HttpPost]
-        public IActionResult Precreate()
+        public async Task<IActionResult> PrecreateAsync()
         {
             try
             {
-                var notify = _client.Execute<AlipayTradePrecreateNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<AlipayTradePrecreateNotifyResponse>(Request);
                 if ("TRADE_SUCCESS" == notify.TradeStatus)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -102,11 +104,11 @@ namespace WebApplicationSample.Controllers
         /// <returns></returns>
         [Route("pay")]
         [HttpPost]
-        public IActionResult Pay()
+        public async Task<IActionResult> PayAsync()
         {
             try
             {
-                var notify = _client.Execute<AlipayTradePayNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<AlipayTradePayNotifyResponse>(Request);
                 if ("TRADE_SUCCESS" == notify.TradeStatus)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -209,7 +211,6 @@ namespace WebApplicationSample.Controllers
                 if ("SUCCESS" == notify.TradeState)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
-
                     return Content("<xml><return_code><![CDATA[SUCCESS]]></return_code></xml>", "text/xml");
                 }
                 return NoContent();
@@ -231,14 +232,244 @@ namespace WebApplicationSample.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync()
+        public async Task<IActionResult> Async()
         {
             try
             {
-                var notify = await _client.ExecuteAsync<JdPayAsynNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<JdPayAsyncNotifyResponse>(Request);
                 Console.WriteLine("TradeNum: " + notify.TradeNum + " tradeType :" + notify.TradeType);
 
                 return Content("success", "text/plain");
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+    }
+
+    [Route("notify/unionpay")]
+    public class UnionPayNotifyController : Controller
+    {
+        private readonly UnionPayNotifyClient _client = null;
+        public UnionPayNotifyController(UnionPayNotifyClient client)
+        {
+            _client = client;
+        }
+
+        /// <summary>
+        /// 二维码支付 - 二维码消费（被扫）通知
+        /// </summary>
+        /// <returns></returns>
+        [Route("appconsume")]
+        [HttpPost]
+        public async Task<IActionResult> AppConsume()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<UnionPayForm05_6_2_AppConsumeNotifyResponse>(Request);
+                Console.WriteLine("OrderId: " + notify.OrderId + " respCode :" + notify.RespCode);
+                return Content("ok", "text/plain");
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
+        /// <summary>
+        /// 二维码支付 - 申请二维码（主扫）通知
+        /// </summary>
+        /// <returns></returns>
+        [Route("applyqrcode")]
+        [HttpPost]
+        public async Task<IActionResult> ApplyQrCode()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<UnionPayForm05_6_1_ApplyQrCodeNotifyResponse>(Request);
+                Console.WriteLine("OrderId: " + notify.OrderId + " respCode :" + notify.RespCode);
+                return Content("ok", "text/plain");
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
+        /// <summary>
+        /// 二维码支付 - 消费撤销通知
+        /// </summary>
+        /// <returns></returns>
+        [Route("purchaseundo")]
+        [HttpPost]
+        public async Task<IActionResult> PurchaseUndo()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<UnionPayUpacpPurchaseUndoNotifyResponse>(Request);
+                Console.WriteLine("OrderId: " + notify.OrderId + " respCode :" + notify.RespCode);
+                return Content("ok", "text/plain");
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
+        /// <summary>
+        /// 二维码支付 - 退货通知
+        /// </summary>
+        /// <returns></returns>
+        [Route("refund")]
+        [HttpPost]
+        public async Task<IActionResult> Refund()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<UnionPayUpacpRefundNotifyResponse>(Request);
+                Console.WriteLine("OrderId: " + notify.OrderId + " respCode :" + notify.RespCode);
+                return Content("ok", "text/plain");
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
+        /// <summary>
+        /// 网关支付 - 跳转网关页面支付通知
+        /// </summary>
+        /// <returns></returns>
+        [Route("frontconsume62")]
+        [HttpPost]
+        public async Task<IActionResult> FrontConsume62()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<UnionPayForm_6_2_FrontConsumeNotifyResponse>(Request);
+                Console.WriteLine("OrderId: " + notify.OrderId + " respCode :" + notify.RespCode);
+                return Content("ok", "text/plain");
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
+        /// <summary>
+        /// 网关支付 - 消费撤销通知
+        /// </summary>
+        /// <returns></returns>
+        [Route("consumeundo63")]
+        [HttpPost]
+        public async Task<IActionResult> ConsumeUndo63()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<UnionPayForm_6_3_ConsumeUndoNotifyResponse>(Request);
+                Console.WriteLine("OrderId: " + notify.OrderId + " respCode :" + notify.RespCode);
+                return Content("ok", "text/plain");
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
+        /// <summary>
+        /// 网关支付 - 退货通知
+        /// </summary>
+        /// <returns></returns>
+        [Route("refund64")]
+        [HttpPost]
+        public async Task<IActionResult> Refund64()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<UnionPayForm_6_4_RefundNotifyResponse>(Request);
+                Console.WriteLine("OrderId: " + notify.OrderId + " respCode :" + notify.RespCode);
+                return Content("ok", "text/plain");
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
+        /// <summary>
+        /// 网关支付 - 预授权通知
+        /// </summary>
+        /// <returns></returns>
+        [Route("authdealfront671")]
+        [HttpPost]
+        public async Task<IActionResult> AuthDealFront671()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<UnionPayForm_6_7_1_AuthDeal_FrontNotifyResponse>(Request);
+                Console.WriteLine("OrderId: " + notify.OrderId + " respCode :" + notify.RespCode);
+                return Content("ok", "text/plain");
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
+        /// <summary>
+        /// 网关支付 - 预授权撤销通知
+        /// </summary>
+        /// <returns></returns>
+        [Route("authundo672")]
+        [HttpPost]
+        public async Task<IActionResult> AuthUndo672()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<UnionPayForm_6_7_2_AuthUndoNotifyResponse>(Request);
+                Console.WriteLine("OrderId: " + notify.OrderId + " respCode :" + notify.RespCode);
+                return Content("ok", "text/plain");
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
+        /// <summary>
+        /// 网关支付 - 预授权完成通知
+        /// </summary>
+        /// <returns></returns>
+        [Route("authfinish673")]
+        [HttpPost]
+        public async Task<IActionResult> AuthFinish673()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<UnionPayForm_6_7_3_AuthFinishNotifyResponse>(Request);
+                Console.WriteLine("OrderId: " + notify.OrderId + " respCode :" + notify.RespCode);
+                return Content("ok", "text/plain");
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
+        /// <summary>
+        /// 网关支付 - 预授权完成撤销通知
+        /// </summary>
+        /// <returns></returns>
+        [Route("authfinishundo674")]
+        [HttpPost]
+        public async Task<IActionResult> AuthFinishUndo674()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<UnionPayForm_6_7_4_AuthFinishUndoNotifyResponse>(Request);
+                Console.WriteLine("OrderId: " + notify.OrderId + " respCode :" + notify.RespCode);
+                return Content("ok", "text/plain");
             }
             catch
             {

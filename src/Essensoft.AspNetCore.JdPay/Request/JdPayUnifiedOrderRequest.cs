@@ -8,132 +8,132 @@ namespace Essensoft.AspNetCore.JdPay.Request
         /// <summary>
         /// 收款商户
         /// </summary>
-        public string PayMerchant { set; get; }
+        public string PayMerchant { get; set; }
 
         /// <summary>
         /// 门店号
         /// </summary>
-        public string Device { set; get; }
+        public string Device { get; set; }
 
         /// <summary>
         /// 交易流水号
         /// </summary>
-        public string TradeNum { set; get; }
+        public string TradeNum { get; set; }
 
         /// <summary>
         /// 交易名称
         /// </summary>
-        public string TradeName { set; get; }
+        public string TradeName { get; set; }
 
         /// <summary>
         /// 交易描述
         /// </summary>
-        public string TradeDesc { set; get; }
+        public string TradeDesc { get; set; }
 
         /// <summary>
         /// 交易时间
         /// </summary>
-        public string TradeTime { set; get; }
+        public string TradeTime { get; set; }
 
         /// <summary>
         /// 交易金额
         /// </summary>
-        public string Amount { set; get; }
+        public string Amount { get; set; }
 
         /// <summary>
         /// 订单类型
         /// </summary>
-        public string OrderType { set; get; }
+        public string OrderType { get; set; }
 
         /// <summary>
         /// 业务类型
         /// </summary>
-        public string IndustryCategoryCode { set; get; }
+        public string IndustryCategoryCode { get; set; }
 
         /// <summary>
         /// 货币种类
         /// </summary>
-        public string Currency { set; get; }
+        public string Currency { get; set; }
 
         /// <summary>
         /// 商户备注
         /// </summary>
-        public string Note { set; get; }
+        public string Note { get; set; }
 
         /// <summary>
         /// 同步通知页面
         /// </summary>
-        public string CallbackUrl { set; get; }
+        public string CallbackUrl { get; set; }
 
         /// <summary>
         /// 异步通知页面地址
         /// </summary>
-        public string NotifyUrl { set; get; }
+        public string NotifyUrl { get; set; }
 
         /// <summary>
         /// 用户IP
         /// </summary>
-        public string Ip { set; get; }
+        public string Ip { get; set; }
 
         /// <summary>
         /// 用户指定卡号
         /// </summary>
-        public string SpecCardNo { set; get; }
+        public string SpecCardNo { get; set; }
 
         /// <summary>
         /// 用户指定身份证
         /// </summary>
-        public string SpecId { set; get; }
+        public string SpecId { get; set; }
 
         /// <summary>
         /// 用户指定姓名
         /// </summary>
-        public string SpecName { set; get; }
+        public string SpecName { get; set; }
 
         /// <summary>
         /// 交易类型
         /// </summary>
-        public string TradeType { set; get; }
+        public string TradeType { get; set; }
 
         /// <summary>
         /// 用户账号
         /// </summary>
-        public string UserId { set; get; }
+        public string UserId { get; set; }
 
         /// <summary>
         /// 订单失效时长
         /// </summary>
-        public string ExpireTime { set; get; }
+        public string ExpireTime { get; set; }
 
         /// <summary>
         /// 订单商品数量
         /// </summary>
-        public string OrderGoodsNum { set; get; }
+        public string OrderGoodsNum { get; set; }
 
         /// <summary>
         /// 厂商编码
         /// </summary>
-        public string VendorId { set; get; }
+        public string VendorId { get; set; }
 
         /// <summary>
         /// 商品信息
         /// </summary>
-        public string GoodsInfo { set; get; }
+        public string GoodsInfo { get; set; }
 
         /// <summary>
         /// 收货信息
         /// </summary>
-        public string ReceiverInfo { set; get; }
+        public string ReceiverInfo { get; set; }
 
         /// <summary>
         /// 终端信息
         /// </summary>
-        public string TermInfo { set; get; }
+        public string TermInfo { get; set; }
 
         /// <summary>
         /// 风控信息
         /// </summary>
-        public string RiskInfo { set; get; }
+        public string RiskInfo { get; set; }
 
         #region IJdPayRequest Members
 
@@ -186,11 +186,6 @@ namespace Essensoft.AspNetCore.JdPay.Request
                 { "riskInfo", RiskInfo },
             };
             return parameters;
-        }
-
-        public IDictionary<string, string> GetEncryptParameters()
-        {
-            return null;
         }
 
         #endregion

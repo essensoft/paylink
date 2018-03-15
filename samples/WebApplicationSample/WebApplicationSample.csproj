@@ -3,9 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>a59ca38e-9b52-44fe-b3d2-8cb5a1641623</UserSecretsId>
-    <Version>1.0.1</Version>
-    <AssemblyVersion>1.0.0.1</AssemblyVersion>
-    <FileVersion>1.0.0.1</FileVersion>
+    <Version>1.1.0</Version>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,17 +12,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Alipay\Essensoft.AspNetCore.Alipay.csproj" />
-    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.JdPay\Essensoft.AspNetCore.JdPay.csproj" />
-    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.QPay\Essensoft.AspNetCore.QPay.csproj" />
-    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.WeChatPay\Essensoft.AspNetCore.WeChatPay.csproj" />
+    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment\Essensoft.AspNetCore.Payment.csproj" />
   </ItemGroup>
-
-  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

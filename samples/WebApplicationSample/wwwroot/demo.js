@@ -4,6 +4,7 @@ $(function () {
     setApiDemoTabs("#tabs-purchase-wechatpay");
     setApiDemoTabs("#tabs-purchase-qpay");
     setApiDemoTabs("#tabs-purchase-jdpay");
+    setApiDemoTabs("#tabs-purchase-unionpay");
     $(document).tooltip();
 });
 

@@ -1,52 +1,51 @@
+using Org.BouncyCastle.Asn1.Pkcs;
+using Org.BouncyCastle.Crypto.Parameters;
+using Org.BouncyCastle.Security;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
-using Essensoft.AspNetCore.Security.Asn1.Pkcs;
-using Essensoft.AspNetCore.Security.Crypto.Parameters;
-using Essensoft.AspNetCore.Security.Security;
 
 namespace Essensoft.AspNetCore.Alipay.Utility
 {
     public class AlipaySignature
     {
-        public static string GetSignContent(IDictionary<string, string> parameters)
+        public static string GetSignContent(IDictionary<string, string> para)
         {
-            // 第一步：把字典按Key的字母顺序排序
-            IDictionary<string, string> sortedParams = new SortedDictionary<string, string>(parameters);
+            if (para == null || para.Count == 0)
+                return string.Empty;
 
-            // 第二步：把所有参数名和参数值串在一起
-            var content = new StringBuilder();
-            foreach (var iter in sortedParams)
+            var sortedDic = new SortedDictionary<string, string>(para);
+
+            var sb = new StringBuilder();
+            foreach (var iter in sortedDic)
             {
                 if (!string.IsNullOrEmpty(iter.Value))
-                {
-                    content.Append(iter.Key + "=" + iter.Value + "&");
-                }
+                    sb.Append(iter.Key).Append("=").Append(iter.Value).Append("&");
             }
-            return content.ToString().Substring(0, content.Length - 1);
+
+            return sb.Remove(sb.Length - 1, 1).ToString();
         }
 
-        public static string RSASignContent(string data, string privateKey, string signType)
+        public static string RSASignContent(string data, RSAParameters parameters, string signType)
         {
             var rsa = RSA.Create();
-            rsa.ImportParameters(GetPrivateParameters(privateKey));
+            rsa.ImportParameters(parameters);
             return Convert.ToBase64String(rsa.SignData(Encoding.UTF8.GetBytes(data), "RSA2" == signType ? HashAlgorithmName.SHA256 : HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1));
         }
 
-        public static string RSASign(IDictionary<string, string> parameters, string privateKey, string signType)
+        public static string RSASign(IDictionary<string, string> content, RSAParameters parameters, string signType)
         {
-            var signContent = GetSignContent(parameters);
-
-            return RSASignContent(signContent, privateKey, signType);
+            var signContent = GetSignContent(content);
+            return RSASignContent(signContent, parameters, signType);
         }
 
-        public static bool RSACheckContent(string signContent, string sign, string publicKey, string signType)
+        public static bool RSACheckContent(string signContent, string sign, RSAParameters parameters, string signType)
         {
             try
             {
                 var rsa = RSA.Create();
-                rsa.ImportParameters(GetPublicParameters(publicKey));
+                rsa.ImportParameters(parameters);
                 return rsa.VerifyData(Encoding.UTF8.GetBytes(signContent), Convert.FromBase64String(sign), "RSA2" == signType ? HashAlgorithmName.SHA256 : HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
             }
             catch
@@ -55,7 +54,7 @@ namespace Essensoft.AspNetCore.Alipay.Utility
             }
         }
 
-        private static RSAParameters GetPrivateParameters(string privateKey)
+        public static RSAParameters GetPrivateParameters(string privateKey)
         {
             var key = RsaPrivateKeyStructure.GetInstance(Convert.FromBase64String(privateKey));
             return new RSAParameters
@@ -71,7 +70,7 @@ namespace Essensoft.AspNetCore.Alipay.Utility
             };
         }
 
-        private static RSAParameters GetPublicParameters(string publicKey)
+        public static RSAParameters GetPublicParameters(string publicKey)
         {
             var key = (RsaKeyParameters)PublicKeyFactory.CreateKey(Convert.FromBase64String(publicKey));
             return new RSAParameters

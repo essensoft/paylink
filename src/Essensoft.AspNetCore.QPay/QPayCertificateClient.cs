@@ -1,12 +1,10 @@
 ﻿using Essensoft.AspNetCore.QPay.Parser;
 using Essensoft.AspNetCore.QPay.Utility;
-using Essensoft.AspNetCore.Security;
 using Microsoft.Extensions.Options;
 using System;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
-using System.IO;
 
 namespace Essensoft.AspNetCore.QPay
 {
@@ -21,27 +19,27 @@ namespace Essensoft.AspNetCore.QPay
 
         protected internal HttpClientEx Client { get; set; }
 
-        public QPayCertificateClient(IOptions<QPayOptions> optionsAccessor)
+        public QPayCertificateClient(QPayOptions options)
         {
-            Options = optionsAccessor?.Value ?? new QPayOptions();
+            Options = options;
 
-            var clientHandler = new HttpClientHandler();
-            if (File.Exists(Options.Certificate)) // 是文件则以文件名的形式创建，否则以Base64String方式
-                clientHandler.ClientCertificates.Add(new X509Certificate2(Options.Certificate, Options.MchId));
-            else
-                clientHandler.ClientCertificates.Add(new X509Certificate2(Convert.FromBase64String(Options.Certificate), Options.MchId));
-
+            if (string.IsNullOrEmpty(Options.Certificate) || string.IsNullOrEmpty(Options.MchId))
+            {
+                throw new Exception("Error Certificate or MchId is Empty!");
+            }
+           var clientHandler = new HttpClientHandler();
+            clientHandler.ClientCertificates.Add(new X509Certificate2(Convert.FromBase64String(Options.Certificate), Options.MchId, X509KeyStorageFlags.MachineKeySet));
             Client = new HttpClientEx(clientHandler);
         }
 
-        public QPayCertificateClient(string appId, string appSecret, string mchId, string key, string certificate)
-            : this(null)
+        public QPayCertificateClient(IOptions<QPayOptions> optionsAccessor)
+            : this(optionsAccessor?.Value ?? new QPayOptions())
         {
-            Options.AppId = appId;
-            Options.AppSecret = appSecret;
-            Options.MchId = mchId;
-            Options.Key = key;
-            Options.Certificate = certificate;
+        }
+
+        public QPayCertificateClient(string appId, string appSecret, string mchId, string key, string certificate)
+            : this(new QPayOptions { AppId = appId, AppSecret = appSecret, MchId = mchId, Key = key, Certificate = certificate })
+        {
         }
 
         public async Task<T> ExecuteAsync<T>(IQPayCertificateRequest<T> request) where T : QPayResponse
@@ -54,7 +52,7 @@ namespace Essensoft.AspNetCore.QPay
                 { NONCE_STR, Guid.NewGuid().ToString("N") }
             };
 
-            sortedTxtParams.Add(SIGN, Md5.GetMD5WithKey(sortedTxtParams, Options.Key));
+            sortedTxtParams.Add(SIGN, QPaySignature.SignWithKey(sortedTxtParams, Options.Key));
 
             var body = await Client.DoPostAsync(request.GetRequestUrl(), sortedTxtParams);
 
@@ -74,7 +72,7 @@ namespace Essensoft.AspNetCore.QPay
             var sign = response?.Sign;
             if (!response.IsError && !string.IsNullOrEmpty(sign))
             {
-                var cal_sign = Md5.GetMD5WithKey(response.Parameters, Options.Key);
+                var cal_sign = QPaySignature.SignWithKey(response.Parameters, Options.Key);
                 if (cal_sign != sign)
                 {
                     throw new Exception("sign check fail: check Sign and Data Fail!");

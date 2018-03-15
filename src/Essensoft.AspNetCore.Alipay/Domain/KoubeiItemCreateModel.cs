@@ -33,7 +33,13 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public List<KoubeiItemDescription> Descriptions { get; set; }
 
         /// <summary>
-        /// 商品生效时间，商品状态有效并且到达生效时间后才可在客户端（消费者端）展示出来，如果商品生效时间小于当前时间，则立即生效。  说明：商品的生效时间不能早于创建当天的0点
+        /// 售卖结束时间。当到达该时间时，商品暂停售卖，将不在客户端中继续展示，用户无法继续购买。  注意：该时间不能晚于核销绝对有效期的结束时间。
+        /// </summary>
+        [JsonProperty("gmt_end")]
+        public string GmtEnd { get; set; }
+
+        /// <summary>
+        /// 商品售卖开始时间，商品状态有效并且到达生效时间后才可在客户端（消费者端）展示出来，如果商品生效时间小于当前时间，则立即生效。  说明：商品的生效时间不能早于创建当天的0点
         /// </summary>
         [JsonProperty("gmt_start")]
         public string GmtStart { get; set; }
@@ -97,6 +103,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         /// </summary>
         [JsonProperty("request_id")]
         public string RequestId { get; set; }
+
+        /// <summary>
+        /// 行业场景 例如泛行业SERV_INDUSTRY，综合体MALL
+        /// </summary>
+        [JsonProperty("scene")]
+        public string Scene { get; set; }
 
         /// <summary>
         /// 上架门店id列表，即传入一个或多个shop_id。多个ID则以英文分隔

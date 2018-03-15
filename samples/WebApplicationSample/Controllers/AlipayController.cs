@@ -213,11 +213,11 @@ namespace WebApplicationSample.Controllers
         }
 
         [HttpGet]
-        public IActionResult PagePayReturn()
+        public async Task<IActionResult> PagePayReturn()
         {
             try
             {
-                var notify = _notifyClient.Execute<AlipayTradePagePayReturnResponse>(Request);
+                var notify = await _notifyClient.ExecuteAsync<AlipayTradePagePayReturnResponse>(Request);
                 return Content("success", "text/plain");
             }
             catch
@@ -227,11 +227,11 @@ namespace WebApplicationSample.Controllers
         }
 
         [HttpGet]
-        public IActionResult WapPayReturn()
+        public async Task<IActionResult> WapPayReturn()
         {
             try
             {
-                var notify = _notifyClient.Execute<AlipayTradeWapPayReturnResponse>(Request);
+                var notify = await _notifyClient.ExecuteAsync<AlipayTradeWapPayReturnResponse>(Request);
                 return Content("success", "text/plain");
             }
             catch

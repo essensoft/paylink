@@ -1,7 +1,9 @@
-﻿using Essensoft.AspNetCore.JdPay.Utility;
+﻿using Essensoft.AspNetCore.JdPay.Parser;
+using Essensoft.AspNetCore.JdPay.Utility;
 using Essensoft.AspNetCore.Security;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
+using Org.BouncyCastle.Crypto;
 using System;
 using System.IO;
 using System.Text;
@@ -12,37 +14,79 @@ namespace Essensoft.AspNetCore.JdPay
 {
     public class JdPayNotifyClient
     {
+        private ICipherParameters RSAPrivateParameters;
+        private ICipherParameters RSAPublicParameters;
+
         public JdPayOptions Options { get; set; }
 
+        public JdPayNotifyClient(JdPayOptions options)
+        {
+            Options = options;
+
+            if (!string.IsNullOrEmpty(Options.RsaPrivateKey))
+            {
+                RSAPrivateParameters = JdPaySignature.GetPrivateKeyParameters(Options.RsaPrivateKey);
+            }
+
+            if (!string.IsNullOrEmpty(Options.RsaPublicKey))
+            {
+                RSAPublicParameters = JdPaySignature.GetPublicKeyParameters(Options.RsaPublicKey);
+            }
+        }
 
         public JdPayNotifyClient(IOptions<JdPayOptions> optionsAccessor)
+            : this(optionsAccessor?.Value ?? new JdPayOptions())
         {
-            Options = optionsAccessor?.Value ?? new JdPayOptions();
         }
 
-        public JdPayNotifyClient(string merchant, string rsaPublicKey, string desKey)
-            : this(null)
+        public JdPayNotifyClient(string merchant, string publicKey, string desKey)
+            : this(new JdPayOptions { Merchant = merchant, RsaPublicKey = publicKey, DesKey = desKey })
         {
-            Options.Merchant = merchant;
-            Options.RsaPublicKey = rsaPublicKey;
-            Options.DesKey = desKey;
         }
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : JdPayResponse
+        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : JdPayNotifyResponse
         {
-            var body = await new StreamReader(request.Body).ReadToEndAsync();
-            var rsp = DecryptResponseXml<T>(JdPayUtil.FotmatXmlString(body));
-            return rsp;
+            if (request.ContentType == "application/x-www-form-urlencoded")
+            {
+                var key = Convert.FromBase64String(Options.DesKey);
+                var signDic = new JdPayDictionary();
+                foreach (var item in request.Form)
+                {
+                    if (!string.IsNullOrEmpty(item.Value))
+                    {
+                        if (item.Key == "sign")
+                        {
+                            signDic.Add(item.Key, item.Value);
+                        }
+                        else
+                        {
+                            signDic.Add(item.Key, DES3.DecryptECB(key, item.Value));
+                        }
+                    }
+                }
+
+                var parser = new JdPayDictionaryParser<T>();
+                var rsp = parser.Parse(signDic);
+
+                CheckNotifySign(signDic, RSAPrivateParameters);
+                return rsp;
+            }
+            else
+            {
+                var body = await new StreamReader(request.Body).ReadToEndAsync();
+                var rsp = DecryptResponseXml<T>(JdPayUtil.FotmatXmlString(body));
+                return rsp;
+            }
         }
 
-        private T DecryptResponseXml<T>(string xml) where T : JdPayResponse
+        private T DecryptResponseXml<T>(string xml) where T : JdPayNotifyResponse
         {
-            var entity = JdPayUtil.Deserialize<T>(typeof(T), xml);
+            var entity = JdPayUtil.Deserialize<T>(xml);
             if (!string.IsNullOrEmpty(entity?.Encrypt))
             {
                 var key = Convert.FromBase64String(Options.DesKey);
                 var base64EncryptStr = Encoding.UTF8.GetString(Convert.FromBase64String(entity.Encrypt));
-                var reqBody = Des3.Des3DecryptECB(key, base64EncryptStr);
+                var reqBody = DES3.DecryptECB(key, base64EncryptStr);
 
                 var reqBodyDoc = new XmlDocument();
                 reqBodyDoc.LoadXml(reqBody);
@@ -58,12 +102,12 @@ namespace Essensoft.AspNetCore.JdPay
                 {
                     reqBodyStr = reqBodyStr.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", xmlh);
                 }
-                var sha256SourceSignString = Sha256.Encrypt(reqBodyStr);
-                var decryptByte = JdPaySignature.Decrypt(inputSign, Options.RsaPublicKey);
-                var decryptStr = Des3.BytesToString(decryptByte);
-                if (sha256SourceSignString.Equals(decryptStr))
+                var sha256SourceSignString = SHA256.Compute(reqBodyStr);
+                var decryptByte = JdPaySignature.Decrypt(inputSign, RSAPublicParameters);
+                var decryptStr = DES3.BytesToString(decryptByte);
+                if (sha256SourceSignString == decryptStr)
                 {
-                    entity = JdPayUtil.Deserialize<T>(typeof(T), reqBody);
+                    entity = JdPayUtil.Deserialize<T>(reqBody);
                 }
                 else
                 {
@@ -76,7 +120,26 @@ namespace Essensoft.AspNetCore.JdPay
             {
                 entity.Body = xml;
             }
-            return (T)entity;
+            return entity;
+        }
+
+        private void CheckNotifySign(JdPayDictionary content, object parameters)
+        {
+            if (content.Count == 0)
+            {
+                throw new Exception("sign check fail: Body is Empty!");
+            }
+
+            var sign = content["sign"];
+            if (string.IsNullOrEmpty(sign))
+            {
+                throw new Exception("sign check fail: sign is Empty!");
+            }
+
+            if (!JdPaySignature.RSACheckContent(content, sign, RSAPublicParameters))
+            {
+                throw new Exception("sign check fail: check Sign and Data Fail");
+            }
         }
     }
 }

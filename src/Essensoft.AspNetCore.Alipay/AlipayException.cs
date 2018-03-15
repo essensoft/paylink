@@ -7,9 +7,6 @@ namespace Essensoft.AspNetCore.Alipay
     /// </summary>
     public class AlipayException : Exception
     {
-        private string errorCode;
-        private string errorMsg;
-
         public AlipayException()
             : base()
         {
@@ -28,18 +25,12 @@ namespace Essensoft.AspNetCore.Alipay
         public AlipayException(string errorCode, string errorMsg)
             : base(errorCode + ":" + errorMsg)
         {
-            this.errorCode = errorCode;
-            this.errorMsg = errorMsg;
+            ErrorCode = errorCode;
+            ErrorMsg = errorMsg;
         }
 
-        public string ErrorCode
-        {
-            get { return errorCode; }
-        }
+        public string ErrorCode { get; }
 
-        public string ErrorMsg
-        {
-            get { return errorMsg; }
-        }
+        public string ErrorMsg { get; }
     }
 }

@@ -44,7 +44,7 @@ namespace Essensoft.AspNetCore.Alipay.Response
         public string OutRequestNo { get; set; }
 
         /// <summary>
-        /// 收款方支付宝账号（Email或手机号）
+        /// 付款方支付宝账号（Email或手机号）
         /// </summary>
         [JsonProperty("payer_logon_id")]
         public string PayerLogonId { get; set; }

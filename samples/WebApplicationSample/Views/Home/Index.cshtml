@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = ".Net Core Payment 示例";
+    ViewData["Title"] = "Payment 示例";
 }
 <div id="wrapper">
 
@@ -14,17 +14,19 @@
             <li><a href="#tabs-api-wechatpay">微信支付</a></li>
             <li><a href="#tabs-api-qpay">QQ钱包</a></li>
             <li><a href="#tabs-api-jdpay">京东支付</a></li>
+            <li><a href="#tabs-api-unionpay">银联支付</a></li>
         </ul>
         <div id="tabs-api-1">
-            <h3>官方文档/帮助：</h3>
+            <h3>官方文档：</h3>
             <p>支付宝：<a href="https://openhome.alipay.com/developmentDocument.htm" target="_blank">文档中心</a>、<a href="https://open.alipay.com/support/supportCenter.htm" target="_blank">技术支持中心</a>、<a href="https://openclub.alipay.com/index.php" target="_blank">开发者社区</a></p>
             <p>微信支付：<a href="https://pay.weixin.qq.com/wiki/doc/api/index.html" target="_blank">开发文档</a>、<a href="http://wxpay.wxutil.com/qa/index.php" target="_blank">问答中心</a>、<a href="http://kf.qq.com/product/wechatpaymentmerchant.html" target="_blank">帮助中心</a></p>
             <p>QQ钱包：<a href="https://qpay.qq.com/qpaywiki.shtml" target="_blank">开发文档</a>、<a href="http://kf.qq.com/product/qq_enterprise.html" target="_blank">帮助中心</a></p>
             <p>京东支付：<a href="http://payapi.jd.com/" target="_blank">开发文档</a></p>
+            <p>银联支付：<a href="https://open.unionpay.com/ajweb/product" target="_blank">开放平台</a></p>
             <p>QQ交流群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=aac56c8f02f54893267d3ac90787c1794a7687f3c31a923812a36b67c4ee6271">522457525(Payment)</a></p>
             <h3>*注意：</h3>
-            <p>1.示例开发环境：Windows 10、VS2017 15.5.4、.NET Core Runtime 2.0.5</p>
-            <p>2.支持渠道:支付宝、微信支付、QQ钱包、京东支付(仅扫码支付)。</p>
+            <p>1.开发环境：Windows 10、VS2017 15.6.2、.NET Core SDK 2.1.101、.NET Core Runtime 2.0.6</p>
+            <p>2.支持渠道：支付宝、微信支付、QQ钱包、京东支付、银联支付。</p>
             <h3>使用方式</h3>
             <p>见示例项目：WebApplicationSample</p>
         </div>
@@ -327,6 +329,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://docs.open.alipay.com/api_28/alipay.fund.trans.toaccount.transfer" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -391,6 +394,7 @@
                     <li><a href="#tabs-purchase-10">获取RSA加密公钥</a></li>
                     <li><a href="#tabs-purchase-11">企业付款到银行卡</a></li>
                     <li><a href="#tabs-purchase-12">查询企业付款银行卡</a></li>
+                    <li><a href="#tabs-purchase-13">下载资金账单</a></li>
                 </ul>
                 <div id="tabs-purchase-1">
                     <form class="api-form" asp-controller="WeChatPay" asp-action="UnifiedOrder" method="post" target="_blank">
@@ -423,6 +427,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_1" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -462,6 +467,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=9_1" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -481,6 +487,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_2" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -496,6 +503,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_3" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -531,6 +539,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_4" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -558,6 +567,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_5" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -581,6 +591,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://pay.weixin.qq.com/wiki/doc/api/native.php?chapter=9_6" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -620,6 +631,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_2" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -635,6 +647,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=14_3" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -646,6 +659,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=24_7&index=4" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -681,6 +695,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=24_2" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -696,10 +711,36 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=24_3" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
                 </div>
+                <div id="tabs-purchase-13">
+                    <form class="api-form" asp-controller="WeChatPay" asp-action="DownloadFundFlow" method="post" target="_blank">
+                        <p>
+                            <label>bill_date：</label>
+                            <input type="text" name="bill_date">
+                        </p>
+                        <p>
+                            <label>account_type：</label>
+                            <input type="text" name="account_type">
+                        </p>
+                        <p>
+                            <label>tar_type：</label>
+                            <input type="text" name="tar_type">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://pay.weixin.qq.com/wiki/doc/api/micropay.php?chapter=9_18&index=7" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+
             </div>
         </div>
         <div id="tabs-api-qpay">
@@ -742,6 +783,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=58" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -761,6 +803,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=60" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -776,6 +819,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=61" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -811,6 +855,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=62" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -838,6 +883,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="https://qpay.qq.com/qpaywiki/showdocument.php?pid=38&docid=63" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -847,12 +893,128 @@
         <div id="tabs-api-jdpay">
             <div id="tabs-purchase-jdpay">
                 <ul>
-                    <li><a href="#tabs-purchase-1">扫码支付</a></li>
-                    <li><a href="#tabs-purchase-2">交易查询</a></li>
-                    <li><a href="#tabs-purchase-3">退款申请</a></li>
-                    <li><a href="#tabs-purchase-4">退款查询</a></li>
+                    <li><a href="#tabs-purchase-1">电脑网站支付</a></li>
+                    <li><a href="#tabs-purchase-2">手机网站支付</a></li>
+                    <li><a href="#tabs-purchase-3">扫码支付</a></li>
+                    <li><a href="#tabs-purchase-4">交易查询</a></li>
+                    <li><a href="#tabs-purchase-5">退款申请</a></li>
+                    <li><a href="#tabs-purchase-6">退款查询</a></li>
                 </ul>
                 <div id="tabs-purchase-1">
+                    <form class="api-form" asp-controller="JdPay" asp-action="SaveOrderPC" method="post" target="_blank">
+                        <p>
+                            <label>tradeNum:</label>
+                            <input type="text" name="tradeNum" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>tradeName:</label>
+                            <input type="text" name="tradeName" value="京东电脑网站支付测试">
+                        </p>
+                        <p>
+                            <label>tradeDesc:</label>
+                            <input type="text" name="tradeDesc" value="交易描述">
+                        </p>
+                        <p>
+                            <label>tradeTime:</label>
+                            <input type="text" name="tradeTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>amount:</label>
+                            <input type="text" name="amount" value="1">
+                        </p>
+                        <p>
+                            <label>orderType:</label>
+                            <input type="text" name="orderType" value="1">
+                        </p>
+                        <p>
+                            <label>currency:</label>
+                            <input type="text" name="currency" value="CNY">
+                        </p>
+                        <p>
+                            <label>note:</label>
+                            <input type="text" name="note" value="备注">
+                        </p>
+                        <p>
+                            <label>callbackUrl:</label>
+                            <input type="text" name="callbackUrl" value="http://www.baidu.com/jdpay/return">
+                        </p>
+                        <p>
+                            <label>notifyUrl:</label>
+                            <input type="text" name="notifyUrl" value="http://www.baidu.com/notify/jdpay">
+                        </p>
+                        <p>
+                            <label>tradeType:</label>
+                            <input type="text" name="tradeType" value="">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="http://payapi.jd.com/docList.html" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+
+                <div id="tabs-purchase-2">
+                    <form class="api-form" asp-controller="JdPay" asp-action="SaveOrderH5" method="post" target="_blank">
+                        <p>
+                            <label>tradeNum:</label>
+                            <input type="text" name="tradeNum" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>tradeName:</label>
+                            <input type="text" name="tradeName" value="京东手机网站支付测试">
+                        </p>
+                        <p>
+                            <label>tradeDesc:</label>
+                            <input type="text" name="tradeDesc" value="交易描述">
+                        </p>
+                        <p>
+                            <label>tradeTime:</label>
+                            <input type="text" name="tradeTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>amount:</label>
+                            <input type="text" name="amount" value="1">
+                        </p>
+                        <p>
+                            <label>orderType:</label>
+                            <input type="text" name="orderType" value="1">
+                        </p>
+                        <p>
+                            <label>currency:</label>
+                            <input type="text" name="currency" value="CNY">
+                        </p>
+                        <p>
+                            <label>note:</label>
+                            <input type="text" name="note" value="备注">
+                        </p>
+                        <p>
+                            <label>callbackUrl:</label>
+                            <input type="text" name="callbackUrl" value="http://www.baidu.com/jdpay/return">
+                        </p>
+                        <p>
+                            <label>notifyUrl:</label>
+                            <input type="text" name="notifyUrl" value="http://www.baidu.com/notify/jdpay">
+                        </p>
+                        <p>
+                            <label>tradeType:</label>
+                            <input type="text" name="tradeType" value="">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="http://payapi.jd.com/docList.html" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+
+                <div id="tabs-purchase-3">
                     <form class="api-form" asp-controller="JdPay" asp-action="Uniorder" method="post" target="_blank">
                         <p>
                             <label>tradeNum:</label>
@@ -899,11 +1061,13 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="http://payapi.jd.com/docList.html" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
                 </div>
-                <div id="tabs-purchase-2">
+
+                <div id="tabs-purchase-4">
                     <form class="api-form" asp-controller="JdPay" asp-action="OrderQuery" method="post" target="_blank">
                         <p>
                             <label>tradeNum:</label>
@@ -918,11 +1082,13 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="http://payapi.jd.com/docList.html" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
                 </div>
-                <div id="tabs-purchase-3">
+
+                <div id="tabs-purchase-5">
                     <form class="api-form" asp-controller="JdPay" asp-action="Refund" method="post" target="_blank">
                         <p>
                             <label>tradeNum:</label>
@@ -945,11 +1111,13 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="http://payapi.jd.com/docList.html" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
                 </div>
-                <div id="tabs-purchase-4">
+
+                <div id="tabs-purchase-6">
                     <form class="api-form" asp-controller="JdPay" asp-action="RefundQuery" method="post" target="_blank">
                         <p>
                             <label>tradeNum:</label>
@@ -964,6 +1132,7 @@
                             <input type="submit" class="button" value="提交">
                         </p>
                     </form>
+                    <hr />
                     <p class="faq">
                         <a href="http://payapi.jd.com/docList.html" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
@@ -971,7 +1140,513 @@
 
             </div>
         </div>
+        <div id="tabs-api-unionpay">
+            <div id="tabs-purchase-unionpay">
+                <ul>
+                    <li><a>二维码支付产品</a></li>
+                    <li><a href="#tabs-purchase-1">二维码消费（被扫）</a></li>
+                    <li><a href="#tabs-purchase-2">申请二维码（主扫）</a></li>
+                    <li><a href="#tabs-purchase-3">消费撤销</a></li>
+                    <li><a href="#tabs-purchase-4">退货</a></li>
+                    <li><a href="#tabs-purchase-5">交易状态查询</a></li>
+                    <li><a href="#tabs-purchase-6">对账文件下载</a></li>
+                    <li><a>网关支付产品</a></li>
+                    <li><a href="#tabs-purchase-10">跳转网关页面支付</a></li>
+                    <li><a href="#tabs-purchase-11">交易状态查询</a></li>
+                    <li><a href="#tabs-purchase-12">消费撤销</a></li>
+                    <li><a href="#tabs-purchase-13">退货</a></li>
+                    <li><a href="#tabs-purchase-14">对账文件下载</a></li>
+                    <li><a>网关支付产品-预授权</a></li>
+                    <li><a href="#tabs-purchase-20">跳转网关页面预授权</a></li>
+                    <li><a href="#tabs-purchase-21">预授权撤销</a></li>
+                    <li><a href="#tabs-purchase-22">预授权完成</a></li>
+                    <li><a href="#tabs-purchase-23">预授权完成撤销</a></li>
+                </ul>
+                <div id="tabs-purchase-1">
+                    <form class="api-form" asp-controller="UnionPay" asp-action="AppConsume" method="post" target="_blank">
+                        <p>
+                            <label>orderId：</label>
+                            <input type="text" name="orderId" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>qrNo：</label>
+                            <input type="text" name="qrNo" value="">
+                        </p>
+                        <p>
+                            <label>txnTime：</label>
+                            <input type="text" name="txnTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>txnAmt：</label>
+                            <input type="text" name="txnAmt" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>currencyCode：</label>
+                            <input type="text" name="currencyCode" value="156">
+                        </p>
+                        <p>
+                            <label>backUrl：</label>
+                            <input type="text" name="backUrl" value="http://www.baidu.com/notify/unionpay/appconsume">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://open.unionpay.com/ajweb/help/qrcodeFormPage" target="_blank">二维码仿真</a>
+                        <br />
+                        <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=89&apiId=55" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-2">
+                    <form class="api-form" asp-controller="UnionPay" asp-action="ApplyQrCode" method="post" target="_blank">
+                        <p>
+                            <label>orderId：</label>
+                            <input type="text" name="orderId" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>txnTime：</label>
+                            <input type="text" name="txnTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>txnAmt：</label>
+                            <input type="text" name="txnAmt" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>currencyCode：</label>
+                            <input type="text" name="currencyCode" value="156">
+                        </p>
+                        <p>
+                            <label>backUrl：</label>
+                            <input type="text" name="backUrl" value="http://www.baidu.com/notify/unionpay/applyqrcode">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://open.unionpay.com/ajweb/help/qrcodeFormPage" target="_blank">二维码仿真</a>
+                        <br />
+                        <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=89&apiId=57" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-3">
+                    <form class="api-form" asp-controller="UnionPay" asp-action="PurchaseUndo" method="post" target="_blank">
+                        <p>
+                            <label>orderId：</label>
+                            <input type="text" name="orderId" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>txnTime：</label>
+                            <input type="text" name="txnTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>txnAmt：</label>
+                            <input type="text" name="txnAmt" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>origQryId：</label>
+                            <input type="text" name="origQryId" value="" />
+                        </p>
+                        <p>
+                            <label>origOrderId：</label>
+                            <input type="text" name="origOrderId" value="" />
+                        </p>
+                        <p>
+                            <label>origTxnTime：</label>
+                            <input type="text" name="origTxnTime" />
+                        </p>
+                        <p>
+                            <label>backUrl：</label>
+                            <input type="text" name="backUrl" value="http://www.baidu.com/notify/unionpay/purchaseundo">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=89&apiId=58" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-4">
+                    <form class="api-form" asp-controller="UnionPay" asp-action="Refund" method="post" target="_blank">
+                        <p>
+                            <label>orderId：</label>
+                            <input type="text" name="orderId" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>txnTime：</label>
+                            <input type="text" name="txnTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>txnAmt：</label>
+                            <input type="text" name="txnAmt" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>origQryId：</label>
+                            <input type="text" name="origQryId" value="" />
+                        </p>
+                        <p>
+                            <label>origOrderId：</label>
+                            <input type="text" name="origOrderId" value="" />
+                        </p>
+
+                        <p>
+                            <label>origTxnTime：</label>
+                            <input type="text" name="origTxnTime" />
+                        </p>
+                        <p>
+                            <label>backUrl：</label>
+                            <input type="text" name="backUrl" value="http://www.baidu.com/notify/unionpay/refund">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=89&apiId=59" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-5">
+                    <form class="api-form" asp-controller="UnionPay" asp-action="Query563" method="post" target="_blank">
+                        <p>
+                            <label>orderId：</label>
+                            <input type="text" name="orderId" value="">
+                        </p>
+                        <p>
+                            <label>txnTime：</label>
+                            <input type="text" name="txnTime" value="">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=89&apiId=60" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-6">
+                    <form class="api-form" asp-controller="UnionPay" asp-action="FileTransfer057" method="post" target="_blank">
+                        <p>
+                            <label>fileType：</label>
+                            <input type="text" name="fileType" value="00">
+                        </p>
+                        <p>
+                            <label>txnTime：</label>
+                            <input type="text" name="txnTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>settleDate：</label>
+                            <input type="text" name="settleDate" value="0119">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=89&apiId=61" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-10">
+                    <form class="api-form" asp-controller="UnionPay" asp-action="FrontConsume62" method="post" target="_blank">
+                        <p>
+                            <label>orderId：</label>
+                            <input type="text" name="orderId" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>txnTime：</label>
+                            <input type="text" name="txnTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>txnAmt：</label>
+                            <input type="text" name="txnAmt" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>currencyCode：</label>
+                            <input type="text" name="currencyCode" value="156">
+                        </p>
+                        <p>
+                            <label>payTimeout：</label>
+                            <input type="text" name="payTimeout" value="@DateTime.Now.AddMinutes(15).ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>frontUrl：</label>
+                            <input type="text" name="frontUrl" value="http://www.baidu.com/unionpay/frontconsume62return">
+                        </p>
+                        <p>
+                            <label>backUrl：</label>
+                            <input type="text" name="backUrl" value="http://www.baidu.com/notify/unionpay/frontconsume62">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=1&apiId=63" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-11">
+                    <form class="api-form" asp-controller="UnionPay" asp-action="Query65" method="post" target="_blank">
+                        <p>
+                            <label>orderId：</label>
+                            <input type="text" name="orderId" value="">
+                        </p>
+                        <p>
+                            <label>txnTime：</label>
+                            <input type="text" name="txnTime" value="">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=1&apiId=66" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-12">
+                    <form class="api-form" asp-controller="UnionPay" asp-action="ConsumeUndo63" method="post" target="_blank">
+                        <p>
+                            <label>orderId：</label>
+                            <input type="text" name="orderId" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>txnTime：</label>
+                            <input type="text" name="txnTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>txnAmt：</label>
+                            <input type="text" name="txnAmt" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>origQryId：</label>
+                            <input type="text" name="origQryId" value="" />
+                        </p>
+                        <p>
+                            <label>backUrl：</label>
+                            <input type="text" name="backUrl" value="http://www.baidu.com/notify/unionpay/consumeundo63">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=1&apiId=64" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-13">
+                    <form class="api-form" asp-controller="UnionPay" asp-action="Refund64" method="post" target="_blank">
+                        <p>
+                            <label>orderId：</label>
+                            <input type="text" name="orderId" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>txnTime：</label>
+                            <input type="text" name="txnTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>txnAmt：</label>
+                            <input type="text" name="txnAmt" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>origQryId：</label>
+                            <input type="text" name="origQryId" value="" />
+                        </p>
+                        <p>
+                            <label>backUrl：</label>
+                            <input type="text" name="backUrl" value="http://www.baidu.com/notify/unionpay/refund64">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=1&apiId=65" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-14">
+                    <form class="api-form" asp-controller="UnionPay" asp-action="FileTransfer66" method="post" target="_blank">
+                        <p>
+                            <label>fileType：</label>
+                            <input type="text" name="fileType" value="00">
+                        </p>
+                        <p>
+                            <label>txnTime：</label>
+                            <input type="text" name="txnTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>settleDate：</label>
+                            <input type="text" name="settleDate" value="0119">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=89&apiId=61" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-20">
+                    <form class="api-form" asp-controller="UnionPay" asp-action="AuthDealFront671" method="post" target="_blank">
+                        <p>
+                            <label>orderId：</label>
+                            <input type="text" name="orderId" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>txnTime：</label>
+                            <input type="text" name="txnTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>txnAmt：</label>
+                            <input type="text" name="txnAmt" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>currencyCode：</label>
+                            <input type="text" name="currencyCode" value="156">
+                        </p>
+                        <p>
+                            <label>payTimeout：</label>
+                            <input type="text" name="payTimeout" value="@DateTime.Now.AddMinutes(15).ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>frontUrl：</label>
+                            <input type="text" name="frontUrl" value="http://www.baidu.com/unionpay/authdealfront671return">
+                        </p>
+                        <p>
+                            <label>backUrl：</label>
+                            <input type="text" name="backUrl" value="http://www.baidu.com/notify/unionpay/authdealfront671">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=1&apiId=68" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-21">
+                    <form class="api-form" asp-controller="UnionPay" asp-action="AuthUndo672" method="post" target="_blank">
+                        <p>
+                            <label>orderId：</label>
+                            <input type="text" name="orderId" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>txnTime：</label>
+                            <input type="text" name="txnTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>txnAmt：</label>
+                            <input type="text" name="txnAmt" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>origQryId：</label>
+                            <input type="text" name="origQryId" value="" />
+                        </p>
+                        <p>
+                            <label>backUrl：</label>
+                            <input type="text" name="backUrl" value="http://www.baidu.com/notify/unionpay/authundo672">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=1&apiId=69" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-22">
+                    <form class="api-form" asp-controller="UnionPay" asp-action="AuthFinish673" method="post" target="_blank">
+                        <p>
+                            <label>orderId：</label>
+                            <input type="text" name="orderId" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>txnTime：</label>
+                            <input type="text" name="txnTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>txnAmt：</label>
+                            <input type="text" name="txnAmt" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>origQryId：</label>
+                            <input type="text" name="origQryId" value="" />
+                        </p>
+                        <p>
+                            <label>backUrl：</label>
+                            <input type="text" name="backUrl" value="http://www.baidu.com/notify/unionpay/authfinish673">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=1&apiId=70" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+                <div id="tabs-purchase-23">
+                    <form class="api-form" asp-controller="UnionPay" asp-action="AuthFinishUndo674" method="post" target="_blank">
+                        <p>
+                            <label>orderId：</label>
+                            <input type="text" name="orderId" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
+                        </p>
+                        <p>
+                            <label>txnTime：</label>
+                            <input type="text" name="txnTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>txnAmt：</label>
+                            <input type="text" name="txnAmt" value="1" title="单位为分。">
+                        </p>
+                        <p>
+                            <label>origQryId：</label>
+                            <input type="text" name="origQryId" value="" />
+                        </p>
+                        <p>
+                            <label>backUrl：</label>
+                            <input type="text" name="backUrl" value="http://www.baidu.com/notify/unionpay/authfinishundo674">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                    <hr />
+                    <p class="faq">
+                        <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=1&apiId=71" target="_blank">* 查看接口 请求参数、响应参数</a>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
 
 </div>
 @section Scripts {

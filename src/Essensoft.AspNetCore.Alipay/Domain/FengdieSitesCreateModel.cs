@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Alipay.Domain
 {
@@ -26,10 +27,16 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string OfflineTime { get; set; }
 
         /// <summary>
-        /// 站点页面在编辑器中默认展示的数据
+        /// 站点页面在编辑器中默认展示的数据(废弃，请使用pages)
         /// </summary>
         [JsonProperty("page")]
         public FengdieActivityCreatePageData Page { get; set; }
+
+        /// <summary>
+        /// 站点页面在编辑器中默认展示的数据
+        /// </summary>
+        [JsonProperty("pages")]
+        public List<FengdieActivityCreatePagesData> Pages { get; set; }
 
         /// <summary>
         /// 站点标题

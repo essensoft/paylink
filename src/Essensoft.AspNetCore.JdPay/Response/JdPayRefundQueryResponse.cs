@@ -9,48 +9,48 @@ namespace Essensoft.AspNetCore.JdPay.Response
         /// 交易流水
         /// </summary>
         [XmlElement("tradeNum")]
-        public string TradeNum { set; get; }
+        public string TradeNum { get; set; }
 
         /// <summary>
         /// 交易类型
         /// </summary>
         [XmlElement("tradeType")]
-        public string TradeType { set; get; }
+        public string TradeType { get; set; }
 
         /// <summary>
         /// 原交易流水
         /// </summary>
         [XmlElement("oTradeNum")]
-        public string OTradeNum { set; get; }
+        public string OTradeNum { get; set; }
 
         /// <summary>
         /// 交易金额
         /// </summary>
         [XmlElement("amount")]
-        public long Amount { set; get; }
+        public long Amount { get; set; }
 
         /// <summary>
         /// 交易币种
         /// </summary>
         [XmlElement("currency")]
-        public string Currency { set; get; }
+        public string Currency { get; set; }
 
         /// <summary>
         /// 交易时间
         /// </summary>
         [XmlElement("tradeTime")]
-        public string TradeTime { set; get; }
+        public string TradeTime { get; set; }
 
         /// <summary>
         /// 交易备注
         /// </summary>
         [XmlElement("note")]
-        public string Note { set; get; }
+        public string Note { get; set; }
 
         /// <summary>
         /// 交易状态
         /// </summary>
         [XmlElement("status")]
-        public string Status { set; get; }
+        public string Status { get; set; }
     }
 }

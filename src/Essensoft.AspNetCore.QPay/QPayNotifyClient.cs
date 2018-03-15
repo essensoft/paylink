@@ -1,5 +1,5 @@
 ﻿using Essensoft.AspNetCore.QPay.Parser;
-using Essensoft.AspNetCore.Security;
+using Essensoft.AspNetCore.QPay.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System;
@@ -13,15 +13,19 @@ namespace Essensoft.AspNetCore.QPay
     {
         public QPayOptions Options { get; set; }
 
-        public QPayNotifyClient(IOptions<QPayOptions> optionsAccessor)
+        public QPayNotifyClient(QPayOptions options)
         {
-            Options = optionsAccessor?.Value ?? new QPayOptions();
+            Options = options;
+        }
+
+        public QPayNotifyClient(IOptions<QPayOptions> optionsAccessor)
+            : this(optionsAccessor?.Value ?? new QPayOptions())
+        {
         }
 
         public QPayNotifyClient(string key)
-            : this(optionsAccessor: null)
+            : this(new QPayOptions { Key = key })
         {
-            Options.Key = key;
         }
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : QPayNotifyResponse
@@ -30,6 +34,7 @@ namespace Essensoft.AspNetCore.QPay
             var parser = new QPayXmlParser<T>();
             var rsp = parser.Parse(body);
             CheckNotifySign(rsp);
+            rsp.Body = body;
             return rsp;
         }
 
@@ -46,7 +51,7 @@ namespace Essensoft.AspNetCore.QPay
                 throw new Exception("sign check fail: sign is Empty!");
             }
 
-            var cal_sign = Md5.GetMD5WithKey(response.Parameters, Options.Key);
+            var cal_sign = QPaySignature.SignWithKey(response.Parameters, Options.Key);
             if (cal_sign != sign)
             {
                 throw new Exception("sign check fail: check Sign and Data Fail!");
