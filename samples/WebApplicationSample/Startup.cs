@@ -1,23 +1,27 @@
 ﻿using Essensoft.AspNetCore.Alipay;
 using Essensoft.AspNetCore.JdPay;
 using Essensoft.AspNetCore.QPay;
+using Essensoft.AspNetCore.UnionPay;
 using Essensoft.AspNetCore.WeChatPay;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 namespace WebApplicationSample
 {
     public class Startup
     {
-        public IConfiguration Configuration { get; }
-
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
+        public IConfiguration Configuration { get; }
+
+        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
@@ -29,6 +33,7 @@ namespace WebApplicationSample
             services.AddWeChatPay();
             services.AddQPay();
             services.AddJdPay();
+            services.AddUnionPay();
 
             // 添加依赖注入时，也可以直接设置参数..
             // 如：
@@ -46,14 +51,21 @@ namespace WebApplicationSample
             services.Configure<WeChatPayOptions>(Configuration.GetSection("WeChatPay"));
             services.Configure<QPayOptions>(Configuration.GetSection("QPay"));
             services.Configure<JdPayOptions>(Configuration.GetSection("JdPay"));
+            services.Configure<UnionPayOptions>(Configuration.GetSection("UnionPay"));
 
-            // 配置参数 具体参数见 AlipayOptions、WeChatPayOptions、QPayOptions、JdPayOptions
+            services.AddWebEncoders(opt =>
+            {
+                opt.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.All);
+            });
+
+            // 配置参数 具体参数见 AlipayOptions、WeChatPayOptions、QPayOptions、JdPayOptions、UnionPayOptions类
 
             //{
             //  "Alipay": {
             //    "AppId": "xxx",
             //    "RsaPublicKey": "xxx",
-            //    "RsaPrivateKey": "xxx"
+            //    "RsaPrivateKey": "xxx",
+            //    "SignType" : "RSA2"
             //  },
             //  "WeChatPay": {
             //    "AppId": "xxx",
@@ -74,15 +86,25 @@ namespace WebApplicationSample
             //    "RsaPrivateKey": "xxx",
             //    "DesKey": "xxx"
             //  }
+            //  "UnionPay": {
+            //    "MerId": "xxx",
+            //    "SignCert": "xxx",
+            //    "SignCertPassword": "xxx",
+            //    "EncryptCert": "xxx",
+            //    "MiddleCert": "xxx",
+            //    "RootCert": "xxx",
+            //    "SecureKey": "xxx",
+            //  }
             //}
         }
 
+        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
+                app.UseDeveloperExceptionPage();
             }
             else
             {

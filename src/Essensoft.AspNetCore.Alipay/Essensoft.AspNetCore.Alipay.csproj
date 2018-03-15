@@ -2,22 +2,24 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Description>源代码及例程: https://github.com/Essensoft/Payment</Description>
+    <Description></Description>
     <Authors>Roc</Authors>
     <Company>Essensoft</Company>
-    <Product>.NET Core Payment</Product>
-    <Version>1.0.2</Version>
-    <AssemblyVersion>1.0.2.0</AssemblyVersion>
-    <FileVersion>1.0.2.0</FileVersion>
-    <Copyright>Copyright © Roc</Copyright>
-    <PackageProjectUrl>https://github.com/Essensoft/Payment</PackageProjectUrl>
+    <Product>Payment</Product>
+    <Version>1.1.0</Version>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <Copyright>© Essensoft 2018</Copyright>
+    <PackageProjectUrl></PackageProjectUrl>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Http" Version="2.0.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="2.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.1" />
   </ItemGroup>
 
   <ItemGroup>

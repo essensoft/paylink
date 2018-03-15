@@ -23,9 +23,9 @@ namespace Essensoft.AspNetCore.JdPay.Utility
         {
             using (var requestContent = new StringContent(content, Encoding.UTF8, "application/xml"))
             using (var response = await PostAsync(url, requestContent))
-            using (var responseContent = response.Content)
+            using (var resContent = response.Content)
             {
-                return await responseContent.ReadAsStringAsync();
+                return await resContent.ReadAsStringAsync();
             }
         }
     }

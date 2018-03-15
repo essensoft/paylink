@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Version>1.1.0</Version>
+    <Authors>Roc</Authors>
+    <Company>Essensoft</Company>
+    <Product>Payment</Product>
+    <Copyright>© Essensoft 2018</Copyright>
+    <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Essensoft.AspNetCore.Alipay\Essensoft.AspNetCore.Alipay.csproj" />
+    <ProjectReference Include="..\Essensoft.AspNetCore.JdPay\Essensoft.AspNetCore.JdPay.csproj" />
+    <ProjectReference Include="..\Essensoft.AspNetCore.QPay\Essensoft.AspNetCore.QPay.csproj" />
+    <ProjectReference Include="..\Essensoft.AspNetCore.UnionPay\Essensoft.AspNetCore.UnionPay.csproj" />
+    <ProjectReference Include="..\Essensoft.AspNetCore.WeChatPay\Essensoft.AspNetCore.WeChatPay.csproj" />
+  </ItemGroup>
+
+</Project>

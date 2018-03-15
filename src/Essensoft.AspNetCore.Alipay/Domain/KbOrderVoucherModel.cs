@@ -56,6 +56,24 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string StoreId { get; set; }
 
         /// <summary>
+        /// 凭证剩余可核销次数(次卡场景)
+        /// </summary>
+        [JsonProperty("ticket_effect_count")]
+        public string TicketEffectCount { get; set; }
+
+        /// <summary>
+        /// 凭证已退款次数(次卡场景)
+        /// </summary>
+        [JsonProperty("ticket_refunded_count")]
+        public string TicketRefundedCount { get; set; }
+
+        /// <summary>
+        /// 凭证已使用次数(次卡场景)
+        /// </summary>
+        [JsonProperty("ticket_used_count")]
+        public string TicketUsedCount { get; set; }
+
+        /// <summary>
         /// 商品凭证ID
         /// </summary>
         [JsonProperty("voucher_id")]

@@ -82,12 +82,9 @@ namespace Essensoft.AspNetCore.Alipay.Parser
         {
             object rsp = null;
             var pas = GetAlipayAttributes(type);
-
-            var em = pas.GetEnumerator();
-            while (em.MoveNext())
+            foreach(var item in pas)
             {
-                var kvp = em.Current;
-                var ta = kvp.Value;
+                var ta = item.Value;
                 var itemName = ta.ItemName;
                 var listName = ta.ListName;
 

@@ -6,9 +6,9 @@ namespace Essensoft.AspNetCore.JdPay.Domain
     public class Result
     {
         [XmlElement("code")]
-        public string Code { set; get; }
+        public string Code { get; set; }
 
         [XmlElement("desc")]
-        public string Desc { set; get; }
+        public string Desc { get; set; }
     }
 }

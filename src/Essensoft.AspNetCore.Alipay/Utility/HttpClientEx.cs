@@ -85,10 +85,9 @@ namespace Essensoft.AspNetCore.Alipay.Utility
 
             // 组装文本请求参数
             var textTemplate = "Content-Disposition:form-data;name=\"{0}\"\r\nContent-Type:text/plain\r\n\r\n{1}";
-            var textEnum = textParams.GetEnumerator();
-            while (textEnum.MoveNext())
+            foreach(var item in textParams)
             {
-                var textEntry = string.Format(textTemplate, textEnum.Current.Key, textEnum.Current.Value);
+                var textEntry = string.Format(textTemplate, item.Key, item.Value);
                 var itemBytes = Encoding.UTF8.GetBytes(textEntry);
                 reqStream.Write(itemBoundaryBytes, 0, itemBoundaryBytes.Length);
                 reqStream.Write(itemBytes, 0, itemBytes.Length);
@@ -96,11 +95,10 @@ namespace Essensoft.AspNetCore.Alipay.Utility
 
             // 组装文件请求参数
             var fileTemplate = "Content-Disposition:form-data;name=\"{0}\";filename=\"{1}\"\r\nContent-Type:{2}\r\n\r\n";
-            var fileEnum = fileParams.GetEnumerator();
-            while (fileEnum.MoveNext())
+            foreach (var item in fileParams)
             {
-                var key = fileEnum.Current.Key;
-                var fileItem = fileEnum.Current.Value;
+                var key = item.Key;
+                var fileItem = item.Value;
                 var fileEntry = string.Format(fileTemplate, key, fileItem.GetFileName(), fileItem.GetMimeType());
                 var itemBytes = Encoding.UTF8.GetBytes(fileEntry);
                 reqStream.Write(itemBoundaryBytes, 0, itemBoundaryBytes.Length);

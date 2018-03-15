@@ -5,6 +5,7 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,50 +34,61 @@ namespace Essensoft.AspNetCore.Alipay
         private const string APP_AUTH_TOKEN = "app_auth_token";
         private const string RETURN_URL = "return_url";
 
+        private RSAParameters RSAPrivateParameters;
+        private RSAParameters RSAPublicParameters;
+
         public AlipayOptions Options { get; set; }
 
         protected internal HttpClientEx Client { get; set; }
 
         #region AlipayClient Constructors
 
-        public AlipayClient(IOptions<AlipayOptions> optionsAccessor)
+        public AlipayClient(AlipayOptions options)
         {
-            Options = optionsAccessor?.Value ?? new AlipayOptions();
+            Options = options;
             Client = new HttpClientEx();
+
+            if (!string.IsNullOrEmpty(Options.RsaPrivateKey))
+            {
+                RSAPrivateParameters = AlipaySignature.GetPrivateParameters(Options.RsaPrivateKey);
+            }
+
+            if (!string.IsNullOrEmpty(Options.RsaPublicKey))
+            {
+                RSAPublicParameters = AlipaySignature.GetPublicParameters(Options.RsaPublicKey);
+            }
+        }
+
+        public AlipayClient(IOptions<AlipayOptions> optionsAccessor)
+            : this(optionsAccessor?.Value ?? new AlipayOptions())
+        {
         }
 
         public AlipayClient(string serverUrl, string appId, string privateKey)
-            : this(null)
+            : this(new AlipayOptions { AppId = appId, RsaPrivateKey = privateKey, ServerUrl = serverUrl })
         {
-            Options.AppId = appId;
-            Options.RsaPrivateKey = privateKey;
-            Options.ServerUrl = serverUrl;
+
         }
 
         public AlipayClient(string serverUrl, string appId, string privateKey, string format)
-            : this(serverUrl, appId, privateKey)
+            : this(new AlipayOptions { ServerUrl = serverUrl, AppId = appId, RsaPrivateKey = privateKey, Format = format })
         {
-            Options.Format = format;
         }
 
         public AlipayClient(string serverUrl, string appId, string privateKey, string format, string version, string signType)
-            : this(serverUrl, appId, privateKey, format)
+            : this(new AlipayOptions { ServerUrl = serverUrl, AppId = appId, RsaPrivateKey = privateKey, Format = format, Version = version, SignType = signType })
         {
-            Options.Version = version;
-            Options.SignType = signType;
         }
 
-        public AlipayClient(string serverUrl, string appId, string privateKey, string format, string version, string signType, string alipayPulicKey)
-            : this(serverUrl, appId, privateKey, format, version, signType)
+        public AlipayClient(string serverUrl, string appId, string privateKey, string format, string version, string signType, string publicKey)
+            : this(new AlipayOptions { ServerUrl = serverUrl, AppId = appId, RsaPrivateKey = privateKey, Format = format, Version = version, SignType = signType, RsaPublicKey = publicKey })
         {
-            Options.RsaPublicKey = alipayPulicKey;
         }
 
-        public AlipayClient(string serverUrl, string appId, string privateKey, string format, string version, string signType, string alipayPulicKey, string encyptKey)
-            : this(serverUrl, appId, privateKey, format, version, signType, alipayPulicKey)
+
+        public AlipayClient(string serverUrl, string appId, string privateKey, string format, string version, string signType, string publicKey, string encyptKey)
+            : this(new AlipayOptions { ServerUrl = serverUrl, AppId = appId, RsaPrivateKey = privateKey, Format = format, Version = version, SignType = signType, RsaPublicKey = publicKey, EncyptKey = encyptKey, EncyptType = "AES" })
         {
-            Options.EncyptKey = encyptKey;
-            Options.EncyptType = "AES";
         }
 
         public void SetTimeout(int timeout)
@@ -146,7 +158,7 @@ namespace Essensoft.AspNetCore.Alipay
             };
 
             // 添加签名参数
-            txtParams.Add(SIGN, AlipaySignature.RSASign(txtParams, Options.RsaPrivateKey, Options.SignType));
+            txtParams.Add(SIGN, AlipaySignature.RSASign(txtParams, RSAPrivateParameters, Options.SignType));
 
             // 是否需要上传文件
             string body;
@@ -159,7 +171,7 @@ namespace Essensoft.AspNetCore.Alipay
             else
             {
 
-                if (reqMethod.Equals("GET"))
+                if (reqMethod == "GET")
                 {
                     //拼接get请求的url
                     var tmpUrl = Options.ServerUrl;
@@ -179,7 +191,7 @@ namespace Essensoft.AspNetCore.Alipay
                 else
                 {
                     //输出post表单
-                    body = BuildHtmlRequest(txtParams, reqMethod, reqMethod);
+                    body = BuildHtmlRequest(txtParams, reqMethod);
                 }
             }
 
@@ -199,7 +211,7 @@ namespace Essensoft.AspNetCore.Alipay
 
         public async Task<T> ExecuteAsync<T>(IAlipayRequest<T> request, string accessToken, string appAuthToken) where T : AlipayResponse
         {
-            string apiVersion = null;
+            var apiVersion = string.Empty;
 
             if (!string.IsNullOrEmpty(request.GetApiVersion()))
             {
@@ -263,7 +275,7 @@ namespace Essensoft.AspNetCore.Alipay
             }
 
             // 添加签名参数
-            txtParams.Add(SIGN, AlipaySignature.RSASign(txtParams, Options.RsaPrivateKey, Options.SignType));
+            txtParams.Add(SIGN, AlipaySignature.RSASign(txtParams, RSAPrivateParameters, Options.SignType));
 
             // 是否需要上传文件
             string body;
@@ -288,7 +300,7 @@ namespace Essensoft.AspNetCore.Alipay
 
             rsp = parser.Parse(item.realContent);
 
-            CheckResponseSign(request, item.respContent, rsp.IsError, parser, Options.RsaPublicKey, Options.SignType);
+            CheckResponseSign(request, item.respContent, rsp.IsError, parser, RSAPublicParameters, Options.SignType);
 
             return rsp;
 
@@ -316,7 +328,7 @@ namespace Essensoft.AspNetCore.Alipay
 
         }
 
-        private void CheckResponseSign<T>(IAlipayRequest<T> request, string responseBody, bool isError, IAlipayParser<T> parser, string alipayPublicKey, string signType) where T : AlipayResponse
+        private void CheckResponseSign<T>(IAlipayRequest<T> request, string responseBody, bool isError, IAlipayParser<T> parser, RSAParameters parameters, string signType) where T : AlipayResponse
         {
             var signItem = parser.GetSignItem(request, responseBody);
             if (signItem == null)
@@ -326,13 +338,13 @@ namespace Essensoft.AspNetCore.Alipay
 
             if (!isError || (isError && !string.IsNullOrEmpty(signItem.Sign)))
             {
-                var rsaCheckContent = AlipaySignature.RSACheckContent(signItem.SignSourceDate, signItem.Sign, alipayPublicKey, signType);
+                var rsaCheckContent = AlipaySignature.RSACheckContent(signItem.SignSourceDate, signItem.Sign, parameters, signType);
                 if (!rsaCheckContent)
                 {
                     if (!string.IsNullOrEmpty(signItem.SignSourceDate) && signItem.SignSourceDate.Contains("\\/"))
                     {
                         var srouceData = signItem.SignSourceDate.Replace("\\/", "/");
-                        var jsonCheck = AlipaySignature.RSACheckContent(srouceData, signItem.Sign, alipayPublicKey, signType);
+                        var jsonCheck = AlipaySignature.RSACheckContent(srouceData, signItem.Sign, parameters, signType);
                         if (!jsonCheck)
                         {
                             throw new AlipayException("sign check fail: check Sign and Data Fail JSON also");
@@ -350,7 +362,7 @@ namespace Essensoft.AspNetCore.Alipay
         #endregion
 
         #region IAlipayClient Members
-        public string BuildHtmlRequest(IDictionary<string, string> sParaTemp, string strMethod, string strButtonValue)
+        public string BuildHtmlRequest(IDictionary<string, string> sParaTemp, string strMethod)
         {
             //待请求参数数组
             var dicPara = new Dictionary<string, string>(sParaTemp);
@@ -363,7 +375,7 @@ namespace Essensoft.AspNetCore.Alipay
             {
                 sbHtml.Append("<input  name='" + temp.Key + "' value='" + temp.Value + "'/>");
             }
-            sbHtml.Append("<input type='submit' value='" + strButtonValue + "' style='display:none;'></form>");
+            sbHtml.Append("<input type='submit' style='display:none;'></form>");
             //表单实现自动提交
             sbHtml.Append("<script>document.forms['alipaysubmit'].submit();</script>");
 
@@ -383,7 +395,7 @@ namespace Essensoft.AspNetCore.Alipay
             var sortedAlipayDic = new AlipayDictionary(sortedParams);
 
             // 参数签名
-            var signResult = AlipaySignature.RSASign(sortedAlipayDic, Options.RsaPrivateKey, Options.SignType);
+            var signResult = AlipaySignature.RSASign(sortedAlipayDic, RSAPrivateParameters, Options.SignType);
 
             // 添加签名结果参数
             sortedAlipayDic.Add(SIGN, signResult);
@@ -392,7 +404,7 @@ namespace Essensoft.AspNetCore.Alipay
             var signedResult = HttpClientEx.BuildQuery(sortedAlipayDic);
 
             // 构造结果
-            var rsp = (T)Activator.CreateInstance(typeof(T));
+            var rsp = Activator.CreateInstance<T>();
             rsp.Body = signedResult;
             return Task.FromResult(rsp);
         }

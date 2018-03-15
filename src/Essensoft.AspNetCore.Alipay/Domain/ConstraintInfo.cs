@@ -27,6 +27,12 @@ namespace Essensoft.AspNetCore.Alipay.Domain
         public string CrowdRestriction { get; set; }
 
         /// <summary>
+        /// 根据crowd_restriction的值不同，设置相应的值，如果crowd_restriction是“MEMBER_CARD”，crowd_restriction_value就是关联会员卡模版ID集合，用逗号拼接
+        /// </summary>
+        [JsonProperty("crowd_restriction_value")]
+        public string CrowdRestrictionValue { get; set; }
+
+        /// <summary>
         /// 单品码列表  仅在创建消费单品送活动时设置，最多设置500个单品码,由商户根据自己的商品管理自定义，一般为国标码
         /// </summary>
         [JsonProperty("item_ids")]

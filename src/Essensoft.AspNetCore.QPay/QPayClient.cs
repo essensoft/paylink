@@ -1,6 +1,5 @@
 ﻿using Essensoft.AspNetCore.QPay.Parser;
 using Essensoft.AspNetCore.QPay.Utility;
-using Essensoft.AspNetCore.Security;
 using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
@@ -18,24 +17,25 @@ namespace Essensoft.AspNetCore.QPay
 
         protected internal HttpClientEx Client { get; set; }
 
-        public QPayClient(IOptions<QPayOptions> optionsAccessor)
+        public QPayClient(QPayOptions options)
         {
-            Options = optionsAccessor?.Value ?? new QPayOptions();
+            Options = options;
             Client = new HttpClientEx();
         }
 
-        public QPayClient(string mchId, string key)
-            : this(null)
+        public QPayClient(IOptions<QPayOptions> optionsAccessor)
+            : this(optionsAccessor?.Value ?? new QPayOptions())
         {
-            Options.MchId = mchId;
-            Options.Key = key;
+        }
+
+        public QPayClient(string mchId, string key)
+            : this(new QPayOptions { MchId = mchId, Key = key })
+        {
         }
 
         public QPayClient(string appId, string appSecret, string mchId, string key)
-            : this(mchId, key)
+            : this(new QPayOptions { AppId = appId, AppSecret = appSecret, MchId = mchId, Key = key })
         {
-            Options.AppId = appId;
-            Options.AppSecret = appSecret;
         }
 
         public async Task<T> ExecuteAsync<T>(IQPayRequest<T> request) where T : QPayResponse
@@ -48,12 +48,16 @@ namespace Essensoft.AspNetCore.QPay
                 { NONCE_STR, Guid.NewGuid().ToString("N") }
             };
 
-            sortedTxtParams.Add(SIGN, Md5.GetMD5WithKey(sortedTxtParams, Options.Key));
+            sortedTxtParams.Add(SIGN, QPaySignature.SignWithKey(sortedTxtParams, Options.Key));
 
-            var body = await Client.DoPostAsync(request.GetRequestUrl(), sortedTxtParams);
+            var rspContent = await Client.DoPostAsync(request.GetRequestUrl(), sortedTxtParams);
+            if (string.IsNullOrEmpty(rspContent))
+            {
+                throw new Exception("rspContent is Empty!");
+            }
 
             var parser = new QPayXmlParser<T>();
-            var rsp = parser.Parse(body);
+            var rsp = parser.Parse(rspContent);
             CheckResponseSign(rsp);
             return rsp;
         }
@@ -68,7 +72,7 @@ namespace Essensoft.AspNetCore.QPay
             var sign = response?.Sign;
             if (!response.IsError && !string.IsNullOrEmpty(sign))
             {
-                var cal_sign = Md5.GetMD5WithKey(response.Parameters, Options.Key);
+                var cal_sign = QPaySignature.SignWithKey(response.Parameters, Options.Key);
                 if (cal_sign != sign)
                 {
                     throw new Exception("sign check fail: check Sign and Data Fail!");

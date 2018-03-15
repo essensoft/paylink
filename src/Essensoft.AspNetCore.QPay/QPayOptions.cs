@@ -23,7 +23,7 @@
         public string Key { get; set; }
 
         /// <summary>
-        /// API证书文件 Base64字符串 或着 证书文件名 
+        /// API证书文件 Base64字符串
         /// </summary>
         public string Certificate { get; set; }
     }

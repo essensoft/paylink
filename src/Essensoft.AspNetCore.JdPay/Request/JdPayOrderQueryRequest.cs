@@ -8,12 +8,12 @@ namespace Essensoft.AspNetCore.JdPay.Request
         /// <summary>
         /// 交易流水号
         /// </summary>
-        public string TradeNum { set; get; }
+        public string TradeNum { get; set; }
 
         /// <summary>
         /// 原交易流水号
         /// </summary>
-        public string OTradeNum { set; get; }
+        public string OTradeNum { get; set; }
 
         #region IJdPayRequest Members
 
@@ -43,11 +43,6 @@ namespace Essensoft.AspNetCore.JdPay.Request
                 { "tradeType", 0 }, // 消费
             };
             return parameters;
-        }
-
-        public IDictionary<string, string> GetEncryptParameters()
-        {
-            return null;
         }
 
         #endregion

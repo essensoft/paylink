@@ -34,13 +34,13 @@ namespace Essensoft.AspNetCore.Alipay.Response
         public string BusinessScope { get; set; }
 
         /// <summary>
-        /// 证件号码，结合证件类型使用.
+        /// 【注意】只有is_certified为T的时候才有意义，否则不保证准确性.  证件号码，结合证件类型使用.
         /// </summary>
         [JsonProperty("cert_no")]
         public string CertNo { get; set; }
 
         /// <summary>
-        /// 0:身份证  1:护照  2:军官证  3:士兵证  4:回乡证  5:临时身份证  6:户口簿  7:警官证  8:台胞证  9:营业执照  10:其它证件  11:港澳居民来往内地通行证  12:台湾居民来往大陆通行证
+        /// 【注意】只有is_certified为T的时候才有意义，否则不保证准确性.  0:身份证  1:护照  2:军官证  3:士兵证  4:回乡证  5:临时身份证  6:户口簿  7:警官证  8:台胞证  9:营业执照  10:其它证件  11:港澳居民来往内地通行证  12:台湾居民来往大陆通行证
         /// </summary>
         [JsonProperty("cert_type")]
         public string CertType { get; set; }
@@ -52,10 +52,22 @@ namespace Essensoft.AspNetCore.Alipay.Response
         public string City { get; set; }
 
         /// <summary>
+        /// 学信网返回的学校名称，有可能为空。
+        /// </summary>
+        [JsonProperty("college_name")]
+        public string CollegeName { get; set; }
+
+        /// <summary>
         /// 国家码
         /// </summary>
         [JsonProperty("country_code")]
         public string CountryCode { get; set; }
+
+        /// <summary>
+        /// 学信网返回的学历/学位信息，数据质量一般，请谨慎使用，取值包括：博士研究生、硕士研究生、高升本、专科、博士、硕士、本科、夜大电大函大普通班、专科(高职)、第二学士学位。
+        /// </summary>
+        [JsonProperty("degree")]
+        public string Degree { get; set; }
 
         /// <summary>
         /// 收货地址列表
@@ -68,6 +80,12 @@ namespace Essensoft.AspNetCore.Alipay.Response
         /// </summary>
         [JsonProperty("email")]
         public string Email { get; set; }
+
+        /// <summary>
+        /// 入学时间，yyyy-mm-dd格式
+        /// </summary>
+        [JsonProperty("enrollment_time")]
+        public string EnrollmentTime { get; set; }
 
         /// <summary>
         /// 企业代理人证件有效期（用户类型是公司类型时才有此字段）。
@@ -136,10 +154,16 @@ namespace Essensoft.AspNetCore.Alipay.Response
         public string FirmType { get; set; }
 
         /// <summary>
-        /// 性别（F：女性；M：男性）。
+        /// 【注意】只有is_certified为T的时候才有意义，否则不保证准确性.  性别（F：女性；M：男性）。
         /// </summary>
         [JsonProperty("gender")]
         public string Gender { get; set; }
+
+        /// <summary>
+        /// 预期毕业时间，不保证准确性，yyyy-mm-dd格式。
+        /// </summary>
+        [JsonProperty("graduation_time")]
+        public string GraduationTime { get; set; }
 
         /// <summary>
         /// 余额账户是否被冻结。  T--被冻结；F--未冻结
@@ -244,7 +268,7 @@ namespace Essensoft.AspNetCore.Alipay.Response
         public string UserId { get; set; }
 
         /// <summary>
-        /// 若用户是个人用户，则是用户的真实姓名；若是企业用户，则是企业名称。
+        /// 【注意】只有is_certified为T的时候才有意义，否则不保证准确性.  若用户是个人用户，则是用户的真实姓名；若是企业用户，则是企业名称。
         /// </summary>
         [JsonProperty("user_name")]
         public string UserName { get; set; }

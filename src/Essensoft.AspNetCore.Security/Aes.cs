@@ -7,7 +7,7 @@ namespace Essensoft.AspNetCore.Security
     /// <summary>
     /// AES加密解密
     /// </summary>
-    public class Aes
+    public class AES
     {
         /// <summary>
         ///  AES 加密
@@ -15,7 +15,7 @@ namespace Essensoft.AspNetCore.Security
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static string AesEncrypt(string data, string key)
+        public static string Encrypt(string data, string key)
         {
             var rm = new RijndaelManaged
             {
@@ -35,7 +35,7 @@ namespace Essensoft.AspNetCore.Security
         /// <param name="data"></param>
         /// <param name="key"></param>
         /// <returns></returns>
-        public static string AesDecrypt(string data, string key)
+        public static string Decrypt(string data, string key)
         {
             var rm = new RijndaelManaged
             {

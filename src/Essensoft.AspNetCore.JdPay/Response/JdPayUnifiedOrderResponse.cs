@@ -6,21 +6,21 @@ namespace Essensoft.AspNetCore.JdPay.Response
     public class JdPayUnifiedOrderResponse : JdPayResponse
     {
         [XmlElement("orderId")]
-        public string OrderId { set; get; }
+        public string OrderId { get; set; }
 
         [XmlElement("merchantName")]
-        public string MerchantName { set; get; }
+        public string MerchantName { get; set; }
 
         [XmlElement("amount")]
-        public string Amount { set; get; }
+        public string Amount { get; set; }
 
         [XmlElement("tradeNum")]
-        public string TradeNum { set; get; }
+        public string TradeNum { get; set; }
 
         [XmlElement("qrCode")]
-        public string QrCode { set; get; }
+        public string QrCode { get; set; }
 
         [XmlElement("expireTime")]
-        public string ExpireTime { set; get; }
+        public string ExpireTime { get; set; }
     }
 }

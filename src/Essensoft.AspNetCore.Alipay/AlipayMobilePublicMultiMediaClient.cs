@@ -6,24 +6,27 @@ using Microsoft.Extensions.Options;
 using System;
 using System.IO;
 using System.Net;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Alipay
 {
     public class AlipayMobilePublicMultiMediaClient : IAlipayClient
     {
-        public const string APP_ID = "app_id";
-        public const string FORMAT = "format";
-        public const string METHOD = "method";
-        public const string TIMESTAMP = "timestamp";
-        public const string VERSION = "version";
-        public const string SIGN_TYPE = "sign_type";
-        public const string ACCESS_TOKEN = "auth_token";
-        public const string SIGN = "sign";
-        public const string TERMINAL_TYPE = "terminal_type";
-        public const string TERMINAL_INFO = "terminal_info";
-        public const string PROD_CODE = "prod_code";
-        public const string APP_AUTH_TOKEN = "app_auth_token";
+        private const string APP_ID = "app_id";
+        private const string FORMAT = "format";
+        private const string METHOD = "method";
+        private const string TIMESTAMP = "timestamp";
+        private const string VERSION = "version";
+        private const string SIGN_TYPE = "sign_type";
+        private const string ACCESS_TOKEN = "auth_token";
+        private const string SIGN = "sign";
+        private const string TERMINAL_TYPE = "terminal_type";
+        private const string TERMINAL_INFO = "terminal_info";
+        private const string PROD_CODE = "prod_code";
+        private const string APP_AUTH_TOKEN = "app_auth_token";
+
+        private RSAParameters RSAPrivateParameters;
 
         public AlipayOptions Options { get; set; }
 
@@ -31,31 +34,35 @@ namespace Essensoft.AspNetCore.Alipay
 
         #region AlipayClient Constructors
 
-        public AlipayMobilePublicMultiMediaClient(IOptions<AlipayOptions> optionsAccessor)
+        public AlipayMobilePublicMultiMediaClient(AlipayOptions options)
         {
-            Options = optionsAccessor?.Value ?? new AlipayOptions();
+            Options = options;
             Client = new HttpClientEx();
+
+            if (!string.IsNullOrEmpty(Options.RsaPrivateKey))
+            {
+                RSAPrivateParameters = AlipaySignature.GetPrivateParameters(Options.RsaPrivateKey);
+            }
+        }
+
+        public AlipayMobilePublicMultiMediaClient(IOptions<AlipayOptions> optionsAccessor)
+            : this(optionsAccessor?.Value ?? new AlipayOptions())
+        {
         }
 
         public AlipayMobilePublicMultiMediaClient(string serverUrl, string appId, string privateKey)
-            : this(null)
+        : this(new AlipayOptions { AppId = appId, RsaPrivateKey = privateKey, ServerUrl = serverUrl })
         {
-            Options.AppId = appId;
-            Options.RsaPrivateKey = privateKey;
-            Options.ServerUrl = serverUrl;
         }
 
         public AlipayMobilePublicMultiMediaClient(string serverUrl, string appId, string privateKey, string format)
-            : this(serverUrl, appId, privateKey)
+            : this(new AlipayOptions { AppId = appId, RsaPrivateKey = privateKey, ServerUrl = serverUrl, Format = format })
         {
-            Options.Format = format;
         }
 
         public AlipayMobilePublicMultiMediaClient(string serverUrl, string appId, string privateKey, string format, string version, string signType)
-            : this(serverUrl, appId, privateKey, format)
+            : this(new AlipayOptions { AppId = appId, RsaPrivateKey = privateKey, ServerUrl = serverUrl, Format = format, Version = version, SignType = signType })
         {
-            Options.Version = version;
-            Options.SignType = signType;
         }
 
         public void SetTimeout(int timeout)
@@ -103,13 +110,11 @@ namespace Essensoft.AspNetCore.Alipay
             }
 
             // 添加签名参数
-            txtParams.Add(SIGN, AlipaySignature.RSASign(txtParams, Options.RsaPrivateKey, Options.SignType));
+            txtParams.Add(SIGN, AlipaySignature.RSASign(txtParams, RSAPrivateParameters, Options.SignType));
 
             var outStream = multiMediaDownloadRequest.Stream;
             var rsp = await DoGetAsync(txtParams, outStream);
-
             return (T)rsp;
-
         }
 
         #endregion

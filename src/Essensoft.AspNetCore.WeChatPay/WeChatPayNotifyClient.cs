@@ -1,12 +1,13 @@
-﻿using System;
+﻿using Essensoft.AspNetCore.Security;
+using Essensoft.AspNetCore.WeChatPay.Notify;
+using Essensoft.AspNetCore.WeChatPay.Parser;
+using Essensoft.AspNetCore.WeChatPay.Utility;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Options;
+using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
-using Essensoft.AspNetCore.Security;
-using Essensoft.AspNetCore.WeChatPay.Notify;
-using Essensoft.AspNetCore.WeChatPay.Parser;
-using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Options;
 
 namespace Essensoft.AspNetCore.WeChatPay
 {
@@ -14,15 +15,19 @@ namespace Essensoft.AspNetCore.WeChatPay
     {
         public WeChatPayOptions Options { get; set; }
 
-        public WeChatPayNotifyClient(IOptions<WeChatPayOptions> optionsAccessor)
+        public WeChatPayNotifyClient(WeChatPayOptions options)
         {
-            Options = optionsAccessor?.Value ?? new WeChatPayOptions();
+            Options = options;
+        }
+
+        public WeChatPayNotifyClient(IOptions<WeChatPayOptions> optionsAccessor)
+            : this(optionsAccessor?.Value ?? new WeChatPayOptions())
+        {
         }
 
         public WeChatPayNotifyClient(string key)
-            : this(optionsAccessor: null)
+            : this(new WeChatPayOptions { Key = key })
         {
-            Options.Key = key;
         }
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : WeChatPayNotifyResponse
@@ -32,13 +37,15 @@ namespace Essensoft.AspNetCore.WeChatPay
             var rsp = parser.Parse(body);
             if (rsp is WeChatPayRefundNotifyResponse)
             {
-                var key = Md5.GetMD5(Options.Key).ToLower();
-                var data = Aes.AesDecrypt(rsp.ReqInfo, key); // AES-256-ECB
+                var key = MD5.Compute(Options.Key).ToLower();
+                var data = AES.Decrypt(rsp.ReqInfo, key); // AES-256-ECB
                 rsp = parser.Parse(rsp, data);
+                rsp.Body = data;
             }
             else
             {
                 CheckNotifySign(rsp);
+                rsp.Body = body;
             }
             return rsp;
         }
@@ -56,7 +63,7 @@ namespace Essensoft.AspNetCore.WeChatPay
                 throw new Exception("sign check fail: sign is Empty!");
             }
 
-            var cal_sign = Md5.GetMD5WithKey(response.Parameters, Options.Key);
+            var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, Options.Key);
             if (cal_sign != sign)
             {
                 throw new Exception("sign check fail: check Sign and Data Fail!");
