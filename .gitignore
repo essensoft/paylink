@@ -259,9 +259,3 @@ paket-files/
 # Python Tools for Visual Studio (PTVS)
 __pycache__/
 *.pyc
-/samples/WebApplicationSample/Properties/PublishProfiles/FolderProfile.pubxml
-/src/Essensoft.AspNetCore.Alipay/Properties/PublishProfiles
-/src/Essensoft.AspNetCore.JdPay/Properties/PublishProfiles
-/src/Essensoft.AspNetCore.QPay/Properties/PublishProfiles
-/src/Essensoft.AspNetCore.Security/Properties/PublishProfiles
-/src/Essensoft.AspNetCore.WeChatPay/Properties/PublishProfiles

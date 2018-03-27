@@ -1,15 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Essensoft.AspNetCore.JdPay.Request;
-using Essensoft.AspNetCore.JdPay;
+﻿using Essensoft.AspNetCore.Payment.JdPay;
+using Essensoft.AspNetCore.Payment.JdPay.Notify;
+using Essensoft.AspNetCore.Payment.JdPay.Request;
+using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Essensoft.AspNetCore.JdPay.Notify;
 
 namespace WebApplicationSample.Controllers
 {
     public class JdPayController : Controller
     {
-        public readonly JdPayClient _client = null;
-        public readonly JdPayNotifyClient _notifyClient = null;
+        private readonly JdPayClient _client = null;
+        private readonly JdPayNotifyClient _notifyClient = null;
 
         public JdPayController(JdPayClient client, JdPayNotifyClient notifyClient)
         {
@@ -112,7 +112,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> RefundQuery(string tradeNum, string oTradeNum)
         {
-            var request = new JdPayRefundQueryRequest()
+            var request = new JdPayQueryRefundRequest()
             {
                 TradeNum = tradeNum,
                 OTradeNum = oTradeNum

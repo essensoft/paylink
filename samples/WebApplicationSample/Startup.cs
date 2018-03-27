@@ -1,8 +1,8 @@
-﻿using Essensoft.AspNetCore.Alipay;
-using Essensoft.AspNetCore.JdPay;
-using Essensoft.AspNetCore.QPay;
-using Essensoft.AspNetCore.UnionPay;
-using Essensoft.AspNetCore.WeChatPay;
+﻿using Essensoft.AspNetCore.Payment.Alipay;
+using Essensoft.AspNetCore.Payment.JdPay;
+using Essensoft.AspNetCore.Payment.QPay;
+using Essensoft.AspNetCore.Payment.UnionPay;
+using Essensoft.AspNetCore.Payment.WeChatPay;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -30,35 +30,27 @@ namespace WebApplicationSample
             // 依赖注入介绍：https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/dependency-injection
 
             services.AddAlipay();
-            services.AddWeChatPay();
-            services.AddQPay();
             services.AddJdPay();
+            services.AddQPay();
             services.AddUnionPay();
-
-            // 添加依赖注入时，也可以直接设置参数..
-            // 如：
-            //services.AddAlipay(Option =>
-            //{
-            //    Option.AppId = "xxx";
-            //    Option.RsaPublicKey = "xxx";
-            //});
+            services.AddWeChatPay();
 
             // 配置介绍： https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/configuration?tabs=basicconfiguration
             // 用户机密介绍： https://docs.microsoft.com/zh-cn/aspnet/core/security/app-secrets?tabs=visual-studio
 
             // 注册配置实例(使用配置文件或用户机密的方式设置参数)
             services.Configure<AlipayOptions>(Configuration.GetSection("Alipay"));
-            services.Configure<WeChatPayOptions>(Configuration.GetSection("WeChatPay"));
-            services.Configure<QPayOptions>(Configuration.GetSection("QPay"));
             services.Configure<JdPayOptions>(Configuration.GetSection("JdPay"));
+            services.Configure<QPayOptions>(Configuration.GetSection("QPay"));
             services.Configure<UnionPayOptions>(Configuration.GetSection("UnionPay"));
+            services.Configure<WeChatPayOptions>(Configuration.GetSection("WeChatPay"));
 
             services.AddWebEncoders(opt =>
             {
                 opt.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.All);
             });
 
-            // 配置参数 具体参数见 AlipayOptions、WeChatPayOptions、QPayOptions、JdPayOptions、UnionPayOptions类
+            // Json格式 配置参数. 具体参数见 AlipayOptions、JdPayOptions、QPayOptions、UnionPayOptions、WeChatPayOptions类
 
             //{
             //  "Alipay": {
@@ -67,25 +59,17 @@ namespace WebApplicationSample
             //    "RsaPrivateKey": "xxx",
             //    "SignType" : "RSA2"
             //  },
-            //  "WeChatPay": {
-            //    "AppId": "xxx",
-            //    "AppSecret": "xxx",
-            //    "MchId": "xxx",
-            //    "Key": "xxx",
-            //    "Certificate": "xxx",
+            //  "JdPay": {
+            //    "Merchant": "xxx",
             //    "RsaPublicKey": "xxx",
+            //    "RsaPrivateKey": "xxx",
+            //    "DesKey": "xxx"
             //  },
             //  "QPay": {
             //    "MchId": "xxx",
             //    "Key": "xxx",
             //    "Certificate": "xxx",
             //  },
-            //  "JdPay": {
-            //    "Merchant": "xxx",
-            //    "RsaPublicKey": "xxx",
-            //    "RsaPrivateKey": "xxx",
-            //    "DesKey": "xxx"
-            //  }
             //  "UnionPay": {
             //    "MerId": "xxx",
             //    "SignCert": "xxx",
@@ -94,6 +78,14 @@ namespace WebApplicationSample
             //    "MiddleCert": "xxx",
             //    "RootCert": "xxx",
             //    "SecureKey": "xxx",
+            //  },
+            //  "WeChatPay": {
+            //    "AppId": "xxx",
+            //    "AppSecret": "xxx",
+            //    "MchId": "xxx",
+            //    "Key": "xxx",
+            //    "Certificate": "xxx",
+            //    "RsaPublicKey": "xxx",
             //  }
             //}
         }

@@ -1,6 +1,6 @@
-﻿using Essensoft.AspNetCore.UnionPay;
-using Essensoft.AspNetCore.UnionPay.Notify;
-using Essensoft.AspNetCore.UnionPay.Request;
+﻿using Essensoft.AspNetCore.Payment.UnionPay;
+using Essensoft.AspNetCore.Payment.UnionPay.Notify;
+using Essensoft.AspNetCore.Payment.UnionPay.Request;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -8,8 +8,8 @@ namespace WebApplicationSample.Controllers
 {
     public class UnionPayController : Controller
     {
-        public readonly UnionPayClient _client = null;
-        public readonly UnionPayNotifyClient _notifyClient = null;
+        private readonly UnionPayClient _client = null;
+        private readonly UnionPayNotifyClient _notifyClient = null;
 
         public UnionPayController(UnionPayClient client, UnionPayNotifyClient notifyClient)
         {

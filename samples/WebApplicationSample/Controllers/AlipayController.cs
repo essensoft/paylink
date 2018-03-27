@@ -1,15 +1,15 @@
-﻿using Essensoft.AspNetCore.Alipay;
-using Essensoft.AspNetCore.Alipay.Domain;
-using Essensoft.AspNetCore.Alipay.Request;
+﻿using Essensoft.AspNetCore.Payment.Alipay;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
+using Essensoft.AspNetCore.Payment.Alipay.Notify;
+using Essensoft.AspNetCore.Payment.Alipay.Request;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using Essensoft.AspNetCore.Alipay.Notify;
 
 namespace WebApplicationSample.Controllers
 {
     public class AlipayController : Controller
     {
-        public readonly AlipayClient _client = null;
+        private readonly AlipayClient _client = null;
         private readonly AlipayNotifyClient _notifyClient = null;
 
         public AlipayController(AlipayClient client, AlipayNotifyClient notifyClient)

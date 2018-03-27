@@ -6,7 +6,7 @@
 <p>银联支付：<a href="https://open.unionpay.com/ajweb/product" target="_blank">开放平台</a></p>
 <p>QQ交流群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=aac56c8f02f54893267d3ac90787c1794a7687f3c31a923812a36b67c4ee6271">522457525(Payment)</a></p>
 <h3>*注意：</h3>
-<p>1.开发环境：Windows 10、VS2017 15.6.2、.NET Core SDK 2.1.101、.NET Core Runtime 2.0.6</p>
+<p>1.开发环境：Windows 10、VS2017 15.6.4、.NET Core SDK 2.1.103</p>
 <p>2.支持渠道：支付宝、微信支付、QQ钱包、京东支付、银联支付。</p>
 <h3>使用方式</h3>
 <p>见示例项目：WebApplicationSample</p>

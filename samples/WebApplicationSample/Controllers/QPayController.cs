@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.QPay;
-using Essensoft.AspNetCore.QPay.Request;
+﻿using Essensoft.AspNetCore.Payment.QPay;
+using Essensoft.AspNetCore.Payment.QPay.Request;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -7,8 +7,8 @@ namespace WebApplicationSample.Controllers
 {
     public class QPayController : Controller
     {
-        public readonly QPayClient _client = null;
-        public readonly QPayCertificateClient _certClient = null;
+        private readonly QPayClient _client = null;
+        private readonly QPayCertificateClient _certClient = null;
         public QPayController(QPayClient client, QPayCertificateClient certClient)
         {
             _client = client;

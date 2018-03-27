@@ -1,13 +1,13 @@
-﻿using Essensoft.AspNetCore.Alipay;
-using Essensoft.AspNetCore.Alipay.Notify;
-using Essensoft.AspNetCore.JdPay;
-using Essensoft.AspNetCore.JdPay.Notify;
-using Essensoft.AspNetCore.QPay;
-using Essensoft.AspNetCore.QPay.Notify;
-using Essensoft.AspNetCore.UnionPay;
-using Essensoft.AspNetCore.UnionPay.Notify;
-using Essensoft.AspNetCore.WeChatPay;
-using Essensoft.AspNetCore.WeChatPay.Notify;
+﻿using Essensoft.AspNetCore.Payment.Alipay;
+using Essensoft.AspNetCore.Payment.Alipay.Notify;
+using Essensoft.AspNetCore.Payment.JdPay;
+using Essensoft.AspNetCore.Payment.JdPay.Notify;
+using Essensoft.AspNetCore.Payment.QPay;
+using Essensoft.AspNetCore.Payment.QPay.Notify;
+using Essensoft.AspNetCore.Payment.UnionPay;
+using Essensoft.AspNetCore.Payment.UnionPay.Notify;
+using Essensoft.AspNetCore.Payment.WeChatPay;
+using Essensoft.AspNetCore.Payment.WeChatPay.Notify;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
@@ -159,7 +159,7 @@ namespace WebApplicationSample.Controllers
     }
 
     /// <summary>
-    /// 微信支付退款通知 需要在微信支付后台设置通知地址
+    /// 微信支付退款通知
     /// </summary>
     [Route("notify/wechatpay/refund")]
     public class WeChatPayRefundNotifyController : Controller
