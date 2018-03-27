@@ -1,5 +1,16 @@
 # Payment
 
+## Package
+
+Package  | NuGet 
+-------- | :------------ 
+Essensoft.AspNetCore.Payment.Alipay		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Alipay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Alipay)
+Essensoft.AspNetCore.Payment.JdPay		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.JdPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.JdPay)
+Essensoft.AspNetCore.Payment.QPay		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.QPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.QPay)
+Essensoft.AspNetCore.Payment.Security		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Security.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Security)
+Essensoft.AspNetCore.Payment.UnionPay		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.UnionPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.UnionPay)
+Essensoft.AspNetCore.Payment.WeChatPay		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.WeChatPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.WeChatPay)
+
 ## 官方文档
 
 * QQ交流群 [Payment <522457525>](https://shang.qq.com/wpa/qunwpa?idkey=aac56c8f02f54893267d3ac90787c1794a7687f3c31a923812a36b67c4ee6271)
