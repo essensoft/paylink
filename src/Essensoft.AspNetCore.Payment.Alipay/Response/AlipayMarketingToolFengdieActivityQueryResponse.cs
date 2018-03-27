@@ -1,0 +1,17 @@
+using Newtonsoft.Json;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
+
+namespace Essensoft.AspNetCore.Payment.Alipay.Response
+{
+    /// <summary>
+    /// AlipayMarketingToolFengdieActivityQueryResponse.
+    /// </summary>
+    public class AlipayMarketingToolFengdieActivityQueryResponse : AlipayResponse
+    {
+        /// <summary>
+        /// H5应用详情
+        /// </summary>
+        [JsonProperty("activity")]
+        public FengdieActivity Activity { get; set; }
+    }
+}

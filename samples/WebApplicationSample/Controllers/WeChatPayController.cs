@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.WeChatPay;
-using Essensoft.AspNetCore.WeChatPay.Request;
+﻿using Essensoft.AspNetCore.Payment.WeChatPay;
+using Essensoft.AspNetCore.Payment.WeChatPay.Request;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -7,8 +7,8 @@ namespace WebApplicationSample.Controllers
 {
     public class WeChatPayController : Controller
     {
-        public readonly WeChatPayClient _client = null;
-        public readonly WeChatPayCertificateClient _certClient = null;
+        private readonly WeChatPayClient _client = null;
+        private readonly WeChatPayCertificateClient _certClient = null;
         public WeChatPayController(WeChatPayClient client, WeChatPayCertificateClient certClient)
         {
             _client = client;
@@ -56,7 +56,7 @@ namespace WebApplicationSample.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Refund(string out_refund_no, string transaction_id, string out_trade_no, int total_fee, int refund_fee, string refund_desc)
+        public async Task<IActionResult> Refund(string out_refund_no, string transaction_id, string out_trade_no, int total_fee, int refund_fee, string refund_desc, string notify_url)
         {
             var request = new WeChatPayRefundRequest()
             {
@@ -66,6 +66,7 @@ namespace WebApplicationSample.Controllers
                 TotalFee = total_fee,
                 RefundFee = refund_fee,
                 RefundDesc = refund_desc,
+                NotifyUrl = notify_url,
             };
             var response = await _certClient.ExecuteAsync(request);
             return Ok(response.Body);
