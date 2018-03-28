@@ -4,6 +4,7 @@
 
 Package  | NuGet 
 -------- | :------------ 
+Essensoft.AspNetCore.Payment.All		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.All.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.All)
 Essensoft.AspNetCore.Payment.Alipay		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Alipay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Alipay)
 Essensoft.AspNetCore.Payment.JdPay		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.JdPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.JdPay)
 Essensoft.AspNetCore.Payment.QPay		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.QPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.QPay)
