@@ -16,7 +16,6 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<WeChatPayOptions> setupAction)
         {
             services.AddSingleton<WeChatPayClient>();
-            services.AddSingleton<WeChatPayCertificateClient>();
             services.AddSingleton<WeChatPayNotifyClient>();
             if (setupAction != null)
             {

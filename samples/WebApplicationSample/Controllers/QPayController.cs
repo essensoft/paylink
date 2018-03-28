@@ -8,11 +8,9 @@ namespace WebApplicationSample.Controllers
     public class QPayController : Controller
     {
         private readonly QPayClient _client = null;
-        private readonly QPayCertificateClient _certClient = null;
-        public QPayController(QPayClient client, QPayCertificateClient certClient)
+        public QPayController(QPayClient client)
         {
             _client = client;
-            _certClient = certClient;
         }
 
         [HttpPost]
@@ -66,7 +64,7 @@ namespace WebApplicationSample.Controllers
                 OpUserId = op_user_id,
                 OpUserPasswd = op_user_passwd,
             };
-            var response = await _certClient.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request);
             return Ok(response.Body);
         }
 

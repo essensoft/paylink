@@ -7,12 +7,12 @@
     <Company>Essensoft</Company>
     <Authors>Roc</Authors>
     <Product>Payment</Product>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
     <Description>ASP.NET Core Payment for WeChatPay.</Description>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
-    <FileVersion>1.2.0.0</FileVersion>
+    <AssemblyVersion>1.2.1.0</AssemblyVersion>
+    <FileVersion>1.2.1.0</FileVersion>
     <Copyright>© Essensoft 2018</Copyright>
-    <PackageProjectUrl></PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Essensoft/Payment</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

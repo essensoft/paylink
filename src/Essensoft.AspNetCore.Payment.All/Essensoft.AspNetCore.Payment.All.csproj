@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
     <Authors>Roc</Authors>
     <Company>Essensoft</Company>
     <Product>Payment</Product>
@@ -11,8 +11,9 @@
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Description>ASP.NET Core Payment</Description>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
-    <FileVersion>1.2.0.0</FileVersion>
+    <AssemblyVersion>1.2.1.0</AssemblyVersion>
+    <FileVersion>1.2.1.0</FileVersion>
+    <PackageProjectUrl>https://github.com/Essensoft/Payment</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>

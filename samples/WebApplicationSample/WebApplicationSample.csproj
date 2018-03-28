@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
     <UserSecretsId>a59ca38e-9b52-44fe-b3d2-8cb5a1641623</UserSecretsId>
-    <Version>1.2.0</Version>
+    <Version>1.2.1</Version>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment\Essensoft.AspNetCore.Payment.csproj" />
+    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.All\Essensoft.AspNetCore.Payment.All.csproj" />
   </ItemGroup>
 
 </Project>

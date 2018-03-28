@@ -7,7 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D3871E61-CA4
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{DD8CC860-F3E3-40F4-8A8F-20BF66EA051C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Payment", "src\Essensoft.AspNetCore.Payment\Essensoft.AspNetCore.Payment.csproj", "{084545C4-FA61-4BF4-913A-59E4C063212D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Payment.All", "src\Essensoft.AspNetCore.Payment.All\Essensoft.AspNetCore.Payment.All.csproj", "{084545C4-FA61-4BF4-913A-59E4C063212D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Payment.Alipay", "src\Essensoft.AspNetCore.Payment.Alipay\Essensoft.AspNetCore.Payment.Alipay.csproj", "{167FAA95-300E-49D5-A29B-EFCFF90A0584}"
 EndProject

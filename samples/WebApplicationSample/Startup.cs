@@ -35,6 +35,21 @@ namespace WebApplicationSample
             services.AddUnionPay();
             services.AddWeChatPay();
 
+            // 可在添加依赖注入时设置参数
+            // 例如：
+            //services.AddAlipay(opt =>
+            //{
+            //    //一般设置 AppId、RsaPrivateKey、RsaPublicKey，其余默认即可.
+            //    //此处为蚂蚁金服开放平台上创建的APPID，而非老版本的商户号
+            //    opt.AppId = "";
+
+            //    // 这里的公私钥 默认均为支付宝官方推荐使用的RSAWithSHA256.
+            //    // 商户私钥
+            //    opt.RsaPrivateKey = "";
+            //    // 支付宝公钥
+            //    opt.RsaPublicKey = "";
+            //});
+
             // 配置介绍： https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/configuration?tabs=basicconfiguration
             // 用户机密介绍： https://docs.microsoft.com/zh-cn/aspnet/core/security/app-secrets?tabs=visual-studio
 
@@ -81,7 +96,6 @@ namespace WebApplicationSample
             //  },
             //  "WeChatPay": {
             //    "AppId": "xxx",
-            //    "AppSecret": "xxx",
             //    "MchId": "xxx",
             //    "Key": "xxx",
             //    "Certificate": "xxx",

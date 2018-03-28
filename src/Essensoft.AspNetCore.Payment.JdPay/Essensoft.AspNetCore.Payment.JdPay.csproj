@@ -5,12 +5,12 @@
     <Company>Essensoft</Company>
     <Authors>Roc</Authors>
     <Product>Payment</Product>
-    <Version>1.2.0</Version>
-    <AssemblyVersion>1.2.0.0</AssemblyVersion>
-    <FileVersion>1.2.0.0</FileVersion>
+    <Version>1.2.1</Version>
+    <AssemblyVersion>1.2.1.0</AssemblyVersion>
+    <FileVersion>1.2.1.0</FileVersion>
     <Description>ASP.NET Core Payment for JdPay.</Description>
     <Copyright>© Essensoft 2018</Copyright>
-    <PackageProjectUrl></PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/Essensoft/Payment</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>

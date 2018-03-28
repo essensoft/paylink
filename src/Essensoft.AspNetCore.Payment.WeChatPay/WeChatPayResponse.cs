@@ -4,7 +4,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     public abstract class WeChatPayResponse : WeChatPayObject
     {
-
         /// <summary>
         /// 返回状态码
         /// 此字段是通信标识，非交易标识，
@@ -30,7 +29,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// <summary>
         /// 商户号ID
         /// </summary>
-        [XmlElement("sub_appid")]
+        [XmlElement("MchId")]
         public string MchId { get; set; }
 
         /// <summary>

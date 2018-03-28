@@ -1,6 +1,8 @@
 ﻿using Essensoft.AspNetCore.Payment.WeChatPay;
 using Essensoft.AspNetCore.Payment.WeChatPay.Request;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace WebApplicationSample.Controllers
@@ -8,11 +10,10 @@ namespace WebApplicationSample.Controllers
     public class WeChatPayController : Controller
     {
         private readonly WeChatPayClient _client = null;
-        private readonly WeChatPayCertificateClient _certClient = null;
-        public WeChatPayController(WeChatPayClient client, WeChatPayCertificateClient certClient)
+
+        public WeChatPayController(WeChatPayClient client)
         {
             _client = client;
-            _certClient = certClient;
         }
 
         [HttpPost]
@@ -30,6 +31,41 @@ namespace WebApplicationSample.Controllers
             };
             var response = await _client.ExecuteAsync(request);
             return Ok(response.Body);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AppOrder(string out_trade_no, string body, int total_fee, string spbill_create_ip, string notify_url, string trade_type)
+        {
+            var request = new WeChatPayUnifiedOrderRequest()
+            {
+                OutTradeNo = out_trade_no,
+                Body = body,
+                TotalFee = total_fee,
+                SpbillCreateIp = spbill_create_ip,
+                NotifyUrl = notify_url,
+                TradeType = trade_type,
+            };
+            var response = await _client.ExecuteAsync(request);
+
+            // 组合"调起支付接口"所需参数 :
+
+            var unixEpoch = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+            var timeStamp = (long)((DateTime.Now - unixEpoch).TotalSeconds);
+
+            var dic = new WeChatPayDictionary
+            {
+                { "appid", _client.Options.AppId },
+                { "partnerid",_client.Options.MchId  },
+                { "prepayid", response.PrepayId },
+                { "package", "Sign=WXPay" },
+                { "noncestr", Guid.NewGuid().ToString("N") },
+                { "timestamp", timeStamp.ToString() }
+            };
+            // 将这些参数签名
+            dic.Add("sign", WeChatPaySignature.SignWithKey(dic, _client.Options.Key));
+
+            // 将签名后的参数(dic)给 ios/android端 由其去调起微信APP(https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5)
+            return Ok(dic);
         }
 
         [HttpPost]
@@ -68,7 +104,7 @@ namespace WebApplicationSample.Controllers
                 RefundDesc = refund_desc,
                 NotifyUrl = notify_url,
             };
-            var response = await _certClient.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request);
             return Ok(response.Body);
         }
 
@@ -112,7 +148,7 @@ namespace WebApplicationSample.Controllers
                 Desc = desc,
                 SpbillCreateIp = spbill_create_ip
             };
-            var response = await _certClient.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request);
             return Ok(response.Body);
         }
 
@@ -123,7 +159,7 @@ namespace WebApplicationSample.Controllers
             {
                 PartnerTradeNo = partner_trade_no,
             };
-            var response = await _certClient.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request);
             return Ok(response.Body);
         }
 
@@ -131,7 +167,7 @@ namespace WebApplicationSample.Controllers
         public async Task<IActionResult> GetPublicKey()
         {
             var request = new WeChatPayGetPublicKeyRequest();
-            var response = await _certClient.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request);
             return Ok(response.Body);
         }
 
@@ -147,7 +183,7 @@ namespace WebApplicationSample.Controllers
                 Amount = amount,
                 Desc = desc,
             };
-            var response = await _certClient.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request);
             return Ok(response.Body);
         }
 
@@ -158,7 +194,7 @@ namespace WebApplicationSample.Controllers
             {
                 PartnerTradeNo = partner_trade_no,
             };
-            var response = await _certClient.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request);
             return Ok(response.Body);
         }
 
@@ -171,7 +207,7 @@ namespace WebApplicationSample.Controllers
                 AccountType = account_type,
                 TarType = tar_type,
             };
-            var response = await _certClient.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request);
             return Ok(response.Body);
         }
     }
