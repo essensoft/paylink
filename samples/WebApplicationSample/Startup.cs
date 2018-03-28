@@ -26,8 +26,12 @@ namespace WebApplicationSample
         {
             services.AddMvc();
 
-            // 添加依赖注入
-            // 依赖注入介绍：https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/dependency-injection
+            // 参数配置 可参考以下两篇文章.
+
+            // ASP.NET Core Web 支付功能接入 微信-扫码支付篇
+            // http://www.cnblogs.com/essenroc/p/8630730.html
+            // ASP.NET Core Web 支付功能接入 支付宝-电脑网页支付篇
+            // https://www.cnblogs.com/essenroc/p/8627775.html
 
             services.AddAlipay();
             services.AddJdPay();
@@ -35,25 +39,6 @@ namespace WebApplicationSample
             services.AddUnionPay();
             services.AddWeChatPay();
 
-            // 可在添加依赖注入时设置参数
-            // 例如：
-            //services.AddAlipay(opt =>
-            //{
-            //    //一般设置 AppId、RsaPrivateKey、RsaPublicKey，其余默认即可.
-            //    //此处为蚂蚁金服开放平台上创建的APPID，而非老版本的商户号
-            //    opt.AppId = "";
-
-            //    // 这里的公私钥 默认均为支付宝官方推荐使用的RSAWithSHA256.
-            //    // 商户私钥
-            //    opt.RsaPrivateKey = "";
-            //    // 支付宝公钥
-            //    opt.RsaPublicKey = "";
-            //});
-
-            // 配置介绍： https://docs.microsoft.com/zh-cn/aspnet/core/fundamentals/configuration?tabs=basicconfiguration
-            // 用户机密介绍： https://docs.microsoft.com/zh-cn/aspnet/core/security/app-secrets?tabs=visual-studio
-
-            // 注册配置实例(使用配置文件或用户机密的方式设置参数)
             services.Configure<AlipayOptions>(Configuration.GetSection("Alipay"));
             services.Configure<JdPayOptions>(Configuration.GetSection("JdPay"));
             services.Configure<QPayOptions>(Configuration.GetSection("QPay"));
@@ -66,7 +51,6 @@ namespace WebApplicationSample
             });
 
             // Json格式 配置参数. 具体参数见 AlipayOptions、JdPayOptions、QPayOptions、UnionPayOptions、WeChatPayOptions类
-
             //{
             //  "Alipay": {
             //    "AppId": "xxx",
