@@ -3,6 +3,8 @@ using Essensoft.AspNetCore.Payment.QPay.Utility;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
+using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.QPay
@@ -19,6 +21,8 @@ namespace Essensoft.AspNetCore.Payment.QPay
         public virtual ILogger<QPayClient> Logger { get; set; }
 
         protected internal HttpClientEx Client { get; set; }
+
+        protected internal HttpClientEx CertificateClient { get; set; }
 
         public QPayClient(
             IOptions<QPayOptions> optionsAccessor,
@@ -37,11 +41,24 @@ namespace Essensoft.AspNetCore.Payment.QPay
             {
                 throw new ArgumentNullException(nameof(Options.Key));
             }
+
+            if (!string.IsNullOrEmpty(Options.Certificate))
+            {
+                var clientHandler = new HttpClientHandler();
+                var certificate = Convert.FromBase64String(Options.Certificate);
+                clientHandler.ClientCertificates.Add(new X509Certificate2(certificate, Options.MchId, X509KeyStorageFlags.MachineKeySet));
+                CertificateClient = new HttpClientEx(clientHandler);
+            }
         }
 
         public void SetTimeout(int timeout)
         {
             Client.Timeout = new TimeSpan(0, 0, 0, timeout);
+
+            if (CertificateClient != null)
+            {
+                CertificateClient.Timeout = new TimeSpan(0, 0, 0, timeout);
+            }
         }
 
         public async Task<T> ExecuteAsync<T>(IQPayRequest<T> request) where T : QPayResponse
@@ -60,6 +77,29 @@ namespace Essensoft.AspNetCore.Payment.QPay
             Logger.LogInformation(0, "Request Content:{content}", content);
 
             var rspContent = await Client.DoPostAsync(request.GetRequestUrl(), content);
+            Logger.LogInformation(1, "Response Content:{content}", rspContent);
+
+            var parser = new QPayXmlParser<T>();
+            var rsp = parser.Parse(rspContent);
+            CheckResponseSign(rsp);
+            return rsp;
+        }
+
+        public async Task<T> ExecuteAsync<T>(IQPayCertificateRequest<T> request) where T : QPayResponse
+        {
+            // 字典排序
+            var sortedTxtParams = new QPayDictionary(request.GetParameters())
+            {
+                { APPID, Options.AppId },
+                { MCHID, Options.MchId },
+                { NONCE_STR, Guid.NewGuid().ToString("N") }
+            };
+
+            sortedTxtParams.Add(SIGN, QPaySignature.SignWithKey(sortedTxtParams, Options.Key));
+            var content = HttpClientEx.BuildContent(sortedTxtParams);
+            Logger.LogInformation(0, "Request Content:{content}", content);
+
+            var rspContent = await CertificateClient.DoPostAsync(request.GetRequestUrl(), content);
             Logger.LogInformation(1, "Response Content:{content}", rspContent);
 
             var parser = new QPayXmlParser<T>();

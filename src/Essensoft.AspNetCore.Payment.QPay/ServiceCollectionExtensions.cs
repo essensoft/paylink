@@ -16,7 +16,6 @@ namespace Microsoft.Extensions.DependencyInjection
             Action<QPayOptions> setupAction)
         {
             services.AddSingleton<QPayClient>();
-            services.AddSingleton<QPayCertificateClient>();
             services.AddSingleton<QPayNotifyClient>();
             if (setupAction != null)
             {
