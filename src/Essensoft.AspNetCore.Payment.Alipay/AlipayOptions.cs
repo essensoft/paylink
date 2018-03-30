@@ -13,7 +13,7 @@
         public string RsaPublicKey { get; set; }
 
         /// <summary>
-        /// 商户私钥
+        /// 应用私钥
         /// </summary>
         public string RsaPrivateKey { get; set; }
 
