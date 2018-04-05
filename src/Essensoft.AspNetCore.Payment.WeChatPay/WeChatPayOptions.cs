@@ -1,6 +1,4 @@
-﻿using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
-
-namespace Essensoft.AspNetCore.Payment.WeChatPay
+﻿namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     public class WeChatPayOptions
     {

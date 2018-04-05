@@ -141,10 +141,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             };
 
             // 添加签名参数
-            txtParams.Add(SIGN, AlipaySignature.RSASign(txtParams, RSAPrivateParameters, Options.SignType));
+            var signContent = AlipaySignature.GetSignContent(txtParams);
+            txtParams.Add(SIGN, AlipaySignature.RSASignContent(signContent, RSAPrivateParameters, Options.SignType));
 
             // 是否需要上传文件
-            string body;
+            var body = string.Empty;
 
             if (request is IAlipayUploadRequest<T> uRequest)
             {
@@ -182,7 +183,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             T rsp = null;
             IAlipayParser<T> parser = null;
-            if ("json".Equals(Options.Format))
+            if ("xml".Equals(Options.Format))
+            {
+                parser = new AlipayXmlParser<T>();
+                rsp = parser.Parse(body);
+            }
+            else
             {
                 parser = new AlipayJsonParser<T>();
                 rsp = parser.Parse(body);
@@ -260,10 +266,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             }
 
             // 添加签名参数
-            txtParams.Add(SIGN, AlipaySignature.RSASign(txtParams, RSAPrivateParameters, Options.SignType));
+            var signContent = AlipaySignature.GetSignContent(txtParams);
+            txtParams.Add(SIGN, AlipaySignature.RSASignContent(signContent, RSAPrivateParameters, Options.SignType));
 
             var query = HttpClientEx.BuildQuery(txtParams);
-            Logger.LogInformation(0, "Request Content:{query}", query);
+            Logger.LogInformation(0, "Request:{query}", query);
 
             // 是否需要上传文件
             var body = string.Empty;
@@ -277,13 +284,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 body = await Client.DoPostAsync(Options.ServerUrl, query);
             }
 
-            Logger.LogInformation(1, "Response Content:{body}", body);
+            Logger.LogInformation(1, "Response:{body}", body);
 
             T rsp = null;
             IAlipayParser<T> parser = null;
-            if ("json".Equals(Options.Format))
+            if ("xml".Equals(Options.Format))
+            {
+                parser = new AlipayXmlParser<T>();
+                rsp = parser.Parse(body);
+            }
+            else
             {
                 parser = new AlipayJsonParser<T>();
+                rsp = parser.Parse(body);
             }
 
             var item = ParseRespItem(request, body, parser, Options.EncyptKey, Options.EncyptType);
@@ -357,7 +370,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             var dicPara = new Dictionary<string, string>(sParaTemp);
 
             var sbHtml = new StringBuilder();
-            sbHtml.Append("<form id='alipaysubmit' name='alipaysubmit' action='" + Options.ServerUrl + "?charset=" + Options.Charset +
+            sbHtml.Append("<form id='submit' name='submit' action='" + Options.ServerUrl + "?charset=" + Options.Charset +
                  "' method='" + strMethod + "' style='display:none;'>");
 
             foreach (var temp in dicPara)
@@ -366,7 +379,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             }
             sbHtml.Append("<input type='submit' style='display:none;'></form>");
             //表单实现自动提交
-            sbHtml.Append("<script>document.forms['alipaysubmit'].submit();</script>");
+            sbHtml.Append("<script>document.forms['submit'].submit();</script>");
 
             return sbHtml.ToString();
         }
@@ -384,7 +397,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             var sortedAlipayDic = new AlipayDictionary(sortedParams);
 
             // 参数签名
-            var signResult = AlipaySignature.RSASign(sortedAlipayDic, RSAPrivateParameters, Options.SignType);
+            var signContent = AlipaySignature.GetSignContent(sortedAlipayDic);
+            var signResult = AlipaySignature.RSASignContent(signContent, RSAPrivateParameters, Options.SignType);
 
             // 添加签名结果参数
             sortedAlipayDic.Add(SIGN, signResult);

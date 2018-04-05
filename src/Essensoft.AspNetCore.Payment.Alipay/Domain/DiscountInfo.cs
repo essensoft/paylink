@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -26,13 +27,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Discount { get; set; }
 
         /// <summary>
+        /// 优惠说明信息
+        /// </summary>
+        [JsonProperty("discount_notes")]
+        public List<VoucherDescDetailModel> DiscountNotes { get; set; }
+
+        /// <summary>
         /// 最近店铺离当前用户的距离
         /// </summary>
         [JsonProperty("distance")]
         public string Distance { get; set; }
 
         /// <summary>
-        /// 优惠结束时间，同时也是优惠券停止发放的时间
+        /// 优惠券停止发放的时间，和发放的优惠券的有效期不同
         /// </summary>
         [JsonProperty("end_time")]
         public string EndTime { get; set; }
@@ -74,6 +81,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string PerPrice { get; set; }
 
         /// <summary>
+        /// 发券商户ID
+        /// </summary>
+        [JsonProperty("pid")]
+        public string Pid { get; set; }
+
+        /// <summary>
         /// 当券类型是全场及单品代金券的时候，这个字段代表券面额；  当券类型是减至券的时候，这个字段代表减至到的金额
         /// </summary>
         [JsonProperty("price")]
@@ -110,7 +123,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Sold { get; set; }
 
         /// <summary>
-        /// 优惠开始时间，同时也是优惠券发放的开始时间
+        /// 优惠券发放的开始时间，和发放的优惠券的有效期不同
         /// </summary>
         [JsonProperty("start_time")]
         public string StartTime { get; set; }
@@ -132,6 +145,30 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("type")]
         public string Type { get; set; }
+
+        /// <summary>
+        /// 券相对有效期，券自领取或者购买起多长时间内有效，取值范围 7-360，单位天
+        /// </summary>
+        [JsonProperty("validity_period")]
+        public string ValidityPeriod { get; set; }
+
+        /// <summary>
+        /// 核销绝对有效期开始时间。自该时间点起，券可被核销。  注意：券的开始发放时段开始时间（gmt_start）不能晚于该时间。
+        /// </summary>
+        [JsonProperty("validity_period_range_from")]
+        public string ValidityPeriodRangeFrom { get; set; }
+
+        /// <summary>
+        /// 核销绝对有效期结束时间。自该时间点起，券无法继续被核销。
+        /// </summary>
+        [JsonProperty("validity_period_range_to")]
+        public string ValidityPeriodRangeTo { get; set; }
+
+        /// <summary>
+        /// 有效期类型。支持相对有效期及绝对有效期两种方式，  RELATIVE:相对有效期  FIXED:绝对有效期  相对有效期指领取或者自购买之日起XX天有效，绝对有效期指某一端固定时间内有效。
+        /// </summary>
+        [JsonProperty("validity_period_type")]
+        public string ValidityPeriodType { get; set; }
 
         /// <summary>
         /// 优惠券二级类型，  all_discount:全场折扣;  single_discount:单品折扣;  all_cash:全场代金;  single_cash：单品代金  mei_man_jian：每满减券

@@ -1,4 +1,4 @@
-﻿using System.Xml.Serialization;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay.Notify
 {
@@ -8,152 +8,152 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Notify
         /// 查询流水号
         /// 消费交易的流水号，供后续查询用
         /// </summary>
-        [XmlElement("queryId")]
+        [JsonProperty("queryId")]
         public string QueryId { get; set; }
 
         /// <summary>
         /// 签名
         /// </summary>
-        [XmlElement("signature")]
+        [JsonProperty("signature")]
         public string Signature { get; set; }
 
         /// <summary>
         /// 签名方法
         /// </summary>
-        [XmlElement("signMethod")]
+        [JsonProperty("signMethod")]
         public string SignMethod { get; set; }
 
         /// <summary>
         /// 应答码
         /// </summary>
-        [XmlElement("respCode")]
+        [JsonProperty("respCode")]
         public string RespCode { get; set; }
 
         /// <summary>
         /// 应答信息
         /// </summary>
-        [XmlElement("respMsg")]
+        [JsonProperty("respMsg")]
         public string RespMsg { get; set; }
 
         /// <summary>
         /// 签名公钥证书
         /// 使用RSA签名方式时必选，此域填写银联签名公钥证书。
         /// </summary>
-        [XmlElement("signPubKeyCert")]
+        [JsonProperty("signPubKeyCert")]
         public string SignPubKeyCert { get; set; }
 
         /// <summary>
         /// 收单机构代码
         /// 接入类型为收单机构接入时需上送
         /// </summary>
-        [XmlElement("acqInsCode")]
+        [JsonProperty("acqInsCode")]
         public string AcqInsCode { get; set; }
 
         /// <summary>
         /// 银联受理订单号
         /// 商户推送订单后银联移动支付系统返回该流水号，商户调用支付控件时使用
         /// </summary>
-        [XmlElement("tn")]
+        [JsonProperty("tn")]
         public string Tn { get; set; }
 
         /// <summary>
         /// 账号
         /// 根据商户配置返回
         /// </summary>
-        [XmlElement("accNo")]
+        [JsonProperty("accNo")]
         public string AccNo { get; set; }
 
         /// <summary>
         /// 支付方式
         /// 根据商户配置返回
         /// </summary>
-        [XmlElement("payType")]
+        [JsonProperty("payType")]
         public string PayType { get; set; }
 
         /// <summary>
         /// 支付卡类型
         /// 根据商户配置返回
         /// </summary>
-        [XmlElement("payCardType")]
+        [JsonProperty("payCardType")]
         public string PayCardType { get; set; }
 
         /// <summary>
         /// 版本号
         /// </summary>
-        [XmlElement("version")]
+        [JsonProperty("version")]
         public string Version { get; set; }
 
         /// <summary>
         /// 编码方式
         /// </summary>
-        [XmlElement("encoding")]
+        [JsonProperty("encoding")]
         public string Encoding { get; set; }
 
         /// <summary>
         /// 产品类型
         /// </summary>
-        [XmlElement("bizType")]
+        [JsonProperty("bizType")]
         public string BizType { get; set; }
 
         /// <summary>
         /// 订单发送时间
         /// </summary>
-        [XmlElement("txnTime")]
+        [JsonProperty("txnTime")]
         public string TxnTime { get; set; }
 
         /// <summary>
         /// 交易币种
         /// 默认为156
         /// </summary>
-        [XmlElement("currencyCode")]
+        [JsonProperty("currencyCode")]
         public string CurrencyCode { get; set; }
 
         /// <summary>
         /// 交易金额
         /// </summary>
-        [XmlElement("txnAmt")]
+        [JsonProperty("txnAmt")]
         public string TxnAmt { get; set; }
 
         /// <summary>
         /// 交易类型
         /// </summary>
-        [XmlElement("txnType")]
+        [JsonProperty("txnType")]
         public string TxnType { get; set; }
 
         /// <summary>
         /// 交易子类
         /// </summary>
-        [XmlElement("txnSubType")]
+        [JsonProperty("txnSubType")]
         public string TxnSubType { get; set; }
 
         /// <summary>
         /// 接入类型
         /// </summary>
-        [XmlElement("accessType")]
+        [JsonProperty("accessType")]
         public string AccessType { get; set; }
 
         /// <summary>
         /// 请求方保留域
         /// </summary>
-        [XmlElement("reqReserved")]
+        [JsonProperty("reqReserved")]
         public string ReqReserved { get; set; }
 
         /// <summary>
         /// 商户代码
         /// </summary>
-        [XmlElement("merId")]
+        [JsonProperty("merId")]
         public string MerId { get; set; }
 
         /// <summary>
         /// 商户订单号
         /// </summary>
-        [XmlElement("orderId")]
+        [JsonProperty("orderId")]
         public string OrderId { get; set; }
 
         /// <summary>
         /// 保留域
         /// </summary>
-        [XmlElement("reserved")]
+        [JsonProperty("reserved")]
         public string Reserved { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Security
     public class AES
     {
         /// <summary>
-        ///  AES 加密
+        /// AES 加密
         /// </summary>
         /// <param name="data"></param>
         /// <param name="key"></param>
@@ -30,7 +30,7 @@ namespace Essensoft.AspNetCore.Security
         }
 
         /// <summary>
-        ///  AES 解密
+        /// AES 解密
         /// </summary>
         /// <param name="data"></param>
         /// <param name="key"></param>

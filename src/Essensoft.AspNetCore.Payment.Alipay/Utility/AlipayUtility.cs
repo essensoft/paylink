@@ -6,12 +6,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
     /// <summary>
     /// Alipay系统工具类。
     /// </summary>
-    public abstract class AlipayUtility
+    public static class AlipayUtility
     {
         /// <summary>m>
         /// <param name="bizContent"></param>
         /// <param name="charset"></param>
-        ///  AES加密
+        /// AES加密
         /// </summary>
         /// <param name="encryptKey"></para
         /// <returns></returns>

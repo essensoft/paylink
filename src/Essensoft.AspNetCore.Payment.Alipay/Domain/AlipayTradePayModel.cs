@@ -81,7 +81,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public ExtendParams ExtendParams { get; set; }
 
         /// <summary>
-        /// 订单包含的商品列表信息，Json格式，其它说明详见商品明细说明
+        /// 订单包含的商品列表信息，json格式，其它说明详见商品明细说明
         /// </summary>
         [JsonProperty("goods_detail")]
         public List<GoodsDetail> GoodsDetail { get; set; }
@@ -111,7 +111,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ProductCode { get; set; }
 
         /// <summary>
-        /// 描述分账信息，Json格式，其它说明详见分账说明
+        /// 描述分账信息，json格式，其它说明详见分账说明
         /// </summary>
         [JsonProperty("royalty_info")]
         public RoyaltyInfo RoyaltyInfo { get; set; }
@@ -133,6 +133,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("settle_currency")]
         public string SettleCurrency { get; set; }
+
+        /// <summary>
+        /// 描述结算信息，json格式，详见结算参数说明
+        /// </summary>
+        [JsonProperty("settle_info")]
+        public SettleInfo SettleInfo { get; set; }
 
         /// <summary>
         /// 商户门店编号

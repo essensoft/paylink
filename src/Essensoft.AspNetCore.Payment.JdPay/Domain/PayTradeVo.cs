@@ -2,7 +2,6 @@
 
 namespace Essensoft.AspNetCore.Payment.JdPay.Domain
 {
-    [XmlRoot("pay")]
     public class PayTradeVo
     {
         /// <summary>

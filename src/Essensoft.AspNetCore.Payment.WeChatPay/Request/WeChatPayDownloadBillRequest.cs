@@ -6,9 +6,14 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
     public class WeChatPayDownloadBillRequest : IWeChatPayRequest<WeChatPayDownloadBillResponse>
     {
         /// <summary>
-        /// 设备号
+        /// 子商户公众账号ID
         /// </summary>
-        public string DeviceInfo { get; set; }
+        public string SubAppId { get; set; }
+
+        /// <summary>
+        /// 子商户号
+        /// </summary>
+        public string SubMchId { get; set; }
 
         /// <summary>
         /// 对账单日期
@@ -25,16 +30,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// </summary>
         public string TarType { get; set; }
 
-        /// <summary>
-        /// 子商户公众账号ID
-        /// </summary>
-        public string SubAppId { get; set; }
-
-        /// <summary>
-        /// 子商户号
-        /// </summary>
-        public string SubMchId { get; set; }
-
         #region IWeChatPayRequest Members
 
         public string GetRequestUrl()
@@ -46,12 +41,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary()
             {
-                { "device_info", DeviceInfo },
+                { "sub_appid", SubAppId },
+                { "sub_mch_id", SubMchId },
                 { "bill_date", BillDate },
                 { "bill_type", BillType },
                 { "tar_type", TarType },
-                { "sub_appid", SubAppId },
-                { "sub_mch_id", SubMchId },
             };
             return parameters;
         }

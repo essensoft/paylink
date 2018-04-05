@@ -14,6 +14,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Code { get; set; }
 
         /// <summary>
+        /// 若template_style_info.column_info_layout  的值为grid，此项为宫格项所属分组标题。可空。如果需要展示该项，还需支付宝内部进行特殊配置。
+        /// </summary>
+        [JsonProperty("group_title")]
+        public string GroupTitle { get; set; }
+
+        /// <summary>
+        /// 若template_style_info.column_info_layout  的值为grid，此项为宫格项的展示icon。通过接口（alipay.offline.material.image.upload）上传图片。
+        /// </summary>
+        [JsonProperty("icon_id")]
+        public string IconId { get; set; }
+
+        /// <summary>
         /// 扩展信息
         /// </summary>
         [JsonProperty("more_info")]
@@ -24,6 +36,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("operate_type")]
         public string OperateType { get; set; }
+
+        /// <summary>
+        /// 若template_style_info.column_info_layout  的值为grid，此项为宫格项标签。可空。
+        /// </summary>
+        [JsonProperty("tag")]
+        public string Tag { get; set; }
 
         /// <summary>
         /// 栏目的标题

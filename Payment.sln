@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Paymen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationSample", "samples\WebApplicationSample\WebApplicationSample.csproj", "{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Essensoft.AspNetCore.Payment.LianLianPay", "src\Essensoft.AspNetCore.Payment.LianLianPay\Essensoft.AspNetCore.Payment.LianLianPay.csproj", "{16843D79-807F-4973-AF26-66FF7141BAAD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{16843D79-807F-4973-AF26-66FF7141BAAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{16843D79-807F-4973-AF26-66FF7141BAAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{16843D79-807F-4973-AF26-66FF7141BAAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{16843D79-807F-4973-AF26-66FF7141BAAD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +80,7 @@ Global
 		{07AE45BF-9434-4254-A1ED-653300D48DDE} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
 		{66655C56-A98C-4F67-9F41-FECF0AFFA28E} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
 		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76} = {DD8CC860-F3E3-40F4-8A8F-20BF66EA051C}
+		{16843D79-807F-4973-AF26-66FF7141BAAD} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C5BE9B18-CD29-4490-84EA-68EDEEF75428}

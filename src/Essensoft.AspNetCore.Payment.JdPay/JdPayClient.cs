@@ -1,4 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.JdPay.Utility;
+﻿using Essensoft.AspNetCore.Payment.JdPay.Parser;
+using Essensoft.AspNetCore.Payment.JdPay.Utility;
 using Essensoft.AspNetCore.Security;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -73,31 +74,89 @@ namespace Essensoft.AspNetCore.Payment.JdPay
             // 字典排序
             var sortedTxtParams = new JdPayDictionary(request.GetParameters());
 
-            var content = GetEncryptXmlContent(request, sortedTxtParams);
-            Logger.LogInformation(0, "Request Content:{content}", content);
+            var content = BuildEncryptXml(request, sortedTxtParams);
+            Logger.LogInformation(0, "Request:{content}", content);
 
             var rspContent = await Client.DoPostAsync(request.GetRequestUrl(), content);
-            Logger.LogInformation(1, "Response Content:{content}", rspContent);
+            Logger.LogInformation(1, "Response:{content}", rspContent);
 
-            var formatStr = JdPayUtil.FotmatXmlString(rspContent);
-            return DecryptResponseXmlContent<T>(formatStr);
+            var parser = new JdPayXmlParser<T>();
+            var rsp = parser.Parse(JdPayUtility.FotmatXmlString(rspContent));
+            if (!string.IsNullOrEmpty(rsp.Encrypt))
+            {
+                var encrypt = rsp.Encrypt;
+                var base64EncryptStr = Encoding.UTF8.GetString(Convert.FromBase64String(encrypt));
+                var reqBody = DES3.DecryptECB(DesKey, base64EncryptStr);
+                Logger.LogInformation(2, "Encrypt Content:{body}", reqBody);
+
+                var reqBodyDoc = new XmlDocument();
+                reqBodyDoc.LoadXml(reqBody);
+
+                var sign = JdPayUtility.GetValue(reqBodyDoc, "sign");
+                var rootNode = reqBodyDoc.SelectSingleNode("jdpay");
+                var signNode = rootNode.SelectSingleNode("sign");
+                rootNode.RemoveChild(signNode);
+
+                var reqBodyStr = JdPayUtility.ConvertXmlToString(reqBodyDoc);
+                var xmlh = rsp.Body.Substring(0, rsp.Body.IndexOf("<jdpay>"));
+                if (!string.IsNullOrEmpty(xmlh))
+                {
+                    reqBodyStr = reqBodyStr.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", xmlh);
+                }
+                var sha256SourceSignString = SHA256.Compute(reqBodyStr);
+                var decryptByte = JdPaySignature.Decrypt(sign, RSAPublicParameters);
+                var decryptStr = DES3.BytesToString(decryptByte);
+                if (sha256SourceSignString == decryptStr)
+                {
+                    rsp = parser.Parse(reqBody);
+                    rsp.Encrypt = encrypt;
+                }
+                else
+                {
+                    throw new Exception("sign check fail: check Sign and Data Fail!");
+                }
+            }
+            return rsp;
         }
 
         public Task<T> PageExecuteAsync<T>(IJdPayRequest<T> request, string reqMethod) where T : JdPayResponse
         {
             // 字典排序
             var sortedTxtParams = new JdPayDictionary(request.GetParameters());
-            var encyptParams = GetEncryptDicContent(request, sortedTxtParams);
+            var encyptParams = BuildEncryptDic(request, sortedTxtParams);
             var rsp = Activator.CreateInstance<T>();
-            rsp.Body = GetHtmlRequestContent(request.GetRequestUrl(), encyptParams, reqMethod);
-            Logger.LogInformation(0, "Request Html:{body}", rsp.Body);
+
+            var url = request.GetRequestUrl();
+            if (reqMethod == "GET")
+            {
+                //拼接get请求的url
+                var tmpUrl = url;
+                if (encyptParams != null && encyptParams.Count > 0)
+                {
+                    if (tmpUrl.Contains("?"))
+                    {
+                        tmpUrl = tmpUrl + "&" + HttpClientEx.BuildQuery(encyptParams);
+                    }
+                    else
+                    {
+                        tmpUrl = tmpUrl + "?" + HttpClientEx.BuildQuery(encyptParams);
+                    }
+                }
+                rsp.Body = tmpUrl;
+            }
+            else
+            {
+                //输出post表单
+                rsp.Body = BuildHtmlRequest(url, encyptParams);
+            }
+
             return Task.FromResult(rsp);
         }
 
-        private string GetEncryptXmlContent<T>(IJdPayRequest<T> request, JdPayDictionary dic) where T : JdPayResponse
+        private string BuildEncryptXml<T>(IJdPayRequest<T> request, JdPayDictionary dic) where T : JdPayResponse
         {
-            var xmldoc = JdPayUtil.SortedDictionary2AllXml(dic);
-            var smlStr = JdPayUtil.ConvertXmlToString(xmldoc);
+            var xmldoc = JdPayUtility.SortedDictionary2AllXml(dic);
+            var smlStr = JdPayUtility.ConvertXmlToString(xmldoc);
             var sha256SourceSignString = SHA256.Compute(smlStr);
             var encyptBytes = JdPaySignature.Encrypt(sha256SourceSignString, RSAPrivateParameters);
             var sign = Convert.ToBase64String(encyptBytes, Base64FormattingOptions.InsertLineBreaks);
@@ -111,10 +170,10 @@ namespace Essensoft.AspNetCore.Payment.JdPay
                 { ENCRYPT, Convert.ToBase64String(Encoding.UTF8.GetBytes(encrypt)) }
             };
 
-            return JdPayUtil.SortedDictionary2XmlStr(reqdic);
+            return JdPayUtility.SortedDictionary2XmlStr(reqdic);
         }
 
-        private JdPayDictionary GetEncryptDicContent<T>(IJdPayRequest<T> request, IDictionary<string, string> dic) where T : JdPayResponse
+        private JdPayDictionary BuildEncryptDic<T>(IJdPayRequest<T> request, IDictionary<string, string> dic) where T : JdPayResponse
         {
             var signDic = new JdPayDictionary(dic)
             {
@@ -122,7 +181,8 @@ namespace Essensoft.AspNetCore.Payment.JdPay
                 { MERCHANT, Options.Merchant },
             };
 
-            var sign = JdPaySignature.RSASign(signDic, RSAPrivateParameters);
+            var signContent = JdPaySignature.GetSignContent(signDic);
+            var sign = JdPaySignature.RSASign(signContent, RSAPrivateParameters);
 
             var encyptDic = new JdPayDictionary
             {
@@ -141,55 +201,10 @@ namespace Essensoft.AspNetCore.Payment.JdPay
             return encyptDic;
         }
 
-        private T DecryptResponseXmlContent<T>(string xml) where T : JdPayResponse
-        {
-            if (string.IsNullOrEmpty(xml))
-            {
-                throw new Exception("Content is Empty!");
-            }
-
-            var entity = JdPayUtil.Deserialize<T>(xml);
-            if (!string.IsNullOrEmpty(entity?.Encrypt))
-            {
-                var base64EncryptStr = Encoding.UTF8.GetString(Convert.FromBase64String(entity.Encrypt));
-                var reqBody = DES3.DecryptECB(DesKey, base64EncryptStr);
-
-                var reqBodyDoc = new XmlDocument();
-                reqBodyDoc.LoadXml(reqBody);
-
-                var inputSign = JdPayUtil.GetValue(reqBodyDoc, "sign");
-                var jdpayRoot = reqBodyDoc.SelectSingleNode("jdpay");
-                var signNode = jdpayRoot.SelectSingleNode("sign");
-                jdpayRoot.RemoveChild(signNode);
-
-                var reqBodyStr = JdPayUtil.ConvertXmlToString(reqBodyDoc);
-                var xmlh = xml.Substring(0, xml.IndexOf("<jdpay>"));
-                if (!string.IsNullOrEmpty(xmlh))
-                {
-                    reqBodyStr = reqBodyStr.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", xmlh);
-                }
-                if (JdPaySignature.RSACheckContent(reqBodyStr, inputSign, RSAPublicParameters))
-                {
-                    entity = JdPayUtil.Deserialize<T>(reqBody);
-                }
-                else
-                {
-                    throw new Exception("sign check fail: check Sign and Data Fail!");
-                }
-
-                entity.Body = reqBody;
-            }
-            else
-            {
-                entity.Body = xml;
-            }
-            return entity;
-        }
-
-        private string GetHtmlRequestContent(string url, JdPayDictionary dicPara, string strMethod)
+        private string BuildHtmlRequest(string url, JdPayDictionary dicPara)
         {
             var sbHtml = new StringBuilder();
-            sbHtml.Append("<form id='submit' name='submit' action='" + url + "' method='" + strMethod + "' style='display:none;'>");
+            sbHtml.Append("<form id='submit' name='submit' action='" + url + "' method='post' style='display:none;'>");
             foreach (var temp in dicPara)
             {
                 sbHtml.Append("<input  name='" + temp.Key + "' value='" + temp.Value + "'/>");

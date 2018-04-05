@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 using System.Text;
+
 namespace Essensoft.AspNetCore.Payment.Alipay.Utility
 {
     internal class AlipayEncrypt
@@ -59,7 +60,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         }
 
         /// <summary>
-        ///     初始化向量
+        ///    初始化向量
         /// </summary>
         /// <param name="blockSize"></param>
         /// <returns></returns>

@@ -113,12 +113,12 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
             UnionPaySignature.Sign(txtParams, SignCertificate.certId, SignCertificate.key, Options.SecureKey);
             var query = HttpClientEx.BuildQuery(txtParams);
-            Logger.LogInformation(0, "Request Content:{query}", query);
+            Logger.LogInformation(0, "Request:{query}", query);
 
             var rspContent = await Client.DoPostAsync(request.GetRequestUrl(Options.TestMode), query);
-            Logger.LogInformation(1, "Response Content:{content}", rspContent.Content);
+            Logger.LogInformation(1, "Response:{content}", rspContent.Content);
 
-            if (rspContent.ContentType.Contains("text/plain"))
+            if (true == rspContent.ContentType?.Contains("text/plain"))
             {
                 throw new Exception(rspContent.Content);
             }
@@ -203,7 +203,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         private string BuildHtmlRequest(string url, UnionPayDictionary dicPara, string strMethod)
         {
             var sbHtml = new StringBuilder();
-            sbHtml.Append("<form id='submit' name='submit' action='" + url + "' method='" + strMethod + "' style='display:none;'>");
+            sbHtml.Append("<form id='submit' name='submit' action='" + url + "' method='post' style='display:none;'>");
             foreach (var temp in dicPara)
             {
                 sbHtml.Append("<input  name='" + temp.Key + "' value='" + temp.Value + "'/>");

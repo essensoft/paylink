@@ -32,12 +32,11 @@ namespace Essensoft.AspNetCore.Payment.QPay
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : QPayNotifyResponse
         {
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
-            Logger.LogInformation(1, "Request Content:{body}", body);
+            Logger.LogInformation(0, "Request:{body}", body);
 
             var parser = new QPayXmlParser<T>();
             var rsp = parser.Parse(body);
             CheckNotifySign(rsp);
-            rsp.Body = body;
             return rsp;
         }
 
@@ -48,8 +47,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
                 throw new Exception("sign check fail: Body is Empty!");
             }
 
-            var sign = response?.Sign;
-            if (string.IsNullOrEmpty(sign))
+            if (!response.Parameters.TryGetValue("sign", out var sign))
             {
                 throw new Exception("sign check fail: sign is Empty!");
             }

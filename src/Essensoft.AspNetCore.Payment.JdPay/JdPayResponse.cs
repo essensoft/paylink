@@ -6,6 +6,18 @@ namespace Essensoft.AspNetCore.Payment.JdPay
     public abstract class JdPayResponse : JdPayObject
     {
         /// <summary>
+        /// 原始内容
+        /// </summary>
+        [XmlIgnore]
+        public string Body { get; set; }
+
+        /// <summary>
+        /// 原始参数
+        /// </summary>
+        [XmlIgnore]
+        public JdPayDictionary Parameters { get; internal set; }
+
+        /// <summary>
         /// 版本号
         /// </summary>
         [XmlElement("version")]
@@ -40,11 +52,5 @@ namespace Essensoft.AspNetCore.Payment.JdPay
         /// </summary>
         [XmlElement("encrypt")]
         public string Encrypt { get; set; }
-
-        /// <summary>
-        /// 完整报文
-        /// </summary>
-        [XmlIgnore]
-        public string Body { get; set; }
     }
 }

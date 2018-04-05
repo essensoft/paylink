@@ -1,5 +1,6 @@
 ﻿using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.JdPay;
+using Essensoft.AspNetCore.Payment.LianLianPay;
 using Essensoft.AspNetCore.Payment.QPay;
 using Essensoft.AspNetCore.Payment.UnionPay;
 using Essensoft.AspNetCore.Payment.WeChatPay;
@@ -38,12 +39,14 @@ namespace WebApplicationSample
             services.AddQPay();
             services.AddUnionPay();
             services.AddWeChatPay();
+            services.AddLianLianPay();
 
             services.Configure<AlipayOptions>(Configuration.GetSection("Alipay"));
             services.Configure<JdPayOptions>(Configuration.GetSection("JdPay"));
             services.Configure<QPayOptions>(Configuration.GetSection("QPay"));
             services.Configure<UnionPayOptions>(Configuration.GetSection("UnionPay"));
             services.Configure<WeChatPayOptions>(Configuration.GetSection("WeChatPay"));
+            services.Configure<LianLianPayOptions>(Configuration.GetSection("LianLianPay"));
 
             services.AddWebEncoders(opt =>
             {
@@ -76,7 +79,7 @@ namespace WebApplicationSample
             //    "EncryptCert": "xxx",
             //    "MiddleCert": "xxx",
             //    "RootCert": "xxx",
-            //    "SecureKey": "xxx",
+            //    "TestMode": "true",
             //  },
             //  "WeChatPay": {
             //    "AppId": "xxx",

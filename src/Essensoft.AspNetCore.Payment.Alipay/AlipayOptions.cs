@@ -23,7 +23,7 @@
         public string ServerUrl { get; set; } = "https://openapi.alipay.com/gateway.do";
 
         /// <summary>
-        /// 数据格式 仅支持JSON
+        /// 数据格式
         /// </summary>
         public string Format { get; set; } = "json";
 

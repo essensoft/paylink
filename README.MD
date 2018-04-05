@@ -4,13 +4,13 @@
 
 Package  | NuGet 
 -------- | :------------ 
-Essensoft.AspNetCore.Payment.All		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.All.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.All)
 Essensoft.AspNetCore.Payment.Alipay		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Alipay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Alipay)
 Essensoft.AspNetCore.Payment.JdPay		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.JdPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.JdPay)
 Essensoft.AspNetCore.Payment.QPay		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.QPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.QPay)
 Essensoft.AspNetCore.Payment.Security		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Security.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Security)
 Essensoft.AspNetCore.Payment.UnionPay		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.UnionPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.UnionPay)
 Essensoft.AspNetCore.Payment.WeChatPay		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.WeChatPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.WeChatPay)
+Essensoft.AspNetCore.Payment.LianLianPay		| [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.LianLianPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.LianLianPay)
 
 ## 官方文档
 
@@ -28,7 +28,7 @@ Essensoft.AspNetCore.Payment.WeChatPay		| [![NuGet](https://img.shields.io/nuget
 
 ## 开发环境
 * Windows 10
-* VS2017 15.6.4
+* VS2017 15.6.5
 * .NET Core SDK 2.1.103
 
 ## 支持渠道
@@ -36,6 +36,10 @@ Essensoft.AspNetCore.Payment.WeChatPay		| [![NuGet](https://img.shields.io/nuget
 
 ## 使用方式
 见示例项目：WebApplicationSample</p>
+
+<p align="center">
+    <img src="http://p687qfgw0.bkt.clouddn.com/demo.png">
+</p>
 
 ----
 

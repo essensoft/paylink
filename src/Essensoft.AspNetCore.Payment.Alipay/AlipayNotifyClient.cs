@@ -34,25 +34,25 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             RSAPublicParameters = AlipaySignature.GetPublicParameters(Options.RsaPublicKey);
         }
 
-        public Task<T> ExecuteAsync<T>(HttpRequest request) where T : AlipayNotifyResponse
+        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : AlipayNotifyResponse
         {
-            var parameters = GetParameters(request);
+            var parameters = await GetParametersAsync(request);
+            var query = HttpClientEx.BuildQuery(parameters);
+            Logger.LogInformation(0, "Request:{query}", query);
+
             var parser = new AlipayDictionaryParser<T>();
             var rsp = parser.Parse(parameters);
-
-            var query = HttpClientEx.BuildQuery(parameters);
-            Logger.LogInformation(0, "Request Content:{query}", query);
-
             CheckNotifySign(parameters, RSAPublicParameters, Options.SignType);
-            return Task.FromResult(rsp);
+            return rsp;
         }
 
-        private SortedDictionary<string, string> GetParameters(HttpRequest request)
+        private async Task<SortedDictionary<string, string>> GetParametersAsync(HttpRequest request)
         {
             var parameters = new SortedDictionary<string, string>();
             if (request.Method == "POST")
             {
-                foreach (var item in request.Form)
+                var form = await request.ReadFormAsync();
+                foreach (var item in form)
                 {
                     parameters.Add(item.Key, item.Value);
                 }
@@ -67,37 +67,37 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             return parameters;
         }
 
-        private void CheckNotifySign(IDictionary<string, string> content, RSAParameters parameters, string signType)
+        private void CheckNotifySign(IDictionary<string, string> para, RSAParameters parameters, string signType)
         {
-            if (content.Count == 0)
+            if (para.Count == 0)
             {
                 throw new AlipayException("sign check fail: content is Empty!");
             }
 
-            var sign = content["sign"];
-            if (string.IsNullOrEmpty(sign))
+            if (!para.TryGetValue("sign", out var sign))
             {
                 throw new AlipayException("sign check fail: sign is Empty!");
             }
 
-            var prestr = GetSignContent(content);
+            var prestr = GetSignContent(para);
             if (!AlipaySignature.RSACheckContent(prestr, sign, parameters, signType))
             {
                 throw new AlipayException("sign check fail: check Sign and Data Fail JSON also");
             }
         }
 
-        private string GetSignContent(IDictionary<string, string> parameters)
+        private string GetSignContent(IDictionary<string, string> para)
         {
-            var content = new StringBuilder();
-            foreach (var iter in parameters)
+            if (para == null || para.Count == 0)
+                return string.Empty;
+
+            var sb = new StringBuilder();
+            foreach (var iter in para)
             {
-                if (iter.Key.ToLower() != "sign" && iter.Key.ToLower() != "sign_type" && !string.IsNullOrEmpty(iter.Value))
-                {
-                    content.Append(iter.Key + "=" + iter.Value + "&");
-                }
+                if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign" && iter.Key != "sign_type")
+                    sb.Append(iter.Key).Append("=").Append(iter.Value).Append("&");
             }
-            return content.ToString().Substring(0, content.Length - 1);
+            return sb.Remove(sb.Length - 1, 1).ToString();
         }
     }
 }

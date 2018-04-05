@@ -155,11 +155,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             var sb = new StringBuilder();
             foreach (var key in list)
             {
-                var value = para[key];
-                if (encode)
-                {
-                    value = WebUtility.UrlEncode(value);
-                }
+                var value = encode ? WebUtility.UrlEncode(para[key]) : para[key];
                 sb.Append(key).Append("=").Append(value).Append("&");
             }
 
