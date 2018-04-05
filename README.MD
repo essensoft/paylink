@@ -26,6 +26,8 @@ Essensoft.AspNetCore.Payment.LianLianPay		| [![NuGet](https://img.shields.io/nug
 
 * 银联支付 [开放平台](https://open.unionpay.com/ajweb/product)
 
+* 连连支付 [开放平台](http://open.lianlianpay.com/)
+
 ## 开发环境
 * Windows 10
 * VS2017 15.6.5
