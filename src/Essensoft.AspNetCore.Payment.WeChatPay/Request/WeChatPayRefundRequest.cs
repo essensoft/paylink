@@ -6,6 +6,16 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
     public class WeChatPayRefundRequest : IWeChatPayCertificateRequest<WeChatPayRefundResponse>
     {
         /// <summary>
+        /// 子商户公众账号ID
+        /// </summary>
+        public string SubAppId { get; set; }
+
+        /// <summary>
+        /// 子商户号
+        /// </summary>
+        public string SubMchId { get; set; }
+
+        /// <summary>
         /// 微信订单号
         /// </summary>
         public string TransactionId { get; set; }
@@ -26,12 +36,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         public int TotalFee { get; set; }
 
         /// <summary>
-        /// 退款金额
+        /// 申请退款金额
         /// </summary>
         public int RefundFee { get; set; }
 
         /// <summary>
-        /// 货币种类
+        /// 退款货币种类
         /// </summary>
         public string RefundFeeType { get; set; }
 
@@ -50,16 +60,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// </summary>
         public string NotifyUrl { get; set; }
 
-        /// <summary>
-        /// 子商户公众账号ID
-        /// </summary>
-        public string SubAppId { get; set; }
-
-        /// <summary>
-        /// 子商户号
-        /// </summary>
-        public string SubMchId { get; set; }
-
         #region IWeChatPayRequest Members
 
         public string GetRequestUrl()
@@ -71,6 +71,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary()
             {
+                { "sub_appid", SubAppId },
+                { "sub_mch_id", SubMchId },
                 { "transaction_id", TransactionId },
                 { "out_trade_no", OutTradeNo },
                 { "out_refund_no", OutRefundNo },
@@ -80,8 +82,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { "refund_desc", RefundDesc },
                 { "refund_account", RefundAccount },
                 { "notify_url", NotifyUrl },
-                { "sub_appid", SubAppId },
-                { "sub_mch_id", SubMchId },
             };
             return parameters;
         }

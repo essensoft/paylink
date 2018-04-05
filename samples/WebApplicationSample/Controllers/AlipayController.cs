@@ -96,7 +96,6 @@ namespace WebApplicationSample.Controllers
             return Ok(response.Body);
         }
 
-
         [HttpPost]
         public async Task<IActionResult> Query(string out_trade_no, string trade_no)
         {

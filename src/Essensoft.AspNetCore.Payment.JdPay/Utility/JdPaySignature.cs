@@ -4,14 +4,13 @@ using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
 using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace Essensoft.AspNetCore.Payment.JdPay.Utility
 {
     public class JdPaySignature
     {
-        public static string GetSignContent(SortedDictionary<string, string> para)
+        public static string GetSignContent(JdPayDictionary para)
         {
             if (para == null || para.Count == 0)
                 return string.Empty;
@@ -26,18 +25,11 @@ namespace Essensoft.AspNetCore.Payment.JdPay.Utility
             return sb.Remove(sb.Length - 1, 1).ToString();
         }
 
-        public static string RSASign(SortedDictionary<string, string> dic, ICipherParameters parameters)
+        public static string RSASign(string sourceSignString, ICipherParameters parameters)
         {
-            var sourceSignString = GetSignContent(dic);
             var sha256SourceSignString = SHA256.Compute(sourceSignString);
             var newsks = Encrypt(sha256SourceSignString, parameters);
             return Convert.ToBase64String(newsks, Base64FormattingOptions.InsertLineBreaks);
-        }
-
-        public static bool RSACheckContent(SortedDictionary<string, string> dic, string sign, ICipherParameters parameters)
-        {
-            var strSourceData = GetSignContent(dic);
-            return RSACheckContent(strSourceData, sign, parameters);
         }
 
         public static bool RSACheckContent(string content, string sign, ICipherParameters parameters)

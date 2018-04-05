@@ -57,100 +57,100 @@ namespace Essensoft.AspNetCore.Payment.JdPay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : JdPayNotifyResponse
         {
-            if (request.ContentType == "application/x-www-form-urlencoded")
+            if (request.HasFormContentType)
             {
-                var dic = new JdPayDictionary();
-                foreach (var item in request.Form)
-                {
-                    if (!string.IsNullOrEmpty(item.Value))
-                    {
-                        if (item.Key == "sign")
-                        {
-                            dic.Add(item.Key, item.Value);
-                        }
-                        else
-                        {
-                            dic.Add(item.Key, DES3.DecryptECB(DesKey, item.Value));
-                        }
-                    }
-                }
+                var parameters = await GetParametersAsync(request);
 
-                var query = HttpClientEx.BuildQuery(dic);
-                Logger.LogInformation(1, "Request Content:{query}", query);
+                var query = HttpClientEx.BuildQuery(parameters);
+                Logger.LogInformation(0, "Request:{query}", query);
 
                 var parser = new JdPayDictionaryParser<T>();
-                var rsp = parser.Parse(dic);
+                var rsp = parser.Parse(parameters);
 
-                CheckNotifySign(dic, RSAPrivateParameters);
+                CheckNotifySign(rsp.Parameters, RSAPrivateParameters);
+                return rsp;
+            }
+            else if(request.HasTextXmlContentType())
+            {
+                var body = await new StreamReader(request.Body).ReadToEndAsync();
+                Logger.LogInformation(0, "Request:{body}", body);
+
+                var parser = new JdPayXmlParser<T>();
+                var rsp = parser.Parse(JdPayUtility.FotmatXmlString(body));
+                if (!string.IsNullOrEmpty(rsp.Encrypt))
+                {
+                    var encrypt = rsp.Encrypt;
+                    var base64EncryptStr = Encoding.UTF8.GetString(Convert.FromBase64String(encrypt));
+                    var reqBody = DES3.DecryptECB(DesKey, base64EncryptStr);
+                    Logger.LogInformation(1, "Encrypt Content:{body}", reqBody);
+
+                    var reqBodyDoc = new XmlDocument();
+                    reqBodyDoc.LoadXml(reqBody);
+
+                    var sign = JdPayUtility.GetValue(reqBodyDoc, "sign");
+                    var rootNode = reqBodyDoc.SelectSingleNode("jdpay");
+                    var signNode = rootNode.SelectSingleNode("sign");
+                    rootNode.RemoveChild(signNode);
+
+                    var reqBodyStr = JdPayUtility.ConvertXmlToString(reqBodyDoc);
+                    var xmlh = rsp.Body.Substring(0, rsp.Body.IndexOf("<jdpay>"));
+                    if (!string.IsNullOrEmpty(xmlh))
+                    {
+                        reqBodyStr = reqBodyStr.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", xmlh);
+                    }
+                    var sha256SourceSignString = SHA256.Compute(reqBodyStr);
+                    var decryptByte = JdPaySignature.Decrypt(sign, RSAPublicParameters);
+                    var decryptStr = DES3.BytesToString(decryptByte);
+                    if (sha256SourceSignString == decryptStr)
+                    {
+                        rsp = parser.Parse(reqBody);
+                        rsp.Encrypt = encrypt;
+                    }
+                    else
+                    {
+                        throw new Exception("sign check fail: check Sign and Data Fail!");
+                    }
+                }
                 return rsp;
             }
             else
             {
-                var body = await new StreamReader(request.Body).ReadToEndAsync();
-                Logger.LogInformation(1, "Request Content:{body}", body);
-
-                var rsp = DecryptResponseXml<T>(JdPayUtil.FotmatXmlString(body));
-                return rsp;
+                throw new Exception("sign check fail: check Sign and Data Fail!");
             }
         }
 
-        private T DecryptResponseXml<T>(string xml) where T : JdPayNotifyResponse
+        private async Task<JdPayDictionary> GetParametersAsync(HttpRequest request)
         {
-            var entity = JdPayUtil.Deserialize<T>(xml);
-            if (!string.IsNullOrEmpty(entity?.Encrypt))
+            var parameters = new JdPayDictionary();
+            var form = await request.ReadFormAsync();
+            foreach (var item in form)
             {
-                var base64EncryptStr = Encoding.UTF8.GetString(Convert.FromBase64String(entity.Encrypt));
-                var reqBody = DES3.DecryptECB(DesKey, base64EncryptStr);
-
-                var reqBodyDoc = new XmlDocument();
-                reqBodyDoc.LoadXml(reqBody);
-
-                var inputSign = JdPayUtil.GetValue(reqBodyDoc, "sign");
-                var jdpayRoot = reqBodyDoc.SelectSingleNode("jdpay");
-                var signNode = jdpayRoot.SelectSingleNode("sign");
-                jdpayRoot.RemoveChild(signNode);
-
-                var reqBodyStr = JdPayUtil.ConvertXmlToString(reqBodyDoc);
-                var xmlh = xml.Substring(0, xml.IndexOf("<jdpay>"));
-                if (!string.IsNullOrEmpty(xmlh))
+                if (item.Key != "sign")
                 {
-                    reqBodyStr = reqBodyStr.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", xmlh);
-                }
-                var sha256SourceSignString = SHA256.Compute(reqBodyStr);
-                var decryptByte = JdPaySignature.Decrypt(inputSign, RSAPublicParameters);
-                var decryptStr = DES3.BytesToString(decryptByte);
-                if (sha256SourceSignString == decryptStr)
-                {
-                    entity = JdPayUtil.Deserialize<T>(reqBody);
+                    parameters.Add(item.Key, DES3.DecryptECB(DesKey, item.Value));
                 }
                 else
                 {
-                    throw new Exception("sign check fail: check Sign and Data Fail!");
+                    parameters.Add(item.Key, item.Value);
                 }
-
-                entity.Body = reqBody;
             }
-            else
-            {
-                entity.Body = xml;
-            }
-            return entity;
+            return parameters;
         }
 
-        private void CheckNotifySign(JdPayDictionary content, object parameters)
+        private void CheckNotifySign(JdPayDictionary para, object parameters)
         {
-            if (content.Count == 0)
+            if (para.Count == 0)
             {
-                throw new Exception("sign check fail: Body is Empty!");
+                throw new Exception("sign check fail: para is Empty!");
             }
 
-            var sign = content["sign"];
-            if (string.IsNullOrEmpty(sign))
+            if (!para.TryGetValue("sign", out var sign))
             {
                 throw new Exception("sign check fail: sign is Empty!");
             }
 
-            if (!JdPaySignature.RSACheckContent(content, sign, RSAPublicParameters))
+            var signContent = JdPaySignature.GetSignContent(para);
+            if (!JdPaySignature.RSACheckContent(signContent, sign, RSAPublicParameters))
             {
                 throw new Exception("sign check fail: check Sign and Data Fail");
             }

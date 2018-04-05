@@ -3,8 +3,8 @@
     /// <summary>
     /// 京东支付结果解析
     /// </summary>
-    public interface IJdPayParser<T> where T : JdPayObject
+    public interface IJdPayParser<T> where T : JdPayResponse
     {
-        T Parse(JdPayDictionary dic);
+        T Parse(string body);
     }
 }

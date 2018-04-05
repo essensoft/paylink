@@ -14,10 +14,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ItemMandatory { get; set; }
 
         /// <summary>
-        /// 缴费项最大可选数  如果缴费项是多选模式，此参数生效，范围是1-9
+        /// 缴费项最大可选数  如果缴费项是多选模式，此参数生效，范围是1-9，如果为空，则最大项默认为9
         /// </summary>
-        [JsonProperty("item_max_num")]
-        public long ItemMaxNum { get; set; }
+        [JsonProperty("item_maximum")]
+        public long ItemMaximum { get; set; }
 
         /// <summary>
         /// 缴费项名称

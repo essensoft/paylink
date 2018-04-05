@@ -95,7 +95,7 @@ namespace WebApplicationSample.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Refund(string tradeNum, string oTradeNum, long amount, string currency)
+        public async Task<IActionResult> Refund(string tradeNum, string oTradeNum, long amount, string currency, string notifyUrl)
         {
             var request = new JdPayRefundRequest()
             {
@@ -103,6 +103,7 @@ namespace WebApplicationSample.Controllers
                 OTradeNum = oTradeNum,
                 Amount = amount,
                 Currency = currency,
+                NotifyUrl = notifyUrl
             };
 
             var response = await _client.ExecuteAsync(request);
@@ -124,11 +125,11 @@ namespace WebApplicationSample.Controllers
 
         [HttpGet]  // h5 get
         [HttpPost] // pc post
-        public IActionResult Return()
+        public async Task<IActionResult> Return()
         {
             try
             {
-                var notify = _notifyClient.ExecuteAsync<JdPaySyncReturnResponse>(Request);
+                var notify = await _notifyClient.ExecuteAsync<JdPaySyncReturnResponse>(Request);
                 return Content("success", "text/plain");
             }
             catch

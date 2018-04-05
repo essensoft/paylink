@@ -6,16 +6,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
     public class WeChatPayOrderQueryRequest : IWeChatPayRequest<WeChatPayOrderQueryResponse>
     {
         /// <summary>
-        /// 微信订单号
-        /// </summary>
-        public string TransactionId { get; set; }
-
-        /// <summary>
-        /// 商户订单号
-        /// </summary>
-        public string OutTradeNo { get; set; }
-
-        /// <summary>
         /// 子商户公众账号ID
         /// </summary>
         public string SubAppId { get; set; }
@@ -24,6 +14,16 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// 子商户号
         /// </summary>
         public string SubMchId { get; set; }
+
+        /// <summary>
+        /// 微信订单号
+        /// </summary>
+        public string TransactionId { get; set; }
+
+        /// <summary>
+        /// 商户订单号
+        /// </summary>
+        public string OutTradeNo { get; set; }
 
         #region IWeChatPayRequest Members
 
@@ -36,10 +36,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary()
             {
-                { "transaction_id", TransactionId },
-                { "out_trade_no", OutTradeNo },
                 { "sub_appid", SubAppId },
                 { "sub_mch_id", SubMchId },
+                { "transaction_id", TransactionId },
+                { "out_trade_no", OutTradeNo },
             };
             return parameters;
         }

@@ -25,7 +25,8 @@ namespace Essensoft.AspNetCore.Payment.JdPay.Notify
         /// <summary>
         /// 交易列表
         /// </summary>
-        [XmlElement("payList")]
+        [XmlArray("payList")]
+        [XmlArrayItem("pay")]
         public List<PayTradeVo> PayList { get; set; }
 
         // 退款相关字段

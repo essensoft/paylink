@@ -3,9 +3,6 @@ using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
-    /// <summary>
-    /// 资金账单下载
-    /// </summary>
     public class WeChatPayDownloadFundFlowRequest : IWeChatPayCertificateRequest<WeChatPayDownloadFundFlowResponse>
     {
         /// <summary>

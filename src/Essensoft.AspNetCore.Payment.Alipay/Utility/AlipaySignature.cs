@@ -15,10 +15,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             if (para == null || para.Count == 0)
                 return string.Empty;
 
-            var sortedDic = new SortedDictionary<string, string>(para);
-
+            var sortPara = new SortedDictionary<string, string>(para);
             var sb = new StringBuilder();
-            foreach (var iter in sortedDic)
+            foreach (var iter in sortPara)
             {
                 if (!string.IsNullOrEmpty(iter.Value))
                     sb.Append(iter.Key).Append("=").Append(iter.Value).Append("&");
@@ -32,12 +31,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             var rsa = RSA.Create();
             rsa.ImportParameters(parameters);
             return Convert.ToBase64String(rsa.SignData(Encoding.UTF8.GetBytes(data), "RSA2" == signType ? HashAlgorithmName.SHA256 : HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1));
-        }
-
-        public static string RSASign(IDictionary<string, string> content, RSAParameters parameters, string signType)
-        {
-            var signContent = GetSignContent(content);
-            return RSASignContent(signContent, parameters, signType);
         }
 
         public static bool RSACheckContent(string signContent, string sign, RSAParameters parameters, string signType)

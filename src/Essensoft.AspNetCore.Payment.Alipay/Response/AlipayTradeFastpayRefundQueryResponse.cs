@@ -8,6 +8,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     public class AlipayTradeFastpayRefundQueryResponse : AlipayResponse
     {
         /// <summary>
+        /// 退款失败错误码。只在使用异步退款接口情况下才会返回该字段
+        /// </summary>
+        [JsonProperty("error_code")]
+        public string ErrorCode { get; set; }
+
+        /// <summary>
         /// 行业特殊信息（例如在医保卡支付退款中，医保局向商户返回医疗信息）。
         /// </summary>
         [JsonProperty("industry_sepc_detail")]
@@ -54,6 +60,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonProperty("refund_reason")]
         public string RefundReason { get; set; }
+
+        /// <summary>
+        /// 只在使用异步退款接口情况下才返回该字段。REFUND_PROCESSING 退款处理中；REFUND_SUCCESS 退款处理成功；REFUND_FAIL 退款失败;
+        /// </summary>
+        [JsonProperty("refund_status")]
+        public string RefundStatus { get; set; }
 
         /// <summary>
         /// 该笔退款所对应的交易的订单金额

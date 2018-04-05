@@ -15,6 +15,7 @@
             <li><a href="#tabs-api-qpay">QQ钱包</a></li>
             <li><a href="#tabs-api-jdpay">京东支付</a></li>
             <li><a href="#tabs-api-unionpay">银联支付</a></li>
+            <li><a href="#tabs-api-lianlianpay">连连支付</a></li>
         </ul>
         <div id="tabs-api-1">
             <h3>支付平台 官方文档：</h3>
@@ -23,6 +24,7 @@
             <p>QQ钱包：<a href="https://qpay.qq.com/qpaywiki.shtml" target="_blank">开发文档</a>、<a href="http://kf.qq.com/product/qq_enterprise.html" target="_blank">帮助中心</a></p>
             <p>京东支付：<a href="http://payapi.jd.com/" target="_blank">开发文档</a></p>
             <p>银联支付：<a href="https://open.unionpay.com/ajweb/product" target="_blank">开放平台</a></p>
+            <p>连连支付：<a href="http://open.lianlianpay.com/" target="_blank">开放平台</a></p>
             <h3>Payment：</h3>
             <p>QQ交流群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=aac56c8f02f54893267d3ac90787c1794a7687f3c31a923812a36b67c4ee6271">522457525</a></p>
             <h3>使用方式</h3>
@@ -1146,6 +1148,10 @@
                             <input type="text" name="currency" value="CNY">
                         </p>
                         <p>
+                            <label>notify_url:</label>
+                            <input type="text" name="notifyUrl" value="http://www.baidu.com/notify/jdpay">
+                        </p>
+                        <p>
                             <label>&nbsp;</label>
                             <input type="submit" class="button" value="提交">
                         </p>
@@ -1681,6 +1687,396 @@
                     <p class="faq">
                         <a href="https://open.unionpay.com/ajweb/product/newProApiShow?proId=1&apiId=71" target="_blank">* 查看接口 请求参数、响应参数</a>
                     </p>
+                </div>
+            </div>
+        </div>
+        <div id="tabs-api-lianlianpay">
+            <div id="tabs-purchase-lianlianpay">
+                <ul>
+                    <li><a href="#tabs-purchase-1">快捷支付</a></li>
+                    <li><a href="#tabs-purchase-2">网银支付</a></li>
+                    <li><a href="#tabs-purchase-3">认证支付</a></li>
+                    <li><a href="#tabs-purchase-4">订单查询</a></li>
+                    <li><a href="#tabs-purchase-5">银行卡卡bin查询</a></li>
+                    <li><a href="#tabs-purchase-6">用户签约信息查询</a></li>
+                    <li><a href="#tabs-purchase-7">银行卡解约</a></li>
+                    <li><a href="#tabs-purchase-8">银行支持查询</a></li>
+                    <li><a href="#tabs-purchase-9">更换手机号申请</a></li>
+                    <li><a href="#tabs-purchase-10">更换手机号验证</a></li>
+                    <li><a href="#tabs-purchase-11">退款</a></li>
+                    <li><a href="#tabs-purchase-12">退款查询</a></li>
+                </ul>
+                <div id="tabs-purchase-1">
+                    <form class="api-form" asp-controller="LianLianPay" asp-action="QuickPay" method="post" target="_blank">
+                        <p>
+                            <label>no_order：</label>
+                            <input type="text" name="no_order" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>dt_order：</label>
+                            <input type="text" name="dt_order" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>money_order：</label>
+                            <input type="text" name="money_order" value="0.01">
+                        </p>
+                        <p>
+                            <label>name_goods：</label>
+                            <input type="text" name="name_goods" value="连连支付快捷支付测试">
+                        </p>
+                        <p>
+                            <label>user_id：</label>
+                            <input type="text" name="user_id" value="1080088">
+                        </p>
+                        <p>
+                            <label>notify_url：</label>
+                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/lianlianpay/quickpay">
+                        </p>
+                        <p>
+                            <label>url_return：</label>
+                            <input type="text" name="url_return" value="http://www.baidu.com/lianlianpay/quickpayreturn">
+                        </p>
+                        <p>
+                            <label>bank_code：</label>
+                            <input type="text" name="bank_code" value="">
+                        </p>
+                        <p>
+                            <label>pay_type：</label>
+                            <input type="text" name="pay_type" value="2">
+                        </p>
+                        <p>
+                            <label>no_agree：</label>
+                            <input type="text" name="no_agree" value="">
+                        </p>
+                        <p>
+                            <label>risk_item：</label>
+                            <input type="text" name="risk_item" value='{"frms_ware_category":"1999","user_info_full_name":"你好"}'>
+                        </p>
+                        <p>
+                            <label>id_type：</label>
+                            <input type="text" name="id_type" value="0">
+                        </p>
+                        <p>
+                            <label>id_no：</label>
+                            <input type="text" name="id_no" value="">
+                        </p>
+                        <p>
+                            <label>acct_name：</label>
+                            <input type="text" name="acct_name" value="">
+                        </p>
+                        <p>
+                            <label>card_no：</label>
+                            <input type="text" name="card_no" value="">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                </div>
+                <div id="tabs-purchase-2">
+                    <form class="api-form" asp-controller="LianLianPay" asp-action="BankPay" method="post" target="_blank">
+                        <p>
+                            <label>no_order：</label>
+                            <input type="text" name="no_order" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>dt_order：</label>
+                            <input type="text" name="dt_order" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>money_order：</label>
+                            <input type="text" name="money_order" value="0.01">
+                        </p>
+                        <p>
+                            <label>name_goods：</label>
+                            <input type="text" name="name_goods" value="连连支付网银支付测试">
+                        </p>
+                        <p>
+                            <label>user_id：</label>
+                            <input type="text" name="user_id" value="1080088">
+                        </p>
+                        <p>
+                            <label>notify_url：</label>
+                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/lianlianpay/bankpay">
+                        </p>
+                        <p>
+                            <label>url_return：</label>
+                            <input type="text" name="url_return" value="http://www.baidu.com/lianlianpay/bankpayreturn">
+                        </p>
+                        <p>
+                            <label>risk_item：</label>
+                            <input type="text" name="risk_item" value='{"frms_ware_category":"1999","user_info_full_name":"你好"}'>
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                </div>
+                <div id="tabs-purchase-3">
+                    <form class="api-form" asp-controller="LianLianPay" asp-action="AuthPay" method="post" target="_blank">
+                        <p>
+                            <label>no_order：</label>
+                            <input type="text" name="no_order" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>dt_order：</label>
+                            <input type="text" name="dt_order" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>money_order：</label>
+                            <input type="text" name="money_order" value="0.01">
+                        </p>
+                        <p>
+                            <label>name_goods：</label>
+                            <input type="text" name="name_goods" value="连连支付认证支付测试">
+                        </p>
+                        <p>
+                            <label>user_id：</label>
+                            <input type="text" name="user_id" value="1080088">
+                        </p>
+                        <p>
+                            <label>notify_url：</label>
+                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/lianlianpay/authpay">
+                        </p>
+                        <p>
+                            <label>url_return：</label>
+                            <input type="text" name="url_return" value="http://www.baidu.com/lianlianpay/authpayreturn">
+                        </p>
+                        <p>
+                            <label>bank_code：</label>
+                            <input type="text" name="bank_code" value="">
+                        </p>
+                        <p>
+                            <label>pay_type：</label>
+                            <input type="text" name="pay_type" value="D">
+                        </p>
+                        <p>
+                            <label>no_agree：</label>
+                            <input type="text" name="no_agree" value="">
+                        </p>
+                        <p>
+                            <label>risk_item：</label>
+                            <input type="text" name="risk_item" value='{"frms_ware_category":"1999","user_info_full_name":"你好"}'>
+                        </p>
+                        <p>
+                            <label>id_type：</label>
+                            <input type="text" name="id_type" value="0">
+                        </p>
+                        <p>
+                            <label>id_no：</label>
+                            <input type="text" name="id_no" value="">
+                        </p>
+                        <p>
+                            <label>acct_name：</label>
+                            <input type="text" name="acct_name" value="">
+                        </p>
+                        <p>
+                            <label>card_no：</label>
+                            <input type="text" name="card_no" value="">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                </div>
+                <div id="tabs-purchase-4">
+                    <form class="api-form" asp-controller="LianLianPay" asp-action="OrderQuery" method="post" target="_blank">
+                        <p>
+                            <label>no_order：</label>
+                            <input type="text" name="no_order" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>dt_order：</label>
+                            <input type="text" name="dt_order" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>oid_paybill：</label>
+                            <input type="text" name="oid_paybill" value="">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                </div>
+                <div id="tabs-purchase-5">
+                    <form class="api-form" asp-controller="LianLianPay" asp-action="QueryBankCarBin" method="post" target="_blank">
+                        <p>
+                            <label>card_no：</label>
+                            <input type="text" name="card_no" value="">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                </div>
+                <div id="tabs-purchase-6">
+                    <form class="api-form" asp-controller="LianLianPay" asp-action="QueryBankCarBindList" method="post" target="_blank">
+                        <p>
+                            <label>user_id：</label>
+                            <input type="text" name="user_id" value="">
+                        </p>
+                        <p>
+                            <label>offset：</label>
+                            <input type="text" name="offset" value="">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                </div>
+                <div id="tabs-purchase-7">
+                    <form class="api-form" asp-controller="LianLianPay" asp-action="BankCardUnbind" method="post" target="_blank">
+                        <p>
+                            <label>user_id：</label>
+                            <input type="text" name="user_id" value="">
+                        </p>
+                        <p>
+                            <label>pay_type：</label>
+                            <input type="text" name="pay_type" value="">
+                        </p>
+                        <p>
+                            <label>no_agree：</label>
+                            <input type="text" name="no_agree" value="">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                </div>
+                <div id="tabs-purchase-8">
+                    <form class="api-form" asp-controller="LianLianPay" asp-action="SupportBankQuery" method="post" target="_blank">
+                        <p>
+                            <label>bank_code：</label>
+                            <input type="text" name="bank_code" value="">
+                        </p>
+                        <p>
+                            <label>card_type：</label>
+                            <input type="text" name="card_type" value="">
+                        </p>
+                        <p>
+                            <label>product_type：</label>
+                            <input type="text" name="product_type" value="">
+                        </p>
+                        <p>
+                            <label>pay_chnl：</label>
+                            <input type="text" name="pay_chnl" value="">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                </div>
+                <div id="tabs-purchase-9">
+                    <form class="api-form" asp-controller="LianLianPay" asp-action="ModifyPhone" method="post" target="_blank">
+                        <p>
+                            <label>user_id：</label>
+                            <input type="text" name="user_id" value="">
+                        </p>
+                        <p>
+                            <label>no_agree：</label>
+                            <input type="text" name="no_agree" value="">
+                        </p>
+                        <p>
+                            <label>pay_type：</label>
+                            <input type="text" name="pay_type" value="">
+                        </p>
+                        <p>
+                            <label>card_no：</label>
+                            <input type="text" name="card_no" value="">
+                        </p>
+                        <p>
+                            <label>bind_mob：</label>
+                            <input type="text" name="bind_mob" value="">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                </div>
+                <div id="tabs-purchase-10">
+                    <form class="api-form" asp-controller="LianLianPay" asp-action="ModifyPhoneCheck" method="post" target="_blank">
+                        <p>
+                            <label>user_id：</label>
+                            <input type="text" name="user_id" value="">
+                        </p>
+                        <p>
+                            <label>token：</label>
+                            <input type="text" name="token" value="">
+                        </p>
+                        <p>
+                            <label>verify_code：</label>
+                            <input type="text" name="verify_code" value="">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                </div>
+                <div id="tabs-purchase-11">
+                    <form class="api-form" asp-controller="LianLianPay" asp-action="Refund" method="post" target="_blank">
+                        <p>
+                            <label>no_refund：</label>
+                            <input type="text" name="no_refund" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>dt_refund：</label>
+                            <input type="text" name="dt_refund" value="@DateTime.Now.ToString("yyyyMMddHHmmss")">
+                        </p>
+                        <p>
+                            <label>money_refund：</label>
+                            <input type="text" name="money_refund" value="0.01">
+                        </p>
+                        <p>
+                            <label>no_order：</label>
+                            <input type="text" name="no_order" value="">
+                        </p>
+                        <p>
+                            <label>dt_order：</label>
+                            <input type="text" name="dt_order" value="">
+                        </p>
+                        <p>
+                            <label>oid_paybill：</label>
+                            <input type="text" name="oid_paybill" value="">
+                        </p>
+                        <p>
+                            <label>notify_url：</label>
+                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/lianlianpay/refund">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
+                </div>
+                <div id="tabs-purchase-12">
+                    <form class="api-form" asp-controller="LianLianPay" asp-action="RefundQuery" method="post" target="_blank">
+                        <p>
+                            <label>no_refund：</label>
+                            <input type="text" name="no_refund" value="">
+                        </p>
+                        <p>
+                            <label>dt_refund：</label>
+                            <input type="text" name="dt_refund" value="">
+                        </p>
+                        <p>
+                            <label>oid_refundno：</label>
+                            <input type="text" name="oid_refundno" value="">
+                        </p>
+                        <p>
+                            <label>&nbsp;</label>
+                            <input type="submit" class="button" value="提交">
+                        </p>
+                    </form>
                 </div>
             </div>
         </div>

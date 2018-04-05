@@ -15,6 +15,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BackgroundId { get; set; }
 
         /// <summary>
+        /// banner图片地址。 通过接口（alipay.offline.material.image.upload）上传图片。
+        /// </summary>
+        [JsonProperty("banner_img_id")]
+        public string BannerImgId { get; set; }
+
+        /// <summary>
+        /// banner跳转地址。
+        /// </summary>
+        [JsonProperty("banner_url")]
+        public string BannerUrl { get; set; }
+
+        /// <summary>
         /// 背景色
         /// </summary>
         [JsonProperty("bg_color")]
@@ -37,6 +49,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("color")]
         public string Color { get; set; }
+
+        /// <summary>
+        /// 栏位信息布局。目前只支持list（列表）或grid（宫格）形式。如果为空则默认为list。
+        /// </summary>
+        [JsonProperty("column_info_layout")]
+        public string ColumnInfoLayout { get; set; }
 
         /// <summary>
         /// 特色信息，用于领卡预览

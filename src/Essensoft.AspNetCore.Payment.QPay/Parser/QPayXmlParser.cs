@@ -1,60 +1,65 @@
-﻿using Essensoft.AspNetCore.Payment.QPay.Utility;
+﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
-using System.Reflection;
 using System.Xml.Linq;
-using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Parser
 {
-    public class QPayXmlParser<T> : IQPayParser<T> where T : QPayObject
+    public class QPayXmlParser<T> : IQPayParser<T> where T : QPayResponse
     {
-        private static readonly Dictionary<Type, Dictionary<string, PropertyInfo>> DicProperties = new Dictionary<Type, Dictionary<string, PropertyInfo>>();
-
         public T Parse(string body)
         {
             if (string.IsNullOrEmpty(body))
                 throw new ArgumentNullException(nameof(body));
 
-            if (!DicProperties.ContainsKey(typeof(T))) DicProperties[typeof(T)] = GetPropertiesMap(typeof(T));
-
-            var propertiesMap = DicProperties[typeof(T)];
-
-            var result = Activator.CreateInstance<T>();
-
-            result.Body = body;
-            var parameters = (result as QPayObject).Parameters;
+            T rsp = null;
+            var parameters = new QPayDictionary();
 
             try
             {
-                var doc = XDocument.Parse(body);
-                foreach (var elm in doc.Root.Elements())
+                var doc = XDocument.Parse(body).Root;
+                var text = doc.DescendantNodes().OfType<XText>().ToList();
+                foreach (var t in text)
                 {
-                    parameters.Add(elm.Name.LocalName, elm.Value);
-                    if (propertiesMap.ContainsKey(elm.Name.LocalName))
-                        propertiesMap[elm.Name.LocalName].SetValue(result, elm.Value.TryTo(propertiesMap[elm.Name.LocalName].PropertyType));
+                    parameters.Add(t.Parent.Name.LocalName, t.Value);
+                    if (t is XCData)
+                    {
+                        t.Parent.Add(t.Value);
+                        t.Remove();
+                    }
+                }
+
+                var jsonText = JsonConvert.SerializeXNode(doc);
+                var json = JsonConvert.DeserializeObject<IDictionary>(jsonText);
+                if (json != null)
+                {
+                    // 忽略根节点的名称
+                    foreach (var key in json.Keys)
+                    {
+                        var data = json[key].ToString();
+                        if (!string.IsNullOrEmpty(data))
+                        {
+                            rsp = JsonConvert.DeserializeObject<T>(data);
+                            break;
+                        }
+                    }
+
                 }
             }
-            catch
+            catch { }
+
+            if (rsp == null)
+                rsp = Activator.CreateInstance<T>();
+
+            if (rsp != null)
             {
-                // 解析XML出错
+                rsp.Body = body;
+
+                rsp.Parameters = parameters;
             }
-            return result;
-        }
 
-        private Dictionary<string, PropertyInfo> GetPropertiesMap(Type type)
-        {
-            if (type == null)
-                throw new ArgumentNullException(nameof(type));
-            var propertiesMap = new Dictionary<string, PropertyInfo>();
-            var query = from e in typeof(T).GetProperties()
-                        where e.CanWrite && e.GetCustomAttributes(typeof(XmlElementAttribute), true).Any()
-                        select new { Property = e, Element = e.GetCustomAttributes(typeof(XmlElementAttribute), true).OfType<XmlElementAttribute>().First() };
-            foreach (var item in query)
-                propertiesMap.Add(item.Element.ElementName, item.Property);
-
-            return propertiesMap;
+            return rsp;
         }
     }
 }

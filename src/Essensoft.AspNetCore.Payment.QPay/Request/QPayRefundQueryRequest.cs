@@ -5,7 +5,6 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
 {
     public class QPayRefundQueryRequest : IQPayRequest<QPayRefundQueryResponse>
     {
-
         /// <summary>
         /// QQ钱包退款单号
         /// </summary>

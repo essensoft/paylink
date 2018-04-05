@@ -1,6 +1,6 @@
 ﻿namespace Essensoft.AspNetCore.Payment.UnionPay
 {
-    public abstract class UnionPayNotifyResponse : UnionPayObject
+    public abstract class UnionPayNotifyResponse : UnionPayResponse
     {
     }
 }

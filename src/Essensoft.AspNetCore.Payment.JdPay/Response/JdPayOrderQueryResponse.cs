@@ -40,7 +40,8 @@ namespace Essensoft.AspNetCore.Payment.JdPay.Response
         /// <summary>
         /// 交易列表
         /// </summary>
-        [XmlElement("payList")]
+        [XmlArray("payList")]
+        [XmlArrayItem("pay")]
         public List<PayTradeVo> PayList { get; set; }
     }
 }

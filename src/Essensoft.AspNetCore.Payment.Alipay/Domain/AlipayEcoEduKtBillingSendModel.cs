@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayEcoEduKtBillingSendModel : AlipayObject
     {
         /// <summary>
-        /// 总金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]
+        /// 总金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]，  如果是非多选项，是要和缴费项的总和相同，多选模式不做验证
         /// </summary>
         [JsonProperty("amount")]
         public string Amount { get; set; }
@@ -45,13 +45,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ClassIn { get; set; }
 
         /// <summary>
-        /// 截止日期是否生效，与gmt_end_time发布配合使用,N为gmt_end_time不生效，用户过期后仍可以缴费；Y为gmt_end_time生效，用户过期后，不能再缴费。
+        /// 截止日期是否生效，与gmt_end发布配合使用,N为gmt_end不生效，用户过期后仍可以缴费；Y为gmt_end生效，用户过期后，不能再缴费。
         /// </summary>
         [JsonProperty("end_enable")]
         public string EndEnable { get; set; }
 
         /// <summary>
-        /// 缴费截止时间，格式"yyyy-MM-dd HH:mm:ss"
+        /// 缴费截止时间，格式"yyyy-MM-dd HH:mm:ss"，日期要大于当前时间。请注意，过期时间不宜设置过短。
         /// </summary>
         [JsonProperty("gmt_end")]
         public string GmtEnd { get; set; }
@@ -87,13 +87,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string SchoolPid { get; set; }
 
         /// <summary>
-        /// 用于删除孩子，状态为“D”，表示删除孩子，状态“U”表示孩子信息添加或更新
-        /// </summary>
-        [JsonProperty("status")]
-        public string Status { get; set; }
-
-        /// <summary>
-        /// 学生的学号，一般以教育局学号为准，作为学生的唯一标识。此字段与student_identify、家长user_mobile至少选一个
+        /// 学生的学号，只支持字母和数字类型，一般以教育局学号为准，作为学生的唯一标识。此字段与student_identify、家长user_mobile至少选一个
         /// </summary>
         [JsonProperty("student_code")]
         public string StudentCode { get; set; }

@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.JdPay.Parser
 {
-    public class JdPayDictionaryParser<T> : IJdPayParser<T> where T : JdPayObject
+    public class JdPayDictionaryParser<T> where T : JdPayResponse
     {
         private static readonly Dictionary<Type, Dictionary<string, PropertyInfo>> DicProperties = new Dictionary<Type, Dictionary<string, PropertyInfo>>();
 
@@ -20,14 +20,20 @@ namespace Essensoft.AspNetCore.Payment.JdPay.Parser
 
             var propertiesMap = DicProperties[typeof(T)];
 
-            var result = Activator.CreateInstance<T>();
+            var rsp = Activator.CreateInstance<T>();
 
             foreach (var item in dic)
             {
                 if (propertiesMap.ContainsKey(item.Key))
-                    propertiesMap[item.Key].SetValue(result, item.Value.TryTo(propertiesMap[item.Key].PropertyType));
+                    propertiesMap[item.Key].SetValue(rsp, item.Value.TryTo(propertiesMap[item.Key].PropertyType));
             }
-            return result;
+
+            if (rsp != null)
+            {
+                rsp.Parameters = dic;
+            }
+
+            return rsp;
         }
 
         private Dictionary<string, PropertyInfo> GetPropertiesMap(Type type)

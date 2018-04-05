@@ -6,6 +6,16 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
     public class WeChatPayMicroPayRequest : IWeChatPayRequest<WeChatPayMicroPayResponse>
     {
         /// <summary>
+        /// 子商户公众账号ID
+        /// </summary>
+        public string SubAppId { get; set; }
+
+        /// <summary>
+        /// 子商户号
+        /// </summary>
+        public string SubMchId { get; set; }
+
+        /// <summary>
         /// 设备号
         /// </summary>
         public string DeviceInfo { get; set; }
@@ -31,7 +41,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         public string OutTradeNo { get; set; }
 
         /// <summary>
-        /// 订单金额
+        /// 总金额
         /// </summary>
         public int TotalFee { get; set; }
 
@@ -50,11 +60,20 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// </summary>
         public string GoodsTag { get; set; }
 
-
         /// <summary>
         /// 指定支付方式
         /// </summary>
         public string LimitPay { get; set; }
+
+        /// <summary>
+        /// 交易起始时间
+        /// </summary>
+        public string TimeStart { get; set; }
+
+        /// <summary>
+        /// 交易结束时间
+        /// </summary>
+        public string TimeExpire { get; set; }
 
         /// <summary>
         /// 授权码
@@ -65,16 +84,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// 场景信息
         /// </summary>
         public string SceneInfo { get; set; }
-
-        /// <summary>
-        /// 子商户公众账号ID
-        /// </summary>
-        public string SubAppId { get; set; }
-
-        /// <summary>
-        /// 子商户号
-        /// </summary>
-        public string SubMchId { get; set; }
 
         #region IWeChatPayRequest Members
 
@@ -87,6 +96,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary()
             {
+                { "sub_appid", SubAppId },
+                { "sub_mch_id", SubMchId },
                 { "device_info", DeviceInfo },
                 { "body", Body },
                 { "detail", Detail },
@@ -97,10 +108,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { "spbill_create_ip", SpbillCreateIp },
                 { "goods_tag", GoodsTag },
                 { "limit_pay", LimitPay },
+                { "time_start", TimeStart },
+                { "time_expire", TimeExpire },
                 { "auth_code", AuthCode },
                 { "scene_info", SceneInfo },
-                { "sub_appid", SubAppId },
-                { "sub_mch_id", SubMchId },
             };
             return parameters;
         }

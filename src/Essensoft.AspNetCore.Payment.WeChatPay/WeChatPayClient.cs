@@ -93,10 +93,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
             sortedTxtParams.Add(SIGN, WeChatPaySignature.SignWithKey(sortedTxtParams, Options.Key));
             var content = HttpClientEx.BuildContent(sortedTxtParams);
-            Logger.LogInformation(0, "Request Content:{content}", content);
+            Logger.LogInformation(0, "Request:{content}", content);
 
             var rspContent = await Client.DoPostAsync(request.GetRequestUrl(), content);
-            Logger.LogInformation(1, "Response Content:{content}", rspContent);
+            Logger.LogInformation(1, "Response:{content}", rspContent);
+
 
             var parser = new WeChatPayXmlParser<T>();
             var rsp = parser.Parse(rspContent);
@@ -177,10 +178,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             sortedTxtParams.Add(SIGN, WeChatPaySignature.SignWithKey(sortedTxtParams, Options.Key, useMD5, excludeSignType));
 
             var content = HttpClientEx.BuildContent(sortedTxtParams);
-            Logger.LogInformation(0, "Request Content:{content}", content);
+            Logger.LogInformation(0, "Request:{content}", content);
 
             var rspContent = await CertificateClient.DoPostAsync(request.GetRequestUrl(), content);
-            Logger.LogInformation(1, "Response Content:{content}", rspContent);
+            Logger.LogInformation(1, "Response:{content}", rspContent);
 
             var parser = new WeChatPayXmlParser<T>();
             var rsp = parser.Parse(rspContent);
@@ -190,18 +191,20 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         private void CheckResponseSign(WeChatPayResponse response, bool useMD5 = true, bool excludeSignType = true)
         {
-            if (string.IsNullOrEmpty(response.Body))
+            if (string.IsNullOrEmpty(response.Body) || response?.Parameters == null)
             {
                 throw new Exception("sign check fail: Body is Empty!");
             }
 
-            var sign = response?.Sign;
-            if (!response.IsError && !string.IsNullOrEmpty(sign))
+            if (response.Parameters.TryGetValue("sign", out var sign))
             {
-                var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, Options.Key, useMD5, excludeSignType);
-                if (cal_sign != sign)
+                if (response.Parameters["return_code"] == "SUCCESS" && !string.IsNullOrEmpty(sign))
                 {
-                    throw new Exception("sign check fail: check Sign and Data Fail!");
+                    var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, Options.Key, useMD5, excludeSignType);
+                    if (cal_sign != sign)
+                    {
+                        throw new Exception("sign check fail: check Sign and Data Fail!");
+                    }
                 }
             }
         }

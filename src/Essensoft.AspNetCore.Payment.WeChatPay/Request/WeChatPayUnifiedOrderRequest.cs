@@ -6,6 +6,16 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
     public class WeChatPayUnifiedOrderRequest : IWeChatPayRequest<WeChatPayUnifiedOrderResponse>
     {
         /// <summary>
+        /// 子商户公众账号ID
+        /// </summary>
+        public string SubAppId { get; set; }
+
+        /// <summary>
+        /// 子商户号
+        /// </summary>
+        public string SubMchId { get; set; }
+
+        /// <summary>
         /// 设备号
         /// </summary>
         public string DeviceInfo { get; set; }
@@ -87,14 +97,14 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         public string OpenId { get; set; }
 
         /// <summary>
-        /// 子商户公众账号ID
+        /// 子用户标识
         /// </summary>
-        public string SubAppId { get; set; }
+        public string SubOpenId { get; set; }
 
         /// <summary>
-        /// 子商户号
+        /// 场景信息
         /// </summary>
-        public string SubMchId { get; set; }
+        public string SceneInfo { get; set; }
 
         #region IWeChatPayRequest Members
 
@@ -107,6 +117,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary()
             {
+                { "sub_appid", SubAppId },
+                { "sub_mch_id", SubMchId },
                 { "device_info", DeviceInfo },
                 { "body", Body },
                 { "detail", Detail },
@@ -123,8 +135,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { "product_id", ProductId },
                 { "limit_pay", LimitPay },
                 { "openid", OpenId },
-                { "sub_appid", SubAppId },
-                { "sub_mch_id", SubMchId },
+                { "sub_openid", SubOpenId },
+                { "scene_info", SceneInfo },
             };
             return parameters;
         }

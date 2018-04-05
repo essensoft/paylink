@@ -18,7 +18,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         public virtual ILogger<UnionPayNotifyClient> Logger { get; set; }
 
         public UnionPayNotifyClient(
-            IOptions<UnionPayOptions> optionsAccessor, 
+            IOptions<UnionPayOptions> optionsAccessor,
             ILogger<UnionPayNotifyClient> logger)
         {
             Options = optionsAccessor?.Value ?? new UnionPayOptions();
@@ -38,28 +38,26 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             RootCertificate = UnionPaySignature.GetCertificate(Options.RootCert);
         }
 
-        public Task<T> ExecuteAsync<T>(HttpRequest request) where T : UnionPayNotifyResponse
+        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : UnionPayNotifyResponse
         {
-            var parameters = GetParameters(request);
+            var parameters = await GetParametersAsync(request);
 
             var query = HttpClientEx.BuildQuery(parameters);
-            Logger.LogInformation(0, "Request Content:{query}", query);
+            Logger.LogInformation(0, "Request:{query}", query);
 
             var parser = new UnionPayDictionaryParser<T>();
             var rsp = parser.Parse(parameters);
             CheckNotifySign(parameters);
-            return Task.FromResult(rsp);
+            return rsp;
         }
 
-        private UnionPayDictionary GetParameters(HttpRequest request)
+        private async Task<UnionPayDictionary> GetParametersAsync(HttpRequest request)
         {
             var parameters = new UnionPayDictionary();
-            if (request.Method == "POST")
+            var form = await request.ReadFormAsync();
+            foreach (var item in form)
             {
-                foreach (var item in request.Form)
-                {
-                    parameters.Add(item.Key, item.Value);
-                }
+                parameters.Add(item.Key, item.Value);
             }
             return parameters;
         }

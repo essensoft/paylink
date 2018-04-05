@@ -4,12 +4,12 @@ using Essensoft.AspNetCore.Payment.Alipay.Response;
 namespace Essensoft.AspNetCore.Payment.Alipay.Request
 {
     /// <summary>
-    /// AOP API: alipay.daowei.service.price.modify
+    /// AOP API: koubei.catering.commodity.order.buy
     /// </summary>
-    public class AlipayDaoweiServicePriceModifyRequest : IAlipayRequest<AlipayDaoweiServicePriceModifyResponse>
+    public class KoubeiCateringCommodityOrderBuyRequest : IAlipayRequest<KoubeiCateringCommodityOrderBuyResponse>
     {
         /// <summary>
-        /// 更新服务价格接口
+        /// isv订购口碑插件接口
         /// </summary>
         public string BizContent { get; set; }
 
@@ -74,7 +74,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
 
         public string GetApiName()
         {
-            return "alipay.daowei.service.price.modify";
+            return "koubei.catering.commodity.order.buy";
         }
 
         public void SetApiVersion(string apiVersion){

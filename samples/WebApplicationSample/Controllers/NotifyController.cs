@@ -2,6 +2,8 @@
 using Essensoft.AspNetCore.Payment.Alipay.Notify;
 using Essensoft.AspNetCore.Payment.JdPay;
 using Essensoft.AspNetCore.Payment.JdPay.Notify;
+using Essensoft.AspNetCore.Payment.LianLianPay;
+using Essensoft.AspNetCore.Payment.LianLianPay.Notify;
 using Essensoft.AspNetCore.Payment.QPay;
 using Essensoft.AspNetCore.Payment.QPay.Notify;
 using Essensoft.AspNetCore.Payment.UnionPay;
@@ -140,7 +142,7 @@ namespace WebApplicationSample.Controllers
             try
             {
                 var notify = await _client.ExecuteAsync<WeChatPayUnifiedOrderNotifyResponse>(Request);
-                if (!notify.IsError)
+                if (notify.ReturnCode == "SUCCESS")
                 {
                     if (notify.ResultCode == "SUCCESS")
                     {
@@ -176,7 +178,7 @@ namespace WebApplicationSample.Controllers
             try
             {
                 var notify = await _client.ExecuteAsync<WeChatPayRefundNotifyResponse>(Request);
-                if (!notify.IsError)
+                if (notify.ReturnCode == "SUCCESS")
                 {
                     if (notify.RefundStatus == "SUCCESS")
                     {
@@ -211,7 +213,7 @@ namespace WebApplicationSample.Controllers
                 if ("SUCCESS" == notify.TradeState)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
-                    return Content("<xml><return_code><![CDATA[SUCCESS]]></return_code></xml>", "text/xml");
+                    return Content("<xml><return_code>SUCCESS</return_code></xml>", "text/xml");
                 }
                 return NoContent();
             }
@@ -477,4 +479,79 @@ namespace WebApplicationSample.Controllers
             }
         }
     }
+
+    [Route("notify/lianlianpay")]
+    public class LianLianPayNotifyController : Controller
+    {
+        private readonly LianLianPayNotifyClient _client = null;
+        public LianLianPayNotifyController(LianLianPayNotifyClient client)
+        {
+            _client = client;
+        }
+
+        [Route("quickpay")]
+        [HttpPost]
+        public async Task<IActionResult> QuickPay()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<LianLianPayQuickPayNotifyResponse>(Request);
+                Console.WriteLine("NoOrder: " + notify.NoOrder);
+                return Content("{\"ret_code\":\"0000\",\"ret_msg\":\"交易成功\"}", "application/json");
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
+        [Route("bankpay")]
+        [HttpPost]
+        public async Task<IActionResult> BankPay()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<LianLianPayBankPayNotifyResponse>(Request);
+                Console.WriteLine("NoOrder: " + notify.NoOrder);
+                return Content("{\"ret_code\":\"0000\",\"ret_msg\":\"交易成功\"}", "application/json");
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
+        [Route("authpay")]
+        [HttpPost]
+        public async Task<IActionResult> AuthPay()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<LianLianPayAuthPayNotifyResponse>(Request);
+                Console.WriteLine("NoOrder: " + notify.NoOrder);
+                return Content("{\"ret_code\":\"0000\",\"ret_msg\":\"交易成功\"}", "application/json");
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
+        [Route("refund")]
+        [HttpPost]
+        public async Task<IActionResult> Refund()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<LianLianPayRefundNotifyResponse>(Request);
+                Console.WriteLine("NoRefund: " + notify.NoRefund);
+                return Content("{\"ret_code\":\"0000\",\"ret_msg\":\"交易成功\"}", "application/json");
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+    }
+
 }
