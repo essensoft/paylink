@@ -34,7 +34,7 @@ Essensoft.AspNetCore.Payment.LianLianPay		| [![NuGet](https://img.shields.io/nug
 * .NET Core SDK 2.1.103
 
 ## 支持渠道
-支付宝、微信支付、QQ钱包、京东支付、银联支付
+支付宝、微信支付、QQ钱包、京东支付、银联支付、连连支付
 
 ## 使用方式
 见示例项目：WebApplicationSample</p>
