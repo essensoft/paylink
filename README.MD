@@ -49,5 +49,4 @@ Essensoft.AspNetCore.Payment.LianLianPay		| [![NuGet](https://img.shields.io/nug
 
 <p align="center">
     <img src="http://p687qfgw0.bkt.clouddn.com/pay.png">
-    <p align="center">打赏扫这里，请留下尊姓大名</p>
 </p>
