@@ -191,7 +191,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         private void CheckResponseSign(WeChatPayResponse response, bool useMD5 = true, bool excludeSignType = true)
         {
-            if (string.IsNullOrEmpty(response.Body) || response?.Parameters == null)
+            if (string.IsNullOrEmpty(response.Body))
             {
                 throw new Exception("sign check fail: Body is Empty!");
             }
