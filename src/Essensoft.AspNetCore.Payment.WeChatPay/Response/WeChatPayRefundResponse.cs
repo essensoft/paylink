@@ -75,7 +75,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         public string Sign { get; set; }
 
         /// <summary>
-        /// 微信支付订单号	
+        /// 微信订单号	
         /// </summary>
         [JsonProperty("transaction_id")]
         public string TransactionId { get; set; }
@@ -85,6 +85,30 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// </summary>
         [JsonProperty("out_trade_no")]
         public string OutTradeNo { get; set; }
+
+        /// <summary>
+        /// 商户退款单号	
+        /// </summary>
+        [JsonProperty("out_refund_no")]
+        public string OutRefundNo { get; set; }
+
+        /// <summary>
+        /// 微信退款单号	
+        /// </summary>
+        [JsonProperty("refund_id")]
+        public string RefundId { get; set; }
+
+        /// <summary>
+        /// 申请退款金额	
+        /// </summary>
+        [JsonProperty("refund_fee")]
+        public string RefundFee { get; set; }
+
+        /// <summary>
+        /// 退款金额	
+        /// </summary>
+        [JsonProperty("settlement_refund_fee")]
+        public string SettlementRefundFee { get; set; }
 
         /// <summary>
         /// 订单金额	
@@ -111,31 +135,45 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         public int CashFee { get; set; }
 
         /// <summary>
-        /// 退款笔数	
+        /// 现金退款金额	
         /// </summary>
-        [JsonProperty("refund_count")]
-        public int RefundCount { get; set; }
-
-        // 商户退款单号	out_refund_no_$n
-        // 微信退款单号	refund_id_$n
-        // 退款渠道	refund_channel_$n
+        [JsonProperty("cash_refund_fee")]
+        public int CashRefundFee { get; set; }
 
         /// <summary>
-        /// 订单总退款次数	
+        /// 代金券退款总金额	
         /// </summary>
-        [JsonProperty("total_refund_count")]
-        public int TotalRefundCount { get; set; }
+        [JsonProperty("coupon_refund_fee")]
+        public int RefundCount { get; set; }
 
-        // 申请退款金额	refund_fee_$n
-        // 退款金额	settlement_refund_fee_$n
-        // 代金券类型	 coupon_type_$n_$m
-        // 总代金券退款金额	coupon_refund_fee_$n	
-        // 退款代金券使用数量	coupon_refund_count_$n
-        // 退款代金券ID	coupon_refund_id_$n_$m
-        // 单个代金券退款金额	coupon_refund_fee_$n_$m
-        // 退款状态	refund_status_$n
-        // 退款资金来源	refund_account_$n
-        // 退款入账账户	refund_recv_accout_$n
-        // 退款成功时间	refund_success_time_$n
+        /// <summary>
+        /// 退款代金券使用数量	
+        /// </summary>
+        [JsonProperty("coupon_refund_count")]
+        public int CouponRefundCount { get; set; }
+
+        // 代金券类型 coupon_type_$n
+
+        /// <summary>
+        /// 代金券类型 0 	
+        /// </summary>
+        [JsonProperty("coupon_type_0")]
+        public int CouponType0 { get; set; }
+
+        // 退款代金券ID coupon_refund_id_$n
+
+        /// <summary>
+        /// 退款代金券ID 0
+        /// </summary>
+        [JsonProperty("coupon_refund_id_0")]
+        public int CouponRefund0 { get; set; }
+
+        // 单个代金券退款金额 coupon_refund_fee_$n
+
+        /// <summary>
+        /// 单个代金券退款金额 0
+        /// </summary>
+        [JsonProperty("coupon_refund_fee_0")]
+        public int CouponRefundFee0 { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -12,6 +13,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 返回执行云凤蝶站点审核操作的成功失败状态
         /// </summary>
         [JsonProperty("data")]
+        [XmlElement("data")]
         public FengdieSuccessRespModel Data { get; set; }
     }
 }

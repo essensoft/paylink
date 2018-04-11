@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,6 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 是否赠送成功
         /// </summary>
         [JsonProperty("send_result")]
+        [XmlElement("send_result")]
         public bool SendResult { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,6 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 支付宝平台统一生产的通知公告唯一ID标示.
         /// </summary>
         [JsonProperty("notice_id")]
+        [XmlElement("notice_id")]
         public string NoticeId { get; set; }
     }
 }

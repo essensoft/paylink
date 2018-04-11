@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,12 +12,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 风险标签
         /// </summary>
         [JsonProperty("risk_code")]
+        [XmlElement("risk_code")]
         public string RiskCode { get; set; }
 
         /// <summary>
         /// 风险等级
         /// </summary>
         [JsonProperty("risk_level")]
+        [XmlElement("risk_level")]
         public long RiskLevel { get; set; }
     }
 }

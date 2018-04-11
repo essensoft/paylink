@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,6 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 车牌信息（utf-8编码）
         /// </summary>
         [JsonProperty("car_number")]
+        [XmlElement("car_number")]
         public string CarNumber { get; set; }
     }
 }

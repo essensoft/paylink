@@ -1,12 +1,12 @@
-﻿using Essensoft.AspNetCore.Payment.JdPay.Response;
+﻿using Essensoft.AspNetCore.Payment.JDPay.Response;
 using System.Collections.Generic;
 
-namespace Essensoft.AspNetCore.Payment.JdPay.Request
+namespace Essensoft.AspNetCore.Payment.JDPay.Request
 {
     /// <summary>
     /// H5在线支付接口
     /// </summary>
-    public class JdPaySaveOrderH5Request : IJdPayRequest<JdPaySaveOrderResponse>
+    public class JDPaySaveOrderH5Request : IJDPayRequest<JDPaySaveOrderResponse>
     {
         /// <summary>
         /// 门店号
@@ -138,7 +138,7 @@ namespace Essensoft.AspNetCore.Payment.JdPay.Request
         /// </summary>
         public string KJInfo { get; set; }
 
-        #region IJdPayRequest Members
+        #region IJDPayRequest Members
 
         private string ApiVersion = "V2.0";
 
@@ -159,7 +159,7 @@ namespace Essensoft.AspNetCore.Payment.JdPay.Request
 
         public IDictionary<string, string> GetParameters()
         {
-            var parameters = new JdPayDictionary()
+            var parameters = new JDPayDictionary()
             {
                 { "device", Device },
                 { "tradeNum", TradeNum },

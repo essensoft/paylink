@@ -7,7 +7,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         /// <summary>
         /// 执行LianLianPay API请求。
         /// </summary>
-        /// <param name="request">具体的JdPay API请求</param>
+        /// <param name="request">具体的LianLianPay API请求</param>
         /// <returns>领域对象</returns>
         Task<T> ExecuteAsync<T>(ILianLianPayRequest<T> request) where T : LianLianPayResponse;
 

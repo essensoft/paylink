@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace Essensoft.AspNetCore.Payment.JdPay
+namespace Essensoft.AspNetCore.Payment.JDPay
 {
-    public interface IJdPayRequest<T> where T : JdPayResponse
+    public interface IJDPayRequest<T> where T : JDPayResponse
     {
         /// <summary>
         /// API接口地址

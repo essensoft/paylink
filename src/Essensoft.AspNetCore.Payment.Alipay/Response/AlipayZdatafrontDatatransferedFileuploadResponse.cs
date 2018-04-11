@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,12 +12,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 返回用户数据推送产生的结果数据，如picPath为文件上传后返回文件内部存储的位置信息
         /// </summary>
         [JsonProperty("result_data")]
+        [XmlElement("result_data")]
         public string ResultData { get; set; }
 
         /// <summary>
         /// 数据上传结果，true/false
         /// </summary>
         [JsonProperty("success")]
+        [XmlElement("success")]
         public string Success { get; set; }
     }
 }

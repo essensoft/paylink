@@ -23,6 +23,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
                 foreach (var t in text)
                 {
                     parameters.Add(t.Parent.Name.LocalName, t.Value);
+
+                    // 移除CData
                     if (t is XCData)
                     {
                         t.Parent.Add(t.Value);
@@ -44,7 +46,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
                             break;
                         }
                     }
-
                 }
             }
             catch { }
@@ -104,7 +105,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
                             break;
                         }
                     }
-
                 }
             }
             catch { }

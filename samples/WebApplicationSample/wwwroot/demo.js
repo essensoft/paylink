@@ -5,7 +5,7 @@ $(function () {
     setApiDemoTabs("#tabs-purchase-qpay");
     setApiDemoTabs("#tabs-purchase-jdpay");
     setApiDemoTabs("#tabs-purchase-unionpay");
-    setApiDemoTabs("#tabs-purchase-lianlianpay");
+    setApiDemoTabs("#tabs-purchase-LianLianPay");
     $(document).tooltip();
 });
 

@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -12,18 +13,22 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 当前页码
         /// </summary>
         [JsonProperty("current_pageno")]
+        [XmlElement("current_pageno")]
         public string CurrentPageno { get; set; }
 
         /// <summary>
         /// 门店列表ID，逗号分隔
         /// </summary>
         [JsonProperty("shop_ids")]
+        [XmlArray("shop_ids")]
+        [XmlArrayItem("string")]
         public List<string> ShopIds { get; set; }
 
         /// <summary>
         /// 总页码数目
         /// </summary>
         [JsonProperty("total_pageno")]
+        [XmlElement("total_pageno")]
         public string TotalPageno { get; set; }
     }
 }

@@ -45,7 +45,7 @@
         /// <summary>
         /// 加密方式
         /// </summary>
-        public string EncyptType { get; set; } = "AES";
+        public string EncyptType { get; } = "AES";
 
         /// <summary>
         /// 加密秘钥

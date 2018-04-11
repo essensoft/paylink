@@ -1,9 +1,9 @@
 ﻿using System.Xml.Serialization;
 
-namespace Essensoft.AspNetCore.Payment.JdPay.Response
+namespace Essensoft.AspNetCore.Payment.JDPay.Response
 {
     [XmlRoot("jdpay")]
-    public class JdPayUnifiedOrderResponse : JdPayResponse
+    public class JDPayUnifiedOrderResponse : JDPayResponse
     {
         [XmlElement("orderId")]
         public string OrderId { get; set; }

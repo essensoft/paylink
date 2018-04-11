@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,6 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 快捷投保产品二维码图片链接URL
         /// </summary>
         [JsonProperty("code_url")]
+        [XmlElement("code_url")]
         public string CodeUrl { get; set; }
     }
 }

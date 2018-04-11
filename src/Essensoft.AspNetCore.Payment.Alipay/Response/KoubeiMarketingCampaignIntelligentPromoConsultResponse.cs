@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -12,6 +13,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 智能营销方案咨询的模型
         /// </summary>
         [JsonProperty("promo")]
+        [XmlElement("promo")]
         public IntelligentPromo Promo { get; set; }
     }
 }

@@ -1,17 +1,17 @@
-﻿using Essensoft.AspNetCore.Payment.JdPay.Utility;
+﻿using Essensoft.AspNetCore.Payment.JDPay.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Xml.Serialization;
 
-namespace Essensoft.AspNetCore.Payment.JdPay.Parser
+namespace Essensoft.AspNetCore.Payment.JDPay.Parser
 {
-    public class JdPayDictionaryParser<T> where T : JdPayResponse
+    public class JDPayDictionaryParser<T> where T : JDPayResponse
     {
         private static readonly Dictionary<Type, Dictionary<string, PropertyInfo>> DicProperties = new Dictionary<Type, Dictionary<string, PropertyInfo>>();
 
-        public T Parse(JdPayDictionary dic)
+        public T Parse(JDPayDictionary dic)
         {
             if (dic == null || dic.Count == 0)
                 throw new ArgumentNullException(nameof(dic));

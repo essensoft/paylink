@@ -8,18 +8,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
     /// </summary>
     public static class AlipayUtility
     {
-        /// <summary>m>
-        /// <param name="bizContent"></param>
-        /// <param name="charset"></param>
-        /// AES加密
-        /// </summary>
-        /// <param name="encryptKey"></para
-        /// <returns></returns>
-        public static string AesEncrypt(string encryptKey, string bizContent)
-        {
-            return AlipayEncrypt.AesEncrypt(encryptKey, bizContent);
-        }
-
         /// <summary>
         /// 清除字典中值为空的项。
         /// </summary>

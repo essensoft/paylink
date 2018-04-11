@@ -15,7 +15,7 @@
             <li><a href="#tabs-api-qpay">QQ钱包</a></li>
             <li><a href="#tabs-api-jdpay">京东支付</a></li>
             <li><a href="#tabs-api-unionpay">银联支付</a></li>
-            <li><a href="#tabs-api-lianlianpay">连连支付</a></li>
+            <li><a href="#tabs-api-LianLianPay">连连支付</a></li>
         </ul>
         <div id="tabs-api-1">
             <h3>支付平台 官方文档：</h3>
@@ -24,7 +24,7 @@
             <p>QQ钱包：<a href="https://qpay.qq.com/qpaywiki.shtml" target="_blank">开发文档</a>、<a href="http://kf.qq.com/product/qq_enterprise.html" target="_blank">帮助中心</a></p>
             <p>京东支付：<a href="http://payapi.jd.com/" target="_blank">开发文档</a></p>
             <p>银联支付：<a href="https://open.unionpay.com/ajweb/product" target="_blank">开放平台</a></p>
-            <p>连连支付：<a href="http://open.lianlianpay.com/" target="_blank">开放平台</a></p>
+            <p>连连支付：<a href="http://open.LianLianPay.com/" target="_blank">开放平台</a></p>
             <h3>Payment：</h3>
             <p>QQ交流群：<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=aac56c8f02f54893267d3ac90787c1794a7687f3c31a923812a36b67c4ee6271">522457525</a></p>
             <h3>使用方式</h3>
@@ -725,7 +725,7 @@
                         </p>
                         <p>
                             <label>amount：</label>
-                            <input type="text" name="amount" value="100">
+                            <input type="text" name="amount" value="1">
                         </p>
                         <p>
                             <label>desc：</label>
@@ -942,7 +942,7 @@
                     <li><a href="#tabs-purchase-6">退款查询</a></li>
                 </ul>
                 <div id="tabs-purchase-1">
-                    <form class="api-form" asp-controller="JdPay" asp-action="SaveOrderPC" method="post" target="_blank">
+                    <form class="api-form" asp-controller="JDPay" asp-action="SaveOrderPC" method="post" target="_blank">
                         <p>
                             <label>tradeNum:</label>
                             <input type="text" name="tradeNum" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
@@ -999,7 +999,7 @@
                 </div>
 
                 <div id="tabs-purchase-2">
-                    <form class="api-form" asp-controller="JdPay" asp-action="SaveOrderH5" method="post" target="_blank">
+                    <form class="api-form" asp-controller="JDPay" asp-action="SaveOrderH5" method="post" target="_blank">
                         <p>
                             <label>tradeNum:</label>
                             <input type="text" name="tradeNum" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
@@ -1056,7 +1056,7 @@
                 </div>
 
                 <div id="tabs-purchase-3">
-                    <form class="api-form" asp-controller="JdPay" asp-action="Uniorder" method="post" target="_blank">
+                    <form class="api-form" asp-controller="JDPay" asp-action="Uniorder" method="post" target="_blank">
                         <p>
                             <label>tradeNum:</label>
                             <input type="text" name="tradeNum" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
@@ -1109,7 +1109,7 @@
                 </div>
 
                 <div id="tabs-purchase-4">
-                    <form class="api-form" asp-controller="JdPay" asp-action="OrderQuery" method="post" target="_blank">
+                    <form class="api-form" asp-controller="JDPay" asp-action="OrderQuery" method="post" target="_blank">
                         <p>
                             <label>tradeNum:</label>
                             <input type="text" name="tradeNum">
@@ -1130,7 +1130,7 @@
                 </div>
 
                 <div id="tabs-purchase-5">
-                    <form class="api-form" asp-controller="JdPay" asp-action="Refund" method="post" target="_blank">
+                    <form class="api-form" asp-controller="JDPay" asp-action="Refund" method="post" target="_blank">
                         <p>
                             <label>tradeNum:</label>
                             <input type="text" name="tradeNum" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
@@ -1163,7 +1163,7 @@
                 </div>
 
                 <div id="tabs-purchase-6">
-                    <form class="api-form" asp-controller="JdPay" asp-action="RefundQuery" method="post" target="_blank">
+                    <form class="api-form" asp-controller="JDPay" asp-action="RefundQuery" method="post" target="_blank">
                         <p>
                             <label>tradeNum:</label>
                             <input type="text" name="tradeNum">
@@ -1690,8 +1690,8 @@
                 </div>
             </div>
         </div>
-        <div id="tabs-api-lianlianpay">
-            <div id="tabs-purchase-lianlianpay">
+        <div id="tabs-api-LianLianPay">
+            <div id="tabs-purchase-LianLianPay">
                 <ul>
                     <li><a href="#tabs-purchase-1">快捷支付</a></li>
                     <li><a href="#tabs-purchase-2">网银支付</a></li>
@@ -1730,11 +1730,11 @@
                         </p>
                         <p>
                             <label>notify_url：</label>
-                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/lianlianpay/quickpay">
+                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/LianLianPay/quickpay">
                         </p>
                         <p>
                             <label>url_return：</label>
-                            <input type="text" name="url_return" value="http://www.baidu.com/lianlianpay/quickpayreturn">
+                            <input type="text" name="url_return" value="http://www.baidu.com/LianLianPay/quickpayreturn">
                         </p>
                         <p>
                             <label>bank_code：</label>
@@ -1798,11 +1798,11 @@
                         </p>
                         <p>
                             <label>notify_url：</label>
-                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/lianlianpay/bankpay">
+                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/LianLianPay/bankpay">
                         </p>
                         <p>
                             <label>url_return：</label>
-                            <input type="text" name="url_return" value="http://www.baidu.com/lianlianpay/bankpayreturn">
+                            <input type="text" name="url_return" value="http://www.baidu.com/LianLianPay/bankpayreturn">
                         </p>
                         <p>
                             <label>risk_item：</label>
@@ -1838,11 +1838,11 @@
                         </p>
                         <p>
                             <label>notify_url：</label>
-                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/lianlianpay/authpay">
+                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/LianLianPay/authpay">
                         </p>
                         <p>
                             <label>url_return：</label>
-                            <input type="text" name="url_return" value="http://www.baidu.com/lianlianpay/authpayreturn">
+                            <input type="text" name="url_return" value="http://www.baidu.com/LianLianPay/authpayreturn">
                         </p>
                         <p>
                             <label>bank_code：</label>
@@ -2050,7 +2050,7 @@
                         </p>
                         <p>
                             <label>notify_url：</label>
-                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/lianlianpay/refund">
+                            <input type="text" name="notify_url" value="http://www.baidu.com/notify/LianLianPay/refund">
                         </p>
                         <p>
                             <label>&nbsp;</label>

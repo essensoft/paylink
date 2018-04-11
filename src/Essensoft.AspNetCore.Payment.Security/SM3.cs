@@ -3,15 +3,15 @@ using Org.BouncyCastle.Security;
 using System;
 using System.Text;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Payment.Security
 {
     public class SM3
     {
-        public static string Compute(string str)
+        public static string Compute(string data)
         {
-            var data = Encoding.UTF8.GetBytes(str);
             var digest = new SM3Digest();
-            digest.BlockUpdate(data, 0, data.Length);
+            var bytes = Encoding.UTF8.GetBytes(data);
+            digest.BlockUpdate(bytes, 0, bytes.Length);
             var result = DigestUtilities.DoFinal(digest);
             return BitConverter.ToString(result).Replace("-", "").ToLower();
         }

@@ -1,18 +1,19 @@
 ﻿using Essensoft.AspNetCore.Payment.LianLianPay.Parser;
 using Essensoft.AspNetCore.Payment.LianLianPay.Utility;
+using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Org.BouncyCastle.Crypto;
 using System;
 using System.IO;
-using System.Security.Cryptography;
 using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     public class LianLianPayNotifyClient
     {
-        private RSAParameters RSAPublicParameters;
+        private AsymmetricKeyParameter PublicKey;
 
         public LianLianPayOptions Options { get; set; }
 
@@ -40,7 +41,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
                 throw new ArgumentNullException(nameof(Options.RsaPublicKey));
             }
 
-            RSAPublicParameters = LianLianPaySignature.GetPublicParameters(Options.RsaPublicKey);
+            PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(Options.RsaPublicKey);
         }
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : LianLianPayNotifyResponse
@@ -53,7 +54,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
                 var parser = new LianLianPayDictionaryParser<T>();
                 var rsp = parser.Parse(parameters);
-                CheckNotifySign(parameters, RSAPublicParameters);
+                CheckNotifySign(parameters);
                 return rsp;
             }
             else if (request.HasTextJsonContentType())
@@ -63,7 +64,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
                 var parser = new LianLianPayJsonParser<T>();
                 var rsp = parser.Parse(body);
-                CheckNotifySign(rsp.Parameters, RSAPublicParameters);
+                CheckNotifySign(rsp.Parameters);
                 return rsp;
             }
             else
@@ -83,7 +84,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             return parameters;
         }
 
-        private void CheckNotifySign(LianLianPayDictionary para, RSAParameters parameters)
+        private void CheckNotifySign(LianLianPayDictionary para)
         {
             if (para.Count == 0)
             {
@@ -95,8 +96,8 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
                 throw new Exception("sign check fail: sign is Empty!");
             }
 
-            var prestr = LianLianPaySignature.GetSignContent(para);
-            if (!LianLianPaySignature.RSACheckContent(prestr, sign, parameters))
+            var prestr = LianLianPaySecurity.GetSignContent(para);
+            if (!MD5WithRSA.VerifyData(prestr, sign, PublicKey))
             {
                 throw new Exception("sign check fail: check Sign and Data Fail JSON also");
             }

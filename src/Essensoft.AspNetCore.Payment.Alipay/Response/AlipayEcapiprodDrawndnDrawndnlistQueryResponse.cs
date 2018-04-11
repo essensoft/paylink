@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
@@ -13,12 +14,15 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 支用列表
         /// </summary>
         [JsonProperty("drawndn_list")]
+        [XmlArray("drawndn_list")]
+        [XmlArrayItem("drawndn_vo")]
         public List<DrawndnVo> DrawndnList { get; set; }
 
         /// <summary>
         /// 唯一一次请求标示
         /// </summary>
         [JsonProperty("request_id")]
+        [XmlElement("request_id")]
         public string RequestId { get; set; }
     }
 }

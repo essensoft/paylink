@@ -1,12 +1,12 @@
-﻿using Essensoft.AspNetCore.Payment.JdPay.Response;
+﻿using Essensoft.AspNetCore.Payment.JDPay.Response;
 using System.Collections.Generic;
 
-namespace Essensoft.AspNetCore.Payment.JdPay.Request
+namespace Essensoft.AspNetCore.Payment.JDPay.Request
 {
     /// <summary>
     /// 退款申请接口
     /// </summary>
-    public class JdPayRefundRequest : IJdPayRequest<JdPayRefundResponse>
+    public class JDPayRefundRequest : IJDPayRequest<JDPayRefundResponse>
     {
         /// <summary>
         /// 交易流水号
@@ -61,7 +61,7 @@ namespace Essensoft.AspNetCore.Payment.JdPay.Request
         public string TermInfoId { get; set; }
 
 
-        #region IJdPayRequest Members
+        #region IJDPayRequest Members
 
         private string ApiVersion = "V2.0";
 
@@ -82,7 +82,7 @@ namespace Essensoft.AspNetCore.Payment.JdPay.Request
 
         public IDictionary<string, string> GetParameters()
         {
-            var parameters = new JdPayDictionary()
+            var parameters = new JDPayDictionary()
             {
                 { "tradeNum", TradeNum },
                 { "oTradeNum", OTradeNum },

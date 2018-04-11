@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,6 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 被核销的券ID
         /// </summary>
         [JsonProperty("voucher_id")]
+        [XmlElement("voucher_id")]
         public string VoucherId { get; set; }
     }
 }

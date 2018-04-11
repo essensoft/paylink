@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -12,6 +13,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 芝麻分分段
         /// </summary>
         [JsonProperty("zm_score_zrank")]
+        [XmlElement("zm_score_zrank")]
         public AlipayZmScoreZrankResult ZmScoreZrank { get; set; }
     }
 }

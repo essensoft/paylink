@@ -1,17 +1,17 @@
-﻿using Essensoft.AspNetCore.Payment.JdPay;
-using Essensoft.AspNetCore.Payment.JdPay.Notify;
-using Essensoft.AspNetCore.Payment.JdPay.Request;
+﻿using Essensoft.AspNetCore.Payment.JDPay;
+using Essensoft.AspNetCore.Payment.JDPay.Notify;
+using Essensoft.AspNetCore.Payment.JDPay.Request;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
 namespace WebApplicationSample.Controllers
 {
-    public class JdPayController : Controller
+    public class JDPayController : Controller
     {
-        private readonly JdPayClient _client = null;
-        private readonly JdPayNotifyClient _notifyClient = null;
+        private readonly JDPayClient _client = null;
+        private readonly JDPayNotifyClient _notifyClient = null;
 
-        public JdPayController(JdPayClient client, JdPayNotifyClient notifyClient)
+        public JDPayController(JDPayClient client, JDPayNotifyClient notifyClient)
         {
             _client = client;
             _notifyClient = notifyClient;
@@ -20,7 +20,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveOrderPC(string tradeNum, string tradeName, string tradeDesc, string tradeTime, string amount, string orderType, string currency, string note, string callbackUrl, string notifyUrl, string tradeType)
         {
-            var request = new JdPaySaveOrderPCRequest()
+            var request = new JDPaySaveOrderPCRequest()
             {
                 TradeNum = tradeNum,
                 TradeName = tradeName,
@@ -41,7 +41,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveOrderH5(string tradeNum, string tradeName, string tradeDesc, string tradeTime, string amount, string orderType, string currency, string note, string callbackUrl, string notifyUrl, string tradeType)
         {
-            var request = new JdPaySaveOrderH5Request()
+            var request = new JDPaySaveOrderH5Request()
             {
                 TradeNum = tradeNum,
                 TradeName = tradeName,
@@ -63,7 +63,7 @@ namespace WebApplicationSample.Controllers
         public async Task<IActionResult> Uniorder(string tradeNum, string tradeName, string tradeDesc, string tradeTime, string amount,
             string orderType, string currency, string note, string notifyUrl, string tradeType)
         {
-            var request = new JdPayUnifiedOrderRequest()
+            var request = new JDPayUnifiedOrderRequest()
             {
                 TradeNum = tradeNum,
                 TradeName = tradeName,
@@ -84,7 +84,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> OrderQuery(string tradeNum, string oTradeNum)
         {
-            var request = new JdPayOrderQueryRequest()
+            var request = new JDPayOrderQueryRequest()
             {
                 TradeNum = tradeNum,
                 OTradeNum = oTradeNum
@@ -97,7 +97,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Refund(string tradeNum, string oTradeNum, long amount, string currency, string notifyUrl)
         {
-            var request = new JdPayRefundRequest()
+            var request = new JDPayRefundRequest()
             {
                 TradeNum = tradeNum,
                 OTradeNum = oTradeNum,
@@ -113,7 +113,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> RefundQuery(string tradeNum, string oTradeNum)
         {
-            var request = new JdPayQueryRefundRequest()
+            var request = new JDPayQueryRefundRequest()
             {
                 TradeNum = tradeNum,
                 OTradeNum = oTradeNum
@@ -129,7 +129,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _notifyClient.ExecuteAsync<JdPaySyncReturnResponse>(Request);
+                var notify = await _notifyClient.ExecuteAsync<JDPaySyncReturnResponse>(Request);
                 return Content("success", "text/plain");
             }
             catch

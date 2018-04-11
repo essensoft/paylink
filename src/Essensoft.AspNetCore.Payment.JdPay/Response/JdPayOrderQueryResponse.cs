@@ -1,11 +1,11 @@
-﻿using Essensoft.AspNetCore.Payment.JdPay.Domain;
+﻿using Essensoft.AspNetCore.Payment.JDPay.Domain;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace Essensoft.AspNetCore.Payment.JdPay.Response
+namespace Essensoft.AspNetCore.Payment.JDPay.Response
 {
     [XmlRoot("jdpay")]
-    public class JdPayOrderQueryResponse : JdPayResponse
+    public class JDPayOrderQueryResponse : JDPayResponse
     {
         /// <summary>
         /// 交易流水  数字或字母

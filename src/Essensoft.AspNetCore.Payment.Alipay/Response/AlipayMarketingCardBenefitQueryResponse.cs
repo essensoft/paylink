@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
@@ -13,6 +14,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 会员卡模板外部权益列表
         /// </summary>
         [JsonProperty("mcard_template_benefit_query")]
+        [XmlArray("mcard_template_benefit_query")]
+        [XmlArrayItem("mcard_template_benefit_query")]
         public List<McardTemplateBenefitQuery> McardTemplateBenefitQuery { get; set; }
     }
 }

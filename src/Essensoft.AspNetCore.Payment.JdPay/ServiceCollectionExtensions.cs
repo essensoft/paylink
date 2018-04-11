@@ -1,22 +1,22 @@
-using Essensoft.AspNetCore.Payment.JdPay;
+using Essensoft.AspNetCore.Payment.JDPay;
 using System;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
-        public static void AddJdPay(
+        public static void AddJDPay(
             this IServiceCollection services)
         {
-            services.AddJdPay(setupAction: null);
+            services.AddJDPay(setupAction: null);
         }
 
-        public static void AddJdPay(
+        public static void AddJDPay(
             this IServiceCollection services,
-            Action<JdPayOptions> setupAction)
+            Action<JDPayOptions> setupAction)
         {
-            services.AddSingleton<JdPayClient>();
-            services.AddSingleton<JdPayNotifyClient>();
+            services.AddSingleton<JDPayClient>();
+            services.AddSingleton<JDPayNotifyClient>();
             if (setupAction != null)
             {
                 services.Configure(setupAction);

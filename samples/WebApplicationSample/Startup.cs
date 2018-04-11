@@ -1,5 +1,5 @@
 ﻿using Essensoft.AspNetCore.Payment.Alipay;
-using Essensoft.AspNetCore.Payment.JdPay;
+using Essensoft.AspNetCore.Payment.JDPay;
 using Essensoft.AspNetCore.Payment.LianLianPay;
 using Essensoft.AspNetCore.Payment.QPay;
 using Essensoft.AspNetCore.Payment.UnionPay;
@@ -35,14 +35,14 @@ namespace WebApplicationSample
             // https://www.cnblogs.com/essenroc/p/8627775.html
 
             services.AddAlipay();
-            services.AddJdPay();
+            services.AddJDPay();
             services.AddQPay();
             services.AddUnionPay();
             services.AddWeChatPay();
             services.AddLianLianPay();
 
             services.Configure<AlipayOptions>(Configuration.GetSection("Alipay"));
-            services.Configure<JdPayOptions>(Configuration.GetSection("JdPay"));
+            services.Configure<JDPayOptions>(Configuration.GetSection("JDPay"));
             services.Configure<QPayOptions>(Configuration.GetSection("QPay"));
             services.Configure<UnionPayOptions>(Configuration.GetSection("UnionPay"));
             services.Configure<WeChatPayOptions>(Configuration.GetSection("WeChatPay"));
@@ -53,7 +53,7 @@ namespace WebApplicationSample
                 opt.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.All);
             });
 
-            // Json格式 配置参数. 具体参数见 AlipayOptions、JdPayOptions、QPayOptions、UnionPayOptions、WeChatPayOptions类
+            // Json格式 配置参数. 具体参数见 AlipayOptions、JDPayOptions、QPayOptions、UnionPayOptions、WeChatPayOptions类
             //{
             //  "Alipay": {
             //    "AppId": "xxx",
@@ -61,7 +61,7 @@ namespace WebApplicationSample
             //    "RsaPrivateKey": "xxx",
             //    "SignType" : "RSA2"
             //  },
-            //  "JdPay": {
+            //  "JDPay": {
             //    "Merchant": "xxx",
             //    "RsaPublicKey": "xxx",
             //    "RsaPrivateKey": "xxx",

@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,6 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 用户级别
         /// </summary>
         [JsonProperty("level")]
+        [XmlElement("level")]
         public string Level { get; set; }
     }
 }

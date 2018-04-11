@@ -2,9 +2,9 @@
 using System.IO;
 using System.Xml.Serialization;
 
-namespace Essensoft.AspNetCore.Payment.JdPay.Parser
+namespace Essensoft.AspNetCore.Payment.JDPay.Parser
 {
-    public class JdPayXmlParser<T> : IJdPayParser<T> where T : JdPayResponse
+    public class JDPayXmlParser<T> : IJDPayParser<T> where T : JDPayResponse
     {
         public T Parse(string body)
         {

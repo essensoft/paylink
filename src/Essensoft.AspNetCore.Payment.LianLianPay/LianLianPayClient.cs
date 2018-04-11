@@ -1,12 +1,13 @@
 ﻿using Essensoft.AspNetCore.Payment.LianLianPay.Parser;
 using Essensoft.AspNetCore.Payment.LianLianPay.Request;
 using Essensoft.AspNetCore.Payment.LianLianPay.Utility;
+using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
+using Org.BouncyCastle.Crypto;
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -21,8 +22,8 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         private const string TIMESTAMP = "timestamp";
         private const string SIGN = "sign";
 
-        private RSAParameters RSAPrivateParameters;
-        private RSAParameters RSAPublicParameters;
+        private AsymmetricKeyParameter PrivateKey;
+        private AsymmetricKeyParameter PublicKey;
 
         public LianLianPayOptions Options { get; set; }
 
@@ -59,8 +60,8 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
                 throw new ArgumentNullException(nameof(Options.RsaPublicKey));
             }
 
-            RSAPrivateParameters = LianLianPaySignature.GetPrivateParameters(Options.RsaPrivateKey);
-            RSAPublicParameters = LianLianPaySignature.GetPublicParameters(Options.RsaPublicKey);
+            PrivateKey = RSAUtilities.GetKeyParameterFormPrivateKey(Options.RsaPrivateKey);
+            PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(Options.RsaPublicKey);
         }
 
         public void SetTimeout(int timeout)
@@ -78,10 +79,20 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             };
 
             // 添加签名
-            var signContent = LianLianPaySignature.GetSignContent(txtParams);
-            txtParams.Add(SIGN, LianLianPaySignature.RSASignContent(signContent, RSAPrivateParameters));
+            var signContent = LianLianPaySecurity.GetSignContent(txtParams);
+            txtParams.Add(SIGN, MD5WithRSA.SignData(signContent, PrivateKey));
 
-            var content = JsonConvert.SerializeObject(txtParams, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+            var content = string.Empty;
+            if (request is LianLianPayPaymentRequest || request is LianLianPayConfirmPaymentRequest)
+            {
+                var plaintext = JsonConvert.SerializeObject(txtParams, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+                var ciphertext = LianLianPaySecurity.Encrypt(plaintext, PublicKey);
+                content = @"{""pay_load"":""" + ciphertext + @""",""oid_partner"":""" + Options.OidPartner + @"""}";
+            }
+            else
+            {
+                content = JsonConvert.SerializeObject(txtParams, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+            }
             Logger.LogInformation(0, "Request:{content}", content);
 
             var rspContent = await Client.DoPostAsync(request.GetRequestUrl(), content);
@@ -102,7 +113,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
                 excludePara.Add("agreement_list");
             }
 
-            CheckNotifySign(rsp.Parameters, excludePara, RSAPublicParameters);
+            CheckNotifySign(rsp.Parameters, excludePara);
             return rsp;
         }
 
@@ -117,8 +128,8 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             };
 
             // 添加签名
-            var signContent = LianLianPaySignature.GetSignContent(txtParams);
-            txtParams.Add(SIGN, LianLianPaySignature.RSASignContent(signContent, RSAPrivateParameters));
+            var signContent = LianLianPaySecurity.GetSignContent(txtParams);
+            txtParams.Add(SIGN, MD5WithRSA.SignData(signContent, PrivateKey));
 
             var body = string.Empty;
 
@@ -152,8 +163,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             return Task.FromResult(rsp);
         }
 
-        #region ILianLianPayClient Members
-        public string BuildHtmlRequest(string url, IDictionary<string, string> sParaTemp)
+        private string BuildHtmlRequest(string url, IDictionary<string, string> sParaTemp)
         {
             //待请求参数数组
             var dicPara = new Dictionary<string, string>(sParaTemp);
@@ -170,9 +180,8 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
             return sbHtml.ToString();
         }
-        #endregion
 
-        private void CheckNotifySign(LianLianPayDictionary para, IList<string> excludePara, RSAParameters parameters)
+        private void CheckNotifySign(LianLianPayDictionary para, List<string> excludePara)
         {
             if (para.Count == 0)
             {
@@ -181,8 +190,8 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
             if (para.TryGetValue("sign", out var sign))
             {
-                var prestr = LianLianPaySignature.GetSignContent(para, excludePara);
-                if (!LianLianPaySignature.RSACheckContent(prestr, sign, parameters))
+                var prestr = LianLianPaySecurity.GetSignContent(para, excludePara);
+                if (!MD5WithRSA.VerifyData(prestr, sign, PublicKey))
                 {
                     throw new Exception("sign check fail: check Sign and Data Fail JSON also");
                 }

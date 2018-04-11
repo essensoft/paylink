@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
@@ -13,18 +14,22 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 支付宝用户账务明细信息
         /// </summary>
         [JsonProperty("account_records")]
+        [XmlArray("account_records")]
+        [XmlArrayItem("account_record")]
         public List<AccountRecord> AccountRecords { get; set; }
 
         /// <summary>
         /// 总页面数
         /// </summary>
         [JsonProperty("total_pages")]
+        [XmlElement("total_pages")]
         public long TotalPages { get; set; }
 
         /// <summary>
         /// 总记录数
         /// </summary>
         [JsonProperty("total_results")]
+        [XmlElement("total_results")]
         public long TotalResults { get; set; }
     }
 }

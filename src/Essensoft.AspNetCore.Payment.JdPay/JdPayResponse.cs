@@ -1,9 +1,9 @@
-﻿using Essensoft.AspNetCore.Payment.JdPay.Domain;
+﻿using Essensoft.AspNetCore.Payment.JDPay.Domain;
 using System.Xml.Serialization;
 
-namespace Essensoft.AspNetCore.Payment.JdPay
+namespace Essensoft.AspNetCore.Payment.JDPay
 {
-    public abstract class JdPayResponse : JdPayObject
+    public abstract class JDPayResponse : JDPayObject
     {
         /// <summary>
         /// 原始内容
@@ -15,7 +15,7 @@ namespace Essensoft.AspNetCore.Payment.JdPay
         /// 原始参数
         /// </summary>
         [XmlIgnore]
-        public JdPayDictionary Parameters { get; internal set; }
+        public JDPayDictionary Parameters { get; internal set; }
 
         /// <summary>
         /// 版本号

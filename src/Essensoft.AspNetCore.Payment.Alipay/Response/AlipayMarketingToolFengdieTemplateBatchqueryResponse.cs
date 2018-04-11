@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -12,6 +13,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 模板详情列表
         /// </summary>
         [JsonProperty("data")]
+        [XmlElement("data")]
         public FengdieTemplateListRespModel Data { get; set; }
     }
 }

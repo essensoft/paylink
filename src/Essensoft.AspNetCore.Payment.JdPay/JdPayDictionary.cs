@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
 
-namespace Essensoft.AspNetCore.Payment.JdPay
+namespace Essensoft.AspNetCore.Payment.JDPay
 {
-    public class JdPayDictionary : SortedDictionary<string, string>
+    public class JDPayDictionary : SortedDictionary<string, string>
     {
-        public JdPayDictionary() { }
+        public JDPayDictionary() { }
 
-        public JdPayDictionary(IDictionary<string, string> dictionary)
+        public JDPayDictionary(IDictionary<string, string> dictionary)
             : base(dictionary)
         { }
 

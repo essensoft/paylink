@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -12,6 +13,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 单笔直接支付返回结果
         /// </summary>
         [JsonProperty("single_pay_detail")]
+        [XmlElement("single_pay_detail")]
         public SinglePayDetail SinglePayDetail { get; set; }
     }
 }

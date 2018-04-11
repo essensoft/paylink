@@ -1,9 +1,9 @@
 ﻿using System.Xml.Serialization;
 
-namespace Essensoft.AspNetCore.Payment.JdPay.Response
+namespace Essensoft.AspNetCore.Payment.JDPay.Response
 {
     [XmlRoot("jdpay")]
-    public class JdPaySaveOrderResponse : JdPayResponse
+    public class JDPaySaveOrderResponse : JDPayResponse
     {
     }
 }
