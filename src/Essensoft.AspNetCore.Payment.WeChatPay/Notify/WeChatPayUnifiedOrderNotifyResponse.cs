@@ -158,9 +158,29 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
         [JsonProperty("coupon_count")]
         public string CouponCount { get; set; }
 
-        // 代金券类型	coupon_type_$n
-        // 代金券ID	coupon_id_$n
-        // 单个代金券支付金额	coupon_fee_$n
+        // 代金券类型 	coupon_type_$n
+
+        /// <summary>
+        /// 代金券类型 0
+        /// </summary>
+        [JsonProperty("coupon_type_0")]
+        public string CouponType0 { get; set; }
+
+        // 代金券ID coupon_id_$n
+
+        /// <summary>
+        /// 代金券ID 0
+        /// </summary>
+        [JsonProperty("coupon_id_0")]
+        public string CouponId0 { get; set; }
+
+        // 单个代金券支付金额 coupon_fee_$n
+
+        /// <summary>
+        /// 单个代金券支付金额 0
+        /// </summary>
+        [JsonProperty("coupon_fee_0")]
+        public string CouponFee0 { get; set; }
 
         /// <summary>
         /// 微信支付订单号

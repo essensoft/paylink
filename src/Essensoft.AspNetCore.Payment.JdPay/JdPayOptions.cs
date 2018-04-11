@@ -1,6 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Payment.JdPay
+﻿namespace Essensoft.AspNetCore.Payment.JDPay
 {
-    public class JdPayOptions
+    public class JDPayOptions
     {
         /// <summary>
         /// 商户号

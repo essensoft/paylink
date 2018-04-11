@@ -1,4 +1,4 @@
-﻿using Essensoft.AspNetCore.Security;
+﻿using Essensoft.AspNetCore.Payment.Security;
 using Essensoft.AspNetCore.Payment.WeChatPay.Notify;
 using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
 using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
@@ -41,8 +41,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             if (rsp is WeChatPayRefundNotifyResponse)
             {
                 var key = MD5.Compute(Options.Key).ToLower();
-                var data = AES.Decrypt((rsp as WeChatPayRefundNotifyResponse).ReqInfo, key); // AES-256-ECB
-                Logger.LogInformation(1, "Decrypt Content:{data}", data);
+                var data = AES.Decrypt((rsp as WeChatPayRefundNotifyResponse).ReqInfo, key, AESPaddingMode.PKCS7, AESCipherModeMode.ECB);
+                Logger.LogInformation(1, "Decrypt Content:{data}", data); // AES-256-ECB
                 rsp = parser.Parse(body, data);
             }
             else

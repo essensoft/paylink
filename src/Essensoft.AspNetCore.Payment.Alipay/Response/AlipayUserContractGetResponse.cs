@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -12,6 +13,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 支付宝用户订购信息
         /// </summary>
         [JsonProperty("alipay_contract")]
+        [XmlElement("alipay_contract")]
         public AlipayContract AlipayContract { get; set; }
     }
 }

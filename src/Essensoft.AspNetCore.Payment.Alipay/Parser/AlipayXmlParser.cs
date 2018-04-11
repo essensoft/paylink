@@ -1,5 +1,5 @@
 ﻿using Essensoft.AspNetCore.Payment.Alipay.Request;
-using Essensoft.AspNetCore.Payment.Alipay.Utility;
+using Essensoft.AspNetCore.Payment.Security;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -50,10 +50,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
             return rsp;
         }
 
-
         public SignItem GetSignItem(IAlipayRequest<T> request, string reponseBody)
         {
-
             if (string.IsNullOrEmpty(reponseBody))
             {
                 return null;
@@ -65,7 +63,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
             var signSourceData = GetSignSourceData(request, reponseBody);
             signItem.SignSourceDate = signSourceData;
-
             return signItem;
         }
 
@@ -149,7 +146,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
             var bodyIndexContent = body.Substring(0, item.startIndex);
             var bodyEndContent = body.Substring(item.endIndex);
-            var encryptContent = AlipayEncrypt.AesDencrypt(encryptKey, item.encryptContent);
+            var encryptContent = AES.Decrypt(item.encryptContent, encryptKey, AESPaddingMode.PKCS7, AESCipherModeMode.CBC, AES.ALIPAY_AES_IV);
 
             return bodyIndexContent + encryptContent + bodyEndContent;
         }

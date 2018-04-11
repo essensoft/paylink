@@ -1,9 +1,7 @@
-﻿using Essensoft.AspNetCore.Security;
+﻿using Essensoft.AspNetCore.Payment.Security;
 using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Pkcs;
 using Org.BouncyCastle.Pkix;
-using Org.BouncyCastle.Security;
 using Org.BouncyCastle.Utilities.Collections;
 using Org.BouncyCastle.X509;
 using Org.BouncyCastle.X509.Store;
@@ -56,7 +54,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             if ("01".Equals(signMethod))
             {
                 var signValue = rspData["signature"];
-                var signByte = Convert.FromBase64String(signValue);
                 rspData.Remove("signature");
                 var stringData = GetSignContent(rspData, true, false);
                 var stringSignDigest = SHA256.Compute(stringData);
@@ -67,7 +64,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
                 {
                     return false;
                 }
-                result = ValidateSha256WithRsa(cert.GetPublicKey(), signByte, Encoding.UTF8.GetBytes(stringSignDigest));
+                result = SHA256WithRSA.VerifyData(stringSignDigest, signValue, cert.GetPublicKey());
             }
             else if ("11".Equals(signMethod) || "12".Equals(signMethod))
             {
@@ -100,8 +97,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 
                 var stringData = GetSignContent(reqData, true, false);
                 var stringSignDigest = SHA256.Compute(stringData);
-
-                var stringSign = SignSha256WithRsa(stringSignDigest, parameters);
+                var stringSign = SHA256WithRSA.SignData(stringSignDigest, parameters);
 
                 //设置签名域值
                 reqData["signature"] = stringSign;
@@ -160,39 +156,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             }
 
             return sb.Remove(sb.Length - 1, 1).ToString();
-        }
-
-        public static string SignSha256WithRsa(string data, AsymmetricKeyParameter key)
-        {
-            var normalSig = SignerUtilities.GetSigner("SHA256WithRSA");
-            normalSig.Init(true, key);
-            normalSig.BlockUpdate(Encoding.UTF8.GetBytes(data), 0, data.Length);
-            return Convert.ToBase64String(normalSig.GenerateSignature());
-        }
-
-        public static string SignSha1WithRsa(string data, AsymmetricKeyParameter key)
-        {
-            var normalSig = SignerUtilities.GetSigner("SHA1WithRSA");
-            normalSig.Init(true, key);
-            normalSig.BlockUpdate(Encoding.UTF8.GetBytes(data), 0, data.Length);
-            return Convert.ToBase64String(normalSig.GenerateSignature());
-
-        }
-
-        public static bool ValidateSha1WithRsa(AsymmetricKeyParameter key, byte[] base64DecodingSignStr, byte[] srcByte)
-        {
-            var verifier = SignerUtilities.GetSigner("SHA1WithRSA");
-            verifier.Init(false, key);
-            verifier.BlockUpdate(srcByte, 0, srcByte.Length);
-            return verifier.VerifySignature(base64DecodingSignStr);
-        }
-
-        public static bool ValidateSha256WithRsa(AsymmetricKeyParameter key, byte[] base64DecodingSignStr, byte[] srcByte)
-        {
-            var verifier = SignerUtilities.GetSigner("SHA256WithRSA");
-            verifier.Init(false, key);
-            verifier.BlockUpdate(srcByte, 0, srcByte.Length);
-            return verifier.VerifySignature(base64DecodingSignStr);
         }
 
         public static UnionPayCertificate GetSignCertificate(string certificate, string certPwd)
@@ -513,60 +476,16 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 
         }
 
-        public static byte[] EncryptData(byte[] data, AsymmetricKeyParameter key)
-        {
-            try
-            {
-                var c = CipherUtilities.GetCipher("RSA/NONE/PKCS1Padding");
-                c.Init(true, new ParametersWithRandom(key, new SecureRandom()));
-                return c.DoFinal(data);
-            }
-            catch (Exception e)
-            {
-                throw new Exception("EncryptedData error: " + e.Message);
-            }
-        }
-
-        public static string EncryptData(string dataString, AsymmetricKeyParameter key)
-        {
-            var data = EncryptData(Encoding.UTF8.GetBytes(dataString), key);
-            return Convert.ToBase64String(data);
-        }
-
         public static string EncryptPin(string pin, string card, AsymmetricKeyParameter key)
         {
             var pinBlock = Pin2PinBlockWithCardNO(pin, card);
-            var data = EncryptData(pinBlock, key);
-            return Convert.ToBase64String(data);
-        }
-
-        public static byte[] DecryptData(byte[] data, AsymmetricKeyParameter key)
-        {
-            try
-            {
-                var c = CipherUtilities.GetCipher("RSA/NONE/PKCS1Padding");
-                c.Init(false, key);
-                return c.DoFinal(data);
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Decrypt data error: " + e.Message);
-            }
-        }
-
-        public static string DecryptData(string dataString, AsymmetricKeyParameter key)
-        {
-            var data = Convert.FromBase64String(dataString);
-            var decryptData = DecryptData(data, key);
-            return Encoding.UTF8.GetString(data);
+            return Convert.ToBase64String(RSA_NONE_PKCS1Padding.Encrypt(pinBlock, key));
         }
 
         public static string DecryptData(string dataString, string cert, string certPwd)
         {
-            var data = Convert.FromBase64String(dataString);
             var certificate = GetSignCertificate(cert, certPwd);
-            data = DecryptData(data, certificate.key);
-            return Encoding.UTF8.GetString(data);
+            return RSA_NONE_PKCS1Padding.Decrypt(dataString, certificate.key);
         }
     }
 }

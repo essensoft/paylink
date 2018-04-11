@@ -1,7 +1,7 @@
 ﻿using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.Alipay.Notify;
-using Essensoft.AspNetCore.Payment.JdPay;
-using Essensoft.AspNetCore.Payment.JdPay.Notify;
+using Essensoft.AspNetCore.Payment.JDPay;
+using Essensoft.AspNetCore.Payment.JDPay.Notify;
 using Essensoft.AspNetCore.Payment.LianLianPay;
 using Essensoft.AspNetCore.Payment.LianLianPay.Notify;
 using Essensoft.AspNetCore.Payment.QPay;
@@ -225,10 +225,10 @@ namespace WebApplicationSample.Controllers
     }
 
     [Route("notify/jdpay")]
-    public class JdPayNotifyController : Controller
+    public class JDPayNotifyController : Controller
     {
-        private readonly JdPayNotifyClient _client = null;
-        public JdPayNotifyController(JdPayNotifyClient client)
+        private readonly JDPayNotifyClient _client = null;
+        public JDPayNotifyController(JDPayNotifyClient client)
         {
             _client = client;
         }
@@ -238,7 +238,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<JdPayAsyncNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<JDPayAsyncNotifyResponse>(Request);
                 Console.WriteLine("TradeNum: " + notify.TradeNum + " tradeType :" + notify.TradeType);
 
                 return Content("success", "text/plain");
@@ -480,7 +480,7 @@ namespace WebApplicationSample.Controllers
         }
     }
 
-    [Route("notify/lianlianpay")]
+    [Route("notify/LianLianPay")]
     public class LianLianPayNotifyController : Controller
     {
         private readonly LianLianPayNotifyClient _client = null;

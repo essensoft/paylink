@@ -1,4 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
+﻿using Essensoft.AspNetCore.Payment.Security;
+using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
 using Essensoft.AspNetCore.Payment.WeChatPay.Request;
 using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 using Microsoft.Extensions.Logging;
@@ -24,7 +25,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         private const string ENC_BANK_NO = "enc_bank_no";
         private const string ENC_TRUE_NAME = "enc_true_name";
 
-        private ICipherParameters RsaPublicParameters;
+        private AsymmetricKeyParameter PublicKey;
 
         public WeChatPayOptions Options { get; set; }
 
@@ -67,7 +68,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
             if (!string.IsNullOrEmpty(Options.RsaPublicKey))
             {
-                RsaPublicParameters = WeChatPaySignature.GetPublicKeyParameters(Options.RsaPublicKey);
+                PublicKey = RSAUtilities.GetPublicKeyParameterFormAsn1PublicKey(Options.RsaPublicKey);
             }
         }
 
@@ -130,15 +131,15 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             }
             else if (request is WeChatPayPayBankRequest)
             {
-                if (RsaPublicParameters == null)
+                if (PublicKey == null)
                 {
                     throw new ArgumentNullException(nameof(Options.RsaPublicKey));
                 }
 
-                var no = WeChatPaySignature.Encrypt(sortedTxtParams.GetValue(ENC_BANK_NO), RsaPublicParameters);
+                var no = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(sortedTxtParams.GetValue(ENC_BANK_NO), PublicKey);
                 sortedTxtParams.SetValue(ENC_BANK_NO, no);
 
-                var name = WeChatPaySignature.Encrypt(sortedTxtParams.GetValue(ENC_TRUE_NAME), RsaPublicParameters);
+                var name = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(sortedTxtParams.GetValue(ENC_TRUE_NAME), PublicKey);
                 sortedTxtParams.SetValue(ENC_TRUE_NAME, name);
 
                 sortedTxtParams.Add(MCH_ID, Options.MchId);

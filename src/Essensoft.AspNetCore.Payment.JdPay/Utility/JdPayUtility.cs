@@ -8,9 +8,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
 
-namespace Essensoft.AspNetCore.Payment.JdPay.Utility
+namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 {
-    public static class JdPayUtility
+    public static class JDPayUtility
     {
         internal static bool HasTextXmlContentType(this HttpRequest request)
         {
@@ -79,7 +79,7 @@ namespace Essensoft.AspNetCore.Payment.JdPay.Utility
             return string.Empty;
         }
 
-        public static XmlDocument SortedDictionary2AllXml(JdPayDictionary dic)
+        public static XmlDocument SortedDictionary2AllXml(JDPayDictionary dic)
         {
             var xmldoc = new XmlDocument();
             var xmldecl = xmldoc.CreateXmlDeclaration("1.0", "UTF-8", null);
@@ -88,14 +88,14 @@ namespace Essensoft.AspNetCore.Payment.JdPay.Utility
             return xmldoc;
         }
 
-        public static string SortedDictionary2XmlStr(JdPayDictionary dic)
+        public static string SortedDictionary2XmlStr(JDPayDictionary dic)
         {
             var xmldoc = new XmlDocument();
             SortedDictionary2Xml(xmldoc, dic);
             return ConvertXmlToString(xmldoc);
         }
 
-        public static void SortedDictionary2Xml(XmlDocument xmldoc, JdPayDictionary dic)
+        public static void SortedDictionary2Xml(XmlDocument xmldoc, JDPayDictionary dic)
         {
             var xmlelem = xmldoc.CreateElement("", "jdpay", "");
             xmldoc.AppendChild(xmlelem);

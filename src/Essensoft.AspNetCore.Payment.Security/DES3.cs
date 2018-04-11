@@ -3,7 +3,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Essensoft.AspNetCore.Security
+namespace Essensoft.AspNetCore.Payment.Security
 {
     /// <summary>
     /// DES3加密解密
@@ -13,14 +13,14 @@ namespace Essensoft.AspNetCore.Security
         private const int MAX_MSG_LENGTH = 16 * 1024;
         private static byte[] iv = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
 
-        public static string EncryptECB(byte[] key, string data)
+        public static string EncryptECB(string data, byte[] key)
         {
             var resultByte = InitResultByteArray(data);
             var desdata = Des3EncodeECB(key, iv, resultByte);
             return ByteToHexStr(desdata);
         }
 
-        public static string DecryptECB(byte[] key, string data)
+        public static string DecryptECB(string data, byte[] key)
         {
             var hexSourceData = Hex2byte(data);
             var unDesResult = Des3DecodeECB(key, iv, hexSourceData);
@@ -44,13 +44,13 @@ namespace Essensoft.AspNetCore.Security
             return str;
         }
 
-        public static string EncryptCBC(byte[] key, string data)
+        public static string EncryptCBC(string data, byte[] key)
         {
             var desdata = Des3EncodeCBC(key, iv, Encoding.UTF8.GetBytes(data));
             return ByteToHexStr(desdata);
         }
 
-        public static string DecryptCBC(byte[] key, string data)
+        public static string DecryptCBC(string data, byte[] key)
         {
             var desdata = Des3DecodeCBC(key, iv, Encoding.UTF8.GetBytes(data));
             return Encoding.UTF8.GetString(desdata);
@@ -184,9 +184,8 @@ namespace Essensoft.AspNetCore.Security
                 mStream.Close();
                 return ret;
             }
-            catch (CryptographicException e)
+            catch
             {
-                Console.WriteLine("A Cryptographic error occurred: {0}", e.Message);
                 return null;
             }
         }
@@ -213,9 +212,8 @@ namespace Essensoft.AspNetCore.Security
                 csDecrypt.Read(fromEncrypt, 0, fromEncrypt.Length);
                 return fromEncrypt;
             }
-            catch (CryptographicException e)
+            catch
             {
-                Console.WriteLine("A Cryptographic error occurred: {0}", e.Message);
                 return null;
             }
         }
@@ -249,9 +247,9 @@ namespace Essensoft.AspNetCore.Security
                 mStream.Close();
                 return ret;
             }
-            catch (CryptographicException e)
+            catch
             {
-                throw new CryptographicException("A Cryptographic error occurred: {0}", e.Message);
+                return null;
             }
         }
 
@@ -277,9 +275,9 @@ namespace Essensoft.AspNetCore.Security
                 csDecrypt.Read(fromEncrypt, 0, fromEncrypt.Length);
                 return fromEncrypt;
             }
-            catch (CryptographicException e)
+            catch
             {
-                throw new CryptographicException("A Cryptographic error occurred: {0}", e.Message);
+                return null;
             }
         }
 
@@ -288,7 +286,7 @@ namespace Essensoft.AspNetCore.Security
         //将数组转换成16进制字符串
         public static string ByteToHexStr(byte[] bytes)
         {
-            var returnStr = "";
+            var returnStr = string.Empty;
             if (bytes != null)
             {
                 for (var i = 0; i < bytes.Length; i++)

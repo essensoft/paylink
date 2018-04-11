@@ -1,9 +1,9 @@
-﻿namespace Essensoft.AspNetCore.Payment.JdPay.Parser
+﻿namespace Essensoft.AspNetCore.Payment.JDPay.Parser
 {
     /// <summary>
     /// 京东支付结果解析
     /// </summary>
-    public interface IJdPayParser<T> where T : JdPayResponse
+    public interface IJDPayParser<T> where T : JDPayResponse
     {
         T Parse(string body);
     }

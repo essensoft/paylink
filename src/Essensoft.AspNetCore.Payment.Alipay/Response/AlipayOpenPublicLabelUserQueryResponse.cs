@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,6 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 用户标签id列表，以英文逗号分隔
         /// </summary>
         [JsonProperty("label_ids")]
+        [XmlElement("label_ids")]
         public string LabelIds { get; set; }
     }
 }

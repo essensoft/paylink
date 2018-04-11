@@ -1,6 +1,7 @@
 ﻿using Essensoft.AspNetCore.Payment.Alipay.Parser;
 using Essensoft.AspNetCore.Payment.Alipay.Request;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
+using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
@@ -35,8 +36,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         private const string APP_AUTH_TOKEN = "app_auth_token";
         private const string RETURN_URL = "return_url";
 
-        private RSAParameters RSAPrivateParameters;
-        private RSAParameters RSAPublicParameters;
+        private RSAParameters PrivateRSAParameters;
+        private RSAParameters PublicRSAParameters;
 
         public AlipayOptions Options { get; set; }
 
@@ -70,8 +71,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 throw new ArgumentNullException(nameof(Options.RsaPublicKey));
             }
 
-            RSAPrivateParameters = AlipaySignature.GetPrivateParameters(Options.RsaPrivateKey);
-            RSAPublicParameters = AlipaySignature.GetPublicParameters(Options.RsaPublicKey);
+            PrivateRSAParameters = RSAUtilities.GetRSAParametersFormPrivateKey(Options.RsaPrivateKey);
+            PublicRSAParameters = RSAUtilities.GetRSAParametersFormPublicKey(Options.RsaPublicKey);
         }
 
         public void SetTimeout(int timeout)
@@ -142,7 +143,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             // 添加签名参数
             var signContent = AlipaySignature.GetSignContent(txtParams);
-            txtParams.Add(SIGN, AlipaySignature.RSASignContent(signContent, RSAPrivateParameters, Options.SignType));
+            txtParams.Add(SIGN, AlipaySignature.RSASignContent(signContent, PrivateRSAParameters, Options.SignType));
 
             // 是否需要上传文件
             var body = string.Empty;
@@ -259,7 +260,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
                 }
 
-                var encryptContent = AlipayUtility.AesEncrypt(Options.EncyptKey, txtParams[BIZ_CONTENT]);
+                var encryptContent = AES.Encrypt(txtParams[BIZ_CONTENT], Options.EncyptKey, AESPaddingMode.PKCS7, AESCipherModeMode.CBC, AES.ALIPAY_AES_IV);
                 txtParams.Remove(BIZ_CONTENT);
                 txtParams.Add(BIZ_CONTENT, encryptContent);
                 txtParams.Add(ENCRYPT_TYPE, Options.EncyptType);
@@ -267,7 +268,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             // 添加签名参数
             var signContent = AlipaySignature.GetSignContent(txtParams);
-            txtParams.Add(SIGN, AlipaySignature.RSASignContent(signContent, RSAPrivateParameters, Options.SignType));
+            txtParams.Add(SIGN, AlipaySignature.RSASignContent(signContent, PrivateRSAParameters, Options.SignType));
 
             var query = HttpClientEx.BuildQuery(txtParams);
             Logger.LogInformation(0, "Request:{query}", query);
@@ -303,7 +304,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             rsp = parser.Parse(item.realContent);
 
-            CheckResponseSign(request, item.respContent, rsp.IsError, parser, RSAPublicParameters, Options.SignType);
+            CheckResponseSign(request, item.respContent, rsp.IsError, parser, PublicRSAParameters, Options.SignType);
 
             return rsp;
         }
@@ -398,7 +399,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             // 参数签名
             var signContent = AlipaySignature.GetSignContent(sortedAlipayDic);
-            var signResult = AlipaySignature.RSASignContent(signContent, RSAPrivateParameters, Options.SignType);
+            var signResult = AlipaySignature.RSASignContent(signContent, PrivateRSAParameters, Options.SignType);
 
             // 添加签名结果参数
             sortedAlipayDic.Add(SIGN, signResult);
@@ -458,7 +459,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                     throw new AlipayException("api only support Aes!");
                 }
 
-                var encryptContent = AlipayUtility.AesEncrypt(Options.EncyptKey, result[BIZ_CONTENT]);
+                var encryptContent = AES.Encrypt(result[BIZ_CONTENT], Options.EncyptKey, AESPaddingMode.PKCS7, AESCipherModeMode.CBC, AES.ALIPAY_AES_IV);
                 result.Remove(BIZ_CONTENT);
                 result.Add(BIZ_CONTENT, encryptContent);
                 result.Add(ENCRYPT_TYPE, Options.EncyptType);

@@ -5,7 +5,7 @@ using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Essensoft.AspNetCore.Payment.JdPay.Utility
+namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 {
     public sealed class HttpClientEx : HttpClient
     {

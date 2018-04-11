@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D3871E61-CA47-4BD0-8BF9-B64A42B2200D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{DD8CC860-F3E3-40F4-8A8F-20BF66EA051C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationSample", "samples\WebApplicationSample\WebApplicationSample.csproj", "{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D3871E61-CA47-4BD0-8BF9-B64A42B2200D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Payment.All", "src\Essensoft.AspNetCore.Payment.All\Essensoft.AspNetCore.Payment.All.csproj", "{084545C4-FA61-4BF4-913A-59E4C063212D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Payment.Alipay", "src\Essensoft.AspNetCore.Payment.Alipay\Essensoft.AspNetCore.Payment.Alipay.csproj", "{167FAA95-300E-49D5-A29B-EFCFF90A0584}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Payment.JdPay", "src\Essensoft.AspNetCore.Payment.JdPay\Essensoft.AspNetCore.Payment.JdPay.csproj", "{45FD8F4B-E2F5-4183-91C4-BC38C3BA9217}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Payment.QPay", "src\Essensoft.AspNetCore.Payment.QPay\Essensoft.AspNetCore.Payment.QPay.csproj", "{071D1073-EEE3-45F1-ADC6-95CF90A64DD3}"
 EndProject
@@ -21,9 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Paymen
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Payment.WeChatPay", "src\Essensoft.AspNetCore.Payment.WeChatPay\Essensoft.AspNetCore.Payment.WeChatPay.csproj", "{66655C56-A98C-4F67-9F41-FECF0AFFA28E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationSample", "samples\WebApplicationSample\WebApplicationSample.csproj", "{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Payment.LianLianPay", "src\Essensoft.AspNetCore.Payment.LianLianPay\Essensoft.AspNetCore.Payment.LianLianPay.csproj", "{16843D79-807F-4973-AF26-66FF7141BAAD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Essensoft.AspNetCore.Payment.LianLianPay", "src\Essensoft.AspNetCore.Payment.LianLianPay\Essensoft.AspNetCore.Payment.LianLianPay.csproj", "{16843D79-807F-4973-AF26-66FF7141BAAD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Payment.JDPay", "src\Essensoft.AspNetCore.Payment.JDPay\Essensoft.AspNetCore.Payment.JDPay.csproj", "{A57153DC-67DE-4141-A13C-216CE6C5129C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +31,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}.Release|Any CPU.Build.0 = Release|Any CPU
 		{084545C4-FA61-4BF4-913A-59E4C063212D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{084545C4-FA61-4BF4-913A-59E4C063212D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{084545C4-FA61-4BF4-913A-59E4C063212D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -39,10 +43,6 @@ Global
 		{167FAA95-300E-49D5-A29B-EFCFF90A0584}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{167FAA95-300E-49D5-A29B-EFCFF90A0584}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{167FAA95-300E-49D5-A29B-EFCFF90A0584}.Release|Any CPU.Build.0 = Release|Any CPU
-		{45FD8F4B-E2F5-4183-91C4-BC38C3BA9217}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{45FD8F4B-E2F5-4183-91C4-BC38C3BA9217}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{45FD8F4B-E2F5-4183-91C4-BC38C3BA9217}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{45FD8F4B-E2F5-4183-91C4-BC38C3BA9217}.Release|Any CPU.Build.0 = Release|Any CPU
 		{071D1073-EEE3-45F1-ADC6-95CF90A64DD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{071D1073-EEE3-45F1-ADC6-95CF90A64DD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{071D1073-EEE3-45F1-ADC6-95CF90A64DD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,28 +59,28 @@ Global
 		{66655C56-A98C-4F67-9F41-FECF0AFFA28E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{66655C56-A98C-4F67-9F41-FECF0AFFA28E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{66655C56-A98C-4F67-9F41-FECF0AFFA28E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}.Release|Any CPU.Build.0 = Release|Any CPU
 		{16843D79-807F-4973-AF26-66FF7141BAAD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{16843D79-807F-4973-AF26-66FF7141BAAD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{16843D79-807F-4973-AF26-66FF7141BAAD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{16843D79-807F-4973-AF26-66FF7141BAAD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A57153DC-67DE-4141-A13C-216CE6C5129C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A57153DC-67DE-4141-A13C-216CE6C5129C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A57153DC-67DE-4141-A13C-216CE6C5129C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A57153DC-67DE-4141-A13C-216CE6C5129C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76} = {DD8CC860-F3E3-40F4-8A8F-20BF66EA051C}
 		{084545C4-FA61-4BF4-913A-59E4C063212D} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
 		{167FAA95-300E-49D5-A29B-EFCFF90A0584} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
-		{45FD8F4B-E2F5-4183-91C4-BC38C3BA9217} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
 		{071D1073-EEE3-45F1-ADC6-95CF90A64DD3} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
 		{3578E08D-A08E-4C4A-A5DE-8D31C21F7D66} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
 		{07AE45BF-9434-4254-A1ED-653300D48DDE} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
 		{66655C56-A98C-4F67-9F41-FECF0AFFA28E} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
-		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76} = {DD8CC860-F3E3-40F4-8A8F-20BF66EA051C}
 		{16843D79-807F-4973-AF26-66FF7141BAAD} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
+		{A57153DC-67DE-4141-A13C-216CE6C5129C} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C5BE9B18-CD29-4490-84EA-68EDEEF75428}

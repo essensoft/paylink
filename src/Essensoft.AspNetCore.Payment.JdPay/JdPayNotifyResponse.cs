@@ -1,6 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Payment.JdPay
+﻿namespace Essensoft.AspNetCore.Payment.JDPay
 {
-    public abstract class JdPayNotifyResponse : JdPayResponse
+    public abstract class JDPayNotifyResponse : JDPayResponse
     {
     }
 }

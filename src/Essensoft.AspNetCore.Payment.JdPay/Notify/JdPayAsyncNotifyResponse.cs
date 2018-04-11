@@ -1,11 +1,11 @@
-﻿using Essensoft.AspNetCore.Payment.JdPay.Domain;
+﻿using Essensoft.AspNetCore.Payment.JDPay.Domain;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace Essensoft.AspNetCore.Payment.JdPay.Notify
+namespace Essensoft.AspNetCore.Payment.JDPay.Notify
 {
     [XmlRoot("jdpay")]
-    public class JdPayAsyncNotifyResponse : JdPayNotifyResponse
+    public class JDPayAsyncNotifyResponse : JDPayNotifyResponse
     {
         /// <summary>
         /// 交易流水  数字或字母

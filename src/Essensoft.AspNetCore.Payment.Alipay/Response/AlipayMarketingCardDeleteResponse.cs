@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,6 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 支付宝端删卡业务流水号
         /// </summary>
         [JsonProperty("biz_serial_no")]
+        [XmlElement("biz_serial_no")]
         public string BizSerialNo { get; set; }
     }
 }

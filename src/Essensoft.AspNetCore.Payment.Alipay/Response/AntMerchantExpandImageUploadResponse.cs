@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,6 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 图片在sfs中的标识
         /// </summary>
         [JsonProperty("image_id")]
+        [XmlElement("image_id")]
         public string ImageId { get; set; }
     }
 }

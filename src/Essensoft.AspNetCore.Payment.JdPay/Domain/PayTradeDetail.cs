@@ -1,8 +1,7 @@
 ﻿using System.Xml.Serialization;
 
-namespace Essensoft.AspNetCore.Payment.JdPay.Domain
+namespace Essensoft.AspNetCore.Payment.JDPay.Domain
 {
-    [XmlRoot("detail")]
     public class PayTradeDetail
     {
         /// <summary>

@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,12 +12,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 扩展结果
         /// </summary>
         [JsonProperty("extern_info")]
+        [XmlElement("extern_info")]
         public string ExternInfo { get; set; }
 
         /// <summary>
         /// 刷脸认证的唯一标识
         /// </summary>
         [JsonProperty("zim_id")]
+        [XmlElement("zim_id")]
         public string ZimId { get; set; }
     }
 }

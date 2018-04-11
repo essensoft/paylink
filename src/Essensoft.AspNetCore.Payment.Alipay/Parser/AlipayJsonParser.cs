@@ -1,5 +1,6 @@
 ﻿using Essensoft.AspNetCore.Payment.Alipay.Request;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
+using Essensoft.AspNetCore.Payment.Security;
 using Newtonsoft.Json;
 using System;
 using System.Collections;
@@ -15,20 +16,23 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
         public T Parse(string body)
         {
             T rsp = null;
+
+            IDictionary json = null;
+
             try
             {
-                var json = JsonConvert.DeserializeObject<IDictionary>(body);
+                if (body.StartsWith("{") && body.EndsWith("}"))
+                {
+                    json = JsonConvert.DeserializeObject<IDictionary>(body);
+                }
                 if (json != null)
                 {
                     // 忽略根节点的名称
                     foreach (var key in json.Keys)
                     {
-                        var data = json[key].ToString();
-                        if (!string.IsNullOrEmpty(data))
-                        {
-                            rsp = JsonConvert.DeserializeObject<T>(data);
+                        rsp = JsonConvert.DeserializeObject<T>(json[key].ToString());
+                        if (rsp != null)
                             break;
-                        }
                     }
                 }
             }
@@ -100,19 +104,15 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
         public string EncryptSourceData(IAlipayRequest<T> request, string body, string encryptType, string encryptKey)
         {
-
             if (!"AES".Equals(encryptType))
             {
                 throw new AlipayException("API only support AES!");
             }
 
             var item = ParseEncryptData(request, body);
-
             var bodyIndexContent = body.Substring(0, item.startIndex);
             var bodyEndexContent = body.Substring(item.endIndex);
-
-            //TODO 解密逻辑
-            var bizContent = AlipayEncrypt.AesDencrypt(encryptKey, item.encryptContent);
+            var bizContent = AES.Decrypt(item.encryptContent, encryptKey, AESPaddingMode.PKCS7, AESCipherModeMode.CBC, AES.ALIPAY_AES_IV);
 
             return bodyIndexContent + bizContent + bodyEndexContent;
         }

@@ -1,4 +1,5 @@
 using Newtonsoft.Json;
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,6 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 行业模板
         /// </summary>
         [JsonProperty("template_url")]
+        [XmlElement("template_url")]
         public string TemplateUrl { get; set; }
     }
 }
