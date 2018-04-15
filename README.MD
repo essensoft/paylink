@@ -43,10 +43,16 @@ Essensoft.AspNetCore.Payment.LianLianPay		| [![NuGet](https://img.shields.io/nug
     <img src="http://p687qfgw0.bkt.clouddn.com/demo.png">
 </p>
 
-----
+---
 
 ## 支持/打赏
 
 <p align="center">
-    <img src="http://p687qfgw0.bkt.clouddn.com/pay.png">
+    <img src="http://p687qfgw0.bkt.clouddn.com/payment.png">
 </p>
+
+---
+
+## 致谢
+
+[Varorbc](https://github.com/Varorbc)
