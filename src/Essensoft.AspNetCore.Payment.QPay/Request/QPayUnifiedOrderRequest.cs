@@ -6,6 +6,21 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
     public class QPayUnifiedOrderRequest : IQPayRequest<QPayUnifiedOrderResponse>
     {
         /// <summary>
+        /// 应用ID
+        /// </summary>
+        public string AppId { get; set; }
+
+        /// <summary>
+        /// 子商户应用ID
+        /// </summary>
+        public string SubAppId { get; set; }
+
+        /// <summary>
+        /// 子商户号
+        /// </summary>
+        public string SubMchId { get; set; }
+
+        /// <summary>
         /// 商品描述
         /// </summary>
         public string Body { get; set; }
@@ -86,6 +101,9 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
         {
             var parameters = new QPayDictionary()
             {
+                { "appid", AppId },
+                { "sub_appid", SubAppId },
+                { "sub_mch_id", SubMchId },
                 { "body", Body },
                 { "attach", Attach },
                 { "out_trade_no", OutTradeNo },

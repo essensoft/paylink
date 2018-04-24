@@ -1,7 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
 {
+    [XmlRoot("xml")]
     public class WeChatPayDownloadBillResponse : WeChatPayResponse
     {
         /// <summary>
@@ -9,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 此字段是通信标识，非交易标识，
         /// 交易是否成功需要查看result_code来判断
         /// </summary>
-        [JsonProperty("return_code")]
+        [XmlElement("return_code")]
         public string ReturnCode { get; set; }
 
         /// <summary>
@@ -17,7 +18,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 签名失败
         /// 参数格式校验错误
         /// </summary>
-        [JsonProperty("return_msg")]
+        [XmlElement("return_msg")]
         public string ReturnMsg { get; set; }
     }
 }

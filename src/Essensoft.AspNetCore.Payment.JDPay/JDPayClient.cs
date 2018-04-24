@@ -27,15 +27,17 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         public JDPayOptions Options { get; set; }
 
-        public ILogger<JDPayClient> Logger { get; set; }
+        public virtual ILogger Logger { get; set; }
 
         protected internal HttpClientEx Client { get; set; }
+
+        #region JDPayClient Constructors
 
         public JDPayClient(
             IOptions<JDPayOptions> optionsAccessor,
             ILogger<JDPayClient> logger)
         {
-            Options = optionsAccessor?.Value ?? new JDPayOptions();
+            Options = optionsAccessor.Value;
             Logger = logger;
             Client = new HttpClientEx();
 
@@ -64,10 +66,22 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             DesKey = Convert.FromBase64String(Options.DesKey);
         }
 
+        public JDPayClient(IOptions<JDPayOptions> optionsAccessor)
+           : this(optionsAccessor, null)
+        { }
+
+        #endregion
+
+        #region IJDPayClient Members
+
         public void SetTimeout(int timeout)
         {
             Client.Timeout = new TimeSpan(0, 0, 0, timeout);
         }
+
+        #endregion
+
+        #region IJDPayClient Members
 
         public async Task<T> ExecuteAsync<T>(IJDPayRequest<T> request) where T : JDPayResponse
         {
@@ -75,19 +89,19 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             var sortedTxtParams = new JDPayDictionary(request.GetParameters());
 
             var content = BuildEncryptXml(request, sortedTxtParams);
-            Logger.LogInformation(0, "Request:{content}", content);
+            Logger?.LogTrace(0, "Request:{content}", content);
 
-            var rspContent = await Client.DoPostAsync(request.GetRequestUrl(), content);
-            Logger.LogInformation(1, "Response:{content}", rspContent);
+            var body = await Client.DoPostAsync(request.GetRequestUrl(), content);
+            Logger?.LogTrace(1, "Response:{content}", body);
 
             var parser = new JDPayXmlParser<T>();
-            var rsp = parser.Parse(JDPayUtility.FotmatXmlString(rspContent));
+            var rsp = parser.Parse(JDPayUtility.FotmatXmlString(body));
             if (!string.IsNullOrEmpty(rsp.Encrypt))
             {
                 var encrypt = rsp.Encrypt;
                 var base64EncryptStr = Encoding.UTF8.GetString(Convert.FromBase64String(encrypt));
-                var reqBody = DES3.DecryptECB(base64EncryptStr, DesKey);
-                Logger.LogInformation(2, "Encrypt Content:{body}", reqBody);
+                var reqBody = JDPaySecurity.DecryptECB(base64EncryptStr, DesKey);
+                Logger?.LogTrace(2, "Encrypt Content:{body}", reqBody);
 
                 var reqBodyDoc = new XmlDocument();
                 reqBodyDoc.LoadXml(reqBody);
@@ -105,7 +119,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 }
                 var sha256SourceSignString = SHA256.Compute(reqBodyStr);
                 var decryptByte = RSA_ECB_PKCS1Padding.Decrypt(Convert.FromBase64String(sign), PublicKey);
-                var decryptStr = DES3.BytesToString(decryptByte);
+                var decryptStr = JDPaySecurity.BytesToString(decryptByte);
                 if (sha256SourceSignString == decryptStr)
                 {
                     rsp = parser.Parse(reqBody);
@@ -119,7 +133,11 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             return rsp;
         }
 
-        public Task<T> PageExecuteAsync<T>(IJDPayRequest<T> request, string reqMethod) where T : JDPayResponse
+        #endregion
+
+        #region IJDPayClient Members
+
+        public Task<T> PageExecuteAsync<T>(IJDPayRequest<T> request) where T : JDPayResponse
         {
             // 字典排序
             var sortedTxtParams = new JDPayDictionary(request.GetParameters());
@@ -127,31 +145,15 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             var rsp = Activator.CreateInstance<T>();
 
             var url = request.GetRequestUrl();
-            if (reqMethod == "GET")
-            {
-                //拼接get请求的url
-                var tmpUrl = url;
-                if (encyptParams != null && encyptParams.Count > 0)
-                {
-                    if (tmpUrl.Contains("?"))
-                    {
-                        tmpUrl = tmpUrl + "&" + HttpClientEx.BuildQuery(encyptParams);
-                    }
-                    else
-                    {
-                        tmpUrl = tmpUrl + "?" + HttpClientEx.BuildQuery(encyptParams);
-                    }
-                }
-                rsp.Body = tmpUrl;
-            }
-            else
-            {
-                //输出post表单
-                rsp.Body = BuildHtmlRequest(url, encyptParams);
-            }
 
+            //输出post表单
+            rsp.Body = BuildHtmlRequest(url, encyptParams);
             return Task.FromResult(rsp);
         }
+
+        #endregion
+
+        #region Common Method
 
         private string BuildEncryptXml<T>(IJDPayRequest<T> request, JDPayDictionary dic) where T : JDPayResponse
         {
@@ -161,7 +163,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             var encyptBytes = RSA_ECB_PKCS1Padding.Encrypt(Encoding.UTF8.GetBytes(sha256SourceSignString), PrivateKey);
             var sign = Convert.ToBase64String(encyptBytes, Base64FormattingOptions.InsertLineBreaks);
             var data = smlStr.Replace("</jdpay>", "<sign>" + sign + "</sign></jdpay>");
-            var encrypt = DES3.EncryptECB(data, DesKey);
+            var encrypt = JDPaySecurity.EncryptECB(data, DesKey);
             // 字典排序
             var reqdic = new JDPayDictionary
             {
@@ -195,7 +197,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             {
                 if (!string.IsNullOrEmpty(item.Value))
                 {
-                    encyptDic.Add(item.Key, DES3.EncryptECB(item.Value, DesKey));
+                    encyptDic.Add(item.Key, JDPaySecurity.EncryptECB(item.Value, DesKey));
                 }
             }
             return encyptDic;
@@ -213,5 +215,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             sbHtml.Append("<script>document.forms['submit'].submit();</script>");
             return sbHtml.ToString();
         }
+
+        #endregion
     }
 }

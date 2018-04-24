@@ -12,19 +12,21 @@ using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
-    public class AlipayNotifyClient
+    public class AlipayNotifyClient : IAlipayNotifyClient
     {
         private RSAParameters PublicRSAParameters;
 
         public AlipayOptions Options { get; set; }
 
-        public virtual ILogger<AlipayNotifyClient> Logger { get; set; }
+        public virtual ILogger Logger { get; set; }
+
+        #region AlipayNotifyClient Constructors
 
         public AlipayNotifyClient(
             IOptions<AlipayOptions> optionsAccessor,
             ILogger<AlipayNotifyClient> logger)
         {
-            Options = optionsAccessor?.Value ?? new AlipayOptions();
+            Options = optionsAccessor.Value;
             Logger = logger;
 
             if (string.IsNullOrEmpty(Options.RsaPublicKey))
@@ -35,17 +37,29 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             PublicRSAParameters = RSAUtilities.GetRSAParametersFormPublicKey(Options.RsaPublicKey);
         }
 
+        public AlipayNotifyClient(IOptions<AlipayOptions> optionsAccessor)
+            : this(optionsAccessor, null)
+        { }
+
+        #endregion
+
+        #region IAlipayNotifyClient Members
+
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : AlipayNotifyResponse
         {
             var parameters = await GetParametersAsync(request);
             var query = HttpClientEx.BuildQuery(parameters);
-            Logger.LogInformation(0, "Request:{query}", query);
+            Logger?.LogTrace(0, "Request:{query}", query);
 
             var parser = new AlipayDictionaryParser<T>();
             var rsp = parser.Parse(parameters);
             CheckNotifySign(parameters, PublicRSAParameters, Options.SignType);
             return rsp;
         }
+
+        #endregion
+
+        #region Common Method
 
         private async Task<SortedDictionary<string, string>> GetParametersAsync(HttpRequest request)
         {
@@ -68,37 +82,41 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             return parameters;
         }
 
-        private void CheckNotifySign(IDictionary<string, string> para, RSAParameters parameters, string signType)
+        private void CheckNotifySign(IDictionary<string, string> parameters, RSAParameters publicRSAParameters, string signType)
         {
-            if (para.Count == 0)
+            if (parameters == null || parameters.Count == 0)
             {
-                throw new AlipayException("sign check fail: content is Empty!");
+                throw new Exception("sign check fail: content is Empty!");
             }
 
-            if (!para.TryGetValue("sign", out var sign))
+            if (!parameters.TryGetValue("sign", out var sign))
             {
-                throw new AlipayException("sign check fail: sign is Empty!");
+                throw new Exception("sign check fail: sign is Empty!");
             }
 
-            var prestr = GetSignContent(para);
-            if (!AlipaySignature.RSACheckContent(prestr, sign, parameters, signType))
+            var prestr = GetSignContent(parameters);
+            if (!AlipaySignature.RSACheckContent(prestr, sign, publicRSAParameters, signType))
             {
-                throw new AlipayException("sign check fail: check Sign and Data Fail JSON also");
+                throw new Exception("sign check fail: check Sign and Data Fail JSON also");
             }
         }
 
-        private string GetSignContent(IDictionary<string, string> para)
+        private string GetSignContent(IDictionary<string, string> parameters)
         {
-            if (para == null || para.Count == 0)
-                return string.Empty;
+            if (parameters == null || parameters.Count == 0)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
 
             var sb = new StringBuilder();
-            foreach (var iter in para)
+            foreach (var iter in parameters)
             {
                 if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign" && iter.Key != "sign_type")
                     sb.Append(iter.Key).Append("=").Append(iter.Value).Append("&");
             }
             return sb.Remove(sb.Length - 1, 1).ToString();
         }
+
+        #endregion
     }
 }

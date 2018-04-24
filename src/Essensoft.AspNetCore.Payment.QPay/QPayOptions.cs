@@ -3,7 +3,7 @@
     public class QPayOptions
     {
         /// <summary>
-        /// 应用账号(公众账号ID)
+        /// 应用ID
         /// </summary>
         public string AppId { get; set; }
 
@@ -18,7 +18,7 @@
         public string Key { get; set; }
 
         /// <summary>
-        /// API证书文件 Base64字符串
+        /// API证书文件 文件路径或文件的Base64串
         /// </summary>
         public string Certificate { get; set; }
     }

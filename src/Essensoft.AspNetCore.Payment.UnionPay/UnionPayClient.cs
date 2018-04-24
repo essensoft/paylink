@@ -15,13 +15,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         private const string VERSION = "version";
         private const string ENCODING = "encoding";
         private const string SIGNMETHOD = "signMethod";
-        private const string TXNTYPE = "txnType";
-        private const string TXNSUBTYPE = "txnSubType";
-        private const string BIZTYPE = "bizType";
         private const string ACCESSTYPE = "accessType";
-        private const string CHANNELTYPE = "channelType";
         private const string MERID = "merId";
-
+        private const string ENCRYPTCERTID = "encryptCertId";
         private UnionPayCertificate SignCertificate;
         private UnionPayCertificate EncryptCertificate;
         private UnionPayCertificate MiddleCertificate;
@@ -29,15 +25,17 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         public UnionPayOptions Options { get; set; }
 
-        public virtual ILogger<UnionPayClient> Logger { get; set; }
+        public virtual ILogger Logger { get; set; }
 
         protected internal HttpClientEx Client { get; set; }
+
+        #region UnionPayClient Constructors
 
         public UnionPayClient(
             IOptions<UnionPayOptions> optionsAccessor,
             ILogger<UnionPayClient> logger)
         {
-            Options = optionsAccessor?.Value ?? new UnionPayOptions();
+            Options = optionsAccessor.Value;
             Logger = logger;
             Client = new HttpClientEx();
 
@@ -72,10 +70,22 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             RootCertificate = UnionPaySignature.GetCertificate(Options.RootCert);
         }
 
+        public UnionPayClient(IOptions<UnionPayOptions> optionsAccessor)
+            : this(optionsAccessor, null)
+        { }
+
+        #endregion
+
+        #region IUnionPayClient Members
+
         public void SetTimeout(int timeout)
         {
             Client.Timeout = new TimeSpan(0, 0, 0, timeout);
         }
+
+        #endregion
+
+        #region IUnionPayClient Members
 
         public async Task<T> ExecuteAsync<T>(IUnionPayRequest<T> request) where T : UnionPayResponse
         {
@@ -101,30 +111,26 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 { VERSION, version },
                 { ENCODING, Options.Encoding },
                 { SIGNMETHOD, Options.SignMethod },
-
-                { TXNTYPE, request.GetTxnType() },
-                { TXNSUBTYPE, request.GetTxnSubType() },
-                { BIZTYPE, request.GetBizType() },
-                { CHANNELTYPE, request.GetChannelType()},
-
                 { ACCESSTYPE, Options.AccessType },
                 { MERID, merId },
             };
 
-            UnionPaySignature.Sign(txtParams, SignCertificate.certId, SignCertificate.key, Options.SecureKey);
-            var query = HttpClientEx.BuildQuery(txtParams);
-            Logger.LogInformation(0, "Request:{query}", query);
-
-            var rspContent = await Client.DoPostAsync(request.GetRequestUrl(Options.TestMode), query);
-            Logger.LogInformation(1, "Response:{content}", rspContent.Content);
-
-            if (true == rspContent.ContentType?.Contains("text/plain"))
+            if (request.HasEncryptCertId())
             {
-                throw new Exception(rspContent.Content);
+                txtParams.Add(ENCRYPTCERTID, EncryptCertificate.certId);
             }
 
-            var dic = ParseQueryString(rspContent.Content);
-            if (dic == null || dic.Count == 0)
+            UnionPaySignature.Sign(txtParams, SignCertificate.certId, SignCertificate.key, Options.SecureKey);
+
+            var query = HttpClientEx.BuildQuery(txtParams);
+            Logger?.LogTrace(0, "Request:{query}", query);
+
+            var body = await Client.DoPostAsync(request.GetRequestUrl(Options.TestMode), query);
+            Logger?.LogTrace(1, "Response:{content}", body.Content);
+
+            var dic = ParseQueryString(body.Content);
+
+            if (string.IsNullOrEmpty(body.Content))
             {
                 throw new Exception("sign check fail: Body is Empty!");
             }
@@ -137,8 +143,17 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
             var parser = new UnionPayDictionaryParser<T>();
             var rsp = parser.Parse(dic);
-            rsp.Body = rspContent.Content;
+            rsp.Body = body.Content;
             return rsp;
+        }
+
+        #endregion
+
+        #region IUnionPayClient Members
+
+        public Task<T> PageExecuteAsync<T>(IUnionPayRequest<T> request) where T : UnionPayResponse
+        {
+            return PageExecuteAsync(request, "POST");
         }
 
         public Task<T> PageExecuteAsync<T>(IUnionPayRequest<T> request, string reqMethod) where T : UnionPayResponse
@@ -159,12 +174,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 { VERSION, version },
                 { ENCODING, Options.Encoding },
                 { SIGNMETHOD, Options.SignMethod },
-
-                { TXNTYPE, request.GetTxnType() },
-                { TXNSUBTYPE, request.GetTxnSubType() },
-                { BIZTYPE, request.GetBizType() },
-                { CHANNELTYPE, request.GetChannelType()},
-
                 { ACCESSTYPE, Options.AccessType },
                 { MERID, Options.MerId },
             };
@@ -174,7 +183,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             var rsp = Activator.CreateInstance<T>();
 
             var url = request.GetRequestUrl(Options.TestMode);
-            if (reqMethod == "GET")
+            if (reqMethod.ToUpper() == "GET")
             {
                 //拼接get请求的url
                 var tmpUrl = url;
@@ -199,6 +208,10 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
             return Task.FromResult(rsp);
         }
+
+        #endregion
+
+        #region Common Method
 
         private string BuildHtmlRequest(string url, UnionPayDictionary dicPara, string strMethod)
         {
@@ -286,5 +299,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 Dictionary[key] = temp.ToString();
             }
         }
+
+        #endregion
     }
 }

@@ -10,17 +10,19 @@ using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.QPay
 {
-    public class QPayNotifyClient
+    public class QPayNotifyClient : IQPayNotifyClient
     {
         public QPayOptions Options { get; set; }
 
-        public virtual ILogger<QPayNotifyClient> Logger { get; set; }
+        public virtual ILogger Logger { get; set; }
+
+        #region QPayNotifyClient
 
         public QPayNotifyClient(
             IOptions<QPayOptions> optionsAccessor,
             ILogger<QPayNotifyClient> logger)
         {
-            Options = optionsAccessor?.Value ?? new QPayOptions();
+            Options = optionsAccessor.Value;
             Logger = logger;
 
             if (string.IsNullOrEmpty(Options.Key))
@@ -29,16 +31,28 @@ namespace Essensoft.AspNetCore.Payment.QPay
             }
         }
 
+        public QPayNotifyClient(IOptions<QPayOptions> optionsAccessor)
+            : this(optionsAccessor, null)
+        { }
+        
+        #endregion
+
+        #region IQPayNotifyClient Members
+
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : QPayNotifyResponse
         {
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
-            Logger.LogInformation(0, "Request:{body}", body);
+            Logger?.LogTrace(0, "Request:{body}", body);
 
             var parser = new QPayXmlParser<T>();
             var rsp = parser.Parse(body);
             CheckNotifySign(rsp);
             return rsp;
         }
+
+        #endregion
+
+        #region Common Method
 
         private void CheckNotifySign(QPayNotifyResponse response)
         {
@@ -58,5 +72,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
                 throw new Exception("sign check fail: check Sign and Data Fail!");
             }
         }
+
+        #endregion
     }
 }

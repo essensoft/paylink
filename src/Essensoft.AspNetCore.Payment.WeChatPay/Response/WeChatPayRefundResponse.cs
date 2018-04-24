@@ -1,7 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using Essensoft.AspNetCore.Payment.WeChatPay.Domain;
+using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
+using System.Xml.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
 {
+    [XmlRoot("xml")]
     public class WeChatPayRefundResponse : WeChatPayResponse
     {
         /// <summary>
@@ -9,7 +13,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 此字段是通信标识，非交易标识，
         /// 交易是否成功需要查看result_code来判断
         /// </summary>
-        [JsonProperty("return_code")]
+        [XmlElement("return_code")]
         public string ReturnCode { get; set; }
 
         /// <summary>
@@ -17,163 +21,154 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 签名失败
         /// 参数格式校验错误
         /// </summary>
-        [JsonProperty("return_msg")]
+        [XmlElement("return_msg")]
         public string ReturnMsg { get; set; }
 
         /// <summary>
         /// 业务结果
         /// </summary>
-        [JsonProperty("result_code")]
+        [XmlElement("result_code")]
         public string ResultCode { get; set; }
 
         /// <summary>
         /// 错误代码
         /// </summary>
-        [JsonProperty("err_code")]
+        [XmlElement("err_code")]
         public string ErrCode { get; set; }
 
         /// <summary>
         /// 错误描述	
         /// </summary>
-        [JsonProperty("err_code_des")]
+        [XmlElement("err_code_des")]
         public string ErrCodeDes { get; set; }
 
         /// <summary>
         /// 公众账号ID
         /// </summary>
-        [JsonProperty("appid")]
+        [XmlElement("appid")]
         public string AppId { get; set; }
 
         /// <summary>
         /// 商户号
         /// </summary>
-        [JsonProperty("mch_id")]
+        [XmlElement("mch_id")]
         public string MchId { get; set; }
 
         /// <summary>
         /// 子商户公众账号ID
         /// </summary>
-        [JsonProperty("sub_appid")]
+        [XmlElement("sub_appid")]
         public string SubAppId { get; set; }
 
         /// <summary>
         /// 子商户号
         /// </summary>
-        [JsonProperty("sub_mch_id")]
+        [XmlElement("sub_mch_id")]
         public string SubMchId { get; set; }
 
         /// <summary>
         /// 随机字符串
         /// </summary>
-        [JsonProperty("nonce_str")]
+        [XmlElement("nonce_str")]
         public string NonceStr { get; set; }
 
         /// <summary>
         /// 签名
         /// </summary>
-        [JsonProperty("sign")]
+        [XmlElement("sign")]
         public string Sign { get; set; }
 
         /// <summary>
         /// 微信订单号	
         /// </summary>
-        [JsonProperty("transaction_id")]
+        [XmlElement("transaction_id")]
         public string TransactionId { get; set; }
 
         /// <summary>
         /// 商户订单号	
         /// </summary>
-        [JsonProperty("out_trade_no")]
+        [XmlElement("out_trade_no")]
         public string OutTradeNo { get; set; }
 
         /// <summary>
         /// 商户退款单号	
         /// </summary>
-        [JsonProperty("out_refund_no")]
+        [XmlElement("out_refund_no")]
         public string OutRefundNo { get; set; }
 
         /// <summary>
         /// 微信退款单号	
         /// </summary>
-        [JsonProperty("refund_id")]
+        [XmlElement("refund_id")]
         public string RefundId { get; set; }
 
         /// <summary>
         /// 申请退款金额	
         /// </summary>
-        [JsonProperty("refund_fee")]
+        [XmlElement("refund_fee")]
         public string RefundFee { get; set; }
 
         /// <summary>
         /// 退款金额	
         /// </summary>
-        [JsonProperty("settlement_refund_fee")]
+        [XmlElement("settlement_refund_fee")]
         public string SettlementRefundFee { get; set; }
 
         /// <summary>
         /// 订单金额	
         /// </summary>
-        [JsonProperty("total_fee")]
+        [XmlElement("total_fee")]
         public int TotalFee { get; set; }
 
         /// <summary>
         /// 应结订单金额
         /// </summary>
-        [JsonProperty("settlement_total_fee")]
+        [XmlElement("settlement_total_fee")]
         public int SettlementTotalFee { get; set; }
 
         /// <summary>
         /// 货币种类
         /// </summary>
-        [JsonProperty("fee_type")]
+        [XmlElement("fee_type")]
         public string FeeType { get; set; }
 
         /// <summary>
         /// 现金支付金额	
         /// </summary>
-        [JsonProperty("cash_fee")]
+        [XmlElement("cash_fee")]
         public int CashFee { get; set; }
 
         /// <summary>
         /// 现金退款金额	
         /// </summary>
-        [JsonProperty("cash_refund_fee")]
+        [XmlElement("cash_refund_fee")]
         public int CashRefundFee { get; set; }
 
         /// <summary>
         /// 代金券退款总金额	
         /// </summary>
-        [JsonProperty("coupon_refund_fee")]
+        [XmlElement("coupon_refund_fee")]
         public int RefundCount { get; set; }
 
         /// <summary>
         /// 退款代金券使用数量	
         /// </summary>
-        [JsonProperty("coupon_refund_count")]
+        [XmlElement("coupon_refund_count")]
         public int CouponRefundCount { get; set; }
 
-        // 代金券类型 coupon_type_$n
+        /// <summary>
+        /// 退款代金券信息
+        /// </summary>
+        [XmlIgnore]
+        public List<CouponRefundInfo> CouponRefundInfos { get; set; }
 
         /// <summary>
-        /// 代金券类型 0 	
+        /// 处理 _$n / _$n_$m
         /// </summary>
-        [JsonProperty("coupon_type_0")]
-        public int CouponType0 { get; set; }
-
-        // 退款代金券ID coupon_refund_id_$n
-
-        /// <summary>
-        /// 退款代金券ID 0
-        /// </summary>
-        [JsonProperty("coupon_refund_id_0")]
-        public int CouponRefund0 { get; set; }
-
-        // 单个代金券退款金额 coupon_refund_fee_$n
-
-        /// <summary>
-        /// 单个代金券退款金额 0
-        /// </summary>
-        [JsonProperty("coupon_refund_fee_0")]
-        public int CouponRefundFee0 { get; set; }
+        internal override void Execute()
+        {
+            var parser = new WeChatPayListPropertyParser();
+            CouponRefundInfos = parser.Parse<CouponRefundInfo, object>(Parameters);
+        }
     }
 }

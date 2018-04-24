@@ -3,8 +3,16 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
+    /// <summary>
+    /// 提交刷卡支付
+    /// </summary>
     public class WeChatPayMicroPayRequest : IWeChatPayRequest<WeChatPayMicroPayResponse>
     {
+        /// <summary>
+        /// 应用ID
+        /// </summary>
+        public string AppId { get; set; }
+
         /// <summary>
         /// 子商户公众账号ID
         /// </summary>
@@ -96,6 +104,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary()
             {
+                { "appid", AppId },
                 { "sub_appid", SubAppId },
                 { "sub_mch_id", SubMchId },
                 { "device_info", DeviceInfo },
@@ -118,5 +127,4 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         #endregion
     }
-
 }

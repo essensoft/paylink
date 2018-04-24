@@ -3,14 +3,22 @@ using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
+    /// <summary>
+    /// 查询企业付款
+    /// </summary>
     public class WeChatPayGetTransferInfoRequest : IWeChatPayCertificateRequest<WeChatPayGetTransferInfoResponse>
     {
+        /// <summary>
+        /// 应用ID
+        /// </summary>
+        public string AppId { get; set; }
+
         /// <summary>
         /// 商户订单号
         /// </summary>
         public string PartnerTradeNo { get; set; }
 
-        #region IWeChatPayRequest Members
+        #region IWeChatPayCertificateRequest Members
 
         public string GetRequestUrl()
         {
@@ -21,10 +29,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary()
             {
-                { "partner_trade_no", PartnerTradeNo }
+                { "appid", AppId },
+                { "partner_trade_no", PartnerTradeNo },
             };
             return parameters;
         }
+
         #endregion
     }
 }

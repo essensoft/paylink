@@ -9,61 +9,72 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
     public class UnionPayEncryptCerUpdateQueryRequest : IUnionPayRequest<UnionPayEncryptCerUpdateQueryResponse>
     {
         /// <summary>
+        /// 产品类型
+        /// </summary>
+        public string BizType { get; set; }
+
+        /// <summary>
         /// 订单发送时间
         /// </summary>
         public string TxnTime { get; set; }
 
         /// <summary>
+        /// 交易类型
+        /// </summary>
+        public string TxnType { get; set; }
+
+        /// <summary>
+        /// 交易子类
+        /// </summary>
+        public string TxnSubType { get; set; }
+
+        /// <summary>
+        /// 渠道类型
+        /// </summary>
+        public string ChannelType { get; set; }
+
+        /// <summary>
         /// 商户订单号
-        /// 退货交易的订单号，由商户生成
         /// </summary>
         public string OrderId { get; set; }
 
         /// <summary>
         /// 证书类型
-        /// 01：敏感信息加密公钥
         /// </summary>
         public string CertType { get; set; }
 
         /// <summary>
         /// 二级商户代码
-        /// 商户类型为平台类商户接入时必须上送
         /// </summary>
         public string SubMerId { get; set; }
 
         /// <summary>
         /// 二级商户简称
-        /// 商户类型为平台类商户接入时必须上送
         /// </summary>
         public string SubMerAbbr { get; set; }
 
         /// <summary>
         /// 二级商户名称
-        /// 商户类型为平台类商户接入时必须上送
         /// </summary>
         public string SubMerName { get; set; }
 
         /// <summary>
         /// 商户简称
-        /// 商户类型为平台类商户接入时必须上送
         /// </summary>
         public string MerAbbr { get; set; }
 
         /// <summary>
         /// 商户类别
-        /// 商户类型为平台类商户接入时必须上送
         /// </summary>
         public string MerCatCode { get; set; }
 
         /// <summary>
         /// 商户名称
-        /// 商户类型为平台类商户接入时必须上送
         /// </summary>
         public string MerName { get; set; }
 
         /// <summary>
         /// 收单机构代码
-        /// 商户类型为平台类商户接入时必须上送
         /// </summary>
         public string AcqInsCode { get; set; }
 
@@ -74,16 +85,12 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
 
         /// <summary>
         /// 请求方保留域
-        /// 商户自定义保留域，交易应答时会原样返回
         /// </summary>
         public string ReqReserved { get; set; }
 
         #region IUnionPayRequest
+
         private string version = string.Empty;
-        private string txnType = "95";
-        private string txnSubType = "00";
-        private string bizType = "000000";
-        private string channelType = "08";
 
         public string GetApiVersion()
         {
@@ -95,52 +102,15 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
             this.version = version;
         }
 
-        public string GetTxnType()
-        {
-            return txnType;
-        }
-
-        public void SetTxnType(string txnType)
-        {
-            this.txnType = txnType;
-        }
-
-
-        public string GetTxnSubType()
-        {
-            return txnSubType;
-        }
-
-        public void SetTxnSubType(string txnSubType)
-        {
-            this.txnSubType = txnSubType;
-        }
-
-        public string GetBizType()
-        {
-            return bizType;
-        }
-
-        public void SetBizType(string bizType)
-        {
-            this.bizType = bizType;
-        }
-
-        public string GetChannelType()
-        {
-            return channelType;
-        }
-
-        public void SetChannelType(string channelType)
-        {
-            this.channelType = channelType;
-        }
-
         public IDictionary<string, string> GetParameters()
         {
             var parameters = new UnionPayDictionary
             {
+                { "bizType", BizType },
                 { "txnTime", TxnTime },
+                { "txnType", TxnType },
+                { "txnSubType", TxnSubType },
+                { "channelType", ChannelType },
                 { "orderId", OrderId  },
                 { "subMerId", SubMerId },
                 { "subMerAbbr", SubMerAbbr },
@@ -158,6 +128,11 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         public string GetRequestUrl(bool isTest)
         {
             return isTest ? "https://gateway.test.95516.com/gateway/api/backTransReq.do" : "https://gateway.95516.com/gateway/api/backTransReq.do";
+        }
+
+        public bool HasEncryptCertId()
+        {
+            return false;
         }
 
         #endregion

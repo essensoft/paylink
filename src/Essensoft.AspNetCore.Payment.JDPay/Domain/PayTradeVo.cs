@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Domain
         /// 交易金额
         /// </summary>
         [XmlElement("amount")]
-        public long Amount { get; set; }
+        public string Amount { get; set; }
 
         /// <summary>
         /// 交易币种
@@ -23,13 +23,13 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Domain
         public string Currency { get; set; }
 
         /// <summary>
-        /// 交易时间 yyyyMMddHHmmss
+        /// 交易时间
         /// </summary>
         [XmlElement("tradeTime")]
         public string TradeTime { get; set; }
 
         /// <summary>
-        /// 支付明细，不同支付方式的明细信息也不同
+        /// 支付明细
         /// </summary>
         [XmlElement("detail")]
         public PayTradeDetail Detail { get; set; }

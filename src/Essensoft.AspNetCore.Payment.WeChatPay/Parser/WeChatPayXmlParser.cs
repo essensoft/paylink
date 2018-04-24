@@ -1,8 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections;
-using System.Linq;
+﻿using System;
+using System.IO;
+using System.Text;
 using System.Xml.Linq;
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
 {
@@ -18,34 +18,16 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
 
             try
             {
-                var doc = XDocument.Parse(body).Root;
-                var text = doc.DescendantNodes().OfType<XText>().ToList();
-                foreach (var t in text)
+                using (var sr = new StringReader(body))
                 {
-                    parameters.Add(t.Parent.Name.LocalName, t.Value);
-
-                    // 移除CData
-                    if (t is XCData)
-                    {
-                        t.Parent.Add(t.Value);
-                        t.Remove();
-                    }
+                    var xmldes = new XmlSerializer(typeof(T));
+                    rsp = (T)xmldes.Deserialize(sr);
                 }
 
-                var jsonText = JsonConvert.SerializeXNode(doc);
-                var json = JsonConvert.DeserializeObject<IDictionary>(jsonText);
-                if (json != null)
+                var bodyDoc = XDocument.Parse(body).Element("xml");
+                foreach (var xe in bodyDoc.Elements())
                 {
-                    // 忽略根节点的名称
-                    foreach (var key in json.Keys)
-                    {
-                        var data = json[key].ToString();
-                        if (!string.IsNullOrEmpty(data))
-                        {
-                            rsp = JsonConvert.DeserializeObject<T>(data);
-                            break;
-                        }
-                    }
+                    parameters.Add(xe.Name.LocalName, xe.Value);
                 }
             }
             catch { }
@@ -58,6 +40,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
                 rsp.Body = body;
 
                 rsp.Parameters = parameters;
+
+                rsp.Execute();
             }
 
             return rsp;
@@ -77,34 +61,24 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
             try
             {
                 var bodyDoc = XDocument.Parse(body).Element("xml");
-                var dataDoc = XDocument.Parse(data).Element("root");
-                bodyDoc.Add(dataDoc.Nodes());
+                var rootDoc = XDocument.Parse(data).Element("root");
+                bodyDoc.Add(rootDoc.Nodes());
 
-                var text = bodyDoc.DescendantNodes().OfType<XText>().ToList();
-                foreach (var t in text)
+                var sb = new StringBuilder();
+                using (var writer = new StringWriter(sb))
                 {
-                    parameters.Add(t.Parent.Name.LocalName, t.Value);
-                    if (t is XCData)
-                    {
-                        t.Parent.Add(t.Value);
-                        t.Remove();
-                    }
+                    bodyDoc.Save(writer, SaveOptions.None);
                 }
 
-                var jsonText = JsonConvert.SerializeXNode(bodyDoc);
-                var json = JsonConvert.DeserializeObject<IDictionary>(jsonText);
-                if (json != null)
+                using (var sr = new StringReader(sb.ToString()))
                 {
-                    // 忽略根节点的名称
-                    foreach (var key in json.Keys)
-                    {
-                        var str = json[key].ToString();
-                        if (!string.IsNullOrEmpty(str))
-                        {
-                            rsp = JsonConvert.DeserializeObject<T>(str);
-                            break;
-                        }
-                    }
+                    var xmldes = new XmlSerializer(typeof(T));
+                    rsp = (T)xmldes.Deserialize(sr);
+                }
+
+                foreach (var xe in bodyDoc.Elements())
+                {
+                    parameters.Add(xe.Name.LocalName, xe.Value);
                 }
             }
             catch { }
@@ -117,6 +91,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
                 rsp.Body = data;
 
                 rsp.Parameters = parameters;
+
+                rsp.Execute();
             }
 
             return rsp;

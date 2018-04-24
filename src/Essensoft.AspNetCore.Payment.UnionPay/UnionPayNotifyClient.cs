@@ -8,20 +8,22 @@ using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay
 {
-    public class UnionPayNotifyClient
+    public class UnionPayNotifyClient : IUnionPayNotifyClient
     {
         private UnionPayCertificate MiddleCertificate;
         private UnionPayCertificate RootCertificate;
 
         public UnionPayOptions Options { get; set; }
 
-        public virtual ILogger<UnionPayNotifyClient> Logger { get; set; }
+        public virtual ILogger Logger { get; set; }
+
+        #region UnionPayNotifyClient Constructors
 
         public UnionPayNotifyClient(
             IOptions<UnionPayOptions> optionsAccessor,
             ILogger<UnionPayNotifyClient> logger)
         {
-            Options = optionsAccessor?.Value ?? new UnionPayOptions();
+            Options = optionsAccessor.Value;
             Logger = logger;
 
             if (string.IsNullOrEmpty(Options.MiddleCert))
@@ -38,18 +40,30 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             RootCertificate = UnionPaySignature.GetCertificate(Options.RootCert);
         }
 
+        public UnionPayNotifyClient(IOptions<UnionPayOptions> optionsAccessor)
+            : this(optionsAccessor, null)
+        { }
+
+        #endregion
+
+        #region IUnionPayNotifyClient Members
+
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : UnionPayNotifyResponse
         {
             var parameters = await GetParametersAsync(request);
 
             var query = HttpClientEx.BuildQuery(parameters);
-            Logger.LogInformation(0, "Request:{query}", query);
+            Logger?.LogTrace(0, "Request:{query}", query);
 
             var parser = new UnionPayDictionaryParser<T>();
             var rsp = parser.Parse(parameters);
             CheckNotifySign(parameters);
             return rsp;
         }
+
+        #endregion
+
+        #region Common Method
 
         private async Task<UnionPayDictionary> GetParametersAsync(HttpRequest request)
         {
@@ -75,5 +89,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 throw new Exception("sign check fail: check Sign and Data Fail!");
             }
         }
+
+        #endregion
     }
 }

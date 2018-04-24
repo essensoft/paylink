@@ -20,21 +20,18 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
 
         /// <summary>
         /// 商户用户唯一编号
-        /// 该用户在商户系统中的唯一编号，要求是该 编号在商户系统中唯一标识该用户
         /// </summary>
         [JsonProperty("user_id")]
         public string UserId { get; set; }
 
         /// <summary>
         /// 总记录条数
-        /// 本次返回的总记录条数 
         /// </summary>
         [JsonProperty("count")]
         public string Count { get; set; }
 
         /// <summary>
         /// 结果集
-        /// 返回按签约时间倒叙的结果集
         /// </summary>
         [JsonProperty("agreement_list", ItemIsReference = true)]
         public List<Agreement> AgreementList { get; set; }
@@ -47,7 +44,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
 
         /// <summary>
         /// 签名
-        /// RSA加密签名，见安全签名机制 
         /// </summary>
         [JsonProperty("sign")]
         public string Sign { get; set; }

@@ -4,6 +4,8 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 {
     public interface IJDPayClient
     {
+        void SetTimeout(int timeout);
+
         /// <summary>
         /// 执行JDPay API请求。
         /// </summary>
@@ -18,6 +20,6 @@ namespace Essensoft.AspNetCore.Payment.JDPay
         /// <typeparam name="T"></typeparam>
         /// <param name="request">具体的JDPay API请求</param>
         /// <returns></returns>
-        Task<T> PageExecuteAsync<T>(IJDPayRequest<T> request, string reqMethod) where T : JDPayResponse;
+        Task<T> PageExecuteAsync<T>(IJDPayRequest<T> request) where T : JDPayResponse;
     }
 }

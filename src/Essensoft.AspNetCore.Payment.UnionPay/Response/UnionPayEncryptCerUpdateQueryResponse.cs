@@ -35,6 +35,12 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Response
         public string EncryptPubKeyCert { get; set; }
 
         /// <summary>
+        /// 收单机构代码
+        /// </summary>
+        [JsonProperty("acqInsCode")]
+        public string AcqInsCode { get; set; }
+
+        /// <summary>
         /// 版本号
         /// </summary>
         [JsonProperty("version")]
@@ -95,12 +101,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Response
         public string OrderId { get; set; }
 
         /// <summary>
-        /// 收单机构代码
-        /// </summary>
-        [JsonProperty("acqInsCode")]
-        public string AcqInsCode { get; set; }
-
-        /// <summary>
         /// 证书类型
         /// </summary>
         [JsonProperty("certType")]
@@ -114,7 +114,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Response
 
         /// <summary>
         /// 签名公钥证书
-        /// 使用RSA签名方式时必选，此域填写银联签名公钥证书。
         /// </summary>
         [JsonProperty("signPubKeyCert")]
         public string SignPubKeyCert { get; set; }

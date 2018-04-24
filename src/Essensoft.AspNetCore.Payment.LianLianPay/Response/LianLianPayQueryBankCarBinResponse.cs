@@ -24,7 +24,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
 
         /// <summary>
         /// 签名
-        /// RSA加密签名，见安全签名机制 
         /// </summary>
         [JsonProperty("sign")]
         public string Sign { get; set; }
@@ -43,7 +42,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
 
         /// <summary>
         /// 银行卡类型
-        /// 2-储蓄卡  3-信用卡 
         /// </summary>
         [JsonProperty("card_no")]
         public string CardNo { get; set; }

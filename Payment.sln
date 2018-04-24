@@ -5,11 +5,9 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{DD8CC860-F3E3-40F4-8A8F-20BF66EA051C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationSample", "samples\WebApplicationSample\WebApplicationSample.csproj", "{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewWebApplicationSample", "samples\NewWebApplicationSample\NewWebApplicationSample.csproj", "{53148C9A-E48E-45B1-B382-6485E4DA1006}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D3871E61-CA47-4BD0-8BF9-B64A42B2200D}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Payment.All", "src\Essensoft.AspNetCore.Payment.All\Essensoft.AspNetCore.Payment.All.csproj", "{084545C4-FA61-4BF4-913A-59E4C063212D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Payment.Alipay", "src\Essensoft.AspNetCore.Payment.Alipay\Essensoft.AspNetCore.Payment.Alipay.csproj", "{167FAA95-300E-49D5-A29B-EFCFF90A0584}"
 EndProject
@@ -31,14 +29,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76}.Release|Any CPU.Build.0 = Release|Any CPU
-		{084545C4-FA61-4BF4-913A-59E4C063212D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{084545C4-FA61-4BF4-913A-59E4C063212D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{084545C4-FA61-4BF4-913A-59E4C063212D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{084545C4-FA61-4BF4-913A-59E4C063212D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{53148C9A-E48E-45B1-B382-6485E4DA1006}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{53148C9A-E48E-45B1-B382-6485E4DA1006}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{53148C9A-E48E-45B1-B382-6485E4DA1006}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{53148C9A-E48E-45B1-B382-6485E4DA1006}.Release|Any CPU.Build.0 = Release|Any CPU
 		{167FAA95-300E-49D5-A29B-EFCFF90A0584}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{167FAA95-300E-49D5-A29B-EFCFF90A0584}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{167FAA95-300E-49D5-A29B-EFCFF90A0584}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -72,8 +66,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{07FED8BA-3825-43DE-BCA7-7C8B19F1AB76} = {DD8CC860-F3E3-40F4-8A8F-20BF66EA051C}
-		{084545C4-FA61-4BF4-913A-59E4C063212D} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
+		{53148C9A-E48E-45B1-B382-6485E4DA1006} = {DD8CC860-F3E3-40F4-8A8F-20BF66EA051C}
 		{167FAA95-300E-49D5-A29B-EFCFF90A0584} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
 		{071D1073-EEE3-45F1-ADC6-95CF90A64DD3} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
 		{3578E08D-A08E-4C4A-A5DE-8D31C21F7D66} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}

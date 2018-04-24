@@ -4,6 +4,8 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     public interface ILianLianPayClient
     {
+        void SetTimeout(int timeout);
+
         /// <summary>
         /// 执行LianLianPay API请求。
         /// </summary>
@@ -17,6 +19,22 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         /// <typeparam name="T"></typeparam>
         /// <param name="request">具体的LianLianPay API请求</param>
         /// <returns></returns>
+        Task<T> PageExecuteAsync<T>(ILianLianPayRequest<T> request) where T : LianLianPayResponse;
+
+        /// <summary>
+        /// 执行LianLianPay API请求。
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="request">具体的LianLianPay API请求</param>
+        /// <returns></returns>
         Task<T> PageExecuteAsync<T>(ILianLianPayRequest<T> request, string reqMethod) where T : LianLianPayResponse;
+
+        /// <summary>
+        /// 执行LianLianPay API请求。
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="request">具体的LianLianPay API请求</param>
+        /// <returns></returns>
+        Task<T> PageReqDataExecuteAsync<T>(ILianLianPayRequest<T> request) where T : LianLianPayResponse;
     }
 }

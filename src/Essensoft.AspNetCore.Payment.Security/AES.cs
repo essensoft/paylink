@@ -4,29 +4,20 @@ using System.Text;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {
-    public enum AESCipherModeMode
+    public enum AESCipherMode
     {
         CBC = CipherMode.CBC,
         ECB = CipherMode.ECB,
-        OFB = CipherMode.OFB,
-        CFB = CipherMode.CFB,
-        CTS = CipherMode.CTS
     }
 
     public enum AESPaddingMode
     {
-        None = PaddingMode.None,
         PKCS7 = PaddingMode.PKCS7,
-        Zeros = PaddingMode.Zeros,
-        ANSIX923 = PaddingMode.ANSIX923,
-        ISO10126 = PaddingMode.ISO10126
     }
 
     public class AES
     {
-        public static readonly byte[] ALIPAY_AES_IV = InitIv(16);
-
-        public static string Encrypt(string data, string key, AESPaddingMode paddingMode, AESCipherModeMode cipherMode, byte[] iv)
+        public static string Encrypt(string data, string key, byte[] iv, AESCipherMode cipherMode, AESPaddingMode paddingMode)
         {
             var rm = new RijndaelManaged
             {
@@ -41,7 +32,7 @@ namespace Essensoft.AspNetCore.Payment.Security
             return Convert.ToBase64String(ctf.TransformFinalBlock(content, 0, content.Length));
         }
 
-        public static string Decrypt(string data, string key, AESPaddingMode paddingMode, AESCipherModeMode cipherMode, byte[] iv)
+        public static string Decrypt(string data, string key, byte[] iv, AESCipherMode cipherMode, AESPaddingMode paddingMode)
         {
             var rm = new RijndaelManaged
             {
@@ -56,7 +47,7 @@ namespace Essensoft.AspNetCore.Payment.Security
             return Encoding.UTF8.GetString(ctf.TransformFinalBlock(content, 0, content.Length));
         }
 
-        public static string Encrypt(string data, string key, AESPaddingMode paddingMode, AESCipherModeMode cipherMode)
+        public static string Encrypt(string data, string key, AESCipherMode cipherMode, AESPaddingMode paddingMode)
         {
             var rm = new RijndaelManaged
             {
@@ -70,7 +61,7 @@ namespace Essensoft.AspNetCore.Payment.Security
             return Convert.ToBase64String(ctf.TransformFinalBlock(content, 0, content.Length));
         }
 
-        public static string Decrypt(string data, string key, AESPaddingMode paddingMode, AESCipherModeMode cipherMode)
+        public static string Decrypt(string data, string key, AESCipherMode cipherMode, AESPaddingMode paddingMode)
         {
             var rm = new RijndaelManaged
             {
@@ -82,14 +73,6 @@ namespace Essensoft.AspNetCore.Payment.Security
             var content = Convert.FromBase64String(data);
             var ctf = rm.CreateDecryptor();
             return Encoding.UTF8.GetString(ctf.TransformFinalBlock(content, 0, content.Length));
-        }
-
-        private static byte[] InitIv(int blockSize)
-        {
-            var iv = new byte[blockSize];
-            for (var i = 0; i < blockSize; i++)
-                iv[i] = 0x0;
-            return iv;
         }
     }
 }

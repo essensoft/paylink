@@ -3,8 +3,16 @@ using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
+    /// <summary>
+    /// 企业付款到零钱
+    /// </summary>
     public class WeChatPayTransfersRequest : IWeChatPayCertificateRequest<WeChatPayTransfersResponse>
     {
+        /// <summary>
+        /// 商户账号appid
+        /// </summary>
+        public string MchAppId { get; set; }
+
         /// <summary>
         /// 设备号
         /// </summary>
@@ -45,7 +53,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// </summary>
         public string SpbillCreateIp { get; set; }
 
-        #region IWeChatPayRequest Members
+        #region IWeChatPayCertificateRequest Members
 
         public string GetRequestUrl()
         {
@@ -56,17 +64,19 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary()
             {
+                { "mch_appid", MchAppId },
                 { "device_info", DeviceInfo },
                 { "partner_trade_no", PartnerTradeNo },
                 { "openid", OpenId },
                 { "check_name", CheckName },
                 { "re_user_name", ReUserName },
-                { "amount", Amount.ToString() },
-                { "desc", Desc.ToString() },
+                { "amount", Amount },
+                { "desc", Desc },
                 { "spbill_create_ip", SpbillCreateIp }
             };
             return parameters;
         }
+
         #endregion
     }
 }

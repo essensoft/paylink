@@ -8,6 +8,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay
     /// </summary>
     public interface IAlipayClient
     {
+        void SetTimeout(int timeout);
+
         /// <summary>
         /// 执行Alipay公开API请求。
         /// </summary>

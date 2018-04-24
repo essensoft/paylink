@@ -22,11 +22,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
 
         /// <summary>
         /// 支付渠道类型 
-        /// 10 手机 SDK 
-        /// 13 PC 端 WEB
-        /// 15 API 支付接口
-        /// 16 手机 WAP
-        /// 见附录-支付渠道类型
         /// </summary>
         public string PayChnl { get; set; }
 

@@ -1,8 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using System.Xml.Serialization;
 using System;
-using System.Collections;
-using System.Linq;
 using System.Xml.Linq;
+using System.IO;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Parser
 {
@@ -18,33 +17,16 @@ namespace Essensoft.AspNetCore.Payment.QPay.Parser
 
             try
             {
-                var doc = XDocument.Parse(body).Root;
-                var text = doc.DescendantNodes().OfType<XText>().ToList();
-                foreach (var t in text)
+                using (var sr = new StringReader(body))
                 {
-                    parameters.Add(t.Parent.Name.LocalName, t.Value);
-                    if (t is XCData)
-                    {
-                        t.Parent.Add(t.Value);
-                        t.Remove();
-                    }
+                    var xmldes = new XmlSerializer(typeof(T));
+                    rsp = (T)xmldes.Deserialize(sr);
                 }
 
-                var jsonText = JsonConvert.SerializeXNode(doc);
-                var json = JsonConvert.DeserializeObject<IDictionary>(jsonText);
-                if (json != null)
+                var doc = XDocument.Parse(body).Root;
+                foreach (var xe in doc.Elements())
                 {
-                    // 忽略根节点的名称
-                    foreach (var key in json.Keys)
-                    {
-                        var data = json[key].ToString();
-                        if (!string.IsNullOrEmpty(data))
-                        {
-                            rsp = JsonConvert.DeserializeObject<T>(data);
-                            break;
-                        }
-                    }
-
+                    parameters.Add(xe.Name.LocalName, xe.Value);
                 }
             }
             catch { }
@@ -57,6 +39,8 @@ namespace Essensoft.AspNetCore.Payment.QPay.Parser
                 rsp.Body = body;
 
                 rsp.Parameters = parameters;
+
+                rsp.Execute();
             }
 
             return rsp;

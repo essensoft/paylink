@@ -1,109 +1,110 @@
-﻿using Newtonsoft.Json;
+﻿using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Notify
 {
+    [XmlRoot("xml")]
     public class QPayUnifiedOrderNotifyResponse : QPayNotifyResponse
     {
         /// <summary>
-        /// 公众账号ID
+        /// 应用ID
         /// </summary>
-        [JsonProperty("appid")]
+        [XmlElement("appid")]
         public string AppId { get; set; }
 
         /// <summary>
         /// 商户号ID
         /// </summary>
-        [JsonProperty("mch_id")]
+        [XmlElement("mch_id")]
         public string MchId { get; set; }
 
         /// <summary>
         /// 随机字符串
         /// </summary>
-        [JsonProperty("nonce_str")]
+        [XmlElement("nonce_str")]
         public string NonceStr { get; set; }
 
         /// <summary>
         /// 签名
         /// </summary>
-        [JsonProperty("sign")]
+        [XmlElement("sign")]
         public string Sign { get; set; }
 
         /// <summary>
         /// 设备号
         /// </summary>
-        [JsonProperty("device_info")]
+        [XmlElement("device_info")]
         public string DeviceInfo { get; set; }
 
         /// <summary>
         /// 支付场景
         /// </summary>
-        [JsonProperty("trade_type")]
+        [XmlElement("trade_type")]
         public string TradeType { get; set; }
 
         /// <summary>
         /// 支付状态
         /// </summary>
-        [JsonProperty("trade_state")]
+        [XmlElement("trade_state")]
         public string TradeState { get; set; }
 
         /// <summary>
         /// 付款银行
         /// </summary>
-        [JsonProperty("bank_type")]
+        [XmlElement("bank_type")]
         public string BankType { get; set; }
 
         /// <summary>
         /// 货币类型
         /// </summary>
-        [JsonProperty("fee_type")]
+        [XmlElement("fee_type")]
         public string FeeType { get; set; }
 
         /// <summary>
         /// 订单金额
         /// </summary>
-        [JsonProperty("total_fee")]
+        [XmlElement("total_fee")]
         public string TotalFee { get; set; }
 
         /// <summary>
         /// 用户支付金额
         /// </summary>
-        [JsonProperty("cash_fee")]
+        [XmlElement("cash_fee")]
         public string CashFee { get; set; }
 
         /// <summary>
         /// QQ钱包优惠金额
         /// </summary>
-        [JsonProperty("coupon_fee")]
+        [XmlElement("coupon_fee")]
         public string CouponFee { get; set; }
 
         /// <summary>
         /// QQ钱包订单号
         /// </summary>
-        [JsonProperty("transaction_id")]
+        [XmlElement("transaction_id")]
         public string TransactionId { get; set; }
 
         /// <summary>
         /// 商户订单号
         /// </summary>
-        [JsonProperty("out_trade_no")]
+        [XmlElement("out_trade_no")]
         public string OutTradeNo { get; set; }
 
         /// <summary>
         /// 附加数据包
         /// </summary>
-        [JsonProperty("attach")]
+        [XmlElement("attach")]
         public string Attach { get; set; }
 
         /// <summary>
         /// 支付完成时间
         /// </summary>
-        [JsonProperty("time_end")]
+        [XmlElement("time_end")]
         public string TimeEnd { get; set; }
 
         /// <summary>
         /// 用户标识
         /// </summary>
-        [JsonProperty("openid")]
+        [XmlElement("openid")]
         public string OpenId { get; set; }
     }
 }

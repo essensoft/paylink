@@ -12,17 +12,19 @@ using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
-    public class WeChatPayNotifyClient
+    public class WeChatPayNotifyClient : IWeChatPayNotifyClient
     {
         public WeChatPayOptions Options { get; set; }
 
-        public virtual ILogger<WeChatPayNotifyClient> Logger { get; set; }
+        public virtual ILogger Logger { get; set; }
+
+        #region WeChatPayNotifyClient Constructors
 
         public WeChatPayNotifyClient(
             IOptions<WeChatPayOptions> optionsAccessor,
             ILogger<WeChatPayNotifyClient> logger)
         {
-            Options = optionsAccessor?.Value ?? new WeChatPayOptions();
+            Options = optionsAccessor.Value;
             Logger = logger;
 
             if (string.IsNullOrEmpty(Options.Key))
@@ -31,18 +33,26 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             }
         }
 
+        public WeChatPayNotifyClient(IOptions<WeChatPayOptions> optionsAccessor)
+            : this(optionsAccessor, null)
+        { }
+
+        #endregion
+
+        #region IWeChatPayNotifyClient Members
+
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : WeChatPayNotifyResponse
         {
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
-            Logger.LogInformation(0, "Request:{body}", body);
+            Logger?.LogTrace(0, "Request:{body}", body);
 
             var parser = new WeChatPayXmlParser<T>();
             var rsp = parser.Parse(body);
             if (rsp is WeChatPayRefundNotifyResponse)
             {
                 var key = MD5.Compute(Options.Key).ToLower();
-                var data = AES.Decrypt((rsp as WeChatPayRefundNotifyResponse).ReqInfo, key, AESPaddingMode.PKCS7, AESCipherModeMode.ECB);
-                Logger.LogInformation(1, "Decrypt Content:{data}", data); // AES-256-ECB
+                var data = AES.Decrypt((rsp as WeChatPayRefundNotifyResponse).ReqInfo, key, AESCipherMode.ECB, AESPaddingMode.PKCS7);
+                Logger?.LogTrace(1, "Decrypt Content:{data}", data); // AES-256-ECB
                 rsp = parser.Parse(body, data);
             }
             else
@@ -51,6 +61,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             }
             return rsp;
         }
+
+        #endregion
+
+        #region Common Method
 
         private void CheckNotifySign(WeChatPayNotifyResponse response)
         {
@@ -70,5 +84,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 throw new Exception("sign check fail: check Sign and Data Fail!");
             }
         }
+
+        #endregion
     }
 }

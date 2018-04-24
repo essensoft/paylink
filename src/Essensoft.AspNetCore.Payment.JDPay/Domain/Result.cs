@@ -2,7 +2,6 @@
 
 namespace Essensoft.AspNetCore.Payment.JDPay.Domain
 {
-    [XmlRoot("result")]
     public class Result
     {
         [XmlElement("code")]

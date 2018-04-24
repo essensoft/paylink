@@ -7,7 +7,7 @@ using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.JDPay.Parser
 {
-    public class JDPayDictionaryParser<T> where T : JDPayResponse
+    public class JDPayDictionaryParser<T> where T : JDPayNotifyResponse
     {
         private static readonly Dictionary<Type, Dictionary<string, PropertyInfo>> DicProperties = new Dictionary<Type, Dictionary<string, PropertyInfo>>();
 

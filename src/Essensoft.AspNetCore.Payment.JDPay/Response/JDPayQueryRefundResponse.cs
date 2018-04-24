@@ -1,4 +1,6 @@
-﻿using System.Xml.Serialization;
+﻿using Essensoft.AspNetCore.Payment.JDPay.Domain;
+using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.JDPay.Response
 {
@@ -6,51 +8,40 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Response
     public class JDPayQueryRefundResponse : JDPayResponse
     {
         /// <summary>
-        /// 交易流水
+        /// 版本号
         /// </summary>
-        [XmlElement("tradeNum")]
-        public string TradeNum { get; set; }
+        [XmlElement("version")]
+        public string Version { get; set; }
 
         /// <summary>
-        /// 交易类型
+        /// 商户号
         /// </summary>
-        [XmlElement("tradeType")]
-        public string TradeType { get; set; }
+        [XmlElement("merchant")]
+        public string Merchant { get; set; }
 
         /// <summary>
-        /// 原交易流水
+        /// 门店号
         /// </summary>
-        [XmlElement("oTradeNum")]
-        public string OTradeNum { get; set; }
+        [XmlElement("device")]
+        public string Device { get; set; }
 
         /// <summary>
-        /// 交易金额
+        /// 数据签名
         /// </summary>
-        [XmlElement("amount")]
-        public long Amount { get; set; }
+        [XmlElement("sign")]
+        public string Sign { get; set; }
 
         /// <summary>
-        /// 交易币种
+        /// 返回信息
         /// </summary>
-        [XmlElement("currency")]
-        public string Currency { get; set; }
+        [XmlElement("result")]
+        public Result Result { get; set; }
 
         /// <summary>
-        /// 交易时间
+        /// 明细列表
         /// </summary>
-        [XmlElement("tradeTime")]
-        public string TradeTime { get; set; }
-
-        /// <summary>
-        /// 交易备注
-        /// </summary>
-        [XmlElement("note")]
-        public string Note { get; set; }
-
-        /// <summary>
-        /// 交易状态
-        /// </summary>
-        [XmlElement("status")]
-        public string Status { get; set; }
+        [XmlArray("refList")]
+        [XmlArrayItem("refund")]
+        public List<Refund> RefundList { get; set; }
     }
 }

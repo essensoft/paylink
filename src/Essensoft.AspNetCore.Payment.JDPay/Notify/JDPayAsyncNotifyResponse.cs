@@ -8,40 +8,79 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Notify
     public class JDPayAsyncNotifyResponse : JDPayNotifyResponse
     {
         /// <summary>
-        /// 交易流水  数字或字母
+        /// 版本号
+        /// </summary>
+        [XmlElement("version")]
+        public string Version { get; set; }
+
+        /// <summary>
+        /// 商户号
+        /// </summary>
+        [XmlElement("merchant")]
+        public string Merchant { get; set; }
+
+        /// <summary>
+        /// 门店号
+        /// </summary>
+        [XmlElement("device")]
+        public string Device { get; set; }
+
+        /// <summary>
+        /// 交易流水
         /// </summary>
         [XmlElement("tradeNum")]
         public string TradeNum { get; set; }
 
         /// <summary>
         /// 交易类型
-        /// 0:消费,1:退款
         /// </summary>
         [XmlElement("tradeType")]
         public string TradeType { get; set; }
 
-        // 消费相关字段
+        /// <summary>
+        /// 返回信息
+        /// </summary>
+        [XmlElement("result")]
+        public Result Result { get; set; }
 
         /// <summary>
-        /// 交易列表
+        /// 数据签名
+        /// </summary>
+        [XmlElement("sign")]
+        public string Sign { get; set; }
+
+        /// <summary>
+        /// 交易备注
+        /// </summary>
+        [XmlElement("note")]
+        public string Note { get; set; }
+
+        /// <summary>
+        /// 交易金额
+        /// </summary>
+        [XmlElement("amount")]
+        public string Amount { get; set; }
+
+        /// <summary>
+        /// 交易状态
+        /// </summary>
+        [XmlElement("status")]
+        public string Status { get; set; }
+
+        /// <summary>
+        /// 明细列表
         /// </summary>
         [XmlArray("payList")]
         [XmlArrayItem("pay")]
         public List<PayTradeVo> PayList { get; set; }
 
-        // 退款相关字段
+        // 退款通知 部分数据
 
         /// <summary>
         /// 原交易流水号
         /// </summary>
         [XmlElement("oTradeNum")]
         public string OTradeNum { get; set; }
-
-        /// <summary>
-        /// 交易金额
-        /// </summary>
-        [XmlElement("amount")]
-        public long Amount { get; set; }
 
         /// <summary>
         /// 交易币种
@@ -55,16 +94,5 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Notify
         [XmlElement("tradeTime")]
         public string TradeTime { get; set; }
 
-        /// <summary>
-        /// 交易备注
-        /// </summary>
-        [XmlElement("note")]
-        public string Note { get; set; }
-
-        /// <summary>
-        /// 交易状态
-        /// </summary>
-        [XmlElement("status")]
-        public string Status { get; set; }
     }
 }

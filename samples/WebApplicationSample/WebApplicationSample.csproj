@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.7" />
   </ItemGroup>
 
   <ItemGroup>
@@ -16,7 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.All\Essensoft.AspNetCore.Payment.All.csproj" />
+    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.Alipay\Essensoft.AspNetCore.Payment.Alipay.csproj" />
+    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.JDPay\Essensoft.AspNetCore.Payment.JDPay.csproj" />
+    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.LianLianPay\Essensoft.AspNetCore.Payment.LianLianPay.csproj" />
+    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.QPay\Essensoft.AspNetCore.Payment.QPay.csproj" />
+    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.UnionPay\Essensoft.AspNetCore.Payment.UnionPay.csproj" />
+    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.WeChatPay\Essensoft.AspNetCore.Payment.WeChatPay.csproj" />
   </ItemGroup>
 
 </Project>
