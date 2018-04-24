@@ -3,8 +3,16 @@ using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
+    /// <summary>
+    /// 申请退款
+    /// </summary>
     public class WeChatPayRefundRequest : IWeChatPayCertificateRequest<WeChatPayRefundResponse>
     {
+        /// <summary>
+        /// 应用ID
+        /// </summary>
+        public string AppId { get; set; }
+
         /// <summary>
         /// 子商户公众账号ID
         /// </summary>
@@ -60,7 +68,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// </summary>
         public string NotifyUrl { get; set; }
 
-        #region IWeChatPayRequest Members
+        #region IWeChatPayCertificateRequest Members
 
         public string GetRequestUrl()
         {
@@ -71,13 +79,14 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary()
             {
+                { "appid", AppId },
                 { "sub_appid", SubAppId },
                 { "sub_mch_id", SubMchId },
                 { "transaction_id", TransactionId },
                 { "out_trade_no", OutTradeNo },
                 { "out_refund_no", OutRefundNo },
-                { "total_fee", TotalFee.ToString() },
-                { "refund_fee", RefundFee.ToString() },
+                { "total_fee", TotalFee },
+                { "refund_fee", RefundFee },
                 { "refund_fee_type", RefundFeeType },
                 { "refund_desc", RefundDesc },
                 { "refund_account", RefundAccount },
@@ -85,6 +94,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             };
             return parameters;
         }
+
         #endregion
     }
 }

@@ -1,5 +1,7 @@
 ﻿using Essensoft.AspNetCore.Payment.Alipay.Request;
+using Essensoft.AspNetCore.Payment.Alipay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -20,33 +22,40 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
         public T Parse(string body)
         {
-            var rootTagName = GetRootElement(body);
+            T rsp = null;
 
-            var inc = parsers.TryGetValue(rootTagName, out var serializer);
-            if (!inc || serializer == null)
+            try
             {
-                var rootAttrs = new XmlAttributes()
+                var rootTagName = GetRootElement(body);
+
+                var inc = parsers.TryGetValue(rootTagName, out var serializer);
+                if (!inc || serializer == null)
                 {
-                    XmlRoot = new XmlRootAttribute(rootTagName)
-                };
-                var attrOvrs = new XmlAttributeOverrides();
-                attrOvrs.Add(typeof(T), rootAttrs);
+                    var rootAttrs = new XmlAttributes()
+                    {
+                        XmlRoot = new XmlRootAttribute(rootTagName)
+                    };
+                    var attrOvrs = new XmlAttributeOverrides();
+                    attrOvrs.Add(typeof(T), rootAttrs);
 
-                serializer = new XmlSerializer(typeof(T), attrOvrs);
-                parsers[rootTagName] = serializer;
+                    serializer = new XmlSerializer(typeof(T), attrOvrs);
+                    parsers[rootTagName] = serializer;
+                }
+
+                using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(body)))
+                {
+                    rsp = (T)serializer.Deserialize(stream);
+                }
             }
+            catch
+            { }
 
-            object obj = null;
-            using (Stream stream = new MemoryStream(Encoding.UTF8.GetBytes(body)))
-            {
-                obj = serializer.Deserialize(stream);
-            }
+            if (rsp == null)
+                rsp = Activator.CreateInstance<T>();
 
-            var rsp = (T)obj;
             if (rsp != null)
-            {
                 rsp.Body = body;
-            }
+
             return rsp;
         }
 
@@ -80,7 +89,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
             }
             else
             {
-                throw new AlipayException("Invalid XML response format!");
+                throw new Exception("Invalid XML response format!");
             }
         }
 
@@ -146,7 +155,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
             var bodyIndexContent = body.Substring(0, item.startIndex);
             var bodyEndContent = body.Substring(item.endIndex);
-            var encryptContent = AES.Decrypt(item.encryptContent, encryptKey, AESPaddingMode.PKCS7, AESCipherModeMode.CBC, AES.ALIPAY_AES_IV);
+            var encryptContent = AES.Decrypt(item.encryptContent, encryptKey, AlipaySignature.AES_IV, AESCipherMode.CBC, AESPaddingMode.PKCS7);
 
             return bodyIndexContent + encryptContent + bodyEndContent;
         }

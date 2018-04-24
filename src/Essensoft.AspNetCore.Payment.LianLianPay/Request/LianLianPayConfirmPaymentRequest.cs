@@ -12,19 +12,16 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
 
         /// <summary>
         /// 商户付款流水号
-        /// 商户系统唯一标识该付款的流水号
         /// </summary>
         public string NoOrder { get; set; }
 
         /// <summary>
         /// 确认付款验证码
-        /// 确认付款验证码，来自付款申请接口返回
         /// </summary>
         public string ConfirmCode { get; set; }
 
         /// <summary>
         /// 服务器异步通知地址
-        /// 连连支付将付款结果通知商户服务端的地址，建议使用 https 协议
         /// </summary>
         public string NotifyUrl { get; set; }
 

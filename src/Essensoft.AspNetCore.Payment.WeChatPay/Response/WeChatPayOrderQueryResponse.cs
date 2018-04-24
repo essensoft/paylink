@@ -1,7 +1,11 @@
-﻿using Newtonsoft.Json;
+﻿using Essensoft.AspNetCore.Payment.WeChatPay.Domain;
+using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
+using System.Xml.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
 {
+    [XmlRoot("xml")]
     public class WeChatPayOrderQueryResponse : WeChatPayResponse
     {
         /// <summary>
@@ -9,7 +13,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 此字段是通信标识，非交易标识，
         /// 交易是否成功需要查看result_code来判断
         /// </summary>
-        [JsonProperty("return_code")]
+        [XmlElement("return_code")]
         public string ReturnCode { get; set; }
 
         /// <summary>
@@ -17,211 +21,202 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 签名失败
         /// 参数格式校验错误
         /// </summary>
-        [JsonProperty("return_msg")]
+        [XmlElement("return_msg")]
         public string ReturnMsg { get; set; }
 
         /// <summary>
         /// 公众账号ID
         /// </summary>
-        [JsonProperty("appid")]
+        [XmlElement("appid")]
         public string AppId { get; set; }
 
         /// <summary>
         /// 商户号
         /// </summary>
-        [JsonProperty("mch_id")]
+        [XmlElement("mch_id")]
         public string MchId { get; set; }
 
         /// <summary>
         /// 子商户公众账号ID
         /// </summary>
-        [JsonProperty("sub_appid")]
+        [XmlElement("sub_appid")]
         public string SubAppId { get; set; }
 
         /// <summary>
         /// 子商户号
         /// </summary>
-        [JsonProperty("sub_mch_id")]
+        [XmlElement("sub_mch_id")]
         public string SubMchId { get; set; }
 
         /// <summary>
         /// 随机字符串
         /// </summary>
-        [JsonProperty("nonce_str")]
+        [XmlElement("nonce_str")]
         public string NonceStr { get; set; }
 
         /// <summary>
         /// 签名
         /// </summary>
-        [JsonProperty("sign")]
+        [XmlElement("sign")]
         public string Sign { get; set; }
 
         /// <summary>
         /// 业务结果
         /// </summary>
-        [JsonProperty("result_code")]
+        [XmlElement("result_code")]
         public string ResultCode { get; set; }
 
         /// <summary>
         /// 错误代码
         /// </summary>
-        [JsonProperty("err_code")]
+        [XmlElement("err_code")]
         public string ErrCode { get; set; }
 
         /// <summary>
         /// 错误描述	
         /// </summary>
-        [JsonProperty("err_code_des")]
+        [XmlElement("err_code_des")]
         public string ErrCodeDes { get; set; }
 
         /// <summary>
         /// 设备号
         /// </summary>
-        [JsonProperty("device_info")]
+        [XmlElement("device_info")]
         public string DeviceInfo { get; set; }
 
         /// <summary>
         /// 用户标识	
         /// </summary>
-        [JsonProperty("openid")]
+        [XmlElement("openid")]
         public string OpenId { get; set; }
 
         /// <summary>
         /// 是否关注公众账号
         /// </summary>
-        [JsonProperty("is_subscribe")]
+        [XmlElement("is_subscribe")]
         public string IsSubscribe { get; set; }
 
         /// <summary>
         /// 用户子标识	
         /// </summary>
-        [JsonProperty("sub_openid")]
+        [XmlElement("sub_openid")]
         public string SubOpenId { get; set; }
 
         /// <summary>
         /// 是否关注子公众账号
         /// </summary>
-        [JsonProperty("sub_is_subscribe")]
+        [XmlElement("sub_is_subscribe")]
         public string SubIsSubscribe { get; set; }
 
         /// <summary>
         /// 交易类型	
         /// </summary>
-        [JsonProperty("trade_type")]
+        [XmlElement("trade_type")]
         public string TradeType { get; set; }
 
         /// <summary>
         /// 交易状态
         /// </summary>
-        [JsonProperty("trade_state")]
+        [XmlElement("trade_state")]
         public string TradeState { get; set; }
 
         /// <summary>
         /// 付款银行
         /// </summary>
-        [JsonProperty("bank_type")]
+        [XmlElement("bank_type")]
         public string BankType { get; set; }
 
         /// <summary>
         /// 商品详情
         /// </summary>
-        [JsonProperty("detail")]
+        [XmlElement("detail")]
         public string Detail { get; set; }
 
         /// <summary>
         /// 标价金额
         /// </summary>
-        [JsonProperty("total_fee")]
+        [XmlElement("total_fee")]
         public int TotalFee { get; set; }
 
         /// <summary>
         /// 标价币种
         /// </summary>
-        [JsonProperty("fee_type")]
+        [XmlElement("fee_type")]
         public string FeeType { get; set; }
 
         /// <summary>
         /// 应结订单金额
         /// </summary>
-        [JsonProperty("settlement_total_fee")]
+        [XmlElement("settlement_total_fee")]
         public int SettlementTotalFee { get; set; }
 
         /// <summary>
         /// 现金支付金额	
         /// </summary>
-        [JsonProperty("cash_fee")]
+        [XmlElement("cash_fee")]
         public int CashFee { get; set; }
 
         /// <summary>
         /// 现金支付货币类型
         /// </summary>
-        [JsonProperty("cash_fee_type")]
+        [XmlElement("cash_fee_type")]
         public string CashFeeType { get; set; }
 
         /// <summary>
         /// 代金券金额	
         /// </summary>
-        [JsonProperty("coupon_fee")]
+        [XmlElement("coupon_fee")]
         public int CouponFee { get; set; }
 
         /// <summary>
         /// 代金券使用数量	
         /// </summary>
-        [JsonProperty("coupon_count")]
+        [XmlElement("coupon_count")]
         public int CouponCount { get; set; }
 
-        // 代金券ID coupon_id_$n
-
         /// <summary>
-        /// 代金券ID	0
+        /// 代金券信息
         /// </summary>
-        [JsonProperty("coupon_id_0")]
-        public int CouponId0 { get; set; }
-
-        // 代金券类型	 coupon_type_$n
-
-        /// <summary>
-        /// 代金券类型 0
-        /// </summary>
-        [JsonProperty("coupon_type_0")]
-        public int CouponType0 { get; set; }
-
-        // 单个代金券金额	coupon_fee_$n
-
-        /// <summary>
-        /// 单个代金券金额 0
-        /// </summary>
-        [JsonProperty("coupon_fee_0")]
-        public int CouponFee0 { get; set; }
+        [XmlIgnore]
+        public List<CouponInfo> CouponInfos { get; set; }
 
         /// <summary>
         /// 微信支付订单号	
         /// </summary>
-        [JsonProperty("transaction_id")]
+        [XmlElement("transaction_id")]
         public string TransactionId { get; set; }
 
         /// <summary>
         /// 商户订单号	
         /// </summary>
-        [JsonProperty("out_trade_no")]
+        [XmlElement("out_trade_no")]
         public string OutTradeNo { get; set; }
 
         /// <summary>
         /// 附加数据	
         /// </summary>
-        [JsonProperty("attach")]
+        [XmlElement("attach")]
         public string Attach { get; set; }
 
         /// <summary>
         /// 支付完成时间	
         /// </summary>
-        [JsonProperty("time_end")]
+        [XmlElement("time_end")]
         public string TimeEnd { get; set; }
 
         /// <summary>
         /// 交易状态描述
         /// </summary>
-        [JsonProperty("trade_state_desc")]
+        [XmlElement("trade_state_desc")]
         public string TradeStateDesc { get; set; }
+
+        /// <summary>
+        /// 处理 _$n / _$n_$m
+        /// </summary>
+        internal override void Execute()
+        {
+            var parser = new WeChatPayListPropertyParser();
+            CouponInfos = parser.Parse<CouponInfo, object>(Parameters);
+        }
     }
 }

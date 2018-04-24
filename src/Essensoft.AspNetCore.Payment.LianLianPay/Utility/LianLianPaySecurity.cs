@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
 {
     public class LianLianPaySecurity
     {
-        public static string GetSignContent(LianLianPayDictionary para, List<string> excludePara = null)
+        public static string GetSignContent(LianLianPayDictionary para, List<string> exclude = null)
         {
             if (para == null || para.Count == 0)
                 return string.Empty;
@@ -16,7 +16,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
             var sb = new StringBuilder();
             foreach (var iter in para)
             {
-                if (excludePara != null && excludePara.Contains(iter.Key))
+                if (exclude != null && exclude.Contains(iter.Key))
                 {
                     continue;
                 }

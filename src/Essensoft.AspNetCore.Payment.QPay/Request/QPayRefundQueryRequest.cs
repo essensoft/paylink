@@ -6,6 +6,21 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
     public class QPayRefundQueryRequest : IQPayRequest<QPayRefundQueryResponse>
     {
         /// <summary>
+        /// 应用ID
+        /// </summary>
+        public string AppId { get; set; }
+
+        /// <summary>
+        /// 子商户应用ID
+        /// </summary>
+        public string SubAppId { get; set; }
+
+        /// <summary>
+        /// 子商户号
+        /// </summary>
+        public string SubMchId { get; set; }
+
+        /// <summary>
         /// QQ钱包退款单号
         /// </summary>
         public string RefundId { get; set; }
@@ -36,6 +51,9 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
         {
             var parameters = new QPayDictionary()
             {
+                { "appid", AppId },
+                { "sub_appid", SubAppId },
+                { "sub_mch_id", SubMchId },
                 { "refund_id", RefundId },
                 { "out_refund_no", OutRefundNo },
                 { "transaction_id", TransactionId },

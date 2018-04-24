@@ -6,14 +6,12 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Notify
     {
         /// <summary>
         /// 查询流水号
-        /// 消费交易的流水号，供后续查询用
         /// </summary>
         [JsonProperty("queryId")]
         public string QueryId { get; set; }
 
         /// <summary>
         /// 交易币种
-        /// 默认为156
         /// </summary>
         [JsonProperty("currencyCode")]
         public string CurrencyCode { get; set; }
@@ -74,56 +72,48 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Notify
 
         /// <summary>
         /// 兑换日期
-        /// 交易成功，交易币种和清算币种不一致的时候返回
         /// </summary>
         [JsonProperty("exchangeDate")]
         public string ExchangeDate { get; set; }
 
         /// <summary>
         /// 签名公钥证书
-        /// 使用RSA签名方式时必选，此域填写银联签名公钥证书。
         /// </summary>
         [JsonProperty("signPubKeyCert")]
         public string SignPubKeyCert { get; set; }
 
         /// <summary>
         /// 清算汇率
-        /// 交易成功，交易币种和清算币种不一致的时候返回
         /// </summary>
         [JsonProperty("exchangeRate")]
         public string ExchangeRate { get; set; }
 
         /// <summary>
         /// 账号
-        /// 根据商户配置返回
         /// </summary>
         [JsonProperty("accNo")]
         public string AccNo { get; set; }
 
         /// <summary>
         /// 支付方式
-        /// 根据商户配置返回
         /// </summary>
         [JsonProperty("payType")]
         public string PayType { get; set; }
 
         /// <summary>
         /// 支付卡标识
-        /// 移动支付交易时，根据商户配置返回
         /// </summary>
         [JsonProperty("payCardNo")]
         public string PayCardNo { get; set; }
 
         /// <summary>
         /// 支付卡类型
-        /// 根据商户配置返回
         /// </summary>
         [JsonProperty("payCardType")]
         public string PayCardType { get; set; }
 
         /// <summary>
         /// 支付卡名称
-        /// 移动支付交易时，根据商户配置返回
         /// </summary>
         [JsonProperty("payCardIssueName")]
         public string PayCardIssueName { get; set; }
@@ -136,7 +126,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Notify
 
         /// <summary>
         /// 绑定标识号
-        /// 绑定支付时，根据商户配置返回
         /// </summary>
         [JsonProperty("bindId")]
         public string BindId { get; set; }

@@ -6,6 +6,21 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
     public class QPayRefundRequest : IQPayCertificateRequest<QPayRefundResponse>
     {
         /// <summary>
+        /// 应用ID
+        /// </summary>
+        public string AppId { get; set; }
+
+        /// <summary>
+        /// 子商户应用ID
+        /// </summary>
+        public string SubAppId { get; set; }
+
+        /// <summary>
+        /// 子商户号
+        /// </summary>
+        public string SubMchId { get; set; }
+
+        /// <summary>
         /// QQ钱包订单号
         /// </summary>
         public string TransactionId { get; set; }
@@ -40,7 +55,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
         /// </summary>
         public string RefundAccount { get; set; }
 
-        #region IQPayRequest Members
+        #region IQPayCertificateRequest Members
 
         public string GetRequestUrl()
         {
@@ -51,10 +66,13 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
         {
             var parameters = new QPayDictionary()
             {
+                { "appid", AppId },
+                { "sub_appid", SubAppId },
+                { "sub_mch_id", SubMchId },
                 { "transaction_id", TransactionId },
                 { "out_trade_no", OutTradeNo },
                 { "out_refund_no", OutRefundNo },
-                { "refund_fee", RefundFee.ToString() },
+                { "refund_fee", RefundFee },
                 { "op_user_id", OpUserId },
                 { "op_user_passwd", OpUserPasswd },
                 { "refund_account", RefundAccount }

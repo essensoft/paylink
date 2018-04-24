@@ -6,14 +6,12 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Notify
     {
         /// <summary>
         /// 查询流水号
-        /// 消费交易的流水号，供后续查询用
         /// </summary>
         [JsonProperty("queryId")]
         public string QueryId { get; set; }
 
         /// <summary>
         /// 交易币种
-        /// 默认为156
         /// </summary>
         [JsonProperty("currencyCode")]
         public string CurrencyCode { get; set; }
@@ -74,21 +72,18 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Notify
 
         /// <summary>
         /// 兑换日期
-        /// 交易成功，交易币种和清算币种不一致的时候返回
         /// </summary>
         [JsonProperty("exchangeDate")]
         public string ExchangeDate { get; set; }
 
         /// <summary>
         /// 签名公钥证书
-        /// 使用RSA签名方式时必选，此域填写银联签名公钥证书。
         /// </summary>
         [JsonProperty("signPubKeyCert")]
         public string SignPubKeyCert { get; set; }
 
         /// <summary>
         /// 清算汇率
-        /// 交易成功，交易币种和清算币种不一致的时候返回
         /// </summary>
         [JsonProperty("exchangeRate")]
         public string ExchangeRate { get; set; }
@@ -161,7 +156,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Notify
 
         /// <summary>
         /// 原交易查询流水号
-        /// 原始消费交易的queryId
         /// </summary>
         [JsonProperty("origQryId")]
         public string OrigQryId { get; set; }

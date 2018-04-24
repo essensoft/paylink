@@ -36,7 +36,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Response
 
         /// <summary>
         /// 签名公钥证书
-        /// 使用RSA签名方式时必选，此域填写银联签名公钥证书。
         /// </summary>
         [JsonProperty("signPubKeyCert")]
         public string SignPubKeyCert { get; set; }

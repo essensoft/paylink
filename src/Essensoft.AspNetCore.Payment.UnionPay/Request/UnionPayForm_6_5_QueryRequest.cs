@@ -9,9 +9,24 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
     public class UnionPayForm_6_5_QueryRequest : IUnionPayRequest<UnionPayForm_6_5_QueryResponse>
     {
         /// <summary>
-        /// 订单发送时间	
+        /// 产品类型
+        /// </summary>
+        public string BizType { get; set; }
+
+        /// <summary>
+        /// 订单发送时间
         /// </summary>
         public string TxnTime { get; set; }
+
+        /// <summary>
+        /// 交易类型
+        /// </summary>
+        public string TxnType { get; set; }
+
+        /// <summary>
+        /// 交易子类
+        /// </summary>
+        public string TxnSubType { get; set; }
 
         /// <summary>
         /// 商户订单号	
@@ -24,11 +39,8 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         public string Reserved { get; set; }
 
         #region IUnionPayRequest
+
         private string version = string.Empty;
-        private string txnType = "00";
-        private string txnSubType = "00";
-        private string bizType = "000000";
-        private string channelType = "07";
 
         public string GetApiVersion()
         {
@@ -40,52 +52,14 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
             this.version = version;
         }
 
-        public string GetTxnType()
-        {
-            return txnType;
-        }
-
-        public void SetTxnType(string txnType)
-        {
-            this.txnType = txnType;
-        }
-
-
-        public string GetTxnSubType()
-        {
-            return txnSubType;
-        }
-
-        public void SetTxnSubType(string txnSubType)
-        {
-            this.txnSubType = txnSubType;
-        }
-
-        public string GetBizType()
-        {
-            return bizType;
-        }
-
-        public void SetBizType(string bizType)
-        {
-            this.bizType = bizType;
-        }
-
-        public string GetChannelType()
-        {
-            return channelType;
-        }
-
-        public void SetChannelType(string channelType)
-        {
-            this.channelType = channelType;
-        }
-
         public IDictionary<string, string> GetParameters()
         {
             var parameters = new UnionPayDictionary
             {
-                { "txnTime", TxnTime  },
+                { "bizType", BizType },
+                { "txnTime", TxnTime },
+                { "txnType", TxnType },
+                { "txnSubType", TxnSubType },
                 { "orderId", OrderId },
                 { "reserved", Reserved },
             };
@@ -95,6 +69,11 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         public string GetRequestUrl(bool isTest)
         {
             return isTest ? "https://gateway.test.95516.com/gateway/api/queryTrans.do" : "https://gateway.95516.com/gateway/api/queryTrans.do";
+        }
+
+        public bool HasEncryptCertId()
+        {
+            return false;
         }
 
         #endregion

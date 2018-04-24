@@ -13,15 +13,15 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Parser
         public T Parse(string body)
         {
             T rsp = null;
+            var parameters = new LianLianPayDictionary();
+
             try
             {
                 rsp = JsonConvert.DeserializeObject<T>(body);
-
-                rsp.Parameters = new LianLianPayDictionary();
                 var objdic = JsonConvert.DeserializeObject<Dictionary<string, object>>(body);
                 foreach (var iter in objdic)
                 {
-                    rsp.Parameters.Add(iter.Key, iter.Value);
+                    parameters.Add(iter.Key, iter.Value);
                 }
             }
             catch { }
@@ -30,8 +30,10 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Parser
                 rsp = Activator.CreateInstance<T>();
 
             if (rsp != null)
+            {
                 rsp.Body = body;
-
+                rsp.Parameters = parameters;
+            }
             return rsp;
         }
         #endregion

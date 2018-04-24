@@ -2,14 +2,10 @@
 
 namespace Essensoft.AspNetCore.Payment.UnionPay.Response
 {
-    /// <summary>
-    /// 消费撤销接口
-    /// </summary>
     public class UnionPayForm_6_3_ConsumeUndoResponse : UnionPayResponse
     {
         /// <summary>
         /// 查询流水号
-        /// 消费撤销交易的交易流水号 供查询用
         /// </summary>
         [JsonProperty("queryId")]
         public string QueryId { get; set; }
@@ -40,7 +36,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Response
 
         /// <summary>
         /// 签名公钥证书
-        /// 使用RSA签名方式时必选，此域填写银联签名公钥证书。
         /// </summary>
         [JsonProperty("signPubKeyCert")]
         public string SignPubKeyCert { get; set; }
@@ -114,7 +109,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Response
 
         /// <summary>
         /// 原交易查询流水号
-        /// 原始消费交易的queryId
         /// </summary>
         [JsonProperty("origQryId")]
         public string OrigQryId { get; set; }

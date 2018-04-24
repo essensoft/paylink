@@ -32,7 +32,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
 
         /// <summary>
         /// 交易金额
-        /// 单位为RMB-元
         /// </summary>
         public string MoneyOrder { get; set; }
 
@@ -68,9 +67,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
 
         /// <summary>
         /// 支付方式
-        /// 1：网银支付（借记卡）
-        /// 8：网银支付（信用卡）
-        /// 9：B2B 企业网银支付
         /// </summary>
         public string PayType { get; set; }
 

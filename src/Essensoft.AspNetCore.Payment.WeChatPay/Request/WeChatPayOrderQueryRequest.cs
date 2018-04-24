@@ -3,8 +3,16 @@ using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
+    /// <summary>
+    /// 查询订单
+    /// </summary>
     public class WeChatPayOrderQueryRequest : IWeChatPayRequest<WeChatPayOrderQueryResponse>
     {
+        /// <summary>
+        /// 应用ID
+        /// </summary>
+        public string AppId { get; set; }
+
         /// <summary>
         /// 子商户公众账号ID
         /// </summary>
@@ -36,6 +44,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary()
             {
+                { "appid", AppId },
                 { "sub_appid", SubAppId },
                 { "sub_mch_id", SubMchId },
                 { "transaction_id", TransactionId },

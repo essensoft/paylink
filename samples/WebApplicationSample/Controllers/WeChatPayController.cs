@@ -1,5 +1,7 @@
 ﻿using Essensoft.AspNetCore.Payment.WeChatPay;
+using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
 using Essensoft.AspNetCore.Payment.WeChatPay.Request;
+using Essensoft.AspNetCore.Payment.WeChatPay.Response;
 using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -59,7 +61,7 @@ namespace WebApplicationSample.Controllers
                 { "prepayid", response.PrepayId },
                 { "package", "Sign=WXPay" },
                 { "noncestr", Guid.NewGuid().ToString("N") },
-                { "timestamp", timeStamp.ToString() }
+                { "timestamp", timeStamp }
             };
             // 将这些参数签名
             dic.Add("sign", WeChatPaySignature.SignWithKey(dic, _client.Options.Key));
@@ -207,6 +209,59 @@ namespace WebApplicationSample.Controllers
                 AccountType = account_type,
                 TarType = tar_type,
             };
+            var response = await _client.ExecuteAsync(request);
+            return Ok(response.Body);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SendRedPack(string mch_billno, string send_name, string re_openid, int total_amount, string wishing, string client_ip, string act_name, string remark)
+        {
+            var request = new WeChatPaySendRedPackRequest()
+            {
+                MchBillNo = mch_billno,
+                SendName = send_name,
+                ReOpenId = re_openid,
+                TotalAmount = total_amount,
+                TotalNum = 1,
+                Wishing = wishing,
+                ClientIp = client_ip,
+                ActName = act_name,
+                Remark = remark,
+            };
+
+            var response = await _client.ExecuteAsync(request);
+            return Ok(response.Body);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SendGroupRedPack(string mch_billno, string send_name, string re_openid, int total_amount, string wishing, string act_name, string remark)
+        {
+            var request = new WeChatPaySendGroupRedPackRequest()
+            {
+                MchBillNo = mch_billno,
+                SendName = send_name,
+                ReOpenId = re_openid,
+                TotalAmount = total_amount,
+                TotalNum = 1,
+                AmtType = "ALL_RAND",
+                Wishing = wishing,
+                ActName = act_name,
+                Remark = remark,
+            };
+
+            var response = await _client.ExecuteAsync(request);
+            return Ok(response.Body);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetHBInfo(string mch_billno, string bill_type)
+        {
+            var request = new WeChatPayGetHBInfoRequest()
+            {
+                MchBillNo = mch_billno,
+                BillType = bill_type
+            };
+
             var response = await _client.ExecuteAsync(request);
             return Ok(response.Body);
         }

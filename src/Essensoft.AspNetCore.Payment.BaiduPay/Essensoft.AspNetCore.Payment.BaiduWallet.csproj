@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Company>Essensoft</Company>
+    <Authors>Roc</Authors>
+    <Product>Payment</Product>
+    <Version>1.4.0</Version>
+    <AssemblyVersion>1.4.0.0</AssemblyVersion>
+    <FileVersion>1.4.0.0</FileVersion>
+    <Description>ASP.NET Core Payment for BaiduWallet.</Description>
+    <Copyright>© Essensoft 2018</Copyright>
+    <PackageProjectUrl>https://github.com/Essensoft/Payment</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>Essensoft.AspNetCore.Payment.BaiduWallet</PackageId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Essensoft.AspNetCore.Payment.Security\Essensoft.AspNetCore.Payment.Security.csproj" />
+  </ItemGroup>
+</Project>

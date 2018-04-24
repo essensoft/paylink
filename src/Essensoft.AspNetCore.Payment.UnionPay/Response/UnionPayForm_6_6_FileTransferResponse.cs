@@ -6,7 +6,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Response
     {
         /// <summary>
         /// 批量文件内容
-        /// 文件流方式
         /// </summary>
         [JsonProperty("fileContent")]
         public string FileContent { get; set; }
@@ -79,7 +78,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Response
 
         /// <summary>
         /// 交易子类
-        /// 01：对账文件下载
         /// </summary>
         [JsonProperty("txnSubType")]
         public string TxnSubType { get; set; }

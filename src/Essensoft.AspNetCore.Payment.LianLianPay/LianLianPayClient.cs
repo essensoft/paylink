@@ -27,15 +27,17 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
         public LianLianPayOptions Options { get; set; }
 
-        public virtual ILogger<LianLianPayClient> Logger { get; set; }
+        public virtual ILogger Logger { get; set; }
 
         protected internal HttpClientEx Client { get; set; }
+
+        #region LianLianPayClient Constructors
 
         public LianLianPayClient(
             IOptions<LianLianPayOptions> optionsAccessor,
             ILogger<LianLianPayClient> logger)
         {
-            Options = optionsAccessor?.Value ?? new LianLianPayOptions();
+            Options = optionsAccessor.Value;
             Logger = logger;
 
             Client = new HttpClientEx();
@@ -64,10 +66,22 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(Options.RsaPublicKey);
         }
 
+        public LianLianPayClient(IOptions<LianLianPayOptions> optionsAccessor)
+            : this(optionsAccessor, null)
+        { }
+
+        #endregion
+
+        #region ILianLianPayClient Members
+
         public void SetTimeout(int timeout)
         {
             Client.Timeout = new TimeSpan(0, 0, 0, timeout);
         }
+
+        #endregion
+
+        #region ILianLianPayClient Members
 
         public async Task<T> ExecuteAsync<T>(ILianLianPayRequest<T> request) where T : LianLianPayResponse
         {
@@ -85,21 +99,21 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             var content = string.Empty;
             if (request is LianLianPayPaymentRequest || request is LianLianPayConfirmPaymentRequest)
             {
-                var plaintext = JsonConvert.SerializeObject(txtParams, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+                var plaintext = Serialize(txtParams);
                 var ciphertext = LianLianPaySecurity.Encrypt(plaintext, PublicKey);
                 content = @"{""pay_load"":""" + ciphertext + @""",""oid_partner"":""" + Options.OidPartner + @"""}";
             }
             else
             {
-                content = JsonConvert.SerializeObject(txtParams, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+                content = Serialize(txtParams);
             }
-            Logger.LogInformation(0, "Request:{content}", content);
+            Logger?.LogTrace(0, "Request:{content}", content);
 
-            var rspContent = await Client.DoPostAsync(request.GetRequestUrl(), content);
-            Logger.LogInformation(1, "Response:{content}", rspContent);
+            var body = await Client.DoPostAsync(request.GetRequestUrl(), content);
+            Logger?.LogTrace(1, "Response:{body}", body);
 
             var parser = new LianLianPayJsonParser<T>();
-            var rsp = parser.Parse(rspContent);
+            var rsp = parser.Parse(body);
 
             // 不签名参数
             var excludePara = new List<string>();
@@ -115,6 +129,15 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
             CheckNotifySign(rsp.Parameters, excludePara);
             return rsp;
+        }
+
+        #endregion
+
+        #region ILianLianPayClient Members
+
+        public Task<T> PageExecuteAsync<T>(ILianLianPayRequest<T> request) where T : LianLianPayResponse
+        {
+            return PageExecuteAsync(request, "POST");
         }
 
         public Task<T> PageExecuteAsync<T>(ILianLianPayRequest<T> request, string reqMethod) where T : LianLianPayResponse
@@ -133,7 +156,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
             var body = string.Empty;
 
-            if (reqMethod == "GET")
+            if (reqMethod.ToUpper() == "GET")
             {
                 //拼接get请求的url
                 var tmpUrl = request.GetRequestUrl();
@@ -149,19 +172,50 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
                     }
                 }
                 body = tmpUrl;
-                Logger.LogInformation(0, "Request Url:{body}", body);
+                Logger?.LogTrace(0, "Request Url:{body}", body);
             }
             else
             {
                 //输出post表单
                 body = BuildHtmlRequest(request.GetRequestUrl(), txtParams);
-                Logger.LogInformation(0, "Request Html:{body}", body);
+                Logger?.LogTrace(0, "Request Html:{body}", body);
             }
 
             var parser = new LianLianPayJsonParser<T>();
             var rsp = parser.Parse(body);
             return Task.FromResult(rsp);
         }
+
+        #endregion
+
+        #region ILianLianPayClient Members
+
+        public Task<T> PageReqDataExecuteAsync<T>(ILianLianPayRequest<T> request) where T : LianLianPayResponse
+        {
+            // 字典排序
+            var txtParams = new LianLianPayDictionary(request.GetParameters())
+            {
+                { OID_PARTNER, Options.OidPartner },
+                { SIGN_TYPE, Options.SignType },
+                { BUSI_PARTNER, Options.BusiPartner },
+            };
+
+            // 添加签名
+            var signContent = LianLianPaySecurity.GetSignContent(txtParams);
+            txtParams.Add(SIGN, MD5WithRSA.SignData(signContent, PrivateKey));
+
+            var content = Serialize(txtParams);
+            Logger?.LogTrace(0, "Request:{content}", content);
+
+            var body = BuildReqDataHtmlRequest(request.GetRequestUrl(), content);
+            var parser = new LianLianPayJsonParser<T>();
+            var rsp = parser.Parse(body);
+            return Task.FromResult(rsp);
+        }
+
+        #endregion
+
+        #region Common Method
 
         private string BuildHtmlRequest(string url, IDictionary<string, string> sParaTemp)
         {
@@ -181,21 +235,38 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             return sbHtml.ToString();
         }
 
-        private void CheckNotifySign(LianLianPayDictionary para, List<string> excludePara)
+        private string BuildReqDataHtmlRequest(string url, string data)
         {
-            if (para.Count == 0)
+            var sbHtml = new StringBuilder();
+            sbHtml.Append("<form id='submit' name='submit' action='" + url + "' method='post' style='display:none;'>");
+            sbHtml.Append("<input  name='req_data' value='" + data + "'/>");
+            sbHtml.Append("<input type='submit' style='display:none;'></form>");
+            sbHtml.Append("<script>document.forms['submit'].submit();</script>");
+            return sbHtml.ToString();
+        }
+
+        private string Serialize(object value)
+        {
+            return JsonConvert.SerializeObject(value, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+        }
+
+        private void CheckNotifySign(LianLianPayDictionary parameters, List<string> excludePara)
+        {
+            if (parameters.Count == 0)
             {
                 throw new Exception("sign check fail: para is Empty!");
             }
 
-            if (para.TryGetValue("sign", out var sign))
+            if (parameters.TryGetValue("sign", out var sign))
             {
-                var prestr = LianLianPaySecurity.GetSignContent(para, excludePara);
+                var prestr = LianLianPaySecurity.GetSignContent(parameters, excludePara);
                 if (!MD5WithRSA.VerifyData(prestr, sign, PublicKey))
                 {
                     throw new Exception("sign check fail: check Sign and Data Fail JSON also");
                 }
             }
         }
+
+        #endregion
     }
 }

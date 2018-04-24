@@ -12,7 +12,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
 
         /// <summary>
         /// 商户付款流水号
-        /// 商户系统唯一标识该付款的流水号
         /// </summary>
         public string NoOrder { get; set; }
 

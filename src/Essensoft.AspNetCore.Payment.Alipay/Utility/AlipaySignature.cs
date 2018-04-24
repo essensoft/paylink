@@ -7,6 +7,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
 {
     public class AlipaySignature
     {
+        public static readonly byte[] AES_IV = InitIv(16);
+
         public static string GetSignContent(IDictionary<string, string> para)
         {
             if (para == null || para.Count == 0)
@@ -41,6 +43,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
                 rsa.ImportParameters(parameters);
                 return rsa.VerifyData(Encoding.UTF8.GetBytes(data), Convert.FromBase64String(sign), type, RSASignaturePadding.Pkcs1);
             }
+        }
+
+        private static byte[] InitIv(int blockSize)
+        {
+            var iv = new byte[blockSize];
+            for (var i = 0; i < blockSize; i++)
+                iv[i] = 0x0;
+            return iv;
         }
     }
 }

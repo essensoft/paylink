@@ -18,13 +18,19 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Request
         /// </summary>
         public string OTradeNum { get; set; }
 
+        /// <summary>
+        /// 交易类型
+        /// </summary>
+        public string TradeType { get; set; }
+
+
         #region IJDPayRequest Members
 
         private string ApiVersion = "V2.0";
 
         public string GetRequestUrl()
         {
-            return "https://paygate.jd.com/service/queryRefund ";
+            return "https://paygate.jd.com/service/queryRefund";
         }
 
         public void SetApiVersion(string apiVersion)
@@ -43,7 +49,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Request
             {
                 { "tradeNum", TradeNum },
                 { "oTradeNum", OTradeNum },
-                { "tradeType", 1 }, // 退款
+                { "tradeType", TradeType },
             };
             return parameters;
         }

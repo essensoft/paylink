@@ -6,7 +6,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
 {
     public class WeChatPaySignature
     {
-        public static string SignWithKey(SortedDictionary<string, string> parameters, string key, bool useMD5 = true, bool excludeSignType = true)
+        public static string SignWithKey(SortedDictionary<string, string> parameters, string key, bool signType = true, bool excludeSignType = true)
         {
             var sb = new StringBuilder();
             foreach (var iter in parameters)
@@ -15,7 +15,19 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
                     sb.Append(iter.Key).Append('=').Append(iter.Value).Append("&");
             }
             var signContent = sb.Append("key=").Append(key).ToString();
-            return useMD5 ? MD5.Compute(signContent).ToUpper() : HMACSHA256.Compute(signContent, key).ToUpper();
+            return signType ? MD5.Compute(signContent).ToUpper() : HMACSHA256.Compute(signContent, key).ToUpper();
+        }
+
+        public static string SignWithSecret(SortedDictionary<string, string> parameters, string secret, List<string> include)
+        {
+            var sb = new StringBuilder();
+            foreach (var iter in parameters)
+            {
+                if (!string.IsNullOrEmpty(iter.Value) && include.Contains(iter.Key))
+                    sb.Append(iter.Key).Append('=').Append(iter.Value).Append("&");
+            }
+            var signContent = sb.Append("secret=").Append(secret).ToString();
+            return MD5.Compute(signContent).ToUpper();
         }
     }
 }

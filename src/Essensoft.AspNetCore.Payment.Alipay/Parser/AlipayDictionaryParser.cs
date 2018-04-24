@@ -6,16 +6,16 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 {
     public class AlipayDictionaryParser<T> where T : AlipayObject
     {
-        public T Parse(IDictionary dic)
+        public T Parse(IDictionary parameters)
         {
-            if (dic == null || dic.Count == 0)
-                throw new ArgumentNullException(nameof(dic));
+            if (parameters == null || parameters.Count == 0)
+                throw new ArgumentNullException(nameof(parameters));
 
             T rsp = null;
 
             try
             {
-                var jsonText = JsonConvert.SerializeObject(dic);
+                var jsonText = JsonConvert.SerializeObject(parameters);
                 rsp = JsonConvert.DeserializeObject<T>(jsonText);
             }
             catch { }

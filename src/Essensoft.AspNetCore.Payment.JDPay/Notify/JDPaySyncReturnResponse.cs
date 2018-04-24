@@ -15,7 +15,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Notify
         /// 交易金额
         /// </summary>
         [XmlElement("amount")]
-        public long Amount { get; set; }
+        public string Amount { get; set; }
 
         /// <summary>
         /// 货币种类
@@ -40,5 +40,11 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Notify
         /// </summary>
         [XmlElement("status")]
         public string Status { get; set; }
+
+        /// <summary>
+        /// 交易信息签名
+        /// </summary>
+        [XmlElement("sign")]
+        public string Sign { get; set; }
     }
 }

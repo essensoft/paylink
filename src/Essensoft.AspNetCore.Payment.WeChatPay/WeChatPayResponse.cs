@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
@@ -7,13 +7,18 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// <summary>
         /// 原始内容
         /// </summary>
-        [JsonIgnore]
+        [XmlIgnore]
         public string Body { get; set; }
 
         /// <summary>
         /// 原始参数
         /// </summary>
-        [JsonIgnore]
+        [XmlIgnore]
         public WeChatPayDictionary Parameters { get; internal set; }
+
+        /// <summary>
+        /// 处理 _$n / _$n_$m
+        /// </summary>
+        internal virtual void Execute() { }
     }
 }

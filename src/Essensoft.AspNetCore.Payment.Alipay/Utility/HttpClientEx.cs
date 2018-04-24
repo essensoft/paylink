@@ -141,6 +141,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <returns>URL编码后的请求数据</returns>
         public static string BuildQuery(IDictionary<string, string> parameters)
         {
+            if (parameters == null || parameters.Count == 0)
+                throw new ArgumentNullException(nameof(parameters));
+
             var content = new StringBuilder();
             foreach (var iter in parameters)
             {

@@ -6,7 +6,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Notify
     {
         /// <summary>
         /// 查询流水号
-        /// 消费交易的流水号，供后续查询用
         /// </summary>
         [JsonProperty("queryId")]
         public string QueryId { get; set; }
@@ -37,35 +36,30 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Notify
 
         /// <summary>
         /// 签名公钥证书
-        /// 使用RSA签名方式时必选，此域填写银联签名公钥证书。
         /// </summary>
         [JsonProperty("signPubKeyCert")]
         public string SignPubKeyCert { get; set; }
 
         /// <summary>
         /// 银联受理订单号
-        /// 商户推送订单后银联移动支付系统返回该流水号，商户调用支付控件时使用
         /// </summary>
         [JsonProperty("tn")]
         public string Tn { get; set; }
 
         /// <summary>
         /// 账号
-        /// 根据商户配置返回
         /// </summary>
         [JsonProperty("accNo")]
         public string AccNo { get; set; }
 
         /// <summary>
         /// 支付方式
-        /// 根据商户配置返回
         /// </summary>
         [JsonProperty("payType")]
         public string PayType { get; set; }
 
         /// <summary>
         /// 支付卡类型
-        /// 根据商户配置返回
         /// </summary>
         [JsonProperty("payCardType")]
         public string PayCardType { get; set; }
@@ -96,7 +90,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Notify
 
         /// <summary>
         /// 交易币种
-        /// 默认为156
         /// </summary>
         [JsonProperty("currencyCode")]
         public string CurrencyCode { get; set; }

@@ -13,7 +13,7 @@ using System.Xml;
 
 namespace Essensoft.AspNetCore.Payment.JDPay
 {
-    public class JDPayNotifyClient
+    public class JDPayNotifyClient : IJDPayNotifyClient
     {
         private const string SIGN = "sign";
         private AsymmetricKeyParameter PrivateKey;
@@ -22,13 +22,15 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         public JDPayOptions Options { get; set; }
 
-        public virtual ILogger<JDPayNotifyClient> Logger { get; set; }
+        public virtual ILogger Logger { get; set; }
+
+        #region JDPayNotifyClient Constructors
 
         public JDPayNotifyClient(
             IOptions<JDPayOptions> optionsAccessor,
             ILogger<JDPayNotifyClient> logger)
         {
-            Options = optionsAccessor?.Value ?? new JDPayOptions();
+            Options = optionsAccessor.Value;
             Logger = logger;
 
             if (string.IsNullOrEmpty(Options.Merchant))
@@ -56,6 +58,14 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             DesKey = Convert.FromBase64String(Options.DesKey);
         }
 
+        public JDPayNotifyClient(IOptions<JDPayOptions> optionsAccessor)
+            : this(optionsAccessor, null)
+        { }
+
+        #endregion
+
+        #region IJDPayNotifyClient Members
+
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : JDPayNotifyResponse
         {
             if (request.HasFormContentType)
@@ -63,18 +73,18 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 var parameters = await GetParametersAsync(request);
 
                 var query = HttpClientEx.BuildQuery(parameters);
-                Logger.LogInformation(0, "Request:{query}", query);
+                Logger?.LogTrace(0, "Request:{query}", query);
 
                 var parser = new JDPayDictionaryParser<T>();
                 var rsp = parser.Parse(parameters);
 
-                CheckNotifySign(rsp.Parameters, PrivateKey);
+                CheckNotifySign(rsp.Parameters);
                 return rsp;
             }
             else if (request.HasTextXmlContentType())
             {
                 var body = await new StreamReader(request.Body).ReadToEndAsync();
-                Logger.LogInformation(0, "Request:{body}", body);
+                Logger?.LogTrace(0, "Request:{body}", body);
 
                 var parser = new JDPayXmlParser<T>();
                 var rsp = parser.Parse(JDPayUtility.FotmatXmlString(body));
@@ -82,8 +92,8 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 {
                     var encrypt = rsp.Encrypt;
                     var base64EncryptStr = Encoding.UTF8.GetString(Convert.FromBase64String(encrypt));
-                    var reqBody = DES3.DecryptECB(base64EncryptStr, DesKey);
-                    Logger.LogInformation(1, "Encrypt Content:{body}", reqBody);
+                    var reqBody = JDPaySecurity.DecryptECB(base64EncryptStr, DesKey);
+                    Logger?.LogTrace(1, "Encrypt Content:{reqBody}", reqBody);
 
                     var reqBodyDoc = new XmlDocument();
                     reqBodyDoc.LoadXml(reqBody);
@@ -101,24 +111,32 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                     }
                     var sha256SourceSignString = SHA256.Compute(reqBodyStr);
                     var decryptByte = RSA_ECB_PKCS1Padding.Decrypt(Convert.FromBase64String(sign), PublicKey);
-                    var decryptStr = DES3.BytesToString(decryptByte);
+                    var decryptStr = JDPaySecurity.BytesToString(decryptByte);
                     if (sha256SourceSignString == decryptStr)
                     {
                         rsp = parser.Parse(reqBody);
                         rsp.Encrypt = encrypt;
+                        return rsp;
                     }
                     else
                     {
                         throw new Exception("sign check fail: check Sign and Data Fail!");
                     }
                 }
-                return rsp;
+                else
+                {
+                    throw new Exception("encrypt is Empty!");
+                }
             }
             else
             {
-                throw new Exception("sign check fail: check Sign and Data Fail!");
+                throw new Exception("Content type is not supported!");
             }
         }
+
+        #endregion
+
+        #region Common Method
 
         private async Task<JDPayDictionary> GetParametersAsync(HttpRequest request)
         {
@@ -126,28 +144,33 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             var form = await request.ReadFormAsync();
             foreach (var item in form)
             {
-                parameters.Add(item.Key, item.Key.Equals(SIGN) ? item.Value.ToString() : DES3.DecryptECB(item.Value, DesKey));
+                if (!string.IsNullOrEmpty(item.Value))
+                {
+                    parameters.Add(item.Key, item.Key == SIGN ? item.Value.ToString() : JDPaySecurity.DecryptECB(item.Value, DesKey));
+                }
             }
             return parameters;
         }
 
-        private void CheckNotifySign(JDPayDictionary para, object parameters)
+        private void CheckNotifySign(JDPayDictionary parameters)
         {
-            if (para.Count == 0)
+            if (parameters.Count == 0)
             {
-                throw new Exception("sign check fail: para is Empty!");
+                throw new Exception("sign check fail: parameters is Empty!");
             }
 
-            if (!para.TryGetValue("sign", out var sign))
+            if (!parameters.TryGetValue("sign", out var sign))
             {
                 throw new Exception("sign check fail: sign is Empty!");
             }
 
-            var signContent = JDPaySecurity.GetSignContent(para);
+            var signContent = JDPaySecurity.GetSignContent(parameters);
             if (!JDPaySecurity.RSACheckContent(signContent, sign, PublicKey))
             {
                 throw new Exception("sign check fail: check Sign and Data Fail");
             }
         }
+
+        #endregion
     }
 }

@@ -25,6 +25,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
                 {
                     json = JsonConvert.DeserializeObject<IDictionary>(body);
                 }
+
                 if (json != null)
                 {
                     // 忽略根节点的名称
@@ -106,13 +107,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
         {
             if (!"AES".Equals(encryptType))
             {
-                throw new AlipayException("API only support AES!");
+                throw new Exception("API only support AES!");
             }
 
             var item = ParseEncryptData(request, body);
             var bodyIndexContent = body.Substring(0, item.startIndex);
             var bodyEndexContent = body.Substring(item.endIndex);
-            var bizContent = AES.Decrypt(item.encryptContent, encryptKey, AESPaddingMode.PKCS7, AESCipherModeMode.CBC, AES.ALIPAY_AES_IV);
+            var bizContent = AES.Decrypt(item.encryptContent, encryptKey, AlipaySignature.AES_IV, AESCipherMode.CBC, AESPaddingMode.PKCS7);
 
             return bodyIndexContent + bizContent + bodyEndexContent;
         }

@@ -6,6 +6,21 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
     public class QPayCloseOrderRequest : IQPayRequest<QPayCloseOrderResponse>
     {
         /// <summary>
+        /// 应用ID
+        /// </summary>
+        public string AppId { get; set; }
+
+        /// <summary>
+        /// 子商户应用ID
+        /// </summary>
+        public string SubAppId { get; set; }
+
+        /// <summary>
+        /// 子商户号
+        /// </summary>
+        public string SubMchId { get; set; }
+
+        /// <summary>
         /// 商户订单号
         /// </summary>
         public string OutTradeNo { get; set; }
@@ -26,8 +41,11 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
         {
             var parameters = new QPayDictionary()
             {
+                { "appid", AppId },
+                { "sub_appid", SubAppId },
+                { "sub_mch_id", SubMchId },
                 { "out_trade_no", OutTradeNo },
-                { "total_fee", TotalFee }
+                { "total_fee", TotalFee },
             };
             return parameters;
         }

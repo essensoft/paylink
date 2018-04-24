@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
+    /// <summary>
+    /// 查询企业付款银行卡
+    /// </summary>
     public class WeChatPayQueryBankRequest : IWeChatPayCertificateRequest<WeChatPayQueryBankResponse>
     {
         /// <summary>
@@ -10,7 +13,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// </summary>
         public string PartnerTradeNo { get; set; }
 
-        #region IWeChatPayRequest Members
+        #region IWeChatPayCertificateRequest Members
 
         public string GetRequestUrl()
         {

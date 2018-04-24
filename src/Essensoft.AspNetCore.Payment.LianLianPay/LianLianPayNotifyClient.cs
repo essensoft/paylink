@@ -11,19 +11,21 @@ using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
-    public class LianLianPayNotifyClient
+    public class LianLianPayNotifyClient : ILianLianPayNotifyClient
     {
         private AsymmetricKeyParameter PublicKey;
 
         public LianLianPayOptions Options { get; set; }
 
-        public virtual ILogger<LianLianPayClient> Logger { get; set; }
+        public virtual ILogger Logger { get; set; }
+
+        #region LianLianPayNotifyClient Constructors
 
         public LianLianPayNotifyClient(
             IOptions<LianLianPayOptions> optionsAccessor,
             ILogger<LianLianPayClient> logger)
         {
-            Options = optionsAccessor?.Value ?? new LianLianPayOptions();
+            Options = optionsAccessor?.Value;
             Logger = logger;
 
             if (string.IsNullOrEmpty(Options.OidPartner))
@@ -44,13 +46,21 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(Options.RsaPublicKey);
         }
 
+        public LianLianPayNotifyClient(IOptions<LianLianPayOptions> optionsAccessor)
+            : this(optionsAccessor, null)
+        { }
+
+        #endregion
+
+        #region ILianLianPayNotifyClient Members
+
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : LianLianPayNotifyResponse
         {
             if (request.HasFormContentType)
             {
                 var parameters = await GetParametersAsync(request);
                 var query = HttpClientEx.BuildQuery(parameters);
-                Logger.LogInformation(0, "Request:{query}", query);
+                Logger?.LogTrace(0, "Request:{query}", query);
 
                 var parser = new LianLianPayDictionaryParser<T>();
                 var rsp = parser.Parse(parameters);
@@ -60,7 +70,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             else if (request.HasTextJsonContentType())
             {
                 var body = await new StreamReader(request.Body).ReadToEndAsync();
-                Logger.LogInformation(0, "Request:{body}", body);
+                Logger?.LogTrace(0, "Request:{body}", body);
 
                 var parser = new LianLianPayJsonParser<T>();
                 var rsp = parser.Parse(body);
@@ -69,9 +79,13 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             }
             else
             {
-                throw new Exception("sign check fail: check Sign and Data Fail!");
+                throw new Exception("Content type is not supported");
             }
         }
+
+        #endregion
+
+        #region Common Method
 
         private async Task<LianLianPayDictionary> GetParametersAsync(HttpRequest request)
         {
@@ -102,5 +116,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
                 throw new Exception("sign check fail: check Sign and Data Fail JSON also");
             }
         }
+
+        #endregion
     }
 }
