@@ -22,7 +22,7 @@ namespace WebApplicationSample.Controllers
             string user_id, string notify_url, string url_return, string bank_code, string pay_type, string no_agree, string risk_item,
             string id_type, string id_no, string acct_name, string card_no)
         {
-            var request = new LianLianPayQuickPayRequest()
+            var request = new LianLianPayWebQuickPayRequest()
             {
                 NoOrder = no_order,
                 DtOrder = dt_order,
@@ -68,7 +68,7 @@ namespace WebApplicationSample.Controllers
             string notify_url, string url_return, string bank_code, string pay_type, string no_agree, string risk_item, string id_type, string id_no,
             string acct_name, string card_no)
         {
-            var request = new LianLianPayAuthPayRequest()
+            var request = new LianLianPayWebAuthPayRequest()
             {
                 NoOrder = no_order,
                 DtOrder = dt_order,
@@ -230,7 +230,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _notifyClient.ExecuteAsync<LianLianPayQuickPayReturnResponse>(Request);
+                var notify = await _notifyClient.ExecuteAsync<LianLianPayWebQuickPayReturnResponse>(Request);
                 return Content("success", "text/plain");
             }
             catch
@@ -244,7 +244,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _notifyClient.ExecuteAsync<LianLianPayAuthPayReturnResponse>(Request);
+                var notify = await _notifyClient.ExecuteAsync<LianLianPayWebAuthPayReturnResponse>(Request);
                 return Content("success", "text/plain");
             }
             catch

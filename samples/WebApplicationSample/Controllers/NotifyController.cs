@@ -495,7 +495,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<LianLianPayQuickPayNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<LianLianPayWebQuickPayNotifyResponse>(Request);
                 Console.WriteLine("NoOrder: " + notify.NoOrder);
                 return Content("{\"ret_code\":\"0000\",\"ret_msg\":\"交易成功\"}", "application/json");
             }
@@ -527,7 +527,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<LianLianPayAuthPayNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<LianLianPayWapAuthPayNotifyResponse>(Request);
                 Console.WriteLine("NoOrder: " + notify.NoOrder);
                 return Content("{\"ret_code\":\"0000\",\"ret_msg\":\"交易成功\"}", "application/json");
             }

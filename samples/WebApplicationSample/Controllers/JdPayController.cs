@@ -34,7 +34,7 @@ namespace WebApplicationSample.Controllers
                 NotifyUrl = notifyUrl,
             };
 
-            var response = await _client.PageExecuteAsync(request, "POST");
+            var response = await _client.PageExecuteAsync(request);
             return Content(response.Body, "text/html");
         }
 
@@ -55,7 +55,7 @@ namespace WebApplicationSample.Controllers
                 NotifyUrl = notifyUrl,
             };
 
-            var response = await _client.PageExecuteAsync(request, "POST");
+            var response = await _client.PageExecuteAsync(request);
             return Content(response.Body, "text/html");
         }
 
@@ -84,7 +84,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> OrderQuery(string tradeNum, string oTradeNum)
         {
-            var request = new JDPayOrderQueryRequest()
+            var request = new JDPayQueryRequest()
             {
                 TradeNum = tradeNum,
                 OTradeNum = oTradeNum
@@ -95,7 +95,7 @@ namespace WebApplicationSample.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Refund(string tradeNum, string oTradeNum, long amount, string currency, string notifyUrl)
+        public async Task<IActionResult> Refund(string tradeNum, string oTradeNum, string amount, string currency, string notifyUrl)
         {
             var request = new JDPayRefundRequest()
             {
