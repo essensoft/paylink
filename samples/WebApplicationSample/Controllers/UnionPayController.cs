@@ -261,20 +261,6 @@ namespace WebApplicationSample.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> AuthDealFront671Return()
-        {
-            try
-            {
-                var notify = await _notifyClient.ExecuteAsync<UnionPayForm_6_7_1_AuthDeal_FrontReturnResponse>(Request);
-                return Content("ok", "text/plain");
-            }
-            catch
-            {
-                return Content("error", "text/plain");
-            }
-        }
-
-        [HttpPost]
         public async Task<IActionResult> AuthUndo672(string orderId, string txnTime, string txnAmt, string origQryId, string backUrl)
         {
             var request = new UnionPayForm_6_7_2_AuthUndoRequest()
