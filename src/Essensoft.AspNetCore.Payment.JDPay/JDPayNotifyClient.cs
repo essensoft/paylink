@@ -68,7 +68,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : JDPayNotifyResponse
         {
-            if (request.HasFormContentType)
+            if (request.HasFormContentType || request.Method == "GET")
             {
                 var parameters = await GetParametersAsync(request);
 
@@ -141,12 +141,26 @@ namespace Essensoft.AspNetCore.Payment.JDPay
         private async Task<JDPayDictionary> GetParametersAsync(HttpRequest request)
         {
             var parameters = new JDPayDictionary();
-            var form = await request.ReadFormAsync();
-            foreach (var item in form)
+
+            if (request.Method == "POST")
             {
-                if (!string.IsNullOrEmpty(item.Value))
+                var form = await request.ReadFormAsync();
+                foreach (var iter in form)
                 {
-                    parameters.Add(item.Key, item.Key == SIGN ? item.Value.ToString() : JDPaySecurity.DecryptECB(item.Value, DesKey));
+                    if (!string.IsNullOrEmpty(iter.Value))
+                    {
+                        parameters.Add(iter.Key, iter.Key == SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, DesKey));
+                    }
+                }
+            }
+            else
+            {
+                foreach (var iter in request.Query)
+                {
+                    if (!string.IsNullOrEmpty(iter.Value))
+                    {
+                        parameters.Add(iter.Key, iter.Key == SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, DesKey));
+                    }
                 }
             }
             return parameters;
