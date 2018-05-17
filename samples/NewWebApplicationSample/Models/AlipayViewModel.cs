@@ -62,7 +62,6 @@ namespace NewWebApplicationSample.Models
         [Display(Name = "subject")]
         public string Subject { get; set; }
 
-        [Required]
         [Display(Name = "product_code")]
         public string ProductCode { get; set; }
 
