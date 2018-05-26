@@ -21,11 +21,11 @@ namespace Essensoft.AspNetCore.Payment.JDPay
         private const string RESULT = "result";
         private const string BODY = "body";
 
-        private AsymmetricKeyParameter PrivateKey;
-        private AsymmetricKeyParameter PublicKey;
-        private byte[] DesKey;
+        private readonly AsymmetricKeyParameter PrivateKey;
+        private readonly AsymmetricKeyParameter PublicKey;
+        private readonly byte[] DesKey;
 
-        public JDPayOptions Options { get; set; }
+        public JDPayOptions Options { get; }
 
         public virtual ILogger Logger { get; set; }
 
@@ -144,10 +144,8 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             var encyptParams = BuildEncryptDic(request, sortedTxtParams);
             var rsp = Activator.CreateInstance<T>();
 
-            var url = request.GetRequestUrl();
-
             //输出post表单
-            rsp.Body = BuildHtmlRequest(url, encyptParams);
+            rsp.Body = BuildHtmlRequest(request, encyptParams);
             return Task.FromResult(rsp);
         }
 
@@ -175,9 +173,9 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             return JDPayUtility.SortedDictionary2XmlStr(reqdic);
         }
 
-        private JDPayDictionary BuildEncryptDic<T>(IJDPayRequest<T> request, IDictionary<string, string> dic) where T : JDPayResponse
+        private JDPayDictionary BuildEncryptDic<T>(IJDPayRequest<T> request, IDictionary<string, string> parameters) where T : JDPayResponse
         {
-            var signDic = new JDPayDictionary(dic)
+            var signDic = new JDPayDictionary(parameters)
             {
                 { VERSION, request.GetApiVersion() },
                 { MERCHANT, Options.Merchant },
@@ -193,27 +191,30 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 { SIGN, sign }
             };
 
-            foreach (var item in dic)
+            foreach (var iter in parameters)
             {
-                if (!string.IsNullOrEmpty(item.Value))
+                if (!string.IsNullOrEmpty(iter.Value))
                 {
-                    encyptDic.Add(item.Key, JDPaySecurity.EncryptECB(item.Value, DesKey));
+                    encyptDic.Add(iter.Key, JDPaySecurity.EncryptECB(iter.Value, DesKey));
                 }
             }
             return encyptDic;
         }
 
-        private string BuildHtmlRequest(string url, JDPayDictionary dicPara)
+        private string BuildHtmlRequest<T>(IJDPayRequest<T> request, IDictionary<string, string> parameters) where T : JDPayResponse
         {
-            var sbHtml = new StringBuilder();
-            sbHtml.Append("<form id='submit' name='submit' action='" + url + "' method='post' style='display:none;'>");
-            foreach (var temp in dicPara)
+            var sb = new StringBuilder();
+            sb.Append("<form id='submit' name='submit' action='" + request.GetRequestUrl() + "' method='post' style='display:none;'>");
+            foreach (var iter in parameters)
             {
-                sbHtml.Append("<input  name='" + temp.Key + "' value='" + temp.Value + "'/>");
+                if (!string.IsNullOrEmpty(iter.Value))
+                {
+                    sb.Append("<input  name='" + iter.Key + "' value='" + iter.Value + "'/>");
+                }
             }
-            sbHtml.Append("<input type='submit' style='display:none;'></form>");
-            sbHtml.Append("<script>document.forms['submit'].submit();</script>");
-            return sbHtml.ToString();
+            sb.Append("<input type='submit' style='display:none;'></form>");
+            sb.Append("<script>document.forms['submit'].submit();</script>");
+            return sb.ToString();
         }
 
         #endregion

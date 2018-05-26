@@ -34,7 +34,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         private const string signType = "signType";
         private const string paySign = "paySign";
 
-        private AsymmetricKeyParameter PublicKey;
+        private readonly AsymmetricKeyParameter PublicKey;
 
         public WeChatPayOptions Options { get; set; }
 

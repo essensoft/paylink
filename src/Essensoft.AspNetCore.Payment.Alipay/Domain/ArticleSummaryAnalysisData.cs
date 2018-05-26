@@ -15,7 +15,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("avg_read_time")]
         [XmlElement("avg_read_time")]
-        public long AvgReadTime { get; set; }
+        public string AvgReadTime { get; set; }
 
         /// <summary>
         /// 日期

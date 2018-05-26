@@ -1,6 +1,7 @@
 using System;
 using Newtonsoft.Json;
 using System.Xml.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -10,6 +11,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     [Serializable]
     public class TemplateOpenCardConfDTO : AlipayObject
     {
+        /// <summary>
+        /// 领卡权益信息
+        /// </summary>
+        [JsonProperty("card_rights")]
+        [XmlArray("card_rights")]
+        [XmlArrayItem("template_rights_content_d_t_o")]
+        public List<TemplateRightsContentDTO> CardRights { get; set; }
+
         /// <summary>
         /// 配置，预留字段，暂时不用
         /// </summary>

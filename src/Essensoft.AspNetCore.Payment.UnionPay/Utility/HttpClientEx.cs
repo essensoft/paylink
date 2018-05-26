@@ -7,18 +7,12 @@ using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 {
-    public class ResponseContent
-    {
-        public string ContentType { get; set; }
-        public string Content { get; set; }
-    }
-
     /// <summary>
     /// 网络工具类。
     /// </summary>
     public sealed class HttpClientEx : HttpClient
     {
-        public HttpClientEx()
+        public HttpClientEx() : base()
         {
             Timeout = new TimeSpan(0, 0, 0, 10);
             DefaultRequestHeaders.Connection.Add("keep-alive");
@@ -30,14 +24,13 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
         /// <param name="url">请求地址</param>
         /// <param name="content">请求参数</param>
         /// <returns>HTTP响应</returns>
-        public async Task<ResponseContent> DoPostAsync(string url, string content)
+        public async Task<string> DoPostAsync(string url, string content)
         {
             using (var requestContent = new StringContent(content, Encoding.UTF8, "application/x-www-form-urlencoded"))
             using (var response = await PostAsync(url, requestContent))
             using (var responseContent = response.Content)
             {
-                var rspContent = await responseContent.ReadAsStringAsync();
-                return new ResponseContent { ContentType = responseContent.Headers.ContentType.ToString().ToLower(), Content = rspContent };
+                return await responseContent.ReadAsStringAsync();
             }
         }
 

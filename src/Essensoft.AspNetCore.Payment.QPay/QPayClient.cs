@@ -17,7 +17,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
         private const string NONCE_STR = "nonce_str";
         private const string SIGN = "sign";
 
-        public QPayOptions Options { get; set; }
+        public QPayOptions Options { get; }
 
         public virtual ILogger Logger { get; set; }
 

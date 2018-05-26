@@ -36,10 +36,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         private const string APP_AUTH_TOKEN = "app_auth_token";
         private const string RETURN_URL = "return_url";
 
-        private RSAParameters PrivateRSAParameters;
-        private RSAParameters PublicRSAParameters;
+        private readonly RSAParameters PrivateRSAParameters;
+        private readonly RSAParameters PublicRSAParameters;
 
-        public AlipayOptions Options { get; set; }
+        public AlipayOptions Options { get; }
 
         public virtual ILogger Logger { get; set; }
 

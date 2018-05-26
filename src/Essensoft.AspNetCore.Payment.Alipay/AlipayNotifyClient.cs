@@ -14,9 +14,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 {
     public class AlipayNotifyClient : IAlipayNotifyClient
     {
-        private RSAParameters PublicRSAParameters;
+        private readonly RSAParameters PublicRSAParameters;
 
-        public AlipayOptions Options { get; set; }
+        public AlipayOptions Options { get; }
 
         public virtual ILogger Logger { get; set; }
 
@@ -67,16 +67,16 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             if (request.Method == "POST")
             {
                 var form = await request.ReadFormAsync();
-                foreach (var item in form)
+                foreach (var iter in form)
                 {
-                    parameters.Add(item.Key, item.Value);
+                    parameters.Add(iter.Key, iter.Value);
                 }
             }
             else
             {
-                foreach (var item in request.Query)
+                foreach (var iter in request.Query)
                 {
-                    parameters.Add(item.Key, item.Value);
+                    parameters.Add(iter.Key, iter.Value);
                 }
             }
             return parameters;
@@ -97,7 +97,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             var prestr = GetSignContent(parameters);
             if (!AlipaySignature.RSACheckContent(prestr, sign, publicRSAParameters, signType))
             {
-                throw new Exception("sign check fail: check Sign and Data Fail JSON also");
+                throw new Exception("sign check fail: check Sign Data Fail!");
             }
         }
 

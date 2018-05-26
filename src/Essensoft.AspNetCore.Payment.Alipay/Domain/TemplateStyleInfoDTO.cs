@@ -83,7 +83,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public bool FrontImageEnable { get; set; }
 
         /// <summary>
-        /// 设置是否在卡面展示文案信息，默认不展示；  文案信息分行展示，最多展示3行文案，每行文案分为label和value两部分；  文案实际内容随创建卡/更新卡时传入；  详见会员卡产品说明文档。
+        /// 设置是否在卡面展示文案信息，默认不展示；  文案信息分行展示，最多展示4行文案，每行文案分为label和value两部分；  文案实际内容随创建卡/更新卡时传入；  详见会员卡产品说明文档。
         /// </summary>
         [JsonProperty("front_text_list_enable")]
         [XmlElement("front_text_list_enable")]

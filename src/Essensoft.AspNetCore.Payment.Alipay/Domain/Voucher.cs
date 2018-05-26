@@ -112,7 +112,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Logo { get; set; }
 
         /// <summary>
-        /// 最高优惠金额，单位元  指用券最高可以优惠的金额  必须为合法金额类型字符串仅当券类型为折扣券（DISOUNT），每满减券（PER_FULL_CUT）有效
+        /// 最高优惠金额，单位元  指用券最高可以优惠的金额  必须为合法金额类型字符串仅当券类型为折扣券（RATE），每满减券（PER_FULL_CUT）有效
         /// </summary>
         [JsonProperty("max_amount")]
         [XmlElement("max_amount")]

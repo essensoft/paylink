@@ -16,11 +16,12 @@ namespace Essensoft.AspNetCore.Payment.JDPay
     public class JDPayNotifyClient : IJDPayNotifyClient
     {
         private const string SIGN = "sign";
-        private AsymmetricKeyParameter PrivateKey;
-        private AsymmetricKeyParameter PublicKey;
-        private byte[] DesKey;
 
-        public JDPayOptions Options { get; set; }
+        private readonly AsymmetricKeyParameter PrivateKey;
+        private readonly AsymmetricKeyParameter PublicKey;
+        private readonly byte[] DesKey;
+
+        public JDPayOptions Options { get; }
 
         public virtual ILogger Logger { get; set; }
 
@@ -130,7 +131,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             }
             else
             {
-                throw new Exception("Content type is not supported!");
+                throw new Exception("content type is not supported!");
             }
         }
 

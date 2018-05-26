@@ -22,10 +22,10 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         private const string TIMESTAMP = "timestamp";
         private const string SIGN = "sign";
 
-        private AsymmetricKeyParameter PrivateKey;
-        private AsymmetricKeyParameter PublicKey;
+        private readonly AsymmetricKeyParameter PrivateKey;
+        private readonly AsymmetricKeyParameter PublicKey;
 
-        public LianLianPayOptions Options { get; set; }
+        public LianLianPayOptions Options { get; }
 
         public virtual ILogger Logger { get; set; }
 

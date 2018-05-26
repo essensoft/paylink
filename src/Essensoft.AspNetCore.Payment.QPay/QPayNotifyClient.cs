@@ -12,7 +12,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
 {
     public class QPayNotifyClient : IQPayNotifyClient
     {
-        public QPayOptions Options { get; set; }
+        public QPayOptions Options { get; }
 
         public virtual ILogger Logger { get; set; }
 
