@@ -15,7 +15,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("avg_click_user_cnt")]
         [XmlElement("avg_click_user_cnt")]
-        public long AvgClickUserCnt { get; set; }
+        public string AvgClickUserCnt { get; set; }
 
         /// <summary>
         /// 菜单点击次数

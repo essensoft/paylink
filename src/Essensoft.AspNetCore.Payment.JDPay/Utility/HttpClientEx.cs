@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 {
     public sealed class HttpClientEx : HttpClient
     {
-        public HttpClientEx()
+        public HttpClientEx() : base()
         {
             Timeout = new TimeSpan(0, 0, 0, 10);
             DefaultRequestHeaders.Connection.Add("keep-alive");

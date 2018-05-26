@@ -10,10 +10,10 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 {
     public class UnionPayNotifyClient : IUnionPayNotifyClient
     {
-        private UnionPayCertificate MiddleCertificate;
-        private UnionPayCertificate RootCertificate;
+        private readonly UnionPayCertificate MiddleCertificate;
+        private readonly UnionPayCertificate RootCertificate;
 
-        public UnionPayOptions Options { get; set; }
+        public UnionPayOptions Options { get; }
 
         public virtual ILogger Logger { get; set; }
 
@@ -69,9 +69,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         {
             var parameters = new UnionPayDictionary();
             var form = await request.ReadFormAsync();
-            foreach (var item in form)
+            foreach (var iter in form)
             {
-                parameters.Add(item.Key, item.Value);
+                parameters.Add(iter.Key, iter.Value);
             }
             return parameters;
         }

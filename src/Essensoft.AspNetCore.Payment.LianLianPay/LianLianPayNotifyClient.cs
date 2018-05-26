@@ -13,7 +13,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     public class LianLianPayNotifyClient : ILianLianPayNotifyClient
     {
-        private AsymmetricKeyParameter PublicKey;
+        private readonly AsymmetricKeyParameter PublicKey;
 
         public LianLianPayOptions Options { get; set; }
 
@@ -79,7 +79,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             }
             else
             {
-                throw new Exception("Content type is not supported");
+                throw new Exception("content type is not supported");
             }
         }
 
@@ -91,9 +91,9 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         {
             var parameters = new LianLianPayDictionary();
             var form = await request.ReadFormAsync();
-            foreach (var item in form)
+            foreach (var iter in form)
             {
-                parameters.Add(item.Key, item.Value);
+                parameters.Add(iter.Key, iter.Value);
             }
             return parameters;
         }

@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
     public class JDPaySecurity
     {
         private const int MAX_MSG_LENGTH = 16 * 1024;
-        private static byte[] iv = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+        private static readonly byte[] iv = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
 
         public static string GetSignContent(JDPayDictionary para)
         {

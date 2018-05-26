@@ -18,12 +18,13 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         private const string ACCESSTYPE = "accessType";
         private const string MERID = "merId";
         private const string ENCRYPTCERTID = "encryptCertId";
-        private UnionPayCertificate SignCertificate;
-        private UnionPayCertificate EncryptCertificate;
-        private UnionPayCertificate MiddleCertificate;
-        private UnionPayCertificate RootCertificate;
 
-        public UnionPayOptions Options { get; set; }
+        private readonly UnionPayCertificate SignCertificate;
+        private readonly UnionPayCertificate EncryptCertificate;
+        private readonly UnionPayCertificate MiddleCertificate;
+        private readonly UnionPayCertificate RootCertificate;
+
+        public UnionPayOptions Options { get; }
 
         public virtual ILogger Logger { get; set; }
 
@@ -126,11 +127,11 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             Logger?.LogTrace(0, "Request:{query}", query);
 
             var body = await Client.DoPostAsync(request.GetRequestUrl(Options.TestMode), query);
-            Logger?.LogTrace(1, "Response:{content}", body.Content);
+            Logger?.LogTrace(1, "Response:{content}", body);
 
-            var dic = ParseQueryString(body.Content);
+            var dic = ParseQueryString(body);
 
-            if (string.IsNullOrEmpty(body.Content))
+            if (string.IsNullOrEmpty(body))
             {
                 throw new Exception("sign check fail: Body is Empty!");
             }
@@ -143,7 +144,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
             var parser = new UnionPayDictionaryParser<T>();
             var rsp = parser.Parse(dic);
-            rsp.Body = body.Content;
+            rsp.Body = body;
             return rsp;
         }
 
