@@ -45,8 +45,15 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <param name="content">文件字节流</param>
         public FileItem(string fileName, byte[] content)
         {
-            if (string.IsNullOrEmpty(fileName)) throw new ArgumentNullException("fileName");
-            if (content == null || content.Length == 0) throw new ArgumentNullException("content");
+            if (string.IsNullOrEmpty(fileName))
+            {
+                throw new ArgumentNullException("fileName");
+            }
+
+            if (content == null || content.Length == 0)
+            {
+                throw new ArgumentNullException("content");
+            }
 
             this.fileName = fileName;
             this.content = content;
@@ -61,7 +68,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         public FileItem(string fileName, byte[] content, string mimeType)
             : this(fileName, content)
         {
-            if (string.IsNullOrEmpty(mimeType)) throw new ArgumentNullException("mimeType");
+            if (string.IsNullOrEmpty(mimeType))
+            {
+                throw new ArgumentNullException("mimeType");
+            }
+
             this.mimeType = mimeType;
         }
 

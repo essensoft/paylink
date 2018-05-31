@@ -141,12 +141,16 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
         public static string GetSignContent(Dictionary<string, string> para, bool sort, bool encode)
         {
             if (para == null || para.Count == 0)
+            {
                 return string.Empty;
+            }
 
             var list = new List<string>(para.Keys);
 
             if (sort)
+            {
                 list.Sort(StringComparer.Ordinal);
+            }
 
             var sb = new StringBuilder();
             foreach (var key in list)
@@ -329,7 +333,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
                 var tSplitStr = tDN.Substring(tDN.IndexOf("CN=")).Split("@".ToCharArray());
                 if (tSplitStr != null && tSplitStr.Length > 2
                         && tSplitStr[2] != null)
+                {
                     tPart = tSplitStr[2];
+                }
             }
             return tPart;
         }

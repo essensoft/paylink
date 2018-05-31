@@ -1,7 +1,16 @@
 ﻿using Essensoft.AspNetCore.Payment.Security;
+using Org.BouncyCastle.Cms;
 using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Crypto.Operators;
+using Org.BouncyCastle.Pkcs;
+using Org.BouncyCastle.Security;
+using Org.BouncyCastle.X509.Store;
 using System;
+using System.Collections;
+using System.IO;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using X509Certificate = Org.BouncyCastle.X509.X509Certificate;
 
 namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 {
@@ -13,13 +22,85 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
         public static string GetSignContent(JDPayDictionary para)
         {
             if (para == null || para.Count == 0)
+            {
                 return string.Empty;
+            }
 
             var sb = new StringBuilder();
             foreach (var iter in para)
             {
                 if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign")
+                {
                     sb.Append(iter.Key).Append("=").Append(iter.Value).Append("&");
+                }
+            }
+
+            return sb.Remove(sb.Length - 1, 1).ToString();
+        }
+
+        private static string GetNPP10Sign(JDPayDictionary para, string algorithm, string salt)
+        {
+            if (para == null || para.Count == 0)
+            {
+                return string.Empty;
+            }
+
+            var sb = new StringBuilder();
+            foreach (var iter in para)
+            {
+                if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign_type" && iter.Key != "sign_data" && iter.Key != "encrypt_type" && iter.Key != "encrypt_data" && iter.Key != "salt")
+                {
+                    sb.Append(iter.Key).Append("=").Append(iter.Value).Append("&");
+                }
+            }
+
+            var sign = string.Empty;
+            var data = sb.Remove(sb.Length - 1, 1).ToString() + salt;
+
+            if ("SHA" == algorithm)
+            {
+                sign = SHA1.Compute(data).ToUpper();
+            }
+            else if ("SHA-256" == algorithm)
+            {
+                sign = SHA256.Compute(data).ToUpper();
+            }
+
+            return sign;
+        }
+
+        private static string GetNPP10Sign(string content, string algorithm, string salt)
+        {
+            var sign = string.Empty;
+
+            var data = content + salt;
+
+            if ("SHA" == algorithm)
+            {
+                sign = SHA1.Compute(data);
+            }
+            else if ("SHA-256" == algorithm)
+            {
+                sign = SHA256.Compute(data);
+            }
+
+            return sign;
+        }
+
+        private static string GetNPP10SignContentOrEncryptContent(JDPayDictionary para)
+        {
+            if (para == null || para.Count == 0)
+            {
+                return string.Empty;
+            }
+
+            var sb = new StringBuilder();
+            foreach (var iter in para)
+            {
+                if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign_type" && iter.Key != "sign_data" && iter.Key != "encrypt_type" && iter.Key != "encrypt_data" && iter.Key != "salt")
+                {
+                    sb.Append(iter.Key).Append("=").Append(iter.Value).Append("&");
+                }
             }
 
             return sb.Remove(sb.Length - 1, 1).ToString();
@@ -27,14 +108,14 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 
         public static string RSASign(string sourceSignString, AsymmetricKeyParameter privateKey)
         {
-            var sha256SourceSignString = Security.SHA256.Compute(sourceSignString);
+            var sha256SourceSignString = SHA256.Compute(sourceSignString);
             var newsks = RSA_ECB_PKCS1Padding.Encrypt(Encoding.UTF8.GetBytes(sha256SourceSignString), privateKey);
             return Convert.ToBase64String(newsks, Base64FormattingOptions.InsertLineBreaks);
         }
 
         public static bool RSACheckContent(string content, string sign, AsymmetricKeyParameter publicKey)
         {
-            var sha256SourceSignString = Security.SHA256.Compute(content);
+            var sha256SourceSignString = SHA256.Compute(content);
             var decryptArr = RSA_ECB_PKCS1Padding.Decrypt(Convert.FromBase64String(sign), publicKey);
             var decrypStr = Encoding.UTF8.GetString(decryptArr);
             return sha256SourceSignString.Equals(decrypStr);
@@ -44,7 +125,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
         {
             var resultByte = InitResultByteArray(data);
             var desdata = DES3.Encode(resultByte, key, iv, DESCipherMode.ECB, DESPaddingMode.Zeros);
-            return ByteToHexStr(desdata);
+            return BitConverter.ToString(desdata).Replace("-", "").ToLower();
         }
 
         public static string DecryptECB(string data, byte[] key)
@@ -66,7 +147,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             {
                 tempData[i] = unDesResult[4 + i];
             }
-            var hexStr = ByteToHexStr(tempData);
+            var hexStr = BitConverter.ToString(tempData).Replace("-", "").ToLower();
             var str = Hex2bin(hexStr);
             return str;
         }
@@ -171,17 +252,94 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             return Encoding.UTF8.GetString(bytes);
         }
 
-        public static string ByteToHexStr(byte[] bytes)
+        public static bool VerifySign(JDPayDictionary dic, string key)
         {
-            var returnStr = string.Empty;
-            if (bytes != null)
+            dic.TryGetValue(Contants.SIGN_TYPE, out var algorithm);
+            dic.TryGetValue(Contants.SIGN_DATA, out var sign);
+            dic.Remove(Contants.SIGN_TYPE);
+            dic.Remove(Contants.SIGN_DATA);
+            return Verify(sign, dic, algorithm, key);
+        }
+
+        private static bool Verify(string signStr, JDPayDictionary dic, string algorithm, string salt)
+        {
+            if (string.IsNullOrEmpty(signStr) || null == dic || dic.Count == 0)
             {
-                for (var i = 0; i < bytes.Length; i++)
+                return false;
+            }
+            var newsign = GetNPP10Sign(dic, algorithm, salt);
+            return newsign == signStr;
+        }
+
+        public static JDPayDictionary EncryptData(string signCert, string password, string envelopCert, JDPayDictionary dic, string singKey, string encryptType, bool isEncrypt)
+        {
+            var encryptData = new JDPayDictionary();
+            var data = GetNPP10SignContentOrEncryptContent(dic);
+
+            dic.TryGetValue(Contants.CUSTOMER_NO, out var customerNo);
+            dic.TryGetValue(Contants.SIGN_TYPE, out var signType);
+
+            if (!isEncrypt || string.IsNullOrEmpty(encryptType))
+            {
+                dic.Add(Contants.SIGN_DATA, GetNPP10Sign(data, signType, singKey));
+                encryptData = dic;
+            }
+            else
+            {
+                encryptData.Add(Contants.SIGN_TYPE, signType);
+                encryptData.Add(Contants.SIGN_DATA, GetNPP10Sign(data, signType, singKey));
+                encryptData.Add(Contants.CUSTOMER_NO, customerNo);
+                encryptData.Add(Contants.ENCRYPT_TYPE, encryptType);
+                if ("RSA" == encryptType)
                 {
-                    returnStr += bytes[i].ToString("X2");
+                    encryptData.Add(Contants.ENCRYPT_DATA, SignEnvelop(signCert, password, envelopCert, data));
+                }
+                else
+                {
+                    throw new Exception("不支持的加密方式");
                 }
             }
-            return returnStr.ToLower();
+
+            return encryptData;
+        }
+
+        private static string SignEnvelop(string signCert, string password, string envelopCert, string orgData)
+        {
+            var pkcs12StoreBuilder = new Pkcs12StoreBuilder();
+            var pkcs12Store = pkcs12StoreBuilder.Build();
+            pkcs12Store.Load(new MemoryStream(Convert.FromBase64String(signCert)), password.ToCharArray());
+
+            var aliases = pkcs12Store.Aliases;
+            var enumerator = aliases.GetEnumerator();
+            enumerator.MoveNext();
+            var alias = enumerator.Current.ToString();
+            var privKey = pkcs12Store.GetKey(alias);
+
+            var x509Cert = pkcs12Store.GetCertificate(alias).Certificate;
+            var sha1Signer = SignerUtilities.GetSigner("SHA1withRSA");
+            sha1Signer.Init(true, privKey.Key);
+
+            var gen = new CmsSignedDataGenerator();
+            gen.AddSignerInfoGenerator(new SignerInfoGeneratorBuilder().Build(new Asn1SignatureFactory("SHA1withRSA", privKey.Key), x509Cert));
+            gen.AddCertificates(X509StoreFactory.Create("Certificate/Collection", new X509CollectionStoreParameters(new ArrayList { x509Cert })));
+
+            var sigData = gen.Generate(new CmsProcessableByteArray(Encoding.UTF8.GetBytes(orgData)), true);
+            var signData = sigData.GetEncoded();
+
+            var certificate = DotNetUtilities.FromX509Certificate(new X509Certificate2(Convert.FromBase64String(envelopCert)));
+            var rst = Convert.ToBase64String(EncryptEnvelop(certificate, signData));
+            return rst;
+        }
+
+        private static byte[] EncryptEnvelop(X509Certificate certificate, byte[] bsOrgData)
+        {
+            var gen = new CmsEnvelopedDataGenerator();
+            var data = new CmsProcessableByteArray(bsOrgData);
+            gen.AddKeyTransRecipient(certificate);
+
+            var enveloped = gen.Generate(data, CmsEnvelopedGenerator.DesEde3Cbc);
+            var a = enveloped.ContentInfo.ToAsn1Object();
+            return a.GetEncoded();
         }
     }
 }

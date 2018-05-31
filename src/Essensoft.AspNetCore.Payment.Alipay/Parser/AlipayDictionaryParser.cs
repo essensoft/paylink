@@ -9,7 +9,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
         public T Parse(IDictionary parameters)
         {
             if (parameters == null || parameters.Count == 0)
+            {
                 throw new ArgumentNullException(nameof(parameters));
+            }
 
             T rsp = null;
 
@@ -21,7 +23,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
             catch { }
 
             if (rsp == null)
+            {
                 rsp = Activator.CreateInstance<T>();
+            }
 
             return rsp;
         }

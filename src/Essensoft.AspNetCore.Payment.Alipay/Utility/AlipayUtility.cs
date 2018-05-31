@@ -19,7 +19,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             foreach (var dem in dict)
             {
                 if (dem.Value != null)
+                {
                     newDict.Add(dem.Key, dem.Value);
+                }
             }
             return newDict;
         }

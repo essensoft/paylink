@@ -51,10 +51,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
             { }
 
             if (rsp == null)
+            {
                 rsp = Activator.CreateInstance<T>();
+            }
 
             if (rsp != null)
+            {
                 rsp.Body = body;
+            }
 
             return rsp;
         }

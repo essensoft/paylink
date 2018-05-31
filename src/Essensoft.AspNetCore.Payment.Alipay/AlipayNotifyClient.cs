@@ -112,7 +112,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             foreach (var iter in parameters)
             {
                 if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign" && iter.Key != "sign_type")
+                {
                     sb.Append(iter.Key).Append("=").Append(iter.Value).Append("&");
+                }
             }
             return sb.Remove(sb.Length - 1, 1).ToString();
         }

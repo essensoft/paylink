@@ -167,6 +167,75 @@ namespace NewWebApplicationSample.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult DefrayPay()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DefrayPay(JDPayDefrayPayViewModel viewModel)
+        {
+            var request = new JDPayDefrayPayRequest()
+            {
+                RequestDatetime = viewModel.RequestDatetime,
+                OutTradeNo = viewModel.OutTradeNo,
+                BizTradeNo = viewModel.BizTradeNo,
+                OutTradeDate = viewModel.OutTradeDate,
+                TradeAmount = viewModel.TradeAmount,
+                TradeCurrency = viewModel.TradeCurrency,
+                SellerInfo = viewModel.SellerInfo,
+                TradeSubject = viewModel.TradeSubject,
+                CategoryCode = viewModel.CategoryCode,
+                PayTool = viewModel.PayTool,
+                TradeSource = viewModel.TradeSource,
+                PayeeBankCode = viewModel.PayeeBankCode,
+                PayeeBankAssociatedCode = viewModel.PayeeBankAssociatedCode,
+                PayeeBankFullname = viewModel.PayeeBankFullname,
+                PayeeBankCountryCode = viewModel.PayeeBankCountryCode,
+                PayeeBankProvinceCode = viewModel.PayeeBankProvinceCode,
+                PayeeBankCityCode = viewModel.PayeeBankCityCode,
+                PayeeCardType = viewModel.PayeeCardType,
+                PayeeAccountType = viewModel.PayeeAccountType,
+                PayeeAccountNo = viewModel.PayeeAccountNo,
+                PayeeAccountName = viewModel.PayeeAccountName,
+                PayeeIdType = viewModel.PayeeIdType,
+                PayeeIdNo = viewModel.PayeeIdNo,
+                PayeeMobile = viewModel.PayeeMobile,
+                NotifyUrl = viewModel.NotifyUrl,
+                ReturnParams = viewModel.ReturnParams,
+                ExtendParams = viewModel.ExtendParams,
+                BankCardInfoType = viewModel.BankCardInfoType,
+                BankCardId = viewModel.BankCardId,
+            };
+
+            var response = await _client.ExecuteAsync(request);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult TradeQuery()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> TradeQuery(JDPayTradeQueryViewModel viewModel)
+        {
+            var request = new JDPayTradeQueryRequest()
+            {
+                RequestDatetime = viewModel.RequestDatetime,
+                OutTradeNo = viewModel.OutTradeNo,
+                TradeNo = viewModel.TradeNo,
+                TradeType = viewModel.TradeType,
+            };
+
+            var response = await _client.ExecuteAsync(request);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
         [HttpGet]  // h5 get
         [HttpPost] // pc post
         public async Task<IActionResult> Return()

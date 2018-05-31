@@ -2,7 +2,7 @@
 
 ## 简介
 
-Payment 是基于 .NET Core 2.0 / ASP.NET Core 2.0 开发的支付SDK集。
+Payment 是基于 .NET Core 2.1 / ASP.NET Core 2.1 开发的跨平台支付SDK集。
 简化了API调用及相关通知的处理流程。
 
 ## Package
@@ -34,7 +34,7 @@ Essensoft.AspNetCore.Payment.UnionPay       | [![NuGet](https://img.shields.io/n
 * 付款码支付、扫码支付、公众号支付、APP支付
 
 ### 京东支付
-* 网页支付、APP支付、扫一扫、付款码
+* 网页支付、APP支付、扫一扫、付款码、代付
 
 ### 连连支付
 * 快捷支付、 网银支付、认证支付、实时付款

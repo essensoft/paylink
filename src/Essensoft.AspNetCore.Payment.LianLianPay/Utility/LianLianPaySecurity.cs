@@ -11,7 +11,9 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
         public static string GetSignContent(LianLianPayDictionary para, List<string> exclude = null)
         {
             if (para == null || para.Count == 0)
+            {
                 return string.Empty;
+            }
 
             var sb = new StringBuilder();
             foreach (var iter in para)

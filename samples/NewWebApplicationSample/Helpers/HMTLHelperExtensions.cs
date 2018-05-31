@@ -10,10 +10,14 @@ namespace NewWebApplicationSample
             var actualController = (string)html.ViewContext.RouteData.Values["controller"];
 
             if (string.IsNullOrEmpty(controller))
+            {
                 controller = actualController;
+            }
 
             if (string.IsNullOrEmpty(action))
+            {
                 action = actualAction;
+            }
 
             return (controller == actualController && action == actualAction) ? activeClass : string.Empty;
         }

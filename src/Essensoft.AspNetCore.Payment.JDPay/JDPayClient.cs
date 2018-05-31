@@ -1,8 +1,10 @@
 ﻿using Essensoft.AspNetCore.Payment.JDPay.Parser;
+using Essensoft.AspNetCore.Payment.JDPay.Request;
 using Essensoft.AspNetCore.Payment.JDPay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using Org.BouncyCastle.Crypto;
 using System;
 using System.Collections.Generic;
@@ -14,13 +16,6 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 {
     public class JDPayClient : IJDPayClient
     {
-        private const string VERSION = "version";
-        private const string MERCHANT = "merchant";
-        private const string SIGN = "sign";
-        private const string ENCRYPT = "encrypt";
-        private const string RESULT = "result";
-        private const string BODY = "body";
-
         private readonly AsymmetricKeyParameter PrivateKey;
         private readonly AsymmetricKeyParameter PublicKey;
         private readonly byte[] DesKey;
@@ -151,6 +146,47 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         #endregion
 
+        #region IJDPayClient Members
+
+        public async Task<T> ExecuteAsync<T>(IJDPayNPP10Request<T> request) where T : JDPayResponse
+        {
+            var sortedTxtParams = new JDPayDictionary(request.GetParameters())
+            {
+                { Contants.CUSTOMER_NO, Options.CustomerNo },
+                { Contants.SIGN_TYPE, Options.SignType }
+            };
+
+            var isEncrypt = false;
+
+            if (request is JDPayDefrayPayRequest)
+            {
+                isEncrypt = true;
+            }
+
+            var encryptDic = JDPaySecurity.EncryptData(Options.PrivateCret, Options.Password, Options.PublicCert, sortedTxtParams, Options.SingKey, Options.EncryptType, isEncrypt);
+
+            var content = HttpClientEx.BuildQuery(encryptDic);
+            Logger?.LogTrace(0, "Request:{content}", content);
+
+            var body = await Client.DoPostAsync(request.GetRequestUrl(), content, "application/x-www-form-urlencoded");
+            Logger?.LogTrace(1, "Response:{content}", body);
+
+            var rsp = JsonConvert.DeserializeObject<T>(body);
+
+            // 验签
+            var dic = JsonConvert.DeserializeObject<JDPayDictionary>(body);
+
+            if (!JDPaySecurity.VerifySign(dic, Options.SingKey))
+            {
+                throw new Exception("sign check fail: check Sign and Data Fail!");
+            }
+
+            rsp.Body = body;
+            return rsp;
+        }
+
+        #endregion
+
         #region Common Method
 
         private string BuildEncryptXml<T>(IJDPayRequest<T> request, JDPayDictionary dic) where T : JDPayResponse
@@ -165,9 +201,9 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             // 字典排序
             var reqdic = new JDPayDictionary
             {
-                { VERSION, request.GetApiVersion() },
-                { MERCHANT, Options.Merchant },
-                { ENCRYPT, Convert.ToBase64String(Encoding.UTF8.GetBytes(encrypt)) }
+                { Contants.VERSION, request.GetApiVersion() },
+                { Contants.MERCHANT, Options.Merchant },
+                { Contants.ENCRYPT, Convert.ToBase64String(Encoding.UTF8.GetBytes(encrypt)) }
             };
 
             return JDPayUtility.SortedDictionary2XmlStr(reqdic);
@@ -177,8 +213,8 @@ namespace Essensoft.AspNetCore.Payment.JDPay
         {
             var signDic = new JDPayDictionary(parameters)
             {
-                { VERSION, request.GetApiVersion() },
-                { MERCHANT, Options.Merchant },
+                { Contants.VERSION, request.GetApiVersion() },
+                { Contants.MERCHANT, Options.Merchant },
             };
 
             var signContent = JDPaySecurity.GetSignContent(signDic);
@@ -186,9 +222,9 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
             var encyptDic = new JDPayDictionary
             {
-                { VERSION, request.GetApiVersion() },
-                { MERCHANT, Options.Merchant },
-                { SIGN, sign }
+                { Contants.VERSION, request.GetApiVersion() },
+                { Contants.MERCHANT, Options.Merchant },
+                { Contants.SIGN, sign }
             };
 
             foreach (var iter in parameters)

@@ -12,7 +12,9 @@ namespace Essensoft.AspNetCore.Payment.QPay.Utility
             foreach (var iter in parameters)
             {
                 if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign" && (excludeSignType ? iter.Key != "sign_type" : true))
+                {
                     content.Append(iter.Key).Append('=').Append(iter.Value).Append("&");
+                }
             }
             var signContent = content.Append("key=").Append(key).ToString();
             return MD5.Compute(signContent).ToUpper();

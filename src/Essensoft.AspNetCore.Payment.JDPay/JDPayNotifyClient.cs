@@ -1,4 +1,6 @@
-﻿using Essensoft.AspNetCore.Payment.JDPay.Parser;
+﻿using Essensoft.AspNetCore.Payment.JDPay.Notify;
+using Essensoft.AspNetCore.Payment.JDPay.Parser;
+using Essensoft.AspNetCore.Payment.JDPay.Response;
 using Essensoft.AspNetCore.Payment.JDPay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.AspNetCore.Http;
@@ -71,7 +73,9 @@ namespace Essensoft.AspNetCore.Payment.JDPay
         {
             if (request.HasFormContentType || request.Method == "GET")
             {
-                var parameters = await GetParametersAsync(request);
+                var rspInstance = Activator.CreateInstance<T>();
+
+                var parameters = GetParameters(request, !(rspInstance is JDPayDefrayPayNotifyResponse));
 
                 var query = HttpClientEx.BuildQuery(parameters);
                 Logger?.LogTrace(0, "Request:{query}", query);
@@ -79,7 +83,15 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 var parser = new JDPayDictionaryParser<T>();
                 var rsp = parser.Parse(parameters);
 
-                CheckNotifySign(rsp.Parameters);
+                if (rsp is JDPayDefrayPayNotifyResponse)
+                {
+                    CheckNotifyDefrayPaySign(rsp.Parameters);
+                }
+                else
+                {
+                    CheckNotifySign(rsp.Parameters);
+                }
+
                 return rsp;
             }
             else if (request.HasTextXmlContentType())
@@ -139,18 +151,22 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         #region Common Method
 
-        private async Task<JDPayDictionary> GetParametersAsync(HttpRequest request)
+        private JDPayDictionary GetParameters(HttpRequest request, bool isDecrypt = true)
         {
             var parameters = new JDPayDictionary();
 
             if (request.Method == "POST")
             {
-                var form = await request.ReadFormAsync();
-                foreach (var iter in form)
+                foreach (var iter in request.Form)
                 {
                     if (!string.IsNullOrEmpty(iter.Value))
                     {
-                        parameters.Add(iter.Key, iter.Key == SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, DesKey));
+                        var value = iter.Value.ToString();
+                        if (isDecrypt)
+                        {
+                            value = iter.Key == SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, DesKey);
+                        }
+                        parameters.Add(iter.Key, value);
                     }
                 }
             }
@@ -160,7 +176,12 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 {
                     if (!string.IsNullOrEmpty(iter.Value))
                     {
-                        parameters.Add(iter.Key, iter.Key == SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, DesKey));
+                        var value = iter.Value.ToString();
+                        if (isDecrypt)
+                        {
+                            value = iter.Key == SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, DesKey);
+                        }
+                        parameters.Add(iter.Key, value);
                     }
                 }
             }
@@ -174,7 +195,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 throw new Exception("sign check fail: parameters is Empty!");
             }
 
-            if (!parameters.TryGetValue("sign", out var sign))
+            if (!parameters.TryGetValue(Contants.SIGN, out var sign))
             {
                 throw new Exception("sign check fail: sign is Empty!");
             }
@@ -183,6 +204,24 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             if (!JDPaySecurity.RSACheckContent(signContent, sign, PublicKey))
             {
                 throw new Exception("sign check fail: check Sign and Data Fail");
+            }
+        }
+
+        private void CheckNotifyDefrayPaySign(JDPayDictionary parameters)
+        {
+            if (parameters.Count == 0)
+            {
+                throw new Exception("sign check fail: parameters is Empty!");
+            }
+
+            if (!parameters.TryGetValue(Contants.SIGN_DATA, out var sign_data))
+            {
+                throw new Exception("sign check fail: sign is Empty!");
+            }
+
+            if (!JDPaySecurity.VerifySign(parameters, Options.SingKey))
+            {
+                throw new Exception("sign check fail: check Sign and Data Fail!");
             }
         }
 

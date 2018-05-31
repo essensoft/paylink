@@ -53,7 +53,6 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Request
         /// </summary>
         public string TermInfoId { get; set; }
 
-
         #region IJDPayRequest Members
 
         private string ApiVersion = "V2.0";
