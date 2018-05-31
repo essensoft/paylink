@@ -11,7 +11,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
         public T Parse(string body)
         {
             if (string.IsNullOrEmpty(body))
+            {
                 throw new ArgumentNullException(nameof(body));
+            }
 
             T rsp = null;
             var parameters = new WeChatPayDictionary();
@@ -33,7 +35,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
             catch { }
 
             if (rsp == null)
+            {
                 rsp = Activator.CreateInstance<T>();
+            }
 
             if (rsp != null)
             {
@@ -50,10 +54,14 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
         public T Parse(string body, string data)
         {
             if (string.IsNullOrEmpty(body))
+            {
                 throw new ArgumentNullException(nameof(body));
+            }
 
             if (string.IsNullOrEmpty(data))
+            {
                 throw new ArgumentNullException(nameof(data));
+            }
 
             T rsp = null;
             var parameters = new WeChatPayDictionary();
@@ -84,7 +92,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
             catch { }
 
             if (rsp == null)
+            {
                 rsp = Activator.CreateInstance<T>();
+            }
 
             if (rsp != null)
             {

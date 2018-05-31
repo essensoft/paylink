@@ -276,7 +276,10 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 }
             }
             if (key != null)
+            {
                 PutKeyValueToDictionary(sb, isKey, key, Dictionary);
+            }
+
             return Dictionary;
         }
 

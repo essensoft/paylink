@@ -33,17 +33,23 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
                     {
                         rsp = JsonConvert.DeserializeObject<T>(json[key].ToString());
                         if (rsp != null)
+                        {
                             break;
+                        }
                     }
                 }
             }
             catch { }
 
             if (rsp == null)
+            {
                 rsp = Activator.CreateInstance<T>();
+            }
 
             if (rsp != null)
+            {
                 rsp.Body = body;
+            }
 
             return rsp;
         }
@@ -81,9 +87,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
             string result = null;
             if (indexOfRootNode > 0)
+            {
                 result = ParseSignSourceData(body, rootNode, indexOfRootNode);
+            }
             else if (indexOfErrorRoot > 0)
+            {
                 result = ParseSignSourceData(body, errorRootNode, indexOfErrorRoot);
+            }
 
             return result;
         }

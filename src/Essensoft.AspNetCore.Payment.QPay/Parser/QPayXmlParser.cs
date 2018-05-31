@@ -10,7 +10,9 @@ namespace Essensoft.AspNetCore.Payment.QPay.Parser
         public T Parse(string body)
         {
             if (string.IsNullOrEmpty(body))
+            {
                 throw new ArgumentNullException(nameof(body));
+            }
 
             T rsp = null;
             var parameters = new QPayDictionary();
@@ -32,7 +34,9 @@ namespace Essensoft.AspNetCore.Payment.QPay.Parser
             catch { }
 
             if (rsp == null)
+            {
                 rsp = Activator.CreateInstance<T>();
+            }
 
             if (rsp != null)
             {

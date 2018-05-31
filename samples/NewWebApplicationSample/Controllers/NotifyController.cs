@@ -312,6 +312,22 @@ namespace NewWebApplicationSample.Controllers
                 return NoContent();
             }
         }
+
+        [Route("defraypay")]
+        [HttpPost]
+        public async Task<IActionResult> DefrayPay()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<JDPayDefrayPayNotifyResponse>(Request);
+                Console.WriteLine("trade_no: " + notify.TradeNo + " trade_amount :" + notify.TradeAmount);
+                return JDPayNotifyResult.Success;
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
     }
 
     #endregion

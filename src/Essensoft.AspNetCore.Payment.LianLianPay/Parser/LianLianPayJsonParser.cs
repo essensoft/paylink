@@ -27,7 +27,9 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Parser
             catch { }
 
             if (rsp == null)
+            {
                 rsp = Activator.CreateInstance<T>();
+            }
 
             if (rsp != null)
             {

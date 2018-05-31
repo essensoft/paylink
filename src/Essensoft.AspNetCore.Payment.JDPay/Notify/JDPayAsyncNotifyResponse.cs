@@ -93,6 +93,5 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Notify
         /// </summary>
         [XmlElement("tradeTime")]
         public string TradeTime { get; set; }
-
     }
 }

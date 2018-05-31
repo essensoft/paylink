@@ -12,14 +12,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         public static string GetSignContent(IDictionary<string, string> para)
         {
             if (para == null || para.Count == 0)
+            {
                 return string.Empty;
+            }
 
             var sortPara = new SortedDictionary<string, string>(para);
             var sb = new StringBuilder();
             foreach (var iter in sortPara)
             {
                 if (!string.IsNullOrEmpty(iter.Value))
+                {
                     sb.Append(iter.Key).Append("=").Append(iter.Value).Append("&");
+                }
             }
 
             return sb.Remove(sb.Length - 1, 1).ToString();
@@ -49,7 +53,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         {
             var iv = new byte[blockSize];
             for (var i = 0; i < blockSize; i++)
+            {
                 iv[i] = 0x0;
+            }
+
             return iv;
         }
     }

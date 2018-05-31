@@ -9,7 +9,9 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Parser
         public T Parse(IDictionary dic)
         {
             if (dic == null || dic.Count == 0)
+            {
                 throw new ArgumentNullException(nameof(dic));
+            }
 
             T rsp = null;
 
@@ -21,7 +23,9 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Parser
             catch { }
 
             if (rsp == null)
+            {
                 rsp = Activator.CreateInstance<T>();
+            }
 
             return rsp;
         }

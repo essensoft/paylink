@@ -37,14 +37,22 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             try
             {
                 if (Object == null || Convert.IsDBNull(Object))
+                {
                     return GetDefault(destinationType);
+                }
+
                 if ((Object as string) != null)
                 {
                     var ObjectValue = Object as string;
                     if (destinationType.IsEnum)
-                        return System.Enum.Parse(destinationType, ObjectValue, true);
+                    {
+                        return Enum.Parse(destinationType, ObjectValue, true);
+                    }
+
                     if (string.IsNullOrEmpty(ObjectValue))
+                    {
                         return GetDefault(destinationType);
+                    }
                 }
                 if ((Object as IConvertible) != null)
                 {
@@ -54,10 +62,15 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
                     return Convert.ChangeType(Object, destination);
                 }
                 if (destinationType.IsAssignableFrom(Object.GetType()))
+                {
                     return Object;
+                }
+
                 var Converter = TypeDescriptor.GetConverter(Object.GetType());
                 if (Converter.CanConvertTo(destinationType))
+                {
                     return Converter.ConvertTo(Object, destinationType);
+                }
             }
             catch { }
             return GetDefault(destinationType);
