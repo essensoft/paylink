@@ -25,6 +25,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string DeptName { get; set; }
 
         /// <summary>
+        /// 组织部门标签，现在有PROCESSING_ROOM, DELIVER_CENTRE, CENTRAL_KITCHEN三种
+        /// </summary>
+        [JsonProperty("label_code")]
+        [XmlElement("label_code")]
+        public string LabelCode { get; set; }
+
+        /// <summary>
         /// 当前需要创建部门的上级部门id
         /// </summary>
         [JsonProperty("parent_dept_id")]

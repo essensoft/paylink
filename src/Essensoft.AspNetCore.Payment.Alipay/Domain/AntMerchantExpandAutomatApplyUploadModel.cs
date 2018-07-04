@@ -11,6 +11,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AntMerchantExpandAutomatApplyUploadModel : AlipayObject
     {
         /// <summary>
+        /// 自助售卖机合作伙伴信息
+        /// </summary>
+        [JsonProperty("associate")]
+        [XmlElement("associate")]
+        public SmartAutomatAssociate Associate { get; set; }
+
+        /// <summary>
         /// 机具发货地址信息
         /// </summary>
         [JsonProperty("delivery_address")]
@@ -72,6 +79,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("product_user_id")]
         [XmlElement("product_user_id")]
         public string ProductUserId { get; set; }
+
+        /// <summary>
+        /// 自助售卖机场景信息
+        /// </summary>
+        [JsonProperty("scene")]
+        [XmlElement("scene")]
+        public SmartAutomatScene Scene { get; set; }
 
         /// <summary>
         /// 机具终端ID，由开发者生成，并需保证在开发者端不重复

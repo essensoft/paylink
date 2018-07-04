@@ -25,6 +25,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AreaCode { get; set; }
 
         /// <summary>
+        /// 区域名称
+        /// </summary>
+        [JsonProperty("area_name")]
+        [XmlElement("area_name")]
+        public string AreaName { get; set; }
+
+        /// <summary>
         /// 仓库的状态，EFFECTIVE：生效，INVALID：失效。
         /// </summary>
         [JsonProperty("biz_status")]
@@ -44,6 +51,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("city_code")]
         [XmlElement("city_code")]
         public string CityCode { get; set; }
+
+        /// <summary>
+        /// 市的名称
+        /// </summary>
+        [JsonProperty("city_name")]
+        [XmlElement("city_name")]
+        public string CityName { get; set; }
 
         /// <summary>
         /// 联系人
@@ -86,6 +100,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("province_code")]
         [XmlElement("province_code")]
         public string ProvinceCode { get; set; }
+
+        /// <summary>
+        /// 省的名称
+        /// </summary>
+        [JsonProperty("province_name")]
+        [XmlElement("province_name")]
+        public string ProvinceName { get; set; }
 
         /// <summary>
         /// 对应的门店ID

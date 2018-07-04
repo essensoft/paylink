@@ -56,6 +56,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ExternalId { get; set; }
 
         /// <summary>
+        /// 开票资料信息
+        /// </summary>
+        [JsonProperty("invoice_info")]
+        [XmlElement("invoice_info")]
+        public MerchantInvoiceInfo InvoiceInfo { get; set; }
+
+        /// <summary>
         /// 法人身份证反面url，其值为使用ant.merchant.expand.indirect.image.upload上传图片得到的一串oss key。本业务接口中，如果是特殊行业必填
         /// </summary>
         [JsonProperty("legal_cert_back_image")]

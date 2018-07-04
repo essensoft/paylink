@@ -48,6 +48,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutOrderNo { get; set; }
 
         /// <summary>
+        /// 商户传入营销信息，具体值要和口碑约定，格式为json格式
+        /// </summary>
+        [JsonProperty("promo_params")]
+        [XmlElement("promo_params")]
+        public string PromoParams { get; set; }
+
+        /// <summary>
         /// 门店ID
         /// </summary>
         [JsonProperty("shop_id")]

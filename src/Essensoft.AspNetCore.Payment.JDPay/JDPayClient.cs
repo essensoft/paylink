@@ -98,7 +98,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 var reqBody = JDPaySecurity.DecryptECB(base64EncryptStr, DesKey);
                 Logger?.LogTrace(2, "Encrypt Content:{body}", reqBody);
 
-                var reqBodyDoc = new XmlDocument();
+                var reqBodyDoc = new XmlDocument() { XmlResolver = null };
                 reqBodyDoc.LoadXml(reqBody);
 
                 var sign = JDPayUtility.GetValue(reqBodyDoc, "sign");

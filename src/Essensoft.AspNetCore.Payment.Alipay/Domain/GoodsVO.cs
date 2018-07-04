@@ -88,18 +88,39 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string LastOperator { get; set; }
 
         /// <summary>
-        /// 商品的原始价格，单位元
+        /// 商品的原始价格（含税），单位元
         /// </summary>
         [JsonProperty("origin_price")]
         [XmlElement("origin_price")]
         public string OriginPrice { get; set; }
 
         /// <summary>
-        /// 商品的现价，单位元
+        /// 商品的现价（含税），单位元
         /// </summary>
         [JsonProperty("price")]
         [XmlElement("price")]
         public string Price { get; set; }
+
+        /// <summary>
+        /// 出厂价，单位元
+        /// </summary>
+        [JsonProperty("produce_price")]
+        [XmlElement("produce_price")]
+        public string ProducePrice { get; set; }
+
+        /// <summary>
+        /// 生产厂商名称
+        /// </summary>
+        [JsonProperty("producer_id")]
+        [XmlElement("producer_id")]
+        public string ProducerId { get; set; }
+
+        /// <summary>
+        /// 生产厂商名称
+        /// </summary>
+        [JsonProperty("producer_name")]
+        [XmlElement("producer_name")]
+        public string ProducerName { get; set; }
 
         /// <summary>
         /// 起售件数
@@ -128,5 +149,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("supplier_id")]
         [XmlElement("supplier_id")]
         public string SupplierId { get; set; }
+
+        /// <summary>
+        /// 税率值，单位%
+        /// </summary>
+        [JsonProperty("tax_rate")]
+        [XmlElement("tax_rate")]
+        public string TaxRate { get; set; }
     }
 }

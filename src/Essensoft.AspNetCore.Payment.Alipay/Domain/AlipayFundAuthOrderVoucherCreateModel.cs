@@ -18,7 +18,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Amount { get; set; }
 
         /// <summary>
-        /// 业务扩展参数，用于商户的特定业务信息的传递，json格式
+        /// 业务扩展参数，用于商户的特定业务信息的传递，json格式。   1.间联模式必须传入二级商户ID，key为secondaryMerchantId;  2. 当面资金授权业务对应的类目，key为category，value由支付宝分配，酒店业务传 "HOTEL"(信用预授权场景下必传)；  3. 外部商户的门店编号，key为outStoreCode，可选；  4. 外部商户的门店简称，key为outStoreAlias，可选。
         /// </summary>
         [JsonProperty("extra_param")]
         [XmlElement("extra_param")]
@@ -72,5 +72,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("product_code")]
         [XmlElement("product_code")]
         public string ProductCode { get; set; }
+
+        /// <summary>
+        /// 商户指定的结算币种。支持澳元：AUD, 新西兰元：NZD, 台币：TWD, 美元：USD, 欧元：EUR, 英镑：GBP
+        /// </summary>
+        [JsonProperty("settle_currency")]
+        [XmlElement("settle_currency")]
+        public string SettleCurrency { get; set; }
+
+        /// <summary>
+        /// 标价币种,  amount 对应的币种单位。支持澳元：AUD, 新西兰元：NZD, 台币：TWD, 美元：USD, 欧元：EUR, 英镑：GBP
+        /// </summary>
+        [JsonProperty("trans_currency")]
+        [XmlElement("trans_currency")]
+        public string TransCurrency { get; set; }
     }
 }
