@@ -9,6 +9,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     public class KoubeiTradeTicketTicketcodeUseResponse : AlipayResponse
     {
         /// <summary>
+        /// 该字段用于描述本次返回中的业务属性，现有：BIZ_ALREADY_SUCCESS（幂等业务码）
+        /// </summary>
+        [JsonProperty("biz_code")]
+        [XmlElement("biz_code")]
+        public string BizCode { get; set; }
+
+        /// <summary>
         /// 用户购买券的时候实际支付的金额，单位为元，精确到小数点后两位
         /// </summary>
         [JsonProperty("buyer_pay_amount")]
@@ -58,7 +65,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string KoubeiSubsidyAmount { get; set; }
 
         /// <summary>
-        /// 券码所属的订单id
+        /// 凭证码所属的订单id
         /// </summary>
         [JsonProperty("order_no")]
         [XmlElement("order_no")]
@@ -121,7 +128,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string UseShopName { get; set; }
 
         /// <summary>
-        /// 券码对应的凭证资产id
+        /// 凭证码对应的凭证资产id
         /// </summary>
         [JsonProperty("voucher_id")]
         [XmlElement("voucher_id")]

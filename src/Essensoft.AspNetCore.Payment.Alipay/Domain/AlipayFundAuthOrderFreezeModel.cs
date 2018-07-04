@@ -86,5 +86,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("product_code")]
         [XmlElement("product_code")]
         public string ProductCode { get; set; }
+
+        /// <summary>
+        /// 商户指定的结算币种。支持澳元：AUD, 新西兰元：NZD, 台币：TWD, 美元：USD, 欧元：EUR, 英镑：GBP
+        /// </summary>
+        [JsonProperty("settle_currency")]
+        [XmlElement("settle_currency")]
+        public string SettleCurrency { get; set; }
+
+        /// <summary>
+        /// 标价币种,  amount 对应的币种单位。支持澳元：AUD, 新西兰元：NZD, 台币：TWD, 美元：USD, 欧元：EUR, 英镑：GBP
+        /// </summary>
+        [JsonProperty("trans_currency")]
+        [XmlElement("trans_currency")]
+        public string TransCurrency { get; set; }
     }
 }

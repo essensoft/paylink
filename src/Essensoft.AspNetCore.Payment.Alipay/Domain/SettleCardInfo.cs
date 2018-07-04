@@ -67,6 +67,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AccountType { get; set; }
 
         /// <summary>
+        /// 联行号
+        /// </summary>
+        [JsonProperty("bank_code")]
+        [XmlElement("bank_code")]
+        public string BankCode { get; set; }
+
+        /// <summary>
         /// 账号使用类型  对公-01  对私-02
         /// </summary>
         [JsonProperty("usage_type")]

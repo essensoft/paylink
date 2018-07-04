@@ -39,6 +39,20 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string DeptPath { get; set; }
 
         /// <summary>
+        /// 人员组织场景的部门标签码
+        /// </summary>
+        [JsonProperty("label_code")]
+        [XmlElement("label_code")]
+        public string LabelCode { get; set; }
+
+        /// <summary>
+        /// 人员组织场景的部门标签名称
+        /// </summary>
+        [JsonProperty("label_name")]
+        [XmlElement("label_name")]
+        public string LabelName { get; set; }
+
+        /// <summary>
         /// 上级组织部门id
         /// </summary>
         [JsonProperty("parent_dept_id")]

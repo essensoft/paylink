@@ -94,7 +94,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 
         public static XmlDocument SortedDictionary2AllXml(JDPayDictionary dic)
         {
-            var xmldoc = new XmlDocument();
+            var xmldoc = new XmlDocument() { XmlResolver = null };
             var xmldecl = xmldoc.CreateXmlDeclaration("1.0", "UTF-8", null);
             xmldoc.AppendChild(xmldecl);
             SortedDictionary2Xml(xmldoc, dic);
@@ -103,7 +103,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 
         public static string SortedDictionary2XmlStr(JDPayDictionary dic)
         {
-            var xmldoc = new XmlDocument();
+            var xmldoc = new XmlDocument() { XmlResolver = null };
             SortedDictionary2Xml(xmldoc, dic);
             return ConvertXmlToString(xmldoc);
         }

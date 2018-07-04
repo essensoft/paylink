@@ -19,14 +19,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AliasName { get; set; }
 
         /// <summary>
-        /// 商户支付宝账号（如果有）
+        /// 商户支付宝账号，用作结算账号。与银行卡对象字段二选一必填
         /// </summary>
         [JsonProperty("alipay_logon_id")]
         [XmlElement("alipay_logon_id")]
         public string AlipayLogonId { get; set; }
 
         /// <summary>
-        /// 商户结算卡信息。本业务当前只允许传入一张结算卡
+        /// 商户结算卡信息。本业务当前只允许传入一张结算卡。与支付宝账号字段二选一必填
         /// </summary>
         [JsonProperty("biz_cards")]
         [XmlArray("biz_cards")]
@@ -48,6 +48,20 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string CertImage { get; set; }
 
         /// <summary>
+        /// 证件反面图片。目前只有当主证件为身份证时才需填写
+        /// </summary>
+        [JsonProperty("cert_image_back")]
+        [XmlElement("cert_image_back")]
+        public string CertImageBack { get; set; }
+
+        /// <summary>
+        /// 目前只有个体工商户商户类型要求填入本字段，填写值为个体工商户营业执照上的名称
+        /// </summary>
+        [JsonProperty("cert_name")]
+        [XmlElement("cert_name")]
+        public string CertName { get; set; }
+
+        /// <summary>
         /// 商户证件编号（企业或者个体工商户提供营业执照，事业单位提供事证号）
         /// </summary>
         [JsonProperty("cert_no")]
@@ -55,7 +69,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string CertNo { get; set; }
 
         /// <summary>
-        /// 商户证件类型，取值范围：201：营业执照；2011:营业执照(多证合一)；218：事业单位法人证书
+        /// 商户证件类型，取值范围：201：营业执照；2011:营业执照(统一社会信用代码)；218：事业单位法人证书
         /// </summary>
         [JsonProperty("cert_type")]
         [XmlElement("cert_type")]
@@ -75,6 +89,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("external_id")]
         [XmlElement("external_id")]
         public string ExternalId { get; set; }
+
+        /// <summary>
+        /// 开票资料信息
+        /// </summary>
+        [JsonProperty("invoice_info")]
+        [XmlElement("invoice_info")]
+        public MerchantInvoiceInfo InvoiceInfo { get; set; }
 
         /// <summary>
         /// 法人身份证反面url，其值为使用ant.merchant.expand.indirect.image.upload上传图片得到的一串oss key。本业务接口中，如果是特殊行业必填
@@ -119,7 +140,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Mcc { get; set; }
 
         /// <summary>
-        /// 商家类型：01：企业；02：事业单位
+        /// 商家类型：01：企业；02：事业单位；07：个体工商户
         /// </summary>
         [JsonProperty("merchant_type")]
         [XmlElement("merchant_type")]

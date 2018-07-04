@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class ZhimaMerchantOrderCreditPayModel : AlipayObject
     {
         /// <summary>
-        /// 订单操作类型，包括取消(CANCEL)、完结(FINISH)
+        /// CANCEL，FINISH, INSTALLMENT  订单完结类型，目前包括取消(CANCEL)、完结(FINISH) 分期扣款(INSTALLMENT)
         /// </summary>
         [JsonProperty("order_operate_type")]
         [XmlElement("order_operate_type")]

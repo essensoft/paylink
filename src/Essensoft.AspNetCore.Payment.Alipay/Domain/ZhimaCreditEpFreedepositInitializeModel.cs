@@ -18,6 +18,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BizChannel { get; set; }
 
         /// <summary>
+        /// 业务来源标识，由前置跳转传递给服务商系统，服务商不需要理解，在本接口传入即可
+        /// </summary>
+        [JsonProperty("biz_source")]
+        [XmlElement("biz_source")]
+        public string BizSource { get; set; }
+
+        /// <summary>
         /// 法人证件号码
         /// </summary>
         [JsonProperty("cert_no")]
@@ -60,6 +67,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string EpName { get; set; }
 
         /// <summary>
+        /// 商户传入的跳转地址，该地址由商户调用时候传入，系统不处理，在applay接口完成处理后在biz_content内容带回，由商户系统做完回跳解析后执行redirect
+        /// </summary>
+        [JsonProperty("goto_url")]
+        [XmlElement("goto_url")]
+        public string GotoUrl { get; set; }
+
+        /// <summary>
         /// 商户业务流水号，确保每次业务唯一。
         /// </summary>
         [JsonProperty("merchant_order_no")]
@@ -79,5 +93,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("product_code")]
         [XmlElement("product_code")]
         public string ProductCode { get; set; }
+
+        /// <summary>
+        /// 请求ID，如果是企业信用页面发起的，会在前置流程里面传递给商户该请求值，商户直接在本接口传递接收到的值即可
+        /// </summary>
+        [JsonProperty("request_id")]
+        [XmlElement("request_id")]
+        public string RequestId { get; set; }
     }
 }

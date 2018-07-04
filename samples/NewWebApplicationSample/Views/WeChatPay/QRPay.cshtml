@@ -45,7 +45,7 @@
                 <label>QrCode:</label>
                 @if (!string.IsNullOrEmpty(ViewData["qrcode"] as string))
                 {
-                    <img src="http://pan.baidu.com/share/qrcode?w=168&h=168&url=@ViewData["qrcode"]" />
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=168x168&data=@ViewData["qrcode"]" />
                 }
             </div>
             <div class="form-group">

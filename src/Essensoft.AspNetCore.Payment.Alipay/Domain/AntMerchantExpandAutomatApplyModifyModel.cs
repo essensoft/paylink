@@ -67,6 +67,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public SmartAddressInfo PointPosition { get; set; }
 
         /// <summary>
+        /// 自助售卖机场景信息
+        /// </summary>
+        [JsonProperty("scene")]
+        [XmlElement("scene")]
+        public SmartAutomatScene Scene { get; set; }
+
+        /// <summary>
         /// 机具终端ID，由开发者生成，并需保证在开发者端不重复
         /// </summary>
         [JsonProperty("terminal_id")]

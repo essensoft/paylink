@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string IdCardNo { get; set; }
 
         /// <summary>
-        /// 手机号
+        /// 手机号。必填与否参见外层对象描述，无特别说明认为是非必填
         /// </summary>
         [JsonProperty("mobile")]
         [XmlElement("mobile")]

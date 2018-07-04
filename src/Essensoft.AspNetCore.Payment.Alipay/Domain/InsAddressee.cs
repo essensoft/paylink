@@ -39,6 +39,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string City { get; set; }
 
         /// <summary>
+        /// 邮箱
+        /// </summary>
+        [JsonProperty("email")]
+        [XmlElement("email")]
+        public string Email { get; set; }
+
+        /// <summary>
         /// 联系方式(mobile登录号)
         /// </summary>
         [JsonProperty("mobile")]

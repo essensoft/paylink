@@ -24,7 +24,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string BillKey { get; set; }
 
         /// <summary>
-        /// 业务类型。  JF：缴水、电、燃气、固话宽带、有线电视、交通罚款费用  WUYE：缴物业费  HK：信用卡还款  TX：手机充值
+        /// 业务类型。  JF：缴水、电、燃气、固话宽带、有线电视、交通罚款费用  WUYE：缴物业费  HK：信用卡还款  TX：手机充值  IND: 保险
         /// </summary>
         public string BizType { get; set; }
 
@@ -34,9 +34,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string ChargeInst { get; set; }
 
         /// <summary>
+        /// 代扣产品码, 由技术同学分配。 目前在缴费业务场景中，传入INST_DIRECT_DEDUCT; 在保险业务场景中, 传入INSURANCE_MERCHANT_DEDUCT
+        /// </summary>
+        public string DeductProdCode { get; set; }
+
+        /// <summary>
         /// 签约类型可为空
         /// </summary>
         public string DeductType { get; set; }
+
+        /// <summary>
+        /// 外部用户实名认证相关信息, 用于做签约时的实名校验。   注：     name: 姓名  cert_type: 身份证：IDENTITY_CARD、护照：PASSPORT、军官证：OFFICER_CARD、士兵证：SOLDIER_CARD、户口本：HOKOU等  cert_no: 证件号码  need_check_info取值 T/F，只有为T时才做强制校验。  mobile:手机号，目前暂不使用此字段做校验  min_age: 允许的最小买家年龄,min_age为整数，必须大于等于0.
+        /// </summary>
+        public string ExtUserInfo { get; set; }
 
         /// <summary>
         /// 扩展字段
@@ -79,7 +89,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string SignExpireDate { get; set; }
 
         /// <summary>
-        /// 业务子类型。  WATER：缴水费  ELECTRIC：缴电费  GAS：缴燃气费  COMMUN：缴固话宽带  CATV：缴有线电视费  TRAFFIC：缴交通罚款  WUYE：缴物业费  HK：信用卡还款  CZ：手机充值
+        /// 业务子类型。  WATER：缴水费  ELECTRIC：缴电费  GAS：缴燃气费  COMMUN：缴固话宽带  CATV：缴有线电视费  TRAFFIC：缴交通罚款  WUYE：缴物业费  HK：信用卡还款  CZ：手机充值  CAR：车险   LIFE：寿险   HEALTH：健康险
         /// </summary>
         public string SubBizType { get; set; }
 
@@ -169,7 +179,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
                 { "bill_key", BillKey },
                 { "biz_type", BizType },
                 { "charge_inst", ChargeInst },
+                { "deduct_prod_code", DeductProdCode },
                 { "deduct_type", DeductType },
+                { "ext_user_info", ExtUserInfo },
                 { "extend_field", ExtendField },
                 { "notify_config", NotifyConfig },
                 { "out_agreement_id", OutAgreementId },

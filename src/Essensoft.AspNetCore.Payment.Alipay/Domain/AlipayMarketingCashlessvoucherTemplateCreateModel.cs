@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayMarketingCashlessvoucherTemplateCreateModel : AlipayObject
     {
         /// <summary>
-        /// 面额。每张代金券可以抵扣的金额。币种为人民币，单位为元。该数值不能小于0，小数点以后最多保留两位。代金券必填，兑换券不能填
+        /// 面额。每张代金券可以抵扣的金额。币种为人民币，单位为元。该数值有效范围为1~999，小数点以后最多保留两位。代金券必填，兑换券不能填
         /// </summary>
         [JsonProperty("amount")]
         [XmlElement("amount")]
@@ -74,6 +74,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string RuleConf { get; set; }
 
         /// <summary>
+        /// 券总金额（仅用于不定额券）。币种为人民币，单位为元。该数值需大于等于1，小于等于10,000,000，小数点以后最多保留两位。voucher_type为CASHLESS_RANDOM_VOUCHER时必填。
+        /// </summary>
+        [JsonProperty("total_amount")]
+        [XmlElement("total_amount")]
+        public string TotalAmount { get; set; }
+
+        /// <summary>
         /// 券可用时段，JSON数组字符串，空数组即[]，表示不限制，指定每周时间段示例：[{"day_rule": "1,2,3,4,5", "time_begin": "09:00:00", "time_end": "22:00:00"}, {"day_rule": "6,7", "time_begin": "08:00:00", "time_end": "23:00:00"}]，数组中每个元素都包含三个key：day_rule, time_begin, time_end，其中day_rule表示周几，取值范围[1, 2, 3, 4, 5, 6, 7]（周7表示星期日），多个值使用英文逗号隔开；time_begin和time_end分别表示生效起始时间和结束时间，格式为HH:mm:ss。另外，数组中各个时间规则是或关系。例如，[{"day_rule": "1,2,3,4,5", "time_begin": "09:00:00", "time_end": "22:00:00"}, {"day_rule": "6,7", "time_begin": "08:00:00", "time_end": "23:00:00"}]表示在每周的一，二，三，四，五的早上9点到晚上10点券可用或者每周的星期六和星期日的早上8点到晚上11点券可用。 仅支持代金券
         /// </summary>
         [JsonProperty("voucher_available_time")]
@@ -88,14 +95,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string VoucherDescription { get; set; }
 
         /// <summary>
-        /// 拟发行券的数量。单位为张。该数值必须是大于0的整数。
+        /// 拟发行券的数量。单位为张。该数值必须是大于0的整数。voucher_type为CASHLESS_FIX_VOUCHER时必填。
         /// </summary>
         [JsonProperty("voucher_quantity")]
         [XmlElement("voucher_quantity")]
         public long VoucherQuantity { get; set; }
 
         /// <summary>
-        /// 券类型，取值范围  代金券：CASHLESS_FIX_VOUCHER；兑换券（暂不支持）：EXCHANGE_VOUCHER；
+        /// 券类型，取值范围为：  1. 定额代金券：CASHLESS_FIX_VOUCHER；  2. 不定额代金券 CASHLESS_RANDOM_VOUCHER；
         /// </summary>
         [JsonProperty("voucher_type")]
         [XmlElement("voucher_type")]

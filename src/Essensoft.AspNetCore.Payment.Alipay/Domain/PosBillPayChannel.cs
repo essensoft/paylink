@@ -62,6 +62,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string PayNo { get; set; }
 
         /// <summary>
+        /// 付款时间
+        /// </summary>
+        [JsonProperty("pay_time")]
+        [XmlElement("pay_time")]
+        public string PayTime { get; set; }
+
+        /// <summary>
         /// 支付实收金额
         /// </summary>
         [JsonProperty("receipt_amount")]

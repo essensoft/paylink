@@ -28,7 +28,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<PosOrderInfoVO> PosOrderInfos { get; set; }
 
         /// <summary>
-        /// source_type+pos订单设备信息来源类型枚举+(isv回流数据: ISV, 设备商数据: META)
+        /// source_type+pos订单设备信息来源类型枚举+(isv回流数据: ISV, 设备商数据: MEMA)
         /// </summary>
         [JsonProperty("source_type")]
         [XmlElement("source_type")]
