@@ -164,7 +164,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 
         public static UnionPayCertificate GetSignCertificate(string certificate, string certPwd)
         {
-            var stream = new MemoryStream(Convert.FromBase64String(certificate));
+            var stream = File.Exists(certificate) ? File.OpenRead(certificate) : (Stream)new MemoryStream(Convert.FromBase64String(certificate));
             var store = new Pkcs12Store(stream, certPwd.ToCharArray());
 
             var alias = string.Empty;
@@ -188,7 +188,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 
         public static UnionPayCertificate GetCertificate(string certificate)
         {
-            var stream = new MemoryStream(Convert.FromBase64String(certificate));
+            var stream = File.Exists(certificate) ? File.OpenRead(certificate) : (Stream)new MemoryStream(Convert.FromBase64String(certificate));
             var x509certificate = new X509CertificateParser().ReadCertificate(stream);
 
             return new UnionPayCertificate
