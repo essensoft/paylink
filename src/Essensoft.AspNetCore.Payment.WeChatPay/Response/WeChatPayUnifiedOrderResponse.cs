@@ -98,5 +98,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// </summary>
         [XmlElement("code_url")]
         public string CodeUrl { get; set; }
+
+        /// <summary>
+        /// 支付跳转链接	
+        /// </summary>
+        [XmlElement("mweb_url")]
+        public string MwebUrl { get; set; }
     }
 }
