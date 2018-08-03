@@ -3,17 +3,17 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 小程序调起支付API
+    /// 微信内H5调起支付
     /// </summary>
-    public class WeChatPayLiteAppCallPaymentRequest : IWeChatPayCalcRequest
+    public class WeChatPayH5CallPaymentRequest : IWeChatPayCalcRequest
     {
         /// <summary>
-        /// 小程序ID
+        /// 公众号ID
         /// </summary>
         public string AppId { get; set; }
 
         /// <summary>
-        /// 扩展字段
+        /// 订单详情扩展字符串
         /// </summary>
         public string Package { get; set; }
 
