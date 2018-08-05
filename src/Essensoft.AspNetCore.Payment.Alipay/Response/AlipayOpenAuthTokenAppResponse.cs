@@ -1,5 +1,7 @@
 using Newtonsoft.Json;
 using System.Xml.Serialization;
+using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -42,6 +44,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         [JsonProperty("re_expires_in")]
         [XmlElement("re_expires_in")]
         public string ReExpiresIn { get; set; }
+
+        /// <summary>
+        /// 批量授权换码访问令牌列表
+        /// </summary>
+        [JsonProperty("tokens")]
+        [XmlArray("tokens")]
+        [XmlArrayItem("app_token_exchange_sub_element")]
+        public List<AppTokenExchangeSubElement> Tokens { get; set; }
 
         /// <summary>
         /// 授权商户的user_id

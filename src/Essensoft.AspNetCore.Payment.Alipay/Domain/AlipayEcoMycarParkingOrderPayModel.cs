@@ -60,7 +60,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ParkingId { get; set; }
 
         /// <summary>
-        /// 卖家支付宝用户号  卖家支付宝账号对应的支付宝唯一用户号。  以2088开头的纯16位数。与seller_logon_id不能同时为空
+        /// 卖家支付宝用户号  卖家支付宝账号对应的支付宝唯一用户号。  以2088开头的纯16位数。
         /// </summary>
         [JsonProperty("seller_id")]
         [XmlElement("seller_id")]

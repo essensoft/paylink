@@ -53,6 +53,20 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Province { get; set; }
 
         /// <summary>
+        /// 仓库id
+        /// </summary>
+        [JsonProperty("warehouse_id")]
+        [XmlElement("warehouse_id")]
+        public string WarehouseId { get; set; }
+
+        /// <summary>
+        /// 供应商的仓库名称
+        /// </summary>
+        [JsonProperty("warehouse_name")]
+        [XmlElement("warehouse_name")]
+        public string WarehouseName { get; set; }
+
+        /// <summary>
         /// 邮编
         /// </summary>
         [JsonProperty("zip_code")]

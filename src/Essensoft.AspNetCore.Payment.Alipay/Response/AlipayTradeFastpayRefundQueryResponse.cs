@@ -1,5 +1,7 @@
 using Newtonsoft.Json;
 using System.Xml.Serialization;
+using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -70,6 +72,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         [JsonProperty("refund_reason")]
         [XmlElement("refund_reason")]
         public string RefundReason { get; set; }
+
+        /// <summary>
+        /// 退分账明细信息
+        /// </summary>
+        [JsonProperty("refund_royaltys")]
+        [XmlArray("refund_royaltys")]
+        [XmlArrayItem("refund_royalty_result")]
+        public List<RefundRoyaltyResult> RefundRoyaltys { get; set; }
 
         /// <summary>
         /// 只在使用异步退款接口情况下才返回该字段。REFUND_PROCESSING 退款处理中；REFUND_SUCCESS 退款处理成功；REFUND_FAIL 退款失败;

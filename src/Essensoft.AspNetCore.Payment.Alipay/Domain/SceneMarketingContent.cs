@@ -12,6 +12,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class SceneMarketingContent : AlipayObject
     {
         /// <summary>
+        /// 美食 娱乐等分类条目
+        /// </summary>
+        [JsonProperty("category")]
+        [XmlElement("category")]
+        public string Category { get; set; }
+
+        /// <summary>
         /// 小图标地址
         /// </summary>
         [JsonProperty("icon")]
@@ -31,6 +38,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("meaning")]
         [XmlElement("meaning")]
         public string Meaning { get; set; }
+
+        /// <summary>
+        /// 优惠信息的html格式展示参考
+        /// </summary>
+        [JsonProperty("meaning_desc")]
+        [XmlElement("meaning_desc")]
+        public string MeaningDesc { get; set; }
 
         /// <summary>
         /// 营销内容标签
@@ -56,7 +70,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Title { get; set; }
 
         /// <summary>
-        /// 营销内容类型
+        /// 营销内容类型，例如优惠好店，商圈特惠
         /// </summary>
         [JsonProperty("type")]
         [XmlElement("type")]

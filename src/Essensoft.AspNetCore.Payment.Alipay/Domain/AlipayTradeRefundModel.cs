@@ -62,6 +62,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string RefundReason { get; set; }
 
         /// <summary>
+        /// 退分账明细信息
+        /// </summary>
+        [JsonProperty("refund_royalty_parameters")]
+        [XmlArray("refund_royalty_parameters")]
+        [XmlArrayItem("open_api_royalty_detail_info_pojo")]
+        public List<OpenApiRoyaltyDetailInfoPojo> RefundRoyaltyParameters { get; set; }
+
+        /// <summary>
         /// 商户的门店编号
         /// </summary>
         [JsonProperty("store_id")]

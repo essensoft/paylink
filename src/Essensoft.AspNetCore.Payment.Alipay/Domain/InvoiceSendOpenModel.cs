@@ -12,6 +12,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class InvoiceSendOpenModel : AlipayObject
     {
         /// <summary>
+        /// 支付宝端的申请id。如果在开票过程中，是通过支付宝提交的申请到机构端，支付宝会带上开票申请在支付宝生成的申请id，机构在回传发票的时候只需要回传这个申请id，不用获取用户的uid，支付宝可以根据申请id将发票归集到对应的用户名下
+        /// </summary>
+        [JsonProperty("apply_id")]
+        [XmlElement("apply_id")]
+        public string ApplyId { get; set; }
+
+        /// <summary>
         /// 票面上的校验码信息。
         /// </summary>
         [JsonProperty("check_code")]
@@ -195,7 +202,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string TaxAmount { get; set; }
 
         /// <summary>
-        /// 支付宝用户userId，当发送红字发票时，即invoice_type＝RED时，可选填；其他情况必填。
+        /// 支付宝用户userId，当发送红字发票时，即invoice_type＝RED时，可选填；或者apply_id不为空的时候，可选填；其他情况必填。
         /// </summary>
         [JsonProperty("user_id")]
         [XmlElement("user_id")]

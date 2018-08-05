@@ -11,6 +11,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     public class KoubeiTradeTicketTicketcodeQueryResponse : AlipayResponse
     {
         /// <summary>
+        /// 次卡场景，可用核销份数。仅当次卡场景有值
+        /// </summary>
+        [JsonProperty("available_quantity")]
+        [XmlElement("available_quantity")]
+        public string AvailableQuantity { get; set; }
+
+        /// <summary>
         /// 用户购买时商品的现价
         /// </summary>
         [JsonProperty("current_price")]
@@ -87,6 +94,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         [XmlArray("ticket_trans_info_list")]
         [XmlArrayItem("ticket_trans_info")]
         public List<TicketTransInfo> TicketTransInfoList { get; set; }
+
+        /// <summary>
+        /// 是否次卡。是次卡场景值为true，反之为false
+        /// </summary>
+        [JsonProperty("time_cards")]
+        [XmlElement("time_cards")]
+        public string TimeCards { get; set; }
 
         /// <summary>
         /// 券码对应的凭证资产id
