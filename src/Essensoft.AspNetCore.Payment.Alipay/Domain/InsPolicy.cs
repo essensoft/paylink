@@ -93,6 +93,20 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutPolicyNo { get; set; }
 
         /// <summary>
+        /// 终缴时间，用于健康险、寿险等场景，用户需要按期缴费使用
+        /// </summary>
+        [JsonProperty("pay_end_time")]
+        [XmlElement("pay_end_time")]
+        public string PayEndTime { get; set; }
+
+        /// <summary>
+        /// 缴至时间，用于健康险、寿险等场景，用户需要按期缴费使用
+        /// </summary>
+        [JsonProperty("pay_to_time")]
+        [XmlElement("pay_to_time")]
+        public string PayToTime { get; set; }
+
+        /// <summary>
         /// 保单凭证号;蚂蚁保险平台生成的保单凭证号,用户可以通过此单号去保险公司查询保单信息.
         /// </summary>
         [JsonProperty("policy_no")]

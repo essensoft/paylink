@@ -116,11 +116,25 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Memo { get; set; }
 
         /// <summary>
+        /// 1. 如果该物料是套组的子物料, 那么该值为套组物料id; 2, 其他情况和物料id(即, item_id)一致或者为空.
+        /// </summary>
+        [JsonProperty("parent_template_id")]
+        [XmlElement("parent_template_id")]
+        public string ParentTemplateId { get; set; }
+
+        /// <summary>
         /// 收件人地址邮编; 收钱码吊牌和贴纸类型不为空
         /// </summary>
         [JsonProperty("postcode")]
         [XmlElement("postcode")]
         public string Postcode { get; set; }
+
+        /// <summary>
+        /// 面单打印信息
+        /// </summary>
+        [JsonProperty("print_data")]
+        [XmlElement("print_data")]
+        public string PrintData { get; set; }
 
         /// <summary>
         /// 生产单号

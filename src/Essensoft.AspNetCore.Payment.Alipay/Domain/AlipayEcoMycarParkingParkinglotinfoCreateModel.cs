@@ -11,6 +11,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayEcoMycarParkingParkinglotinfoCreateModel : AlipayObject
     {
         /// <summary>
+        /// 服务商ID（2088开头的16位纯数字），由服务商提供给ISV
+        /// </summary>
+        [JsonProperty("agent_id")]
+        [XmlElement("agent_id")]
+        public string AgentId { get; set; }
+
+        /// <summary>
         /// 该参数废弃
         /// </summary>
         [JsonProperty("city_id")]
@@ -109,7 +116,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ParkingFeeDescription { get; set; }
 
         /// <summary>
-        /// 停车场类型，1为小区停车场、2为商圈停车场、3为路面停车场、4为园区停车场、5为写字楼停车场、6为私人停车场
+        /// 停车场类型，1为居民小区、2为商圈停车场（购物中心商业广场商场等）、3为路侧停车、4为公园景点（景点乐园公园老街古镇等）、5为商务楼宇（酒店写字楼商务楼园区等）、6为其他、7为交通枢纽（机场火车站汽车站码头港口等）、8为市政设施（体育场博物图书馆医院学校等）
         /// </summary>
         [JsonProperty("parking_lot_type")]
         [XmlElement("parking_lot_type")]

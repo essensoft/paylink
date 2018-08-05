@@ -32,7 +32,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OrderNo { get; set; }
 
         /// <summary>
-        /// 核销份数，次卡业务必填
+        /// 核销份数，次卡业务必填;非次卡业务不能填写
         /// </summary>
         [JsonProperty("quantity")]
         [XmlElement("quantity")]

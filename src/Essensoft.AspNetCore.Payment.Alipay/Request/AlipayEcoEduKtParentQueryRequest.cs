@@ -4,12 +4,12 @@ using Essensoft.AspNetCore.Payment.Alipay.Response;
 namespace Essensoft.AspNetCore.Payment.Alipay.Request
 {
     /// <summary>
-    /// AOP API: koubei.item.batchquery
+    /// AOP API: alipay.eco.edu.kt.parent.query
     /// </summary>
-    public class KoubeiItemBatchqueryRequest : IAlipayRequest<KoubeiItemBatchqueryResponse>
+    public class AlipayEcoEduKtParentQueryRequest : IAlipayRequest<AlipayEcoEduKtParentQueryResponse>
     {
         /// <summary>
-        /// 口碑商品查询
+        /// 查询学生家长状态接口
         /// </summary>
         public string BizContent { get; set; }
 
@@ -74,7 +74,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
 
         public string GetApiName()
         {
-            return "koubei.item.batchquery";
+            return "alipay.eco.edu.kt.parent.query";
         }
 
         public void SetApiVersion(string apiVersion){

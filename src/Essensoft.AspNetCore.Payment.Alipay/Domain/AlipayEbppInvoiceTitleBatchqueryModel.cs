@@ -19,6 +19,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string EndInvoiceDate { get; set; }
 
         /// <summary>
+        /// 发票报销状态的查询条件，为空的情况下，查询所有状态的发票；可选值WAIT_EXPENSE:待报销状态；EXPENSE_PROCESSING:报销中；EXPENSE_FINISHED:已报销
+        /// </summary>
+        [JsonProperty("expense_status_list")]
+        [XmlArray("expense_status_list")]
+        [XmlArrayItem("string")]
+        public List<string> ExpenseStatusList { get; set; }
+
+        /// <summary>
         /// 查询票种列表  可选值  PLAIN：增值税电子普通发票  SPECIAL：增值税专用发票  PLAIN_INVOICE:增值税普通发票  PAPER_INVOICE:增值税普通发票（卷式）  SALSE_INVOICE:机动车销售统一发票
         /// </summary>
         [JsonProperty("invoice_kind_list")]

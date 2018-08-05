@@ -37,5 +37,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("name")]
         [XmlElement("name")]
         public string Name { get; set; }
+
+        /// <summary>
+        /// 商户或者isv的pid
+        /// </summary>
+        [JsonProperty("pid")]
+        [XmlElement("pid")]
+        public string Pid { get; set; }
     }
 }

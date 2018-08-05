@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayEbppInvoiceApplyResultSyncModel : AlipayObject
     {
         /// <summary>
-        /// 支付宝发起发票申请的id,该id具有唯一性，该字段由支付宝向税控发起申请的时候带过去，作为支付宝向税控开票申请的唯一标志
+        /// 支付宝发起开票申请的id，该id具有唯一性，该字段由支付宝向税控发起申请的时候带过去，作为支付宝向税控开票申请的唯一标志
         /// </summary>
         [JsonProperty("apply_id")]
         [XmlElement("apply_id")]
@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ResultMsg { get; set; }
 
         /// <summary>
-        /// 该字段是税控商或ISV收到支付宝开票请求后生成的申请id，由税控商或isv自己生成，该id具有唯一性
+        /// 该字段是税控商或ISV收到支付宝开票请求后生成的申请id，由税控商或isv自己生成，该id具有唯一性  当ISV接入时是按照tax_apply_id来查询发票信息时，该字段必填。
         /// </summary>
         [JsonProperty("tax_apply_id")]
         [XmlElement("tax_apply_id")]

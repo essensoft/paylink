@@ -88,6 +88,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Name { get; set; }
 
         /// <summary>
+        /// 外部请求号，用作关联使用，该号可以是前置业务产生传递给商户，需要商户验签后解析使用
+        /// </summary>
+        [JsonProperty("out_request_no")]
+        [XmlElement("out_request_no")]
+        public string OutRequestNo { get; set; }
+
+        /// <summary>
         /// 企业免押额度申请产品码
         /// </summary>
         [JsonProperty("product_code")]

@@ -95,11 +95,32 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Memo { get; set; }
 
         /// <summary>
+        /// 1. 如果该物料是套组的子物料, 那么该值为套组物料id;  2, 其他情况和物料id(即, item_id)一致或者为空.
+        /// </summary>
+        [JsonProperty("parent_item_id")]
+        [XmlElement("parent_item_id")]
+        public string ParentItemId { get; set; }
+
+        /// <summary>
         /// 面单信息
         /// </summary>
         [JsonProperty("print_data")]
         [XmlElement("print_data")]
         public string PrintData { get; set; }
+
+        /// <summary>
+        /// 生产调拨对应的生产指令.
+        /// </summary>
+        [JsonProperty("produce_order_item_id")]
+        [XmlElement("produce_order_item_id")]
+        public string ProduceOrderItemId { get; set; }
+
+        /// <summary>
+        /// TO_CUSTOMER : 到客户的配送指令; INTERIM : 中转配送指令. 可选值详见openApi文档.
+        /// </summary>
+        [JsonProperty("record_type")]
+        [XmlElement("record_type")]
+        public string RecordType { get; set; }
 
         /// <summary>
         /// 对应供应商pid
