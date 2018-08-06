@@ -479,10 +479,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         #endregion
 
         #region Model Serialize
+
+        static readonly JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
         private string Serialize(AlipayObject bizModel)
         {
-            return JsonConvert.SerializeObject(bizModel, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+            return bizModel == null ? string.Empty : JsonConvert.SerializeObject(bizModel, jsonSerializerSettings);
         }
+
         #endregion
     }
 }
