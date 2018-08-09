@@ -46,7 +46,7 @@ namespace NewWebApplicationSample.Controllers
             };
 
             var response = await _client.PageExecuteAsync(request);
-            return Content(response.Body, "text/html");
+            return Content(response.Body, "text/html;charset=utf-8");
         }
 
         [HttpGet]
@@ -72,7 +72,7 @@ namespace NewWebApplicationSample.Controllers
             };
 
             var response = await _client.PageExecuteAsync(request);
-            return Content(response.Body, "text/html");
+            return Content(response.Body, "text/html;charset=utf-8");
         }
 
         [HttpGet]

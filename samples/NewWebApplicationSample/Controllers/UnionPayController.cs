@@ -47,7 +47,7 @@ namespace NewWebApplicationSample.Controllers
                 BackUrl = viewModel.BackUrl,
             };
             var response = await _client.PageExecuteAsync(request);
-            return Content(response.Body, "text/html");
+            return Content(response.Body, "text/html;charset=utf-8");
         }
 
         [HttpPost]
