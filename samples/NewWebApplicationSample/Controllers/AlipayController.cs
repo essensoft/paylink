@@ -128,7 +128,7 @@ namespace NewWebApplicationSample.Controllers
             req.SetReturnUrl(viewModel.ReturnUrl);
 
             var response = await _client.PageExecuteAsync(req);
-            return Content(response.Body, "text/html");
+            return Content(response.Body, "text/html;charset=utf-8");
         }
 
         [HttpGet]
@@ -154,7 +154,7 @@ namespace NewWebApplicationSample.Controllers
             req.SetReturnUrl(viewMode.ReturnUrl);
 
             var response = await _client.PageExecuteAsync(req);
-            return Content(response.Body, "text/html");
+            return Content(response.Body, "text/html;charset=utf-8");
         }
 
         [HttpGet]
