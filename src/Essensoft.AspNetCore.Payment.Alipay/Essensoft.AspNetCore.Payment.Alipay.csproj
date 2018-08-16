@@ -5,9 +5,9 @@
     <Company>Essensoft</Company>
     <Authors>Roc</Authors>
     <Product>Payment</Product>
-    <Version>1.5.0</Version>
-    <AssemblyVersion>1.5.0.0</AssemblyVersion>
-    <FileVersion>1.5.0.0</FileVersion>
+    <Version>1.5.1</Version>
+    <AssemblyVersion>1.5.1.0</AssemblyVersion>
+    <FileVersion>1.5.1.0</FileVersion>
     <Description>ASP.NET Core Payment for Alipay.</Description>
     <Copyright>© Essensoft 2018</Copyright>
     <PackageProjectUrl>https://github.com/Essensoft/Payment</PackageProjectUrl>
