@@ -18,11 +18,6 @@
         public string Key { get; set; }
 
         /// <summary>
-        /// API证书文件 文件路径或文件的Base64串
-        /// </summary>
-        public string Certificate { get; set; }
-
-        /// <summary>
         /// RSA公钥 企业付款到银行卡
         /// </summary>
         public string RsaPublicKey { get; set; }

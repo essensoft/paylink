@@ -1,5 +1,6 @@
-using Essensoft.AspNetCore.Payment.UnionPay;
 using System;
+using Essensoft.AspNetCore.Payment.UnionPay;
+using Essensoft.AspNetCore.Payment.UnionPay.Utility;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -21,6 +22,12 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 services.Configure(setupAction);
             }
+        }
+
+        public static void AddUnionPayHttpClient(
+            this IServiceCollection services)
+        {
+            services.AddHttpClient(UnionPayUtility.DefaultClientName);
         }
     }
 }

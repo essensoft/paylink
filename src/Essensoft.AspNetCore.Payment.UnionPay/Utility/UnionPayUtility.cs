@@ -1,11 +1,34 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
+using System.Net;
+using System.Text;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 {
-    public static class UnionPayUtils
+    public static class UnionPayUtility
     {
+        public static readonly string DefaultClientName = "Payment.UnionPay.Client";
+
+        /// <summary>
+        /// 组装普通文本请求参数。
+        /// </summary>
+        /// <param name="parameters">Key-Value形式请求参数字典</param>
+        /// <returns>URL编码后的请求数据</returns>
+        public static string BuildQuery(IDictionary<string, string> parameters)
+        {
+            var content = new StringBuilder();
+            foreach (var iter in parameters)
+            {
+                if (!string.IsNullOrEmpty(iter.Value))
+                {
+                    content.Append(iter.Key + "=" + WebUtility.UrlEncode(iter.Value) + "&");
+                }
+            }
+            return content.ToString().Substring(0, content.Length - 1);
+        }
+
         internal static object TryTo<T>(this object Object)
         {
             return Object.TryTo(typeof(T));
@@ -33,7 +56,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
                     var ObjectValue = Object as string;
                     if (destinationType.IsEnum)
                     {
-                        return System.Enum.Parse(destinationType, ObjectValue, true);
+                        return Enum.Parse(destinationType, ObjectValue, true);
                     }
 
                     if (string.IsNullOrEmpty(ObjectValue))

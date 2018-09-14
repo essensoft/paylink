@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Net;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,24 +10,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
     /// <summary>
     /// 网络工具类。
     /// </summary>
-    public sealed class HttpClientEx : HttpClient
+    public static class HttpClientUtility
     {
-        public HttpClientEx() : base()
-        {
-            Timeout = new TimeSpan(0, 0, 0, 10);
-            DefaultRequestHeaders.Connection.Add("keep-alive");
-        }
-
         /// <summary>
         /// 执行HTTP POST请求。
         /// </summary>
         /// <param name="url">请求地址</param>
         /// <param name="parameters">请求参数</param>
         /// <returns>HTTP响应</returns>
-        public async Task<string> DoPostAsync(string url, IDictionary<string, string> parameters)
+        public static async Task<string> DoPostAsync(HttpClient client, string url, IDictionary<string, string> parameters)
         {
-            using (var requestContent = new StringContent(BuildQuery(parameters), Encoding.UTF8, "application/x-www-form-urlencoded"))
-            using (var response = await PostAsync(url, requestContent))
+            using (var requestContent = new StringContent(AlipayUtility.BuildQuery(parameters), Encoding.UTF8, "application/x-www-form-urlencoded"))
+            using (var response = await client.PostAsync(url, requestContent))
             using (var responseContent = response.Content)
             {
                 return await responseContent.ReadAsStringAsync();
@@ -41,10 +34,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <param name="url">请求地址</param>
         /// <param name="content">请求内容</param>
         /// <returns>HTTP响应</returns>
-        public async Task<string> DoPostAsync(string url, string content)
+        public static async Task<string> DoPostAsync(HttpClient client, string url, string content)
         {
             using (var requestContent = new StringContent(content, Encoding.UTF8, "application/x-www-form-urlencoded"))
-            using (var response = await PostAsync(url, requestContent))
+            using (var response = await client.PostAsync(url, requestContent))
             using (var responseContent = response.Content)
             {
                 return await responseContent.ReadAsStringAsync();
@@ -57,21 +50,21 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <param name="url">请求地址</param>
         /// <param name="parameters">请求参数</param>
         /// <returns>HTTP响应</returns>
-        public async Task<string> DoGetAsync(string url, IDictionary<string, string> parameters)
+        public static async Task<string> DoGetAsync(HttpClient client, string url, IDictionary<string, string> parameters)
         {
             if (parameters?.Count > 0)
             {
                 if (url.Contains("?"))
                 {
-                    url = url + "&" + BuildQuery(parameters);
+                    url = url + "&" + AlipayUtility.BuildQuery(parameters);
                 }
                 else
                 {
-                    url = url + "?" + BuildQuery(parameters);
+                    url = url + "?" + AlipayUtility.BuildQuery(parameters);
                 }
             }
 
-            using (var response = await GetAsync(url))
+            using (var response = await client.GetAsync(url))
             using (var responseContent = response.Content)
             {
                 return await responseContent.ReadAsStringAsync();
@@ -85,12 +78,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <param name="textParams">请求文本参数</param>
         /// <param name="fileParams">请求文件参数</param>
         /// <returns>HTTP响应</returns>
-        public async Task<string> DoPostAsync(string url, IDictionary<string, string> textParams, IDictionary<string, FileItem> fileParams)
+        public static async Task<string> DoPostAsync(HttpClient client, string url, IDictionary<string, string> textParams, IDictionary<string, FileItem> fileParams)
         {
             // 如果没有文件参数，则走普通POST请求
             if (fileParams == null || fileParams.Count == 0)
             {
-                return await DoPostAsync(url, textParams);
+                return await DoPostAsync(client, url, textParams);
             }
 
             var boundary = DateTime.Now.Ticks.ToString("X"); // 随机分隔线
@@ -127,34 +120,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             reqStream.Write(endBoundaryBytes, 0, endBoundaryBytes.Length);
 
             using (var requestContent = new StringContent(reqStream.ToString(), Encoding.UTF8, "multipart/form-data;boundary=" + boundary))
-            using (var response = await PostAsync(url, requestContent))
+            using (var response = await client.PostAsync(url, requestContent))
             using (var responseContent = response.Content)
             {
                 return await responseContent.ReadAsStringAsync();
             }
-        }
-
-        /// <summary>
-        /// 组装普通文本请求参数。
-        /// </summary>
-        /// <param name="parameters">Key-Value形式请求参数字典</param>
-        /// <returns>URL编码后的请求数据</returns>
-        public static string BuildQuery(IDictionary<string, string> parameters)
-        {
-            if (parameters == null || parameters.Count == 0)
-            {
-                throw new ArgumentNullException(nameof(parameters));
-            }
-
-            var content = new StringBuilder();
-            foreach (var iter in parameters)
-            {
-                if (!string.IsNullOrEmpty(iter.Value))
-                {
-                    content.Append(iter.Key + "=" + WebUtility.UrlEncode(iter.Value) + "&");
-                }
-            }
-            return content.ToString().Substring(0, content.Length - 1);
         }
     }
 }

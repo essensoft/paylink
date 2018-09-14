@@ -1,5 +1,6 @@
-using Essensoft.AspNetCore.Payment.Alipay;
 using System;
+using Essensoft.AspNetCore.Payment.Alipay;
+using Essensoft.AspNetCore.Payment.Alipay.Utility;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -21,6 +22,12 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 services.Configure(setupAction);
             }
+        }
+
+        public static void AddAlipayHttpClient(
+            this IServiceCollection services)
+        {
+            services.AddHttpClient(AlipayUtility.DefaultClientName);
         }
     }
 }

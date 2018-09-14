@@ -1,40 +1,37 @@
-﻿using Essensoft.AspNetCore.Payment.JDPay.Notify;
+﻿using System;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml;
+using Essensoft.AspNetCore.Payment.JDPay.Notify;
 using Essensoft.AspNetCore.Payment.JDPay.Parser;
-using Essensoft.AspNetCore.Payment.JDPay.Response;
 using Essensoft.AspNetCore.Payment.JDPay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Org.BouncyCastle.Crypto;
-using System;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 
 namespace Essensoft.AspNetCore.Payment.JDPay
 {
     public class JDPayNotifyClient : IJDPayNotifyClient
     {
-        private const string SIGN = "sign";
-
         private readonly AsymmetricKeyParameter PrivateKey;
         private readonly AsymmetricKeyParameter PublicKey;
         private readonly byte[] DesKey;
 
-        public JDPayOptions Options { get; }
-
         public virtual ILogger Logger { get; set; }
+
+        public JDPayOptions Options { get; }
 
         #region JDPayNotifyClient Constructors
 
         public JDPayNotifyClient(
-            IOptions<JDPayOptions> optionsAccessor,
-            ILogger<JDPayNotifyClient> logger)
+            ILogger<JDPayNotifyClient> logger,
+            IOptions<JDPayOptions> optionsAccessor)
         {
-            Options = optionsAccessor.Value;
             Logger = logger;
+            Options = optionsAccessor.Value;
 
             if (string.IsNullOrEmpty(Options.Merchant))
             {
@@ -61,10 +58,6 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             DesKey = Convert.FromBase64String(Options.DesKey);
         }
 
-        public JDPayNotifyClient(IOptions<JDPayOptions> optionsAccessor)
-            : this(optionsAccessor, null)
-        { }
-
         #endregion
 
         #region IJDPayNotifyClient Members
@@ -77,7 +70,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
                 var parameters = GetParameters(request, !(rspInstance is JDPayDefrayPayNotifyResponse));
 
-                var query = HttpClientEx.BuildQuery(parameters);
+                var query = JDPayUtility.BuildQuery(parameters);
                 Logger?.LogTrace(0, "Request:{query}", query);
 
                 var parser = new JDPayDictionaryParser<T>();
@@ -164,7 +157,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                         var value = iter.Value.ToString();
                         if (isDecrypt)
                         {
-                            value = iter.Key == SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, DesKey);
+                            value = iter.Key == JDPayContants.SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, DesKey);
                         }
                         parameters.Add(iter.Key, value);
                     }
@@ -179,7 +172,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                         var value = iter.Value.ToString();
                         if (isDecrypt)
                         {
-                            value = iter.Key == SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, DesKey);
+                            value = iter.Key == JDPayContants.SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, DesKey);
                         }
                         parameters.Add(iter.Key, value);
                     }
@@ -195,7 +188,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 throw new Exception("sign check fail: parameters is Empty!");
             }
 
-            if (!parameters.TryGetValue(Contants.SIGN, out var sign))
+            if (!parameters.TryGetValue(JDPayContants.SIGN, out var sign))
             {
                 throw new Exception("sign check fail: sign is Empty!");
             }
@@ -214,7 +207,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 throw new Exception("sign check fail: parameters is Empty!");
             }
 
-            if (!parameters.TryGetValue(Contants.SIGN_DATA, out var sign_data))
+            if (!parameters.TryGetValue(JDPayContants.SIGN_DATA, out var sign_data))
             {
                 throw new Exception("sign check fail: sign is Empty!");
             }

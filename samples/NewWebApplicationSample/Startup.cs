@@ -1,4 +1,8 @@
-﻿using Essensoft.AspNetCore.Payment.Alipay;
+﻿using System;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
+using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.JDPay;
 using Essensoft.AspNetCore.Payment.LianLianPay;
 using Essensoft.AspNetCore.Payment.QPay;
@@ -11,8 +15,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using System.Text.Encodings.Web;
-using System.Text.Unicode;
 
 namespace NewWebApplicationSample
 {
@@ -38,11 +40,24 @@ namespace NewWebApplicationSample
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddAlipay();
+            services.AddAlipayHttpClient();
+
             services.AddJDPay();
+            services.AddJDPayHttpClient();
+
             services.AddQPay();
+            services.AddQPayHttpClient();
+            //services.AddQPayHttpClient(new X509Certificate2(Convert.FromBase64String(Configuration["QPay:Certificate"]), Configuration["QPay:MchId"], X509KeyStorageFlags.MachineKeySet));
+
             services.AddUnionPay();
+            services.AddUnionPayHttpClient();
+
             services.AddWeChatPay();
+            services.AddWeChatPayHttpClient();
+            //services.AddWeChatPayHttpClient(new X509Certificate2(Convert.FromBase64String(Configuration["WeChatPay:Certificate"]), Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));
+
             services.AddLianLianPay();
+            services.AddLianLianPayHttpClient();
 
             services.Configure<AlipayOptions>(Configuration.GetSection("Alipay"));
             services.Configure<JDPayOptions>(Configuration.GetSection("JDPay"));

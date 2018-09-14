@@ -1,7 +1,7 @@
-﻿using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Security;
-using System;
+﻿using System;
 using System.Text;
+using Org.BouncyCastle.Crypto;
+using Org.BouncyCastle.Security;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {

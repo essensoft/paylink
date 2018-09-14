@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Text;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Utility
 {
@@ -8,6 +10,31 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
     /// </summary>
     public static class AlipayUtility
     {
+        public static readonly string DefaultClientName = "Payment.Alipay.Client";
+
+        /// <summary>
+        /// 组装普通文本请求参数。
+        /// </summary>
+        /// <param name="parameters">Key-Value形式请求参数字典</param>
+        /// <returns>URL编码后的请求数据</returns>
+        public static string BuildQuery(IDictionary<string, string> parameters)
+        {
+            if (parameters == null || parameters.Count == 0)
+            {
+                throw new ArgumentNullException(nameof(parameters));
+            }
+
+            var content = new StringBuilder();
+            foreach (var iter in parameters)
+            {
+                if (!string.IsNullOrEmpty(iter.Value))
+                {
+                    content.Append(iter.Key + "=" + WebUtility.UrlEncode(iter.Value) + "&");
+                }
+            }
+            return content.ToString().Substring(0, content.Length - 1);
+        }
+
         /// <summary>
         /// 清除字典中值为空的项。
         /// </summary>

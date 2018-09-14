@@ -1,29 +1,29 @@
-﻿using Essensoft.AspNetCore.Payment.QPay.Parser;
+﻿using System;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.QPay.Parser;
 using Essensoft.AspNetCore.Payment.QPay.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.QPay
 {
     public class QPayNotifyClient : IQPayNotifyClient
     {
-        public QPayOptions Options { get; }
-
         public virtual ILogger Logger { get; set; }
 
-        #region QPayNotifyClient
+        public QPayOptions Options { get; }
+
+        #region QPayNotifyClient Constructors
 
         public QPayNotifyClient(
-            IOptions<QPayOptions> optionsAccessor,
-            ILogger<QPayNotifyClient> logger)
+            ILogger<QPayNotifyClient> logger,
+            IOptions<QPayOptions> optionsAccessor)
         {
-            Options = optionsAccessor.Value;
             Logger = logger;
+            Options = optionsAccessor.Value;
 
             if (string.IsNullOrEmpty(Options.Key))
             {
@@ -31,10 +31,6 @@ namespace Essensoft.AspNetCore.Payment.QPay
             }
         }
 
-        public QPayNotifyClient(IOptions<QPayOptions> optionsAccessor)
-            : this(optionsAccessor, null)
-        { }
-        
         #endregion
 
         #region IQPayNotifyClient Members

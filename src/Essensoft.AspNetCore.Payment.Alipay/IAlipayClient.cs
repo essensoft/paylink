@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.Alipay.Request;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.Alipay.Request;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
@@ -8,8 +8,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay
     /// </summary>
     public interface IAlipayClient
     {
-        void SetTimeout(int timeout);
-
         /// <summary>
         /// 执行Alipay公开API请求。
         /// </summary>

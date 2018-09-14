@@ -1,4 +1,9 @@
-﻿using Essensoft.AspNetCore.Payment.LianLianPay.Parser;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.LianLianPay.Parser;
 using Essensoft.AspNetCore.Payment.LianLianPay.Request;
 using Essensoft.AspNetCore.Payment.LianLianPay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
@@ -6,10 +11,6 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using Org.BouncyCastle.Crypto;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
@@ -25,22 +26,22 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         private readonly AsymmetricKeyParameter PrivateKey;
         private readonly AsymmetricKeyParameter PublicKey;
 
-        public LianLianPayOptions Options { get; }
-
         public virtual ILogger Logger { get; set; }
 
-        protected internal HttpClientEx Client { get; set; }
+        public virtual IHttpClientFactory ClientFactory { get; set; }
+
+        public LianLianPayOptions Options { get; }
 
         #region LianLianPayClient Constructors
 
         public LianLianPayClient(
-            IOptions<LianLianPayOptions> optionsAccessor,
-            ILogger<LianLianPayClient> logger)
+            ILogger<LianLianPayClient> logger,
+            IHttpClientFactory clientFactory,
+            IOptions<LianLianPayOptions> optionsAccessor)
         {
-            Options = optionsAccessor.Value;
             Logger = logger;
-
-            Client = new HttpClientEx();
+            ClientFactory = clientFactory;
+            Options = optionsAccessor.Value;
 
             if (string.IsNullOrEmpty(Options.OidPartner))
             {
@@ -64,19 +65,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
             PrivateKey = RSAUtilities.GetKeyParameterFormPrivateKey(Options.RsaPrivateKey);
             PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(Options.RsaPublicKey);
-        }
-
-        public LianLianPayClient(IOptions<LianLianPayOptions> optionsAccessor)
-            : this(optionsAccessor, null)
-        { }
-
-        #endregion
-
-        #region ILianLianPayClient Members
-
-        public void SetTimeout(int timeout)
-        {
-            Client.Timeout = new TimeSpan(0, 0, 0, timeout);
         }
 
         #endregion
@@ -109,26 +97,29 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             }
             Logger?.LogTrace(0, "Request:{content}", content);
 
-            var body = await Client.DoPostAsync(request.GetRequestUrl(), content);
-            Logger?.LogTrace(1, "Response:{body}", body);
-
-            var parser = new LianLianPayJsonParser<T>();
-            var rsp = parser.Parse(body);
-
-            // 不签名参数
-            var excludePara = new List<string>();
-            if (request is LianLianPayOrderQueryRequest)
+            using (var client = ClientFactory.CreateClient(LianLianPayUtility.DefaultClientName))
             {
-                excludePara.Add("bank_name");
-                excludePara.Add("card_no");
-            }
-            else if (request is LianLianPayQueryBankCarBindListRequest)
-            {
-                excludePara.Add("agreement_list");
-            }
+                var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
+                Logger?.LogTrace(1, "Response:{body}", body);
 
-            CheckNotifySign(rsp.Parameters, excludePara);
-            return rsp;
+                var parser = new LianLianPayJsonParser<T>();
+                var rsp = parser.Parse(body);
+
+                // 不签名参数
+                var excludePara = new List<string>();
+                if (request is LianLianPayOrderQueryRequest)
+                {
+                    excludePara.Add("bank_name");
+                    excludePara.Add("card_no");
+                }
+                else if (request is LianLianPayQueryBankCarBindListRequest)
+                {
+                    excludePara.Add("agreement_list");
+                }
+
+                CheckNotifySign(rsp.Parameters, excludePara);
+                return rsp;
+            }
         }
 
         #endregion
@@ -164,11 +155,11 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
                 {
                     if (tmpUrl.Contains("?"))
                     {
-                        tmpUrl = tmpUrl + "&" + HttpClientEx.BuildQuery(txtParams);
+                        tmpUrl = tmpUrl + "&" + LianLianPayUtility.BuildQuery(txtParams);
                     }
                     else
                     {
-                        tmpUrl = tmpUrl + "?" + HttpClientEx.BuildQuery(txtParams);
+                        tmpUrl = tmpUrl + "?" + LianLianPayUtility.BuildQuery(txtParams);
                     }
                 }
                 body = tmpUrl;

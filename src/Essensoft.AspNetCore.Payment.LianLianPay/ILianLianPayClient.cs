@@ -4,8 +4,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     public interface ILianLianPayClient
     {
-        void SetTimeout(int timeout);
-
         /// <summary>
         /// 执行LianLianPay API请求。
         /// </summary>

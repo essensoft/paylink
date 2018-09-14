@@ -1,14 +1,14 @@
-﻿using Essensoft.AspNetCore.Payment.Alipay.Parser;
+﻿using System;
+using System.Collections.Generic;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.Alipay.Parser;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
@@ -16,18 +16,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay
     {
         private readonly RSAParameters PublicRSAParameters;
 
-        public AlipayOptions Options { get; }
-
         public virtual ILogger Logger { get; set; }
+
+        public AlipayOptions Options { get; }
 
         #region AlipayNotifyClient Constructors
 
         public AlipayNotifyClient(
-            IOptions<AlipayOptions> optionsAccessor,
-            ILogger<AlipayNotifyClient> logger)
+            ILogger<AlipayNotifyClient> logger,
+            IOptions<AlipayOptions> optionsAccessor)
         {
-            Options = optionsAccessor.Value;
             Logger = logger;
+            Options = optionsAccessor.Value;
 
             if (string.IsNullOrEmpty(Options.RsaPublicKey))
             {
@@ -37,10 +37,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             PublicRSAParameters = RSAUtilities.GetRSAParametersFormPublicKey(Options.RsaPublicKey);
         }
 
-        public AlipayNotifyClient(IOptions<AlipayOptions> optionsAccessor)
-            : this(optionsAccessor, null)
-        { }
-
         #endregion
 
         #region IAlipayNotifyClient Members
@@ -48,7 +44,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : AlipayNotifyResponse
         {
             var parameters = await GetParametersAsync(request);
-            var query = HttpClientEx.BuildQuery(parameters);
+            var query = AlipayUtility.BuildQuery(parameters);
             Logger?.LogTrace(0, "Request:{query}", query);
 
             var parser = new AlipayDictionaryParser<T>();

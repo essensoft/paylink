@@ -1,15 +1,15 @@
-﻿using Essensoft.AspNetCore.Payment.Security;
+﻿using System;
+using System.Collections;
+using System.IO;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using Essensoft.AspNetCore.Payment.Security;
 using Org.BouncyCastle.Cms;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Operators;
 using Org.BouncyCastle.Pkcs;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.X509.Store;
-using System;
-using System.Collections;
-using System.IO;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using X509Certificate = Org.BouncyCastle.X509.X509Certificate;
 
 namespace Essensoft.AspNetCore.Payment.JDPay.Utility
@@ -254,10 +254,10 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 
         public static bool VerifySign(JDPayDictionary dic, string key)
         {
-            dic.TryGetValue(Contants.SIGN_TYPE, out var algorithm);
-            dic.TryGetValue(Contants.SIGN_DATA, out var sign);
-            dic.Remove(Contants.SIGN_TYPE);
-            dic.Remove(Contants.SIGN_DATA);
+            dic.TryGetValue(JDPayContants.SIGN_TYPE, out var algorithm);
+            dic.TryGetValue(JDPayContants.SIGN_DATA, out var sign);
+            dic.Remove(JDPayContants.SIGN_TYPE);
+            dic.Remove(JDPayContants.SIGN_DATA);
             return Verify(sign, dic, algorithm, key);
         }
 
@@ -276,23 +276,23 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             var encryptData = new JDPayDictionary();
             var data = GetNPP10SignContentOrEncryptContent(dic);
 
-            dic.TryGetValue(Contants.CUSTOMER_NO, out var customerNo);
-            dic.TryGetValue(Contants.SIGN_TYPE, out var signType);
+            dic.TryGetValue(JDPayContants.CUSTOMER_NO, out var customerNo);
+            dic.TryGetValue(JDPayContants.SIGN_TYPE, out var signType);
 
             if (!isEncrypt || string.IsNullOrEmpty(encryptType))
             {
-                dic.Add(Contants.SIGN_DATA, GetNPP10Sign(data, signType, singKey));
+                dic.Add(JDPayContants.SIGN_DATA, GetNPP10Sign(data, signType, singKey));
                 encryptData = dic;
             }
             else
             {
-                encryptData.Add(Contants.SIGN_TYPE, signType);
-                encryptData.Add(Contants.SIGN_DATA, GetNPP10Sign(data, signType, singKey));
-                encryptData.Add(Contants.CUSTOMER_NO, customerNo);
-                encryptData.Add(Contants.ENCRYPT_TYPE, encryptType);
+                encryptData.Add(JDPayContants.SIGN_TYPE, signType);
+                encryptData.Add(JDPayContants.SIGN_DATA, GetNPP10Sign(data, signType, singKey));
+                encryptData.Add(JDPayContants.CUSTOMER_NO, customerNo);
+                encryptData.Add(JDPayContants.ENCRYPT_TYPE, encryptType);
                 if ("RSA" == encryptType)
                 {
-                    encryptData.Add(Contants.ENCRYPT_DATA, SignEnvelop(signCert, password, envelopCert, data));
+                    encryptData.Add(JDPayContants.ENCRYPT_DATA, SignEnvelop(signCert, password, envelopCert, data));
                 }
                 else
                 {

@@ -1,13 +1,13 @@
-﻿using Essensoft.AspNetCore.Payment.LianLianPay.Parser;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.LianLianPay.Parser;
 using Essensoft.AspNetCore.Payment.LianLianPay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Org.BouncyCastle.Crypto;
-using System;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
@@ -15,18 +15,18 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
     {
         private readonly AsymmetricKeyParameter PublicKey;
 
-        public LianLianPayOptions Options { get; set; }
-
         public virtual ILogger Logger { get; set; }
+
+        public LianLianPayOptions Options { get; }
 
         #region LianLianPayNotifyClient Constructors
 
         public LianLianPayNotifyClient(
-            IOptions<LianLianPayOptions> optionsAccessor,
-            ILogger<LianLianPayClient> logger)
+            ILogger<LianLianPayClient> logger,
+            IOptions<LianLianPayOptions> optionsAccessor)
         {
-            Options = optionsAccessor?.Value;
             Logger = logger;
+            Options = optionsAccessor?.Value;
 
             if (string.IsNullOrEmpty(Options.OidPartner))
             {
@@ -46,10 +46,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(Options.RsaPublicKey);
         }
 
-        public LianLianPayNotifyClient(IOptions<LianLianPayOptions> optionsAccessor)
-            : this(optionsAccessor, null)
-        { }
-
         #endregion
 
         #region ILianLianPayNotifyClient Members
@@ -59,7 +55,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             if (request.HasFormContentType)
             {
                 var parameters = await GetParametersAsync(request);
-                var query = HttpClientEx.BuildQuery(parameters);
+                var query = LianLianPayUtility.BuildQuery(parameters);
                 Logger?.LogTrace(0, "Request:{query}", query);
 
                 var parser = new LianLianPayDictionaryParser<T>();
