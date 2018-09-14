@@ -67,15 +67,21 @@ Essensoft.AspNetCore.Payment.UnionPay       | [![NuGet](https://img.shields.io/n
 
 * 以WeChatPay为例，有以下几种方式：
 1. 添加默认HttpClient供WeChatPayClient使用. (未使用到API证书时适用)
-`services.AddWeChatPayHttpClient();`
+```
+services.AddWeChatPayHttpClient();
+```
 
 2. 添加默认HttpClient和证书HttpClient供WeChatPayClient使用.
 
 * 根据证书路径
-`services.AddWeChatPayHttpClient(new X509Certificate2(Configuration["WeChatPay:Certificate"], Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));`
+```
+services.AddWeChatPayHttpClient(new X509Certificate2(Configuration["WeChatPay:Certificate"], Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));
+```
 
 * 根据证书Base64String
-`services.AddWeChatPayHttpClient(new X509Certificate2(Convert.FromBase64String(Configuration["WeChatPay:Certificate"]), Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));`
+```
+services.AddWeChatPayHttpClient(new X509Certificate2(Convert.FromBase64String(Configuration["WeChatPay:Certificate"]), Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));
+```
 
 3.  自行配置HttpClient供WeChatPayClient使用.
 ```
