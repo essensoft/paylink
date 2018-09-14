@@ -10,8 +10,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
     /// </summary>
     public static class AlipayUtility
     {
-        public static readonly string DefaultClientName = "Payment.Alipay.Client";
-
         /// <summary>
         /// 组装普通文本请求参数。
         /// </summary>

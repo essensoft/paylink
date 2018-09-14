@@ -2,6 +2,8 @@
 {
     public class UnionPayOptions
     {
+        public static readonly string DefaultClientName = "Payment.UnionPay.Client";
+
         /// <summary>
         /// 商户代码
         /// </summary>

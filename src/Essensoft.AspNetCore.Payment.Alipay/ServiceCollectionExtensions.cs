@@ -27,7 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static void AddAlipayHttpClient(
             this IServiceCollection services)
         {
-            services.AddHttpClient(AlipayUtility.DefaultClientName);
+            services.AddHttpClient(AlipayOptions.DefaultClientName);
         }
     }
 }

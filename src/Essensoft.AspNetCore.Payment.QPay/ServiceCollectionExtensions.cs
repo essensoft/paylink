@@ -37,11 +37,11 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             X509Certificate2 certificate)
         {
-            services.AddHttpClient(QPayUtility.DefaultClientName);
+            services.AddHttpClient(QPayOptions.DefaultClientName);
 
             if (certificate != null)
             {
-                services.AddHttpClient(QPayUtility.CertificateClientName).ConfigurePrimaryHttpMessageHandler(() =>
+                services.AddHttpClient(QPayOptions.CertificateClientName).ConfigurePrimaryHttpMessageHandler(() =>
                 {
                     var handler = new HttpClientHandler();
                     handler.ClientCertificates.Add(certificate);

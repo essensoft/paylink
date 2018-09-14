@@ -2,6 +2,8 @@
 {
     public class LianLianPayOptions
     {
+        public static readonly string DefaultClientName = "Payment.LianLianPay.Client";
+
         /// <summary>
         /// 连连支付公钥
         /// </summary>

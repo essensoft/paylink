@@ -2,6 +2,8 @@
 {
     public class JDPayOptions
     {
+        public static readonly string DefaultClientName = "Payment.JDPay.Client";
+
         /// <summary>
         /// 商户号
         /// </summary>

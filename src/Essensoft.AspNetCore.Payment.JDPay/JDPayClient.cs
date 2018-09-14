@@ -75,7 +75,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             var content = BuildEncryptXml(request, sortedTxtParams);
             Logger?.LogTrace(0, "Request:{content}", content);
 
-            using (var client = ClientFactory.CreateClient(JDPayUtility.DefaultClientName))
+            using (var client = ClientFactory.CreateClient(JDPayOptions.DefaultClientName))
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
                 Logger?.LogTrace(1, "Response:{content}", body);
@@ -160,7 +160,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             var content = JDPayUtility.BuildQuery(encryptDic);
             Logger?.LogTrace(0, "Request:{content}", content);
 
-            using (var client = ClientFactory.CreateClient(JDPayUtility.DefaultClientName))
+            using (var client = ClientFactory.CreateClient(JDPayOptions.DefaultClientName))
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content, "application/x-www-form-urlencoded");
                 Logger?.LogTrace(1, "Response:{content}", body);

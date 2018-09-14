@@ -9,8 +9,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
 {
     public static class LianLianPayUtility
     {
-        public static readonly string DefaultClientName = "Payment.LianLianPay.Client";
-
         /// <summary>
         /// 组装普通文本请求参数。
         /// </summary>

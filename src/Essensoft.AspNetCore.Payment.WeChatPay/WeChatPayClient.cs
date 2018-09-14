@@ -208,7 +208,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             var content = WeChatPayUtility.BuildContent(sortedTxtParams);
             Logger?.LogTrace(0, "Request:{content}", content);
 
-            using (var client = ClientFactory.CreateClient(WeChatPayUtility.CertificateClientName))
+            using (var client = ClientFactory.CreateClient(WeChatPayOptions.CertificateClientName))
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
 

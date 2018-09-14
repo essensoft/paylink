@@ -27,7 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static void AddJDPayHttpClient(
             this IServiceCollection services)
         {
-            services.AddHttpClient(JDPayUtility.DefaultClientName);
+            services.AddHttpClient(JDPayOptions.DefaultClientName);
         }
     }
 }
