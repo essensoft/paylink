@@ -9,8 +9,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 {
     public static class UnionPayUtility
     {
-        public static readonly string DefaultClientName = "Payment.UnionPay.Client";
-
         /// <summary>
         /// 组装普通文本请求参数。
         /// </summary>

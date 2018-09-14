@@ -148,7 +148,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             {
                 var fileParams = AlipayUtility.CleanupDictionary(uRequest.GetFileParameters());
 
-                using (var client = ClientFactory.CreateClient(AlipayUtility.DefaultClientName))
+                using (var client = ClientFactory.CreateClient(AlipayOptions.DefaultClientName))
                 {
                     body = await HttpClientUtility.DoPostAsync(client, Options.ServerUrl, txtParams, fileParams);
                 }
@@ -277,7 +277,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             // 是否需要上传文件
             var body = string.Empty;
-            using (var client = ClientFactory.CreateClient(AlipayUtility.DefaultClientName))
+            using (var client = ClientFactory.CreateClient(AlipayOptions.DefaultClientName))
             {
                 if (request is IAlipayUploadRequest<T> uRequest)
                 {

@@ -5,9 +5,6 @@ namespace Essensoft.AspNetCore.Payment.QPay.Utility
 {
     public static class QPayUtility
     {
-        public static readonly string DefaultClientName = "Payment.QPay.Client";
-        public static readonly string CertificateClientName = "Payment.QPay.CertificateClient";
-
         /// <summary>
         /// 组装普通文本请求参数。
         /// </summary>

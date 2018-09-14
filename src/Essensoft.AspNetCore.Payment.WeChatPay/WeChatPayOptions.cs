@@ -2,6 +2,9 @@
 {
     public class WeChatPayOptions
     {
+        public static readonly string DefaultClientName = "Payment.WechatPay.Client";
+        public static readonly string CertificateClientName = "Payment.WechatPay.CertificateClient";
+
         /// <summary>
         /// 应用账号(公众账号ID/小程序ID/企业号CorpId)
         /// </summary>

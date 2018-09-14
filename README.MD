@@ -79,8 +79,8 @@ Essensoft.AspNetCore.Payment.UnionPay       | [![NuGet](https://img.shields.io/n
 
 3.  自行配置HttpClient供WeChatPayClient使用.
 ```
-services.AddHttpClient(WeChatPayUtility.DefaultClientName);
-services.AddHttpClient(WeChatPayUtility.CertificateClientName).ConfigurePrimaryHttpMessageHandler(() => { ... });
+services.AddHttpClient(WeChatPayOptions.DefaultClientName);
+services.AddHttpClient(WeChatPayOptions.CertificateClientName).ConfigurePrimaryHttpMessageHandler(() => { ... });
 ```
 
 详情见示例项目：NewWebApplicationSample / WebApplicationSample</p>

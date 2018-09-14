@@ -97,7 +97,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             }
             Logger?.LogTrace(0, "Request:{content}", content);
 
-            using (var client = ClientFactory.CreateClient(LianLianPayUtility.DefaultClientName))
+            using (var client = ClientFactory.CreateClient(LianLianPayOptions.DefaultClientName))
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
                 Logger?.LogTrace(1, "Response:{body}", body);

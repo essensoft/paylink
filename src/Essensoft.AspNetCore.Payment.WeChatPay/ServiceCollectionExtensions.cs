@@ -37,11 +37,11 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             X509Certificate2 certificate)
         {
-            services.AddHttpClient(WeChatPayUtility.DefaultClientName);
+            services.AddHttpClient(WeChatPayOptions.DefaultClientName);
 
             if (certificate != null)
             {
-                services.AddHttpClient(WeChatPayUtility.CertificateClientName).ConfigurePrimaryHttpMessageHandler(() =>
+                services.AddHttpClient(WeChatPayOptions.CertificateClientName).ConfigurePrimaryHttpMessageHandler(() =>
                 {
                     var handler = new HttpClientHandler();
                     handler.ClientCertificates.Add(certificate);

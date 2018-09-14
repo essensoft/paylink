@@ -27,7 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static void AddUnionPayHttpClient(
             this IServiceCollection services)
         {
-            services.AddHttpClient(UnionPayUtility.DefaultClientName);
+            services.AddHttpClient(UnionPayOptions.DefaultClientName);
         }
     }
 }

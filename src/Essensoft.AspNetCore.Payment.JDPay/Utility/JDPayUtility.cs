@@ -14,8 +14,6 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 {
     public static class JDPayUtility
     {
-        public static readonly string DefaultClientName = "Payment.JDPay.Client";
-
         /// <summary>
         /// 组装普通文本请求参数。
         /// </summary>

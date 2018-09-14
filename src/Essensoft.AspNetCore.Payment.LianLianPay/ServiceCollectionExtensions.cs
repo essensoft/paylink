@@ -27,7 +27,7 @@ namespace Microsoft.Extensions.DependencyInjection
         public static void AddLianLianPayHttpClient(
             this IServiceCollection services)
         {
-            services.AddHttpClient(LianLianPayUtility.DefaultClientName);
+            services.AddHttpClient(LianLianPayOptions.DefaultClientName);
         }
     }
 }

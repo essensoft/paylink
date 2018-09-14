@@ -115,7 +115,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             var query = UnionPayUtility.BuildQuery(txtParams);
             Logger?.LogTrace(0, "Request:{query}", query);
 
-            using (var client = ClientFactory.CreateClient(UnionPayUtility.DefaultClientName))
+            using (var client = ClientFactory.CreateClient(UnionPayOptions.DefaultClientName))
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(Options.TestMode), query);
                 Logger?.LogTrace(1, "Response:{content}", body);

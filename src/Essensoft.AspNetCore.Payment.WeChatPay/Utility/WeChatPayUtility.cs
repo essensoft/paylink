@@ -8,9 +8,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
 {
     public static class WeChatPayUtility
     {
-        public static readonly string DefaultClientName = "Payment.WechatPay.Client";
-        public static readonly string CertificateClientName = "Payment.WechatPay.CertificateClient";
-
         /// <summary>
         /// 组装普通文本请求参数。
         /// </summary>
