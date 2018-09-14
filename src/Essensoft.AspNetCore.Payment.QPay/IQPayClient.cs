@@ -4,8 +4,6 @@ namespace Essensoft.AspNetCore.Payment.QPay
 {
     public interface IQPayClient
     {
-        void SetTimeout(int timeout);
-
         /// <summary>
         /// 执行QPay API请求。
         /// </summary>

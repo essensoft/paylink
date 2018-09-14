@@ -1,5 +1,8 @@
-using Essensoft.AspNetCore.Payment.QPay;
 using System;
+using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
+using Essensoft.AspNetCore.Payment.QPay;
+using Essensoft.AspNetCore.Payment.QPay.Utility;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -17,9 +20,33 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddSingleton<QPayClient>();
             services.AddSingleton<QPayNotifyClient>();
+
             if (setupAction != null)
             {
                 services.Configure(setupAction);
+            }
+        }
+
+        public static void AddQPayHttpClient(
+            this IServiceCollection services)
+        {
+            services.AddQPayHttpClient(certificate: null);
+        }
+
+        public static void AddQPayHttpClient(
+            this IServiceCollection services,
+            X509Certificate2 certificate)
+        {
+            services.AddHttpClient(QPayUtility.DefaultClientName);
+
+            if (certificate != null)
+            {
+                services.AddHttpClient(QPayUtility.CertificateClientName).ConfigurePrimaryHttpMessageHandler(() =>
+                {
+                    var handler = new HttpClientHandler();
+                    handler.ClientCertificates.Add(certificate);
+                    return handler;
+                });
             }
         }
     }

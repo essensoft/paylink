@@ -56,13 +56,34 @@ Essensoft.AspNetCore.Payment.UnionPay       | [![NuGet](https://img.shields.io/n
 
 * 银联支付 [开放平台](https://open.unionpay.com/ajweb/product)
 
-## 开发环境
-* Windows 10 1803 17134.48
-* VS2017 15.7.*
-* .NET Core SDK 2.1.* (x64)
+## 参考开发环境
+* Windows 10
+* VS2017 15.8.4
+* .NET Core SDK 2.1.402 (x64)
 
 ## 使用方式
-见示例项目：NewWebApplicationSample / WebApplicationSample</p>
+
+### 关于Payment使用 HttpClient 默认/证书 配置介绍 (目前仅WeChatPay\QPay部分API有使用到API证书配置) 
+
+* 以WeChatPay为例，有以下几种方式：
+1. 添加默认HttpClient供WeChatPayClient使用. (未使用到API证书时适用)
+`services.AddWeChatPayHttpClient();`
+
+2. 添加默认HttpClient和证书HttpClient供WeChatPayClient使用.
+
+* 根据证书路径
+`services.AddWeChatPayHttpClient(new X509Certificate2(Configuration["WeChatPay:Certificate"], Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));`
+
+* 根据证书Base64String
+`services.AddWeChatPayHttpClient(new X509Certificate2(Convert.FromBase64String(Configuration["WeChatPay:Certificate"]), Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));`
+
+3.  自行配置HttpClient供WeChatPayClient使用.
+```
+services.AddHttpClient(WeChatPayUtility.DefaultClientName);
+services.AddHttpClient(WeChatPayUtility.CertificateClientName).ConfigurePrimaryHttpMessageHandler(() => { ... });
+```
+
+详情见示例项目：NewWebApplicationSample / WebApplicationSample</p>
 
 <p align="center">
     <img src="http://p687qfgw0.bkt.clouddn.com/NewWebApplicationSample.png">

@@ -4,8 +4,6 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 {
     public interface IJDPayClient
     {
-        void SetTimeout(int timeout);
-
         /// <summary>
         /// 执行JDPay API请求。
         /// </summary>

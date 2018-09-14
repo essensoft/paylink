@@ -1,6 +1,6 @@
-﻿using Essensoft.AspNetCore.Payment.Security;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text;
+using Essensoft.AspNetCore.Payment.Security;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
 {

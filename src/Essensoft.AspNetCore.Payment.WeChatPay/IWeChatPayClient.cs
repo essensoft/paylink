@@ -4,8 +4,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     public interface IWeChatPayClient
     {
-        void SetTimeout(int timeout);
-
         /// <summary>
         /// 执行WeChatPay API请求。
         /// </summary>

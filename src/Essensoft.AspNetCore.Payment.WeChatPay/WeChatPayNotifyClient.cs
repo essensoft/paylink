@@ -1,41 +1,37 @@
-﻿using Essensoft.AspNetCore.Payment.Security;
+﻿using System;
+using System.IO;
+using System.Text;
+using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.Security;
 using Essensoft.AspNetCore.Payment.WeChatPay.Notify;
 using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
 using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     public class WeChatPayNotifyClient : IWeChatPayNotifyClient
     {
-        public WeChatPayOptions Options { get; set; }
-
         public virtual ILogger Logger { get; set; }
+
+        public WeChatPayOptions Options { get; }
 
         #region WeChatPayNotifyClient Constructors
 
         public WeChatPayNotifyClient(
-            IOptions<WeChatPayOptions> optionsAccessor,
-            ILogger<WeChatPayNotifyClient> logger)
+            ILogger<WeChatPayNotifyClient> logger,
+            IOptions<WeChatPayOptions> optionsAccessor)
         {
-            Options = optionsAccessor.Value;
             Logger = logger;
+            Options = optionsAccessor.Value;
 
             if (string.IsNullOrEmpty(Options.Key))
             {
                 throw new ArgumentNullException(nameof(Options.Key));
             }
         }
-
-        public WeChatPayNotifyClient(IOptions<WeChatPayOptions> optionsAccessor)
-            : this(optionsAccessor, null)
-        { }
 
         #endregion
 

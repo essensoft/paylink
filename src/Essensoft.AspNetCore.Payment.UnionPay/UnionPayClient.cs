@@ -1,12 +1,13 @@
-﻿using Essensoft.AspNetCore.Payment.UnionPay.Parser;
+﻿using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.UnionPay.Parser;
 using Essensoft.AspNetCore.Payment.UnionPay.Request;
 using Essensoft.AspNetCore.Payment.UnionPay.Utility;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay
 {
@@ -24,21 +25,22 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         private readonly UnionPayCertificate MiddleCertificate;
         private readonly UnionPayCertificate RootCertificate;
 
-        public UnionPayOptions Options { get; }
-
         public virtual ILogger Logger { get; set; }
 
-        protected internal HttpClientEx Client { get; set; }
+        public virtual IHttpClientFactory ClientFactory { get; set; }
+
+        public UnionPayOptions Options { get; }
 
         #region UnionPayClient Constructors
 
         public UnionPayClient(
-            IOptions<UnionPayOptions> optionsAccessor,
-            ILogger<UnionPayClient> logger)
+            ILogger<UnionPayClient> logger,
+            IHttpClientFactory clientFactory,
+            IOptions<UnionPayOptions> optionsAccessor)
         {
-            Options = optionsAccessor.Value;
             Logger = logger;
-            Client = new HttpClientEx();
+            ClientFactory = clientFactory;
+            Options = optionsAccessor.Value;
 
             if (string.IsNullOrEmpty(Options.SignCert))
             {
@@ -69,19 +71,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             EncryptCertificate = UnionPaySignature.GetCertificate(Options.EncryptCert);
             MiddleCertificate = UnionPaySignature.GetCertificate(Options.MiddleCert);
             RootCertificate = UnionPaySignature.GetCertificate(Options.RootCert);
-        }
-
-        public UnionPayClient(IOptions<UnionPayOptions> optionsAccessor)
-            : this(optionsAccessor, null)
-        { }
-
-        #endregion
-
-        #region IUnionPayClient Members
-
-        public void SetTimeout(int timeout)
-        {
-            Client.Timeout = new TimeSpan(0, 0, 0, timeout);
         }
 
         #endregion
@@ -123,29 +112,32 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
             UnionPaySignature.Sign(txtParams, SignCertificate.certId, SignCertificate.key, Options.SecureKey);
 
-            var query = HttpClientEx.BuildQuery(txtParams);
+            var query = UnionPayUtility.BuildQuery(txtParams);
             Logger?.LogTrace(0, "Request:{query}", query);
 
-            var body = await Client.DoPostAsync(request.GetRequestUrl(Options.TestMode), query);
-            Logger?.LogTrace(1, "Response:{content}", body);
-
-            var dic = ParseQueryString(body);
-
-            if (string.IsNullOrEmpty(body))
+            using (var client = ClientFactory.CreateClient(UnionPayUtility.DefaultClientName))
             {
-                throw new Exception("sign check fail: Body is Empty!");
-            }
+                var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(Options.TestMode), query);
+                Logger?.LogTrace(1, "Response:{content}", body);
 
-            var ifValidateCNName = !Options.TestMode;
-            if (!UnionPaySignature.Validate(dic, RootCertificate.cert, MiddleCertificate.cert, Options.SecureKey, ifValidateCNName))
-            {
-                throw new Exception("sign check fail: check Sign and Data Fail!");
-            }
+                var dic = ParseQueryString(body);
 
-            var parser = new UnionPayDictionaryParser<T>();
-            var rsp = parser.Parse(dic);
-            rsp.Body = body;
-            return rsp;
+                if (string.IsNullOrEmpty(body))
+                {
+                    throw new Exception("sign check fail: Body is Empty!");
+                }
+
+                var ifValidateCNName = !Options.TestMode;
+                if (!UnionPaySignature.Validate(dic, RootCertificate.cert, MiddleCertificate.cert, Options.SecureKey, ifValidateCNName))
+                {
+                    throw new Exception("sign check fail: check Sign and Data Fail!");
+                }
+
+                var parser = new UnionPayDictionaryParser<T>();
+                var rsp = parser.Parse(dic);
+                rsp.Body = body;
+                return rsp;
+            }
         }
 
         #endregion
@@ -192,11 +184,11 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 {
                     if (tmpUrl.Contains("?"))
                     {
-                        tmpUrl = tmpUrl + "&" + HttpClientEx.BuildQuery(txtParams);
+                        tmpUrl = tmpUrl + "&" + UnionPayUtility.BuildQuery(txtParams);
                     }
                     else
                     {
-                        tmpUrl = tmpUrl + "?" + HttpClientEx.BuildQuery(txtParams);
+                        tmpUrl = tmpUrl + "?" + UnionPayUtility.BuildQuery(txtParams);
                     }
                 }
                 rsp.Body = tmpUrl;

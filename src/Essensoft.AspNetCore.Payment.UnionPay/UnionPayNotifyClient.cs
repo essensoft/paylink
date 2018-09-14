@@ -1,10 +1,10 @@
-﻿using Essensoft.AspNetCore.Payment.UnionPay.Parser;
+﻿using System;
+using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.UnionPay.Parser;
 using Essensoft.AspNetCore.Payment.UnionPay.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
-using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay
 {
@@ -13,18 +13,18 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         private readonly UnionPayCertificate MiddleCertificate;
         private readonly UnionPayCertificate RootCertificate;
 
-        public UnionPayOptions Options { get; }
-
         public virtual ILogger Logger { get; set; }
+
+        public UnionPayOptions Options { get; }
 
         #region UnionPayNotifyClient Constructors
 
         public UnionPayNotifyClient(
-            IOptions<UnionPayOptions> optionsAccessor,
-            ILogger<UnionPayNotifyClient> logger)
+            ILogger<UnionPayNotifyClient> logger,
+            IOptions<UnionPayOptions> optionsAccessor)
         {
-            Options = optionsAccessor.Value;
             Logger = logger;
+            Options = optionsAccessor.Value;
 
             if (string.IsNullOrEmpty(Options.MiddleCert))
             {
@@ -40,10 +40,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             RootCertificate = UnionPaySignature.GetCertificate(Options.RootCert);
         }
 
-        public UnionPayNotifyClient(IOptions<UnionPayOptions> optionsAccessor)
-            : this(optionsAccessor, null)
-        { }
-
         #endregion
 
         #region IUnionPayNotifyClient Members
@@ -52,7 +48,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         {
             var parameters = await GetParametersAsync(request);
 
-            var query = HttpClientEx.BuildQuery(parameters);
+            var query = UnionPayUtility.BuildQuery(parameters);
             Logger?.LogTrace(0, "Request:{query}", query);
 
             var parser = new UnionPayDictionaryParser<T>();

@@ -1,15 +1,14 @@
-﻿using Essensoft.AspNetCore.Payment.Security;
+﻿using System;
+using System.Net.Http;
+using System.Text;
+using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.Security;
 using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
 using Essensoft.AspNetCore.Payment.WeChatPay.Request;
 using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Org.BouncyCastle.Crypto;
-using System;
-using System.IO;
-using System.Net.Http;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
@@ -36,23 +35,22 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         private readonly AsymmetricKeyParameter PublicKey;
 
-        public WeChatPayOptions Options { get; set; }
-
         public virtual ILogger Logger { get; set; }
 
-        protected internal HttpClientEx Client { get; set; }
+        public virtual IHttpClientFactory ClientFactory { get; set; }
 
-        protected internal HttpClientEx CertificateClient { get; set; }
+        public WeChatPayOptions Options { get; }
 
         #region WeChatPayClient Constructors
 
         public WeChatPayClient(
-            IOptions<WeChatPayOptions> optionsAccessor,
-            ILogger<WeChatPayClient> logger)
+            ILogger<WeChatPayClient> logger,
+            IHttpClientFactory clientFactory,
+            IOptions<WeChatPayOptions> optionsAccessor)
         {
-            Options = optionsAccessor.Value;
             Logger = logger;
-            Client = new HttpClientEx();
+            ClientFactory = clientFactory;
+            Options = optionsAccessor.Value;
 
             if (string.IsNullOrEmpty(Options.AppId))
             {
@@ -69,36 +67,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 throw new ArgumentNullException(nameof(Options.Key));
             }
 
-            if (!string.IsNullOrEmpty(Options.Certificate))
-            {
-                var clientHandler = new HttpClientHandler();
-                clientHandler.ClientCertificates.Add(
-                    File.Exists(Options.Certificate) ? new X509Certificate2(Options.Certificate, Options.MchId) :
-                    new X509Certificate2(Convert.FromBase64String(Options.Certificate), Options.MchId, X509KeyStorageFlags.MachineKeySet));
-                CertificateClient = new HttpClientEx(clientHandler);
-            }
-
             if (!string.IsNullOrEmpty(Options.RsaPublicKey))
             {
                 PublicKey = RSAUtilities.GetPublicKeyParameterFormAsn1PublicKey(Options.RsaPublicKey);
-            }
-        }
-
-        public WeChatPayClient(IOptions<WeChatPayOptions> optionsAccessor)
-            : this(optionsAccessor, null)
-        { }
-
-        #endregion
-
-        #region IWeChatPayClient Members
-
-        public void SetTimeout(int timeout)
-        {
-            Client.Timeout = new TimeSpan(0, 0, 0, timeout);
-
-            if (CertificateClient != null)
-            {
-                CertificateClient.Timeout = new TimeSpan(0, 0, 0, timeout);
             }
         }
 
@@ -121,16 +92,19 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             }
 
             sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, Options.Key));
-            var content = HttpClientEx.BuildContent(sortedTxtParams);
+            var content = WeChatPayUtility.BuildContent(sortedTxtParams);
             Logger?.LogTrace(0, "Request:{content}", content);
 
-            var body = await Client.DoPostAsync(request.GetRequestUrl(), content);
-            Logger?.LogTrace(1, "Response:{body}", body);
+            using (var client = ClientFactory.CreateClient())
+            {
+                var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
+                Logger?.LogTrace(1, "Response:{body}", body);
 
-            var parser = new WeChatPayXmlParser<T>();
-            var rsp = parser.Parse(body);
-            CheckResponseSign(rsp);
-            return rsp;
+                var parser = new WeChatPayXmlParser<T>();
+                var rsp = parser.Parse(body);
+                CheckResponseSign(rsp);
+                return rsp;
+            }
         }
 
         #endregion
@@ -141,11 +115,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         {
             var signType = true; // ture:MD5，false:HMAC-SHA256
             var excludeSignType = true;
-
-            if (CertificateClient == null)
-            {
-                throw new ArgumentNullException(nameof(Options.Certificate));
-            }
 
             // 字典排序
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
@@ -214,7 +183,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
                 sortedTxtParams.Add(mch_id, Options.MchId);
             }
-            else if (request is WeChatPaySendRedPackRequest|| request is WeChatPaySendGroupRedPackRequest)
+            else if (request is WeChatPaySendRedPackRequest || request is WeChatPaySendGroupRedPackRequest)
             {
                 if (string.IsNullOrEmpty(sortedTxtParams.GetValue(wxappid)))
                 {
@@ -236,16 +205,20 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             sortedTxtParams.Add(nonce_str, Guid.NewGuid().ToString("N"));
             sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, Options.Key, signType, excludeSignType));
 
-            var content = HttpClientEx.BuildContent(sortedTxtParams);
+            var content = WeChatPayUtility.BuildContent(sortedTxtParams);
             Logger?.LogTrace(0, "Request:{content}", content);
 
-            var body = await CertificateClient.DoPostAsync(request.GetRequestUrl(), content);
-            Logger?.LogTrace(1, "Response:{body}", body);
+            using (var client = ClientFactory.CreateClient(WeChatPayUtility.CertificateClientName))
+            {
+                var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
 
-            var parser = new WeChatPayXmlParser<T>();
-            var rsp = parser.Parse(body);
-            CheckResponseSign(rsp, signType, excludeSignType);
-            return rsp;
+                Logger?.LogTrace(1, "Response:{body}", body);
+
+                var parser = new WeChatPayXmlParser<T>();
+                var rsp = parser.Parse(body);
+                CheckResponseSign(rsp, signType, excludeSignType);
+                return rsp;
+            }
         }
 
         #endregion
@@ -257,7 +230,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
             if (request is WeChatPayAppCallPaymentRequest)
             {
-                if(string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
+                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
                 {
                     sortedTxtParams.Add(appid, Options.AppId);
                 }
@@ -270,7 +243,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 sortedTxtParams.Add(timestamp, WeChatPayUtility.GetTimeStamp());
                 sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, Options.Key));
             }
-            else if(request is WeChatPayLiteAppCallPaymentRequest || request is WeChatPayH5CallPaymentRequest)
+            else if (request is WeChatPayLiteAppCallPaymentRequest || request is WeChatPayH5CallPaymentRequest)
             {
                 if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appId)))
                 {

@@ -16,10 +16,5 @@
         /// API秘钥
         /// </summary>
         public string Key { get; set; }
-
-        /// <summary>
-        /// API证书文件 文件路径或文件的Base64串
-        /// </summary>
-        public string Certificate { get; set; }
     }
 }

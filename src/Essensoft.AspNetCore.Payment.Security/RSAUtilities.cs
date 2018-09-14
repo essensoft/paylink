@@ -1,11 +1,11 @@
-﻿using Org.BouncyCastle.Asn1;
+﻿using System;
+using System.Security.Cryptography;
+using Org.BouncyCastle.Asn1;
 using Org.BouncyCastle.Asn1.Pkcs;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Crypto.Parameters;
 using Org.BouncyCastle.Security;
-using System;
-using System.Security.Cryptography;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {

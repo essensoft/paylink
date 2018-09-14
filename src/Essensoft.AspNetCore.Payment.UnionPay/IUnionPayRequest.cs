@@ -27,7 +27,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         /// </summary>
         /// <returns></returns>
         bool HasEncryptCertId();
-    
+
         /// <summary>
         /// 获取所有的Key-Value形式的文本请求参数字典。其中：
         /// Key: 请求参数名

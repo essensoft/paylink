@@ -1,5 +1,6 @@
-using Essensoft.AspNetCore.Payment.LianLianPay;
 using System;
+using Essensoft.AspNetCore.Payment.LianLianPay;
+using Essensoft.AspNetCore.Payment.LianLianPay.Utility;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -21,6 +22,12 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 services.Configure(setupAction);
             }
+        }
+
+        public static void AddLianLianPayHttpClient(
+            this IServiceCollection services)
+        {
+            services.AddHttpClient(LianLianPayUtility.DefaultClientName);
         }
     }
 }

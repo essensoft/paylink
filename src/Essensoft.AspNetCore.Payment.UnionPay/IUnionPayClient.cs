@@ -4,8 +4,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 {
     public interface IUnionPayClient
     {
-        void SetTimeout(int timeout);
-
         /// <summary>
         /// 执行UnionPay API请求。
         /// </summary>

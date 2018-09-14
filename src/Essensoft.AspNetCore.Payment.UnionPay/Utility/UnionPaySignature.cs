@@ -1,16 +1,16 @@
-﻿using Essensoft.AspNetCore.Payment.Security;
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+using System.Net;
+using System.Text;
+using Essensoft.AspNetCore.Payment.Security;
 using Org.BouncyCastle.Crypto;
 using Org.BouncyCastle.Pkcs;
 using Org.BouncyCastle.Pkix;
 using Org.BouncyCastle.Utilities.Collections;
 using Org.BouncyCastle.X509;
 using Org.BouncyCastle.X509.Store;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Net;
-using System.Text;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 {
