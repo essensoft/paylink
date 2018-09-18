@@ -29,7 +29,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         public virtual IHttpClientFactory ClientFactory { get; set; }
 
-        public UnionPayOptions Options { get; }
+        protected UnionPayOptions Options { get; set; }
 
         #region UnionPayClient Constructors
 

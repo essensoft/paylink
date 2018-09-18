@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         public virtual IHttpClientFactory ClientFactory { get; set; }
 
-        public WeChatPayOptions Options { get; }
+        protected WeChatPayOptions Options { get; set; }
 
         #region WeChatPayClient Constructors
 

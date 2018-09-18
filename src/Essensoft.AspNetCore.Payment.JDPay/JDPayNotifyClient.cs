@@ -22,7 +22,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         public virtual ILogger Logger { get; set; }
 
-        public JDPayOptions Options { get; }
+        protected JDPayOptions Options { get; set; }
 
         #region JDPayNotifyClient Constructors
 
