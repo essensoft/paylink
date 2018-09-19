@@ -47,6 +47,10 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         /// </summary>
         public string SignCertPassword { get; set; }
 
+
+        internal UnionPayCertificate SignCertificate => UnionPaySignature.GetSignCertificate(SignCert, SignCertPassword);
+
+
         private string encryptCert;
         /// <summary>
         /// 加密证书 
@@ -60,7 +64,8 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             set
             {
                 encryptCert = value;
-                EncryptCertificate = UnionPaySignature.GetCertificate(encryptCert);
+                if (!string.IsNullOrEmpty(encryptCert))
+                    EncryptCertificate = UnionPaySignature.GetCertificate(encryptCert);
             }
         }
 
@@ -79,7 +84,8 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             set
             {
                 middleCert = value;
-                MiddleCertificate = UnionPaySignature.GetCertificate(middleCert);
+                if (!string.IsNullOrEmpty(middleCert))
+                    MiddleCertificate = UnionPaySignature.GetCertificate(middleCert);
             }
         }
 
@@ -95,7 +101,8 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             }
             set {
                 rootCert = value;
-                RootCertificate = UnionPaySignature.GetCertificate(rootCert);
+                if (!string.IsNullOrEmpty(rootCert))
+                    RootCertificate = UnionPaySignature.GetCertificate(rootCert);
             }
         }
 

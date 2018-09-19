@@ -24,7 +24,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             set
             {
                 rsaPublicKey = value;
-                PublicRSAParameters = RSAUtilities.GetRSAParametersFormPublicKey(RsaPublicKey);
+                if (!string.IsNullOrEmpty(rsaPublicKey))
+                    PublicRSAParameters = RSAUtilities.GetRSAParametersFormPublicKey(RsaPublicKey);
             }
         }
 
@@ -41,7 +42,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             }
             set {
                 rsaPrivateKey = value;
-                PrivateRSAParameters = RSAUtilities.GetRSAParametersFormPrivateKey(rsaPrivateKey);
+                if(!string.IsNullOrEmpty(rsaPrivateKey))
+                    PrivateRSAParameters = RSAUtilities.GetRSAParametersFormPrivateKey(rsaPrivateKey);
             }
         }
 

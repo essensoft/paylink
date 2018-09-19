@@ -41,7 +41,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         public virtual IHttpClientFactory ClientFactory { get; set; }
 
-        protected AlipayOptions Options { get; set; }
+        public AlipayOptions Options { get; protected set; }
 
         #region AlipayClient Constructors
 

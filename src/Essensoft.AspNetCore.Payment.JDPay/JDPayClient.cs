@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         public virtual IHttpClientFactory ClientFactory { get; set; }
 
-        protected JDPayOptions Options { get; set; }
+        public JDPayOptions Options { get; protected set; }
 
         #region JDPayClient Constructors
 

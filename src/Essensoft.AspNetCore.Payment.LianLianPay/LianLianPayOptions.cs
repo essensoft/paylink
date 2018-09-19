@@ -20,7 +20,8 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             }
             set {
                 rsaPublicKey = value;
-                PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(rsaPublicKey);
+                if (!string.IsNullOrEmpty(rsaPublicKey))
+                    PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(rsaPublicKey);
             }
         }
 
@@ -40,7 +41,8 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             set
             {
                 rsaPrivateKey = value;
-                PrivateKey = RSAUtilities.GetKeyParameterFormPrivateKey(rsaPrivateKey);
+                if (!string.IsNullOrEmpty(rsaPrivateKey))
+                    PrivateKey = RSAUtilities.GetKeyParameterFormPrivateKey(rsaPrivateKey);
             }
         }
         

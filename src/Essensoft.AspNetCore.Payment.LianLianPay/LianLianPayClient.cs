@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
         public virtual IHttpClientFactory ClientFactory { get; set; }
 
-        protected LianLianPayOptions Options { get; set; }
+        public LianLianPayOptions Options { get; protected set; }
 
         #region LianLianPayClient Constructors
 

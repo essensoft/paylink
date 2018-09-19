@@ -34,7 +34,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             }
             set {
                 rsaPublicKey = value;
-                PublicKey = RSAUtilities.GetPublicKeyParameterFormAsn1PublicKey(rsaPublicKey);
+                if (!string.IsNullOrEmpty(rsaPublicKey))
+                    PublicKey = RSAUtilities.GetPublicKeyParameterFormAsn1PublicKey(rsaPublicKey);
             }
         }
 
