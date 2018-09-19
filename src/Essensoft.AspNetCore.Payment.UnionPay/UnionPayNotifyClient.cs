@@ -12,7 +12,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
     {
         public virtual ILogger Logger { get; set; }
 
-        protected UnionPayOptions Options { get; set; }
+        public UnionPayOptions Options { get; protected set; }
 
         #region UnionPayNotifyClient Constructors
 

@@ -15,7 +15,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
     {
         public virtual ILogger Logger { get; set; }
 
-        protected AlipayOptions Options { get; set; }
+        public AlipayOptions Options { get; protected set; }
 
         #region AlipayNotifyClient Constructors
 

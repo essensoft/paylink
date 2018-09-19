@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
     {
         public virtual ILogger Logger { get; set; }
 
-        protected LianLianPayOptions Options { get; set; }
+        public LianLianPayOptions Options { get; protected set; }
 
         #region LianLianPayNotifyClient Constructors
 

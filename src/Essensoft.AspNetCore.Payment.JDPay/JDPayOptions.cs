@@ -26,7 +26,8 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             set
             {
                 desKey = value;
-                DesKeyBase64 = Convert.FromBase64String(desKey);
+                if (!string.IsNullOrEmpty(desKey))
+                    DesKeyBase64 = Convert.FromBase64String(desKey);
             }
         }
 
@@ -45,7 +46,8 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             set
             {
                 rsaPublicKey = value;
-                PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(rsaPublicKey);
+                if (!string.IsNullOrEmpty(rsaPublicKey))
+                    PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(rsaPublicKey);
             }
         }
 
@@ -65,7 +67,8 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             set
             {
                 rsaPrivateKey = value;
-                PrivateKey = RSAUtilities.GetKeyParameterFormPrivateKey(rsaPrivateKey);
+                if (!string.IsNullOrEmpty(rsaPrivateKey))
+                    PrivateKey = RSAUtilities.GetKeyParameterFormPrivateKey(rsaPrivateKey);
             }
         }
 

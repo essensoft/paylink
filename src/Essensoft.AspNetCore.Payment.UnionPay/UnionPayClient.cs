@@ -20,13 +20,11 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         private const string MERID = "merId";
         private const string ENCRYPTCERTID = "encryptCertId";
 
-        private UnionPayCertificate SignCertificate => UnionPaySignature.GetSignCertificate(Options.SignCert, Options.SignCertPassword);
-
         public virtual ILogger Logger { get; set; }
 
         public virtual IHttpClientFactory ClientFactory { get; set; }
 
-        protected UnionPayOptions Options { get; set; }
+        public UnionPayOptions Options { get; protected set; }
 
         #region UnionPayClient Constructors
 
@@ -102,7 +100,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 txtParams.Add(ENCRYPTCERTID, Options.EncryptCertificate.certId);
             }
 
-            UnionPaySignature.Sign(txtParams, SignCertificate.certId, SignCertificate.key, Options.SecureKey);
+            UnionPaySignature.Sign(txtParams, Options.SignCertificate.certId, Options.SignCertificate.key, Options.SecureKey);
 
             var query = UnionPayUtility.BuildQuery(txtParams);
             Logger?.LogTrace(0, "Request:{query}", query);
@@ -163,7 +161,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 { MERID, Options.MerId },
             };
 
-            UnionPaySignature.Sign(txtParams, SignCertificate.certId, SignCertificate.key, Options.SecureKey);
+            UnionPaySignature.Sign(txtParams, Options.SignCertificate.certId, Options.SignCertificate.key, Options.SecureKey);
 
             var rsp = Activator.CreateInstance<T>();
 
