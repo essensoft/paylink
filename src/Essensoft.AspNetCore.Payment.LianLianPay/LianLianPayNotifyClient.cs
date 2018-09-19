@@ -1,20 +1,17 @@
-﻿using System;
-using System.IO;
-using System.Threading.Tasks;
-using Essensoft.AspNetCore.Payment.LianLianPay.Parser;
+﻿using Essensoft.AspNetCore.Payment.LianLianPay.Parser;
 using Essensoft.AspNetCore.Payment.LianLianPay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Org.BouncyCastle.Crypto;
+using System;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     public class LianLianPayNotifyClient : ILianLianPayNotifyClient
     {
-        private readonly AsymmetricKeyParameter PublicKey;
-
         public virtual ILogger Logger { get; set; }
 
         protected LianLianPayOptions Options { get; set; }
@@ -41,9 +38,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             if (string.IsNullOrEmpty(Options.RsaPublicKey))
             {
                 throw new ArgumentNullException(nameof(Options.RsaPublicKey));
-            }
-
-            PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(Options.RsaPublicKey);
+            }          
         }
 
         #endregion
@@ -107,7 +102,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             }
 
             var prestr = LianLianPaySecurity.GetSignContent(para);
-            if (!MD5WithRSA.VerifyData(prestr, sign, PublicKey))
+            if (!MD5WithRSA.VerifyData(prestr, sign, Options.PublicKey))
             {
                 throw new Exception("sign check fail: check Sign and Data Fail JSON also");
             }

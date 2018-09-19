@@ -20,10 +20,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         private const string MERID = "merId";
         private const string ENCRYPTCERTID = "encryptCertId";
 
-        private readonly UnionPayCertificate SignCertificate;
-        private readonly UnionPayCertificate EncryptCertificate;
-        private readonly UnionPayCertificate MiddleCertificate;
-        private readonly UnionPayCertificate RootCertificate;
+        private UnionPayCertificate SignCertificate => UnionPaySignature.GetSignCertificate(Options.SignCert, Options.SignCertPassword);
 
         public virtual ILogger Logger { get; set; }
 
@@ -65,12 +62,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             if (string.IsNullOrEmpty(Options.RootCert))
             {
                 throw new ArgumentNullException(nameof(Options.RootCert));
-            }
-
-            SignCertificate = UnionPaySignature.GetSignCertificate(Options.SignCert, Options.SignCertPassword);
-            EncryptCertificate = UnionPaySignature.GetCertificate(Options.EncryptCert);
-            MiddleCertificate = UnionPaySignature.GetCertificate(Options.MiddleCert);
-            RootCertificate = UnionPaySignature.GetCertificate(Options.RootCert);
+            }          
         }
 
         #endregion
@@ -107,7 +99,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
             if (request.HasEncryptCertId())
             {
-                txtParams.Add(ENCRYPTCERTID, EncryptCertificate.certId);
+                txtParams.Add(ENCRYPTCERTID, Options.EncryptCertificate.certId);
             }
 
             UnionPaySignature.Sign(txtParams, SignCertificate.certId, SignCertificate.key, Options.SecureKey);
@@ -128,7 +120,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 }
 
                 var ifValidateCNName = !Options.TestMode;
-                if (!UnionPaySignature.Validate(dic, RootCertificate.cert, MiddleCertificate.cert, Options.SecureKey, ifValidateCNName))
+                if (!UnionPaySignature.Validate(dic, Options.RootCertificate.cert, Options.MiddleCertificate.cert, Options.SecureKey, ifValidateCNName))
                 {
                     throw new Exception("sign check fail: check Sign and Data Fail!");
                 }

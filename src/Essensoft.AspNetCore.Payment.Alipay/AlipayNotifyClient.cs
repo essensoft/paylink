@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Alipay.Parser;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
-using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -14,8 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 {
     public class AlipayNotifyClient : IAlipayNotifyClient
     {
-        private readonly RSAParameters PublicRSAParameters;
-
         public virtual ILogger Logger { get; set; }
 
         protected AlipayOptions Options { get; set; }
@@ -32,9 +29,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             if (string.IsNullOrEmpty(Options.RsaPublicKey))
             {
                 throw new ArgumentNullException(nameof(Options.RsaPublicKey));
-            }
-
-            PublicRSAParameters = RSAUtilities.GetRSAParametersFormPublicKey(Options.RsaPublicKey);
+            }            
         }
 
         #endregion
@@ -49,7 +44,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             var parser = new AlipayDictionaryParser<T>();
             var rsp = parser.Parse(parameters);
-            CheckNotifySign(parameters, PublicRSAParameters, Options.SignType);
+            CheckNotifySign(parameters, Options.PublicRSAParameters, Options.SignType);
             return rsp;
         }
 
