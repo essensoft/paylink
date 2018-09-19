@@ -10,7 +10,6 @@ using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using Org.BouncyCastle.Crypto;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
@@ -23,14 +22,11 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         private const string TIMESTAMP = "timestamp";
         private const string SIGN = "sign";
 
-        private readonly AsymmetricKeyParameter PrivateKey;
-        private readonly AsymmetricKeyParameter PublicKey;
-
         public virtual ILogger Logger { get; set; }
 
         public virtual IHttpClientFactory ClientFactory { get; set; }
 
-        public LianLianPayOptions Options { get; }
+        public LianLianPayOptions Options { get; protected set; }
 
         #region LianLianPayClient Constructors
 
@@ -61,10 +57,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             if (string.IsNullOrEmpty(Options.RsaPublicKey))
             {
                 throw new ArgumentNullException(nameof(Options.RsaPublicKey));
-            }
-
-            PrivateKey = RSAUtilities.GetKeyParameterFormPrivateKey(Options.RsaPrivateKey);
-            PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(Options.RsaPublicKey);
+            }           
         }
 
         #endregion
@@ -82,13 +75,13 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
             // 添加签名
             var signContent = LianLianPaySecurity.GetSignContent(txtParams);
-            txtParams.Add(SIGN, MD5WithRSA.SignData(signContent, PrivateKey));
+            txtParams.Add(SIGN, MD5WithRSA.SignData(signContent, Options.PrivateKey));
 
             var content = string.Empty;
             if (request is LianLianPayPaymentRequest || request is LianLianPayConfirmPaymentRequest)
             {
                 var plaintext = Serialize(txtParams);
-                var ciphertext = LianLianPaySecurity.Encrypt(plaintext, PublicKey);
+                var ciphertext = LianLianPaySecurity.Encrypt(plaintext, Options.PublicKey);
                 content = @"{""pay_load"":""" + ciphertext + @""",""oid_partner"":""" + Options.OidPartner + @"""}";
             }
             else
@@ -143,7 +136,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
             // 添加签名
             var signContent = LianLianPaySecurity.GetSignContent(txtParams);
-            txtParams.Add(SIGN, MD5WithRSA.SignData(signContent, PrivateKey));
+            txtParams.Add(SIGN, MD5WithRSA.SignData(signContent, Options.PrivateKey));
 
             var body = string.Empty;
 
@@ -193,7 +186,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
             // 添加签名
             var signContent = LianLianPaySecurity.GetSignContent(txtParams);
-            txtParams.Add(SIGN, MD5WithRSA.SignData(signContent, PrivateKey));
+            txtParams.Add(SIGN, MD5WithRSA.SignData(signContent, Options.PrivateKey));
 
             var content = Serialize(txtParams);
             Logger?.LogTrace(0, "Request:{content}", content);
@@ -251,7 +244,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             if (parameters.TryGetValue("sign", out var sign))
             {
                 var prestr = LianLianPaySecurity.GetSignContent(parameters, excludePara);
-                if (!MD5WithRSA.VerifyData(prestr, sign, PublicKey))
+                if (!MD5WithRSA.VerifyData(prestr, sign, Options.PublicKey))
                 {
                     throw new Exception("sign check fail: check Sign and Data Fail JSON also");
                 }

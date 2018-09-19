@@ -16,7 +16,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
     {
         public virtual ILogger Logger { get; set; }
 
-        public WeChatPayOptions Options { get; }
+        public WeChatPayOptions Options { get; protected set; }
 
         #region WeChatPayNotifyClient Constructors
 

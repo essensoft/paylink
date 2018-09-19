@@ -1,4 +1,7 @@
-﻿namespace Essensoft.AspNetCore.Payment.Alipay
+﻿using Essensoft.AspNetCore.Payment.Security;
+using System.Security.Cryptography;
+
+namespace Essensoft.AspNetCore.Payment.Alipay
 {
     public class AlipayOptions
     {
@@ -9,15 +12,43 @@
         /// </summary>
         public string AppId { get; set; }
 
+        private string rsaPublicKey;
         /// <summary>
         /// 支付宝公钥
         /// </summary>
-        public string RsaPublicKey { get; set; }
+        public string RsaPublicKey {
+            get
+            {
+                return rsaPublicKey;
+            }
+            set
+            {
+                rsaPublicKey = value;
+                if (!string.IsNullOrEmpty(rsaPublicKey))
+                    PublicRSAParameters = RSAUtilities.GetRSAParametersFormPublicKey(RsaPublicKey);
+            }
+        }
 
+        internal RSAParameters PublicRSAParameters;
+        
+
+        private string rsaPrivateKey;
         /// <summary>
         /// 应用私钥
         /// </summary>
-        public string RsaPrivateKey { get; set; }
+        public string RsaPrivateKey {
+            get {
+                return rsaPrivateKey;
+            }
+            set {
+                rsaPrivateKey = value;
+                if(!string.IsNullOrEmpty(rsaPrivateKey))
+                    PrivateRSAParameters = RSAUtilities.GetRSAParametersFormPrivateKey(rsaPrivateKey);
+            }
+        }
+
+        internal RSAParameters PrivateRSAParameters;
+        
 
         /// <summary>
         /// 服务地址

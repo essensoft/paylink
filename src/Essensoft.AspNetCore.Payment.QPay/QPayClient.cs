@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         public virtual IHttpClientFactory ClientFactory { get; set; }
 
-        public QPayOptions Options { get; }
+        public QPayOptions Options { get; protected set; }
 
         #region QPayClient Constructors
 

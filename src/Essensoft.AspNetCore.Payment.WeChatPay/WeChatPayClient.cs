@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Security;
 using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
@@ -8,7 +7,6 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Request;
 using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Org.BouncyCastle.Crypto;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
@@ -31,15 +29,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         private const string timeStamp = "timeStamp";
         private const string nonceStr = "nonceStr";
         private const string signType = "signType";
-        private const string paySign = "paySign";
-
-        private readonly AsymmetricKeyParameter PublicKey;
+        private const string paySign = "paySign";        
 
         public virtual ILogger Logger { get; set; }
 
         public virtual IHttpClientFactory ClientFactory { get; set; }
 
-        public WeChatPayOptions Options { get; }
+        public WeChatPayOptions Options { get; protected set; }
 
         #region WeChatPayClient Constructors
 
@@ -65,12 +61,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             if (string.IsNullOrEmpty(Options.Key))
             {
                 throw new ArgumentNullException(nameof(Options.Key));
-            }
-
-            if (!string.IsNullOrEmpty(Options.RsaPublicKey))
-            {
-                PublicKey = RSAUtilities.GetPublicKeyParameterFormAsn1PublicKey(Options.RsaPublicKey);
-            }
+            }          
         }
 
         #endregion
@@ -135,15 +126,15 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             }
             else if (request is WeChatPayPayBankRequest)
             {
-                if (PublicKey == null)
+                if (Options.PublicKey == null)
                 {
                     throw new ArgumentNullException(nameof(Options.RsaPublicKey));
                 }
 
-                var no = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(sortedTxtParams.GetValue(enc_bank_no), PublicKey);
+                var no = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(sortedTxtParams.GetValue(enc_bank_no), Options.PublicKey);
                 sortedTxtParams.SetValue(enc_bank_no, no);
 
-                var name = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(sortedTxtParams.GetValue(enc_true_name), PublicKey);
+                var name = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(sortedTxtParams.GetValue(enc_true_name), Options.PublicKey);
                 sortedTxtParams.SetValue(enc_true_name, name);
 
                 sortedTxtParams.Add(mch_id, Options.MchId);

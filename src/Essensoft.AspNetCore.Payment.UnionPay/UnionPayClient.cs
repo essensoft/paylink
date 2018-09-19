@@ -20,16 +20,11 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         private const string MERID = "merId";
         private const string ENCRYPTCERTID = "encryptCertId";
 
-        private readonly UnionPayCertificate SignCertificate;
-        private readonly UnionPayCertificate EncryptCertificate;
-        private readonly UnionPayCertificate MiddleCertificate;
-        private readonly UnionPayCertificate RootCertificate;
-
         public virtual ILogger Logger { get; set; }
 
         public virtual IHttpClientFactory ClientFactory { get; set; }
 
-        public UnionPayOptions Options { get; }
+        public UnionPayOptions Options { get; protected set; }
 
         #region UnionPayClient Constructors
 
@@ -65,12 +60,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             if (string.IsNullOrEmpty(Options.RootCert))
             {
                 throw new ArgumentNullException(nameof(Options.RootCert));
-            }
-
-            SignCertificate = UnionPaySignature.GetSignCertificate(Options.SignCert, Options.SignCertPassword);
-            EncryptCertificate = UnionPaySignature.GetCertificate(Options.EncryptCert);
-            MiddleCertificate = UnionPaySignature.GetCertificate(Options.MiddleCert);
-            RootCertificate = UnionPaySignature.GetCertificate(Options.RootCert);
+            }          
         }
 
         #endregion
@@ -107,10 +97,10 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
             if (request.HasEncryptCertId())
             {
-                txtParams.Add(ENCRYPTCERTID, EncryptCertificate.certId);
+                txtParams.Add(ENCRYPTCERTID, Options.EncryptCertificate.certId);
             }
 
-            UnionPaySignature.Sign(txtParams, SignCertificate.certId, SignCertificate.key, Options.SecureKey);
+            UnionPaySignature.Sign(txtParams, Options.SignCertificate.certId, Options.SignCertificate.key, Options.SecureKey);
 
             var query = UnionPayUtility.BuildQuery(txtParams);
             Logger?.LogTrace(0, "Request:{query}", query);
@@ -128,7 +118,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 }
 
                 var ifValidateCNName = !Options.TestMode;
-                if (!UnionPaySignature.Validate(dic, RootCertificate.cert, MiddleCertificate.cert, Options.SecureKey, ifValidateCNName))
+                if (!UnionPaySignature.Validate(dic, Options.RootCertificate.cert, Options.MiddleCertificate.cert, Options.SecureKey, ifValidateCNName))
                 {
                     throw new Exception("sign check fail: check Sign and Data Fail!");
                 }
@@ -171,7 +161,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 { MERID, Options.MerId },
             };
 
-            UnionPaySignature.Sign(txtParams, SignCertificate.certId, SignCertificate.key, Options.SecureKey);
+            UnionPaySignature.Sign(txtParams, Options.SignCertificate.certId, Options.SignCertificate.key, Options.SecureKey);
 
             var rsp = Activator.CreateInstance<T>();
 
