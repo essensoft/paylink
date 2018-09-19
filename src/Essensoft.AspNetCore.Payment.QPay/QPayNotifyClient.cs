@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
     {
         public virtual ILogger Logger { get; set; }
 
-        public QPayOptions Options { get; }
+        public QPayOptions Options { get; protected set; }
 
         #region QPayNotifyClient Constructors
 

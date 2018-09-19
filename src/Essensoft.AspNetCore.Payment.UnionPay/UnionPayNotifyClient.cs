@@ -10,12 +10,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 {
     public class UnionPayNotifyClient : IUnionPayNotifyClient
     {
-        private readonly UnionPayCertificate MiddleCertificate;
-        private readonly UnionPayCertificate RootCertificate;
-
         public virtual ILogger Logger { get; set; }
 
-        public UnionPayOptions Options { get; }
+        public UnionPayOptions Options { get; protected set; }
 
         #region UnionPayNotifyClient Constructors
 
@@ -35,9 +32,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             {
                 throw new ArgumentNullException(nameof(Options.RootCert));
             }
-
-            MiddleCertificate = UnionPaySignature.GetCertificate(Options.MiddleCert);
-            RootCertificate = UnionPaySignature.GetCertificate(Options.RootCert);
         }
 
         #endregion
@@ -80,7 +74,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             }
 
             var ifValidateCNName = !Options.TestMode;
-            if (!UnionPaySignature.Validate(dic, RootCertificate.cert, MiddleCertificate.cert, Options.SecureKey, ifValidateCNName))
+            if (!UnionPaySignature.Validate(dic, Options.RootCertificate.cert, Options.MiddleCertificate.cert, Options.SecureKey, ifValidateCNName))
             {
                 throw new Exception("sign check fail: check Sign and Data Fail!");
             }

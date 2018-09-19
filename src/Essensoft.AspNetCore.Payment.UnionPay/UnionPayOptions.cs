@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Payment.UnionPay
+﻿using Essensoft.AspNetCore.Payment.UnionPay.Utility;
+
+namespace Essensoft.AspNetCore.Payment.UnionPay
 {
     public class UnionPayOptions
     {
@@ -45,20 +47,66 @@
         /// </summary>
         public string SignCertPassword { get; set; }
 
+
+        internal UnionPayCertificate SignCertificate => UnionPaySignature.GetSignCertificate(SignCert, SignCertPassword);
+
+
+        private string encryptCert;
         /// <summary>
         /// 加密证书 
         /// </summary>
-        public string EncryptCert { get; set; }
+        public string EncryptCert
+        {
+            get
+            {
+                return encryptCert;
+            }
+            set
+            {
+                encryptCert = value;
+                if (!string.IsNullOrEmpty(encryptCert))
+                    EncryptCertificate = UnionPaySignature.GetCertificate(encryptCert);
+            }
+        }
 
+        internal UnionPayCertificate EncryptCertificate;
+
+        private string middleCert;
         /// <summary>
         /// 验签中级证书
         /// </summary>
-        public string MiddleCert { get; set; }
+        public string MiddleCert
+        {
+            get
+            {
+                return middleCert;
+            }
+            set
+            {
+                middleCert = value;
+                if (!string.IsNullOrEmpty(middleCert))
+                    MiddleCertificate = UnionPaySignature.GetCertificate(middleCert);
+            }
+        }
 
+        internal UnionPayCertificate MiddleCertificate;
+
+        private string rootCert;
         /// <summary>
         /// 验签根证书 
         /// </summary>
-        public string RootCert { get; set; }
+        public string RootCert {
+            get {
+                return rootCert;
+            }
+            set {
+                rootCert = value;
+                if (!string.IsNullOrEmpty(rootCert))
+                    RootCertificate = UnionPaySignature.GetCertificate(rootCert);
+            }
+        }
+
+        internal UnionPayCertificate RootCertificate;
 
         /// <summary>
         /// 散列方式签名密钥

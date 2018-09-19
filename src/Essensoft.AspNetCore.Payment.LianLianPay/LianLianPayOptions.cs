@@ -1,18 +1,52 @@
-﻿namespace Essensoft.AspNetCore.Payment.LianLianPay
+﻿using Essensoft.AspNetCore.Payment.Security;
+using Org.BouncyCastle.Crypto;
+
+namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     public class LianLianPayOptions
     {
         public static readonly string DefaultClientName = "Payment.LianLianPay.Client";
 
+        private string rsaPublicKey;
+
         /// <summary>
         /// 连连支付公钥
         /// </summary>
-        public string RsaPublicKey { get; set; }
+        public string RsaPublicKey
+        {
+            get
+            {
+                return rsaPublicKey;
+            }
+            set {
+                rsaPublicKey = value;
+                if (!string.IsNullOrEmpty(rsaPublicKey))
+                    PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(rsaPublicKey);
+            }
+        }
+
+        internal AsymmetricKeyParameter PublicKey;
+
+        private string rsaPrivateKey;
 
         /// <summary>
         /// 商户私钥
         /// </summary>
-        public string RsaPrivateKey { get; set; }
+        public string RsaPrivateKey
+        {
+            get
+            {
+                return rsaPrivateKey;
+            }
+            set
+            {
+                rsaPrivateKey = value;
+                if (!string.IsNullOrEmpty(rsaPrivateKey))
+                    PrivateKey = RSAUtilities.GetKeyParameterFormPrivateKey(rsaPrivateKey);
+            }
+        }
+        
+        internal AsymmetricKeyParameter PrivateKey;
 
         /// <summary>
         /// 商户号
