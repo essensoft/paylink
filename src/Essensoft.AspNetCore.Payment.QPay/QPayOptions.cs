@@ -2,8 +2,8 @@
 {
     public class QPayOptions
     {
-        public static readonly string DefaultClientName = "Payment.QPay.Client";
-        public static readonly string CertificateClientName = "Payment.QPay.CertificateClient";
+        public const string DefaultClientName = "Payment.QPay.Client";
+        public const string CertificateClientName = "Payment.QPay.CertificateClient";
 
         /// <summary>
         /// 应用ID

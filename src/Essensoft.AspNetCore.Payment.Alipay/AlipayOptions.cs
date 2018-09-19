@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.Security;
-using System.Security.Cryptography;
+﻿using System.Security.Cryptography;
+using Essensoft.AspNetCore.Payment.Security;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
@@ -12,11 +12,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         /// </summary>
         public string AppId { get; set; }
 
-        private string rsaPublicKey;
         /// <summary>
         /// 支付宝公钥
         /// </summary>
-        public string RsaPublicKey {
+        internal RSAParameters PublicRSAParameters;
+        private string rsaPublicKey;
+        public string RsaPublicKey
+        {
             get
             {
                 return rsaPublicKey;
@@ -25,30 +27,32 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             {
                 rsaPublicKey = value;
                 if (!string.IsNullOrEmpty(rsaPublicKey))
+                {
                     PublicRSAParameters = RSAUtilities.GetRSAParametersFormPublicKey(RsaPublicKey);
+                }
             }
         }
 
-        internal RSAParameters PublicRSAParameters;
-        
-
-        private string rsaPrivateKey;
         /// <summary>
         /// 应用私钥
         /// </summary>
-        public string RsaPrivateKey {
-            get {
+        internal RSAParameters PrivateRSAParameters;
+        private string rsaPrivateKey;
+        public string RsaPrivateKey
+        {
+            get
+            {
                 return rsaPrivateKey;
             }
-            set {
+            set
+            {
                 rsaPrivateKey = value;
-                if(!string.IsNullOrEmpty(rsaPrivateKey))
+                if (!string.IsNullOrEmpty(rsaPrivateKey))
+                {
                     PrivateRSAParameters = RSAUtilities.GetRSAParametersFormPrivateKey(rsaPrivateKey);
+                }
             }
         }
-
-        internal RSAParameters PrivateRSAParameters;
-        
 
         /// <summary>
         /// 服务地址
