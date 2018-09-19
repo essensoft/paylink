@@ -10,16 +10,11 @@ using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Org.BouncyCastle.Crypto;
 
 namespace Essensoft.AspNetCore.Payment.JDPay
 {
     public class JDPayNotifyClient : IJDPayNotifyClient
     {
-        private readonly AsymmetricKeyParameter PrivateKey;
-        private readonly AsymmetricKeyParameter PublicKey;
-        private readonly byte[] DesKey;
-
         public virtual ILogger Logger { get; set; }
 
         protected JDPayOptions Options { get; set; }
@@ -51,11 +46,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             if (string.IsNullOrEmpty(Options.DesKey))
             {
                 throw new ArgumentNullException(nameof(Options.DesKey));
-            }
-
-            PrivateKey = RSAUtilities.GetKeyParameterFormPrivateKey(Options.RsaPrivateKey);
-            PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(Options.RsaPublicKey);
-            DesKey = Convert.FromBase64String(Options.DesKey);
+            }          
         }
 
         #endregion
@@ -98,7 +89,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 {
                     var encrypt = rsp.Encrypt;
                     var base64EncryptStr = Encoding.UTF8.GetString(Convert.FromBase64String(encrypt));
-                    var reqBody = JDPaySecurity.DecryptECB(base64EncryptStr, DesKey);
+                    var reqBody = JDPaySecurity.DecryptECB(base64EncryptStr,Options.DesKeyBase64);
                     Logger?.LogTrace(1, "Encrypt Content:{reqBody}", reqBody);
 
                     var reqBodyDoc = new XmlDocument() { XmlResolver = null };
@@ -116,7 +107,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                         reqBodyStr = reqBodyStr.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", xmlh);
                     }
                     var sha256SourceSignString = SHA256.Compute(reqBodyStr);
-                    var decryptByte = RSA_ECB_PKCS1Padding.Decrypt(Convert.FromBase64String(sign), PublicKey);
+                    var decryptByte = RSA_ECB_PKCS1Padding.Decrypt(Convert.FromBase64String(sign), Options.PublicKey);
                     var decryptStr = JDPaySecurity.BytesToString(decryptByte);
                     if (sha256SourceSignString == decryptStr)
                     {
@@ -157,7 +148,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                         var value = iter.Value.ToString();
                         if (isDecrypt)
                         {
-                            value = iter.Key == JDPayContants.SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, DesKey);
+                            value = iter.Key == JDPayContants.SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, Options.DesKeyBase64);
                         }
                         parameters.Add(iter.Key, value);
                     }
@@ -172,7 +163,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                         var value = iter.Value.ToString();
                         if (isDecrypt)
                         {
-                            value = iter.Key == JDPayContants.SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, DesKey);
+                            value = iter.Key == JDPayContants.SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, Options.DesKeyBase64);
                         }
                         parameters.Add(iter.Key, value);
                     }
@@ -194,7 +185,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             }
 
             var signContent = JDPaySecurity.GetSignContent(parameters);
-            if (!JDPaySecurity.RSACheckContent(signContent, sign, PublicKey))
+            if (!JDPaySecurity.RSACheckContent(signContent, sign, Options.PublicKey))
             {
                 throw new Exception("sign check fail: check Sign and Data Fail");
             }

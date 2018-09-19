@@ -35,10 +35,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         private const string ENCRYPT_TYPE = "encrypt_type";
         private const string BIZ_CONTENT = "biz_content";
         private const string APP_AUTH_TOKEN = "app_auth_token";
-        private const string RETURN_URL = "return_url";
-
-        private readonly RSAParameters PrivateRSAParameters;
-        private readonly RSAParameters PublicRSAParameters;
+        private const string RETURN_URL = "return_url";        
 
         public virtual ILogger Logger { get; set; }
 
@@ -70,10 +67,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             if (string.IsNullOrEmpty(Options.RsaPublicKey))
             {
                 throw new ArgumentNullException(nameof(Options.RsaPublicKey));
-            }
-
-            PrivateRSAParameters = RSAUtilities.GetRSAParametersFormPrivateKey(Options.RsaPrivateKey);
-            PublicRSAParameters = RSAUtilities.GetRSAParametersFormPublicKey(Options.RsaPublicKey);
+            }          
         }
 
         #endregion
@@ -139,7 +133,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             // 添加签名参数
             var signContent = AlipaySignature.GetSignContent(txtParams);
-            txtParams.Add(SIGN, AlipaySignature.RSASignContent(signContent, PrivateRSAParameters, Options.SignType));
+            txtParams.Add(SIGN, AlipaySignature.RSASignContent(signContent, Options.PrivateRSAParameters, Options.SignType));
 
             // 是否需要上传文件
             var body = string.Empty;
@@ -270,7 +264,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             // 添加签名参数
             var signContent = AlipaySignature.GetSignContent(txtParams);
-            txtParams.Add(SIGN, AlipaySignature.RSASignContent(signContent, PrivateRSAParameters, Options.SignType));
+            txtParams.Add(SIGN, AlipaySignature.RSASignContent(signContent, Options.PrivateRSAParameters, Options.SignType));
 
             var query = AlipayUtility.BuildQuery(txtParams);
             Logger?.LogTrace(0, "Request:{query}", query);
@@ -309,7 +303,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             var item = ParseRespItem(request, body, parser, Options.EncyptKey, Options.EncyptType);
             rsp = parser.Parse(item.realContent);
 
-            CheckResponseSign(request, item.respContent, rsp.IsError, parser, PublicRSAParameters, Options.SignType);
+            CheckResponseSign(request, item.respContent, rsp.IsError, parser, Options.PublicRSAParameters, Options.SignType);
 
             return rsp;
         }
@@ -404,7 +398,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             // 参数签名
             var signContent = AlipaySignature.GetSignContent(sortedAlipayDic);
-            var signResult = AlipaySignature.RSASignContent(signContent, PrivateRSAParameters, Options.SignType);
+            var signResult = AlipaySignature.RSASignContent(signContent, Options.PrivateRSAParameters, Options.SignType);
 
             // 添加签名结果参数
             sortedAlipayDic.Add(SIGN, signResult);

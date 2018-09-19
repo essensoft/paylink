@@ -1,4 +1,8 @@
-﻿namespace Essensoft.AspNetCore.Payment.JDPay
+﻿using Essensoft.AspNetCore.Payment.Security;
+using Org.BouncyCastle.Crypto;
+using System;
+
+namespace Essensoft.AspNetCore.Payment.JDPay
 {
     public class JDPayOptions
     {
@@ -9,20 +13,63 @@
         /// </summary>
         public string Merchant { get; set; }
 
+        private string desKey;
         /// <summary>
         /// 京东DES秘钥
         /// </summary>
-        public string DesKey { get; set; }
+        public string DesKey
+        {
+            get
+            {
+                return desKey;
+            }
+            set
+            {
+                desKey = value;
+                DesKeyBase64 = Convert.FromBase64String(desKey);
+            }
+        }
 
+        internal byte[] DesKeyBase64;
+
+        private string rsaPublicKey;
         /// <summary>
         /// 京东RSA公钥
         /// </summary>
-        public string RsaPublicKey { get; set; }
+        public string RsaPublicKey
+        {
+            get
+            {
+                return rsaPublicKey;
+            }
+            set
+            {
+                rsaPublicKey = value;
+                PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(rsaPublicKey);
+            }
+        }
+
+        internal AsymmetricKeyParameter PublicKey;
+
+        private string rsaPrivateKey;
 
         /// <summary>
         /// 商户RSA私钥
         /// </summary>
-        public string RsaPrivateKey { get; set; }
+        public string RsaPrivateKey
+        {
+            get
+            {
+                return rsaPrivateKey;
+            }
+            set
+            {
+                rsaPrivateKey = value;
+                PrivateKey = RSAUtilities.GetKeyParameterFormPrivateKey(rsaPrivateKey);
+            }
+        }
+
+        internal AsymmetricKeyParameter PrivateKey;
 
         /// <summary>
         /// 京东代付 提交者会员号
