@@ -4,7 +4,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 {
     public class UnionPayOptions
     {
-        public static readonly string DefaultClientName = "Payment.UnionPay.Client";
+        public const string DefaultClientName = "Payment.UnionPay.Client";
 
         /// <summary>
         /// 商户代码
@@ -47,14 +47,13 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         /// </summary>
         public string SignCertPassword { get; set; }
 
-
         internal UnionPayCertificate SignCertificate => UnionPaySignature.GetSignCertificate(SignCert, SignCertPassword);
 
-
-        private string encryptCert;
         /// <summary>
         /// 加密证书 
         /// </summary>
+        internal UnionPayCertificate EncryptCertificate;
+        private string encryptCert;
         public string EncryptCert
         {
             get
@@ -65,16 +64,17 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             {
                 encryptCert = value;
                 if (!string.IsNullOrEmpty(encryptCert))
+                {
                     EncryptCertificate = UnionPaySignature.GetCertificate(encryptCert);
+                }
             }
         }
 
-        internal UnionPayCertificate EncryptCertificate;
-
-        private string middleCert;
         /// <summary>
         /// 验签中级证书
         /// </summary>
+        internal UnionPayCertificate MiddleCertificate;
+        private string middleCert;
         public string MiddleCert
         {
             get
@@ -85,28 +85,32 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             {
                 middleCert = value;
                 if (!string.IsNullOrEmpty(middleCert))
+                {
                     MiddleCertificate = UnionPaySignature.GetCertificate(middleCert);
+                }
             }
         }
 
-        internal UnionPayCertificate MiddleCertificate;
-
-        private string rootCert;
         /// <summary>
         /// 验签根证书 
         /// </summary>
-        public string RootCert {
-            get {
+        internal UnionPayCertificate RootCertificate;
+        private string rootCert;
+        public string RootCert
+        {
+            get
+            {
                 return rootCert;
             }
-            set {
+            set
+            {
                 rootCert = value;
                 if (!string.IsNullOrEmpty(rootCert))
+                {
                     RootCertificate = UnionPaySignature.GetCertificate(rootCert);
+                }
             }
         }
-
-        internal UnionPayCertificate RootCertificate;
 
         /// <summary>
         /// 散列方式签名密钥

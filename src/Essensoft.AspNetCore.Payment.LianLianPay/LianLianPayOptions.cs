@@ -5,33 +5,34 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     public class LianLianPayOptions
     {
-        public static readonly string DefaultClientName = "Payment.LianLianPay.Client";
-
-        private string rsaPublicKey;
+        public const string DefaultClientName = "Payment.LianLianPay.Client";
 
         /// <summary>
         /// 连连支付公钥
         /// </summary>
+        internal AsymmetricKeyParameter PublicKey;
+        private string rsaPublicKey;
         public string RsaPublicKey
         {
             get
             {
                 return rsaPublicKey;
             }
-            set {
+            set
+            {
                 rsaPublicKey = value;
                 if (!string.IsNullOrEmpty(rsaPublicKey))
+                {
                     PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(rsaPublicKey);
+                }
             }
         }
-
-        internal AsymmetricKeyParameter PublicKey;
-
-        private string rsaPrivateKey;
 
         /// <summary>
         /// 商户私钥
         /// </summary>
+        internal AsymmetricKeyParameter PrivateKey;
+        private string rsaPrivateKey;
         public string RsaPrivateKey
         {
             get
@@ -42,11 +43,11 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             {
                 rsaPrivateKey = value;
                 if (!string.IsNullOrEmpty(rsaPrivateKey))
+                {
                     PrivateKey = RSAUtilities.GetKeyParameterFormPrivateKey(rsaPrivateKey);
+                }
             }
         }
-        
-        internal AsymmetricKeyParameter PrivateKey;
 
         /// <summary>
         /// 商户号

@@ -5,8 +5,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     public class WeChatPayOptions
     {
-        public static readonly string DefaultClientName = "Payment.WechatPay.Client";
-        public static readonly string CertificateClientName = "Payment.WechatPay.CertificateClient";
+        public const string DefaultClientName = "Payment.WechatPay.Client";
+        public const string CertificateClientName = "Payment.WechatPay.CertificateClient";
 
         /// <summary>
         /// 应用账号(公众账号ID/小程序ID/企业号CorpId)
@@ -23,22 +23,25 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// </summary>
         public string Key { get; set; }
 
-        private string rsaPublicKey;
         /// <summary>
         /// RSA公钥 企业付款到银行卡
         /// </summary>
+        internal AsymmetricKeyParameter PublicKey;
+        private string rsaPublicKey;
         public string RsaPublicKey
         {
-            get {
+            get
+            {
                 return rsaPublicKey;
             }
-            set {
+            set
+            {
                 rsaPublicKey = value;
                 if (!string.IsNullOrEmpty(rsaPublicKey))
+                {
                     PublicKey = RSAUtilities.GetPublicKeyParameterFormAsn1PublicKey(rsaPublicKey);
+                }
             }
         }
-
-        internal AsymmetricKeyParameter PublicKey;
     }
 }

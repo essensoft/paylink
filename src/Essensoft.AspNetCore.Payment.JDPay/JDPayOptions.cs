@@ -1,22 +1,23 @@
-﻿using Essensoft.AspNetCore.Payment.Security;
+﻿using System;
+using Essensoft.AspNetCore.Payment.Security;
 using Org.BouncyCastle.Crypto;
-using System;
 
 namespace Essensoft.AspNetCore.Payment.JDPay
 {
     public class JDPayOptions
     {
-        public static readonly string DefaultClientName = "Payment.JDPay.Client";
+        public const string DefaultClientName = "Payment.JDPay.Client";
 
         /// <summary>
         /// 商户号
         /// </summary>
         public string Merchant { get; set; }
 
-        private string desKey;
         /// <summary>
         /// 京东DES秘钥
         /// </summary>
+        internal byte[] DesKeyBase64;
+        private string desKey;
         public string DesKey
         {
             get
@@ -27,16 +28,17 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             {
                 desKey = value;
                 if (!string.IsNullOrEmpty(desKey))
+                {
                     DesKeyBase64 = Convert.FromBase64String(desKey);
+                }
             }
         }
 
-        internal byte[] DesKeyBase64;
-
-        private string rsaPublicKey;
         /// <summary>
         /// 京东RSA公钥
         /// </summary>
+        internal AsymmetricKeyParameter PublicKey;
+        private string rsaPublicKey;
         public string RsaPublicKey
         {
             get
@@ -47,17 +49,17 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             {
                 rsaPublicKey = value;
                 if (!string.IsNullOrEmpty(rsaPublicKey))
+                {
                     PublicKey = RSAUtilities.GetKeyParameterFormPublicKey(rsaPublicKey);
+                }
             }
         }
-
-        internal AsymmetricKeyParameter PublicKey;
-
-        private string rsaPrivateKey;
 
         /// <summary>
         /// 商户RSA私钥
         /// </summary>
+        internal AsymmetricKeyParameter PrivateKey;
+        private string rsaPrivateKey;
         public string RsaPrivateKey
         {
             get
@@ -68,11 +70,11 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             {
                 rsaPrivateKey = value;
                 if (!string.IsNullOrEmpty(rsaPrivateKey))
+                {
                     PrivateKey = RSAUtilities.GetKeyParameterFormPrivateKey(rsaPrivateKey);
+                }
             }
         }
-
-        internal AsymmetricKeyParameter PrivateKey;
 
         /// <summary>
         /// 京东代付 提交者会员号
