@@ -29,7 +29,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         private const string timeStamp = "timeStamp";
         private const string nonceStr = "nonceStr";
         private const string signType = "signType";
-        private const string paySign = "paySign";        
+        private const string paySign = "paySign";
 
         public virtual ILogger Logger { get; set; }
 
@@ -61,7 +61,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             if (string.IsNullOrEmpty(Options.Key))
             {
                 throw new ArgumentNullException(nameof(Options.Key));
-            }          
+            }
         }
 
         #endregion
@@ -102,7 +102,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         #region IWeChatPayClient Members
 
-        public async Task<T> ExecuteAsync<T>(IWeChatPayCertificateRequest<T> request) where T : WeChatPayResponse
+        public async Task<T> ExecuteAsync<T>(IWeChatPayCertificateRequest<T> request, string certificateName = "Default") where T : WeChatPayResponse
         {
             var signType = true; // ture:MD5，false:HMAC-SHA256
             var excludeSignType = true;
@@ -199,7 +199,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             var content = WeChatPayUtility.BuildContent(sortedTxtParams);
             Logger?.LogTrace(0, "Request:{content}", content);
 
-            using (var client = ClientFactory.CreateClient(WeChatPayOptions.CertificateClientName))
+            using (var client = ClientFactory.CreateClient(WeChatPayOptions.CertificateClientName + "." + certificateName))
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
 

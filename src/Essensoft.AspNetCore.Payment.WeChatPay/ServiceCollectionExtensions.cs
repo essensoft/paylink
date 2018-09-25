@@ -2,7 +2,6 @@ using System;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using Essensoft.AspNetCore.Payment.WeChatPay;
-using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -30,24 +29,27 @@ namespace Microsoft.Extensions.DependencyInjection
         public static void AddWeChatPayHttpClient(
             this IServiceCollection services)
         {
-            services.AddWeChatPayHttpClient(certificate: null);
+            services.AddHttpClient(WeChatPayOptions.DefaultClientName);
         }
 
-        public static void AddWeChatPayHttpClient(
+        public static void AddWeChatPayCertificateHttpClient(
             this IServiceCollection services,
             X509Certificate2 certificate)
         {
-            services.AddHttpClient(WeChatPayOptions.DefaultClientName);
+            services.AddWeChatPayCertificateHttpClient(certificateName: "Default", certificate: certificate);
+        }
 
-            if (certificate != null)
+        public static void AddWeChatPayCertificateHttpClient(
+            this IServiceCollection services,
+            string certificateName,
+            X509Certificate2 certificate)
+        {
+            services.AddHttpClient(WeChatPayOptions.CertificateClientName + "." + certificateName).ConfigurePrimaryHttpMessageHandler(() =>
             {
-                services.AddHttpClient(WeChatPayOptions.CertificateClientName).ConfigurePrimaryHttpMessageHandler(() =>
-                {
-                    var handler = new HttpClientHandler();
-                    handler.ClientCertificates.Add(certificate);
-                    return handler;
-                });
-            }
+                var handler = new HttpClientHandler();
+                handler.ClientCertificates.Add(certificate);
+                return handler;
+            });
         }
     }
 }

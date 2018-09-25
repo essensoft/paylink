@@ -15,7 +15,8 @@ namespace Essensoft.AspNetCore.Payment.QPay
         /// 执行QPay Certificate API请求。
         /// </summary>
         /// <param name="request">具体的QPay Certificate API请求</param>
+        /// <param name="certificateName">请求所使用证书的名称</param>
         /// <returns>领域对象</returns>
-        Task<T> ExecuteAsync<T>(IQPayCertificateRequest<T> request) where T : QPayResponse;
+        Task<T> ExecuteAsync<T>(IQPayCertificateRequest<T> request, string certificateName) where T : QPayResponse;
     }
 }

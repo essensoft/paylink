@@ -47,14 +47,16 @@ namespace NewWebApplicationSample
 
             services.AddQPay();
             services.AddQPayHttpClient();
-            //services.AddQPayHttpClient(new X509Certificate2(Convert.FromBase64String(Configuration["QPay:Certificate"]), Configuration["QPay:MchId"], X509KeyStorageFlags.MachineKeySet));
+            //services.AddQPayCertificateHttpClient(new X509Certificate2(Convert.FromBase64String(Configuration["QPay:Certificate"]), Configuration["QPay:MchId"], X509KeyStorageFlags.MachineKeySet));
+            //services.AddQPayCertificateHttpClient("Default", new X509Certificate2(Convert.FromBase64String(Configuration["QPay:Certificate"]), Configuration["QPay:MchId"], X509KeyStorageFlags.MachineKeySet));
 
             services.AddUnionPay();
             services.AddUnionPayHttpClient();
 
             services.AddWeChatPay();
             services.AddWeChatPayHttpClient();
-            //services.AddWeChatPayHttpClient(new X509Certificate2(Convert.FromBase64String(Configuration["WeChatPay:Certificate"]), Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));
+            //services.AddWeChatPayCertificateHttpClient(new X509Certificate2(Convert.FromBase64String(Configuration["WeChatPay:Certificate"]), Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));
+            //services.AddWeChatPayCertificateHttpClient("Default", new X509Certificate2(Convert.FromBase64String(Configuration["WeChatPay:Certificate"]), Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));
 
             services.AddLianLianPay();
             services.AddLianLianPayHttpClient();

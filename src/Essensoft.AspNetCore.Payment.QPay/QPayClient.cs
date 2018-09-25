@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.QPay.Parser;
 using Essensoft.AspNetCore.Payment.QPay.Utility;
@@ -83,7 +82,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         #region IQPayClient Members
 
-        public async Task<T> ExecuteAsync<T>(IQPayCertificateRequest<T> request) where T : QPayResponse
+        public async Task<T> ExecuteAsync<T>(IQPayCertificateRequest<T> request, string certificateName = "Default") where T : QPayResponse
         {
             // 字典排序
             var sortedTxtParams = new QPayDictionary(request.GetParameters())
@@ -101,7 +100,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
             var content = QPayUtility.BuildContent(sortedTxtParams);
             Logger?.LogTrace(0, "Request:{content}", content);
 
-            using (var client = ClientFactory.CreateClient(QPayOptions.CertificateClientName))
+            using (var client = ClientFactory.CreateClient(QPayOptions.CertificateClientName + "." + certificateName))
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
                 Logger?.LogTrace(1, "Response:{body}", body);
