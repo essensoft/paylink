@@ -15,8 +15,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// 执行WeChatPay Certificate API请求。
         /// </summary>
         /// <param name="request">具体的WeChatPay Certificate API请求</param>
+        /// <param name="certificateName">请求所使用证书的名称</param>
         /// <returns>领域对象</returns>
-        Task<T> ExecuteAsync<T>(IWeChatPayCertificateRequest<T> request) where T : WeChatPayResponse;
+        Task<T> ExecuteAsync<T>(IWeChatPayCertificateRequest<T> request, string certificateName) where T : WeChatPayResponse;
 
 
         /// <summary>
