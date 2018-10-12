@@ -70,13 +70,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         public string PartnerTradeNo { get; set; }
 
         /// <summary>
-        /// 微信订单号
+        /// 微信付款单号
         /// </summary>
         [XmlElement("payment_no")]
         public string PaymentNo { get; set; }
 
         /// <summary>
-        /// 微信支付成功时间	
+        /// 付款成功时间	
         /// </summary>
         [XmlElement("payment_time")]
         public string PaymentTime { get; set; }

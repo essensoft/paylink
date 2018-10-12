@@ -34,7 +34,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         public int Amount { get; set; }
 
         /// <summary>
-        /// 付款说明
+        /// 付款备注
         /// </summary>
         public string Desc { get; set; }
 
