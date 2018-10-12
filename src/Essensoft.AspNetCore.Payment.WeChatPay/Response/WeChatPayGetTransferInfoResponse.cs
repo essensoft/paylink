@@ -46,6 +46,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         public string PartnerTradeNo { get; set; }
 
         /// <summary>
+        /// 应用ID
+        /// </summary>
+        [XmlElement("appid")]
+        public string AppId { get; set; }
+
+        /// <summary>
         /// 商户号
         /// </summary>
         [XmlElement("mch_id")]
@@ -94,7 +100,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         public string TransferTime { get; set; }
 
         /// <summary>
-        /// 付款描述
+        /// 付款成功时间
+        /// </summary>
+        [XmlElement("payment_time")]
+        public string PaymentTime { get; set; }
+
+        /// <summary>
+        /// 企业付款备注
         /// </summary>
         [XmlElement("desc")]
         public string Desc { get; set; }
