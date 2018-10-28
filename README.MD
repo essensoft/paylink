@@ -15,9 +15,10 @@ Essensoft.AspNetCore.Payment.QPay           | [![NuGet](https://img.shields.io/n
 Essensoft.AspNetCore.Payment.JDPay		    | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.JDPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.JDPay)
 Essensoft.AspNetCore.Payment.LianLianPay    | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.LianLianPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.LianLianPay)
 Essensoft.AspNetCore.Payment.UnionPay       | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.UnionPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.UnionPay)
+Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Security.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Security)
 
-## Payment 交流方式
-* Payment QQ群 [522457525](https://shang.qq.com/wpa/qunwpa?idkey=aac56c8f02f54893267d3ac90787c1794a7687f3c31a923812a36b67c4ee6271)
+## 交流方式
+* QQ群 [522457525](https://shang.qq.com/wpa/qunwpa?idkey=aac56c8f02f54893267d3ac90787c1794a7687f3c31a923812a36b67c4ee6271)
 
 ## 支持渠道
 
@@ -40,21 +41,21 @@ Essensoft.AspNetCore.Payment.UnionPay       | [![NuGet](https://img.shields.io/n
 * 快捷支付、 网银支付、认证支付、实时付款
 
 ### 银联支付
-* 网关支付、无跳转支付、二维码支付(主扫\被扫)
+* 在线网关支付、无跳转支付、二维码支付(商户)
 
 ## 官方文档
 
-* 支付宝 [文档中心](https://openhome.alipay.com/developmentDocument.htm)
+* [支付宝-蚂蚁金服-文档中心](https://docs.open.alipay.com/catalog)
 
-* 微信支付 [开发文档](https://pay.weixin.qq.com/wiki/doc/api/index.html)
+* [微信支付-开发文档](https://pay.weixin.qq.com/wiki/doc/api/index.html)
 
-* QQ钱包 [开发文档](https://qpay.qq.com/qpaywiki.shtml)
+* [QQ钱包商户平台-开发文档](https://qpay.qq.com/buss/qpaywiki.shtml)
 
-* 京东支付 [开发文档](http://payapi.jd.com)
+* [京东支付文档](http://payapi.jd.com)
 
-* 连连支付 [开放平台](http://open.lianlianpay.com)
+* [连连支付开放平台](http://open.lianlianpay.com)
 
-* 银联支付 [开放平台](https://open.unionpay.com/ajweb/product)
+* [银联支付-中国银联技术开放平台-产品API](https://open.unionpay.com/tjweb/api/list?tagId=20)
 
 ## 参考开发环境
 * Windows 10
