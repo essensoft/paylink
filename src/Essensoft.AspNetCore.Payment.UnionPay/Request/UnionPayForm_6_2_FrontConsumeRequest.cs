@@ -19,21 +19,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         public string TxnTime { get; set; }
 
         /// <summary>
-        /// 交易类型
-        /// </summary>
-        public string TxnType { get; set; }
-
-        /// <summary>
-        /// 交易子类
-        /// </summary>
-        public string TxnSubType { get; set; }
-
-        /// <summary>
-        /// 渠道类型
-        /// </summary>
-        public string ChannelType { get; set; }
-
-        /// <summary>
         /// 后台通知地址
         /// </summary>
         public string BackUrl { get; set; }
@@ -47,6 +32,21 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         /// 交易金额
         /// </summary>
         public string TxnAmt { get; set; }
+
+        /// <summary>
+        /// 交易类型
+        /// </summary>
+        public string TxnType { get; set; }
+
+        /// <summary>
+        /// 交易子类
+        /// </summary>
+        public string TxnSubType { get; set; }
+
+        /// <summary>
+        /// 渠道类型
+        /// </summary>
+        public string ChannelType { get; set; }
 
         /// <summary>
         /// 商户订单号
@@ -198,12 +198,12 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
             {
                 { "bizType", BizType },
                 { "txnTime", TxnTime },
-                { "txnType", TxnType },
-                { "txnSubType", TxnSubType },
-                { "channelType", ChannelType },
                 { "backUrl", BackUrl },
                 { "currencyCode", CurrencyCode },
                 { "txnAmt", TxnAmt },
+                { "txnType", TxnType },
+                { "txnSubType", TxnSubType },
+                { "channelType", ChannelType },
                 { "orderId", OrderId },
                 { "orderDesc", OrderDesc },
                 { "subMerId", SubMerId },
