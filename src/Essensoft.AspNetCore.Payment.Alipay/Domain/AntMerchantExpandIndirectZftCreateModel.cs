@@ -26,6 +26,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AlipayLogonId { get; set; }
 
         /// <summary>
+        /// 身份指定支付宝账号，当平台商需要对二级商户签约时必填
+        /// </summary>
+        [JsonProperty("binding_alipay_logon_id")]
+        [XmlElement("binding_alipay_logon_id")]
+        public string BindingAlipayLogonId { get; set; }
+
+        /// <summary>
         /// 商户结算卡信息。本业务当前只允许传入一张结算卡。与支付宝账号字段二选一必填
         /// </summary>
         [JsonProperty("biz_cards")]

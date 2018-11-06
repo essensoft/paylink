@@ -18,7 +18,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Amount { get; set; }
 
         /// <summary>
-        /// 扩展参数，json字符串格式，目前仅支持的key：order_title：收款方转账账单标题。  用于商户的特定业务信息的传递，只有商户与支付宝约定了传递此参数且约定了参数含义，此参数才有效。
+        /// 扩展参数，json字符串格式，目前仅支持的key=order_title，表示收款方的转账账单标题，value可以根据自己的业务定制。
         /// </summary>
         [JsonProperty("ext_param")]
         [XmlElement("ext_param")]

@@ -82,6 +82,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BsnNo { get; set; }
 
         /// <summary>
+        /// 此字段主要是为了兼容新老逻辑，原来的签约并放款是由bkloanfront自己做了两阶段提交事务一致性处理，后面统一交给bkloantrade系统，如果为NEW则代表走bkloantrade去签约并放款，为空或者其他则保持原来逻辑不变
+        /// </summary>
+        [JsonProperty("bsn_type")]
+        [XmlElement("bsn_type")]
+        public string BsnType { get; set; }
+
+        /// <summary>
         /// 本次支用的授信编号，网商银行审批通过后回传给外部机构，然后由外部机构传入
         /// </summary>
         [JsonProperty("credit_no")]
@@ -145,7 +152,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string LoanTermUnit { get; set; }
 
         /// <summary>
-        /// 是否需要签署合同
+        /// 是否需要校验同名账户，默认是校验
+        /// </summary>
+        [JsonProperty("need_check_account_same_name")]
+        [XmlElement("need_check_account_same_name")]
+        public bool NeedCheckAccountSameName { get; set; }
+
+        /// <summary>
+        /// 是否需要签署合同，默认是签署
         /// </summary>
         [JsonProperty("need_sign_contract")]
         [XmlElement("need_sign_contract")]
@@ -172,6 +186,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [XmlArray("promo_tools")]
         [XmlArrayItem("string")]
         public List<string> PromoTools { get; set; }
+
+        /// <summary>
+        /// 还款账户
+        /// </summary>
+        [JsonProperty("repay_account")]
+        [XmlElement("repay_account")]
+        public MyBkAccountVO RepayAccount { get; set; }
 
         /// <summary>
         /// 还款方式，枚举值如下：  1：等额本息  2：等额本金  3：按期付息到期还本  4：组合还款  6：一次性到期还本付息  7：固定利息等额分期

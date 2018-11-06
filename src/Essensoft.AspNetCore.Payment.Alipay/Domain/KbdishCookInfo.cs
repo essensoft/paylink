@@ -19,7 +19,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Area { get; set; }
 
         /// <summary>
-        /// 渠道    eatin堂食，takeout外卖,paipai 扫码
+        /// 渠道    eatin堂食，takeout外卖,paipai 扫码,kbb2c 口碑点餐
         /// </summary>
         [JsonProperty("cook_channel")]
         [XmlElement("cook_channel")]
@@ -90,7 +90,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string MerchantId { get; set; }
 
         /// <summary>
-        /// 时间约束类型 forever:永久;  week:按周，每周周几 month:按月,每月几号
+        /// 时间约束类型 forever:永久;  week:按周，每周周几 month:按月,每月几号.  如果操作的是菜谱，非空必传。如果是操作门店或者挂明细，可为空
         /// </summary>
         [JsonProperty("period_type")]
         [XmlElement("period_type")]

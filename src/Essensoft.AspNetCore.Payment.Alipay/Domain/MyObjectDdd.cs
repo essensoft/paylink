@@ -11,6 +11,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class MyObjectDdd : AlipayObject
     {
         /// <summary>
+        /// xx
+        /// </summary>
+        [JsonProperty("item")]
+        [XmlElement("item")]
+        public string Item { get; set; }
+
+        /// <summary>
         /// xxx
         /// </summary>
         [JsonProperty("param")]

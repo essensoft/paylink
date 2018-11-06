@@ -11,6 +11,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipaySecurityProdXwbtestprodQueryModel : AlipayObject
     {
         /// <summary>
+        /// Stop
+        /// </summary>
+        [JsonProperty("in_a")]
+        [XmlElement("in_a")]
+        public string InA { get; set; }
+
+        /// <summary>
         /// 省份编码，国标码
         /// </summary>
         [JsonProperty("province_code")]

@@ -49,7 +49,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BusinessLicenseType { get; set; }
 
         /// <summary>
-        /// 商户经营类目，参考文档：https://doc.open.alipay.com/doc2/detail?&docType=1&articleId=105444
+        /// 商户经营类目，参考文档：https://doc.open.alipay.com/doc2/detail?&docType=1&articleId=105444，非银联/网联进件时必传
         /// </summary>
         [JsonProperty("category_id")]
         [XmlElement("category_id")]
@@ -79,6 +79,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<string> LogonId { get; set; }
 
         /// <summary>
+        /// 标准商户类别码，例如5976表示“专业销售-药品医疗-康复和身体辅助用品”，银联/网联进件时必传
+        /// </summary>
+        [JsonProperty("mcc")]
+        [XmlElement("mcc")]
+        public string Mcc { get; set; }
+
+        /// <summary>
         /// 商户备注，可填写额外信息。分支机构进件，需要按照要求填写“分支机构码”，方便进行入驻管控，分支机构码由支付宝指定编码值，具体编码值可联系对口BD获取。填写分支机构码的时候用“##”标识符括起来，放在整条备注信息的开头处。示例：若进件分支机构为吉林省，由于对应分支机构编码值为220000，那么进件的时候应填写备注信息为：##220000##其他备注信息。
         /// </summary>
         [JsonProperty("memo")]
@@ -91,6 +98,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("name")]
         [XmlElement("name")]
         public string Name { get; set; }
+
+        /// <summary>
+        /// 收单机构(例如银行）的标识，填写该机构在支付宝的pid。银联/网联进件时必传。
+        /// </summary>
+        [JsonProperty("org_pid")]
+        [XmlElement("org_pid")]
+        public string OrgPid { get; set; }
 
         /// <summary>
         /// 商户的支付二维码中信息，用于营销活动
@@ -108,7 +122,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ServicePhone { get; set; }
 
         /// <summary>
-        /// 商户来源机构标识，填写机构在支付宝的pid
+        /// 间连受理商户的推荐组织。如果是银行自有商户入驻，则推荐组织为银行，如果是ISV推广的商户，那么商户推荐组织为ISV，如果是第三方支付机构的自有商户，则推荐组织为第三方支付机构。
         /// </summary>
         [JsonProperty("source")]
         [XmlElement("source")]

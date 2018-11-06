@@ -90,6 +90,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<GoodsDetail> GoodsDetail { get; set; }
 
         /// <summary>
+        /// 物流信息
+        /// </summary>
+        [JsonProperty("logistics_detail")]
+        [XmlElement("logistics_detail")]
+        public LogisticsDetail LogisticsDetail { get; set; }
+
+        /// <summary>
         /// 商户原始订单号，最大长度限制32位
         /// </summary>
         [JsonProperty("merchant_order_no")]
@@ -109,6 +116,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("out_trade_no")]
         [XmlElement("out_trade_no")]
         public string OutTradeNo { get; set; }
+
+        /// <summary>
+        /// 收货人及地址信息
+        /// </summary>
+        [JsonProperty("receiver_address_info")]
+        [XmlElement("receiver_address_info")]
+        public ReceiverAddressInfo ReceiverAddressInfo { get; set; }
 
         /// <summary>
         /// 描述分账信息，json格式。

@@ -41,14 +41,21 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string IpRoleId { get; set; }
 
         /// <summary>
-        /// 产品码，授信前准入咨询则为运营产品码，支用准入时可不用传
+        /// 外部统一编码，外部机构与网商合作的方案产品码，用于标识所属的合作业务，pd_code为空时该字段必传。
+        /// </summary>
+        [JsonProperty("out_uni_code")]
+        [XmlElement("out_uni_code")]
+        public string OutUniCode { get; set; }
+
+        /// <summary>
+        /// 产品码，授信前准入咨询则为运营产品码，支用准入时可不用传，out_uni_code不为空时，该字段可空
         /// </summary>
         [JsonProperty("pd_code")]
         [XmlElement("pd_code")]
         public string PdCode { get; set; }
 
         /// <summary>
-        /// 场景码，表示本次查询应用于哪个场景。目前已有枚举以及对应场景：  1：授信申请前准入判断，2：支用申请准入，3：产品层可贷额度查询
+        /// 场景码，表示本次查询应用于哪个场景。目前已有枚举以及对应场景：  1：授信申请前准入判断，2：支用申请准入，3：产品层可贷额度查询，4：预付方案查询，5：授信可贷额度咨询，6.营销额度咨询
         /// </summary>
         [JsonProperty("scen")]
         [XmlElement("scen")]

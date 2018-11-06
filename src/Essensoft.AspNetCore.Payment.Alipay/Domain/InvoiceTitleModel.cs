@@ -46,6 +46,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string TaxRegisterNo { get; set; }
 
         /// <summary>
+        /// 用户私人手机号
+        /// </summary>
+        [JsonProperty("tele_phone_no")]
+        [XmlElement("tele_phone_no")]
+        public string TelePhoneNo { get; set; }
+
+        /// <summary>
         /// 抬头名称
         /// </summary>
         [JsonProperty("title_name")]

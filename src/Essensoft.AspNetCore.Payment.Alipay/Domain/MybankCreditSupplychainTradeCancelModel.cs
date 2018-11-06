@@ -18,11 +18,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public Member Buyer { get; set; }
 
         /// <summary>
-        /// 渠道，枚举如下：TMGXBL：天猫供销保理，TYZBL：通用自保理，TMZBL：天猫自保理，DSCYFRZ：大搜车预付融资
+        /// 渠道，枚举如下：TMGXBL：天猫供销保理，TYZBL：通用自保理，TMZBL：天猫自保理，DSCYFRZ：大搜车预付融资，TMJX：天猫经销池融资
         /// </summary>
         [JsonProperty("channel")]
         [XmlElement("channel")]
         public string Channel { get; set; }
+
+        /// <summary>
+        /// 扩展字段，json类型的字符串
+        /// </summary>
+        [JsonProperty("ext_data")]
+        [XmlElement("ext_data")]
+        public string ExtData { get; set; }
 
         /// <summary>
         /// 外部订单号，格式：机构ipRoleId_外部订单号
@@ -46,7 +53,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string SalePdCode { get; set; }
 
         /// <summary>
-        /// FACTORING：保理，PREPAYMENT：预付融资，CREDITPAY：信任付
+        /// 卖家会员信息
+        /// </summary>
+        [JsonProperty("seller")]
+        [XmlElement("seller")]
+        public Member Seller { get; set; }
+
+        /// <summary>
+        /// FACTORING：保理，PREPAYMENT：预付融资，CREDITPAY：信任付，POOL：池融资
         /// </summary>
         [JsonProperty("trade_type")]
         [XmlElement("trade_type")]

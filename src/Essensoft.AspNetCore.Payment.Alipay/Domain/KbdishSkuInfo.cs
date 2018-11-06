@@ -48,6 +48,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string MemberPrice { get; set; }
 
         /// <summary>
+        /// 外部的菜品skuId, isv自己的skuId
+        /// </summary>
+        [JsonProperty("out_sku_id")]
+        [XmlElement("out_sku_id")]
+        public string OutSkuId { get; set; }
+
+        /// <summary>
         /// 售卖价格
         /// </summary>
         [JsonProperty("sell_price")]

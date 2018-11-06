@@ -34,6 +34,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public Member Customer { get; set; }
 
         /// <summary>
+        /// 扩展字段，在特定场景下必填
+        /// </summary>
+        [JsonProperty("ext_info")]
+        [XmlElement("ext_info")]
+        public string ExtInfo { get; set; }
+
+        /// <summary>
         /// 外部订单号，格式：机构ipRoleId_外部订单号
         /// </summary>
         [JsonProperty("out_order_no")]
@@ -48,7 +55,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string SalePdCode { get; set; }
 
         /// <summary>
-        /// FACTORING：保理，PREPAYMENT：预付融资，CREDITPAY：信任付
+        /// FACTORING：保理，PREPAYMENT：预付融资，CREDITPAY：信任付，UN_TRADE_SCENE：非交易出库
         /// </summary>
         [JsonProperty("trade_type")]
         [XmlElement("trade_type")]

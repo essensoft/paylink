@@ -11,11 +11,25 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class MybankCreditLoantradeRepayBudgetQueryModel : AlipayObject
     {
         /// <summary>
-        /// 申请还款本金
+        /// 申请还款金额，如果budget_type为TOTAL_AMT，则填写还款总金额，如果为PRIN_AMT则填写还款本金
         /// </summary>
         [JsonProperty("apply_repay_prin")]
         [XmlElement("apply_repay_prin")]
         public string ApplyRepayPrin { get; set; }
+
+        /// <summary>
+        /// TOTAL_AMT：总额还款，PRIN_AMT：本金还款，如果为空，默认为本金还款
+        /// </summary>
+        [JsonProperty("budget_type")]
+        [XmlElement("budget_type")]
+        public string BudgetType { get; set; }
+
+        /// <summary>
+        /// 可为空，默认需要判断是否可还款，false为不需要判断是否可还款，其他为需要判断是否可还款
+        /// </summary>
+        [JsonProperty("can_repay_flag")]
+        [XmlElement("can_repay_flag")]
+        public bool CanRepayFlag { get; set; }
 
         /// <summary>
         /// 扩展字段

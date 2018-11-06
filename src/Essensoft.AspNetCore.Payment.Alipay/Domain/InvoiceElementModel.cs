@@ -81,6 +81,20 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string InvoiceStatus { get; set; }
 
         /// <summary>
+        /// logo地址
+        /// </summary>
+        [JsonProperty("logo_url")]
+        [XmlElement("logo_url")]
+        public string LogoUrl { get; set; }
+
+        /// <summary>
+        /// 商户全称
+        /// </summary>
+        [JsonProperty("m_name")]
+        [XmlElement("m_name")]
+        public string MName { get; set; }
+
+        /// <summary>
         /// 销方名称
         /// </summary>
         [JsonProperty("payee_name")]

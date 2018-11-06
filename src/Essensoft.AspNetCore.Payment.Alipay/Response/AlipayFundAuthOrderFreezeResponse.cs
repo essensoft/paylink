@@ -23,6 +23,20 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string AuthNo { get; set; }
 
         /// <summary>
+        /// 本次冻结操作中信用冻结金额，单位为：元（人民币），精确到小数点后两位
+        /// </summary>
+        [JsonProperty("credit_amount")]
+        [XmlElement("credit_amount")]
+        public string CreditAmount { get; set; }
+
+        /// <summary>
+        /// 本次冻结操作中自有资金冻结金额，单位为：元（人民币），精确到小数点后两位
+        /// </summary>
+        [JsonProperty("fund_amount")]
+        [XmlElement("fund_amount")]
+        public string FundAmount { get; set; }
+
+        /// <summary>
         /// 资金授权成功时间  格式：YYYY-MM-DD HH:MM:SS
         /// </summary>
         [JsonProperty("gmt_trans")]

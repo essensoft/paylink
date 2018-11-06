@@ -25,6 +25,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string BuyerId { get; set; }
 
         /// <summary>
+        /// 卖家实收金额，单笔订单中给打款给卖家的金额
+        /// </summary>
+        [JsonProperty("deliver_seller_real_amount")]
+        [XmlElement("deliver_seller_real_amount")]
+        public string DeliverSellerRealAmount { get; set; }
+
+        /// <summary>
         /// 优惠金额
         /// </summary>
         [JsonProperty("discount_amount")]

@@ -67,6 +67,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string MedicalCardType { get; set; }
 
         /// <summary>
+        /// 医保卡持有人姓名( 脱敏)
+        /// </summary>
+        [JsonProperty("out_user_name")]
+        [XmlElement("out_user_name")]
+        public string OutUserName { get; set; }
+
+        /// <summary>
         /// 绑定状态  已激活:signed  已解绑:unsigned
         /// </summary>
         [JsonProperty("sign_status")]
