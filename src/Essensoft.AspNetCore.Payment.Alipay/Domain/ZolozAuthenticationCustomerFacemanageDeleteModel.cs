@@ -18,6 +18,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Areacode { get; set; }
 
         /// <summary>
+        /// 人脸产品能力
+        /// </summary>
+        [JsonProperty("biz_type")]
+        [XmlElement("biz_type")]
+        public string BizType { get; set; }
+
+        /// <summary>
         /// 业务量
         /// </summary>
         [JsonProperty("bizscale")]
@@ -25,7 +32,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Bizscale { get; set; }
 
         /// <summary>
-        /// 品牌
+        /// 商户品牌
         /// </summary>
         [JsonProperty("brandcode")]
         [XmlElement("brandcode")]
@@ -46,7 +53,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Extinfo { get; set; }
 
         /// <summary>
-        /// 入库类型
+        /// 入库类型  IDCARD:身份证  ALIPAY_USER:支付宝用户id,  ALIPAY_TEL:手机号入库  CUSTOMER:自定义
         /// </summary>
         [JsonProperty("facetype")]
         [XmlElement("facetype")]

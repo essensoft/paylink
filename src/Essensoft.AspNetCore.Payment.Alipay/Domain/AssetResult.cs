@@ -18,6 +18,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AssignItemId { get; set; }
 
         /// <summary>
+        /// 批次号，分批反馈时用
+        /// </summary>
+        [JsonProperty("batch_no")]
+        [XmlElement("batch_no")]
+        public string BatchNo { get; set; }
+
+        /// <summary>
         /// 错误码
         /// </summary>
         [JsonProperty("error_code")]

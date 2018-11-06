@@ -88,6 +88,20 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string MerchantPid { get; set; }
 
         /// <summary>
+        /// 小程序APPID，订购实体为小程序的场景该字段必填
+        /// </summary>
+        [JsonProperty("mini_app_id")]
+        [XmlElement("mini_app_id")]
+        public string MiniAppId { get; set; }
+
+        /// <summary>
+        /// 小程序应用名称，订购实体为小程序的场景该字段必填
+        /// </summary>
+        [JsonProperty("mini_app_name")]
+        [XmlElement("mini_app_name")]
+        public string MiniAppName { get; set; }
+
+        /// <summary>
         /// 上架时间
         /// </summary>
         [JsonProperty("online_time")]
@@ -116,14 +130,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Province { get; set; }
 
         /// <summary>
-        /// 店铺ID
+        /// 店铺ID，订购实体为口碑门店的场景该字段必填
         /// </summary>
         [JsonProperty("shop_id")]
         [XmlElement("shop_id")]
         public string ShopId { get; set; }
 
         /// <summary>
-        /// 店铺名称
+        /// 店铺名称，订购实体为口碑门店的场景该字段必填
         /// </summary>
         [JsonProperty("shop_name")]
         [XmlElement("shop_name")]

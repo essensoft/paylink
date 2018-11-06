@@ -16,7 +16,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string BatchNo { get; set; }
 
         /// <summary>
-        /// 营业执照授权函图片，个体工商户如果使用总公司或其他公司的营业执照认证需上传该授权函图片，最小50KB，图片格式必须为：png、bmp、gif、jpg、jpeg
+        /// 营业执照授权函图片，个体工商户如果使用总公司或其他公司的营业执照认证需上传该授权函图片，最小5KB，图片格式必须为：png、bmp、gif、jpg、jpeg
         /// </summary>
         public FileItem BusinessLicenseAuthPic { get; set; }
 
@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string BusinessLicenseNo { get; set; }
 
         /// <summary>
-        /// 营业执照图片。被代创建商户运营主体为个人账户必填，企业账户无需填写，最小50KB，图片格式必须为：png、bmp、gif、jpg、jpeg
+        /// 营业执照图片。被代创建商户运营主体为个人账户必填，企业账户无需填写，最小5KB，图片格式必须为：png、bmp、gif、jpg、jpeg
         /// </summary>
         public FileItem BusinessLicensePic { get; set; }
 
@@ -46,17 +46,17 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string MccCode { get; set; }
 
         /// <summary>
-        /// 店铺内景图片，最小50KB，图片格式必须为：png、bmp、gif、jpg、jpeg
+        /// 店铺内景图片，最小5KB，图片格式必须为：png、bmp、gif、jpg、jpeg
         /// </summary>
         public FileItem ShopScenePic { get; set; }
 
         /// <summary>
-        /// 店铺门头照图片，最小50KB，图片格式必须为：png、bmp、gif、jpg、jpeg
+        /// 店铺门头照图片，最小5KB，图片格式必须为：png、bmp、gif、jpg、jpeg
         /// </summary>
         public FileItem ShopSignBoardPic { get; set; }
 
         /// <summary>
-        /// 企业特殊资质图片，可参考  <a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.59bgD2&treeId=222&articleId=105364&docType=1#s1  ">商家经营类目</a> 中的“需要的特殊资质证书”，最小50KB，图片格式必须为：png、bmp、gif、jpg、jpeg
+        /// 企业特殊资质图片，可参考  <a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.59bgD2&treeId=222&articleId=105364&docType=1#s1  ">商家经营类目</a> 中的“需要的特殊资质证书”，最小5KB，图片格式必须为：png、bmp、gif、jpg、jpeg
         /// </summary>
         public FileItem SpecialLicensePic { get; set; }
 

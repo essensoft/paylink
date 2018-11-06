@@ -39,6 +39,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ExtParam { get; set; }
 
         /// <summary>
+        /// 扩展字段实体，规范了通用的扩展字段内的信息，便于调用方使用，与ext_param作用相同。与ext_param有同名字段冲突时以ext_param_info中内容为准。
+        /// </summary>
+        [JsonProperty("ext_param_info")]
+        [XmlElement("ext_param_info")]
+        public SceneExtParam ExtParamInfo { get; set; }
+
+        /// <summary>
         /// 出资机构在网商的角色号（ipRoleId）, 下单时不确定可以不填
         /// </summary>
         [JsonProperty("finance_inst_iprole_id")]

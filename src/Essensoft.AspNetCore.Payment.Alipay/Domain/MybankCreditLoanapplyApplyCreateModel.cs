@@ -12,7 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class MybankCreditLoanapplyApplyCreateModel : AlipayObject
     {
         /// <summary>
-        /// 客户的支付宝ID
+        /// 客户的支付宝ID，注意：如果site为ALIPAY，此参数login_id和参数alipay_id至少有一个不能为空。
         /// </summary>
         [JsonProperty("alipay_id")]
         [XmlElement("alipay_id")]
@@ -55,14 +55,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BizTag { get; set; }
 
         /// <summary>
-        /// 客户的身份证号码
+        /// 客户的身份证号码，如果参数biz_scene_no为1，则为必填
         /// </summary>
         [JsonProperty("cert_no")]
         [XmlElement("cert_no")]
         public string CertNo { get; set; }
 
         /// <summary>
-        /// 证件类型，01:身份证
+        /// 证件类型，01:身份证，如果参数biz_scene_no为1，则为必填
         /// </summary>
         [JsonProperty("cert_type")]
         [XmlElement("cert_type")]
@@ -97,7 +97,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string IpRoleId { get; set; }
 
         /// <summary>
-        /// 会员的登录账号，比如支付宝登录账号，一般为手机号或邮箱
+        /// 会员的登录账号，比如支付宝登录账号，一般为手机号或邮箱，注意：如果site为ALIPAY，此参数login_id和参数alipay_id至少有一个不能为空。
         /// </summary>
         [JsonProperty("login_id")]
         [XmlElement("login_id")]
@@ -111,14 +111,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Mobile { get; set; }
 
         /// <summary>
-        /// 客户姓名
+        /// 客户姓名，如果参数biz_scene_no为1，则为必填
         /// </summary>
         [JsonProperty("name")]
         [XmlElement("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// 运营产品码
+        /// 运营产品码，平台大数贷机构无须填写
         /// </summary>
         [JsonProperty("op_pd_code")]
         [XmlElement("op_pd_code")]
@@ -130,6 +130,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("out_mem_id")]
         [XmlElement("out_mem_id")]
         public string OutMemId { get; set; }
+
+        /// <summary>
+        /// 外部统一编码，外部机构与网商合作的方案产品标识，用于标识所属的合作业务，op_pd_code为空时该字段必传。
+        /// </summary>
+        [JsonProperty("out_uni_code")]
+        [XmlElement("out_uni_code")]
+        public string OutUniCode { get; set; }
 
         /// <summary>
         /// 外部流水号,唯一标识客户的一笔贷款申请。格式：日期(8位)+序列号(8位）,序列号是数字，如00000001（必须是16位且符合该格式）。

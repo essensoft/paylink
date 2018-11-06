@@ -34,6 +34,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public long LimitSize { get; set; }
 
         /// <summary>
+        /// 当前页码，为空时默认第一页
+        /// </summary>
+        [JsonProperty("page_num")]
+        [XmlElement("page_num")]
+        public long PageNum { get; set; }
+
+        /// <summary>
         /// 发票要素获取应用场景  INVOICE_EXPENSE－发票报销
         /// </summary>
         [JsonProperty("scene")]

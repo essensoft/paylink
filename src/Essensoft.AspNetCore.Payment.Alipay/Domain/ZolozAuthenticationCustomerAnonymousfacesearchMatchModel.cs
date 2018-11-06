@@ -11,6 +11,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class ZolozAuthenticationCustomerAnonymousfacesearchMatchModel : AlipayObject
     {
         /// <summary>
+        /// 防攻击能力参数
+        /// </summary>
+        [JsonProperty("antiattack")]
+        [XmlElement("antiattack")]
+        public string Antiattack { get; set; }
+
+        /// <summary>
         /// 地域编码
         /// </summary>
         [JsonProperty("areacode")]
@@ -23,6 +30,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("authimg")]
         [XmlElement("authimg")]
         public string Authimg { get; set; }
+
+        /// <summary>
+        /// 代表业务方接入编号
+        /// </summary>
+        [JsonProperty("biz_type")]
+        [XmlElement("biz_type")]
+        public string BizType { get; set; }
 
         /// <summary>
         /// 业务量规模
@@ -44,6 +58,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("devicenum")]
         [XmlElement("devicenum")]
         public string Devicenum { get; set; }
+
+        /// <summary>
+        /// 拓展参数
+        /// </summary>
+        [JsonProperty("extinfo")]
+        [XmlElement("extinfo")]
+        public string Extinfo { get; set; }
 
         /// <summary>
         /// 群组

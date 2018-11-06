@@ -25,6 +25,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string EvalTime { get; set; }
 
         /// <summary>
+        /// JSON格式的扩展信息，具体操作和机构约定具体的扩展信息。  {"annualIncome":"200000.00","downPayment":"30000.00","installmentNum":"12","installmentOrg":"0","isInstallment":"1","isLocal":"1","isMortgaged":"1","monthlyPayment":"11000.00","paidNum":"3","serviceProvider":"杭州服务商","totalAmount":"150000.00","unpaidAmount":"99000.00"}
+        /// </summary>
+        [JsonProperty("ext_info")]
+        [XmlElement("ext_info")]
+        public string ExtInfo { get; set; }
+
+        /// <summary>
         /// 机构请求流水号，请求的幂等字段，作为业务幂等性控制
         /// </summary>
         [JsonProperty("out_request_no")]

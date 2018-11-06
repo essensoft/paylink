@@ -49,7 +49,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BusinessLicenseType { get; set; }
 
         /// <summary>
-        /// 商户经营类目，参考文档：https://doc.open.alipay.com/doc2/detail?&docType=1&articleId=105444
+        /// 商户经营类目，参考文档：https://doc.open.alipay.com/doc2/detail?&docType=1&articleId=105444，非银联网联调用时必传
         /// </summary>
         [JsonProperty("category_id")]
         [XmlElement("category_id")]
@@ -79,6 +79,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<string> LogonId { get; set; }
 
         /// <summary>
+        /// 标准商户类别码，例如5976表示“专业销售-药品医疗-康复和身体辅助用品”，银联网联调用时必传
+        /// </summary>
+        [JsonProperty("mcc")]
+        [XmlElement("mcc")]
+        public string Mcc { get; set; }
+
+        /// <summary>
         /// 商户备注信息，可填写额外信息
         /// </summary>
         [JsonProperty("memo")]
@@ -91,6 +98,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("name")]
         [XmlElement("name")]
         public string Name { get; set; }
+
+        /// <summary>
+        /// 签约机构pid。银联或者网联调用时，如果未传sub_merchant_id,则需要同时传org_pid和externel_id。
+        /// </summary>
+        [JsonProperty("org_pid")]
+        [XmlElement("org_pid")]
+        public string OrgPid { get; set; }
 
         /// <summary>
         /// 受理商户的固定二维码链接地址（即一码多付页面地址，用于后续支付宝营销活动）  商户所属的银行或ISV 给商户的二维码url值  一码多付方案:https://doc.open.alipay.com/docs/doc.htm?&docType=1&articleId=105672
@@ -108,7 +122,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ServicePhone { get; set; }
 
         /// <summary>
-        /// 商户来源机构标识，填写机构在支付宝的pid
+        /// 间连受理商户的推荐组织。如果是银行自有商户入驻，则推荐组织为银行，如果是ISV推广的商户，那么商户推荐组织为ISV，如果是第三方支付机构的自有商户，则推荐组织为第三方支付机构。
         /// </summary>
         [JsonProperty("source")]
         [XmlElement("source")]

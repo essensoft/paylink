@@ -16,6 +16,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string AgentAppId { get; set; }
 
         /// <summary>
+        /// 只有申请单状态在MERCHANT_CONFIRM状态下，才会返回商户确认签约链接
+        /// </summary>
+        [JsonProperty("confirm_url")]
+        [XmlElement("confirm_url")]
+        public string ConfirmUrl { get; set; }
+
+        /// <summary>
         /// 商户pid
         /// </summary>
         [JsonProperty("merchant_pid")]

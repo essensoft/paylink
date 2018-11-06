@@ -11,6 +11,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class MybankCreditSceneprodLoanCancelModel : AlipayObject
     {
         /// <summary>
+        /// 关闭订单的原因
+        /// </summary>
+        [JsonProperty("cancel_reason")]
+        [XmlElement("cancel_reason")]
+        public string CancelReason { get; set; }
+
+        /// <summary>
         /// 机构编码，机构接入场景金融平台时分配，固定值
         /// </summary>
         [JsonProperty("org_code")]

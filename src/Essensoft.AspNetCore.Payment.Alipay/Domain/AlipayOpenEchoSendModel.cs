@@ -11,6 +11,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayOpenEchoSendModel : AlipayObject
     {
         /// <summary>
+        /// city
+        /// </summary>
+        [JsonProperty("city")]
+        [XmlElement("city")]
+        public string City { get; set; }
+
+        /// <summary>
         /// xxx
         /// </summary>
         [JsonProperty("name")]

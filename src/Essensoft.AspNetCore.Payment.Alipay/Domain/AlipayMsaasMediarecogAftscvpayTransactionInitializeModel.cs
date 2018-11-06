@@ -20,6 +20,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<GoodInfo> GoodsInfos { get; set; }
 
         /// <summary>
+        /// 标识是什么场景下的视觉识别请求
+        /// </summary>
+        [JsonProperty("scene")]
+        [XmlElement("scene")]
+        public string Scene { get; set; }
+
+        /// <summary>
         /// 售卖设备编号
         /// </summary>
         [JsonProperty("terminal_id")]

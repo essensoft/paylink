@@ -96,6 +96,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string RefundFee { get; set; }
 
         /// <summary>
+        /// 退回的前置资产列表
+        /// </summary>
+        [JsonProperty("refund_preset_paytool_list")]
+        [XmlElement("refund_preset_paytool_list")]
+        public PresetPayToolInfo RefundPresetPaytoolList { get; set; }
+
+        /// <summary>
         /// 本次商户实际退回金额  注：在签约收单产品时需勾选“返回资金明细”才会返回
         /// </summary>
         [JsonProperty("send_back_fee")]

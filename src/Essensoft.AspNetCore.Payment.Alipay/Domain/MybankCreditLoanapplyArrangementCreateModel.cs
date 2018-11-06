@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class MybankCreditLoanapplyArrangementCreateModel : AlipayObject
     {
         /// <summary>
-        /// 产品代码，标识网商银行具体的产品，由网商银行预先分配好，接入方按网商银行的要求送。
+        /// 产品代码，scene字段为空时必填，标识网商银行具体的产品，由网商银行预先分配好，接入方按网商银行的要求送。
         /// </summary>
         [JsonProperty("ar_pd_code")]
         [XmlElement("ar_pd_code")]
@@ -25,7 +25,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ExtData { get; set; }
 
         /// <summary>
-        /// 客户id，网商银行唯一标识一个客户的id。此客户id是通过客户创建接口返回的。即调用此接口前必须先调用客户创建接口。
+        /// 客户id，网商银行唯一标识一个客户的id。scene值为ENTRUST_ACCOUNT时可空，其他场景必填，此客户id是通过客户创建接口返回的。即调用此接口前必须先调用客户创建接口。
         /// </summary>
         [JsonProperty("ip_id")]
         [XmlElement("ip_id")]
@@ -37,6 +37,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("ip_role_id")]
         [XmlElement("ip_role_id")]
         public string IpRoleId { get; set; }
+
+        /// <summary>
+        /// 签约场景码，ar_pd_code为空时必填，例如：  ENTRUST_ACCOUNT：受托账户签约；  CREDIT_AUTH：征信授权签约；  INVESTIGATION_AUTH：信息调查授权；  SUPPLYCHAIN_BUYER：供应链买家协议；
+        /// </summary>
+        [JsonProperty("scene")]
+        [XmlElement("scene")]
+        public string Scene { get; set; }
 
         /// <summary>
         /// 站点类型，当前只支持ALIPAY。后续扩展可以支持TAOBAO等。目前这个字段必须传递ALIPAY。

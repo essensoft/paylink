@@ -46,7 +46,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ReturnUrl { get; set; }
 
         /// <summary>
-        /// 支付场景  条码支付，取值：bar_code  声波支付，取值：wave_code
+        /// 支付场景  条码支付，取值：bar_code  声波支付，取值：wave_code  人脸支付，取值：face_code
         /// </summary>
         [JsonProperty("scene")]
         [XmlElement("scene")]

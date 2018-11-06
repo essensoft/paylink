@@ -23,11 +23,25 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string AuthNo { get; set; }
 
         /// <summary>
+        /// 该笔资金操作流水opertion_id对应的操作信用金额
+        /// </summary>
+        [JsonProperty("credit_amount")]
+        [XmlElement("credit_amount")]
+        public string CreditAmount { get; set; }
+
+        /// <summary>
         /// 商户请求创建预授权订单时传入的扩展参数，仅返回商户自定义的扩展信息（merchantExt）
         /// </summary>
         [JsonProperty("extra_param")]
         [XmlElement("extra_param")]
         public string ExtraParam { get; set; }
+
+        /// <summary>
+        /// 该笔资金操作流水opertion_id对应的操作自有资金金额
+        /// </summary>
+        [JsonProperty("fund_amount")]
+        [XmlElement("fund_amount")]
+        public string FundAmount { get; set; }
 
         /// <summary>
         /// 资金授权单据操作流水创建时间，  格式：YYYY-MM-DD HH:MM:SS
@@ -114,6 +128,20 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string RestAmount { get; set; }
 
         /// <summary>
+        /// 剩余冻结信用金额，单位为：元（人民币），精确到小数点后两位
+        /// </summary>
+        [JsonProperty("rest_credit_amount")]
+        [XmlElement("rest_credit_amount")]
+        public string RestCreditAmount { get; set; }
+
+        /// <summary>
+        /// 剩余冻结自有资金金额，单位为：元（人民币），精确到小数点后两位
+        /// </summary>
+        [JsonProperty("rest_fund_amount")]
+        [XmlElement("rest_fund_amount")]
+        public string RestFundAmount { get; set; }
+
+        /// <summary>
         /// 资金操作流水的状态，  目前支持：   INIT：初始  SUCCESS：成功  CLOSED：关闭
         /// </summary>
         [JsonProperty("status")]
@@ -128,11 +156,39 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string TotalFreezeAmount { get; set; }
 
         /// <summary>
+        /// 累计冻结信用金额，单位为：元（人民币），精确到小数点后两位
+        /// </summary>
+        [JsonProperty("total_freeze_credit_amount")]
+        [XmlElement("total_freeze_credit_amount")]
+        public string TotalFreezeCreditAmount { get; set; }
+
+        /// <summary>
+        /// 累计冻结自有资金金额，单位为：元（人民币），精确到小数点后两位
+        /// </summary>
+        [JsonProperty("total_freeze_fund_amount")]
+        [XmlElement("total_freeze_fund_amount")]
+        public string TotalFreezeFundAmount { get; set; }
+
+        /// <summary>
         /// 订单累计用于支付的金额，单位为：元（人民币）
         /// </summary>
         [JsonProperty("total_pay_amount")]
         [XmlElement("total_pay_amount")]
         public string TotalPayAmount { get; set; }
+
+        /// <summary>
+        /// 累计支付信用金额，单位为：元（人民币），精确到小数点后两位
+        /// </summary>
+        [JsonProperty("total_pay_credit_amount")]
+        [XmlElement("total_pay_credit_amount")]
+        public string TotalPayCreditAmount { get; set; }
+
+        /// <summary>
+        /// 累计支付自有资金金额，单位为：元（人民币），精确到小数点后两位
+        /// </summary>
+        [JsonProperty("total_pay_fund_amount")]
+        [XmlElement("total_pay_fund_amount")]
+        public string TotalPayFundAmount { get; set; }
 
         /// <summary>
         /// 标价币种,  amount 对应的币种单位。支持澳元：AUD, 新西兰元：NZD, 台币：TWD, 美元：USD, 欧元：EUR, 英镑：GBP

@@ -11,6 +11,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class ZhimaMerchantOrderCreditPayModel : AlipayObject
     {
         /// <summary>
+        /// 优惠券金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]，无支付行为时为空，例如订单取消或者支付金额为0
+        /// </summary>
+        [JsonProperty("coupon_amount")]
+        [XmlElement("coupon_amount")]
+        public string CouponAmount { get; set; }
+
+        /// <summary>
         /// CANCEL，FINISH, INSTALLMENT  订单完结类型，目前包括取消(CANCEL)、完结(FINISH) 分期扣款(INSTALLMENT)
         /// </summary>
         [JsonProperty("order_operate_type")]
@@ -44,6 +51,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("remark")]
         [XmlElement("remark")]
         public string Remark { get; set; }
+
+        /// <summary>
+        /// 是否使用优惠券，默认为false，可选值：true或false，字符串形式，目前仅针对回收行业生效
+        /// </summary>
+        [JsonProperty("use_coupon")]
+        [XmlElement("use_coupon")]
+        public string UseCoupon { get; set; }
 
         /// <summary>
         /// 芝麻订单号

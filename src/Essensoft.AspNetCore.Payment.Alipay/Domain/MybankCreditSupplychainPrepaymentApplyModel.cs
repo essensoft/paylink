@@ -18,6 +18,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public Member Buyer { get; set; }
 
         /// <summary>
+        /// 扩展字段
+        /// </summary>
+        [JsonProperty("ext_data")]
+        [XmlElement("ext_data")]
+        public string ExtData { get; set; }
+
+        /// <summary>
         /// 贷款支付金额，单位人民币元。
         /// </summary>
         [JsonProperty("loan_pay_amount")]

@@ -25,7 +25,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string DictionaryId { get; set; }
 
         /// <summary>
-        /// 字典的扩展json，根据不同的biz_type,设置商家的自定义字典表key以及value。如果字典类型为catetory, key：cateSort，cateType，level,parentCatetoryId ;如果字典类型为spec, key：specSort.
+        /// 字典的扩展json，根据不同的biz_type,设置商家的自定义字典表key以及value。如果字典类型为catetory,  key为cateSort，cateType，level,parentCatetoryId（level传数字，cateType为dish或cook） ;如果字典类型为spec, key为specSort.。注意：如果是字符串拼接的方式，转移符\要替换为\\\ 。
         /// </summary>
         [JsonProperty("ext_info")]
         [XmlElement("ext_info")]

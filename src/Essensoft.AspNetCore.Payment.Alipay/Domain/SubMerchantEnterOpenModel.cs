@@ -11,6 +11,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class SubMerchantEnterOpenModel : AlipayObject
     {
         /// <summary>
+        /// 开票商户pid，入驻支付即开票场景的时候，该字段必传
+        /// </summary>
+        [JsonProperty("pid")]
+        [XmlElement("pid")]
+        public string Pid { get; set; }
+
+        /// <summary>
         /// 商户门店税号。
         /// </summary>
         [JsonProperty("register_no")]

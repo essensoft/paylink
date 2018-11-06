@@ -83,6 +83,20 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<string> PromTools { get; set; }
 
         /// <summary>
+        /// 还款账户
+        /// </summary>
+        [JsonProperty("repay_account")]
+        [XmlElement("repay_account")]
+        public MyBkAccountVO RepayAccount { get; set; }
+
+        /// <summary>
+        /// 还款类型，CUSTOMER_ACTIVE_REPAY：提前还款-客户主动还款；CUSTOMER_PASSIVE_REPAY：提前还款-系统触发还款
+        /// </summary>
+        [JsonProperty("repay_type")]
+        [XmlElement("repay_type")]
+        public string RepayType { get; set; }
+
+        /// <summary>
         /// 请求流水号，用于幂等控制.以"ipRoleId_"开头
         /// </summary>
         [JsonProperty("request_id")]

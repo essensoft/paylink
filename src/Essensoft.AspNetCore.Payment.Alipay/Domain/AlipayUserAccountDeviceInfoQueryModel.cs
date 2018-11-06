@@ -46,12 +46,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         [JsonProperty("request_from")]
         [XmlElement("request_from")]
         public string RequestFrom { get; set; }
-
-        /// <summary>
-        /// 目标人群类型,切记，如需要使用该字段，请跟支付宝技术支持联系
-        /// </summary>
-        [JsonProperty("target_crowd_type")]
-        [XmlElement("target_crowd_type")]
-        public string TargetCrowdType { get; set; }
     }
 }

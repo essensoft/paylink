@@ -25,6 +25,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BizScene { get; set; }
 
         /// <summary>
+        /// 额外附加信息
+        /// </summary>
+        [JsonProperty("ext_info")]
+        [XmlElement("ext_info")]
+        public string ExtInfo { get; set; }
+
+        /// <summary>
         /// 附加信息Id，如淘宝虚拟账号Id
         /// </summary>
         [JsonProperty("ext_info_id")]
