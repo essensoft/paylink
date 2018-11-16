@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Essensoft.AspNetCore.Payment.JDPay
+namespace WebApplicationSample
 {
     public class JDPayNotifyResult
     {

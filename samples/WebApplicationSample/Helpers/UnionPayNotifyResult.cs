@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Essensoft.AspNetCore.Payment.UnionPay
+namespace WebApplicationSample
 {
     public class UnionPayNotifyResult
     {

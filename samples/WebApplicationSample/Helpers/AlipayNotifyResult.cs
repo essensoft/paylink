@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Essensoft.AspNetCore.Payment.Alipay
+namespace WebApplicationSample
 {
     public class AlipayNotifyResult
     {

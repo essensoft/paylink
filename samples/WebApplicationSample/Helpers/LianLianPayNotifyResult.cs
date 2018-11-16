@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Essensoft.AspNetCore.Payment.LianLianPay
+namespace WebApplicationSample
 {
     public class LianLianPayNotifyResult
     {
