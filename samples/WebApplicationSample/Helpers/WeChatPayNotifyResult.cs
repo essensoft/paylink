@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace Essensoft.AspNetCore.Payment.WeChatPay
+namespace WebApplicationSample
 {
     public class WeChatPayNotifyResult
     {
