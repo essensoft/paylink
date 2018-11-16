@@ -66,10 +66,10 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 
 * [使用配置 HttpClient](docs/Using-HttpClient.md)
 
-* [参考示例项目](samples/NewWebApplicationSample)
+* [参考示例项目](samples/WebApplicationSample)
 
 <p align="center">
-    <img src="http://p687qfgw0.bkt.clouddn.com/NewWebApplicationSample.png">
+    <img src="http://p687qfgw0.bkt.clouddn.com/WebApplicationSample.png">
 </p>
 
 ----
