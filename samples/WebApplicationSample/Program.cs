@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace NewWebApplicationSample
+namespace WebApplicationSample
 {
     public class Program
     {

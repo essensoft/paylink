@@ -2,10 +2,10 @@
 using Essensoft.AspNetCore.Payment.LianLianPay.Notify;
 using Essensoft.AspNetCore.Payment.LianLianPay.Request;
 using Microsoft.AspNetCore.Mvc;
-using NewWebApplicationSample.Models;
+using WebApplicationSample.Models;
 using System.Threading.Tasks;
 
-namespace NewWebApplicationSample.Controllers
+namespace WebApplicationSample.Controllers
 {
     public class LianLianPayController : Controller
     {

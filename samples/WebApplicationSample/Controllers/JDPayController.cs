@@ -2,10 +2,10 @@
 using Essensoft.AspNetCore.Payment.JDPay.Notify;
 using Essensoft.AspNetCore.Payment.JDPay.Request;
 using Microsoft.AspNetCore.Mvc;
-using NewWebApplicationSample.Models;
+using WebApplicationSample.Models;
 using System.Threading.Tasks;
 
-namespace NewWebApplicationSample.Controllers
+namespace WebApplicationSample.Controllers
 {
     public class JDPayController : Controller
     {

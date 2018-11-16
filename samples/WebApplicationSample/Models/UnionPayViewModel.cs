@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace NewWebApplicationSample.Models
+namespace WebApplicationSample.Models
 {
     public class UnionPayForm_6_2_FrontConsumeViewModel
     {

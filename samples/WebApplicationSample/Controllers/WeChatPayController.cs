@@ -2,10 +2,10 @@
 using Essensoft.AspNetCore.Payment.WeChatPay.Request;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using NewWebApplicationSample.Models;
+using WebApplicationSample.Models;
 using System.Threading.Tasks;
 
-namespace NewWebApplicationSample.Controllers
+namespace WebApplicationSample.Controllers
 {
     public class WeChatPayController : Controller
     {

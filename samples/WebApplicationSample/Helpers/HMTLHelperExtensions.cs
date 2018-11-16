@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace NewWebApplicationSample
+namespace WebApplicationSample
 {
     public static class HtmlHelpers
     {

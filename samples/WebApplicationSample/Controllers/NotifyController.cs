@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 
-namespace NewWebApplicationSample.Controllers
+namespace WebApplicationSample.Controllers
 {
     #region 支付宝异步通知
 

@@ -3,10 +3,10 @@ using Essensoft.AspNetCore.Payment.Alipay.Domain;
 using Essensoft.AspNetCore.Payment.Alipay.Notify;
 using Essensoft.AspNetCore.Payment.Alipay.Request;
 using Microsoft.AspNetCore.Mvc;
-using NewWebApplicationSample.Models;
+using WebApplicationSample.Models;
 using System.Threading.Tasks;
 
-namespace NewWebApplicationSample.Controllers
+namespace WebApplicationSample.Controllers
 {
     public class AlipayController : Controller
     {
