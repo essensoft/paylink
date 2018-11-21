@@ -47,9 +47,6 @@ namespace WebApplicationSample.Models
         [Required]
         [Display(Name = "total_amount")]
         public string TotalAmount { get; set; }
-
-        [Display(Name = "notify_url")]
-        public string NotifyUrl { get; set; }
     }
 
     public class AlipayTradeAppPayViewModel

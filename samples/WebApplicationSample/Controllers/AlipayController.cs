@@ -71,7 +71,6 @@ namespace WebApplicationSample.Controllers
             };
             var req = new AlipayTradePayRequest();
             req.SetBizModel(model);
-            req.SetNotifyUrl(viewModel.NotifyUrl);
 
             var response = await _client.ExecuteAsync(req);
             ViewData["response"] = response.Body;
