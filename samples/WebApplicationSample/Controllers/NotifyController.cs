@@ -53,31 +53,6 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// 条码支付异步通知
-        /// </summary>
-        /// <returns></returns>
-        [Route("pay")]
-        [HttpPost]
-        public async Task<IActionResult> Pay()
-        {
-            try
-            {
-                var notify = await _client.ExecuteAsync<AlipayTradePayNotifyResponse>(Request);
-                if ("TRADE_SUCCESS" == notify.TradeStatus)
-                {
-                    Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
-
-                    return AlipayNotifyResult.Success;
-                }
-                return NoContent();
-            }
-            catch
-            {
-                return NoContent();
-            }
-        }
-
-        /// <summary>
         /// APP支付异步通知
         /// </summary>
         /// <returns></returns>
