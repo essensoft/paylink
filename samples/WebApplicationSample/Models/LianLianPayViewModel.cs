@@ -31,33 +31,12 @@ namespace WebApplicationSample.Models
         [Display(Name = "url_return")]
         public string UrlReturn { get; set; }
 
-        [Display(Name = "bank_code")]
-        public string BankCode { get; set; }
-
-        [Display(Name = "pay_type")]
-        public string PayType { get; set; }
-
-        [Display(Name = "no_agree")]
-        public string NoAgree { get; set; }
-
         [Required]
         [Display(Name = "risk_item")]
         public string RiskItem { get; set; }
-
-        [Display(Name = "id_type")]
-        public string IdType { get; set; }
-
-        [Display(Name = "id_no")]
-        public string IdNo { get; set; }
-
-        [Display(Name = "acct_name")]
-        public string AcctName { get; set; }
-
-        [Display(Name = "card_no")]
-        public string CardNo { get; set; }
     }
 
-    public class LianLianPayWapQuickPayViewModel
+    public class LianLianPayH5QuickPayViewModel
     {
         [Required]
         [Display(Name = "no_order")]
@@ -80,34 +59,15 @@ namespace WebApplicationSample.Models
         public string UserId { get; set; }
 
         [Required]
-        [Display(Name = "app_request")]
-        public string AppRequest { get; set; }
-
-        [Required]
         [Display(Name = "notify_url")]
         public string NotifyUrl { get; set; }
 
         [Display(Name = "url_return")]
         public string UrlReturn { get; set; }
 
-        [Display(Name = "no_agree")]
-        public string NoAgree { get; set; }
-
         [Required]
         [Display(Name = "risk_item")]
         public string RiskItem { get; set; }
-
-        [Display(Name = "id_type")]
-        public string IdType { get; set; }
-
-        [Display(Name = "id_no")]
-        public string IdNo { get; set; }
-
-        [Display(Name = "acct_name")]
-        public string AcctName { get; set; }
-
-        [Display(Name = "card_no")]
-        public string CardNo { get; set; }
     }
 
     public class LianLianPayOrderQueryViewModel

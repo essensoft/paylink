@@ -1,4 +1,6 @@
-﻿using Essensoft.AspNetCore.Payment.Alipay;
+﻿using System;
+using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.Alipay.Notify;
 using Essensoft.AspNetCore.Payment.JDPay;
 using Essensoft.AspNetCore.Payment.JDPay.Notify;
@@ -11,8 +13,6 @@ using Essensoft.AspNetCore.Payment.UnionPay.Notify;
 using Essensoft.AspNetCore.Payment.WeChatPay;
 using Essensoft.AspNetCore.Payment.WeChatPay.Notify;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Threading.Tasks;
 
 namespace WebApplicationSample.Controllers
 {
@@ -318,29 +318,13 @@ namespace WebApplicationSample.Controllers
             _client = client;
         }
 
-        [Route("webquickpay")]
+        [Route("receivemoney")]
         [HttpPost]
-        public async Task<IActionResult> WebQuickPay()
+        public async Task<IActionResult> ReceiveMoney()
         {
             try
             {
-                var notify = await _client.ExecuteAsync<LianLianPayWebQuickPayNotifyResponse>(Request);
-                Console.WriteLine("NoOrder: " + notify.NoOrder);
-                return LianLianPayNotifyResult.Success;
-            }
-            catch
-            {
-                return NoContent();
-            }
-        }
-
-        [Route("wapquickpay")]
-        [HttpPost]
-        public async Task<IActionResult> WapQuickPay()
-        {
-            try
-            {
-                var notify = await _client.ExecuteAsync<LianLianPayWapQuickPayNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<LianLianPayReceiveMoneyNotifyResponse>(Request);
                 Console.WriteLine("NoOrder: " + notify.NoOrder);
                 return LianLianPayNotifyResult.Success;
             }
