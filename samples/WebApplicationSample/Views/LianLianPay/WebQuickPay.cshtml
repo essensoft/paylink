@@ -35,43 +35,15 @@
             </div>
             <div class="form-group">
                 <label asp-for="NotifyUrl"></label>
-                <input type="text" class="form-control" asp-for="NotifyUrl" value="http://*/notify/lianlianpay/webquickpay" />
+                <input type="text" class="form-control" asp-for="NotifyUrl" value="http://*/notify/lianlianpay/receivemoney" />
             </div>
             <div class="form-group">
                 <label asp-for="UrlReturn"></label>
-                <input type="text" class="form-control" asp-for="UrlReturn" value="http://*/lianlianpay/webquickpayreturn" />
-            </div>
-            <div class="form-group">
-                <label asp-for="BankCode"></label>
-                <input type="text" class="form-control" asp-for="BankCode" />
-            </div>
-            <div class="form-group">
-                <label asp-for="PayType"></label>
-                <input type="text" class="form-control" asp-for="PayType" />
-            </div>
-            <div class="form-group">
-                <label asp-for="NoAgree"></label>
-                <input type="text" class="form-control" asp-for="NoAgree" />
+                <input type="text" class="form-control" asp-for="UrlReturn" value="http://*/lianlianpay/quickpayreturn" />
             </div>
             <div class="form-group">
                 <label asp-for="RiskItem"></label>
                 <input type="text" class="form-control" asp-for="RiskItem" value='{"frms_ware_category":"1999","user_info_full_name":"你好"}' />
-            </div>
-            <div class="form-group">
-                <label asp-for="IdType"></label>
-                <input type="text" class="form-control" asp-for="IdType" />
-            </div>
-            <div class="form-group">
-                <label asp-for="IdNo"></label>
-                <input type="text" class="form-control" asp-for="IdNo" />
-            </div>
-            <div class="form-group">
-                <label asp-for="AcctName"></label>
-                <input type="text" class="form-control" asp-for="AcctName" />
-            </div>
-            <div class="form-group">
-                <label asp-for="CardNo"></label>
-                <input type="text" class="form-control" asp-for="CardNo" />
             </div>
             <button type="submit" class="btn btn-primary">提交请求</button>
         </form>
