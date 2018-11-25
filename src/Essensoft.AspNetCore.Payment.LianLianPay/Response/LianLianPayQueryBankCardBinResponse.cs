@@ -2,16 +2,19 @@
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
 {
+    /// <summary>
+    /// 卡bin查询
+    /// </summary>
     public class LianLianPayQueryBankCardBinResponse : LianLianPayResponse
     {
         /// <summary>
-        /// 交易结果代码 
+        /// 请求结果代码 
         /// </summary>
         [JsonProperty("ret_code")]
         public string RetCode { get; set; }
 
         /// <summary>
-        /// 交易结果描述
+        /// 请求结果描述
         /// </summary>
         [JsonProperty("ret_msg")]
         public string RetMsg { get; set; }
@@ -35,13 +38,15 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
         public string BankCode { get; set; }
 
         /// <summary>
-        /// 所属银行名称
+        /// 银行名称
         /// </summary>
         [JsonProperty("bank_name")]
         public string BankName { get; set; }
 
         /// <summary>
-        /// 银行卡类型
+        /// 银行卡类型。
+        /// 2 - 储蓄卡。
+        /// 3 - 信用卡。
         /// </summary>
         [JsonProperty("card_no")]
         public string CardNo { get; set; }

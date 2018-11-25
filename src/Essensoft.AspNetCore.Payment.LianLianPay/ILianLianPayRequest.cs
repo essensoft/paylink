@@ -2,6 +2,10 @@
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
+    /// <summary>
+    /// 卡bin查询
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface ILianLianPayRequest<T> where T : LianLianPayResponse
     {
         /// <summary>

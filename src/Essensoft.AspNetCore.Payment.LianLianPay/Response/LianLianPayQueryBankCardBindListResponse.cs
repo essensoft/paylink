@@ -1,40 +1,25 @@
-﻿using Essensoft.AspNetCore.Payment.LianLianPay.Domain;
+﻿using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.LianLianPay.Domain;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
 {
+    /// <summary>
+    /// 用户签约银行卡列表查询
+    /// </summary>
     public class LianLianPayQueryBankCardBindListResponse : LianLianPayResponse
     {
         /// <summary>
-        /// 交易结果代码 
+        /// 请求结果代码 
         /// </summary>
         [JsonProperty("ret_code")]
         public string RetCode { get; set; }
 
         /// <summary>
-        /// 交易结果描述
+        /// 请求结果描述
         /// </summary>
         [JsonProperty("ret_msg")]
         public string RetMsg { get; set; }
-
-        /// <summary>
-        /// 商户用户唯一编号
-        /// </summary>
-        [JsonProperty("user_id")]
-        public string UserId { get; set; }
-
-        /// <summary>
-        /// 总记录条数
-        /// </summary>
-        [JsonProperty("count")]
-        public string Count { get; set; }
-
-        /// <summary>
-        /// 结果集
-        /// </summary>
-        [JsonProperty("agreement_list", ItemIsReference = true)]
-        public List<Agreement> AgreementList { get; set; }
 
         /// <summary>
         /// 签名方式
@@ -47,5 +32,24 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
         /// </summary>
         [JsonProperty("sign")]
         public string Sign { get; set; }
+
+        /// <summary>
+        /// 用户编号。
+        /// 商户系统内对用户的唯一编码，可以为自定义字符串，加密密文或者邮箱等可以唯一定义用户的标识。
+        /// </summary>
+        [JsonProperty("user_id")]
+        public string UserId { get; set; }
+
+        /// <summary>
+        /// 本次查询返回的总记录条数。
+        /// </summary>
+        [JsonProperty("count")]
+        public string Count { get; set; }
+
+        /// <summary>
+        /// 协议号结果集。按照签约时间倒序排列，该参数不参与签名。
+        /// </summary>
+        [JsonProperty("agreement_list", ItemIsReference = true)]
+        public List<Agreement> AgreementList { get; set; }
     }
 }

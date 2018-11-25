@@ -1,8 +1,11 @@
-﻿using Essensoft.AspNetCore.Payment.LianLianPay.Response;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.LianLianPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
 {
+    /// <summary>
+    /// 确认付款
+    /// </summary>
     public class LianLianPayConfirmPaymentRequest : ILianLianPayRequest<LianLianPayConfirmPaymentResponse>
     {
         /// <summary>
@@ -56,6 +59,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
         {
             ApiVersion = apiVersion;
         }
+
         #endregion
     }
 }

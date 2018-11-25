@@ -1,5 +1,6 @@
-﻿using Essensoft.AspNetCore.Payment.LianLianPay.Response;
+﻿using System;
 using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.LianLianPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
 {
@@ -36,6 +37,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
         public string BindMob { get; set; }
 
         #region ILianLianPayRequest
+
         public string GetRequestUrl()
         {
             return "https://traderapi.lianlianpay.com/modifyphone.htm";
@@ -57,12 +59,14 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
 
         public string GetApiVersion()
         {
-            return string.Empty;
+            throw new NotImplementedException();
         }
 
         public void SetApiVersion(string apiVersion)
         {
+            throw new NotImplementedException();
         }
+
         #endregion
     }
 }

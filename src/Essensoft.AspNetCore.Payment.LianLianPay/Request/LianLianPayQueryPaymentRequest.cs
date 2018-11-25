@@ -1,8 +1,11 @@
-﻿using Essensoft.AspNetCore.Payment.LianLianPay.Response;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.LianLianPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
 {
+    /// <summary>
+    /// 付款结果查询
+    /// </summary>
     public class LianLianPayQueryPaymentRequest : ILianLianPayRequest<LianLianPayQueryPaymentResponse>
     {
         /// <summary>
@@ -16,7 +19,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
         public string NoOrder { get; set; }
 
         /// <summary>
-        /// 连连支付支付单号
+        /// 连连支付单号
         /// </summary>
         public string OidPaybill { get; set; }
 
@@ -34,9 +37,9 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
             var parameters = new LianLianPayDictionary
             {
                 { "platform", Platform },
-                { "api_version", ApiVersion },
                 { "no_order", NoOrder },
                 { "oid_paybill", OidPaybill },
+                { "api_version", ApiVersion },
             };
             return parameters;
         }
@@ -50,6 +53,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
         {
             ApiVersion = apiVersion;
         }
+
         #endregion
     }
 }

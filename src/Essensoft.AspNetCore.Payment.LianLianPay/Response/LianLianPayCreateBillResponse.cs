@@ -3,9 +3,9 @@
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
 {
     /// <summary>
-    /// 付款结果查询
+    /// 统一支付创单
     /// </summary>
-    public class LianLianPayQueryPaymentResponse : LianLianPayResponse
+    public class LianLianPayCreateBillResponse : LianLianPayResponse
     {
         /// <summary>
         /// 请求结果代码 
@@ -32,51 +32,43 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
         public string Sign { get; set; }
 
         /// <summary>
-        /// 商户编号
+        /// 授权令牌。 
+        /// 有效期为30分钟。
         /// </summary>
-        [JsonProperty("oid_partner")]
-        public string OidPartner { get; set; }
+        [JsonProperty("token")]
+        public string Token { get; set; }
 
         /// <summary>
-        /// 商户付款流水号
+        /// 原请求中商户订单号。
         /// </summary>
         [JsonProperty("no_order")]
         public string NoOrder { get; set; }
 
         /// <summary>
-        /// 商户下单时间
+        /// 商户订单时间。
+        /// 格式为 YYMMDDHHMMSS，HH以24小时为准，如 20180130161010。
         /// </summary>
         [JsonProperty("dt_order")]
         public string DtOrder { get; set; }
 
         /// <summary>
-        /// 付款金额
+        /// 原请求中交易金额。
         /// </summary>
         [JsonProperty("money_order")]
         public string MoneyOrder { get; set; }
 
         /// <summary>
-        /// 连连支付单号
+        /// 连连支付单号。
+        /// 全局唯一。
+        /// 如： 2011030900001098。
         /// </summary>
         [JsonProperty("oid_paybill")]
         public string OidPaybill { get; set; }
 
         /// <summary>
-        /// 付款结果
+        /// 连连网关地址。
         /// </summary>
-        [JsonProperty("result_pay")]
-        public string ResultPay { get; set; }
-
-        /// <summary>
-        /// 账务日期
-        /// </summary>
-        [JsonProperty("settle_date")]
-        public string SettleDate { get; set; }
-
-        /// <summary>
-        /// 订单描述
-        /// </summary>
-        [JsonProperty("info_order")]
-        public string InfoOrder { get; set; }
+        [JsonProperty("gateway_url")]
+        public string GatewayUrl { get; set; }
     }
 }

@@ -2,7 +2,7 @@
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Domain
 {
-    public class SupportBank
+    public class Bank
     {
         /// <summary>
         /// 银行编号
