@@ -64,7 +64,9 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 
 ## 使用方式
 
-* [使用配置 HttpClient](docs/Using-HttpClient.md)
+* [配置参数](docs/Configuration.md)
+
+* [使用/配置 HttpClient](docs/Using-HttpClient.md)
 
 * [参考示例项目](samples/WebApplicationSample)
 
