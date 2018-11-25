@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
 {
-    public class LianLianPayQueryBankCarBinRequest : ILianLianPayRequest<LianLianPayQueryBankCarBinResponse>
+    public class LianLianPayQueryBankCardBinRequest : ILianLianPayRequest<LianLianPayQueryBankCardBinResponse>
     {
         /// <summary>
         /// 银行卡号
