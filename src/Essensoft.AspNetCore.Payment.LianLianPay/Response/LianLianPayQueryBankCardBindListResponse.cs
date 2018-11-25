@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
 {
-    public class LianLianPayQueryBankCarBindListResponse : LianLianPayResponse
+    public class LianLianPayQueryBankCardBindListResponse : LianLianPayResponse
     {
         /// <summary>
         /// 交易结果代码 

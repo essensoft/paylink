@@ -2,7 +2,7 @@
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
 {
-    public class LianLianPayQueryBankCarBinResponse : LianLianPayResponse
+    public class LianLianPayQueryBankCardBinResponse : LianLianPayResponse
     {
         /// <summary>
         /// 交易结果代码 

@@ -105,7 +105,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
                     excludePara.Add("bank_name");
                     excludePara.Add("card_no");
                 }
-                else if (request is LianLianPayQueryBankCarBindListRequest)
+                else if (request is LianLianPayQueryBankCardBindListRequest)
                 {
                     excludePara.Add("agreement_list");
                 }
