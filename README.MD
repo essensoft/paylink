@@ -38,7 +38,7 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 * 网页支付、APP支付、扫一扫、付款码、代付
 
 ### 连连支付
-* 快捷支付、 网银支付、认证支付、实时付款
+* 网银支付、银行卡支付、掌上银行支付、实时付款
 
 ### 银联支付
 * 在线网关支付、无跳转支付、二维码支付(商户)
@@ -57,9 +57,9 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 
 * [银联支付-中国银联技术开放平台-产品API](https://open.unionpay.com/tjweb/api/list?tagId=20)
 
-## 参考开发环境
+## 开发环境
 * Windows 10
-* VS2017 15.8.x
+* VS2017 15.9.x
 * .NET Core SDK 2.1.x (x64)
 
 ## 使用方式
@@ -68,16 +68,12 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 
 * [参考示例项目](samples/WebApplicationSample)
 
-<p align="center">
-    <img src="http://p687qfgw0.bkt.clouddn.com/WebApplicationSample.png">
-</p>
-
 ----
 
 ## 打赏
 
 <p align="center">
-    <img src="http://p687qfgw0.bkt.clouddn.com/payment.png">
+    <img src="https://raw.githubusercontent.com/Essensoft/Payment/master/samples/WebApplicationSample/wwwroot/images/payment.png">
 </p>
 
 ---

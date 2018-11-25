@@ -1,19 +1,22 @@
-﻿using Essensoft.AspNetCore.Payment.LianLianPay.Domain;
+﻿using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.LianLianPay.Domain;
 using Newtonsoft.Json;
-using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
 {
+    /// <summary>
+    /// 支持银行查询
+    /// </summary>
     public class LianLianPaySupportBankQueryResponse : LianLianPayResponse
     {
         /// <summary>
-        /// 交易结果代码 
+        /// 请求结果代码 
         /// </summary>
         [JsonProperty("ret_code")]
         public string RetCode { get; set; }
 
         /// <summary>
-        /// 交易结果描述
+        /// 请求结果描述
         /// </summary>
         [JsonProperty("ret_msg")]
         public string RetMsg { get; set; }
@@ -21,7 +24,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
         /// <summary>
         /// 支持银行列表
         /// </summary>
-        [JsonProperty("support_banklist")]
-        public List<SupportBank> SupportBanklist { get; set; }
+        [JsonProperty("support_banklist", ItemIsReference = true)]
+        public List<Bank> SupportBanklist { get; set; }
     }
 }

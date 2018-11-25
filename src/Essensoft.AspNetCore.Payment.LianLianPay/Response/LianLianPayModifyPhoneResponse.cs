@@ -5,13 +5,13 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
     public class LianLianPayModifyPhoneResponse : LianLianPayResponse
     {
         /// <summary>
-        /// 交易结果代码 
+        /// 请求结果代码 
         /// </summary>
         [JsonProperty("ret_code")]
         public string RetCode { get; set; }
 
         /// <summary>
-        /// 交易结果描述
+        /// 请求结果描述
         /// </summary>
         [JsonProperty("ret_msg")]
         public string RetMsg { get; set; }

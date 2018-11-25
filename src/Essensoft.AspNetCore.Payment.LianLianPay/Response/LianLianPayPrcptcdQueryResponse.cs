@@ -1,11 +1,13 @@
-﻿using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.LianLianPay.Domain;
+using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
 {
     /// <summary>
-    /// 确认付款
+    /// 大额行号查询
     /// </summary>
-    public class LianLianPayConfirmPaymentResponse : LianLianPayResponse
+    public class LianLianPayPrcptcdQueryResponse : LianLianPayResponse
     {
         /// <summary>
         /// 请求结果代码 
@@ -20,16 +22,16 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
         public string RetMsg { get; set; }
 
         /// <summary>
-        /// 商户付款流水号
+        /// 银行编号
         /// </summary>
-        [JsonProperty("no_order")]
-        public string NoOrder { get; set; }
+        [JsonProperty("bank_code")]
+        public string BankCode { get; set; }
 
         /// <summary>
-        /// 签名方式
+        /// 支行信息
         /// </summary>
-        [JsonProperty("sign_type")]
-        public string SignType { get; set; }
+        [JsonProperty("card_list", ItemIsReference = true)]
+        public List<Brabank> CardList { get; set; }
 
         /// <summary>
         /// 签名
@@ -38,15 +40,9 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
         public string Sign { get; set; }
 
         /// <summary>
-        /// 商户编号
+        /// 签名方式
         /// </summary>
-        [JsonProperty("oid_partner")]
-        public string OidPartner { get; set; }
-
-        /// <summary>
-        /// 连连支付单号
-        /// </summary>
-        [JsonProperty("oid_paybill")]
-        public string OidPaybill { get; set; }
+        [JsonProperty("sign_type")]
+        public string SignType { get; set; }
     }
 }

@@ -3,9 +3,9 @@
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
 {
     /// <summary>
-    /// 付款申请
+    /// 统一签约创单
     /// </summary>
-    public class LianLianPayPaymentResponse : LianLianPayResponse
+    public class LianLianPayUnifiedCardBindResponse : LianLianPayResponse
     {
         /// <summary>
         /// 请求结果代码 
@@ -20,12 +20,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
         public string RetMsg { get; set; }
 
         /// <summary>
-        /// 原请求中商户订单号。
-        /// </summary>
-        [JsonProperty("no_order")]
-        public string NoOrder { get; set; }
-
-        /// <summary>
         /// 签名方式
         /// </summary>
         [JsonProperty("sign_type")]
@@ -38,25 +32,22 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
         public string Sign { get; set; }
 
         /// <summary>
-        /// 商户编号是商户在连连支付支付平台上开设的商户号码，为18位数字，如：201304121000001004。
+        /// 授权令牌。 
+        /// 有效期为30分钟。
         /// </summary>
-        [JsonProperty("oid_partner")]
-        public string OidPartner { get; set; }
+        [JsonProperty("token")]
+        public string Token { get; set; }
 
         /// <summary>
-        /// 连连支付单号。
-        /// 全局唯一。
-        /// 如： 2011030900001098。
+        /// 原请求中商户订单号。
         /// </summary>
-        [JsonProperty("oid_paybill")]
-        public string OidPaybill { get; set; }
-
+        [JsonProperty("no_order")]
+        public string NoOrder { get; set; }
+        
         /// <summary>
-        /// RetCode 为4002, 4003, 4004 时返回
-        /// 确认码。
-        /// 用于确认付款API。
+        /// 连连网关地址。
         /// </summary>
-        [JsonProperty("confirm_code")]
-        public string ConfirmCode { get; set; }
+        [JsonProperty("gateway_url")]
+        public string GatewayUrl { get; set; }
     }
 }
