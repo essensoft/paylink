@@ -130,14 +130,9 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
                 { "user_id", UserId },
                 { "no_order", NoOrder },
                 { "dt_order", DtOrder },
-                { "name_goods", NameGoods },
-                { "info_order", InfoOrder },
-                { "money_order", MoneyOrder },
                 { "notify_url", NotifyUrl },
                 { "url_return", UrlReturn },
                 { "back_url", BackUrl },
-                { "valid_order", ValidOrder },
-                { "shareing_data", ShareingData },
                 { "risk_item", RiskItem },
                 { "flag_pay_product", FlagPayProduct },
                 { "flag_chnl", FlagChnl },
@@ -145,9 +140,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
                 { "id_no", IdNo },
                 { "acct_name", AcctName },
                 { "card_no", CardNo },
-                { "no_agree", NoAgree },
-                { "bank_code", BankCode },
-                { "card_type", CardType },
             };
             return parameters;
         }
