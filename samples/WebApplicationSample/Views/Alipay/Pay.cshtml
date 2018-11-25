@@ -1,6 +1,6 @@
 ﻿@model AlipayTradePayViewModel
 @{
-    ViewData["Title"] = "当面付-条码支付";
+    ViewData["Title"] = "当面付-二维码/条码/声波支付";
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -19,7 +19,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Subject"></label>
-                <input type="text" class="form-control" asp-for="Subject" value="条码支付测试" />
+                <input type="text" class="form-control" asp-for="Subject" value="二维码/条码/声波支付测试" />
             </div>
             <div class="form-group">
                 <label asp-for="Scene"></label>
@@ -31,7 +31,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="Body"></label>
-                <input type="text" class="form-control" asp-for="Body" value="条码支付描述信息" />
+                <input type="text" class="form-control" asp-for="Body" value="二维码/条码/声波支付描述信息" />
             </div>
             <div class="form-group">
                 <label asp-for="TotalAmount"></label>
