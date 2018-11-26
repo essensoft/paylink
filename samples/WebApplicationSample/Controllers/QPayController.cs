@@ -1,15 +1,15 @@
-﻿using Essensoft.AspNetCore.Payment.QPay;
+﻿using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.QPay;
 using Essensoft.AspNetCore.Payment.QPay.Request;
 using Microsoft.AspNetCore.Mvc;
 using WebApplicationSample.Models;
-using System.Threading.Tasks;
 
 namespace WebApplicationSample.Controllers
 {
     public class QPayController : Controller
     {
-        private readonly QPayClient _client = null;
-        public QPayController(QPayClient client)
+        private readonly IQPayClient _client = null;
+        public QPayController(IQPayClient client)
         {
             _client = client;
         }
@@ -150,7 +150,7 @@ namespace WebApplicationSample.Controllers
             {
                 OutTradeNo = viewModel.OutTradeNo,
             };
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, "qpayCertificateName");
             ViewData["response"] = response.Body;
             return View();
         }
@@ -192,7 +192,7 @@ namespace WebApplicationSample.Controllers
                 OpUserId = viewModel.OpUserId,
                 OpUserPasswd = viewModel.OpUserPasswd,
             };
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, "qpayCertificateName");
             ViewData["response"] = response.Body;
             return View();
         }

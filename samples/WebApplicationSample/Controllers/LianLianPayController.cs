@@ -9,10 +9,10 @@ namespace WebApplicationSample.Controllers
 {
     public class LianLianPayController : Controller
     {
-        private readonly LianLianPayClient _client = null;
-        private readonly LianLianPayNotifyClient _notifyClient = null;
+        private readonly ILianLianPayClient _client = null;
+        private readonly ILianLianPayNotifyClient _notifyClient = null;
 
-        public LianLianPayController(LianLianPayClient client, LianLianPayNotifyClient notifyClient)
+        public LianLianPayController(ILianLianPayClient client, ILianLianPayNotifyClient notifyClient)
         {
             _client = client;
             _notifyClient = notifyClient;

@@ -9,10 +9,10 @@ namespace WebApplicationSample.Controllers
 {
     public class UnionPayController : Controller
     {
-        private readonly UnionPayClient _client = null;
-        private readonly UnionPayNotifyClient _notifyClient = null;
+        private readonly IUnionPayClient _client = null;
+        private readonly IUnionPayNotifyClient _notifyClient = null;
 
-        public UnionPayController(UnionPayClient client, UnionPayNotifyClient notifyClient)
+        public UnionPayController(IUnionPayClient client, IUnionPayNotifyClient notifyClient)
         {
             _client = client;
             _notifyClient = notifyClient;

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Security.Cryptography.X509Certificates;
-using System.Text.Encodings.Web;
+﻿using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.JDPay;
@@ -37,30 +35,35 @@ namespace WebApplicationSample
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            // 引入HttpClient
+            services.AddHttpClient();
 
+            //引入HttpClient API证书的使用(仅QPay / WeChatPay的部分API使用到)。
+            //services.AddHttpClient("qpayCertificateName").ConfigurePrimaryHttpMessageHandler(() =>
+            //{
+            //    var certificate = new X509Certificate2("", "", X509KeyStorageFlags.MachineKeySet);
+            //    var handler = new HttpClientHandler();
+            //    handler.ClientCertificates.Add(certificate);
+            //    return handler;
+            //});
+
+            //services.AddHttpClient("wechatpayCertificateName").ConfigurePrimaryHttpMessageHandler(() =>
+            //{
+            //    var certificate = new X509Certificate2("", "", X509KeyStorageFlags.MachineKeySet);
+            //    var handler = new HttpClientHandler();
+            //    handler.ClientCertificates.Add(certificate);
+            //    return handler;
+            //});
+
+            // 引入Payment 依赖注入
             services.AddAlipay();
-            services.AddAlipayHttpClient();
-
             services.AddJDPay();
-            services.AddJDPayHttpClient();
-
             services.AddQPay();
-            services.AddQPayHttpClient();
-            //services.AddQPayCertificateHttpClient(new X509Certificate2(Convert.FromBase64String(Configuration["QPay:Certificate"]), Configuration["QPay:MchId"], X509KeyStorageFlags.MachineKeySet));
-            //services.AddQPayCertificateHttpClient("Default", new X509Certificate2(Convert.FromBase64String(Configuration["QPay:Certificate"]), Configuration["QPay:MchId"], X509KeyStorageFlags.MachineKeySet));
-
             services.AddUnionPay();
-            services.AddUnionPayHttpClient();
-
             services.AddWeChatPay();
-            services.AddWeChatPayHttpClient();
-            //services.AddWeChatPayCertificateHttpClient(new X509Certificate2(Convert.FromBase64String(Configuration["WeChatPay:Certificate"]), Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));
-            //services.AddWeChatPayCertificateHttpClient("Default", new X509Certificate2(Convert.FromBase64String(Configuration["WeChatPay:Certificate"]), Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));
-
             services.AddLianLianPay();
-            services.AddLianLianPayHttpClient();
 
+            // 在 appsettings.json 中 配置选项
             services.Configure<AlipayOptions>(Configuration.GetSection("Alipay"));
             services.Configure<JDPayOptions>(Configuration.GetSection("JDPay"));
             services.Configure<QPayOptions>(Configuration.GetSection("QPay"));
@@ -72,6 +75,8 @@ namespace WebApplicationSample
             {
                 opt.TextEncoderSettings = new TextEncoderSettings(UnicodeRanges.All);
             });
+
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
