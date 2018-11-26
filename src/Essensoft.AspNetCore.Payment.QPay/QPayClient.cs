@@ -19,28 +19,18 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         public virtual IHttpClientFactory ClientFactory { get; set; }
 
-        public QPayOptions Options { get; protected set; }
+        public virtual IOptionsSnapshot<QPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region QPayClient Constructors
 
         public QPayClient(
             ILogger<QPayClient> logger,
             IHttpClientFactory clientFactory,
-            IOptions<QPayOptions> optionsAccessor)
+            IOptionsSnapshot<QPayOptions> optionsAccessor)
         {
             Logger = logger;
             ClientFactory = clientFactory;
-            Options = optionsAccessor.Value;
-
-            if (string.IsNullOrEmpty(Options.MchId))
-            {
-                throw new ArgumentNullException(nameof(Options.MchId));
-            }
-
-            if (string.IsNullOrEmpty(Options.Key))
-            {
-                throw new ArgumentNullException(nameof(Options.Key));
-            }
+            OptionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
@@ -49,31 +39,37 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         public async Task<T> ExecuteAsync<T>(IQPayRequest<T> request) where T : QPayResponse
         {
+            return await ExecuteAsync(request, null);
+        }
+
+        public async Task<T> ExecuteAsync<T>(IQPayRequest<T> request, string optionsName) where T : QPayResponse
+        {
+            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
             // 字典排序
             var sortedTxtParams = new QPayDictionary(request.GetParameters())
             {
-                { MCHID, Options.MchId },
+                { MCHID, options.MchId },
                 { NONCE_STR, Guid.NewGuid().ToString("N") }
             };
 
             if (string.IsNullOrEmpty(sortedTxtParams.GetValue(APPID)))
             {
-                sortedTxtParams.Add(APPID, Options.AppId);
+                sortedTxtParams.Add(APPID, options.AppId);
             }
 
-            sortedTxtParams.Add(SIGN, QPaySignature.SignWithKey(sortedTxtParams, Options.Key));
+            sortedTxtParams.Add(SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
 
             var content = QPayUtility.BuildContent(sortedTxtParams);
             Logger?.LogTrace(0, "Request:{content}", content);
 
-            using (var client = ClientFactory.CreateClient(QPayOptions.DefaultClientName))
+            using (var client = ClientFactory.CreateClient())
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
                 Logger?.LogTrace(1, "Response:{body}", body);
 
                 var parser = new QPayXmlParser<T>();
                 var rsp = parser.Parse(body);
-                CheckResponseSign(rsp);
+                CheckResponseSign(rsp, options);
                 return rsp;
             }
         }
@@ -82,32 +78,37 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         #region IQPayClient Members
 
-        public async Task<T> ExecuteAsync<T>(IQPayCertificateRequest<T> request, string certificateName = "Default") where T : QPayResponse
+        public async Task<T> ExecuteAsync<T>(IQPayCertificateRequest<T> request, string certificateName) where T : QPayResponse
         {
+            return await ExecuteAsync(request, null, certificateName);
+        }
+
+        public async Task<T> ExecuteAsync<T>(IQPayCertificateRequest<T> request, string optionsName, string certificateName) where T : QPayResponse
+        {
+            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
             // 字典排序
             var sortedTxtParams = new QPayDictionary(request.GetParameters())
             {
-                { MCHID, Options.MchId },
+                { MCHID, options.MchId },
                 { NONCE_STR, Guid.NewGuid().ToString("N") }
             };
 
             if (string.IsNullOrEmpty(sortedTxtParams.GetValue(APPID)))
             {
-                sortedTxtParams.Add(APPID, Options.AppId);
+                sortedTxtParams.Add(APPID, options.AppId);
             }
 
-            sortedTxtParams.Add(SIGN, QPaySignature.SignWithKey(sortedTxtParams, Options.Key));
+            sortedTxtParams.Add(SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
             var content = QPayUtility.BuildContent(sortedTxtParams);
             Logger?.LogTrace(0, "Request:{content}", content);
-
-            using (var client = ClientFactory.CreateClient(QPayOptions.CertificateClientName + "." + certificateName))
+            using (var client = string.IsNullOrEmpty(certificateName) ? ClientFactory.CreateClient() : ClientFactory.CreateClient(certificateName))
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
                 Logger?.LogTrace(1, "Response:{body}", body);
 
                 var parser = new QPayXmlParser<T>();
                 var rsp = parser.Parse(body);
-                CheckResponseSign(rsp);
+                CheckResponseSign(rsp, options);
                 return rsp;
             }
         }
@@ -116,7 +117,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         #region Common Method
 
-        private void CheckResponseSign(QPayResponse response)
+        private void CheckResponseSign(QPayResponse response, QPayOptions options)
         {
             if (string.IsNullOrEmpty(response.Body) || response?.Parameters == null)
             {
@@ -127,7 +128,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
             {
                 if (response.Parameters["return_code"] == "SUCCESS" && !string.IsNullOrEmpty(sign))
                 {
-                    var cal_sign = QPaySignature.SignWithKey(response.Parameters, Options.Key);
+                    var cal_sign = QPaySignature.SignWithKey(response.Parameters, options.Key);
                     if (cal_sign != sign)
                     {
                         throw new Exception("sign check fail: check Sign and Data Fail!");

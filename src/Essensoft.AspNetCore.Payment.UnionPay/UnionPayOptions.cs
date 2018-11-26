@@ -4,8 +4,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 {
     public class UnionPayOptions
     {
-        public const string DefaultClientName = "Payment.UnionPay.Client";
-
         /// <summary>
         /// 商户代码
         /// </summary>

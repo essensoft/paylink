@@ -17,39 +17,12 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             Action<QPayOptions> setupAction)
         {
-            services.AddSingleton<QPayClient>();
-            services.AddSingleton<QPayNotifyClient>();
-
+            services.AddScoped<IQPayClient, QPayClient>();
+            services.AddScoped<IQPayNotifyClient, QPayNotifyClient>();
             if (setupAction != null)
             {
                 services.Configure(setupAction);
             }
-        }
-
-        public static void AddQPayHttpClient(
-            this IServiceCollection services)
-        {
-            services.AddHttpClient(QPayOptions.DefaultClientName);
-        }
-
-        public static void AddQPayCertificateHttpClient(
-            this IServiceCollection services,
-            X509Certificate2 certificate)
-        {
-            services.AddQPayCertificateHttpClient(certificateName: "Default", certificate: certificate);
-        }
-
-        public static void AddQPayCertificateHttpClient(
-            this IServiceCollection services,
-            string certificateName,
-            X509Certificate2 certificate)
-        {
-            services.AddHttpClient(QPayOptions.CertificateClientName + "." + certificateName).ConfigurePrimaryHttpMessageHandler(() =>
-            {
-                var handler = new HttpClientHandler();
-                handler.ClientCertificates.Add(certificate);
-                return handler;
-            });
         }
     }
 }

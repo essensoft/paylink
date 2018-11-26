@@ -2,6 +2,10 @@
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
+    /// <summary>
+    /// WeChatPay API证书请求
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IWeChatPayCertificateRequest<T> where T : WeChatPayResponse
     {
         /// <summary>

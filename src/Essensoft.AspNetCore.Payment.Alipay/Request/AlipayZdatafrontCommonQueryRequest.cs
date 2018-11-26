@@ -12,7 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// <summary>
         /// 如果cacheInterval<=0,就直接从外部获取数据；  如果cacheInterval>0,就先判断cache中的数据是否过期，如果没有过期就返回cache中的数据，如果过期再从外部获取数据并刷新cache，然后返回数据。  单位：秒
         /// </summary>
-        public Nullable<long> CacheInterval { get; set; }
+        public long? CacheInterval { get; set; }
 
         /// <summary>
         /// 通用查询的入参

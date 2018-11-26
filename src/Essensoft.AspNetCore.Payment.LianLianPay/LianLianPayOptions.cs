@@ -5,8 +5,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     public class LianLianPayOptions
     {
-        public const string DefaultClientName = "Payment.LianLianPay.Client";
-
         /// <summary>
         /// 连连支付公钥
         /// </summary>

@@ -25,38 +25,18 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
         public virtual IHttpClientFactory ClientFactory { get; set; }
 
-        public LianLianPayOptions Options { get; protected set; }
+        public virtual IOptionsSnapshot<LianLianPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region LianLianPayClient Constructors
 
         public LianLianPayClient(
             ILogger<LianLianPayClient> logger,
             IHttpClientFactory clientFactory,
-            IOptions<LianLianPayOptions> optionsAccessor)
+            IOptionsSnapshot<LianLianPayOptions> optionsAccessor)
         {
             Logger = logger;
             ClientFactory = clientFactory;
-            Options = optionsAccessor.Value;
-
-            if (string.IsNullOrEmpty(Options.OidPartner))
-            {
-                throw new ArgumentNullException(nameof(Options.OidPartner));
-            }
-
-            if (string.IsNullOrEmpty(Options.BusiPartner))
-            {
-                throw new ArgumentNullException(nameof(Options.BusiPartner));
-            }
-
-            if (string.IsNullOrEmpty(Options.RsaPrivateKey))
-            {
-                throw new ArgumentNullException(nameof(Options.RsaPrivateKey));
-            }
-
-            if (string.IsNullOrEmpty(Options.RsaPublicKey))
-            {
-                throw new ArgumentNullException(nameof(Options.RsaPublicKey));
-            }
+            OptionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
@@ -65,29 +45,35 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
         public async Task<T> ExecuteAsync<T>(ILianLianPayRequest<T> request) where T : LianLianPayResponse
         {
+            return await ExecuteAsync(request, null);
+        }
+
+        public async Task<T> ExecuteAsync<T>(ILianLianPayRequest<T> request, string optionsName) where T : LianLianPayResponse
+        {
+            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
             // 字典排序
             var txtParams = new LianLianPayDictionary(request.GetParameters())
             {
-                { OID_PARTNER, Options.OidPartner },
-                { SIGN_TYPE, Options.SignType },
+                { OID_PARTNER, options.OidPartner },
+                { SIGN_TYPE, options.SignType },
             };
 
-            if (request is LianLianPayCreateBillRequest|| request is LianLianPayUnifiedCardBindRequest)
+            if (request is LianLianPayCreateBillRequest || request is LianLianPayUnifiedCardBindRequest)
             {
                 txtParams.Add(TIME_STAMP, DateTime.Now);
-                txtParams.Add(BUSI_PARTNER, Options.BusiPartner);
+                txtParams.Add(BUSI_PARTNER, options.BusiPartner);
             }
 
             // 添加签名
             var signContent = LianLianPaySecurity.GetSignContent(txtParams);
-            txtParams.Add(SIGN, MD5WithRSA.SignData(signContent, Options.PrivateKey));
+            txtParams.Add(SIGN, MD5WithRSA.SignData(signContent, options.PrivateKey));
 
             var content = string.Empty;
             if (request is LianLianPayPaymentRequest || request is LianLianPayConfirmPaymentRequest)
             {
                 var plaintext = Serialize(txtParams);
-                var ciphertext = LianLianPaySecurity.Encrypt(plaintext, Options.PublicKey);
-                content = $"{{\"pay_load\":\"{ciphertext}\",\"oid_partner\":\"{Options.OidPartner}\"}}";
+                var ciphertext = LianLianPaySecurity.Encrypt(plaintext, options.PublicKey);
+                content = $"{{\"pay_load\":\"{ciphertext}\",\"oid_partner\":\"{options.OidPartner}\"}}";
             }
             else
             {
@@ -95,7 +81,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             }
             Logger?.LogTrace(0, "Request:{content}", content);
 
-            using (var client = ClientFactory.CreateClient(LianLianPayOptions.DefaultClientName))
+            using (var client = ClientFactory.CreateClient())
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
                 Logger?.LogTrace(1, "Response:{body}", body);
@@ -115,7 +101,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
                     excludePara.Add("agreement_list");
                 }
 
-                CheckNotifySign(rsp.Parameters, excludePara);
+                CheckNotifySign(rsp.Parameters, excludePara, options);
                 return rsp;
             }
         }
@@ -129,7 +115,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             return JsonConvert.SerializeObject(value, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
         }
 
-        private void CheckNotifySign(LianLianPayDictionary parameters, List<string> excludePara)
+        private void CheckNotifySign(LianLianPayDictionary parameters, List<string> excludePara, LianLianPayOptions options)
         {
             if (parameters.Count == 0)
             {
@@ -139,7 +125,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             if (parameters.TryGetValue("sign", out var sign))
             {
                 var prestr = LianLianPaySecurity.GetSignContent(parameters, excludePara);
-                if (!MD5WithRSA.VerifyData(prestr, sign, Options.PublicKey))
+                if (!MD5WithRSA.VerifyData(prestr, sign, options.PublicKey))
                 {
                     throw new Exception("sign check fail: check Sign and Data Fail JSON also");
                 }

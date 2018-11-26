@@ -5,8 +5,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 {
     public class AlipayOptions
     {
-        public static readonly string DefaultClientName = "Payment.Alipay.Client";
-
         /// <summary>
         /// 应用ID
         /// </summary>

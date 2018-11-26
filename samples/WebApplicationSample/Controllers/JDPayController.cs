@@ -9,10 +9,10 @@ namespace WebApplicationSample.Controllers
 {
     public class JDPayController : Controller
     {
-        private readonly JDPayClient _client = null;
-        private readonly JDPayNotifyClient _notifyClient = null;
+        private readonly IJDPayClient _client = null;
+        private readonly IJDPayNotifyClient _notifyClient = null;
 
-        public JDPayController(JDPayClient client, JDPayNotifyClient notifyClient)
+        public JDPayController(IJDPayClient client, IJDPayNotifyClient notifyClient)
         {
             _client = client;
             _notifyClient = notifyClient;
