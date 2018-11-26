@@ -15,21 +15,16 @@ namespace Essensoft.AspNetCore.Payment.Alipay
     {
         public virtual ILogger Logger { get; set; }
 
-        public AlipayOptions Options { get; protected set; }
+        public virtual IOptionsSnapshot<AlipayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region AlipayNotifyClient Constructors
 
         public AlipayNotifyClient(
             ILogger<AlipayNotifyClient> logger,
-            IOptions<AlipayOptions> optionsAccessor)
+            IOptionsSnapshot<AlipayOptions> optionsAccessor)
         {
             Logger = logger;
-            Options = optionsAccessor.Value;
-
-            if (string.IsNullOrEmpty(Options.RsaPublicKey))
-            {
-                throw new ArgumentNullException(nameof(Options.RsaPublicKey));
-            }            
+            OptionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
@@ -38,13 +33,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : AlipayNotifyResponse
         {
+            return await ExecuteAsync<T>(request, null);
+        }
+
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : AlipayNotifyResponse
+        {
+            var options = OptionsSnapshotAccessor.Get(optionsName);
             var parameters = await GetParametersAsync(request);
             var query = AlipayUtility.BuildQuery(parameters);
             Logger?.LogTrace(0, "Request:{query}", query);
 
             var parser = new AlipayDictionaryParser<T>();
             var rsp = parser.Parse(parameters);
-            CheckNotifySign(parameters, Options.PublicRSAParameters, Options.SignType);
+            CheckNotifySign(parameters, options.PublicRSAParameters, options.SignType);
             return rsp;
         }
 

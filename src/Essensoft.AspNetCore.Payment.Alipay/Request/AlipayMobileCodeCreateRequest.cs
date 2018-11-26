@@ -27,7 +27,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// <summary>
         /// 如果是true，则扫一扫下发跳转地址直接取自bizLinkedId  否则，从路由信息里取跳转地址
         /// </summary>
-        public Nullable<bool> IsDirect { get; set; }
+        public bool? IsDirect { get; set; }
 
         /// <summary>
         /// 备注信息字段
@@ -42,12 +42,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// <summary>
         /// 编码启动时间（yyy-MM-dd hh:mm:ss），为空表示立即启用
         /// </summary>
-        public Nullable<DateTime> StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
         /// <summary>
         /// 超时时间,单位秒；若不传则为永久。发码超时时间需要找码平台技术评估
         /// </summary>
-        public Nullable<long> Timeout { get; set; }
+        public long? Timeout { get; set; }
 
         /// <summary>
         /// 支付宝用户id

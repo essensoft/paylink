@@ -5,9 +5,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     public class WeChatPayOptions
     {
-        public const string DefaultClientName = "Payment.WechatPay.Client";
-        public const string CertificateClientName = "Payment.WechatPay.CertificateClient";
-
         /// <summary>
         /// 应用账号(公众账号ID/小程序ID/企业号CorpId)
         /// </summary>

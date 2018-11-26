@@ -38,7 +38,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// <summary>
         /// 营业期限是否长期有效
         /// </summary>
-        public Nullable<bool> LongTerm { get; set; }
+        public bool? LongTerm { get; set; }
 
         /// <summary>
         /// 所属MCCCode，详情可参考  <a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.59bgD2&treeId=222&articleId=105364&docType=1#s1  ">商家经营类目</a> 中的“经营类目编码”

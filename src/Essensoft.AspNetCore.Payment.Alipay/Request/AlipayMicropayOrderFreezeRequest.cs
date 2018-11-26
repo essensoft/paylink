@@ -17,7 +17,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// <summary>
         /// 冻结资金的到期时间，超过此日期，冻结金会自动解冻,时间要求是:[当前时间+24h,订购时间-8h] .
         /// </summary>
-        public Nullable<DateTime> ExpireTime { get; set; }
+        public DateTime? ExpireTime { get; set; }
 
         /// <summary>
         /// 冻结备注,maxLength=40
