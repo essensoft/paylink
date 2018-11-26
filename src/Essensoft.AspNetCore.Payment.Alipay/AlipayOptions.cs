@@ -5,14 +5,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 {
     public class AlipayOptions
     {
-        /// <summary>
-        /// 应用私钥
-        /// </summary>
         internal RSAParameters PrivateRSAParameters;
-
-        /// <summary>
-        /// 支付宝公钥
-        /// </summary>
         internal RSAParameters PublicRSAParameters;
 
         private string rsaPrivateKey;
@@ -23,6 +16,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         /// </summary>
         public string AppId { get; set; }
 
+        /// <summary>
+        /// 支付宝公钥
+        /// </summary>
         public string RsaPublicKey
         {
             get => rsaPublicKey;
@@ -36,6 +32,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             }
         }
 
+        /// <summary>
+        /// 应用私钥
+        /// </summary>
         public string RsaPrivateKey
         {
             get => rsaPrivateKey;

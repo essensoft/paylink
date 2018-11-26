@@ -4,26 +4,14 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 {
     public class UnionPayOptions
     {
-        private string encryptCert;
-
-        /// <summary>
-        /// 加密证书 
-        /// </summary>
         internal UnionPayCertificate EncryptCertificate;
-
-        private string middleCert;
-
-        /// <summary>
-        /// 验签中级证书
-        /// </summary>
         internal UnionPayCertificate MiddleCertificate;
-
-        private string rootCert;
-
-        /// <summary>
-        /// 验签根证书 
-        /// </summary>
         internal UnionPayCertificate RootCertificate;
+        internal UnionPayCertificate SignCertificate => UnionPaySignature.GetSignCertificate(SignCert, SignCertPassword);
+
+        private string encryptCert;
+        private string middleCert;
+        private string rootCert;
 
         /// <summary>
         /// 商户代码
@@ -66,8 +54,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         /// </summary>
         public string SignCertPassword { get; set; }
 
-        internal UnionPayCertificate SignCertificate => UnionPaySignature.GetSignCertificate(SignCert, SignCertPassword);
-
+        /// <summary>
+        /// 加密证书 
+        /// </summary>
         public string EncryptCert
         {
             get => encryptCert;
@@ -81,6 +70,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             }
         }
 
+        /// <summary>
+        /// 验签中级证书
+        /// </summary>
         public string MiddleCert
         {
             get => middleCert;
@@ -94,6 +86,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             }
         }
 
+        /// <summary>
+        /// 验签根证书 
+        /// </summary>
         public string RootCert
         {
             get => rootCert;

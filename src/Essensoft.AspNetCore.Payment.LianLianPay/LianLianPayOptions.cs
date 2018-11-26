@@ -5,19 +5,15 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     public class LianLianPayOptions
     {
-        /// <summary>
-        /// 商户私钥
-        /// </summary>
         internal AsymmetricKeyParameter PrivateKey;
-
-        /// <summary>
-        /// 连连支付公钥
-        /// </summary>
         internal AsymmetricKeyParameter PublicKey;
 
         private string rsaPrivateKey;
         private string rsaPublicKey;
 
+        /// <summary>
+        /// 连连支付公钥
+        /// </summary>
         public string RsaPublicKey
         {
             get => rsaPublicKey;
@@ -31,6 +27,9 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             }
         }
 
+        /// <summary>
+        /// 商户私钥
+        /// </summary>
         public string RsaPrivateKey
         {
             get => rsaPrivateKey;
