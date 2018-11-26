@@ -43,7 +43,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// <summary>
         /// 上传数据文件包含的记录数，file_type为json_data时必选
         /// </summary>
-        public Nullable<long> Records { get; set; }
+        public long? Records { get; set; }
 
         /// <summary>
         /// 外部公司的数据源标识信息，由联接网络分配

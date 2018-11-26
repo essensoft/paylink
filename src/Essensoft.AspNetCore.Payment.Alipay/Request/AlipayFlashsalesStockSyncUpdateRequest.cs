@@ -22,7 +22,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// <summary>
         /// 库存数量
         /// </summary>
-        public Nullable<long> Stock { get; set; }
+        public long? Stock { get; set; }
 
         #region IAlipayRequest Members
 		private bool  needEncrypt=false;

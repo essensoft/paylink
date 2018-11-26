@@ -15,18 +15,12 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             Action<AlipayOptions> setupAction)
         {
-            services.AddSingleton<AlipayClient>();
-            services.AddSingleton<AlipayNotifyClient>();
+            services.AddScoped<IAlipayClient, AlipayClient>();
+            services.AddScoped<IAlipayNotifyClient, AlipayNotifyClient>();
             if (setupAction != null)
             {
                 services.Configure(setupAction);
             }
-        }
-
-        public static void AddAlipayHttpClient(
-            this IServiceCollection services)
-        {
-            services.AddHttpClient(AlipayOptions.DefaultClientName);
         }
     }
 }

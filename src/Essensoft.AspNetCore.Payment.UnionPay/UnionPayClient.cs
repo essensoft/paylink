@@ -24,43 +24,18 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         public virtual IHttpClientFactory ClientFactory { get; set; }
 
-        public UnionPayOptions Options { get; protected set; }
+        public virtual IOptionsSnapshot<UnionPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region UnionPayClient Constructors
 
         public UnionPayClient(
             ILogger<UnionPayClient> logger,
             IHttpClientFactory clientFactory,
-            IOptions<UnionPayOptions> optionsAccessor)
+            IOptionsSnapshot<UnionPayOptions> optionsAccessor)
         {
             Logger = logger;
             ClientFactory = clientFactory;
-            Options = optionsAccessor.Value;
-
-            if (string.IsNullOrEmpty(Options.SignCert))
-            {
-                throw new ArgumentNullException(nameof(Options.SignCert));
-            }
-
-            if (string.IsNullOrEmpty(Options.SignCertPassword))
-            {
-                throw new ArgumentNullException(nameof(Options.SignCertPassword));
-            }
-
-            if (string.IsNullOrEmpty(Options.EncryptCert))
-            {
-                throw new ArgumentNullException(nameof(Options.EncryptCert));
-            }
-
-            if (string.IsNullOrEmpty(Options.MiddleCert))
-            {
-                throw new ArgumentNullException(nameof(Options.MiddleCert));
-            }
-
-            if (string.IsNullOrEmpty(Options.RootCert))
-            {
-                throw new ArgumentNullException(nameof(Options.RootCert));
-            }          
+            OptionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
@@ -69,19 +44,16 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         public async Task<T> ExecuteAsync<T>(IUnionPayRequest<T> request) where T : UnionPayResponse
         {
-            var version = string.Empty;
+            return await ExecuteAsync(request, null);
+        }
 
-            if (!string.IsNullOrEmpty(request.GetApiVersion()))
-            {
-                version = request.GetApiVersion();
-            }
-            else
-            {
-                version = Options.Version;
-            }
+        public async Task<T> ExecuteAsync<T>(IUnionPayRequest<T> request, string optionsName) where T : UnionPayResponse
+        {
+            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var version = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
 
-            var merId = Options.MerId;
-            if (Options.TestMode && (request is UnionPayForm05_7_FileTransferRequest || request is UnionPayForm_6_6_FileTransferRequest))
+            var merId = options.MerId;
+            if (options.TestMode && (request is UnionPayForm05_7_FileTransferRequest || request is UnionPayForm_6_6_FileTransferRequest))
             {
                 merId = "700000000000001";
             }
@@ -89,25 +61,25 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             var txtParams = new UnionPayDictionary(request.GetParameters())
             {
                 { VERSION, version },
-                { ENCODING, Options.Encoding },
-                { SIGNMETHOD, Options.SignMethod },
-                { ACCESSTYPE, Options.AccessType },
+                { ENCODING, options.Encoding },
+                { SIGNMETHOD, options.SignMethod },
+                { ACCESSTYPE, options.AccessType },
                 { MERID, merId },
             };
 
             if (request.HasEncryptCertId())
             {
-                txtParams.Add(ENCRYPTCERTID, Options.EncryptCertificate.certId);
+                txtParams.Add(ENCRYPTCERTID, options.EncryptCertificate.certId);
             }
 
-            UnionPaySignature.Sign(txtParams, Options.SignCertificate.certId, Options.SignCertificate.key, Options.SecureKey);
+            UnionPaySignature.Sign(txtParams, options.SignCertificate.certId, options.SignCertificate.key, options.SecureKey);
 
             var query = UnionPayUtility.BuildQuery(txtParams);
             Logger?.LogTrace(0, "Request:{query}", query);
 
-            using (var client = ClientFactory.CreateClient(UnionPayOptions.DefaultClientName))
+            using (var client = ClientFactory.CreateClient())
             {
-                var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(Options.TestMode), query);
+                var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(options.TestMode), query);
                 Logger?.LogTrace(1, "Response:{content}", body);
 
                 var dic = ParseQueryString(body);
@@ -117,8 +89,8 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                     throw new Exception("sign check fail: Body is Empty!");
                 }
 
-                var ifValidateCNName = !Options.TestMode;
-                if (!UnionPaySignature.Validate(dic, Options.RootCertificate.cert, Options.MiddleCertificate.cert, Options.SecureKey, ifValidateCNName))
+                var ifValidateCNName = !options.TestMode;
+                if (!UnionPaySignature.Validate(dic, options.RootCertificate.cert, options.MiddleCertificate.cert, options.SecureKey, ifValidateCNName))
                 {
                     throw new Exception("sign check fail: check Sign and Data Fail!");
                 }
@@ -136,36 +108,32 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         public Task<T> PageExecuteAsync<T>(IUnionPayRequest<T> request) where T : UnionPayResponse
         {
-            return PageExecuteAsync(request, "POST");
+            return PageExecuteAsync(request, null, "POST");
         }
 
-        public Task<T> PageExecuteAsync<T>(IUnionPayRequest<T> request, string reqMethod) where T : UnionPayResponse
+        public Task<T> PageExecuteAsync<T>(IUnionPayRequest<T> request, string optionsName) where T : UnionPayResponse
         {
-            var version = string.Empty;
+            return PageExecuteAsync(request, optionsName, "POST");
+        }
 
-            if (!string.IsNullOrEmpty(request.GetApiVersion()))
-            {
-                version = request.GetApiVersion();
-            }
-            else
-            {
-                version = Options.Version;
-            }
-
+        public Task<T> PageExecuteAsync<T>(IUnionPayRequest<T> request, string optionsName, string reqMethod) where T : UnionPayResponse
+        {
+            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var version = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
             var txtParams = new UnionPayDictionary(request.GetParameters())
             {
                 { VERSION, version },
-                { ENCODING, Options.Encoding },
-                { SIGNMETHOD, Options.SignMethod },
-                { ACCESSTYPE, Options.AccessType },
-                { MERID, Options.MerId },
+                { ENCODING, options.Encoding },
+                { SIGNMETHOD, options.SignMethod },
+                { ACCESSTYPE, options.AccessType },
+                { MERID, options.MerId },
             };
 
-            UnionPaySignature.Sign(txtParams, Options.SignCertificate.certId, Options.SignCertificate.key, Options.SecureKey);
+            UnionPaySignature.Sign(txtParams, options.SignCertificate.certId, options.SignCertificate.key, options.SecureKey);
 
             var rsp = Activator.CreateInstance<T>();
 
-            var url = request.GetRequestUrl(Options.TestMode);
+            var url = request.GetRequestUrl(options.TestMode);
             if (reqMethod.ToUpper() == "GET")
             {
                 //拼接get请求的url

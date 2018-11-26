@@ -16,21 +16,16 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
     {
         public virtual ILogger Logger { get; set; }
 
-        public WeChatPayOptions Options { get; protected set; }
+        public virtual IOptionsSnapshot<WeChatPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region WeChatPayNotifyClient Constructors
 
         public WeChatPayNotifyClient(
             ILogger<WeChatPayNotifyClient> logger,
-            IOptions<WeChatPayOptions> optionsAccessor)
+            IOptionsSnapshot<WeChatPayOptions> optionsAccessor)
         {
             Logger = logger;
-            Options = optionsAccessor.Value;
-
-            if (string.IsNullOrEmpty(Options.Key))
-            {
-                throw new ArgumentNullException(nameof(Options.Key));
-            }
+            OptionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
@@ -39,6 +34,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : WeChatPayNotifyResponse
         {
+            return await ExecuteAsync<T>(request, null);
+        }
+
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : WeChatPayNotifyResponse
+        {
+            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
             Logger?.LogTrace(0, "Request:{body}", body);
 
@@ -46,14 +47,14 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             var rsp = parser.Parse(body);
             if (rsp is WeChatPayRefundNotifyResponse)
             {
-                var key = MD5.Compute(Options.Key).ToLower();
+                var key = MD5.Compute(options.Key).ToLower();
                 var data = AES.Decrypt((rsp as WeChatPayRefundNotifyResponse).ReqInfo, key, AESCipherMode.ECB, AESPaddingMode.PKCS7);
                 Logger?.LogTrace(1, "Decrypt Content:{data}", data); // AES-256-ECB
                 rsp = parser.Parse(body, data);
             }
             else
             {
-                CheckNotifySign(rsp);
+                CheckNotifySign(rsp, options);
             }
             return rsp;
         }
@@ -62,7 +63,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         #region Common Method
 
-        private void CheckNotifySign(WeChatPayNotifyResponse response)
+        private void CheckNotifySign(WeChatPayNotifyResponse response, WeChatPayOptions options)
         {
             if (response?.Parameters?.Count == 0)
             {
@@ -74,7 +75,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 throw new Exception("sign check fail: sign is Empty!");
             }
 
-            var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, Options.Key);
+            var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key);
             if (cal_sign != sign)
             {
                 throw new Exception("sign check fail: check Sign and Data Fail!");

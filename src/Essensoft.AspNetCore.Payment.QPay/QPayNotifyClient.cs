@@ -14,21 +14,16 @@ namespace Essensoft.AspNetCore.Payment.QPay
     {
         public virtual ILogger Logger { get; set; }
 
-        public QPayOptions Options { get; protected set; }
+        public virtual IOptionsSnapshot<QPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region QPayNotifyClient Constructors
 
         public QPayNotifyClient(
             ILogger<QPayNotifyClient> logger,
-            IOptions<QPayOptions> optionsAccessor)
+            IOptionsSnapshot<QPayOptions> optionsAccessor)
         {
             Logger = logger;
-            Options = optionsAccessor.Value;
-
-            if (string.IsNullOrEmpty(Options.Key))
-            {
-                throw new ArgumentNullException(nameof(Options.Key));
-            }
+            OptionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
@@ -37,12 +32,18 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : QPayNotifyResponse
         {
+            return await ExecuteAsync<T>(request, null);
+        }
+
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : QPayNotifyResponse
+        {
+            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
             Logger?.LogTrace(0, "Request:{body}", body);
 
             var parser = new QPayXmlParser<T>();
             var rsp = parser.Parse(body);
-            CheckNotifySign(rsp);
+            CheckNotifySign(rsp, options);
             return rsp;
         }
 
@@ -50,7 +51,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         #region Common Method
 
-        private void CheckNotifySign(QPayNotifyResponse response)
+        private void CheckNotifySign(QPayNotifyResponse response, QPayOptions options)
         {
             if (response?.Parameters?.Count == 0)
             {
@@ -62,7 +63,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
                 throw new Exception("sign check fail: sign is Empty!");
             }
 
-            var cal_sign = QPaySignature.SignWithKey(response.Parameters, Options.Key);
+            var cal_sign = QPaySignature.SignWithKey(response.Parameters, options.Key);
             if (cal_sign != sign)
             {
                 throw new Exception("sign check fail: check Sign and Data Fail!");
