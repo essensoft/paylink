@@ -18,6 +18,8 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
     {
         private static readonly string UNIONPAY_CNNAME = "中国银联股份有限公司";
 
+        private static readonly Dictionary<string, X509Certificate> validateCerts = new Dictionary<string, X509Certificate>();
+
         public static void Sign(Dictionary<string, string> reqData, string certId, AsymmetricKeyParameter parameters, string secureKey)
         {
             if (!reqData.ContainsKey("signMethod"))
@@ -200,8 +202,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
                 certId = cert.SerialNumber.ToString()
             };
         }
-
-        private static Dictionary<string, X509Certificate> validateCerts = new Dictionary<string, X509Certificate>();
 
         public static X509Certificate VerifyAndGetPubKey(string signPubKeyCert, X509Certificate rootCert, X509Certificate middleCert, bool ifValidateCNName)
         {
@@ -397,7 +397,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
                     {
                         var a = pin.Substring(i, 2).Trim();
                         bytes[temp] = (byte)Convert.ToInt32(a, 16);
-                        if (i == (pinLen - 2))
+                        if (i == pinLen - 2)
                         {
                             if (temp < 7)
                             {
@@ -417,11 +417,11 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
                     {
                         var a = pin.Substring(i, 2);
                         bytes[temp] = (byte)Convert.ToInt32(a, 16);
-                        if (i == (pinLen - 3))
+                        if (i == pinLen - 3)
                         {
                             var b = pin.Substring(pinLen - 1) + "F";
                             bytes[temp + 1] = (byte)Convert.ToInt32(b, 16);
-                            if ((temp + 1) < 7)
+                            if (temp + 1 < 7)
                             {
                                 for (var x = temp + 2; x < 8; x++)
                                 {

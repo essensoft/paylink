@@ -7,12 +7,12 @@ namespace Essensoft.AspNetCore.Payment.Security
     public enum AESCipherMode
     {
         CBC = CipherMode.CBC,
-        ECB = CipherMode.ECB,
+        ECB = CipherMode.ECB
     }
 
     public enum AESPaddingMode
     {
-        PKCS7 = PaddingMode.PKCS7,
+        PKCS7 = PaddingMode.PKCS7
     }
 
     public class AES
@@ -24,7 +24,7 @@ namespace Essensoft.AspNetCore.Payment.Security
                 IV = iv,
                 Key = Encoding.UTF8.GetBytes(key),
                 Mode = (CipherMode)cipherMode,
-                Padding = (PaddingMode)paddingMode,
+                Padding = (PaddingMode)paddingMode
             };
 
             var content = Encoding.UTF8.GetBytes(data);
@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.Security
                 IV = iv,
                 Key = Encoding.UTF8.GetBytes(key),
                 Mode = (CipherMode)cipherMode,
-                Padding = (PaddingMode)paddingMode,
+                Padding = (PaddingMode)paddingMode
             };
 
             var content = Convert.FromBase64String(data);
@@ -53,7 +53,7 @@ namespace Essensoft.AspNetCore.Payment.Security
             {
                 Key = Encoding.UTF8.GetBytes(key),
                 Mode = (CipherMode)cipherMode,
-                Padding = (PaddingMode)paddingMode,
+                Padding = (PaddingMode)paddingMode
             };
 
             var content = Encoding.UTF8.GetBytes(data);
@@ -67,7 +67,7 @@ namespace Essensoft.AspNetCore.Payment.Security
             {
                 Key = Encoding.UTF8.GetBytes(key),
                 Mode = (CipherMode)cipherMode,
-                Padding = (PaddingMode)paddingMode,
+                Padding = (PaddingMode)paddingMode
             };
 
             var content = Convert.FromBase64String(data);

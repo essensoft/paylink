@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipayDataDataserviceSdfsdfResponse.
     /// </summary>
     public class AlipayDataDataserviceSdfsdfResponse : AlipayResponse
-    {
-    }
+    {}
 }

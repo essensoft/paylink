@@ -55,16 +55,17 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string UserId { get; set; }
 
         #region IAlipayRequest Members
-		private bool  needEncrypt=false;
-        private string apiVersion = "1.0";
-		private string terminalType;
-		private string terminalInfo;
-        private string prodCode;
-		private string notifyUrl;
-        private string returnUrl;
-		private AlipayObject bizModel;
 
-		public void SetNeedEncrypt(bool needEncrypt){
+        private bool  needEncrypt;
+        private string apiVersion = "1.0";
+        private string terminalType;
+        private string terminalInfo;
+        private string prodCode;
+        private string notifyUrl;
+        private string returnUrl;
+        private AlipayObject bizModel;
+
+        public void SetNeedEncrypt(bool needEncrypt){
              this.needEncrypt=needEncrypt;
         }
 
@@ -73,7 +74,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
             return needEncrypt;
         }
 
-		public void SetNotifyUrl(string notifyUrl){
+        public void SetNotifyUrl(string notifyUrl){
             this.notifyUrl = notifyUrl;
         }
 
@@ -93,15 +94,15 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
 			this.terminalType=terminalType;
 		}
 
-    	public string GetTerminalType(){
+        public string GetTerminalType(){
     		return terminalType;
     	}
 
-    	public void SetTerminalInfo(string terminalInfo){
+        public void SetTerminalInfo(string terminalInfo){
     		this.terminalInfo=terminalInfo;
     	}
 
-    	public string GetTerminalInfo(){
+        public string GetTerminalInfo(){
     		return terminalInfo;
     	}
 
@@ -143,7 +144,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
             return parameters;
         }
 
-		public AlipayObject GetBizModel()
+        public AlipayObject GetBizModel()
         {
             return bizModel;
         }

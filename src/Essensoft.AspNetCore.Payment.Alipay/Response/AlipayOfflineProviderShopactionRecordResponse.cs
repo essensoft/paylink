@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipayOfflineProviderShopactionRecordResponse.
     /// </summary>
     public class AlipayOfflineProviderShopactionRecordResponse : AlipayResponse
-    {
-    }
+    {}
 }

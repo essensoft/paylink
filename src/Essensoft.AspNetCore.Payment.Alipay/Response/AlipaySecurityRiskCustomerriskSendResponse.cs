@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipaySecurityRiskCustomerriskSendResponse.
     /// </summary>
     public class AlipaySecurityRiskCustomerriskSendResponse : AlipayResponse
-    {
-    }
+    {}
 }

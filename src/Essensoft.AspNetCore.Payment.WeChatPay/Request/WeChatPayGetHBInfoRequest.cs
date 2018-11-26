@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.WeChatPay.Response;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.WeChatPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
@@ -32,11 +32,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         public IDictionary<string, string> GetParameters()
         {
-            var parameters = new WeChatPayDictionary()
+            var parameters = new WeChatPayDictionary
             {
                 { "appid", AppId },
                 { "mch_billno", MchBillNo },
-                { "bill_type", BillType },
+                { "bill_type", BillType }
             };
             return parameters;
         }

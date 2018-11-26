@@ -61,7 +61,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "txnType", TxnType },
                 { "txnSubType", TxnSubType },
                 { "orderId", OrderId },
-                { "reserved", Reserved },
+                { "reserved", Reserved }
             };
             return parameters;
         }

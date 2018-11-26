@@ -1,5 +1,5 @@
-using Essensoft.AspNetCore.Payment.QPay.Response;
 using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.QPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Request
 {
@@ -29,11 +29,11 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
 
         public IDictionary<string, string> GetParameters()
         {
-            var parameters = new QPayDictionary()
+            var parameters = new QPayDictionary
             {
                 { "bill_date", BillDate },
                 { "bill_type", BillType },
-                { "tar_type", TarType },
+                { "tar_type", TarType }
             };
             return parameters;
         }

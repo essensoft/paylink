@@ -1,5 +1,5 @@
-using Essensoft.AspNetCore.Payment.Alipay.Domain;
 using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
 using Essensoft.AspNetCore.Payment.Alipay.Response;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
 
@@ -145,17 +145,42 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// </summary>
         public string VersionDesc { get; set; }
 
-        #region IAlipayRequest Members
-		private bool needEncrypt=false;
-		private string apiVersion = "1.0";
-		private string terminalType;
-		private string terminalInfo;
-        private string prodCode;
-		private string notifyUrl;
-        private string returnUrl;
-		private AlipayObject bizModel;
+        #region IAlipayUploadRequest Members
 
-    	 public void SetNeedEncrypt(bool needEncrypt){
+        public IDictionary<string, FileItem> GetFileParameters()
+        {
+            IDictionary<string, FileItem> parameters = new Dictionary<string, FileItem>
+            {
+                { "app_logo", AppLogo },
+                { "fifth_license_pic", FifthLicensePic },
+                { "fifth_screen_shot", FifthScreenShot },
+                { "first_license_pic", FirstLicensePic },
+                { "first_screen_shot", FirstScreenShot },
+                { "fourth_license_pic", FourthLicensePic },
+                { "fourth_screen_shot", FourthScreenShot },
+                { "out_door_pic", OutDoorPic },
+                { "second_license_pic", SecondLicensePic },
+                { "second_screen_shot", SecondScreenShot },
+                { "third_license_pic", ThirdLicensePic },
+                { "third_screen_shot", ThirdScreenShot }
+            };
+            return parameters;
+        }
+
+        #endregion
+
+        #region IAlipayRequest Members
+
+        private bool needEncrypt;
+        private string apiVersion = "1.0";
+        private string terminalType;
+        private string terminalInfo;
+        private string prodCode;
+        private string notifyUrl;
+        private string returnUrl;
+        private AlipayObject bizModel;
+
+        public void SetNeedEncrypt(bool needEncrypt){
              this.needEncrypt=needEncrypt;
         }
 
@@ -164,7 +189,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
             return needEncrypt;
         }
 
-		public void SetNotifyUrl(string notifyUrl){
+        public void SetNotifyUrl(string notifyUrl){
             this.notifyUrl = notifyUrl;
         }
 
@@ -180,19 +205,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
             return returnUrl;
         }
 
-		public void SetTerminalType(string terminalType){
+        public void SetTerminalType(string terminalType){
 			this.terminalType=terminalType;
 		}
 
-    	public string GetTerminalType(){
+        public string GetTerminalType(){
     		return terminalType;
     	}
 
-    	public void SetTerminalInfo(string terminalInfo){
+        public void SetTerminalInfo(string terminalInfo){
     		this.terminalInfo=terminalInfo;
     	}
 
-    	public string GetTerminalInfo(){
+        public string GetTerminalInfo(){
     		return terminalInfo;
     	}
 
@@ -204,7 +229,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
             return prodCode;
         }
 
-		public void SetApiVersion(string apiVersion){
+        public void SetApiVersion(string apiVersion){
             this.apiVersion=apiVersion;
         }
 
@@ -239,8 +264,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
             };
             return parameters;
         }
-		
-		public AlipayObject GetBizModel()
+
+        public AlipayObject GetBizModel()
         {
             return bizModel;
         }
@@ -248,30 +273,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public void SetBizModel(AlipayObject bizModel)
         {
             this.bizModel = bizModel;
-        }
-
-        #endregion
-
-        #region IAlipayUploadRequest Members
-
-        public IDictionary<string, FileItem> GetFileParameters()
-        {
-            IDictionary<string, FileItem> parameters = new Dictionary<string, FileItem>
-            {
-                { "app_logo", AppLogo },
-                { "fifth_license_pic", FifthLicensePic },
-                { "fifth_screen_shot", FifthScreenShot },
-                { "first_license_pic", FirstLicensePic },
-                { "first_screen_shot", FirstScreenShot },
-                { "fourth_license_pic", FourthLicensePic },
-                { "fourth_screen_shot", FourthScreenShot },
-                { "out_door_pic", OutDoorPic },
-                { "second_license_pic", SecondLicensePic },
-                { "second_screen_shot", SecondScreenShot },
-                { "third_license_pic", ThirdLicensePic },
-                { "third_screen_shot", ThirdScreenShot }
-            };
-            return parameters;
         }
 
         #endregion

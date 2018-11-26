@@ -46,7 +46,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
                 { "card_no", CardNo },
                 { "bank_code", BankCode },
                 { "brabank_name", BrabankName },
-                { "city_code", CityCode },
+                { "city_code", CityCode }
             };
             return parameters;
         }

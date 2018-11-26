@@ -51,12 +51,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         /// </summary>
         [JsonIgnore]
         [XmlIgnore]
-        public bool IsError
-        {
-            get
-            {
-                return !string.IsNullOrEmpty(SubCode);
-            }
-        }
+        public bool IsError => !string.IsNullOrEmpty(SubCode);
     }
 }

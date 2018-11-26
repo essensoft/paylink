@@ -61,7 +61,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
                     return GetDefault(destinationType);
                 }
 
-                if ((Object as string) != null)
+                if (Object as string != null)
                 {
                     var ObjectValue = Object as string;
                     if (destinationType.IsEnum)
@@ -74,7 +74,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
                         return GetDefault(destinationType);
                     }
                 }
-                if ((Object as IConvertible) != null)
+                if (Object as IConvertible != null)
                 {
                     var destination =
                        destinationType.IsGenericType && destinationType.GetGenericTypeDefinition() == typeof(Nullable<>) ?
@@ -114,7 +114,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 
         public static XmlDocument SortedDictionary2AllXml(JDPayDictionary dic)
         {
-            var xmldoc = new XmlDocument() { XmlResolver = null };
+            var xmldoc = new XmlDocument { XmlResolver = null };
             var xmldecl = xmldoc.CreateXmlDeclaration("1.0", "UTF-8", null);
             xmldoc.AppendChild(xmldecl);
             SortedDictionary2Xml(xmldoc, dic);
@@ -123,7 +123,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 
         public static string SortedDictionary2XmlStr(JDPayDictionary dic)
         {
-            var xmldoc = new XmlDocument() { XmlResolver = null };
+            var xmldoc = new XmlDocument { XmlResolver = null };
             SortedDictionary2Xml(xmldoc, dic);
             return ConvertXmlToString(xmldoc);
         }

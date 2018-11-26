@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// KoubeiCraftsmanDataWorkModifyResponse.
     /// </summary>
     public class KoubeiCraftsmanDataWorkModifyResponse : AlipayResponse
-    {
-    }
+    {}
 }

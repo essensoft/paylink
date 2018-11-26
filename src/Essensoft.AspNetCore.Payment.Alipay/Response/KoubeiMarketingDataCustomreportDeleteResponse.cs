@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// KoubeiMarketingDataCustomreportDeleteResponse.
     /// </summary>
     public class KoubeiMarketingDataCustomreportDeleteResponse : AlipayResponse
-    {
-    }
+    {}
 }

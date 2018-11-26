@@ -162,7 +162,7 @@ namespace WebApplicationSample.Models
         [Required]
         [Display(Name = "trade_type")]
         public string TradeType { get; set; }
-    
+
         [Required]
         [Display(Name = "openid")]
         public string OpenId { get; set; }

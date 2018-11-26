@@ -34,7 +34,7 @@ namespace Essensoft.AspNetCore.Payment.Security
                 Q = keyStructure.Prime2.ToByteArrayUnsigned(),
                 DP = keyStructure.Exponent1.ToByteArrayUnsigned(),
                 DQ = keyStructure.Exponent2.ToByteArrayUnsigned(),
-                InverseQ = keyStructure.Coefficient.ToByteArrayUnsigned(),
+                InverseQ = keyStructure.Coefficient.ToByteArrayUnsigned()
             };
         }
 
@@ -44,7 +44,7 @@ namespace Essensoft.AspNetCore.Payment.Security
             return new RSAParameters
             {
                 Modulus = key.Modulus.ToByteArrayUnsigned(),
-                Exponent = key.Exponent.ToByteArrayUnsigned(),
+                Exponent = key.Exponent.ToByteArrayUnsigned()
             };
         }
 

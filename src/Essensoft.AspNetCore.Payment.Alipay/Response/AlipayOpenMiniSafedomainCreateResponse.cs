@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipayOpenMiniSafedomainCreateResponse.
     /// </summary>
     public class AlipayOpenMiniSafedomainCreateResponse : AlipayResponse
-    {
-    }
+    {}
 }

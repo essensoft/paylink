@@ -13,10 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 {
     public class AlipayNotifyClient : IAlipayNotifyClient
     {
-        public virtual ILogger Logger { get; set; }
-
-        public virtual IOptionsSnapshot<AlipayOptions> OptionsSnapshotAccessor { get; set; }
-
         #region AlipayNotifyClient Constructors
 
         public AlipayNotifyClient(
@@ -28,6 +24,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         }
 
         #endregion
+
+        public virtual ILogger Logger { get; set; }
+
+        public virtual IOptionsSnapshot<AlipayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region IAlipayNotifyClient Members
 

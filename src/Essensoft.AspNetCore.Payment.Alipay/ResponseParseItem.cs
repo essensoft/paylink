@@ -1,11 +1,9 @@
 ﻿namespace Essensoft.AspNetCore.Payment.Alipay
 {
-    class ResponseParseItem
+    internal class ResponseParseItem
     {
-
         public string realContent;
 
         public string respContent;
-
     }
 }

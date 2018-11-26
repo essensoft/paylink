@@ -68,7 +68,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
                 { "no_order", NoOrder },
                 { "dt_order", DtOrder },
                 { "oid_paybill", OidPaybill },
-                { "notify_url", NotifyUrl },
+                { "notify_url", NotifyUrl }
             };
             return parameters;
         }

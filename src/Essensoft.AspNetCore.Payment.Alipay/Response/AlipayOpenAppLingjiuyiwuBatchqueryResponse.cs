@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipayOpenAppLingjiuyiwuBatchqueryResponse.
     /// </summary>
     public class AlipayOpenAppLingjiuyiwuBatchqueryResponse : AlipayResponse
-    {
-    }
+    {}
 }

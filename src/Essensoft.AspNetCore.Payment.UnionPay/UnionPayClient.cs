@@ -20,12 +20,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         private const string MERID = "merId";
         private const string ENCRYPTCERTID = "encryptCertId";
 
-        public virtual ILogger Logger { get; set; }
-
-        public virtual IHttpClientFactory ClientFactory { get; set; }
-
-        public virtual IOptionsSnapshot<UnionPayOptions> OptionsSnapshotAccessor { get; set; }
-
         #region UnionPayClient Constructors
 
         public UnionPayClient(
@@ -39,6 +33,12 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         }
 
         #endregion
+
+        public virtual ILogger Logger { get; set; }
+
+        public virtual IHttpClientFactory ClientFactory { get; set; }
+
+        public virtual IOptionsSnapshot<UnionPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region IUnionPayClient Members
 
@@ -64,7 +64,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 { ENCODING, options.Encoding },
                 { SIGNMETHOD, options.SignMethod },
                 { ACCESSTYPE, options.AccessType },
-                { MERID, merId },
+                { MERID, merId }
             };
 
             if (request.HasEncryptCertId())
@@ -126,7 +126,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 { ENCODING, options.Encoding },
                 { SIGNMETHOD, options.SignMethod },
                 { ACCESSTYPE, options.AccessType },
-                { MERID, options.MerId },
+                { MERID, options.MerId }
             };
 
             UnionPaySignature.Sign(txtParams, options.SignCertificate.certId, options.SignCertificate.key, options.SecureKey);

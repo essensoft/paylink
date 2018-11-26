@@ -67,7 +67,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "txnSubType", TxnSubType },
                 { "settleDate", SettleDate },
                 { "fileType", FileType },
-                { "reqReserved", ReqReserved },
+                { "reqReserved", ReqReserved }
             };
             return parameters;
         }

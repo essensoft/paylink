@@ -4,6 +4,5 @@
     /// 基础对象。
     /// </summary>
     public abstract class QPayObject
-    {
-    }
+    {}
 }

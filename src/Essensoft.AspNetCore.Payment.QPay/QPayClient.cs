@@ -15,12 +15,6 @@ namespace Essensoft.AspNetCore.Payment.QPay
         private const string NONCE_STR = "nonce_str";
         private const string SIGN = "sign";
 
-        public virtual ILogger Logger { get; set; }
-
-        public virtual IHttpClientFactory ClientFactory { get; set; }
-
-        public virtual IOptionsSnapshot<QPayOptions> OptionsSnapshotAccessor { get; set; }
-
         #region QPayClient Constructors
 
         public QPayClient(
@@ -31,6 +25,36 @@ namespace Essensoft.AspNetCore.Payment.QPay
             Logger = logger;
             ClientFactory = clientFactory;
             OptionsSnapshotAccessor = optionsAccessor;
+        }
+
+        #endregion
+
+        public virtual ILogger Logger { get; set; }
+
+        public virtual IHttpClientFactory ClientFactory { get; set; }
+
+        public virtual IOptionsSnapshot<QPayOptions> OptionsSnapshotAccessor { get; set; }
+
+        #region Common Method
+
+        private void CheckResponseSign(QPayResponse response, QPayOptions options)
+        {
+            if (string.IsNullOrEmpty(response.Body) || response?.Parameters == null)
+            {
+                throw new Exception("sign check fail: Body is Empty!");
+            }
+
+            if (response.Parameters.TryGetValue("sign", out var sign))
+            {
+                if (response.Parameters["return_code"] == "SUCCESS" && !string.IsNullOrEmpty(sign))
+                {
+                    var cal_sign = QPaySignature.SignWithKey(response.Parameters, options.Key);
+                    if (cal_sign != sign)
+                    {
+                        throw new Exception("sign check fail: check Sign and Data Fail!");
+                    }
+                }
+            }
         }
 
         #endregion
@@ -110,30 +134,6 @@ namespace Essensoft.AspNetCore.Payment.QPay
                 var rsp = parser.Parse(body);
                 CheckResponseSign(rsp, options);
                 return rsp;
-            }
-        }
-
-        #endregion
-
-        #region Common Method
-
-        private void CheckResponseSign(QPayResponse response, QPayOptions options)
-        {
-            if (string.IsNullOrEmpty(response.Body) || response?.Parameters == null)
-            {
-                throw new Exception("sign check fail: Body is Empty!");
-            }
-
-            if (response.Parameters.TryGetValue("sign", out var sign))
-            {
-                if (response.Parameters["return_code"] == "SUCCESS" && !string.IsNullOrEmpty(sign))
-                {
-                    var cal_sign = QPaySignature.SignWithKey(response.Parameters, options.Key);
-                    if (cal_sign != sign)
-                    {
-                        throw new Exception("sign check fail: check Sign and Data Fail!");
-                    }
-                }
             }
         }
 

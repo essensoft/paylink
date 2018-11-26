@@ -45,7 +45,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
                 { "api_version", ApiVersion },
                 { "no_order", NoOrder },
                 { "confirm_code", ConfirmCode },
-                { "notify_url", NotifyUrl },
+                { "notify_url", NotifyUrl }
             };
             return parameters;
         }

@@ -86,6 +86,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         {
             this.version = version;
         }
+
         public IDictionary<string, string> GetParameters()
         {
             var parameters = new UnionPayDictionary
@@ -102,7 +103,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "accInsCode", AccInsCode },
                 { "reserved", Reserved },
                 { "reqReserved", ReqReserved },
-                { "termId", TermId },
+                { "termId", TermId }
             };
             return parameters;
         }

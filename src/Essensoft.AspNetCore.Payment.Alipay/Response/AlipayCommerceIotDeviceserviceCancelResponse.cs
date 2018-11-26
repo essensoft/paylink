@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipayCommerceIotDeviceserviceCancelResponse.
     /// </summary>
     public class AlipayCommerceIotDeviceserviceCancelResponse : AlipayResponse
-    {
-    }
+    {}
 }

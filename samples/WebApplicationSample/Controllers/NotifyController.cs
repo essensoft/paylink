@@ -13,6 +13,7 @@ using Essensoft.AspNetCore.Payment.UnionPay.Notify;
 using Essensoft.AspNetCore.Payment.WeChatPay;
 using Essensoft.AspNetCore.Payment.WeChatPay.Notify;
 using Microsoft.AspNetCore.Mvc;
+using WebApplicationSample.Helpers;
 
 namespace WebApplicationSample.Controllers
 {
@@ -21,7 +22,8 @@ namespace WebApplicationSample.Controllers
     [Route("notify/alipay")]
     public class AlipayNotifyController : Controller
     {
-        private readonly IAlipayNotifyClient _client = null;
+        private readonly IAlipayNotifyClient _client;
+
         public AlipayNotifyController(IAlipayNotifyClient client)
         {
             _client = client;
@@ -135,7 +137,8 @@ namespace WebApplicationSample.Controllers
     [Route("notify/wechatpay")]
     public class WeChatPayNotifyController : Controller
     {
-        private readonly IWeChatPayNotifyClient _client = null;
+        private readonly IWeChatPayNotifyClient _client;
+
         public WeChatPayNotifyController(IWeChatPayNotifyClient client)
         {
             _client = client;
@@ -204,7 +207,8 @@ namespace WebApplicationSample.Controllers
     [Route("notify/qpay")]
     public class QPayNotifyController : Controller
     {
-        private readonly IQPayNotifyClient _client = null;
+        private readonly IQPayNotifyClient _client;
+
         public QPayNotifyController(IQPayNotifyClient client)
         {
             _client = client;
@@ -266,7 +270,8 @@ namespace WebApplicationSample.Controllers
     [Route("notify/jdpay")]
     public class JDPayNotifyController : Controller
     {
-        private readonly IJDPayNotifyClient _client = null;
+        private readonly IJDPayNotifyClient _client;
+
         public JDPayNotifyController(IJDPayNotifyClient client)
         {
             _client = client;
@@ -312,7 +317,8 @@ namespace WebApplicationSample.Controllers
     [Route("notify/lianlianpay")]
     public class LianLianPayNotifyController : Controller
     {
-        private readonly ILianLianPayNotifyClient _client = null;
+        private readonly ILianLianPayNotifyClient _client;
+
         public LianLianPayNotifyController(ILianLianPayNotifyClient client)
         {
             _client = client;
@@ -358,7 +364,8 @@ namespace WebApplicationSample.Controllers
     [Route("notify/unionpay")]
     public class UnionPayNotifyController : Controller
     {
-        private readonly IUnionPayNotifyClient _client = null;
+        private readonly IUnionPayNotifyClient _client;
+
         public UnionPayNotifyController(IUnionPayNotifyClient client)
         {
             _client = client;

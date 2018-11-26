@@ -9,7 +9,8 @@ namespace WebApplicationSample.Controllers
 {
     public class WeChatPayController : Controller
     {
-        private readonly IWeChatPayClient _client = null;
+        private readonly IWeChatPayClient _client;
+
         public WeChatPayController(IWeChatPayClient client)
         {
             _client = client;
@@ -29,7 +30,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> MicroPay(WeChatPayMicroPayViewModel viewModel)
         {
-            var request = new WeChatPayMicroPayRequest()
+            var request = new WeChatPayMicroPayRequest
             {
                 Body = viewModel.Body,
                 OutTradeNo = viewModel.OutTradeNo,
@@ -51,7 +52,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> PubPay(WeChatPayPubPayViewModel viewModel)
         {
-            var request = new WeChatPayUnifiedOrderRequest()
+            var request = new WeChatPayUnifiedOrderRequest
             {
                 Body = viewModel.Body,
                 OutTradeNo = viewModel.OutTradeNo,
@@ -64,9 +65,9 @@ namespace WebApplicationSample.Controllers
             var response = await _client.ExecuteAsync(request);
             if (response.ReturnCode == "SUCCESS" && response.ResultCode == "SUCCESS")
             {
-                var req = new WeChatPayH5CallPaymentRequest()
+                var req = new WeChatPayH5CallPaymentRequest
                 {
-                    Package = "prepay_id=" + response.PrepayId,
+                    Package = "prepay_id=" + response.PrepayId
                 };
                 var parameter = await _client.ExecuteAsync(req);
                 // 将参数(parameter)给 公众号前端 让他在微信内H5调起支付(https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6)
@@ -87,14 +88,14 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> QRPay(WeChatPayQRPayViewModel viewModel)
         {
-            var request = new WeChatPayUnifiedOrderRequest()
+            var request = new WeChatPayUnifiedOrderRequest
             {
                 Body = viewModel.Body,
                 OutTradeNo = viewModel.OutTradeNo,
                 TotalFee = viewModel.TotalFee,
                 SpbillCreateIp = viewModel.SpbillCreateIp,
                 NotifyUrl = viewModel.NotifyUrl,
-                TradeType = viewModel.TradeType,
+                TradeType = viewModel.TradeType
             };
             var response = await _client.ExecuteAsync(request);
             // response.CodeUrl 给前端生成二维码
@@ -112,22 +113,22 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> AppPay(WeChatPayAppPayViewModel viewModel)
         {
-            var request = new WeChatPayUnifiedOrderRequest()
+            var request = new WeChatPayUnifiedOrderRequest
             {
                 Body = viewModel.Body,
                 OutTradeNo = viewModel.OutTradeNo,
                 TotalFee = viewModel.TotalFee,
                 SpbillCreateIp = viewModel.SpbillCreateIp,
                 NotifyUrl = viewModel.NotifyUrl,
-                TradeType = viewModel.TradeType,
+                TradeType = viewModel.TradeType
             };
             var response = await _client.ExecuteAsync(request);
 
             if (response.ReturnCode == "SUCCESS" && response.ResultCode == "SUCCESS")
             {
-                var req = new WeChatPayAppCallPaymentRequest()
+                var req = new WeChatPayAppCallPaymentRequest
                 {
-                    PrepayId = response.PrepayId,
+                    PrepayId = response.PrepayId
                 };
                 var parameter = await _client.ExecuteAsync(req);
                 // 将参数(parameter)给 ios/android端 让他调起微信APP(https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5)
@@ -148,14 +149,14 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> H5Pay(WeChatPayH5PayViewModel viewModel)
         {
-            var request = new WeChatPayUnifiedOrderRequest()
+            var request = new WeChatPayUnifiedOrderRequest
             {
                 Body = viewModel.Body,
                 OutTradeNo = viewModel.OutTradeNo,
                 TotalFee = viewModel.TotalFee,
                 SpbillCreateIp = viewModel.SpbillCreateIp,
                 NotifyUrl = viewModel.NotifyUrl,
-                TradeType = viewModel.TradeType,
+                TradeType = viewModel.TradeType
             };
             var response = await _client.ExecuteAsync(request);
 
@@ -172,7 +173,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> LiteAppPay(WeChatPayLiteAppPayViewModel viewModel)
         {
-            var request = new WeChatPayUnifiedOrderRequest()
+            var request = new WeChatPayUnifiedOrderRequest
             {
                 Body = viewModel.Body,
                 OutTradeNo = viewModel.OutTradeNo,
@@ -180,15 +181,15 @@ namespace WebApplicationSample.Controllers
                 SpbillCreateIp = viewModel.SpbillCreateIp,
                 NotifyUrl = viewModel.NotifyUrl,
                 TradeType = viewModel.TradeType,
-                OpenId = viewModel.OpenId,
+                OpenId = viewModel.OpenId
             };
             var response = await _client.ExecuteAsync(request);
 
             if (response.ReturnCode == "SUCCESS" && response.ResultCode == "SUCCESS")
             {
-                var req = new WeChatPayLiteAppCallPaymentRequest()
+                var req = new WeChatPayLiteAppCallPaymentRequest
                 {
-                    Package = "prepay_id=" + response.PrepayId,
+                    Package = "prepay_id=" + response.PrepayId
                 };
                 var parameter = await _client.ExecuteAsync(req);
                 // 将参数(parameter)给 小程序前端 让他调起支付API(https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7&index=5)
@@ -209,10 +210,10 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> OrderQuery(WeChatPayOrderQueryViewModel viewModel)
         {
-            var request = new WeChatPayOrderQueryRequest()
+            var request = new WeChatPayOrderQueryRequest
             {
                 TransactionId = viewModel.TransactionId,
-                OutTradeNo = viewModel.OutTradeNo,
+                OutTradeNo = viewModel.OutTradeNo
             };
             var response = await _client.ExecuteAsync(request);
             ViewData["response"] = response.Body;
@@ -228,10 +229,10 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Reverse(WeChatPayReverseViewModel viewModel)
         {
-            var request = new WeChatPayReverseRequest()
+            var request = new WeChatPayReverseRequest
             {
                 TransactionId = viewModel.TransactionId,
-                OutTradeNo = viewModel.OutTradeNo,
+                OutTradeNo = viewModel.OutTradeNo
             };
             var response = await _client.ExecuteAsync(request, "wechatpayCertificateName");
             ViewData["response"] = response.Body;
@@ -247,9 +248,9 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> CloseOrder(WeChatPayCloseOrderViewModel viewModel)
         {
-            var request = new WeChatPayCloseOrderRequest()
+            var request = new WeChatPayCloseOrderRequest
             {
-                OutTradeNo = viewModel.OutTradeNo,
+                OutTradeNo = viewModel.OutTradeNo
             };
             var response = await _client.ExecuteAsync(request);
             ViewData["response"] = response.Body;
@@ -265,7 +266,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Refund(WeChatPayRefundViewModel viewModel)
         {
-            var request = new WeChatPayRefundRequest()
+            var request = new WeChatPayRefundRequest
             {
                 OutRefundNo = viewModel.OutRefundNo,
                 TransactionId = viewModel.TransactionId,
@@ -273,7 +274,7 @@ namespace WebApplicationSample.Controllers
                 TotalFee = viewModel.TotalFee,
                 RefundFee = viewModel.RefundFee,
                 RefundDesc = viewModel.RefundDesc,
-                NotifyUrl = viewModel.NotifyUrl,
+                NotifyUrl = viewModel.NotifyUrl
             };
             var response = await _client.ExecuteAsync(request, "wechatpayCertificateName");
             ViewData["response"] = response.Body;
@@ -289,12 +290,12 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> RefundQuery(WeChatPayRefundQueryViewModel viewModel)
         {
-            var request = new WeChatPayRefundQueryRequest()
+            var request = new WeChatPayRefundQueryRequest
             {
                 RefundId = viewModel.RefundId,
                 OutRefundNo = viewModel.OutRefundNo,
                 TransactionId = viewModel.TransactionId,
-                OutTradeNo = viewModel.OutTradeNo,
+                OutTradeNo = viewModel.OutTradeNo
             };
             var response = await _client.ExecuteAsync(request);
             ViewData["response"] = response.Body;
@@ -310,11 +311,11 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> DownloadBill(WeChatPayDownloadBillViewModel viewModel)
         {
-            var request = new WeChatPayDownloadBillRequest()
+            var request = new WeChatPayDownloadBillRequest
             {
                 BillDate = viewModel.BillDate,
                 BillType = viewModel.BillType,
-                TarType = viewModel.TarType,
+                TarType = viewModel.TarType
             };
             var response = await _client.ExecuteAsync(request);
             ViewData["response"] = response.Body;
@@ -330,11 +331,11 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> DownloadFundFlow(WeChatPayDownloadFundFlowViewModel viewModel)
         {
-            var request = new WeChatPayDownloadFundFlowRequest()
+            var request = new WeChatPayDownloadFundFlowRequest
             {
                 BillDate = viewModel.BillDate,
                 AccountType = viewModel.AccountType,
-                TarType = viewModel.TarType,
+                TarType = viewModel.TarType
             };
             var response = await _client.ExecuteAsync(request, "wechatpayCertificateName");
             ViewData["response"] = response.Body;
@@ -350,7 +351,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Transfers(WeChatPayTransfersViewModel viewModel)
         {
-            var request = new WeChatPayTransfersRequest()
+            var request = new WeChatPayTransfersRequest
             {
                 PartnerTradeNo = viewModel.PartnerTradeNo,
                 OpenId = viewModel.OpenId,
@@ -374,9 +375,9 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> GetTransferInfo(WeChatPayGetTransferInfoViewModel viewModel)
         {
-            var request = new WeChatPayGetTransferInfoRequest()
+            var request = new WeChatPayGetTransferInfoRequest
             {
-                PartnerTradeNo = viewModel.PartnerTradeNo,
+                PartnerTradeNo = viewModel.PartnerTradeNo
             };
             var response = await _client.ExecuteAsync(request, "wechatpayCertificateName");
             ViewData["response"] = response.Body;
@@ -392,14 +393,14 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> PayBank(WeChatPayPayBankViewModel viewModel)
         {
-            var request = new WeChatPayPayBankRequest()
+            var request = new WeChatPayPayBankRequest
             {
                 PartnerTradeNo = viewModel.PartnerTradeNo,
                 EncBankNo = viewModel.EncBankNo,
                 EncTrueName = viewModel.EncTrueName,
                 BankCode = viewModel.BankCode,
                 Amount = viewModel.Amount,
-                Desc = viewModel.Desc,
+                Desc = viewModel.Desc
             };
             var response = await _client.ExecuteAsync(request, "wechatpayCertificateName");
             ViewData["response"] = response.Body;
@@ -415,9 +416,9 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> QueryBank(WeChatPayQueryBankViewModel viewModel)
         {
-            var request = new WeChatPayQueryBankRequest()
+            var request = new WeChatPayQueryBankRequest
             {
-                PartnerTradeNo = viewModel.PartnerTradeNo,
+                PartnerTradeNo = viewModel.PartnerTradeNo
             };
             var response = await _client.ExecuteAsync(request, "wechatpayCertificateName");
             ViewData["response"] = response.Body;
@@ -435,10 +436,8 @@ namespace WebApplicationSample.Controllers
                 ViewData["response"] = response.Body;
                 return View();
             }
-            else
-            {
-                return View();
-            }
+
+            return View();
         }
     }
 }

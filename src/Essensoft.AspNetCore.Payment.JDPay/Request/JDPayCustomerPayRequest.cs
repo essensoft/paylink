@@ -114,7 +114,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Request
 
         public IDictionary<string, string> GetParameters()
         {
-            var parameters = new JDPayDictionary()
+            var parameters = new JDPayDictionary
             {
                 { "payMerchant", PayMerchant },
                 { "device", Device},
@@ -131,7 +131,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Request
                 { "callbackUrl", CallbackUrl},
                 { "notifyUrl", NotifyUrl },
                 { "ip", Ip },
-                { "riskInfo", RiskInfo },
+                { "riskInfo", RiskInfo }
             };
             return parameters;
         }

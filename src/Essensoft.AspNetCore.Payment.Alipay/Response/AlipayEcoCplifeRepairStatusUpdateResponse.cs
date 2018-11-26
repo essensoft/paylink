@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipayEcoCplifeRepairStatusUpdateResponse.
     /// </summary>
     public class AlipayEcoCplifeRepairStatusUpdateResponse : AlipayResponse
-    {
-    }
+    {}
 }

@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// ZhimaMerchantBorrowEntityUploadResponse.
     /// </summary>
     public class ZhimaMerchantBorrowEntityUploadResponse : AlipayResponse
-    {
-    }
+    {}
 }

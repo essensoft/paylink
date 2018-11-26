@@ -49,7 +49,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
                     return GetDefault(destinationType);
                 }
 
-                if ((Object as string) != null)
+                if (Object as string != null)
                 {
                     var ObjectValue = Object as string;
                     if (destinationType.IsEnum)
@@ -62,7 +62,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
                         return GetDefault(destinationType);
                     }
                 }
-                if ((Object as IConvertible) != null)
+                if (Object as IConvertible != null)
                 {
                     var destination =
                        destinationType.IsGenericType && destinationType.GetGenericTypeDefinition() == typeof(Nullable<>) ?
@@ -89,6 +89,5 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             var defaultExpr = Expression.Default(type);
             return Expression.Lambda<Func<object>>(defaultExpr).Compile()();
         }
-
     }
 }

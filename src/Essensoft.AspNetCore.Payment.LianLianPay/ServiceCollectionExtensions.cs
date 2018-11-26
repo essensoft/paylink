@@ -1,14 +1,14 @@
 using System;
-using Essensoft.AspNetCore.Payment.LianLianPay;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     public static class ServiceCollectionExtensions
     {
         public static void AddLianLianPay(
             this IServiceCollection services)
         {
-            services.AddLianLianPay(setupAction: null);
+            services.AddLianLianPay(null);
         }
 
         public static void AddLianLianPay(

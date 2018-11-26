@@ -6,13 +6,13 @@ namespace Essensoft.AspNetCore.Payment.Security
     public enum DESCipherMode
     {
         CBC = CipherMode.CBC,
-        ECB = CipherMode.ECB,
+        ECB = CipherMode.ECB
     }
 
     public enum DESPaddingMode
     {
         PKCS7 = PaddingMode.PKCS7,
-        Zeros = PaddingMode.Zeros,
+        Zeros = PaddingMode.Zeros
     }
 
     public class DES3
@@ -47,7 +47,7 @@ namespace Essensoft.AspNetCore.Payment.Security
                 var tdsp = new TripleDESCryptoServiceProvider
                 {
                     Mode = (CipherMode)cipherMode,
-                    Padding = (PaddingMode)paddingMode,
+                    Padding = (PaddingMode)paddingMode
                 };
                 using (var stream = new MemoryStream(data))
                 using (var crypto = new CryptoStream(stream, tdsp.CreateDecryptor(key, iv), CryptoStreamMode.Read))

@@ -67,22 +67,23 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             {
                 return "GIF";
             }
-            else if (fileData[1] == 'P' && fileData[2] == 'N' && fileData[3] == 'G')
+
+            if (fileData[1] == 'P' && fileData[2] == 'N' && fileData[3] == 'G')
             {
                 return "PNG";
             }
-            else if (fileData[6] == 'J' && fileData[7] == 'F' && fileData[8] == 'I' && fileData[9] == 'F')
+
+            if (fileData[6] == 'J' && fileData[7] == 'F' && fileData[8] == 'I' && fileData[9] == 'F')
             {
                 return "JPG";
             }
-            else if (fileData[0] == 'B' && fileData[1] == 'M')
+
+            if (fileData[0] == 'B' && fileData[1] == 'M')
             {
                 return "BMP";
             }
-            else
-            {
-                return null;
-            }
+
+            return null;
         }
 
         /// <summary>

@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// ZhimaMerchantOrderRentCancelResponse.
     /// </summary>
     public class ZhimaMerchantOrderRentCancelResponse : AlipayResponse
-    {
-    }
+    {}
 }

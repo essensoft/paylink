@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Essensoft.AspNetCore.Payment.UnionPay.Response
+namespace Essensoft.AspNetCore.Payment.UnionPay.Notify
 {
     public class UnionPayForm03_6_2_Token_OpenCard_FrontReturnResponse : UnionPayResponse
     {

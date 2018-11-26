@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// ZhimaOpenAppKeyanLqlCreateResponse.
     /// </summary>
     public class ZhimaOpenAppKeyanLqlCreateResponse : AlipayResponse
-    {
-    }
+    {}
 }

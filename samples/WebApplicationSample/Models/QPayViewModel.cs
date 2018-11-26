@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace WebApplicationSample.Models
 {
@@ -76,7 +75,7 @@ namespace WebApplicationSample.Models
     public class QPayOrderQueryViewModel
     {
         [Display(Name = "transaction_id")]
-        public String TransactionId { get; set; }
+        public string TransactionId { get; set; }
 
         [Display(Name = "out_trade_no")]
         public string OutTradeNo { get; set; }

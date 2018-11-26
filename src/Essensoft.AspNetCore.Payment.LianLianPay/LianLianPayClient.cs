@@ -21,12 +21,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         private const string TIME_STAMP = "time_stamp";
         private const string SIGN = "sign";
 
-        public virtual ILogger Logger { get; set; }
-
-        public virtual IHttpClientFactory ClientFactory { get; set; }
-
-        public virtual IOptionsSnapshot<LianLianPayOptions> OptionsSnapshotAccessor { get; set; }
-
         #region LianLianPayClient Constructors
 
         public LianLianPayClient(
@@ -40,6 +34,12 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         }
 
         #endregion
+
+        public virtual ILogger Logger { get; set; }
+
+        public virtual IHttpClientFactory ClientFactory { get; set; }
+
+        public virtual IOptionsSnapshot<LianLianPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region ILianLianPayClient Members
 
@@ -55,7 +55,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             var txtParams = new LianLianPayDictionary(request.GetParameters())
             {
                 { OID_PARTNER, options.OidPartner },
-                { SIGN_TYPE, options.SignType },
+                { SIGN_TYPE, options.SignType }
             };
 
             if (request is LianLianPayCreateBillRequest || request is LianLianPayUnifiedCardBindRequest)
@@ -112,7 +112,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
         private string Serialize(object value)
         {
-            return JsonConvert.SerializeObject(value, new JsonSerializerSettings() { NullValueHandling = NullValueHandling.Ignore });
+            return JsonConvert.SerializeObject(value, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
         }
 
         private void CheckNotifySign(LianLianPayDictionary parameters, List<string> excludePara, LianLianPayOptions options)

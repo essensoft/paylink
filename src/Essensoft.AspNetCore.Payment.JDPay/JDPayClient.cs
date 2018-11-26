@@ -16,12 +16,6 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 {
     public class JDPayClient : IJDPayClient
     {
-        public virtual ILogger Logger { get; set; }
-
-        public virtual IHttpClientFactory ClientFactory { get; set; }
-
-        public virtual IOptionsSnapshot<JDPayOptions> OptionsSnapshotAccessor { get; set; }
-
         #region JDPayClient Constructors
 
         public JDPayClient(
@@ -35,6 +29,12 @@ namespace Essensoft.AspNetCore.Payment.JDPay
         }
 
         #endregion
+
+        public virtual ILogger Logger { get; set; }
+
+        public virtual IHttpClientFactory ClientFactory { get; set; }
+
+        public virtual IOptionsSnapshot<JDPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region IJDPayClient Members
 
@@ -66,7 +66,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                     var reqBody = JDPaySecurity.DecryptECB(base64EncryptStr, options.DesKeyBase64);
                     Logger?.LogTrace(2, "Encrypt Content:{body}", reqBody);
 
-                    var reqBodyDoc = new XmlDocument() { XmlResolver = null };
+                    var reqBodyDoc = new XmlDocument { XmlResolver = null };
                     reqBodyDoc.LoadXml(reqBody);
 
                     var sign = JDPayUtility.GetValue(reqBodyDoc, "sign");
@@ -197,7 +197,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             var signDic = new JDPayDictionary(parameters)
             {
                 { JDPayContants.VERSION, request.GetApiVersion() },
-                { JDPayContants.MERCHANT, options.Merchant },
+                { JDPayContants.MERCHANT, options.Merchant }
             };
 
             var signContent = JDPaySecurity.GetSignContent(signDic);

@@ -12,10 +12,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     public class LianLianPayNotifyClient : ILianLianPayNotifyClient
     {
-        public virtual ILogger Logger { get; set; }
-
-        public virtual IOptionsSnapshot<LianLianPayOptions> OptionsSnapshotAccessor { get; set; }
-
         #region LianLianPayNotifyClient Constructors
 
         public LianLianPayNotifyClient(
@@ -27,6 +23,10 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         }
 
         #endregion
+
+        public virtual ILogger Logger { get; set; }
+
+        public virtual IOptionsSnapshot<LianLianPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region ILianLianPayNotifyClient Members
 
@@ -49,7 +49,8 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
                 CheckNotifySign(parameters, options);
                 return rsp;
             }
-            else if (request.HasTextJsonContentType())
+
+            if (request.HasTextJsonContentType())
             {
                 var body = await new StreamReader(request.Body).ReadToEndAsync();
                 Logger?.LogTrace(0, "Request:{body}", body);
@@ -59,10 +60,8 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
                 CheckNotifySign(rsp.Parameters, options);
                 return rsp;
             }
-            else
-            {
-                throw new Exception("content type is not supported");
-            }
+
+            throw new Exception("content type is not supported");
         }
 
         #endregion

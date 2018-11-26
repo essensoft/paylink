@@ -15,10 +15,6 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 {
     public class JDPayNotifyClient : IJDPayNotifyClient
     {
-        public virtual ILogger Logger { get; set; }
-
-        public virtual IOptionsSnapshot<JDPayOptions> OptionsSnapshotAccessor { get; set; }
-
         #region JDPayNotifyClient Constructors
 
         public JDPayNotifyClient(
@@ -30,6 +26,10 @@ namespace Essensoft.AspNetCore.Payment.JDPay
         }
 
         #endregion
+
+        public virtual ILogger Logger { get; set; }
+
+        public virtual IOptionsSnapshot<JDPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region IJDPayNotifyClient Members
 
@@ -64,7 +64,8 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
                 return rsp;
             }
-            else if (request.HasTextXmlContentType())
+
+            if (request.HasTextXmlContentType())
             {
                 var body = await new StreamReader(request.Body).ReadToEndAsync();
                 Logger?.LogTrace(0, "Request:{body}", body);
@@ -78,7 +79,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                     var reqBody = JDPaySecurity.DecryptECB(base64EncryptStr, options.DesKeyBase64);
                     Logger?.LogTrace(1, "Encrypt Content:{reqBody}", reqBody);
 
-                    var reqBodyDoc = new XmlDocument() { XmlResolver = null };
+                    var reqBodyDoc = new XmlDocument { XmlResolver = null };
                     reqBodyDoc.LoadXml(reqBody);
 
                     var sign = JDPayUtility.GetValue(reqBodyDoc, "sign");
@@ -101,20 +102,14 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                         rsp.Encrypt = encrypt;
                         return rsp;
                     }
-                    else
-                    {
-                        throw new Exception("sign check fail: check Sign and Data Fail!");
-                    }
+
+                    throw new Exception("sign check fail: check Sign and Data Fail!");
                 }
-                else
-                {
-                    throw new Exception("encrypt is Empty!");
-                }
+
+                throw new Exception("encrypt is Empty!");
             }
-            else
-            {
-                throw new Exception("content type is not supported!");
-            }
+
+            throw new Exception("content type is not supported!");
         }
 
         #endregion

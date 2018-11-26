@@ -31,12 +31,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         public IDictionary<string, string> GetParameters()
         {
-            var parameters = new WeChatPayDictionary()
+            var parameters = new WeChatPayDictionary
             {
                 { "appid", AppId },
                 { "partnerid", PartnerId },
                 { "prepayid", PrepayId },
-                { "package", Package },
+                { "package", Package }
             };
             return parameters;
         }

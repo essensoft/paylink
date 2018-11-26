@@ -73,7 +73,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         /// </summary>
         [JsonProperty("out_biz_no")]
         public string OutBizNo { get; set; }
-        
+
         /// <summary>
         /// 买家支付宝用户号
         /// </summary>

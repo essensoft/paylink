@@ -15,71 +15,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
     /// </summary>
     public class AlipayXmlParser<T> : IAlipayParser<T> where T : AlipayResponse
     {
-        private static Regex regex = new Regex("<(\\w+?)[ >]", RegexOptions.Compiled);
-        private static Dictionary<string, XmlSerializer> parsers = new Dictionary<string, XmlSerializer>();
+        private static readonly Regex regex = new Regex("<(\\w+?)[ >]", RegexOptions.Compiled);
+        private static readonly Dictionary<string, XmlSerializer> parsers = new Dictionary<string, XmlSerializer>();
 
-        #region IAlipayParser<T> Members
-
-        public T Parse(string body)
+        public string EncryptSourceData(IAlipayRequest<T> request, string body, string encryptType, string encryptKey)
         {
-            T rsp = null;
+            var item = ParseEncryptData(request, body);
 
-            try
-            {
-                var rootTagName = GetRootElement(body);
+            var bodyIndexContent = body.Substring(0, item.startIndex);
+            var bodyEndContent = body.Substring(item.endIndex);
+            var encryptContent = AES.Decrypt(item.encryptContent, encryptKey, AlipaySignature.AES_IV, AESCipherMode.CBC, AESPaddingMode.PKCS7);
 
-                var inc = parsers.TryGetValue(rootTagName, out var serializer);
-                if (!inc || serializer == null)
-                {
-                    var rootAttrs = new XmlAttributes()
-                    {
-                        XmlRoot = new XmlRootAttribute(rootTagName)
-                    };
-                    var attrOvrs = new XmlAttributeOverrides();
-                    attrOvrs.Add(typeof(T), rootAttrs);
-
-                    serializer = new XmlSerializer(typeof(T), attrOvrs);
-                    parsers[rootTagName] = serializer;
-                }
-
-                using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(body)))
-                {
-                    rsp = (T)serializer.Deserialize(stream);
-                }
-            }
-            catch
-            { }
-
-            if (rsp == null)
-            {
-                rsp = Activator.CreateInstance<T>();
-            }
-
-            if (rsp != null)
-            {
-                rsp.Body = body;
-            }
-
-            return rsp;
+            return bodyIndexContent + encryptContent + bodyEndContent;
         }
-
-        public SignItem GetSignItem(IAlipayRequest<T> request, string reponseBody)
-        {
-            if (string.IsNullOrEmpty(reponseBody))
-            {
-                return null;
-            }
-
-            var signItem = new SignItem();
-            var sign = GetSign(reponseBody);
-            signItem.Sign = sign;
-
-            var signSourceData = GetSignSourceData(request, reponseBody);
-            signItem.SignSourceDate = signSourceData;
-            return signItem;
-        }
-
-        #endregion
 
         /// <summary>
         /// 获取XML响应的根节点名称
@@ -91,10 +39,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
             {
                 return match.Groups[1].ToString();
             }
-            else
-            {
-                throw new Exception("Invalid XML response format!");
-            }
+
+            throw new Exception("Invalid XML response format!");
         }
 
         private static string GetSign(string body)
@@ -153,17 +99,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
             return body.Substring(signDataStartIndex, signDataEndIndex - signDataStartIndex);
         }
 
-        public string EncryptSourceData(IAlipayRequest<T> request, string body, string encryptType, string encryptKey)
-        {
-            var item = ParseEncryptData(request, body);
-
-            var bodyIndexContent = body.Substring(0, item.startIndex);
-            var bodyEndContent = body.Substring(item.endIndex);
-            var encryptContent = AES.Decrypt(item.encryptContent, encryptKey, AlipaySignature.AES_IV, AESCipherMode.CBC, AESPaddingMode.PKCS7);
-
-            return bodyIndexContent + encryptContent + bodyEndContent;
-        }
-
         private static EncryptParseItem ParseEncryptData(IAlipayRequest<T> request, string body)
         {
             var rootNode = request.GetApiName().Replace(".", "_") + AlipayConstants.RESPONSE_SUFFIX;
@@ -196,7 +131,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
             if (indexOfEncryptNode < 0)
             {
-                var item = new EncryptParseItem()
+                var item = new EncryptParseItem
                 {
                     encryptContent = null,
                     startIndex = 0,
@@ -210,7 +145,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
             var encryptBizContent = body.Substring(startIndex, bizLen);
 
-            var item2 = new EncryptParseItem()
+            var item2 = new EncryptParseItem
             {
                 encryptContent = encryptBizContent,
                 startIndex = signDataStartIndex,
@@ -218,5 +153,68 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
             };
             return item2;
         }
+
+        #region IAlipayParser<T> Members
+
+        public T Parse(string body)
+        {
+            T rsp = null;
+
+            try
+            {
+                var rootTagName = GetRootElement(body);
+
+                var inc = parsers.TryGetValue(rootTagName, out var serializer);
+                if (!inc || serializer == null)
+                {
+                    var rootAttrs = new XmlAttributes
+                    {
+                        XmlRoot = new XmlRootAttribute(rootTagName)
+                    };
+                    var attrOvrs = new XmlAttributeOverrides();
+                    attrOvrs.Add(typeof(T), rootAttrs);
+
+                    serializer = new XmlSerializer(typeof(T), attrOvrs);
+                    parsers[rootTagName] = serializer;
+                }
+
+                using (var stream = new MemoryStream(Encoding.UTF8.GetBytes(body)))
+                {
+                    rsp = (T)serializer.Deserialize(stream);
+                }
+            }
+            catch
+            { }
+
+            if (rsp == null)
+            {
+                rsp = Activator.CreateInstance<T>();
+            }
+
+            if (rsp != null)
+            {
+                rsp.Body = body;
+            }
+
+            return rsp;
+        }
+
+        public SignItem GetSignItem(IAlipayRequest<T> request, string reponseBody)
+        {
+            if (string.IsNullOrEmpty(reponseBody))
+            {
+                return null;
+            }
+
+            var signItem = new SignItem();
+            var sign = GetSign(reponseBody);
+            signItem.Sign = sign;
+
+            var signSourceData = GetSignSourceData(request, reponseBody);
+            signItem.SignSourceDate = signSourceData;
+            return signItem;
+        }
+
+        #endregion
     }
 }

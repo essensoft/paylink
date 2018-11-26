@@ -79,7 +79,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "accInsCode", AccInsCode },
                 { "orderId", OrderId },
                 { "reserved", Reserved },
-                { "ctrlRule", CtrlRule },
+                { "ctrlRule", CtrlRule }
             };
             return parameters;
         }

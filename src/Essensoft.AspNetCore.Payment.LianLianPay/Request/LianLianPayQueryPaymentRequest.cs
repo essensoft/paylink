@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
                 { "platform", Platform },
                 { "no_order", NoOrder },
                 { "oid_paybill", OidPaybill },
-                { "api_version", ApiVersion },
+                { "api_version", ApiVersion }
             };
             return parameters;
         }

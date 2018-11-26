@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipayEbppInvoiceMerchantlistEnterApplyResponse.
     /// </summary>
     public class AlipayEbppInvoiceMerchantlistEnterApplyResponse : AlipayResponse
-    {
-    }
+    {}
 }

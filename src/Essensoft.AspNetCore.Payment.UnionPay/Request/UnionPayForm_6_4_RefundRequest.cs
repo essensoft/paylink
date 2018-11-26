@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.UnionPay.Response;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.UnionPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay.Request
 {
@@ -133,7 +133,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "accSplitData", AccSplitData },
                 { "ctrlRule", CtrlRule },
                 { "reqReserved", ReqReserved },
-                { "termId", TermId },
+                { "termId", TermId }
             };
             return parameters;
         }

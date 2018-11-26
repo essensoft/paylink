@@ -1,6 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections;
+using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay.Parser
 {

@@ -52,7 +52,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
                 { "no_agree", NoAgree },
                 { "pay_type", PayType },
                 { "card_no", CardNo },
-                { "bind_mob", BindMob },
+                { "bind_mob", BindMob }
             };
             return parameters;
         }

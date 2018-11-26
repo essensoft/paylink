@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 
-namespace WebApplicationSample
+namespace WebApplicationSample.Helpers
 {
     public class JDPayNotifyResult
     {
-        private static readonly ContentResult _success = new ContentResult() { Content = "success", ContentType = "text/plain" };
-        private static readonly ContentResult _ok = new ContentResult() { Content = "ok", ContentType = "text/plain" };
+        private static readonly ContentResult _success = new ContentResult { Content = "success", ContentType = "text/plain" };
+        private static readonly ContentResult _ok = new ContentResult { Content = "ok", ContentType = "text/plain" };
 
         public static IActionResult Success => _success;
 

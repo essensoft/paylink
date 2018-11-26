@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.UnionPay.Response;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.UnionPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay.Request
 {
@@ -85,7 +85,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "merAbbr", MerAbbr },
                 { "merCatCode", MerCatCode },
                 { "merName", MerName },
-                { "acqInsCode", AcqInsCode },
+                { "acqInsCode", AcqInsCode }
             };
             return parameters;
         }
