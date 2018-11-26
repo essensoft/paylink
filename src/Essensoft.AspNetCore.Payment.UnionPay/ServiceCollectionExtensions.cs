@@ -1,14 +1,14 @@
 using System;
-using Essensoft.AspNetCore.Payment.UnionPay;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace Essensoft.AspNetCore.Payment.UnionPay
 {
     public static class ServiceCollectionExtensions
     {
         public static void AddUnionPay(
             this IServiceCollection services)
         {
-            services.AddUnionPay(setupAction: null);
+            services.AddUnionPay(null);
         }
 
         public static void AddUnionPay(

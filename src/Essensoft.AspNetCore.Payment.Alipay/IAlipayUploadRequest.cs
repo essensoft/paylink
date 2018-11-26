@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
 
-namespace Essensoft.AspNetCore.Payment.Alipay.Request
+namespace Essensoft.AspNetCore.Payment.Alipay
 {
     /// <summary>
     /// Alipay上传请求接口，支持同时上传多个文件。

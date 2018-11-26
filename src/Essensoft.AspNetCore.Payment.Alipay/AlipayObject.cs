@@ -7,6 +7,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay
     /// </summary>
     [Serializable]
     public abstract class AlipayObject
-    {
-    }
+    {}
 }

@@ -1,14 +1,14 @@
 using System;
-using Essensoft.AspNetCore.Payment.WeChatPay;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     public static class ServiceCollectionExtensions
     {
         public static void AddWeChatPay(
             this IServiceCollection services)
         {
-            services.AddWeChatPay(setupAction: null);
+            services.AddWeChatPay(null);
         }
 
         public static void AddWeChatPay(

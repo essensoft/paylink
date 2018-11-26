@@ -134,7 +134,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
                 { "bank_code", BankCode },
                 { "city_code", CityCode },
                 { "brabank_name", BrabankName },
-                { "notify_url", NotifyUrl },
+                { "notify_url", NotifyUrl }
             };
             return parameters;
         }

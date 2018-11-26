@@ -1,5 +1,5 @@
-using Essensoft.AspNetCore.Payment.QPay.Response;
 using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.QPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Request
 {
@@ -89,7 +89,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
 
         public IDictionary<string, string> GetParameters()
         {
-            var parameters = new QPayDictionary()
+            var parameters = new QPayDictionary
             {
                 { "appid", AppId },
                 { "sub_appid", SubAppId },
@@ -105,7 +105,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
                 { "notify_url", NotifyUrl },
                 { "device_info", DeviceInfo },
                 { "auth_code", AuthCode },
-                { "trade_type", TradeType },
+                { "trade_type", TradeType }
             };
             return parameters;
         }

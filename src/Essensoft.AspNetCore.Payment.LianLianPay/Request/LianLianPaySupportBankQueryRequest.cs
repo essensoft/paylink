@@ -58,7 +58,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
                 { "bank_code", BankCode },
                 { "card_type", CardType },
                 { "product_type", ProductType },
-                { "pay_chnl", PayChnl },
+                { "pay_chnl", PayChnl }
             };
             return parameters;
         }

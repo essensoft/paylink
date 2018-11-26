@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.UnionPay.Response;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.UnionPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay.Request
 {
@@ -64,6 +64,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         public string AccType { get; set; }
 
         #region IUnionPayRequest
+
         private string version = string.Empty;
 
         public string GetApiVersion()
@@ -90,7 +91,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "customerInfo", CustomerInfo },
                 { "reqReserved", ReqReserved },
                 { "reserved", Reserved },
-                { "accType", AccType },
+                { "accType", AccType }
             };
             return parameters;
         }

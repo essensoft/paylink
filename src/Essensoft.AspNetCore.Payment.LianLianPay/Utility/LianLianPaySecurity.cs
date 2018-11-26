@@ -51,10 +51,8 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
                 var base64_ciphertext = ciphertextArry.Length > 4 ? ciphertextArry[4] : string.Empty;
                 return LianlianpayDecrypt(base64_ciphertext, base64_encrypted_aes_key, base64_nonce, private_key);
             }
-            else
-            {
-                return string.Empty;
-            }
+
+            return string.Empty;
         }
 
         private static string LianlianpayEncrypt(string req, AsymmetricKeyParameter public_key, string hmack_key, string version, string aes_key, string nonce)

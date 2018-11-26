@@ -42,7 +42,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
             {
                 { "no_refund", NoRefund },
                 { "dt_refund", DtRefund },
-                { "oid_refundno", OidRefundNo },
+                { "oid_refundno", OidRefundNo }
             };
             return parameters;
         }

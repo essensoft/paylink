@@ -6,22 +6,34 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 {
     public class JDPayOptions
     {
-        /// <summary>
-        /// 商户号
-        /// </summary>
-        public string Merchant { get; set; }
+        private string desKey;
 
         /// <summary>
         /// 京东DES秘钥
         /// </summary>
         internal byte[] DesKeyBase64;
-        private string desKey;
+
+        /// <summary>
+        /// 商户RSA私钥
+        /// </summary>
+        internal AsymmetricKeyParameter PrivateKey;
+
+        /// <summary>
+        /// 京东RSA公钥
+        /// </summary>
+        internal AsymmetricKeyParameter PublicKey;
+
+        private string rsaPrivateKey;
+        private string rsaPublicKey;
+
+        /// <summary>
+        /// 商户号
+        /// </summary>
+        public string Merchant { get; set; }
+
         public string DesKey
         {
-            get
-            {
-                return desKey;
-            }
+            get => desKey;
             set
             {
                 desKey = value;
@@ -32,17 +44,9 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             }
         }
 
-        /// <summary>
-        /// 京东RSA公钥
-        /// </summary>
-        internal AsymmetricKeyParameter PublicKey;
-        private string rsaPublicKey;
         public string RsaPublicKey
         {
-            get
-            {
-                return rsaPublicKey;
-            }
+            get => rsaPublicKey;
             set
             {
                 rsaPublicKey = value;
@@ -53,17 +57,9 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             }
         }
 
-        /// <summary>
-        /// 商户RSA私钥
-        /// </summary>
-        internal AsymmetricKeyParameter PrivateKey;
-        private string rsaPrivateKey;
         public string RsaPrivateKey
         {
-            get
-            {
-                return rsaPrivateKey;
-            }
+            get => rsaPrivateKey;
             set
             {
                 rsaPrivateKey = value;

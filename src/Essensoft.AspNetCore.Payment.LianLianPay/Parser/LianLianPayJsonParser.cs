@@ -10,6 +10,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Parser
     public class LianLianPayJsonParser<T> : ILianLianPayParser<T> where T : LianLianPayResponse
     {
         #region ILianLianPayParser<T> Members
+
         public T Parse(string body)
         {
             T rsp = null;
@@ -38,6 +39,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Parser
             }
             return rsp;
         }
+
         #endregion
     }
 }

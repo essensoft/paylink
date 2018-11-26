@@ -1,7 +1,7 @@
-﻿using Essensoft.AspNetCore.Payment.QPay.Domain;
-using Essensoft.AspNetCore.Payment.QPay.Parser;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
+using Essensoft.AspNetCore.Payment.QPay.Domain;
+using Essensoft.AspNetCore.Payment.QPay.Parser;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Response
 {

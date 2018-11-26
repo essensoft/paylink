@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// KoubeiMarketingCampaignItemMerchantactivityCloseResponse.
     /// </summary>
     public class KoubeiMarketingCampaignItemMerchantactivityCloseResponse : AlipayResponse
-    {
-    }
+    {}
 }

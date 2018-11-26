@@ -12,10 +12,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
     /// </summary>
     public class FileItem
     {
+        private byte[] content;
+        private readonly FileInfo fileInfo;
         private string fileName;
         private string mimeType;
-        private byte[] content;
-        private FileInfo fileInfo;
 
         /// <summary>
         /// 基于本地文件的构造器。

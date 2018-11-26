@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipayOpenPublicPersonalizedExtensionDeleteResponse.
     /// </summary>
     public class AlipayOpenPublicPersonalizedExtensionDeleteResponse : AlipayResponse
-    {
-    }
+    {}
 }

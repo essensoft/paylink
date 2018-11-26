@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipayBossFncXwbtestRetModifyResponse.
     /// </summary>
     public class AlipayBossFncXwbtestRetModifyResponse : AlipayResponse
-    {
-    }
+    {}
 }

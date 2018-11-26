@@ -1,16 +1,16 @@
-﻿using Essensoft.AspNetCore.Payment.UnionPay;
+﻿using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.UnionPay;
 using Essensoft.AspNetCore.Payment.UnionPay.Notify;
 using Essensoft.AspNetCore.Payment.UnionPay.Request;
 using Microsoft.AspNetCore.Mvc;
 using WebApplicationSample.Models;
-using System.Threading.Tasks;
 
 namespace WebApplicationSample.Controllers
 {
     public class UnionPayController : Controller
     {
-        private readonly IUnionPayClient _client = null;
-        private readonly IUnionPayNotifyClient _notifyClient = null;
+        private readonly IUnionPayClient _client;
+        private readonly IUnionPayNotifyClient _notifyClient;
 
         public UnionPayController(IUnionPayClient client, IUnionPayNotifyClient notifyClient)
         {
@@ -32,7 +32,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> FrontConsume62(UnionPayForm_6_2_FrontConsumeViewModel viewModel)
         {
-            var request = new UnionPayForm_6_2_FrontConsumeRequest()
+            var request = new UnionPayForm_6_2_FrontConsumeRequest
             {
                 TxnType = "01",
                 TxnSubType = "01",
@@ -44,7 +44,7 @@ namespace WebApplicationSample.Controllers
                 CurrencyCode = viewModel.CurrencyCode,
                 PayTimeout = viewModel.PayTimeout,
                 FrontUrl = viewModel.FrontUrl,
-                BackUrl = viewModel.BackUrl,
+                BackUrl = viewModel.BackUrl
             };
             var response = await _client.PageExecuteAsync(request);
             return Content(response.Body, "text/html;charset=utf-8");

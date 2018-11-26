@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.JDPay.Response;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.JDPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.JDPay.Request
 {
@@ -32,12 +32,12 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Request
 
         public IDictionary<string, string> GetParameters()
         {
-            var parameters = new JDPayDictionary()
+            var parameters = new JDPayDictionary
             {
                 { "request_datetime", RequestDatetime },
                 { "out_trade_no",  OutTradeNo },
                 { "trade_no", TradeNo },
-                { "trade_type", TradeType },
+                { "trade_type", TradeType }
             };
 
             return parameters;

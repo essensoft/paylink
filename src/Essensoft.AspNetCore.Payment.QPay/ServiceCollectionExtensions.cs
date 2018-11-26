@@ -1,16 +1,14 @@
 using System;
-using System.Net.Http;
-using System.Security.Cryptography.X509Certificates;
-using Essensoft.AspNetCore.Payment.QPay;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace Essensoft.AspNetCore.Payment.QPay
 {
     public static class ServiceCollectionExtensions
     {
         public static void AddQPay(
             this IServiceCollection services)
         {
-            services.AddQPay(setupAction: null);
+            services.AddQPay(null);
         }
 
         public static void AddQPay(

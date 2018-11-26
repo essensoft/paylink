@@ -27,7 +27,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Response
         /// </summary>
         [JsonProperty("respMsg")]
         public string RespMsg { get; set; }
-        
+
         /// <summary>
         /// 签名公钥证书	
         /// </summary>

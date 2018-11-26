@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.UnionPay.Response;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.UnionPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay.Request
 {
@@ -77,6 +77,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         /// 商户类别
         /// </summary>
         public string MerCatCode { get; set; }
+
         /// <summary>
         /// 商户名称
         /// </summary>
@@ -138,7 +139,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "acqInsCode", AcqInsCode },
                 { "reserved", Reserved },
                 { "reqReserved", ReqReserved },
-                { "termId", TermId },
+                { "termId", TermId }
             };
             return parameters;
         }

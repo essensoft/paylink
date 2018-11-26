@@ -1,7 +1,7 @@
-﻿using Essensoft.AspNetCore.Payment.WeChatPay.Domain;
-using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
-using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.WeChatPay.Domain;
+using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
 {

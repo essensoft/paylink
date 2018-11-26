@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.UnionPay.Response;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.UnionPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay.Request
 {
@@ -115,7 +115,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "subMerName", SubMerName },
                 { "reserved", Reserved },
                 { "reqReserved", ReqReserved },
-                { "termId", TermId },
+                { "termId", TermId }
             };
             return parameters;
         }
@@ -129,6 +129,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         {
             return false;
         }
+
         #endregion
     }
 }

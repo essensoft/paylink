@@ -10,8 +10,8 @@ namespace WebApplicationSample.Controllers
 {
     public class AlipayController : Controller
     {
-        private readonly IAlipayClient _client = null;
-        private readonly IAlipayNotifyClient _notifyClient = null;
+        private readonly IAlipayClient _client;
+        private readonly IAlipayNotifyClient _notifyClient;
 
         public AlipayController(IAlipayClient client, IAlipayNotifyClient notifyClient)
         {
@@ -34,12 +34,12 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> PreCreate(AlipayTradePreCreateViewModel viewModel)
         {
-            var model = new AlipayTradePrecreateModel()
+            var model = new AlipayTradePrecreateModel
             {
                 OutTradeNo = viewModel.OutTradeNo,
                 Subject = viewModel.Subject,
                 TotalAmount = viewModel.TotalAmount,
-                Body = viewModel.Body,
+                Body = viewModel.Body
             };
             var req = new AlipayTradePrecreateRequest();
             req.SetBizModel(model);
@@ -60,14 +60,14 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Pay(AlipayTradePayViewModel viewModel)
         {
-            var model = new AlipayTradePayModel()
+            var model = new AlipayTradePayModel
             {
                 OutTradeNo = viewModel.OutTradeNo,
                 Subject = viewModel.Subject,
                 Scene = viewModel.Scene,
                 AuthCode = viewModel.AuthCode,
                 TotalAmount = viewModel.TotalAmount,
-                Body = viewModel.Body,
+                Body = viewModel.Body
             };
             var req = new AlipayTradePayRequest();
             req.SetBizModel(model);
@@ -86,13 +86,13 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> AppPay(AlipayTradeAppPayViewModel viewModel)
         {
-            var model = new AlipayTradeAppPayModel()
+            var model = new AlipayTradeAppPayModel
             {
                 OutTradeNo = viewModel.OutTradeNo,
                 Subject = viewModel.Subject,
                 ProductCode = viewModel.ProductCode,
                 TotalAmount = viewModel.TotalAmount,
-                Body = viewModel.Body,
+                Body = viewModel.Body
             };
             var req = new AlipayTradeAppPayRequest();
             req.SetBizModel(model);
@@ -113,13 +113,13 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> PagePay(AlipayTradePagePayViewModel viewModel)
         {
-            var model = new AlipayTradePagePayModel()
+            var model = new AlipayTradePagePayModel
             {
                 Body = viewModel.Body,
                 Subject = viewModel.Subject,
                 TotalAmount = viewModel.TotalAmount,
                 OutTradeNo = viewModel.OutTradeNo,
-                ProductCode = viewModel.ProductCode,
+                ProductCode = viewModel.ProductCode
             };
             var req = new AlipayTradePagePayRequest();
             req.SetBizModel(model);
@@ -139,13 +139,13 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> WapPay(AlipayTradeWapPayViewModel viewMode)
         {
-            var model = new AlipayTradeWapPayModel()
+            var model = new AlipayTradeWapPayModel
             {
                 Body = viewMode.Body,
                 Subject = viewMode.Subject,
                 TotalAmount = viewMode.TotalAmount,
                 OutTradeNo = viewMode.OutTradeNo,
-                ProductCode = viewMode.ProductCode,
+                ProductCode = viewMode.ProductCode
             };
             var req = new AlipayTradeWapPayRequest();
             req.SetBizModel(model);
@@ -165,7 +165,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Query(AlipayTradeQueryViewModel viewMode)
         {
-            var model = new AlipayTradeQueryModel()
+            var model = new AlipayTradeQueryModel
             {
                 OutTradeNo = viewMode.OutTradeNo,
                 TradeNo = viewMode.TradeNo
@@ -188,7 +188,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Refund(AlipayTradeRefundViewModel viewMode)
         {
-            var model = new AlipayTradeRefundModel()
+            var model = new AlipayTradeRefundModel
             {
                 OutTradeNo = viewMode.OutTradeNo,
                 TradeNo = viewMode.TradeNo,
@@ -214,7 +214,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> RefundQuery(AlipayTradeRefundQueryViewModel viewMode)
         {
-            var model = new AlipayTradeFastpayRefundQueryModel()
+            var model = new AlipayTradeFastpayRefundQueryModel
             {
                 OutTradeNo = viewMode.OutTradeNo,
                 TradeNo = viewMode.TradeNo,
@@ -238,7 +238,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Transfer(AlipayTransferViewModel viewMode)
         {
-            var model = new AlipayFundTransToaccountTransferModel()
+            var model = new AlipayFundTransToaccountTransferModel
             {
                 OutBizNo = viewMode.OutBizNo,
                 PayeeType = viewMode.PayeeType,
@@ -262,10 +262,10 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> TransQuery(AlipayTransQueryViewModel viewMode)
         {
-            var model = new AlipayFundTransOrderQueryModel()
+            var model = new AlipayFundTransOrderQueryModel
             {
                 OutBizNo = viewMode.OutBizNo,
-                OrderId = viewMode.OrderId,
+                OrderId = viewMode.OrderId
             };
 
             var req = new AlipayFundTransOrderQueryRequest();
@@ -284,7 +284,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> BillDownloadurlQuery(AlipayBillDownloadurlQueryViewModel viewModel)
         {
-            var model = new AlipayDataDataserviceBillDownloadurlQueryModel()
+            var model = new AlipayDataDataserviceBillDownloadurlQueryModel
             {
                 BillDate = viewModel.BillDate,
                 BillType = viewModel.BillType

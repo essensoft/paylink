@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
 
-namespace WebApplicationSample
+namespace WebApplicationSample.Helpers
 {
     public static class HtmlHelpers
     {
@@ -19,7 +19,7 @@ namespace WebApplicationSample
                 action = actualAction;
             }
 
-            return (controller == actualController && action == actualAction) ? activeClass : string.Empty;
+            return controller == actualController && action == actualAction ? activeClass : string.Empty;
         }
     }
 }

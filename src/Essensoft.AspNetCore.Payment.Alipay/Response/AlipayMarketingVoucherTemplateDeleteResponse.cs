@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipayMarketingVoucherTemplateDeleteResponse.
     /// </summary>
     public class AlipayMarketingVoucherTemplateDeleteResponse : AlipayResponse
-    {
-    }
+    {}
 }

@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// KoubeiAdvertDeliveryDiscountAuthwebBatchqueryResponse.
     /// </summary>
     public class KoubeiAdvertDeliveryDiscountAuthwebBatchqueryResponse : AlipayResponse
-    {
-    }
+    {}
 }

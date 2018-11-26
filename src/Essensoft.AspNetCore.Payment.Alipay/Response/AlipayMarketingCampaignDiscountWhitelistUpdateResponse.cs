@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipayMarketingCampaignDiscountWhitelistUpdateResponse.
     /// </summary>
     public class AlipayMarketingCampaignDiscountWhitelistUpdateResponse : AlipayResponse
-    {
-    }
+    {}
 }

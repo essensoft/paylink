@@ -49,7 +49,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
                 { "user_id", UserId },
                 { "platform", Platform },
                 { "pay_type", PayType },
-                { "no_agree", NoAgree },
+                { "no_agree", NoAgree }
             };
             return parameters;
         }

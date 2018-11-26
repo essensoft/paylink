@@ -145,7 +145,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "ctrlRule", CtrlRule },
                 { "reqReserved", ReqReserved },
                 { "payTimeout", PayTimeout },
-                { "termId", TermId },
+                { "termId", TermId }
             };
             return parameters;
         }

@@ -40,7 +40,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
                 { "platform", Platform },
                 { "user_id", UserId },
                 { "token", Token },
-                { "verify_code", VerifyCode },
+                { "verify_code", VerifyCode }
             };
             return parameters;
         }

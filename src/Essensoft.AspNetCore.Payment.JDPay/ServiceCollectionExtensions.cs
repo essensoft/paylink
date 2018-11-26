@@ -1,14 +1,14 @@
 using System;
-using Essensoft.AspNetCore.Payment.JDPay;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace Essensoft.AspNetCore.Payment.JDPay
 {
     public static class ServiceCollectionExtensions
     {
         public static void AddJDPay(
             this IServiceCollection services)
         {
-            services.AddJDPay(setupAction: null);
+            services.AddJDPay(null);
         }
 
         public static void AddJDPay(

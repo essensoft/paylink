@@ -8,7 +8,8 @@ namespace WebApplicationSample.Controllers
 {
     public class QPayController : Controller
     {
-        private readonly IQPayClient _client = null;
+        private readonly IQPayClient _client;
+
         public QPayController(IQPayClient client)
         {
             _client = client;
@@ -28,7 +29,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> MicroPay(QPayMicroPayViewModel viewModel)
         {
-            var request = new QPayMicroPayRequest()
+            var request = new QPayMicroPayRequest
             {
                 OutTradeNo = viewModel.OutTradeNo,
                 Body = viewModel.Body,
@@ -38,7 +39,7 @@ namespace WebApplicationSample.Controllers
                 DeviceInfo = viewModel.DeviceInfo,
                 AuthCode = viewModel.AuthCode,
                 TradeType = viewModel.TradeType,
-                NotifyUrl = viewModel.NotifyUrl,
+                NotifyUrl = viewModel.NotifyUrl
             };
             var response = await _client.ExecuteAsync(request);
             ViewData["response"] = response.Body;
@@ -54,7 +55,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> QRPay(QPayUnifiedOrderViewModel viewModel)
         {
-            var request = new QPayUnifiedOrderRequest()
+            var request = new QPayUnifiedOrderRequest
             {
                 OutTradeNo = viewModel.OutTradeNo,
                 Body = viewModel.Body,
@@ -62,7 +63,7 @@ namespace WebApplicationSample.Controllers
                 TotalFee = viewModel.TotalFee,
                 SpbillCreateIp = viewModel.SpbillCreateIp,
                 TradeType = viewModel.TradeType,
-                NotifyUrl = viewModel.NotifyUrl,
+                NotifyUrl = viewModel.NotifyUrl
             };
             var response = await _client.ExecuteAsync(request);
             ViewData["qrcode"] = response.CodeUrl;
@@ -79,7 +80,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> PubPay(QPayUnifiedOrderViewModel viewModel)
         {
-            var request = new QPayUnifiedOrderRequest()
+            var request = new QPayUnifiedOrderRequest
             {
                 OutTradeNo = viewModel.OutTradeNo,
                 Body = viewModel.Body,
@@ -87,7 +88,7 @@ namespace WebApplicationSample.Controllers
                 TotalFee = viewModel.TotalFee,
                 SpbillCreateIp = viewModel.SpbillCreateIp,
                 TradeType = viewModel.TradeType,
-                NotifyUrl = viewModel.NotifyUrl,
+                NotifyUrl = viewModel.NotifyUrl
             };
             var response = await _client.ExecuteAsync(request);
             ViewData["response"] = response.Body;
@@ -103,7 +104,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> AppPay(QPayUnifiedOrderViewModel viewModel)
         {
-            var request = new QPayUnifiedOrderRequest()
+            var request = new QPayUnifiedOrderRequest
             {
                 OutTradeNo = viewModel.OutTradeNo,
                 Body = viewModel.Body,
@@ -111,7 +112,7 @@ namespace WebApplicationSample.Controllers
                 TotalFee = viewModel.TotalFee,
                 SpbillCreateIp = viewModel.SpbillCreateIp,
                 TradeType = viewModel.TradeType,
-                NotifyUrl = viewModel.NotifyUrl,
+                NotifyUrl = viewModel.NotifyUrl
             };
             var response = await _client.ExecuteAsync(request);
             ViewData["response"] = response.Body;
@@ -127,10 +128,10 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> OrderQuery(QPayOrderQueryViewModel viewModel)
         {
-            var request = new QPayOrderQueryRequest()
+            var request = new QPayOrderQueryRequest
             {
                 TransactionId = viewModel.TransactionId,
-                OutTradeNo = viewModel.OutTradeNo,
+                OutTradeNo = viewModel.OutTradeNo
             };
             var response = await _client.ExecuteAsync(request);
             ViewData["response"] = response.Body;
@@ -146,9 +147,9 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Reverse(QPayReverseViewModel viewModel)
         {
-            var request = new QPayReverseRequest()
+            var request = new QPayReverseRequest
             {
-                OutTradeNo = viewModel.OutTradeNo,
+                OutTradeNo = viewModel.OutTradeNo
             };
             var response = await _client.ExecuteAsync(request, "qpayCertificateName");
             ViewData["response"] = response.Body;
@@ -165,9 +166,9 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> CloseOrder(QPayCloseOrderViewModel viewModel)
         {
-            var request = new QPayCloseOrderRequest()
+            var request = new QPayCloseOrderRequest
             {
-                OutTradeNo = viewModel.OutTradeNo,
+                OutTradeNo = viewModel.OutTradeNo
             };
             var response = await _client.ExecuteAsync(request);
             ViewData["response"] = response.Body;
@@ -183,14 +184,14 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Refund(QPayRefundViewModel viewModel)
         {
-            var request = new QPayRefundRequest()
+            var request = new QPayRefundRequest
             {
                 OutRefundNo = viewModel.OutRefundNo,
                 TransactionId = viewModel.TransactionId,
                 OutTradeNo = viewModel.OutTradeNo,
                 RefundFee = viewModel.RefundFee,
                 OpUserId = viewModel.OpUserId,
-                OpUserPasswd = viewModel.OpUserPasswd,
+                OpUserPasswd = viewModel.OpUserPasswd
             };
             var response = await _client.ExecuteAsync(request, "qpayCertificateName");
             ViewData["response"] = response.Body;
@@ -206,12 +207,12 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> RefundQuery(QPayRefundQueryViewModel viewModel)
         {
-            var request = new QPayRefundQueryRequest()
+            var request = new QPayRefundQueryRequest
             {
                 RefundId = viewModel.RefundId,
                 OutRefundNo = viewModel.OutRefundNo,
                 TransactionId = viewModel.TransactionId,
-                OutTradeNo = viewModel.OutTradeNo,
+                OutTradeNo = viewModel.OutTradeNo
             };
             var response = await _client.ExecuteAsync(request);
             ViewData["response"] = response.Body;
@@ -227,11 +228,11 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> StatementDown(QPayStatementDownViewModel viewModel)
         {
-            var request = new QPayStatementDownRequest()
+            var request = new QPayStatementDownRequest
             {
                 BillDate = viewModel.BillDate,
                 BillType = viewModel.BillType,
-                TarType = viewModel.TarType,
+                TarType = viewModel.TarType
             };
             var response = await _client.ExecuteAsync(request);
             ViewData["response"] = response.Body;

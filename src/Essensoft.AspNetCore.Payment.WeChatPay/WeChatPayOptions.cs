@@ -6,6 +6,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
     public class WeChatPayOptions
     {
         /// <summary>
+        /// RSA公钥 企业付款到银行卡
+        /// </summary>
+        internal AsymmetricKeyParameter PublicKey;
+
+        private string rsaPublicKey;
+
+        /// <summary>
         /// 应用账号(公众账号ID/小程序ID/企业号CorpId)
         /// </summary>
         public string AppId { get; set; }
@@ -20,17 +27,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// </summary>
         public string Key { get; set; }
 
-        /// <summary>
-        /// RSA公钥 企业付款到银行卡
-        /// </summary>
-        internal AsymmetricKeyParameter PublicKey;
-        private string rsaPublicKey;
         public string RsaPublicKey
         {
-            get
-            {
-                return rsaPublicKey;
-            }
+            get => rsaPublicKey;
             set
             {
                 rsaPublicKey = value;

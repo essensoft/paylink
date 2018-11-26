@@ -14,10 +14,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     public class WeChatPayNotifyClient : IWeChatPayNotifyClient
     {
-        public virtual ILogger Logger { get; set; }
-
-        public virtual IOptionsSnapshot<WeChatPayOptions> OptionsSnapshotAccessor { get; set; }
-
         #region WeChatPayNotifyClient Constructors
 
         public WeChatPayNotifyClient(
@@ -26,6 +22,33 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         {
             Logger = logger;
             OptionsSnapshotAccessor = optionsAccessor;
+        }
+
+        #endregion
+
+        public virtual ILogger Logger { get; set; }
+
+        public virtual IOptionsSnapshot<WeChatPayOptions> OptionsSnapshotAccessor { get; set; }
+
+        #region Common Method
+
+        private void CheckNotifySign(WeChatPayNotifyResponse response, WeChatPayOptions options)
+        {
+            if (response?.Parameters?.Count == 0)
+            {
+                throw new Exception("sign check fail: Body is Empty!");
+            }
+
+            if (!response.Parameters.TryGetValue("sign", out var sign))
+            {
+                throw new Exception("sign check fail: sign is Empty!");
+            }
+
+            var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key);
+            if (cal_sign != sign)
+            {
+                throw new Exception("sign check fail: check Sign and Data Fail!");
+            }
         }
 
         #endregion
@@ -57,29 +80,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 CheckNotifySign(rsp, options);
             }
             return rsp;
-        }
-
-        #endregion
-
-        #region Common Method
-
-        private void CheckNotifySign(WeChatPayNotifyResponse response, WeChatPayOptions options)
-        {
-            if (response?.Parameters?.Count == 0)
-            {
-                throw new Exception("sign check fail: Body is Empty!");
-            }
-
-            if (!response.Parameters.TryGetValue("sign", out var sign))
-            {
-                throw new Exception("sign check fail: sign is Empty!");
-            }
-
-            var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key);
-            if (cal_sign != sign)
-            {
-                throw new Exception("sign check fail: check Sign and Data Fail!");
-            }
         }
 
         #endregion

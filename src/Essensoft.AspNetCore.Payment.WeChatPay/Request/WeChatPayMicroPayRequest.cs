@@ -102,7 +102,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         public IDictionary<string, string> GetParameters()
         {
-            var parameters = new WeChatPayDictionary()
+            var parameters = new WeChatPayDictionary
             {
                 { "appid", AppId },
                 { "sub_appid", SubAppId },
@@ -120,7 +120,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { "time_start", TimeStart },
                 { "time_expire", TimeExpire },
                 { "auth_code", AuthCode },
-                { "scene_info", SceneInfo },
+                { "scene_info", SceneInfo }
             };
             return parameters;
         }

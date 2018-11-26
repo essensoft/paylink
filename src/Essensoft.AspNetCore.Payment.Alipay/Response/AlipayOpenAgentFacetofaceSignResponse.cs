@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipayOpenAgentFacetofaceSignResponse.
     /// </summary>
     public class AlipayOpenAgentFacetofaceSignResponse : AlipayResponse
-    {
-    }
+    {}
 }

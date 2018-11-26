@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.UnionPay.Response;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.UnionPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay.Request
 {
@@ -104,6 +104,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         public string TermId { get; set; }
 
         #region IUnionPayRequest
+
         private string version = string.Empty;
 
         public string GetApiVersion()
@@ -138,7 +139,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "acqInsCode", AcqInsCode },
                 { "reserved", Reserved },
                 { "reqReserved", ReqReserved },
-                { "termId", TermId },
+                { "termId", TermId }
             };
             return parameters;
         }

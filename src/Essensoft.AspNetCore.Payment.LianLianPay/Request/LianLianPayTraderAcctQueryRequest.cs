@@ -21,7 +21,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
         {
             var parameters = new LianLianPayDictionary
             {
-                { "api_version", Version },
+                { "api_version", Version }
             };
             return parameters;
         }

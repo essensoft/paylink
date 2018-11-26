@@ -1,14 +1,14 @@
 using System;
-using Essensoft.AspNetCore.Payment.Alipay;
+using Microsoft.Extensions.DependencyInjection;
 
-namespace Microsoft.Extensions.DependencyInjection
+namespace Essensoft.AspNetCore.Payment.Alipay
 {
     public static class ServiceCollectionExtensions
     {
         public static void AddAlipay(
             this IServiceCollection services)
         {
-            services.AddAlipay(setupAction: null);
+            services.AddAlipay(null);
         }
 
         public static void AddAlipay(

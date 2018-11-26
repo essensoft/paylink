@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipayOpenMiniVersionAuditedCancelResponse.
     /// </summary>
     public class AlipayOpenMiniVersionAuditedCancelResponse : AlipayResponse
-    {
-    }
+    {}
 }

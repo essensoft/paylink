@@ -1,6 +1,6 @@
-﻿using Essensoft.AspNetCore.Payment.JDPay.Domain;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
+using Essensoft.AspNetCore.Payment.JDPay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.JDPay.Response
 {

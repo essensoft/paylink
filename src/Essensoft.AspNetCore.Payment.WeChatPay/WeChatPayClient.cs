@@ -31,12 +31,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         private const string signType = "signType";
         private const string paySign = "paySign";
 
-        public virtual ILogger Logger { get; set; }
-
-        public virtual IHttpClientFactory ClientFactory { get; set; }
-
-        public virtual IOptionsSnapshot<WeChatPayOptions> OptionsSnapshotAccessor { get; set; }
-
         #region WeChatPayClient Constructors
 
         public WeChatPayClient(
@@ -47,6 +41,36 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             Logger = logger;
             ClientFactory = clientFactory;
             OptionsSnapshotAccessor = optionsAccessor;
+        }
+
+        #endregion
+
+        public virtual ILogger Logger { get; set; }
+
+        public virtual IHttpClientFactory ClientFactory { get; set; }
+
+        public virtual IOptionsSnapshot<WeChatPayOptions> OptionsSnapshotAccessor { get; set; }
+
+        #region Common Method
+
+        private void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options, bool useMD5 = true, bool excludeSignType = true)
+        {
+            if (string.IsNullOrEmpty(response.Body))
+            {
+                throw new Exception("sign check fail: Body is Empty!");
+            }
+
+            if (response.Parameters.TryGetValue("sign", out var sign))
+            {
+                if (response.Parameters["return_code"] == "SUCCESS" && !string.IsNullOrEmpty(sign))
+                {
+                    var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key, useMD5, excludeSignType);
+                    if (cal_sign != sign)
+                    {
+                        throw new Exception("sign check fail: check Sign and Data Fail!");
+                    }
+                }
+            }
         }
 
         #endregion
@@ -250,30 +274,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 sortedTxtParams.Add(paySign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key));
             }
             return Task.FromResult(sortedTxtParams);
-        }
-
-        #endregion
-
-        #region Common Method
-
-        private void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options, bool useMD5 = true, bool excludeSignType = true)
-        {
-            if (string.IsNullOrEmpty(response.Body))
-            {
-                throw new Exception("sign check fail: Body is Empty!");
-            }
-
-            if (response.Parameters.TryGetValue("sign", out var sign))
-            {
-                if (response.Parameters["return_code"] == "SUCCESS" && !string.IsNullOrEmpty(sign))
-                {
-                    var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key, useMD5, excludeSignType);
-                    if (cal_sign != sign)
-                    {
-                        throw new Exception("sign check fail: check Sign and Data Fail!");
-                    }
-                }
-            }
         }
 
         #endregion

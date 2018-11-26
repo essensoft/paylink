@@ -9,8 +9,8 @@ namespace WebApplicationSample.Controllers
 {
     public class LianLianPayController : Controller
     {
-        private readonly ILianLianPayClient _client = null;
-        private readonly ILianLianPayNotifyClient _notifyClient = null;
+        private readonly ILianLianPayClient _client;
+        private readonly ILianLianPayNotifyClient _notifyClient;
 
         public LianLianPayController(ILianLianPayClient client, ILianLianPayNotifyClient notifyClient)
         {
@@ -32,7 +32,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> WebQuickPay(LianLianPayWebQuickPayViewModel viewModel)
         {
-            var request = new LianLianPayCreateBillRequest()
+            var request = new LianLianPayCreateBillRequest
             {
                 UserId = viewModel.UserId,
                 NoOrder = viewModel.NoOrder,
@@ -43,7 +43,7 @@ namespace WebApplicationSample.Controllers
                 UrlReturn = viewModel.UrlReturn,
                 RiskItem = viewModel.RiskItem,
                 FlagPayProduct = "0",
-                FlagChnl = "2",
+                FlagChnl = "2"
             };
             var response = await _client.ExecuteAsync(request);
             return Redirect(response.GatewayUrl);
@@ -58,7 +58,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> H5QuickPay(LianLianPayH5QuickPayViewModel viewModel)
         {
-            var request = new LianLianPayCreateBillRequest()
+            var request = new LianLianPayCreateBillRequest
             {
                 UserId = viewModel.UserId,
                 NoOrder = viewModel.NoOrder,
@@ -69,7 +69,7 @@ namespace WebApplicationSample.Controllers
                 UrlReturn = viewModel.UrlReturn,
                 RiskItem = viewModel.RiskItem,
                 FlagPayProduct = "0",
-                FlagChnl = "3",
+                FlagChnl = "3"
             };
             var response = await _client.ExecuteAsync(request);
             return Redirect(response.GatewayUrl);
@@ -84,7 +84,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> OrderQuery(LianLianPayOrderQueryViewModel viewModel)
         {
-            var request = new LianLianPayOrderQueryRequest()
+            var request = new LianLianPayOrderQueryRequest
             {
                 NoOrder = viewModel.NoOrder,
                 DtOrder = viewModel.DtOrder,
@@ -104,7 +104,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Refund(LianLianPayRefundViewModel viewModel)
         {
-            var request = new LianLianPayRefundRequest()
+            var request = new LianLianPayRefundRequest
             {
                 NoRefund = viewModel.NoRefund,
                 DtRefund = viewModel.DtRefund,
@@ -112,7 +112,7 @@ namespace WebApplicationSample.Controllers
                 NoOrder = viewModel.NoOrder,
                 DtOrder = viewModel.DtOrder,
                 OidPaybill = viewModel.OidPayBill,
-                NotifyUrl = viewModel.NotifyUrl,
+                NotifyUrl = viewModel.NotifyUrl
             };
             var response = await _client.ExecuteAsync(request);
             ViewData["response"] = response.Body;
@@ -128,11 +128,11 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> RefundQuery(LianLianPayRefundQueryViewModel viewModel)
         {
-            var request = new LianLianPayRefundQueryRequest()
+            var request = new LianLianPayRefundQueryRequest
             {
                 NoRefund = viewModel.NoRefund,
                 DtRefund = viewModel.DtRefund,
-                OidRefundNo = viewModel.OidRefundNo,
+                OidRefundNo = viewModel.OidRefundNo
             };
             var response = await _client.ExecuteAsync(request);
             ViewData["response"] = response.Body;

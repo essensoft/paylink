@@ -139,7 +139,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Request
                 { "id_type", IdType },
                 { "id_no", IdNo },
                 { "acct_name", AcctName },
-                { "card_no", CardNo },
+                { "card_no", CardNo }
             };
             return parameters;
         }

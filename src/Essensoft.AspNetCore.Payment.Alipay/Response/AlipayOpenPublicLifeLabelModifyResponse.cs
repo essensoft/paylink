@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipayOpenPublicLifeLabelModifyResponse.
     /// </summary>
     public class AlipayOpenPublicLifeLabelModifyResponse : AlipayResponse
-    {
-    }
+    {}
 }

@@ -43,7 +43,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Response
         /// </summary>
         [JsonProperty("no_order")]
         public string NoOrder { get; set; }
-        
+
         /// <summary>
         /// 连连网关地址。
         /// </summary>

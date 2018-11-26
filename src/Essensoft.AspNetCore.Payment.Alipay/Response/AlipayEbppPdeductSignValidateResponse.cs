@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// AlipayEbppPdeductSignValidateResponse.
     /// </summary>
     public class AlipayEbppPdeductSignValidateResponse : AlipayResponse
-    {
-    }
+    {}
 }

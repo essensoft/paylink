@@ -17,7 +17,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
     public class JDPaySecurity
     {
         private const int MAX_MSG_LENGTH = 16 * 1024;
-        private static readonly byte[] iv = new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 };
+        private static readonly byte[] iv = { 1, 2, 3, 4, 5, 6, 7, 8 };
 
         public static string GetSignContent(JDPayDictionary para)
         {
@@ -55,7 +55,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             }
 
             var sign = string.Empty;
-            var data = sb.Remove(sb.Length - 1, 1).ToString() + salt;
+            var data = sb.Remove(sb.Length - 1, 1) + salt;
 
             if ("SHA" == algorithm)
             {
@@ -157,7 +157,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             var source = Encoding.UTF8.GetBytes(data);
             var merchantData = source.Length;
             var x = (merchantData + 4) % 8;
-            var y = (x == 0) ? 0 : (8 - x);
+            var y = x == 0 ? 0 : 8 - x;
             var resultByte = new byte[merchantData + 4 + y];
             resultByte[0] = (byte)((merchantData >> 24) & 0xFF);
             resultByte[1] = (byte)((merchantData >> 16) & 0xFF);
@@ -178,7 +178,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 
         public static byte[] Hex2byte(string b)
         {
-            if ((b.Length % 2) != 0)
+            if (b.Length % 2 != 0)
             {
                 throw new Exception("长度不是偶数");
             }

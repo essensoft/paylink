@@ -4,6 +4,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// KoubeiItemExtitemCreateResponse.
     /// </summary>
     public class KoubeiItemExtitemCreateResponse : AlipayResponse
-    {
-    }
+    {}
 }

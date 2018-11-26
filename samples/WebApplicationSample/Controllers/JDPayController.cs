@@ -1,16 +1,16 @@
-﻿using Essensoft.AspNetCore.Payment.JDPay;
+﻿using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.JDPay;
 using Essensoft.AspNetCore.Payment.JDPay.Notify;
 using Essensoft.AspNetCore.Payment.JDPay.Request;
 using Microsoft.AspNetCore.Mvc;
 using WebApplicationSample.Models;
-using System.Threading.Tasks;
 
 namespace WebApplicationSample.Controllers
 {
     public class JDPayController : Controller
     {
-        private readonly IJDPayClient _client = null;
-        private readonly IJDPayNotifyClient _notifyClient = null;
+        private readonly IJDPayClient _client;
+        private readonly IJDPayNotifyClient _notifyClient;
 
         public JDPayController(IJDPayClient client, IJDPayNotifyClient notifyClient)
         {
@@ -32,7 +32,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveOrderPC(JDPaySaveOrderViewModel viewModel)
         {
-            var request = new JDPaySaveOrderPCRequest()
+            var request = new JDPaySaveOrderPCRequest
             {
                 TradeNum = viewModel.TradeNum,
                 TradeName = viewModel.TradeName,
@@ -42,7 +42,7 @@ namespace WebApplicationSample.Controllers
                 Currency = viewModel.Currency,
                 CallbackUrl = viewModel.CallbackUrl,
                 NotifyUrl = viewModel.NotifyUrl,
-                UserId = viewModel.UserId,
+                UserId = viewModel.UserId
             };
 
             var response = await _client.PageExecuteAsync(request);
@@ -58,7 +58,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveOrderH5(JDPaySaveOrderViewModel viewModel)
         {
-            var request = new JDPaySaveOrderH5Request()
+            var request = new JDPaySaveOrderH5Request
             {
                 TradeNum = viewModel.TradeNum,
                 TradeName = viewModel.TradeName,
@@ -68,7 +68,7 @@ namespace WebApplicationSample.Controllers
                 Currency = viewModel.Currency,
                 CallbackUrl = viewModel.CallbackUrl,
                 NotifyUrl = viewModel.NotifyUrl,
-                UserId = viewModel.UserId,
+                UserId = viewModel.UserId
             };
 
             var response = await _client.PageExecuteAsync(request);
@@ -84,7 +84,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> QRPay(JDPayUnifiedOrderViewModel viewModel)
         {
-            var request = new JDPayUnifiedOrderRequest()
+            var request = new JDPayUnifiedOrderRequest
             {
                 TradeNum = viewModel.TradeNum,
                 TradeName = viewModel.TradeName,
@@ -93,7 +93,7 @@ namespace WebApplicationSample.Controllers
                 OrderType = viewModel.OrderType,
                 Currency = viewModel.Currency,
                 NotifyUrl = viewModel.NotifyUrl,
-                TradeType = viewModel.TradeType,
+                TradeType = viewModel.TradeType
             };
 
             var response = await _client.ExecuteAsync(request);
@@ -111,11 +111,11 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Query(JDPayQueryViewModel viewModel)
         {
-            var request = new JDPayQueryRequest()
+            var request = new JDPayQueryRequest
             {
                 TradeNum = viewModel.TradeNum,
                 OTradeNum = viewModel.OTradeNum,
-                TradeType = viewModel.TradeType,
+                TradeType = viewModel.TradeType
             };
 
             var response = await _client.ExecuteAsync(request);
@@ -132,7 +132,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Refund(JDPayRefundViewModel viewModel)
         {
-            var request = new JDPayRefundRequest()
+            var request = new JDPayRefundRequest
             {
                 TradeNum = viewModel.TradeNum,
                 OTradeNum = viewModel.OTradeNum,
@@ -155,11 +155,11 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> QueryRefund(JDPayQueryRefundViewModel viewModel)
         {
-            var request = new JDPayQueryRefundRequest()
+            var request = new JDPayQueryRefundRequest
             {
                 TradeNum = viewModel.TradeNum,
                 OTradeNum = viewModel.OTradeNum,
-                TradeType = viewModel.TradeType,
+                TradeType = viewModel.TradeType
             };
 
             var response = await _client.ExecuteAsync(request);
@@ -176,7 +176,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> DefrayPay(JDPayDefrayPayViewModel viewModel)
         {
-            var request = new JDPayDefrayPayRequest()
+            var request = new JDPayDefrayPayRequest
             {
                 RequestDatetime = viewModel.RequestDatetime,
                 OutTradeNo = viewModel.OutTradeNo,
@@ -206,7 +206,7 @@ namespace WebApplicationSample.Controllers
                 ReturnParams = viewModel.ReturnParams,
                 ExtendParams = viewModel.ExtendParams,
                 BankCardInfoType = viewModel.BankCardInfoType,
-                BankCardId = viewModel.BankCardId,
+                BankCardId = viewModel.BankCardId
             };
 
             var response = await _client.ExecuteAsync(request);
@@ -223,12 +223,12 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> TradeQuery(JDPayTradeQueryViewModel viewModel)
         {
-            var request = new JDPayTradeQueryRequest()
+            var request = new JDPayTradeQueryRequest
             {
                 RequestDatetime = viewModel.RequestDatetime,
                 OutTradeNo = viewModel.OutTradeNo,
                 TradeNo = viewModel.TradeNo,
-                TradeType = viewModel.TradeType,
+                TradeType = viewModel.TradeType
             };
 
             var response = await _client.ExecuteAsync(request);

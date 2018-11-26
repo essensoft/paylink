@@ -145,7 +145,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "txnAmt", TxnAmt },
                 { "riskRateInfo", RiskRateInfo },
                 { "reqReserved", ReqReserved },
-                { "termId", TermId },
+                { "termId", TermId }
             };
             return parameters;
         }

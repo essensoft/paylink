@@ -1,5 +1,5 @@
-using Essensoft.AspNetCore.Payment.WeChatPay.Response;
 using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.WeChatPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
@@ -77,7 +77,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         public IDictionary<string, string> GetParameters()
         {
-            var parameters = new WeChatPayDictionary()
+            var parameters = new WeChatPayDictionary
             {
                 { "appid", AppId },
                 { "sub_appid", SubAppId },
@@ -90,7 +90,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { "refund_fee_type", RefundFeeType },
                 { "refund_desc", RefundDesc },
                 { "refund_account", RefundAccount },
-                { "notify_url", NotifyUrl },
+                { "notify_url", NotifyUrl }
             };
             return parameters;
         }

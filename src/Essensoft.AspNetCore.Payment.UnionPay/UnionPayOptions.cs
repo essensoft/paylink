@@ -4,6 +4,27 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 {
     public class UnionPayOptions
     {
+        private string encryptCert;
+
+        /// <summary>
+        /// 加密证书 
+        /// </summary>
+        internal UnionPayCertificate EncryptCertificate;
+
+        private string middleCert;
+
+        /// <summary>
+        /// 验签中级证书
+        /// </summary>
+        internal UnionPayCertificate MiddleCertificate;
+
+        private string rootCert;
+
+        /// <summary>
+        /// 验签根证书 
+        /// </summary>
+        internal UnionPayCertificate RootCertificate;
+
         /// <summary>
         /// 商户代码
         /// </summary>
@@ -47,17 +68,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         internal UnionPayCertificate SignCertificate => UnionPaySignature.GetSignCertificate(SignCert, SignCertPassword);
 
-        /// <summary>
-        /// 加密证书 
-        /// </summary>
-        internal UnionPayCertificate EncryptCertificate;
-        private string encryptCert;
         public string EncryptCert
         {
-            get
-            {
-                return encryptCert;
-            }
+            get => encryptCert;
             set
             {
                 encryptCert = value;
@@ -68,17 +81,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             }
         }
 
-        /// <summary>
-        /// 验签中级证书
-        /// </summary>
-        internal UnionPayCertificate MiddleCertificate;
-        private string middleCert;
         public string MiddleCert
         {
-            get
-            {
-                return middleCert;
-            }
+            get => middleCert;
             set
             {
                 middleCert = value;
@@ -89,17 +94,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             }
         }
 
-        /// <summary>
-        /// 验签根证书 
-        /// </summary>
-        internal UnionPayCertificate RootCertificate;
-        private string rootCert;
         public string RootCert
         {
-            get
-            {
-                return rootCert;
-            }
+            get => rootCert;
             set
             {
                 rootCert = value;
