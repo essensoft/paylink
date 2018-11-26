@@ -2,7 +2,10 @@
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
-    public interface IWeChatPayCalcRequest
+    /// <summary>
+    /// WeChatPay API调起请求
+    /// </summary>
+    public interface IWeChatPayCallRequest
     {
         /// <summary>
         /// 获取所有的Key-Value形式的文本请求参数字典。其中：

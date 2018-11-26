@@ -1,33 +1,35 @@
 # 关于Payment中使用 HttpClient 配置介绍
 
-* 以WeChatPay为例，有以下几种方式：
+## Payment使用HttpClient提交API请求，务必在项目中引入它。
 
-1. 添加默认HttpClient供WeChatPayClient使用. (未使用到API证书时适用)
-```
-services.AddWeChatPayHttpClient();
-```
+## 引入 HttpClient
 
-2. 添加默认HttpClient和证书HttpClient供WeChatPayClient使用 (目前仅WeChatPay\QPay部分API有使用到API证书配置) 
-
-* 根据证书路径
 ```
-services.AddWeChatPayHttpClient();
-services.AddWeChatPayCertificateHttpClient(new X509Certificate2(Configuration["WeChatPay:Certificate"], Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));
-//services.AddWeChatPayCertificateHttpClient("certificateName1", new X509Certificate2(Configuration["WeChatPay:Certificate"], Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));
-//若配置证书名为"certificateName1", 则执行请求时需要配置证书名(该API请求需要证书的情况下), 如: await _client.ExecuteAsync(request, "certificateName1");
+services.AddHttpClient();
 ```
 
-* 根据证书Base64String
+## API证书配置(仅QPay 与 WeChatPay的部分API 使用到API证书。)
+
+* API证书配置
+
 ```
-services.AddWeChatPayHttpClient();
-services.AddWeChatPayCertificateHttpClient(new X509Certificate2(Convert.FromBase64String(Configuration["WeChatPay:Certificate"]), Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));
-//services.AddWeChatPayCertificateHttpClient("certificateName1", new X509Certificate2(Convert.FromBase64String(Configuration["WeChatPay:Certificate"]), Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet));
-//若配置证书名为"certificateName1", 则执行请求时需要配置证书名(该API请求需要证书的情况下), 如: await _client.ExecuteAsync(request, "certificateName1");
+// 证书名称可自定义
+services.AddHttpClient("证书名称").ConfigurePrimaryHttpMessageHandler(() =>
+{
+    // 载入证书
+    var certificate = new X509Certificate2("", "", X509KeyStorageFlags.MachineKeySet);
+    var handler = new HttpClientHandler();
+    handler.ClientCertificates.Add(certificate);
+    return handler;
+});
 ```
 
-3.  自行配置HttpClient供WeChatPayClient使用 (目前仅WeChatPay\QPay部分API有使用到API证书配置) 
+* API证书使用
+
 ```
-services.AddHttpClient(WeChatPayOptions.DefaultClientName);
-services.AddHttpClient(WeChatPayOptions.CertificateClientName + "." + "Default").ConfigurePrimaryHttpMessageHandler(() => { ... });
-// "Default" 为默认执行请求的API证书名, 可自行配置.
+var request = new WeChatPayRefundRequest()
+{
+...
+};
+var response = await _client.ExecuteAsync(request, "证书名称");
 ```

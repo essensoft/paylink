@@ -1,6 +1,5 @@
 using System;
 using Essensoft.AspNetCore.Payment.LianLianPay;
-using Essensoft.AspNetCore.Payment.LianLianPay.Utility;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -16,18 +15,12 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             Action<LianLianPayOptions> setupAction)
         {
-            services.AddSingleton<LianLianPayClient>();
-            services.AddSingleton<LianLianPayNotifyClient>();
+            services.AddScoped<ILianLianPayClient, LianLianPayClient>();
+            services.AddScoped<ILianLianPayNotifyClient, LianLianPayNotifyClient>();
             if (setupAction != null)
             {
                 services.Configure(setupAction);
             }
-        }
-
-        public static void AddLianLianPayHttpClient(
-            this IServiceCollection services)
-        {
-            services.AddHttpClient(LianLianPayOptions.DefaultClientName);
         }
     }
 }

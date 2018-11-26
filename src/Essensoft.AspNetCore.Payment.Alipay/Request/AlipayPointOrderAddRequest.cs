@@ -22,12 +22,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// <summary>
         /// 发放集分宝时间
         /// </summary>
-        public Nullable<DateTime> OrderTime { get; set; }
+        public DateTime? OrderTime { get; set; }
 
         /// <summary>
         /// 发放集分宝的数量
         /// </summary>
-        public Nullable<long> PointCount { get; set; }
+        public long? PointCount { get; set; }
 
         /// <summary>
         /// 用户标识符，用于指定集分宝发放的用户，和user_symbol_type一起使用，确定一个唯一的支付宝用户

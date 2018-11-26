@@ -1,6 +1,5 @@
 using System;
 using Essensoft.AspNetCore.Payment.JDPay;
-using Essensoft.AspNetCore.Payment.JDPay.Utility;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -16,18 +15,12 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             Action<JDPayOptions> setupAction)
         {
-            services.AddSingleton<JDPayClient>();
-            services.AddSingleton<JDPayNotifyClient>();
+            services.AddScoped<IJDPayClient, JDPayClient>();
+            services.AddScoped<IJDPayNotifyClient, JDPayNotifyClient>();
             if (setupAction != null)
             {
                 services.Configure(setupAction);
             }
-        }
-
-        public static void AddJDPayHttpClient(
-            this IServiceCollection services)
-        {
-            services.AddHttpClient(JDPayOptions.DefaultClientName);
         }
     }
 }

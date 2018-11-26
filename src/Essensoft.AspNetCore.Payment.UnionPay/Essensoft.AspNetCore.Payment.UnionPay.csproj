@@ -5,9 +5,9 @@
     <Company>Essensoft</Company>
     <Authors>Roc</Authors>
     <Product>Payment</Product>
-    <Version>1.6.2</Version>
-    <AssemblyVersion>1.6.2.0</AssemblyVersion>
-    <FileVersion>1.6.2.0</FileVersion>
+    <Version>2.0.0</Version>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
     <Description>Essensoft.AspNetCore.Payment.UnionPay</Description>
     <Copyright>© Essensoft 2018</Copyright>
     <PackageProjectUrl>https://github.com/Essensoft/Payment</PackageProjectUrl>

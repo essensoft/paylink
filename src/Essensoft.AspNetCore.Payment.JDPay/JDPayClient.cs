@@ -20,38 +20,18 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         public virtual IHttpClientFactory ClientFactory { get; set; }
 
-        public JDPayOptions Options { get; protected set; }
+        public virtual IOptionsSnapshot<JDPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region JDPayClient Constructors
 
         public JDPayClient(
-            IOptions<JDPayOptions> optionsAccessor,
             ILogger<JDPayClient> logger,
-            IHttpClientFactory clientFactory)
+            IHttpClientFactory clientFactory,
+            IOptionsSnapshot<JDPayOptions> optionsAccessor)
         {
             Logger = logger;
             ClientFactory = clientFactory;
-            Options = optionsAccessor.Value;
-
-            if (string.IsNullOrEmpty(Options.Merchant))
-            {
-                throw new ArgumentNullException(nameof(Options.Merchant));
-            }
-
-            if (string.IsNullOrEmpty(Options.RsaPrivateKey))
-            {
-                throw new ArgumentNullException(nameof(Options.RsaPrivateKey));
-            }
-
-            if (string.IsNullOrEmpty(Options.RsaPublicKey))
-            {
-                throw new ArgumentNullException(nameof(Options.RsaPublicKey));
-            }
-
-            if (string.IsNullOrEmpty(Options.DesKey))
-            {
-                throw new ArgumentNullException(nameof(Options.DesKey));
-            }         
+            OptionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
@@ -60,13 +40,19 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         public async Task<T> ExecuteAsync<T>(IJDPayRequest<T> request) where T : JDPayResponse
         {
+            return await ExecuteAsync(request, null);
+        }
+
+        public async Task<T> ExecuteAsync<T>(IJDPayRequest<T> request, string optionsName) where T : JDPayResponse
+        {
+            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
             // 字典排序
             var sortedTxtParams = new JDPayDictionary(request.GetParameters());
 
-            var content = BuildEncryptXml(request, sortedTxtParams);
+            var content = BuildEncryptXml(request, sortedTxtParams, options);
             Logger?.LogTrace(0, "Request:{content}", content);
 
-            using (var client = ClientFactory.CreateClient(JDPayOptions.DefaultClientName))
+            using (var client = ClientFactory.CreateClient())
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
                 Logger?.LogTrace(1, "Response:{content}", body);
@@ -77,7 +63,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 {
                     var encrypt = rsp.Encrypt;
                     var base64EncryptStr = Encoding.UTF8.GetString(Convert.FromBase64String(encrypt));
-                    var reqBody = JDPaySecurity.DecryptECB(base64EncryptStr, Options.DesKeyBase64);
+                    var reqBody = JDPaySecurity.DecryptECB(base64EncryptStr, options.DesKeyBase64);
                     Logger?.LogTrace(2, "Encrypt Content:{body}", reqBody);
 
                     var reqBodyDoc = new XmlDocument() { XmlResolver = null };
@@ -95,7 +81,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                         reqBodyStr = reqBodyStr.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", xmlh);
                     }
                     var sha256SourceSignString = SHA256.Compute(reqBodyStr);
-                    var decryptByte = RSA_ECB_PKCS1Padding.Decrypt(Convert.FromBase64String(sign), Options.PublicKey);
+                    var decryptByte = RSA_ECB_PKCS1Padding.Decrypt(Convert.FromBase64String(sign), options.PublicKey);
                     var decryptStr = JDPaySecurity.BytesToString(decryptByte);
                     if (sha256SourceSignString == decryptStr)
                     {
@@ -117,9 +103,15 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         public Task<T> PageExecuteAsync<T>(IJDPayRequest<T> request) where T : JDPayResponse
         {
+            return PageExecuteAsync(request, null);
+        }
+
+        public Task<T> PageExecuteAsync<T>(IJDPayRequest<T> request, string optionsName) where T : JDPayResponse
+        {
+            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
             // 字典排序
             var sortedTxtParams = new JDPayDictionary(request.GetParameters());
-            var encyptParams = BuildEncryptDic(request, sortedTxtParams);
+            var encyptParams = BuildEncryptDic(request, sortedTxtParams, options);
             var rsp = Activator.CreateInstance<T>();
 
             //输出post表单
@@ -133,10 +125,16 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         public async Task<T> ExecuteAsync<T>(IJDPayNPP10Request<T> request) where T : JDPayResponse
         {
+            return await ExecuteAsync(request, null);
+        }
+
+        public async Task<T> ExecuteAsync<T>(IJDPayNPP10Request<T> request, string optionsName) where T : JDPayResponse
+        {
+            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
             var sortedTxtParams = new JDPayDictionary(request.GetParameters())
             {
-                { JDPayContants.CUSTOMER_NO, Options.CustomerNo },
-                { JDPayContants.SIGN_TYPE, Options.SignType }
+                { JDPayContants.CUSTOMER_NO, options.CustomerNo },
+                { JDPayContants.SIGN_TYPE, options.SignType }
             };
 
             var isEncrypt = false;
@@ -146,12 +144,12 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 isEncrypt = true;
             }
 
-            var encryptDic = JDPaySecurity.EncryptData(Options.PrivateCret, Options.Password, Options.PublicCert, sortedTxtParams, Options.SingKey, Options.EncryptType, isEncrypt);
+            var encryptDic = JDPaySecurity.EncryptData(options.PrivateCret, options.Password, options.PublicCert, sortedTxtParams, options.SingKey, options.EncryptType, isEncrypt);
 
             var content = JDPayUtility.BuildQuery(encryptDic);
             Logger?.LogTrace(0, "Request:{content}", content);
 
-            using (var client = ClientFactory.CreateClient(JDPayOptions.DefaultClientName))
+            using (var client = ClientFactory.CreateClient())
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content, "application/x-www-form-urlencoded");
                 Logger?.LogTrace(1, "Response:{content}", body);
@@ -160,7 +158,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
                 // 验签
                 var dic = JsonConvert.DeserializeObject<JDPayDictionary>(body);
-                if (!JDPaySecurity.VerifySign(dic, Options.SingKey))
+                if (!JDPaySecurity.VerifySign(dic, options.SingKey))
                 {
                     throw new Exception("sign check fail: check Sign and Data Fail!");
                 }
@@ -174,41 +172,41 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         #region Common Method
 
-        private string BuildEncryptXml<T>(IJDPayRequest<T> request, JDPayDictionary dic) where T : JDPayResponse
+        private string BuildEncryptXml<T>(IJDPayRequest<T> request, JDPayDictionary dic, JDPayOptions options) where T : JDPayResponse
         {
             var xmldoc = JDPayUtility.SortedDictionary2AllXml(dic);
             var smlStr = JDPayUtility.ConvertXmlToString(xmldoc);
             var sha256SourceSignString = SHA256.Compute(smlStr);
-            var encyptBytes = RSA_ECB_PKCS1Padding.Encrypt(Encoding.UTF8.GetBytes(sha256SourceSignString), Options.PrivateKey);
+            var encyptBytes = RSA_ECB_PKCS1Padding.Encrypt(Encoding.UTF8.GetBytes(sha256SourceSignString), options.PrivateKey);
             var sign = Convert.ToBase64String(encyptBytes, Base64FormattingOptions.InsertLineBreaks);
             var data = smlStr.Replace("</jdpay>", "<sign>" + sign + "</sign></jdpay>");
-            var encrypt = JDPaySecurity.EncryptECB(data, Options.DesKeyBase64);
+            var encrypt = JDPaySecurity.EncryptECB(data, options.DesKeyBase64);
             // 字典排序
             var reqdic = new JDPayDictionary
             {
                 { JDPayContants.VERSION, request.GetApiVersion() },
-                { JDPayContants.MERCHANT, Options.Merchant },
+                { JDPayContants.MERCHANT, options.Merchant },
                 { JDPayContants.ENCRYPT, Convert.ToBase64String(Encoding.UTF8.GetBytes(encrypt)) }
             };
 
             return JDPayUtility.SortedDictionary2XmlStr(reqdic);
         }
 
-        private JDPayDictionary BuildEncryptDic<T>(IJDPayRequest<T> request, IDictionary<string, string> parameters) where T : JDPayResponse
+        private JDPayDictionary BuildEncryptDic<T>(IJDPayRequest<T> request, IDictionary<string, string> parameters, JDPayOptions options) where T : JDPayResponse
         {
             var signDic = new JDPayDictionary(parameters)
             {
                 { JDPayContants.VERSION, request.GetApiVersion() },
-                { JDPayContants.MERCHANT, Options.Merchant },
+                { JDPayContants.MERCHANT, options.Merchant },
             };
 
             var signContent = JDPaySecurity.GetSignContent(signDic);
-            var sign = JDPaySecurity.RSASign(signContent, Options.PrivateKey);
+            var sign = JDPaySecurity.RSASign(signContent, options.PrivateKey);
 
             var encyptDic = new JDPayDictionary
             {
                 { JDPayContants.VERSION, request.GetApiVersion() },
-                { JDPayContants.MERCHANT, Options.Merchant },
+                { JDPayContants.MERCHANT, options.Merchant },
                 { JDPayContants.SIGN, sign }
             };
 
@@ -216,7 +214,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             {
                 if (!string.IsNullOrEmpty(iter.Value))
                 {
-                    encyptDic.Add(iter.Key, JDPaySecurity.EncryptECB(iter.Value, Options.DesKeyBase64));
+                    encyptDic.Add(iter.Key, JDPaySecurity.EncryptECB(iter.Value, options.DesKeyBase64));
                 }
             }
             return encyptDic;

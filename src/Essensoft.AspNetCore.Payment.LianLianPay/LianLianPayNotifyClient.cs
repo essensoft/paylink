@@ -1,12 +1,12 @@
-﻿using Essensoft.AspNetCore.Payment.LianLianPay.Parser;
+﻿using System;
+using System.IO;
+using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.LianLianPay.Parser;
 using Essensoft.AspNetCore.Payment.LianLianPay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using System;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
@@ -14,31 +14,16 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
     {
         public virtual ILogger Logger { get; set; }
 
-        public LianLianPayOptions Options { get; protected set; }
+        public virtual IOptionsSnapshot<LianLianPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region LianLianPayNotifyClient Constructors
 
         public LianLianPayNotifyClient(
             ILogger<LianLianPayClient> logger,
-            IOptions<LianLianPayOptions> optionsAccessor)
+            IOptionsSnapshot<LianLianPayOptions> optionsAccessor)
         {
             Logger = logger;
-            Options = optionsAccessor?.Value;
-
-            if (string.IsNullOrEmpty(Options.OidPartner))
-            {
-                throw new ArgumentNullException(nameof(Options.OidPartner));
-            }
-
-            if (string.IsNullOrEmpty(Options.BusiPartner))
-            {
-                throw new ArgumentNullException(nameof(Options.BusiPartner));
-            }
-
-            if (string.IsNullOrEmpty(Options.RsaPublicKey))
-            {
-                throw new ArgumentNullException(nameof(Options.RsaPublicKey));
-            }          
+            OptionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
@@ -47,6 +32,12 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : LianLianPayNotifyResponse
         {
+            return await ExecuteAsync<T>(request, null);
+        }
+
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : LianLianPayNotifyResponse
+        {
+            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
             if (request.HasFormContentType)
             {
                 var parameters = await GetParametersAsync(request);
@@ -55,7 +46,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
                 var parser = new LianLianPayDictionaryParser<T>();
                 var rsp = parser.Parse(parameters);
-                CheckNotifySign(parameters);
+                CheckNotifySign(parameters, options);
                 return rsp;
             }
             else if (request.HasTextJsonContentType())
@@ -65,7 +56,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
                 var parser = new LianLianPayJsonParser<T>();
                 var rsp = parser.Parse(body);
-                CheckNotifySign(rsp.Parameters);
+                CheckNotifySign(rsp.Parameters, options);
                 return rsp;
             }
             else
@@ -89,7 +80,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             return parameters;
         }
 
-        private void CheckNotifySign(LianLianPayDictionary para)
+        private void CheckNotifySign(LianLianPayDictionary para, LianLianPayOptions options)
         {
             if (para.Count == 0)
             {
@@ -102,7 +93,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             }
 
             var prestr = LianLianPaySecurity.GetSignContent(para);
-            if (!MD5WithRSA.VerifyData(prestr, sign, Options.PublicKey))
+            if (!MD5WithRSA.VerifyData(prestr, sign, options.PublicKey))
             {
                 throw new Exception("sign check fail: check Sign and Data Fail JSON also");
             }

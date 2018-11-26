@@ -12,26 +12,16 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
     {
         public virtual ILogger Logger { get; set; }
 
-        public UnionPayOptions Options { get; protected set; }
+        public virtual IOptionsSnapshot<UnionPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region UnionPayNotifyClient Constructors
 
         public UnionPayNotifyClient(
             ILogger<UnionPayNotifyClient> logger,
-            IOptions<UnionPayOptions> optionsAccessor)
+            IOptionsSnapshot<UnionPayOptions> optionsAccessor)
         {
             Logger = logger;
-            Options = optionsAccessor.Value;
-
-            if (string.IsNullOrEmpty(Options.MiddleCert))
-            {
-                throw new ArgumentNullException(nameof(Options.MiddleCert));
-            }
-
-            if (string.IsNullOrEmpty(Options.RootCert))
-            {
-                throw new ArgumentNullException(nameof(Options.RootCert));
-            }
+            OptionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
@@ -40,6 +30,12 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : UnionPayNotifyResponse
         {
+            return await ExecuteAsync<T>(request, null);
+        }
+
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : UnionPayNotifyResponse
+        {
+            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
             var parameters = await GetParametersAsync(request);
 
             var query = UnionPayUtility.BuildQuery(parameters);
@@ -47,7 +43,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
             var parser = new UnionPayDictionaryParser<T>();
             var rsp = parser.Parse(parameters);
-            CheckNotifySign(parameters);
+            CheckNotifySign(parameters, options);
             return rsp;
         }
 
@@ -66,15 +62,15 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             return parameters;
         }
 
-        private void CheckNotifySign(UnionPayDictionary dic)
+        private void CheckNotifySign(UnionPayDictionary dic, UnionPayOptions options)
         {
             if (dic == null || dic.Count == 0)
             {
                 throw new Exception("sign check fail: sign is Empty!");
             }
 
-            var ifValidateCNName = !Options.TestMode;
-            if (!UnionPaySignature.Validate(dic, Options.RootCertificate.cert, Options.MiddleCertificate.cert, Options.SecureKey, ifValidateCNName))
+            var ifValidateCNName = !options.TestMode;
+            if (!UnionPaySignature.Validate(dic, options.RootCertificate.cert, options.MiddleCertificate.cert, options.SecureKey, ifValidateCNName))
             {
                 throw new Exception("sign check fail: check Sign and Data Fail!");
             }

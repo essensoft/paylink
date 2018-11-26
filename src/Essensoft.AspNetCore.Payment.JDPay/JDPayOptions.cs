@@ -6,8 +6,6 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 {
     public class JDPayOptions
     {
-        public const string DefaultClientName = "Payment.JDPay.Client";
-
         /// <summary>
         /// 商户号
         /// </summary>
