@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Essensoft.AspNetCore.Payment.Alipay.Request;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
