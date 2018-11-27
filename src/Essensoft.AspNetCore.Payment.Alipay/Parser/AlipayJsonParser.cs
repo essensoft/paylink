@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using Essensoft.AspNetCore.Payment.Alipay.Request;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
 using Newtonsoft.Json;

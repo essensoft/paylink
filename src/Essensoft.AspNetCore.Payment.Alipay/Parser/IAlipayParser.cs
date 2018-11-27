@@ -1,6 +1,4 @@
-﻿using Essensoft.AspNetCore.Payment.Alipay.Request;
-
-namespace Essensoft.AspNetCore.Payment.Alipay.Parser
+﻿namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 {
     /// <summary>
     /// Alipay API响应解释器接口。响应格式可以是XML, JSON等等。
