@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using Essensoft.AspNetCore.Payment.Security;
+using Microsoft.Extensions.Logging;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
@@ -82,5 +83,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         /// 加密秘钥
         /// </summary>
         public string EncyptKey { get; set; }
+
+        /// <summary>
+        /// 日志等级
+        /// </summary>
+        public LogLevel LogLevel { get; set; } = LogLevel.Information;
     }
 }

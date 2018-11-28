@@ -1,4 +1,5 @@
 ﻿using Essensoft.AspNetCore.Payment.UnionPay.Utility;
+using Microsoft.Extensions.Logging;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay
 {
@@ -111,5 +112,10 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         /// 测试模式
         /// </summary>
         public bool TestMode { get; set; }
+
+        /// <summary>
+        /// 日志等级
+        /// </summary>
+        public LogLevel LogLevel { get; set; } = LogLevel.Information;
     }
 }

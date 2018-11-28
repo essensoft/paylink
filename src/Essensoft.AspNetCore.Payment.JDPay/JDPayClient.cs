@@ -30,11 +30,11 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         #endregion
 
-        public virtual ILogger Logger { get; set; }
+        public ILogger Logger { get; set; }
 
-        public virtual IHttpClientFactory ClientFactory { get; set; }
+        public IHttpClientFactory ClientFactory { get; set; }
 
-        public virtual IOptionsSnapshot<JDPayOptions> OptionsSnapshotAccessor { get; set; }
+        public IOptionsSnapshot<JDPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region IJDPayClient Members
 
@@ -50,12 +50,12 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             var sortedTxtParams = new JDPayDictionary(request.GetParameters());
 
             var content = BuildEncryptXml(request, sortedTxtParams, options);
-            Logger?.LogTrace(0, "Request:{content}", content);
+            Logger.Log(options.LogLevel, "Request:{content}", content);
 
             using (var client = ClientFactory.CreateClient())
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
-                Logger?.LogTrace(1, "Response:{content}", body);
+                Logger.Log(options.LogLevel, "Response:{content}", body);
 
                 var parser = new JDPayXmlParser<T>();
                 var rsp = parser.Parse(JDPayUtility.FotmatXmlString(body));
@@ -64,7 +64,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                     var encrypt = rsp.Encrypt;
                     var base64EncryptStr = Encoding.UTF8.GetString(Convert.FromBase64String(encrypt));
                     var reqBody = JDPaySecurity.DecryptECB(base64EncryptStr, options.DesKeyBase64);
-                    Logger?.LogTrace(2, "Encrypt Content:{body}", reqBody);
+                    Logger.Log(options.LogLevel, "Encrypt Content:{body}", reqBody);
 
                     var reqBodyDoc = new XmlDocument { XmlResolver = null };
                     reqBodyDoc.LoadXml(reqBody);
@@ -147,12 +147,12 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             var encryptDic = JDPaySecurity.EncryptData(options.PrivateCret, options.Password, options.PublicCert, sortedTxtParams, options.SingKey, options.EncryptType, isEncrypt);
 
             var content = JDPayUtility.BuildQuery(encryptDic);
-            Logger?.LogTrace(0, "Request:{content}", content);
+            Logger.Log(options.LogLevel, "Request:{content}", content);
 
             using (var client = ClientFactory.CreateClient())
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content, "application/x-www-form-urlencoded");
-                Logger?.LogTrace(1, "Response:{content}", body);
+                Logger.Log(options.LogLevel, "Response:{content}", body);
 
                 var rsp = JsonConvert.DeserializeObject<T>(body);
 

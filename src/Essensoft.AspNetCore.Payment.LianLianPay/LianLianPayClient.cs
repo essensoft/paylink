@@ -35,11 +35,11 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
         #endregion
 
-        public virtual ILogger Logger { get; set; }
+        public ILogger Logger { get; set; }
 
-        public virtual IHttpClientFactory ClientFactory { get; set; }
+        public IHttpClientFactory ClientFactory { get; set; }
 
-        public virtual IOptionsSnapshot<LianLianPayOptions> OptionsSnapshotAccessor { get; set; }
+        public IOptionsSnapshot<LianLianPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region ILianLianPayClient Members
 
@@ -79,12 +79,12 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             {
                 content = Serialize(txtParams);
             }
-            Logger?.LogTrace(0, "Request:{content}", content);
+            Logger.Log(options.LogLevel, "Request:{content}", content);
 
             using (var client = ClientFactory.CreateClient())
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
-                Logger?.LogTrace(1, "Response:{body}", body);
+                Logger.Log(options.LogLevel, "Response:{body}", body);
 
                 var parser = new LianLianPayJsonParser<T>();
                 var rsp = parser.Parse(body);

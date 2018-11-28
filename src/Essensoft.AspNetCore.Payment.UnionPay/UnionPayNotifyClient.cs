@@ -22,9 +22,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         #endregion
 
-        public virtual ILogger Logger { get; set; }
+        public ILogger Logger { get; set; }
 
-        public virtual IOptionsSnapshot<UnionPayOptions> OptionsSnapshotAccessor { get; set; }
+        public IOptionsSnapshot<UnionPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region IUnionPayNotifyClient Members
 
@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             var parameters = await GetParametersAsync(request);
 
             var query = UnionPayUtility.BuildQuery(parameters);
-            Logger?.LogTrace(0, "Request:{query}", query);
+            Logger.Log(options.LogLevel, "Request:{query}", query);
 
             var parser = new UnionPayDictionaryParser<T>();
             var rsp = parser.Parse(parameters);

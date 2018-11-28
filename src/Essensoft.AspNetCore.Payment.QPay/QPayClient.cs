@@ -29,11 +29,11 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         #endregion
 
-        public virtual ILogger Logger { get; set; }
+        public ILogger Logger { get; set; }
 
-        public virtual IHttpClientFactory ClientFactory { get; set; }
+        public IHttpClientFactory ClientFactory { get; set; }
 
-        public virtual IOptionsSnapshot<QPayOptions> OptionsSnapshotAccessor { get; set; }
+        public IOptionsSnapshot<QPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region Common Method
 
@@ -84,12 +84,12 @@ namespace Essensoft.AspNetCore.Payment.QPay
             sortedTxtParams.Add(SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
 
             var content = QPayUtility.BuildContent(sortedTxtParams);
-            Logger?.LogTrace(0, "Request:{content}", content);
+            Logger.Log(options.LogLevel, "Request:{content}", content);
 
             using (var client = ClientFactory.CreateClient())
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
-                Logger?.LogTrace(1, "Response:{body}", body);
+                Logger.Log(options.LogLevel, "Response:{body}", body);
 
                 var parser = new QPayXmlParser<T>();
                 var rsp = parser.Parse(body);
@@ -124,11 +124,11 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
             sortedTxtParams.Add(SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
             var content = QPayUtility.BuildContent(sortedTxtParams);
-            Logger?.LogTrace(0, "Request:{content}", content);
+            Logger.Log(options.LogLevel, "Request:{content}", content);
             using (var client = string.IsNullOrEmpty(certificateName) ? ClientFactory.CreateClient() : ClientFactory.CreateClient(certificateName))
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
-                Logger?.LogTrace(1, "Response:{body}", body);
+                Logger.Log(options.LogLevel, "Response:{body}", body);
 
                 var parser = new QPayXmlParser<T>();
                 var rsp = parser.Parse(body);

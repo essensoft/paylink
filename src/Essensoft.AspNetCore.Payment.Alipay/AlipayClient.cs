@@ -50,89 +50,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         #endregion
 
-        public virtual ILogger Logger { get; set; }
+        public ILogger Logger { get; set; }
 
-        public virtual IHttpClientFactory ClientFactory { get; set; }
+        public IHttpClientFactory ClientFactory { get; set; }
 
-        public virtual IOptionsSnapshot<AlipayOptions> OptionsSnapshotAccessor { get; set; }
-
-        #region IAlipayClient Members
-
-        public string BuildHtmlRequest(IDictionary<string, string> sParaTemp, string strMethod, AlipayOptions options)
-        {
-            //待请求参数数组
-            var dicPara = new Dictionary<string, string>(sParaTemp);
-
-            var sbHtml = new StringBuilder();
-            sbHtml.Append("<form id='submit' name='submit' action='" + options.ServerUrl + "?charset=" + options.Charset +
-                 "' method='" + strMethod + "' style='display:none;'>");
-
-            foreach (var temp in dicPara)
-            {
-                sbHtml.Append("<input  name='" + temp.Key + "' value='" + temp.Value + "'/>");
-            }
-            sbHtml.Append("<input type='submit' style='display:none;'></form>");
-            //表单实现自动提交
-            sbHtml.Append("<script>document.forms['submit'].submit();</script>");
-
-            return sbHtml.ToString();
-        }
-
-        #endregion
-
-        #region Common Method
-
-        private AlipayDictionary BuildRequestParams<T>(IAlipayRequest<T> request, string accessToken, string appAuthToken, AlipayOptions options) where T : AlipayResponse
-        {
-            var apiVersion = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
-            var result = new AlipayDictionary(request.GetParameters())
-            {
-                // 序列化BizModel
-                { BIZ_CONTENT, Serialize(request.GetBizModel()) },
-                // 添加协议级请求参数，为空的参数后面会自动过滤，这里不做处理。
-                { METHOD, request.GetApiName() },
-                { VERSION, apiVersion },
-                { APP_ID, options.AppId },
-                { FORMAT, options.Format },
-                { TIMESTAMP, DateTime.Now },
-                { ACCESS_TOKEN, accessToken },
-                { SIGN_TYPE, options.SignType },
-                { TERMINAL_TYPE, request.GetTerminalType() },
-                { TERMINAL_INFO, request.GetTerminalInfo() },
-                { PROD_CODE, request.GetProdCode() },
-                { NOTIFY_URL, request.GetNotifyUrl() },
-                { CHARSET, options.Charset },
-                { RETURN_URL, request.GetReturnUrl() },
-                { APP_AUTH_TOKEN, appAuthToken }
-            };
-
-            if (request.GetNeedEncrypt())
-            {
-                if (string.IsNullOrEmpty(result[BIZ_CONTENT]))
-                {
-                    throw new Exception("api request Fail ! The reason: encrypt request is not supported!");
-                }
-
-                if (string.IsNullOrEmpty(options.EncyptKey) || string.IsNullOrEmpty(options.EncyptType))
-                {
-                    throw new Exception("encryptType or encryptKey must not null!");
-                }
-
-                if (!"AES".Equals(options.EncyptType))
-                {
-                    throw new Exception("api only support Aes!");
-                }
-
-                var encryptContent = AES.Encrypt(result[BIZ_CONTENT], options.EncyptKey, AlipaySignature.AES_IV, AESCipherMode.CBC, AESPaddingMode.PKCS7);
-                result.Remove(BIZ_CONTENT);
-                result.Add(BIZ_CONTENT, encryptContent);
-                result.Add(ENCRYPT_TYPE, options.EncyptType);
-            }
-
-            return result;
-        }
-
-        #endregion
+        public IOptionsSnapshot<AlipayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region IAlipayClient Members
 
@@ -230,13 +152,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                         }
                     }
                     body = tmpUrl;
-                    Logger?.LogTrace(0, "Request Url:{body}", body);
+                    Logger.Log(options.LogLevel, "Request Url:{body}", body);
                 }
                 else
                 {
                     //输出post表单
                     body = BuildHtmlRequest(txtParams, reqMethod, options);
-                    Logger?.LogTrace(0, "Request Html:{body}", body);
+                    Logger.Log(options.LogLevel, "Request Html:{body}", body);
                 }
             }
 
@@ -319,7 +241,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             txtParams.Add(SIGN, AlipaySignature.RSASignContent(signContent, options.PrivateRSAParameters, options.SignType));
 
             var query = AlipayUtility.BuildQuery(txtParams);
-            Logger?.LogTrace(0, "Request:{query}", query);
+            Logger.Log(options.LogLevel, "Request:{query}", query);
 
             // 是否需要上传文件
             var body = string.Empty;
@@ -337,7 +259,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 }
             }
 
-            Logger?.LogTrace(1, "Response:{body}", body);
+            Logger.Log(options.LogLevel, "Response:{body}", body);
 
             T rsp = null;
             IAlipayParser<T> parser = null;
@@ -411,6 +333,80 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 }
 
             }
+        }
+
+        #endregion
+
+        #region Common Method
+
+        public string BuildHtmlRequest(IDictionary<string, string> sParaTemp, string strMethod, AlipayOptions options)
+        {
+            //待请求参数数组
+            var dicPara = new Dictionary<string, string>(sParaTemp);
+
+            var sbHtml = new StringBuilder();
+            sbHtml.Append("<form id='submit' name='submit' action='" + options.ServerUrl + "?charset=" + options.Charset +
+                 "' method='" + strMethod + "' style='display:none;'>");
+
+            foreach (var temp in dicPara)
+            {
+                sbHtml.Append("<input  name='" + temp.Key + "' value='" + temp.Value + "'/>");
+            }
+            sbHtml.Append("<input type='submit' style='display:none;'></form>");
+            //表单实现自动提交
+            sbHtml.Append("<script>document.forms['submit'].submit();</script>");
+
+            return sbHtml.ToString();
+        }
+
+        private AlipayDictionary BuildRequestParams<T>(IAlipayRequest<T> request, string accessToken, string appAuthToken, AlipayOptions options) where T : AlipayResponse
+        {
+            var apiVersion = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
+            var result = new AlipayDictionary(request.GetParameters())
+            {
+                // 序列化BizModel
+                { BIZ_CONTENT, Serialize(request.GetBizModel()) },
+                // 添加协议级请求参数，为空的参数后面会自动过滤，这里不做处理。
+                { METHOD, request.GetApiName() },
+                { VERSION, apiVersion },
+                { APP_ID, options.AppId },
+                { FORMAT, options.Format },
+                { TIMESTAMP, DateTime.Now },
+                { ACCESS_TOKEN, accessToken },
+                { SIGN_TYPE, options.SignType },
+                { TERMINAL_TYPE, request.GetTerminalType() },
+                { TERMINAL_INFO, request.GetTerminalInfo() },
+                { PROD_CODE, request.GetProdCode() },
+                { NOTIFY_URL, request.GetNotifyUrl() },
+                { CHARSET, options.Charset },
+                { RETURN_URL, request.GetReturnUrl() },
+                { APP_AUTH_TOKEN, appAuthToken }
+            };
+
+            if (request.GetNeedEncrypt())
+            {
+                if (string.IsNullOrEmpty(result[BIZ_CONTENT]))
+                {
+                    throw new Exception("api request Fail ! The reason: encrypt request is not supported!");
+                }
+
+                if (string.IsNullOrEmpty(options.EncyptKey) || string.IsNullOrEmpty(options.EncyptType))
+                {
+                    throw new Exception("encryptType or encryptKey must not null!");
+                }
+
+                if (!"AES".Equals(options.EncyptType))
+                {
+                    throw new Exception("api only support Aes!");
+                }
+
+                var encryptContent = AES.Encrypt(result[BIZ_CONTENT], options.EncyptKey, AlipaySignature.AES_IV, AESCipherMode.CBC, AESPaddingMode.PKCS7);
+                result.Remove(BIZ_CONTENT);
+                result.Add(BIZ_CONTENT, encryptContent);
+                result.Add(ENCRYPT_TYPE, options.EncyptType);
+            }
+
+            return result;
         }
 
         #endregion

@@ -45,35 +45,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         #endregion
 
-        public virtual ILogger Logger { get; set; }
+        public ILogger Logger { get; set; }
 
-        public virtual IHttpClientFactory ClientFactory { get; set; }
+        public IHttpClientFactory ClientFactory { get; set; }
 
-        public virtual IOptionsSnapshot<WeChatPayOptions> OptionsSnapshotAccessor { get; set; }
-
-        #region Common Method
-
-        private void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options, bool useMD5 = true, bool excludeSignType = true)
-        {
-            if (string.IsNullOrEmpty(response.Body))
-            {
-                throw new Exception("sign check fail: Body is Empty!");
-            }
-
-            if (response.Parameters.TryGetValue("sign", out var sign))
-            {
-                if (response.Parameters["return_code"] == "SUCCESS" && !string.IsNullOrEmpty(sign))
-                {
-                    var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key, useMD5, excludeSignType);
-                    if (cal_sign != sign)
-                    {
-                        throw new Exception("sign check fail: check Sign and Data Fail!");
-                    }
-                }
-            }
-        }
-
-        #endregion
+        public IOptionsSnapshot<WeChatPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region IWeChatPayClient Members
 
@@ -99,12 +75,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
             sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key));
             var content = WeChatPayUtility.BuildContent(sortedTxtParams);
-            Logger?.LogTrace(0, "Request:{content}", content);
+            Logger.Log(options.LogLevel, "Request:{content}", content);
 
             using (var client = ClientFactory.CreateClient())
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
-                Logger?.LogTrace(1, "Response:{body}", body);
+                Logger.Log(options.LogLevel, "Response:{body}", body);
 
                 var parser = new WeChatPayXmlParser<T>();
                 var rsp = parser.Parse(body);
@@ -217,13 +193,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType, excludeSignType));
 
             var content = WeChatPayUtility.BuildContent(sortedTxtParams);
-            Logger?.LogTrace(0, "Request:{content}", content);
+            Logger.Log(options.LogLevel, "Request:{content}", content);
 
             using (var client = ClientFactory.CreateClient(certificateName))
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
 
-                Logger?.LogTrace(1, "Response:{body}", body);
+                Logger.Log(options.LogLevel, "Response:{body}", body);
 
                 var parser = new WeChatPayXmlParser<T>();
                 var rsp = parser.Parse(body);
@@ -274,6 +250,30 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 sortedTxtParams.Add(paySign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key));
             }
             return Task.FromResult(sortedTxtParams);
+        }
+
+        #endregion
+
+        #region Common Method
+
+        private void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options, bool useMD5 = true, bool excludeSignType = true)
+        {
+            if (string.IsNullOrEmpty(response.Body))
+            {
+                throw new Exception("sign check fail: Body is Empty!");
+            }
+
+            if (response.Parameters.TryGetValue("sign", out var sign))
+            {
+                if (response.Parameters["return_code"] == "SUCCESS" && !string.IsNullOrEmpty(sign))
+                {
+                    var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key, useMD5, excludeSignType);
+                    if (cal_sign != sign)
+                    {
+                        throw new Exception("sign check fail: check Sign and Data Fail!");
+                    }
+                }
+            }
         }
 
         #endregion
