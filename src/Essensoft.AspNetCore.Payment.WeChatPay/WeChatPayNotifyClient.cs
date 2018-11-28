@@ -26,9 +26,40 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         #endregion
 
-        public virtual ILogger Logger { get; set; }
+        public ILogger Logger { get; set; }
 
-        public virtual IOptionsSnapshot<WeChatPayOptions> OptionsSnapshotAccessor { get; set; }
+        public IOptionsSnapshot<WeChatPayOptions> OptionsSnapshotAccessor { get; set; }
+
+        #region IWeChatPayNotifyClient Members
+
+        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : WeChatPayNotifyResponse
+        {
+            return await ExecuteAsync<T>(request, null);
+        }
+
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : WeChatPayNotifyResponse
+        {
+            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
+            Logger.Log(options.LogLevel, "Request:{body}", body);
+
+            var parser = new WeChatPayXmlParser<T>();
+            var rsp = parser.Parse(body);
+            if (rsp is WeChatPayRefundNotifyResponse)
+            {
+                var key = MD5.Compute(options.Key).ToLower();
+                var data = AES.Decrypt((rsp as WeChatPayRefundNotifyResponse).ReqInfo, key, AESCipherMode.ECB, AESPaddingMode.PKCS7);
+                Logger.Log(options.LogLevel, "Decrypt Content:{data}", data); // AES-256-ECB
+                rsp = parser.Parse(body, data);
+            }
+            else
+            {
+                CheckNotifySign(rsp, options);
+            }
+            return rsp;
+        }
+
+        #endregion
 
         #region Common Method
 
@@ -49,37 +80,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             {
                 throw new Exception("sign check fail: check Sign and Data Fail!");
             }
-        }
-
-        #endregion
-
-        #region IWeChatPayNotifyClient Members
-
-        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : WeChatPayNotifyResponse
-        {
-            return await ExecuteAsync<T>(request, null);
-        }
-
-        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : WeChatPayNotifyResponse
-        {
-            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
-            var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
-            Logger?.LogTrace(0, "Request:{body}", body);
-
-            var parser = new WeChatPayXmlParser<T>();
-            var rsp = parser.Parse(body);
-            if (rsp is WeChatPayRefundNotifyResponse)
-            {
-                var key = MD5.Compute(options.Key).ToLower();
-                var data = AES.Decrypt((rsp as WeChatPayRefundNotifyResponse).ReqInfo, key, AESCipherMode.ECB, AESPaddingMode.PKCS7);
-                Logger?.LogTrace(1, "Decrypt Content:{data}", data); // AES-256-ECB
-                rsp = parser.Parse(body, data);
-            }
-            else
-            {
-                CheckNotifySign(rsp, options);
-            }
-            return rsp;
         }
 
         #endregion

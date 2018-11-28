@@ -1,4 +1,5 @@
 ﻿using Essensoft.AspNetCore.Payment.Security;
+using Microsoft.Extensions.Logging;
 using Org.BouncyCastle.Crypto;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
@@ -39,5 +40,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 }
             }
         }
+
+        /// <summary>
+        /// 日志等级
+        /// </summary>
+        public LogLevel LogLevel { get; set; } = LogLevel.Information;
     }
 }

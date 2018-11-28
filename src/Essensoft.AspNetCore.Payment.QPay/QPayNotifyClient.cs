@@ -24,9 +24,30 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         #endregion
 
-        public virtual ILogger Logger { get; set; }
+        public ILogger Logger { get; set; }
 
-        public virtual IOptionsSnapshot<QPayOptions> OptionsSnapshotAccessor { get; set; }
+        public IOptionsSnapshot<QPayOptions> OptionsSnapshotAccessor { get; set; }
+
+        #region IQPayNotifyClient Members
+
+        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : QPayNotifyResponse
+        {
+            return await ExecuteAsync<T>(request, null);
+        }
+
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : QPayNotifyResponse
+        {
+            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
+            Logger.Log(options.LogLevel, "Request:{body}", body);
+
+            var parser = new QPayXmlParser<T>();
+            var rsp = parser.Parse(body);
+            CheckNotifySign(rsp, options);
+            return rsp;
+        }
+
+        #endregion
 
         #region Common Method
 
@@ -47,27 +68,6 @@ namespace Essensoft.AspNetCore.Payment.QPay
             {
                 throw new Exception("sign check fail: check Sign and Data Fail!");
             }
-        }
-
-        #endregion
-
-        #region IQPayNotifyClient Members
-
-        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : QPayNotifyResponse
-        {
-            return await ExecuteAsync<T>(request, null);
-        }
-
-        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : QPayNotifyResponse
-        {
-            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
-            var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
-            Logger?.LogTrace(0, "Request:{body}", body);
-
-            var parser = new QPayXmlParser<T>();
-            var rsp = parser.Parse(body);
-            CheckNotifySign(rsp, options);
-            return rsp;
         }
 
         #endregion

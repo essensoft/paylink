@@ -24,9 +24,9 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
         #endregion
 
-        public virtual ILogger Logger { get; set; }
+        public ILogger Logger { get; set; }
 
-        public virtual IOptionsSnapshot<LianLianPayOptions> OptionsSnapshotAccessor { get; set; }
+        public IOptionsSnapshot<LianLianPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region ILianLianPayNotifyClient Members
 
@@ -42,7 +42,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             {
                 var parameters = await GetParametersAsync(request);
                 var query = LianLianPayUtility.BuildQuery(parameters);
-                Logger?.LogTrace(0, "Request:{query}", query);
+                Logger.Log(options.LogLevel, "Request:{query}", query);
 
                 var parser = new LianLianPayDictionaryParser<T>();
                 var rsp = parser.Parse(parameters);
@@ -53,7 +53,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             if (request.HasTextJsonContentType())
             {
                 var body = await new StreamReader(request.Body).ReadToEndAsync();
-                Logger?.LogTrace(0, "Request:{body}", body);
+                Logger.Log(options.LogLevel, "Request:{body}", body);
 
                 var parser = new LianLianPayJsonParser<T>();
                 var rsp = parser.Parse(body);

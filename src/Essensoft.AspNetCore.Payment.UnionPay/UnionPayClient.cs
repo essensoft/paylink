@@ -34,11 +34,11 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         #endregion
 
-        public virtual ILogger Logger { get; set; }
+        public ILogger Logger { get; set; }
 
-        public virtual IHttpClientFactory ClientFactory { get; set; }
+        public IHttpClientFactory ClientFactory { get; set; }
 
-        public virtual IOptionsSnapshot<UnionPayOptions> OptionsSnapshotAccessor { get; set; }
+        public IOptionsSnapshot<UnionPayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region IUnionPayClient Members
 
@@ -75,12 +75,12 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             UnionPaySignature.Sign(txtParams, options.SignCertificate.certId, options.SignCertificate.key, options.SecureKey);
 
             var query = UnionPayUtility.BuildQuery(txtParams);
-            Logger?.LogTrace(0, "Request:{query}", query);
+            Logger.Log(options.LogLevel, "Request:{query}", query);
 
             using (var client = ClientFactory.CreateClient())
             {
                 var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(options.TestMode), query);
-                Logger?.LogTrace(1, "Response:{content}", body);
+                Logger.Log(options.LogLevel, "Response:{content}", body);
 
                 var dic = ParseQueryString(body);
 

@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Payment.QPay
+﻿using Microsoft.Extensions.Logging;
+
+namespace Essensoft.AspNetCore.Payment.QPay
 {
     public class QPayOptions
     {
@@ -16,5 +18,10 @@
         /// API秘钥
         /// </summary>
         public string Key { get; set; }
+
+        /// <summary>
+        /// 日志等级
+        /// </summary>
+        public LogLevel LogLevel { get; set; } = LogLevel.Information;
     }
 }

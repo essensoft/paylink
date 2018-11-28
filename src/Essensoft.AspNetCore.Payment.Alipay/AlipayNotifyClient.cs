@@ -25,9 +25,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         #endregion
 
-        public virtual ILogger Logger { get; set; }
+        public ILogger Logger { get; set; }
 
-        public virtual IOptionsSnapshot<AlipayOptions> OptionsSnapshotAccessor { get; set; }
+        public IOptionsSnapshot<AlipayOptions> OptionsSnapshotAccessor { get; set; }
 
         #region IAlipayNotifyClient Members
 
@@ -41,7 +41,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             var options = OptionsSnapshotAccessor.Get(optionsName);
             var parameters = await GetParametersAsync(request);
             var query = AlipayUtility.BuildQuery(parameters);
-            Logger?.LogTrace(0, "Request:{query}", query);
+            Logger.Log(options.LogLevel, "Request:{query}", query);
 
             var parser = new AlipayDictionaryParser<T>();
             var rsp = parser.Parse(parameters);
