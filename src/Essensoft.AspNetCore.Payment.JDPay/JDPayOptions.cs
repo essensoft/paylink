@@ -8,8 +8,8 @@ namespace Essensoft.AspNetCore.Payment.JDPay
     public class JDPayOptions
     {
         internal byte[] DesKeyBase64;
-        internal AsymmetricKeyParameter PrivateKey;
-        internal AsymmetricKeyParameter PublicKey;
+        internal ICipherParameters PrivateKey;
+        internal ICipherParameters PublicKey;
 
         private string desKey;
         private string rsaPrivateKey;

@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 
         private static readonly Dictionary<string, X509Certificate> validateCerts = new Dictionary<string, X509Certificate>();
 
-        public static void Sign(Dictionary<string, string> reqData, string certId, AsymmetricKeyParameter parameters, string secureKey)
+        public static void Sign(Dictionary<string, string> reqData, string certId, ICipherParameters key, string secureKey)
         {
             if (!reqData.ContainsKey("signMethod"))
             {
@@ -30,7 +30,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             var signMethod = reqData["signMethod"];
             if ("01" == signMethod)
             {
-                SignByCertInfo(reqData, certId, parameters);
+                SignByCertInfo(reqData, certId, key);
             }
             else if ("11" == signMethod || "12" == signMethod)
             {
@@ -81,7 +81,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             return result;
         }
 
-        public static void SignByCertInfo(Dictionary<string, string> data, string certId, ICipherParameters parameters)
+        public static void SignByCertInfo(Dictionary<string, string> data, string certId, ICipherParameters key)
         {
             if (!data.ContainsKey("signMethod"))
             {
@@ -100,7 +100,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 
                 var stringData = GetSignContent(data, true, false);
                 var stringSignDigest = SHA256.Compute(stringData);
-                var stringSign = SHA256WithRSA.SignData(stringSignDigest, parameters);
+                var stringSign = SHA256WithRSA.SignData(stringSignDigest, key);
 
                 //设置签名域值
                 data["signature"] = stringSign;

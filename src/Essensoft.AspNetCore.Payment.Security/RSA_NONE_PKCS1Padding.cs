@@ -21,14 +21,14 @@ namespace Essensoft.AspNetCore.Payment.Security
             return cipher.DoFinal(data);
         }
 
-        public static string Encrypt(string data, AsymmetricKeyParameter key)
+        public static string Encrypt(string data, ICipherParameters key)
         {
             var cipher = CipherUtilities.GetCipher("RSA/NONE/PKCS1Padding");
             cipher.Init(true, key);
             return Convert.ToBase64String(cipher.DoFinal(Encoding.UTF8.GetBytes(data)));
         }
 
-        public static string Decrypt(string data, AsymmetricKeyParameter key)
+        public static string Decrypt(string data, ICipherParameters key)
         {
             var cipher = CipherUtilities.GetCipher("RSA/NONE/PKCS1Padding");
             cipher.Init(false, key);
