@@ -73,7 +73,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         /// </summary>
         public string SubMerName { get; set; }
 
-
         /// <summary>
         /// 商户简称
         /// </summary>
