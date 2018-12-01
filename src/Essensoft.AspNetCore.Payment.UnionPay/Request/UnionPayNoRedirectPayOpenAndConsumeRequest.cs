@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
     /// <summary>
     /// 无跳转支付(V2.2) 银联全渠道开通并支付交易
     /// </summary>
-    public class UnionPayNoRedirectPayOpenAndConsumeRequest : IUnionPayRequest<UnionPayResponse>
+    public class UnionPayNoRedirectPayOpenAndConsumeRequest : IUnionPayRequest<UnionPayNullResponse>
     {
         /// <summary>
         /// 产品类型

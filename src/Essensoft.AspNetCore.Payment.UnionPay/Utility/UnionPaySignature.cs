@@ -81,7 +81,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             return result;
         }
 
-        public static void SignByCertInfo(Dictionary<string, string> data, string certId, AsymmetricKeyParameter parameters)
+        public static void SignByCertInfo(Dictionary<string, string> data, string certId, ICipherParameters parameters)
         {
             if (!data.ContainsKey("signMethod"))
             {

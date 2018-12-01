@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Text;
+using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.UnionPay;
 using Essensoft.AspNetCore.Payment.UnionPay.Notify;
 using Essensoft.AspNetCore.Payment.UnionPay.Request;
@@ -47,7 +48,7 @@ namespace WebApplicationSample.Controllers
                 BackUrl = viewModel.BackUrl
             };
             var response = await _client.PageExecuteAsync(request);
-            return Content(response.Body, "text/html;charset=utf-8");
+            return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
         [HttpPost]
