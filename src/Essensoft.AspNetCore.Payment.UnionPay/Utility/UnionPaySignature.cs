@@ -28,11 +28,11 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             }
 
             var signMethod = reqData["signMethod"];
-            if ("01".Equals(signMethod))
+            if ("01" == signMethod)
             {
                 SignByCertInfo(reqData, certId, parameters);
             }
-            else if ("11".Equals(signMethod) || "12".Equals(signMethod))
+            else if ("11" == signMethod || "12" == signMethod)
             {
                 SignBySecureKey(reqData, secureKey);
             }
@@ -52,7 +52,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             var signMethod = data["signMethod"];
             var result = false;
 
-            if ("01".Equals(signMethod))
+            if ("01" == signMethod)
             {
                 var signValue = data["signature"];
                 data.Remove("signature");
@@ -69,7 +69,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 
                 result = SHA256WithRSA.VerifyData(stringSignDigest, signValue, cert.GetPublicKey());
             }
-            else if ("11".Equals(signMethod) || "12".Equals(signMethod))
+            else if ("11" == signMethod || "12" == signMethod)
             {
                 return ValidateBySecureKey(data, secureKey);
             }
@@ -94,7 +94,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             }
 
             var signMethod = data["signMethod"];
-            if ("01".Equals(signMethod))
+            if ("01" == signMethod)
             {
                 data["certId"] = certId;
 
@@ -121,14 +121,14 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             var stringData = GetSignContent(data, true, false);
             var signMethod = data["signMethod"];
 
-            if ("11".Equals(signMethod))
+            if ("11" == signMethod)
             {
                 var strBeforeSha256 = stringData + "&" + SHA256.Compute(secureKey);
                 var strAfterSha256 = SHA256.Compute(strBeforeSha256);
                 //设置签名域值
                 data["signature"] = strAfterSha256;
             }
-            else if ("12".Equals(signMethod))
+            else if ("12" == signMethod)
             {
                 var strBeforeSm3 = stringData + "&" + SM3.Compute(secureKey);
                 var strAfterSm3 = SM3.Compute(strBeforeSm3);
@@ -317,14 +317,14 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             if (ifValidateCNName)
             {
                 // 验证公钥是否属于银联
-                if (!UNIONPAY_CNNAME.Equals(cn))
+                if (UNIONPAY_CNNAME != cn)
                 {
                     return false;
                 }
             }
             else
             {
-                if (!UNIONPAY_CNNAME.Equals(cn) && !"00040000:SIGN".Equals(cn))
+                if (UNIONPAY_CNNAME != cn && "00040000:SIGN" != cn)
                 {
                     return false;
                 }
@@ -360,147 +360,40 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             var result = false;
             var signMethod = rspData["signMethod"];
 
-            if ("11".Equals(signMethod))
+            if ("11" == signMethod)
             {
                 var stringSign = rspData["signature"];
                 rspData.Remove("signature");
                 var stringData = GetSignContent(rspData, true, false);
                 var strBeforeSha256 = stringData + "&" + SHA256.Compute(secureKey);
                 var strAfterSha256 = SHA256.Compute(strBeforeSha256);
-                result = stringSign.Equals(strAfterSha256);
+                result = stringSign == strAfterSha256;
             }
-            else if ("12".Equals(signMethod))
+            else if ("12" == signMethod)
             {
                 var stringSign = rspData["signature"];
                 rspData.Remove("signature");
                 var stringData = GetSignContent(rspData, true, false);
                 var strBeforeSm3 = stringData + "&" + SM3.Compute(secureKey);
                 var strAfterSm3 = SM3.Compute(strBeforeSm3);
-                result = stringSign.Equals(strAfterSm3);
+                result = stringSign == strAfterSm3;
             }
 
             return result;
         }
 
-        private static byte[] Pin2PinBlock(string pin)
+        public static string EncryptData(string dataString, ICipherParameters key)
         {
-            var temp = 1;
-            var pinLen = pin.Length;
-            var bytes = new byte[8];
-
-            try
-            {
-                bytes[0] = (byte)Convert.ToInt32(pinLen.ToString(), 10);
-                if (pinLen % 2 == 0)
-                {
-                    for (var i = 0; i < pinLen;)
-                    {
-                        var a = pin.Substring(i, 2).Trim();
-                        bytes[temp] = (byte)Convert.ToInt32(a, 16);
-                        if (i == pinLen - 2)
-                        {
-                            if (temp < 7)
-                            {
-                                for (var x = temp + 1; x < 8; x++)
-                                {
-                                    bytes[x] = 0xff;
-                                }
-                            }
-                        }
-                        temp++;
-                        i = i + 2;
-                    }
-                }
-                else
-                {
-                    for (var i = 0; i < pinLen - 1;)
-                    {
-                        var a = pin.Substring(i, 2);
-                        bytes[temp] = (byte)Convert.ToInt32(a, 16);
-                        if (i == pinLen - 3)
-                        {
-                            var b = pin.Substring(pinLen - 1) + "F";
-                            bytes[temp + 1] = (byte)Convert.ToInt32(b, 16);
-                            if (temp + 1 < 7)
-                            {
-                                for (var x = temp + 2; x < 8; x++)
-                                {
-                                    bytes[x] = 0xff;
-                                }
-                            }
-                        }
-                        temp++;
-                        i = i + 2;
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception("Pin2PinBlock error" + e.Message);
-            }
-
-            return bytes;
+            var encData = Encoding.UTF8.GetBytes(dataString);
+            var data = RSA_NONE_PKCS1Padding.Encrypt(encData, key);
+            return Convert.ToBase64String(data);
         }
 
-        private static byte[] FormatPan(string pan)
+        public static string DecryptData(string dataString, ICipherParameters key)
         {
-            var panLen = pan.Length;
-            var bytes = new byte[8];
-            var temp = panLen - 13;
-
-            try
-            {
-                bytes[0] = 0x00;
-                bytes[1] = 0x00;
-                for (var i = 2; i < 8; i++)
-                {
-                    var a = pan.Substring(temp, 2).Trim();
-                    bytes[i] = (byte)Convert.ToInt32(a, 16);
-                    temp = temp + 2;
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception("FormatPan error:" + e.Message);
-            }
-
-            return bytes;
-        }
-
-        public static byte[] Pin2PinBlockWithCardNO(string pin, string cardNO)
-        {
-            var pinBlockBytes = Pin2PinBlock(pin);
-
-            if (cardNO.Length == 11)
-            {
-                cardNO = "00" + cardNO;
-            }
-            else if (cardNO.Length == 12)
-            {
-                cardNO = "0" + cardNO;
-            }
-
-            var cardNoPanBytes = FormatPan(cardNO);
-            var bytes = new byte[8];
-
-            for (var i = 0; i < 8; i++)
-            {
-                bytes[i] = (byte)(pinBlockBytes[i] ^ cardNoPanBytes[i]);
-            }
-
-            return bytes;
-        }
-
-        public static string EncryptPin(string pin, string card, AsymmetricKeyParameter key)
-        {
-            var pinBlock = Pin2PinBlockWithCardNO(pin, card);
-            return Convert.ToBase64String(RSA_NONE_PKCS1Padding.Encrypt(pinBlock, key));
-        }
-
-        public static string DecryptData(string dataString, string cert, string certPwd)
-        {
-            var certificate = GetSignCertificate(cert, certPwd);
-            return RSA_NONE_PKCS1Padding.Decrypt(dataString, certificate.key);
+            var decData = Convert.FromBase64String(dataString);
+            var data = RSA_NONE_PKCS1Padding.Encrypt(decData, key);
+            return Encoding.UTF8.GetString(data);
         }
     }
 }
