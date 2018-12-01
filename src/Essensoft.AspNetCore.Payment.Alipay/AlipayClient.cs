@@ -82,9 +82,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             return await PageExecuteAsync(request, null, "POST");
         }
 
-        public async Task<T> PageExecuteAsync<T>(string optionsName, IAlipayRequest<T> request) where T : AlipayResponse
+        public async Task<T> PageExecuteAsync<T>(IAlipayRequest<T> request, string optionsName) where T : AlipayResponse
         {
-            return await PageExecuteAsync(optionsName, request, null, "POST");
+            return await PageExecuteAsync(request, null, "POST");
         }
 
         #endregion
@@ -93,10 +93,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         public async Task<T> PageExecuteAsync<T>(IAlipayRequest<T> request, string accessToken, string reqMethod) where T : AlipayResponse
         {
-            return await PageExecuteAsync(null, request, accessToken, reqMethod);
+            return await PageExecuteAsync(request, null, accessToken, reqMethod);
         }
 
-        public async Task<T> PageExecuteAsync<T>(string optionsName, IAlipayRequest<T> request, string accessToken, string reqMethod) where T : AlipayResponse
+        public async Task<T> PageExecuteAsync<T>(IAlipayRequest<T> request, string optionsName, string accessToken, string reqMethod) where T : AlipayResponse
         {
             var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
             var apiVersion = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
@@ -454,16 +454,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         private string Serialize(AlipayObject bizModel)
         {
             return bizModel == null ? string.Empty : JsonConvert.SerializeObject(bizModel, jsonSerializerSettings);
-        }
-
-        public Task<T> PageExecuteAsync<T>(IAlipayRequest<T> request, string optionsName) where T : AlipayResponse
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<T> PageExecuteAsync<T>(IAlipayRequest<T> request, string optionsName, string session, string reqMethod) where T : AlipayResponse
-        {
-            throw new NotImplementedException();
         }
 
         #endregion
