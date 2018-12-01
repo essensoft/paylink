@@ -116,7 +116,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         /// <summary>
         /// 订单接收超时时间
         /// </summary>
-        public string OrderTimeout { get; set; }
+        public string OrderTimeOut { get; set; }
 
         /// <summary>
         /// 发卡机构代码
@@ -156,7 +156,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         /// <summary>
         /// 支付超时时间
         /// </summary>
-        public string PayTimeout { get; set; }
+        public string PayTimeOut { get; set; }
 
         /// <summary>
         /// 终端号
@@ -208,14 +208,14 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "accType", AccType },
                 { "reserved", Reserved },
                 { "customerIp", CustomerIp },
-                { "orderTimeout", OrderTimeout },
+                { "orderTimeout", OrderTimeOut },
                 { "accSplitData", AccSplitData },
                 { "riskRateInfo", RiskRateInfo },
                 { "defaultPayType", DefaultPayType },
                 { "reqReserved", ReqReserved },
                 { "frontFailUrl", FrontFailUrl },
                 { "supPayType", SupPayType },
-                { "payTimeout", PayTimeout },
+                { "payTimeout", PayTimeOut },
                 { "termId", TermId },
                 { "userMac", UserMac }
             };
