@@ -79,7 +79,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
             using (var client = ClientFactory.CreateClient())
             {
-                var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
+                var body = await client.DoPostAsync(request.GetRequestUrl(), content);
                 Logger.Log(options.LogLevel, "Response:{body}", body);
 
                 var parser = new WeChatPayXmlParser<T>();
@@ -197,7 +197,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
             using (var client = ClientFactory.CreateClient(certificateName))
             {
-                var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
+                var body = await client.DoPostAsync(request.GetRequestUrl(), content);
 
                 Logger.Log(options.LogLevel, "Response:{body}", body);
 

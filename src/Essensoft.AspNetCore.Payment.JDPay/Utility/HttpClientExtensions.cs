@@ -4,7 +4,10 @@ using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 {
-    public static class HttpClientUtility
+    /// <summary>
+    /// HTTP客户端扩展。
+    /// </summary>
+    public static class HttpClientExtensions
     {
         /// <summary>
         /// 执行HTTP POST请求。
@@ -12,7 +15,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
         /// <param name="url">请求地址</param>
         /// <param name="content">请求内容</param>
         /// <returns>HTTP响应</returns>
-        public static async Task<string> DoPostAsync(HttpClient client, string url, string content, string mediaType = "application/xml")
+        public static async Task<string> DoPostAsync(this HttpClient client, string url, string content, string mediaType = "application/xml")
         {
             using (var requestContent = new StringContent(content, Encoding.UTF8, mediaType))
             using (var response = await client.PostAsync(url, requestContent))
