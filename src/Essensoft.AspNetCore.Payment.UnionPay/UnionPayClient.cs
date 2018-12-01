@@ -53,10 +53,10 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             var version = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
 
             var merId = options.MerId;
-            if (options.TestMode && (request is UnionPayForm05_7_FileTransferRequest || request is UnionPayForm_6_6_FileTransferRequest))
-            {
-                merId = "700000000000001";
-            }
+            //if (options.TestMode && (request is UnionPayForm05_7_FileTransferRequest || request is UnionPayForm_6_6_FileTransferRequest))
+            //{
+            //    merId = "700000000000001";
+            //}
 
             var txtParams = new UnionPayDictionary(request.GetParameters())
             {
@@ -79,7 +79,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
             using (var client = ClientFactory.CreateClient())
             {
-                var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(options.TestMode), query);
+                var body = await client.DoPostAsync(request.GetRequestUrl(options.TestMode), query);
                 Logger.Log(options.LogLevel, "Response:{content}", body);
 
                 var dic = ParseQueryString(body);
