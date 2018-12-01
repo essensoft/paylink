@@ -1,4 +1,4 @@
-﻿@model UnionPayForm_6_2_FrontConsumeViewModel
+﻿@model GatewayPayFrontConsumeFrontConsumeViewModel
 @{
     ViewData["Title"] = "跳转网关页面支付通知";
 }
@@ -30,16 +30,16 @@
                 <input type="text" class="form-control" asp-for="CurrencyCode" value="156" />
             </div>
             <div class="form-group">
-                <label asp-for="PayTimeout"></label>
-                <input type="text" class="form-control" asp-for="PayTimeout" value="@DateTime.Now.AddDays(7).ToString("yyyyMMddHHmmss")" />
+                <label asp-for="PayTimeOut"></label>
+                <input type="text" class="form-control" asp-for="PayTimeOut" value="@DateTime.Now.AddDays(7).ToString("yyyyMMddHHmmss")" />
             </div>
             <div class="form-group">
                 <label asp-for="FrontUrl"></label>
-                <input type="text" class="form-control" asp-for="FrontUrl" value="http://*/unionpay/frontconsume62return" />
+                <input type="text" class="form-control" asp-for="FrontUrl" value="http://*/unionpay/gatewaypayfrontconsumereturn" />
             </div>
             <div class="form-group">
                 <label asp-for="BackUrl"></label>
-                <input type="text" class="form-control" asp-for="BackUrl" value="http://*/notify/unionpay/frontconsume62" />
+                <input type="text" class="form-control" asp-for="BackUrl" value="http://*/notify/unionpay/gatewaypayfrontconsume" />
             </div>
             <button type="submit" class="btn btn-primary">提交请求</button>
         </form>
