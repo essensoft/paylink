@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
     /// <summary>
     /// 网关支付(V2.2) 消费接口
     /// </summary>
-    public class UnionPayGatewayPayFrontConsumeRequest : IUnionPayRequest<UnionPayResponse>
+    public class UnionPayGatewayPayFrontConsumeRequest : IUnionPayRequest<UnionPayNullResponse>
     {
         /// <summary>
         /// 产品类型

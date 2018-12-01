@@ -7,7 +7,7 @@ namespace Essensoft.AspNetCore.Payment.Security
 {
     public class SHA256WithRSA
     {
-        public static string SignData(string data, AsymmetricKeyParameter key)
+        public static string SignData(string data, ICipherParameters key)
         {
             var signer = SignerUtilities.GetSigner("SHA256WithRSA");
             signer.Init(true, key);
@@ -16,7 +16,7 @@ namespace Essensoft.AspNetCore.Payment.Security
             return Convert.ToBase64String(signer.GenerateSignature());
         }
 
-        public static bool VerifyData(string data, string sign, AsymmetricKeyParameter key)
+        public static bool VerifyData(string data, string sign, ICipherParameters key)
         {
             var verifier = SignerUtilities.GetSigner("SHA256WithRSA");
             verifier.Init(false, key);

@@ -70,13 +70,15 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
             if (request.HasEncryptCertId())
             {
-                var accNo = txtParams[ACCNO];
-                if (!string.IsNullOrEmpty(accNo))
+                if (txtParams.TryGetValue(ACCNO, out var accNo))
                 {
-                    // 对敏感信息加密
-                    txtParams[ACCNO] = UnionPaySignature.EncryptData(accNo, options.EncryptCertificate.key);
+                    if (!string.IsNullOrEmpty(accNo))
+                    {
+                        // 对敏感信息加密
+                        txtParams[ACCNO] = UnionPaySignature.EncryptData(accNo, options.EncryptCertificate.key);
 
-                    txtParams.Add(ENCRYPTCERTID, options.EncryptCertificate.certId);
+                        txtParams.Add(ENCRYPTCERTID, options.EncryptCertificate.certId);
+                    }
                 }
             }
 
@@ -116,15 +118,10 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         public Task<T> PageExecuteAsync<T>(IUnionPayRequest<T> request) where T : UnionPayResponse
         {
-            return PageExecuteAsync(request, null, "POST");
+            return PageExecuteAsync(request, null);
         }
 
         public Task<T> PageExecuteAsync<T>(IUnionPayRequest<T> request, string optionsName) where T : UnionPayResponse
-        {
-            return PageExecuteAsync(request, optionsName, "POST");
-        }
-
-        public Task<T> PageExecuteAsync<T>(IUnionPayRequest<T> request, string optionsName, string reqMethod) where T : UnionPayResponse
         {
             var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
             var version = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
@@ -146,13 +143,15 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
             if (request.HasEncryptCertId())
             {
-                var accNo = txtParams[ACCNO];
-                if (!string.IsNullOrEmpty(accNo))
+                if (txtParams.TryGetValue(ACCNO, out var accNo))
                 {
-                    // 对敏感信息加密
-                    txtParams[ACCNO] = UnionPaySignature.EncryptData(accNo, options.EncryptCertificate.key);
+                    if (!string.IsNullOrEmpty(accNo))
+                    {
+                        // 对敏感信息加密
+                        txtParams[ACCNO] = UnionPaySignature.EncryptData(accNo, options.EncryptCertificate.key);
 
-                    txtParams.Add(ENCRYPTCERTID, options.EncryptCertificate.certId);
+                        txtParams.Add(ENCRYPTCERTID, options.EncryptCertificate.certId);
+                    }
                 }
             }
 
@@ -161,29 +160,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             var rsp = Activator.CreateInstance<T>();
 
             var url = request.GetRequestUrl(options.TestMode);
-            if (reqMethod.ToUpper() == "GET")
-            {
-                //拼接get请求的url
-                var tmpUrl = url;
-                if (txtParams != null && txtParams.Count > 0)
-                {
-                    if (tmpUrl.Contains("?"))
-                    {
-                        tmpUrl = tmpUrl + "&" + UnionPayUtility.BuildQuery(txtParams);
-                    }
-                    else
-                    {
-                        tmpUrl = tmpUrl + "?" + UnionPayUtility.BuildQuery(txtParams);
-                    }
-                }
-                rsp.Body = tmpUrl;
-            }
-            else
-            {
-                //输出post表单
-                rsp.Body = BuildHtmlRequest(url, txtParams, reqMethod);
-            }
 
+            //输出post表单
+            rsp.Body = BuildHtmlRequest(url, txtParams);
             return Task.FromResult(rsp);
         }
 
@@ -191,7 +170,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         #region Common Method
 
-        private string BuildHtmlRequest(string url, UnionPayDictionary dicPara, string strMethod)
+        private string BuildHtmlRequest(string url, UnionPayDictionary dicPara)
         {
             var sbHtml = new StringBuilder();
             sbHtml.Append("<form id='submit' name='submit' action='" + url + "' method='post' style='display:none;'>");
