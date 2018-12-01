@@ -131,7 +131,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
                 using (var client = ClientFactory.CreateClient())
                 {
-                    body = await HttpClientUtility.DoPostAsync(client, options.ServerUrl, txtParams, fileParams);
+                    body = await client.DoPostAsync(options.ServerUrl, txtParams, fileParams);
                 }
             }
             else
@@ -251,11 +251,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 {
                     var fileParams = AlipayUtility.CleanupDictionary(uRequest.GetFileParameters());
 
-                    body = await HttpClientUtility.DoPostAsync(client, options.ServerUrl, txtParams, fileParams);
+                    body = await client.DoPostAsync(options.ServerUrl, txtParams, fileParams);
                 }
                 else
                 {
-                    body = await HttpClientUtility.DoPostAsync(client, options.ServerUrl, query);
+                    body = await client.DoPostAsync(options.ServerUrl, query);
                 }
             }
 
