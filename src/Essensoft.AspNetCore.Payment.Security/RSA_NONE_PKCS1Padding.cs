@@ -7,14 +7,14 @@ namespace Essensoft.AspNetCore.Payment.Security
 {
     public class RSA_NONE_PKCS1Padding
     {
-        public static byte[] Encrypt(byte[] data, AsymmetricKeyParameter key)
+        public static byte[] Encrypt(byte[] data, ICipherParameters key)
         {
             var cipher = CipherUtilities.GetCipher("RSA/NONE/PKCS1Padding");
             cipher.Init(true, key);
             return cipher.DoFinal(data);
         }
 
-        public static byte[] Decrypt(byte[] data, AsymmetricKeyParameter key)
+        public static byte[] Decrypt(byte[] data, ICipherParameters key)
         {
             var cipher = CipherUtilities.GetCipher("RSA/NONE/PKCS1Padding");
             cipher.Init(false, key);

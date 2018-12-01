@@ -19,6 +19,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         private const string ACCESSTYPE = "accessType";
         private const string MERID = "merId";
         private const string ENCRYPTCERTID = "encryptCertId";
+        private const string ACCNO = "accNo";
 
         #region UnionPayClient Constructors
 
@@ -53,10 +54,10 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             var version = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
 
             var merId = options.MerId;
-            //if (options.TestMode && (request is UnionPayForm05_7_FileTransferRequest || request is UnionPayForm_6_6_FileTransferRequest))
-            //{
-            //    merId = "700000000000001";
-            //}
+            if (options.TestMode && (request is UnionPayGatewayPayFileTransferRequest || request is UnionPayNoRedirectPayFileTransferRequest || request is UnionPayQrCodePayFileTransferRequest || request is UnionPayWapPayFileTransferRequest))
+            {
+                merId = "700000000000001";
+            }
 
             var txtParams = new UnionPayDictionary(request.GetParameters())
             {
@@ -69,7 +70,14 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
             if (request.HasEncryptCertId())
             {
-                txtParams.Add(ENCRYPTCERTID, options.EncryptCertificate.certId);
+                var accNo = txtParams[ACCNO];
+                if (!string.IsNullOrEmpty(accNo))
+                {
+                    // 对敏感信息加密
+                    txtParams[ACCNO] = UnionPaySignature.EncryptData(accNo, options.EncryptCertificate.key);
+
+                    txtParams.Add(ENCRYPTCERTID, options.EncryptCertificate.certId);
+                }
             }
 
             UnionPaySignature.Sign(txtParams, options.SignCertificate.certId, options.SignCertificate.key, options.SecureKey);
@@ -120,14 +128,33 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         {
             var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
             var version = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
+            var merId = options.MerId;
+
+            if (options.TestMode && (request is UnionPayGatewayPayFileTransferRequest || request is UnionPayNoRedirectPayFileTransferRequest || request is UnionPayQrCodePayFileTransferRequest || request is UnionPayWapPayFileTransferRequest))
+            {
+                merId = "700000000000001";
+            }
+
             var txtParams = new UnionPayDictionary(request.GetParameters())
             {
                 { VERSION, version },
                 { ENCODING, options.Encoding },
                 { SIGNMETHOD, options.SignMethod },
                 { ACCESSTYPE, options.AccessType },
-                { MERID, options.MerId }
+                { MERID, merId }
             };
+
+            if (request.HasEncryptCertId())
+            {
+                var accNo = txtParams[ACCNO];
+                if (!string.IsNullOrEmpty(accNo))
+                {
+                    // 对敏感信息加密
+                    txtParams[ACCNO] = UnionPaySignature.EncryptData(accNo, options.EncryptCertificate.key);
+
+                    txtParams.Add(ENCRYPTCERTID, options.EncryptCertificate.certId);
+                }
+            }
 
             UnionPaySignature.Sign(txtParams, options.SignCertificate.certId, options.SignCertificate.key, options.SecureKey);
 
