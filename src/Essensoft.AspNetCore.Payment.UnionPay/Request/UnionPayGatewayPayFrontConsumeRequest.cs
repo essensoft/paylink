@@ -218,7 +218,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "accType", AccType },
                 { "reserved", Reserved },
                 { "customerIp", CustomerIp },
-                { "orderTimeOut", OrderTimeOut },
+                { "orderTimeout", OrderTimeOut },
                 { "accSplitData", AccSplitData },
                 { "riskRateInfo", RiskRateInfo },
                 { "ctrlRule", CtrlRule },
