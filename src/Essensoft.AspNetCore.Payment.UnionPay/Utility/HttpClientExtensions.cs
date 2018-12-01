@@ -6,17 +6,18 @@ using System.Threading.Tasks;
 namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 {
     /// <summary>
-    /// 网络工具类。
+    /// HTTP客户端扩展。
     /// </summary>
-    public static class HttpClientUtility
+    public static class HttpClientExtensions
     {
         /// <summary>
         /// 执行HTTP POST请求。
         /// </summary>
+        /// <param name="client">客户端</param>
         /// <param name="url">请求地址</param>
-        /// <param name="content">请求参数</param>
-        /// <returns>HTTP响应</returns>
-        public static async Task<string> DoPostAsync(HttpClient client, string url, string content)
+        /// <param name="content">内容</param>
+        /// <returns>响应内容</returns>
+        public static async Task<string> DoPostAsync(this HttpClient client, string url, string content)
         {
             using (var requestContent = new StringContent(content, Encoding.UTF8, "application/x-www-form-urlencoded"))
             using (var response = await client.PostAsync(url, requestContent))
@@ -29,10 +30,11 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
         /// <summary>
         /// 执行HTTP GET请求。
         /// </summary>
+        /// <param name="client">客户端</param>
         /// <param name="url">请求地址</param>
         /// <param name="parameters">请求参数</param>
-        /// <returns>HTTP响应</returns>
-        public static async Task<string> DoGetAsync(HttpClient client, string url, IDictionary<string, string> parameters)
+        /// <returns>响应内容</returns>
+        public static async Task<string> DoGetAsync(this HttpClient client, string url, IDictionary<string, string> parameters)
         {
             if (parameters?.Count > 0)
             {
