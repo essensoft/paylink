@@ -24,15 +24,15 @@ namespace WebApplicationSample.Controllers
         }
 
         [HttpGet]
-        public IActionResult FrontConsume62()
+        public IActionResult GatewayPayFrontConsume()
         {
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> FrontConsume62(UnionPayForm_6_2_FrontConsumeViewModel viewModel)
+        public async Task<IActionResult> GatewayPayFrontConsume(GatewayPayFrontConsumeFrontConsumeViewModel viewModel)
         {
-            var request = new UnionPayForm_6_2_FrontConsumeRequest
+            var request = new UnionPayGatewayPayFrontConsumeRequest
             {
                 TxnType = "01",
                 TxnSubType = "01",
@@ -42,7 +42,7 @@ namespace WebApplicationSample.Controllers
                 TxnTime = viewModel.TxnTime,
                 TxnAmt = viewModel.TxnAmt,
                 CurrencyCode = viewModel.CurrencyCode,
-                PayTimeout = viewModel.PayTimeout,
+                PayTimeOut = viewModel.PayTimeOut,
                 FrontUrl = viewModel.FrontUrl,
                 BackUrl = viewModel.BackUrl
             };
@@ -51,11 +51,11 @@ namespace WebApplicationSample.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> FrontConsume62Return()
+        public async Task<IActionResult> GatewayPayFrontConsumeReturn()
         {
             try
             {
-                var notify = await _notifyClient.ExecuteAsync<UnionPayForm_6_2_FrontConsumeReturnResponse>(Request);
+                var notify = await _notifyClient.ExecuteAsync<UnionPayGatewayPayFrontConsumeReturnResponse>(Request);
                 ViewData["response"] = "支付成功";
                 return View();
             }
