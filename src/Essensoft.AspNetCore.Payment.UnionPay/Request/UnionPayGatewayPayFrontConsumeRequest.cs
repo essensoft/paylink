@@ -226,7 +226,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "reqReserved", ReqReserved },
                 { "frontFailUrl", FrontFailUrl },
                 { "supPayType", SupPayType },
-                { "payTimeOut", PayTimeOut },
+                { "payTimeout", PayTimeOut },
                 { "termId", TermId },
                 { "userMac", UserMac }
             };
