@@ -19,15 +19,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             ILogger<AlipayNotifyClient> logger,
             IOptionsSnapshot<AlipayOptions> optionsAccessor)
         {
-            Logger = logger;
-            OptionsSnapshotAccessor = optionsAccessor;
+            _logger = logger;
+            _optionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
 
-        public ILogger Logger { get; set; }
-
-        public IOptionsSnapshot<AlipayOptions> OptionsSnapshotAccessor { get; set; }
+        private ILogger _logger;
+        private IOptionsSnapshot<AlipayOptions> _optionsSnapshotAccessor;
 
         #region IAlipayNotifyClient Members
 
@@ -38,10 +37,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : AlipayNotifyResponse
         {
-            var options = OptionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
             var parameters = await GetParametersAsync(request);
             var query = AlipayUtility.BuildQuery(parameters);
-            Logger.Log(options.LogLevel, "Request:{query}", query);
+            _logger.Log(options.LogLevel, "Request:{query}", query);
 
             var parser = new AlipayDictionaryParser<T>();
             var rsp = parser.Parse(parameters);

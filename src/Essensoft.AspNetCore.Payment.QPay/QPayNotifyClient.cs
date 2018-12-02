@@ -18,15 +18,14 @@ namespace Essensoft.AspNetCore.Payment.QPay
             ILogger<QPayNotifyClient> logger,
             IOptionsSnapshot<QPayOptions> optionsAccessor)
         {
-            Logger = logger;
-            OptionsSnapshotAccessor = optionsAccessor;
+            _logger = logger;
+            _optionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
 
-        public ILogger Logger { get; set; }
-
-        public IOptionsSnapshot<QPayOptions> OptionsSnapshotAccessor { get; set; }
+        private ILogger _logger;
+        private IOptionsSnapshot<QPayOptions> _optionsSnapshotAccessor;
 
         #region IQPayNotifyClient Members
 
@@ -37,9 +36,9 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : QPayNotifyResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
-            Logger.Log(options.LogLevel, "Request:{body}", body);
+            _logger.Log(options.LogLevel, "Request:{body}", body);
 
             var parser = new QPayXmlParser<T>();
             var rsp = parser.Parse(body);

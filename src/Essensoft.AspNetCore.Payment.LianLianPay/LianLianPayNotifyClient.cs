@@ -18,15 +18,14 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             ILogger<LianLianPayClient> logger,
             IOptionsSnapshot<LianLianPayOptions> optionsAccessor)
         {
-            Logger = logger;
-            OptionsSnapshotAccessor = optionsAccessor;
+            _logger = logger;
+            _optionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
 
-        public ILogger Logger { get; set; }
-
-        public IOptionsSnapshot<LianLianPayOptions> OptionsSnapshotAccessor { get; set; }
+        private ILogger _logger;
+        private IOptionsSnapshot<LianLianPayOptions> _optionsSnapshotAccessor;
 
         #region ILianLianPayNotifyClient Members
 
@@ -37,12 +36,12 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : LianLianPayNotifyResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             if (request.HasFormContentType)
             {
                 var parameters = await GetParametersAsync(request);
                 var query = LianLianPayUtility.BuildQuery(parameters);
-                Logger.Log(options.LogLevel, "Request:{query}", query);
+                _logger.Log(options.LogLevel, "Request:{query}", query);
 
                 var parser = new LianLianPayDictionaryParser<T>();
                 var rsp = parser.Parse(parameters);
@@ -53,7 +52,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             if (request.HasTextJsonContentType())
             {
                 var body = await new StreamReader(request.Body).ReadToEndAsync();
-                Logger.Log(options.LogLevel, "Request:{body}", body);
+                _logger.Log(options.LogLevel, "Request:{body}", body);
 
                 var parser = new LianLianPayJsonParser<T>();
                 var rsp = parser.Parse(body);

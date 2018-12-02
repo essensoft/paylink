@@ -43,18 +43,16 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             IHttpClientFactory clientFactory,
             IOptionsSnapshot<AlipayOptions> optionsAccessor)
         {
-            Logger = logger;
-            ClientFactory = clientFactory;
-            OptionsSnapshotAccessor = optionsAccessor;
+            _logger = logger;
+            _clientFactory = clientFactory;
+            _optionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
 
-        public ILogger Logger { get; set; }
-
-        public IHttpClientFactory ClientFactory { get; set; }
-
-        public IOptionsSnapshot<AlipayOptions> OptionsSnapshotAccessor { get; set; }
+        private ILogger _logger;
+        private IHttpClientFactory _clientFactory;
+        private IOptionsSnapshot<AlipayOptions> _optionsSnapshotAccessor;
 
         #region IAlipayClient Members
 
@@ -98,7 +96,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         public async Task<T> PageExecuteAsync<T>(IAlipayRequest<T> request, string optionsName, string accessToken, string reqMethod) where T : AlipayResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             var apiVersion = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
             var txtParams = new AlipayDictionary(request.GetParameters())
             {
@@ -129,7 +127,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             {
                 var fileParams = AlipayUtility.CleanupDictionary(uRequest.GetFileParameters());
 
-                using (var client = ClientFactory.CreateClient())
+                using (var client = _clientFactory.CreateClient())
                 {
                     body = await client.DoPostAsync(options.ServerUrl, txtParams, fileParams);
                 }
@@ -152,13 +150,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                         }
                     }
                     body = tmpUrl;
-                    Logger.Log(options.LogLevel, "Request Url:{body}", body);
+                    _logger.Log(options.LogLevel, "Request Url:{body}", body);
                 }
                 else
                 {
                     //输出post表单
                     body = BuildHtmlRequest(txtParams, reqMethod, options);
-                    Logger.Log(options.LogLevel, "Request Html:{body}", body);
+                    _logger.Log(options.LogLevel, "Request Html:{body}", body);
                 }
             }
 
@@ -183,7 +181,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         public async Task<T> ExecuteAsync<T>(IAlipayRequest<T> request, string optionsName, string accessToken, string appAuthToken) where T : AlipayResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             var apiVersion = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
             var txtParams = new AlipayDictionary(request.GetParameters())
             {
@@ -241,11 +239,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             txtParams.Add(SIGN, AlipaySignature.RSASignContent(signContent, options.PrivateRSAParameters, options.SignType));
 
             var query = AlipayUtility.BuildQuery(txtParams);
-            Logger.Log(options.LogLevel, "Request:{query}", query);
+            _logger.Log(options.LogLevel, "Request:{query}", query);
 
             // 是否需要上传文件
             var body = string.Empty;
-            using (var client = ClientFactory.CreateClient())
+            using (var client = _clientFactory.CreateClient())
             {
                 if (request is IAlipayUploadRequest<T> uRequest)
                 {
@@ -259,7 +257,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 }
             }
 
-            Logger.Log(options.LogLevel, "Response:{body}", body);
+            _logger.Log(options.LogLevel, "Response:{body}", body);
 
             T rsp = null;
             IAlipayParser<T> parser = null;
@@ -339,7 +337,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         #region Common Method
 
-        public string BuildHtmlRequest(IDictionary<string, string> sParaTemp, string strMethod, AlipayOptions options)
+        private string BuildHtmlRequest(IDictionary<string, string> sParaTemp, string strMethod, AlipayOptions options)
         {
             //待请求参数数组
             var dicPara = new Dictionary<string, string>(sParaTemp);
@@ -420,7 +418,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         public Task<T> SdkExecuteAsync<T>(IAlipayRequest<T> request, string optionsName) where T : AlipayResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
 
             // 构造请求参数
             var requestParams = BuildRequestParams(request, null, null, options);

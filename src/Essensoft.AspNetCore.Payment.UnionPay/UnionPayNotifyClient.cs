@@ -16,15 +16,14 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             ILogger<UnionPayNotifyClient> logger,
             IOptionsSnapshot<UnionPayOptions> optionsAccessor)
         {
-            Logger = logger;
-            OptionsSnapshotAccessor = optionsAccessor;
+            _logger = logger;
+            _optionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
 
-        public ILogger Logger { get; set; }
-
-        public IOptionsSnapshot<UnionPayOptions> OptionsSnapshotAccessor { get; set; }
+        private ILogger _logger;
+        private IOptionsSnapshot<UnionPayOptions> _optionsSnapshotAccessor;
 
         #region IUnionPayNotifyClient Members
 
@@ -35,11 +34,11 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : UnionPayNotifyResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             var parameters = await GetParametersAsync(request);
 
             var query = UnionPayUtility.BuildQuery(parameters);
-            Logger.Log(options.LogLevel, "Request:{query}", query);
+            _logger.Log(options.LogLevel, "Request:{query}", query);
 
             var parser = new UnionPayDictionaryParser<T>();
             var rsp = parser.Parse(parameters);
