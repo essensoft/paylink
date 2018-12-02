@@ -1,4 +1,4 @@
-﻿using System.Text;
+using System.Text;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
@@ -20,18 +20,30 @@ namespace WebApplicationSample.Controllers
             _notifyClient = notifyClient;
         }
 
+        /// <summary>
+        /// 支付宝支付Demo功能指引页
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// 当面付-扫码支付
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult PreCreate()
         {
             return View();
         }
 
+        /// <summary>
+        /// 当面付-扫码支付
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> PreCreate(AlipayTradePreCreateViewModel viewModel)
         {
@@ -52,12 +64,20 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 当面付-二维码/条码/声波支付
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Pay()
         {
             return View();
         }
 
+        /// <summary>
+        /// 当面付-二维码/条码/声波支付
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Pay(AlipayTradePayViewModel viewModel)
         {
@@ -78,12 +98,20 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// APP支付
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult AppPay()
         {
             return View();
         }
 
+        /// <summary>
+        /// APP支付
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AppPay(AlipayTradeAppPayViewModel viewModel)
         {
@@ -105,12 +133,22 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 电脑网站支付
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult PagePay()
         {
             return View();
         }
 
+        /// <summary>
+        /// 电脑网站支付
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> PagePay(AlipayTradePagePayViewModel viewModel)
         {
@@ -131,12 +169,20 @@ namespace WebApplicationSample.Controllers
             return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
+        /// <summary>
+        /// 手机网站支付
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult WapPay()
         {
             return View();
         }
 
+        /// <summary>
+        /// 手机网站支付
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> WapPay(AlipayTradeWapPayViewModel viewMode)
         {
@@ -157,12 +203,20 @@ namespace WebApplicationSample.Controllers
             return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
+        /// <summary>
+        /// 交易查询
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Query()
         {
             return View();
         }
 
+        /// <summary>
+        /// 交易查询
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Query(AlipayTradeQueryViewModel viewMode)
         {
@@ -180,12 +234,20 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 交易退款
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Refund()
         {
             return View();
         }
 
+        /// <summary>
+        /// 交易退款
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Refund(AlipayTradeRefundViewModel viewMode)
         {
@@ -206,12 +268,20 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 退款查询
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult RefundQuery()
         {
             return View();
         }
 
+        /// <summary>
+        /// 退款查询
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> RefundQuery(AlipayTradeRefundQueryViewModel viewMode)
         {
@@ -230,12 +300,20 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 单笔转账到支付宝账户
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Transfer()
         {
             return View();
         }
 
+        /// <summary>
+        /// 单笔转账到支付宝账户
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Transfer(AlipayTransferViewModel viewMode)
         {
@@ -254,12 +332,20 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 查询转账订单
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult TransQuery()
         {
             return View();
         }
 
+        /// <summary>
+        /// 查询转账订单
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> TransQuery(AlipayTransQueryViewModel viewMode)
         {
@@ -276,12 +362,20 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 查询对账单下载地址
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult BillDownloadurlQuery()
         {
             return View();
         }
 
+        /// <summary>
+        /// 查询对账单下载地址
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> BillDownloadurlQuery(AlipayBillDownloadurlQueryViewModel viewModel)
         {
