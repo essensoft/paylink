@@ -19,17 +19,30 @@ namespace WebApplicationSample.Controllers
             _notifyClient = notifyClient;
         }
 
+        /// <summary>
+        /// 京东支付指引页
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// PC在线支付
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult SaveOrderPC()
         {
             return View();
         }
 
+        /// <summary>
+        /// PC在线支付
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> SaveOrderPC(JDPaySaveOrderViewModel viewModel)
         {
@@ -50,12 +63,21 @@ namespace WebApplicationSample.Controllers
             return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
+        /// <summary>
+        /// H5在线支付
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult SaveOrderH5()
         {
             return View();
         }
 
+        /// <summary>
+        /// H5在线支付
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> SaveOrderH5(JDPaySaveOrderViewModel viewModel)
         {
@@ -76,14 +98,23 @@ namespace WebApplicationSample.Controllers
             return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
+        /// <summary>
+        /// 扫码支付
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public IActionResult QRPay()
+        public IActionResult QrCodePay()
         {
             return View();
         }
 
+        /// <summary>
+        /// 扫码支付
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> QRPay(JDPayUnifiedOrderViewModel viewModel)
+        public async Task<IActionResult> QrCodePay(JDPayUnifiedOrderViewModel viewModel)
         {
             var request = new JDPayUnifiedOrderRequest
             {
@@ -103,12 +134,21 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 交易查询接口
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Query()
         {
             return View();
         }
 
+        /// <summary>
+        /// 交易查询接口
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Query(JDPayQueryViewModel viewModel)
         {
@@ -124,12 +164,21 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 退款申请接口
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Refund()
         {
             return View();
         }
 
+        /// <summary>
+        /// 退款申请接口
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Refund(JDPayRefundViewModel viewModel)
         {
@@ -147,12 +196,21 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 退款查询接口
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult QueryRefund()
         {
             return View();
         }
 
+        /// <summary>
+        /// 退款查询接口
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> QueryRefund(JDPayQueryRefundViewModel viewModel)
         {
@@ -168,12 +226,21 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 代付交易请求
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult DefrayPay()
         {
             return View();
         }
 
+        /// <summary>
+        /// 代付交易请求
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> DefrayPay(JDPayDefrayPayViewModel viewModel)
         {
@@ -215,12 +282,21 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 代付交易查询
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult TradeQuery()
         {
             return View();
         }
 
+        /// <summary>
+        /// 代付交易查询
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> TradeQuery(JDPayTradeQueryViewModel viewModel)
         {
@@ -237,8 +313,13 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
-        [HttpGet]  // h5 get
-        [HttpPost] // pc post
+        /// <summary>
+        /// PC在线支付 / H5在线支付
+        /// pc post / h5 get
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [HttpPost]
         public async Task<IActionResult> Return()
         {
             try

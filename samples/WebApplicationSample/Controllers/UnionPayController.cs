@@ -19,17 +19,30 @@ namespace WebApplicationSample.Controllers
             _notifyClient = notifyClient;
         }
 
+        /// <summary>
+        /// 银联支付指引页
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// 跳转网关页面支付
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult GatewayPayFrontConsume()
         {
             return View();
         }
 
+        /// <summary>
+        /// 跳转网关页面支付
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> GatewayPayFrontConsume(GatewayPayFrontConsumeFrontConsumeViewModel viewModel)
         {
@@ -51,6 +64,10 @@ namespace WebApplicationSample.Controllers
             return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
+        /// <summary>
+        /// 网关页面支付 - 同步跳转
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> GatewayPayFrontConsumeReturn()
         {

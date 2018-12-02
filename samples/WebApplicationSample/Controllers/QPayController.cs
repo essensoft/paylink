@@ -15,17 +15,30 @@ namespace WebApplicationSample.Controllers
             _client = client;
         }
 
+        /// <summary>
+        /// QQ钱包指引页
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// 付款码支付
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult MicroPay()
         {
             return View();
         }
 
+        /// <summary>
+        /// 付款码支付
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> MicroPay(QPayMicroPayViewModel viewModel)
         {
@@ -46,14 +59,23 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 扫码支付
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
-        public IActionResult QRPay()
+        public IActionResult QrCodePay()
         {
             return View();
         }
 
+        /// <summary>
+        /// 扫码支付
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
-        public async Task<IActionResult> QRPay(QPayUnifiedOrderViewModel viewModel)
+        public async Task<IActionResult> QrCodePay(QPayUnifiedOrderViewModel viewModel)
         {
             var request = new QPayUnifiedOrderRequest
             {
@@ -71,12 +93,21 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 公众号支付
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult PubPay()
         {
             return View();
         }
 
+        /// <summary>
+        /// 公众号支付
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> PubPay(QPayUnifiedOrderViewModel viewModel)
         {
@@ -95,12 +126,21 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// APP支付
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult AppPay()
         {
             return View();
         }
 
+        /// <summary>
+        /// APP支付
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AppPay(QPayUnifiedOrderViewModel viewModel)
         {
@@ -119,12 +159,21 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 订单查询
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult OrderQuery()
         {
             return View();
         }
 
+        /// <summary>
+        /// 订单查询
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> OrderQuery(QPayOrderQueryViewModel viewModel)
         {
@@ -138,12 +187,21 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 撤销订单
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Reverse()
         {
             return View();
         }
 
+        /// <summary>
+        /// 撤销订单
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Reverse(QPayReverseViewModel viewModel)
         {
@@ -156,13 +214,21 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
-
+        /// <summary>
+        /// 关闭订单
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult CloseOrder()
         {
             return View();
         }
 
+        /// <summary>
+        /// 关闭订单
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CloseOrder(QPayCloseOrderViewModel viewModel)
         {
@@ -175,12 +241,21 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 关闭订单
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Refund()
         {
             return View();
         }
 
+        /// <summary>
+        /// 关闭订单
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Refund(QPayRefundViewModel viewModel)
         {
@@ -198,12 +273,21 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 退款查询
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult RefundQuery()
         {
             return View();
         }
 
+        /// <summary>
+        /// 退款查询
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> RefundQuery(QPayRefundQueryViewModel viewModel)
         {
@@ -219,12 +303,21 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 对账单下载
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult StatementDown()
         {
             return View();
         }
 
+        /// <summary>
+        /// 对账单下载
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> StatementDown(QPayStatementDownViewModel viewModel)
         {

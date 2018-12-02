@@ -21,7 +21,7 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// 支付宝支付Demo功能指引页
+        /// 支付宝指引页
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -393,7 +393,7 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// 电脑网站支付-同步跳转
+        /// 电脑网站支付 - 同步跳转
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -413,7 +413,7 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// 手机网站支付-同步跳转
+        /// 手机网站支付 - 同步跳转
         /// </summary>
         /// <returns></returns>
         [HttpGet]

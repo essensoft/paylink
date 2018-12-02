@@ -56,7 +56,7 @@ namespace WebApplicationSample.Models
         public string OpenId { get; set; }
     }
 
-    public class WeChatPayQRPayViewModel
+    public class WeChatPayQrCodePayViewModel
     {
         [Required]
         [Display(Name = "out_trade_no")]
