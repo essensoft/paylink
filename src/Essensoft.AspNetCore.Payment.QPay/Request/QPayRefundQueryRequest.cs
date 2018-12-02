@@ -3,6 +3,9 @@ using Essensoft.AspNetCore.Payment.QPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Request
 {
+    /// <summary>
+    /// 退款查询
+    /// </summary>
     public class QPayRefundQueryRequest : IQPayRequest<QPayRefundQueryResponse>
     {
         /// <summary>

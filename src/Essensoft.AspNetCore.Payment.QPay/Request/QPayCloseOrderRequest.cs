@@ -3,6 +3,9 @@ using Essensoft.AspNetCore.Payment.QPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Request
 {
+    /// <summary>
+    /// 关闭订单
+    /// </summary>
     public class QPayCloseOrderRequest : IQPayRequest<QPayCloseOrderResponse>
     {
         /// <summary>

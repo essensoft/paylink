@@ -5,6 +5,9 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
 {
+    /// <summary>
+    /// 统一下单 - 支付结果通知
+    /// </summary>
     [XmlRoot("xml")]
     public class WeChatPayUnifiedOrderNotifyResponse : WeChatPayNotifyResponse
     {
