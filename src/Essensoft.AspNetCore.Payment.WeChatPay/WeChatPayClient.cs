@@ -38,18 +38,16 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             IHttpClientFactory clientFactory,
             IOptionsSnapshot<WeChatPayOptions> optionsAccessor)
         {
-            Logger = logger;
-            ClientFactory = clientFactory;
-            OptionsSnapshotAccessor = optionsAccessor;
+            _logger = logger;
+            _clientFactory = clientFactory;
+            _optionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
 
-        public ILogger Logger { get; set; }
-
-        public IHttpClientFactory ClientFactory { get; set; }
-
-        public IOptionsSnapshot<WeChatPayOptions> OptionsSnapshotAccessor { get; set; }
+        private ILogger _logger;
+        private IHttpClientFactory _clientFactory;
+        private IOptionsSnapshot<WeChatPayOptions> _optionsSnapshotAccessor;
 
         #region IWeChatPayClient Members
 
@@ -60,7 +58,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         public async Task<T> ExecuteAsync<T>(IWeChatPayRequest<T> request, string optionsName) where T : WeChatPayResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             // 字典排序
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters())
             {
@@ -75,12 +73,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
             sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key));
             var content = WeChatPayUtility.BuildContent(sortedTxtParams);
-            Logger.Log(options.LogLevel, "Request:{content}", content);
+            _logger.Log(options.LogLevel, "Request:{content}", content);
 
-            using (var client = ClientFactory.CreateClient())
+            using (var client = _clientFactory.CreateClient())
             {
                 var body = await client.DoPostAsync(request.GetRequestUrl(), content);
-                Logger.Log(options.LogLevel, "Response:{body}", body);
+                _logger.Log(options.LogLevel, "Response:{body}", body);
 
                 var parser = new WeChatPayXmlParser<T>();
                 var rsp = parser.Parse(body);
@@ -102,7 +100,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         {
             var signType = true; // ture:MD5，false:HMAC-SHA256
             var excludeSignType = true;
-            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             // 字典排序
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
             if (request is WeChatPayTransfersRequest)
@@ -193,13 +191,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType, excludeSignType));
 
             var content = WeChatPayUtility.BuildContent(sortedTxtParams);
-            Logger.Log(options.LogLevel, "Request:{content}", content);
+            _logger.Log(options.LogLevel, "Request:{content}", content);
 
-            using (var client = ClientFactory.CreateClient(certificateName))
+            using (var client = _clientFactory.CreateClient(certificateName))
             {
                 var body = await client.DoPostAsync(request.GetRequestUrl(), content);
 
-                Logger.Log(options.LogLevel, "Response:{body}", body);
+                _logger.Log(options.LogLevel, "Response:{body}", body);
 
                 var parser = new WeChatPayXmlParser<T>();
                 var rsp = parser.Parse(body);
@@ -219,7 +217,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         public Task<WeChatPayDictionary> ExecuteAsync(IWeChatPayCallRequest request, string optionsName)
         {
-            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
 
             if (request is WeChatPayAppCallPaymentRequest)

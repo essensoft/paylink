@@ -22,18 +22,16 @@ namespace Essensoft.AspNetCore.Payment.QPay
             IHttpClientFactory clientFactory,
             IOptionsSnapshot<QPayOptions> optionsAccessor)
         {
-            Logger = logger;
-            ClientFactory = clientFactory;
-            OptionsSnapshotAccessor = optionsAccessor;
+            _logger = logger;
+            _clientFactory = clientFactory;
+            _optionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
 
-        public ILogger Logger { get; set; }
-
-        public IHttpClientFactory ClientFactory { get; set; }
-
-        public IOptionsSnapshot<QPayOptions> OptionsSnapshotAccessor { get; set; }
+        private ILogger _logger;
+        private IHttpClientFactory _clientFactory;
+        private IOptionsSnapshot<QPayOptions> _optionsSnapshotAccessor;
 
         #region IQPayClient Members
 
@@ -44,7 +42,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         public async Task<T> ExecuteAsync<T>(IQPayRequest<T> request, string optionsName) where T : QPayResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             // 字典排序
             var sortedTxtParams = new QPayDictionary(request.GetParameters())
             {
@@ -60,12 +58,12 @@ namespace Essensoft.AspNetCore.Payment.QPay
             sortedTxtParams.Add(SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
 
             var content = QPayUtility.BuildContent(sortedTxtParams);
-            Logger.Log(options.LogLevel, "Request:{content}", content);
+            _logger.Log(options.LogLevel, "Request:{content}", content);
 
-            using (var client = ClientFactory.CreateClient())
+            using (var client = _clientFactory.CreateClient())
             {
                 var body = await client.DoPostAsync(request.GetRequestUrl(), content);
-                Logger.Log(options.LogLevel, "Response:{body}", body);
+                _logger.Log(options.LogLevel, "Response:{body}", body);
 
                 var parser = new QPayXmlParser<T>();
                 var rsp = parser.Parse(body);
@@ -85,7 +83,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         public async Task<T> ExecuteAsync<T>(IQPayCertificateRequest<T> request, string optionsName, string certificateName) where T : QPayResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             // 字典排序
             var sortedTxtParams = new QPayDictionary(request.GetParameters())
             {
@@ -100,11 +98,11 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
             sortedTxtParams.Add(SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
             var content = QPayUtility.BuildContent(sortedTxtParams);
-            Logger.Log(options.LogLevel, "Request:{content}", content);
-            using (var client = string.IsNullOrEmpty(certificateName) ? ClientFactory.CreateClient() : ClientFactory.CreateClient(certificateName))
+            _logger.Log(options.LogLevel, "Request:{content}", content);
+            using (var client = string.IsNullOrEmpty(certificateName) ? _clientFactory.CreateClient() : _clientFactory.CreateClient(certificateName))
             {
                 var body = await client.DoPostAsync(request.GetRequestUrl(), content);
-                Logger.Log(options.LogLevel, "Response:{body}", body);
+                _logger.Log(options.LogLevel, "Response:{body}", body);
 
                 var parser = new QPayXmlParser<T>();
                 var rsp = parser.Parse(body);

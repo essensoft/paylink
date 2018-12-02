@@ -20,15 +20,14 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             ILogger<WeChatPayNotifyClient> logger,
             IOptionsSnapshot<WeChatPayOptions> optionsAccessor)
         {
-            Logger = logger;
-            OptionsSnapshotAccessor = optionsAccessor;
+            _logger = logger;
+            _optionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
 
-        public ILogger Logger { get; set; }
-
-        public IOptionsSnapshot<WeChatPayOptions> OptionsSnapshotAccessor { get; set; }
+        private ILogger _logger;
+        private IOptionsSnapshot<WeChatPayOptions> _optionsSnapshotAccessor;
 
         #region IWeChatPayNotifyClient Members
 
@@ -39,9 +38,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : WeChatPayNotifyResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
+            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
-            Logger.Log(options.LogLevel, "Request:{body}", body);
+            _logger.Log(options.LogLevel, "Request:{body}", body);
 
             var parser = new WeChatPayXmlParser<T>();
             var rsp = parser.Parse(body);
@@ -49,7 +48,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             {
                 var key = MD5.Compute(options.Key).ToLower();
                 var data = AES.Decrypt((rsp as WeChatPayRefundNotifyResponse).ReqInfo, key, AESCipherMode.ECB, AESPaddingMode.PKCS7);
-                Logger.Log(options.LogLevel, "Decrypt Content:{data}", data); // AES-256-ECB
+                _logger.Log(options.LogLevel, "Decrypt Content:{data}", data); // AES-256-ECB
                 rsp = parser.Parse(body, data);
             }
             else
