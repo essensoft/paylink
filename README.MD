@@ -41,7 +41,7 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 * 网银支付、银行卡支付、掌上银行支付、实时付款
 
 ### 银联支付
-* 在线网关支付、无跳转支付、二维码支付(商户)
+* 在线网关支付、无跳转支付、手机网页支付（WAP支付）、二维码支付(商户)
 
 ## 官方文档
 

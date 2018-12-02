@@ -54,7 +54,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
             using (var client = ClientFactory.CreateClient())
             {
-                var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
+                var body = await client.DoPostAsync(request.GetRequestUrl(), content);
                 Logger.Log(options.LogLevel, "Response:{content}", body);
 
                 var parser = new JDPayXmlParser<T>();
@@ -151,7 +151,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
             using (var client = ClientFactory.CreateClient())
             {
-                var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content, "application/x-www-form-urlencoded");
+                var body = await client.DoPostAsync(request.GetRequestUrl(), content, "application/x-www-form-urlencoded");
                 Logger.Log(options.LogLevel, "Response:{content}", body);
 
                 var rsp = JsonConvert.DeserializeObject<T>(body);

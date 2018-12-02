@@ -32,7 +32,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
             return sb.Remove(sb.Length - 1, 1).ToString();
         }
 
-        public static string Encrypt(string plaintext, AsymmetricKeyParameter public_key)
+        public static string Encrypt(string plaintext, ICipherParameters public_key)
         {
             var hmack_key = Guid.NewGuid().ToString("N");
             var version = "lianpay1_0_1";
@@ -41,7 +41,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
             return LianlianpayEncrypt(plaintext, public_key, hmack_key, version, aes_key, nonce);
         }
 
-        public static string Decrypt(string ciphertext, AsymmetricKeyParameter private_key)
+        public static string Decrypt(string ciphertext, ICipherParameters private_key)
         {
             if (!string.IsNullOrEmpty(ciphertext))
             {
@@ -55,7 +55,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
             return string.Empty;
         }
 
-        private static string LianlianpayEncrypt(string req, AsymmetricKeyParameter public_key, string hmack_key, string version, string aes_key, string nonce)
+        private static string LianlianpayEncrypt(string req, ICipherParameters public_key, string hmack_key, string version, string aes_key, string nonce)
         {
             var b64Hmack_key = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(hmack_key, public_key);
             var b64Aes_key = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(aes_key, public_key);
@@ -68,7 +68,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
             return version + "$" + b64Hmack_key + "$" + b64Aes_key + "$" + b64Nonce + "$" + encry + "$" + b64Sign;
         }
 
-        private static string LianlianpayDecrypt(string base64_ciphertext, string base64_encrypted_aes_key, string base64_nonce, AsymmetricKeyParameter trader_pri_key)
+        private static string LianlianpayDecrypt(string base64_ciphertext, string base64_encrypted_aes_key, string base64_nonce, ICipherParameters trader_pri_key)
         {
             var key = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Decrypt(base64_encrypted_aes_key, trader_pri_key);
             var nonce = Convert.FromBase64String(base64_nonce);

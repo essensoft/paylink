@@ -11,13 +11,13 @@ namespace Essensoft.AspNetCore.Payment.Security
 {
     public class RSAUtilities
     {
-        public static AsymmetricKeyParameter GetKeyParameterFormPrivateKey(string privateKey)
+        public static ICipherParameters GetKeyParameterFormPrivateKey(string privateKey)
         {
             var keyStructure = RsaPrivateKeyStructure.GetInstance(Convert.FromBase64String(privateKey));
             return new RsaPrivateCrtKeyParameters(keyStructure.Modulus, keyStructure.PublicExponent, keyStructure.PrivateExponent, keyStructure.Prime1, keyStructure.Prime2, keyStructure.Exponent1, keyStructure.Exponent2, keyStructure.Coefficient);
         }
 
-        public static AsymmetricKeyParameter GetKeyParameterFormPublicKey(string publicKey)
+        public static ICipherParameters GetKeyParameterFormPublicKey(string publicKey)
         {
             return PublicKeyFactory.CreateKey(Convert.FromBase64String(publicKey));
         }
@@ -48,7 +48,7 @@ namespace Essensoft.AspNetCore.Payment.Security
             };
         }
 
-        public static AsymmetricKeyParameter GetPublicKeyParameterFormAsn1PublicKey(string publicKey)
+        public static ICipherParameters GetPublicKeyParameterFormAsn1PublicKey(string publicKey)
         {
             var keyStructure = RsaPublicKeyStructure.GetInstance(Asn1Object.FromByteArray(Convert.FromBase64String(publicKey)));
             return new RsaKeyParameters(false, keyStructure.Modulus, keyStructure.PublicExponent);
