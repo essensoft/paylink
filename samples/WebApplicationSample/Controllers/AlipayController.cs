@@ -1,3 +1,4 @@
+using System.Text;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
@@ -165,7 +166,7 @@ namespace WebApplicationSample.Controllers
             req.SetReturnUrl(viewModel.ReturnUrl);
 
             var response = await _client.PageExecuteAsync(req);
-            return Content(response.Body, "text/html;charset=utf-8");
+            return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
         /// <summary>
@@ -199,7 +200,7 @@ namespace WebApplicationSample.Controllers
             req.SetReturnUrl(viewMode.ReturnUrl);
 
             var response = await _client.PageExecuteAsync(req);
-            return Content(response.Body, "text/html;charset=utf-8");
+            return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
         /// <summary>

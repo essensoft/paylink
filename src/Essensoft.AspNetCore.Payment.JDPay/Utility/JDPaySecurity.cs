@@ -106,14 +106,14 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             return sb.Remove(sb.Length - 1, 1).ToString();
         }
 
-        public static string RSASign(string sourceSignString, AsymmetricKeyParameter privateKey)
+        public static string RSASign(string sourceSignString, ICipherParameters privateKey)
         {
             var sha256SourceSignString = SHA256.Compute(sourceSignString);
             var newsks = RSA_ECB_PKCS1Padding.Encrypt(Encoding.UTF8.GetBytes(sha256SourceSignString), privateKey);
             return Convert.ToBase64String(newsks, Base64FormattingOptions.InsertLineBreaks);
         }
 
-        public static bool RSACheckContent(string content, string sign, AsymmetricKeyParameter publicKey)
+        public static bool RSACheckContent(string content, string sign, ICipherParameters publicKey)
         {
             var sha256SourceSignString = SHA256.Compute(content);
             var decryptArr = RSA_ECB_PKCS1Padding.Decrypt(Convert.FromBase64String(sign), publicKey);

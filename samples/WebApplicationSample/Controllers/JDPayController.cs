@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Text;
+using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.JDPay;
 using Essensoft.AspNetCore.Payment.JDPay.Notify;
 using Essensoft.AspNetCore.Payment.JDPay.Request;
@@ -46,7 +47,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var response = await _client.PageExecuteAsync(request);
-            return Content(response.Body, "text/html;charset=utf-8");
+            return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
         [HttpGet]
@@ -72,7 +73,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var response = await _client.PageExecuteAsync(request);
-            return Content(response.Body, "text/html;charset=utf-8");
+            return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
         [HttpGet]

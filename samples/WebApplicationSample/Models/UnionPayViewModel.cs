@@ -2,7 +2,7 @@
 
 namespace WebApplicationSample.Models
 {
-    public class UnionPayForm_6_2_FrontConsumeViewModel
+    public class GatewayPayFrontConsumeFrontConsumeViewModel
     {
         [Required]
         [Display(Name = "orderId")]
@@ -21,7 +21,7 @@ namespace WebApplicationSample.Models
         public string CurrencyCode { get; set; }
 
         [Display(Name = "payTimeout")]
-        public string PayTimeout { get; set; }
+        public string PayTimeOut { get; set; }
 
         [Display(Name = "frontUrl")]
         public string FrontUrl { get; set; }

@@ -35,30 +35,6 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         public IOptionsSnapshot<QPayOptions> OptionsSnapshotAccessor { get; set; }
 
-        #region Common Method
-
-        private void CheckResponseSign(QPayResponse response, QPayOptions options)
-        {
-            if (string.IsNullOrEmpty(response.Body) || response?.Parameters == null)
-            {
-                throw new Exception("sign check fail: Body is Empty!");
-            }
-
-            if (response.Parameters.TryGetValue("sign", out var sign))
-            {
-                if (response.Parameters["return_code"] == "SUCCESS" && !string.IsNullOrEmpty(sign))
-                {
-                    var cal_sign = QPaySignature.SignWithKey(response.Parameters, options.Key);
-                    if (cal_sign != sign)
-                    {
-                        throw new Exception("sign check fail: check Sign and Data Fail!");
-                    }
-                }
-            }
-        }
-
-        #endregion
-
         #region IQPayClient Members
 
         public async Task<T> ExecuteAsync<T>(IQPayRequest<T> request) where T : QPayResponse
@@ -88,7 +64,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
             using (var client = ClientFactory.CreateClient())
             {
-                var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
+                var body = await client.DoPostAsync(request.GetRequestUrl(), content);
                 Logger.Log(options.LogLevel, "Response:{body}", body);
 
                 var parser = new QPayXmlParser<T>();
@@ -127,13 +103,37 @@ namespace Essensoft.AspNetCore.Payment.QPay
             Logger.Log(options.LogLevel, "Request:{content}", content);
             using (var client = string.IsNullOrEmpty(certificateName) ? ClientFactory.CreateClient() : ClientFactory.CreateClient(certificateName))
             {
-                var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(), content);
+                var body = await client.DoPostAsync(request.GetRequestUrl(), content);
                 Logger.Log(options.LogLevel, "Response:{body}", body);
 
                 var parser = new QPayXmlParser<T>();
                 var rsp = parser.Parse(body);
                 CheckResponseSign(rsp, options);
                 return rsp;
+            }
+        }
+
+        #endregion
+
+        #region Common Method
+
+        private void CheckResponseSign(QPayResponse response, QPayOptions options)
+        {
+            if (string.IsNullOrEmpty(response.Body) || response?.Parameters == null)
+            {
+                throw new Exception("sign check fail: Body is Empty!");
+            }
+
+            if (response.Parameters.TryGetValue("sign", out var sign))
+            {
+                if (response.Parameters["return_code"] == "SUCCESS" && !string.IsNullOrEmpty(sign))
+                {
+                    var cal_sign = QPaySignature.SignWithKey(response.Parameters, options.Key);
+                    if (cal_sign != sign)
+                    {
+                        throw new Exception("sign check fail: check Sign and Data Fail!");
+                    }
+                }
             }
         }
 

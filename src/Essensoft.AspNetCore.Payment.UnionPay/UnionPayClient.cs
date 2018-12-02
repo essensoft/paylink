@@ -19,6 +19,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         private const string ACCESSTYPE = "accessType";
         private const string MERID = "merId";
         private const string ENCRYPTCERTID = "encryptCertId";
+        private const string ACCNO = "accNo";
 
         #region UnionPayClient Constructors
 
@@ -53,7 +54,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             var version = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
 
             var merId = options.MerId;
-            if (options.TestMode && (request is UnionPayForm05_7_FileTransferRequest || request is UnionPayForm_6_6_FileTransferRequest))
+            if (options.TestMode && (request is UnionPayGatewayPayFileTransferRequest || request is UnionPayNoRedirectPayFileTransferRequest || request is UnionPayQrCodePayFileTransferRequest || request is UnionPayWapPayFileTransferRequest))
             {
                 merId = "700000000000001";
             }
@@ -69,7 +70,16 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
             if (request.HasEncryptCertId())
             {
-                txtParams.Add(ENCRYPTCERTID, options.EncryptCertificate.certId);
+                if (txtParams.TryGetValue(ACCNO, out var accNo))
+                {
+                    if (!string.IsNullOrEmpty(accNo))
+                    {
+                        // 对敏感信息加密
+                        txtParams[ACCNO] = UnionPaySignature.EncryptData(accNo, options.EncryptCertificate.key);
+
+                        txtParams.Add(ENCRYPTCERTID, options.EncryptCertificate.certId);
+                    }
+                }
             }
 
             UnionPaySignature.Sign(txtParams, options.SignCertificate.certId, options.SignCertificate.key, options.SecureKey);
@@ -79,7 +89,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
             using (var client = ClientFactory.CreateClient())
             {
-                var body = await HttpClientUtility.DoPostAsync(client, request.GetRequestUrl(options.TestMode), query);
+                var body = await client.DoPostAsync(request.GetRequestUrl(options.TestMode), query);
                 Logger.Log(options.LogLevel, "Response:{content}", body);
 
                 var dic = ParseQueryString(body);
@@ -108,55 +118,51 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         public Task<T> PageExecuteAsync<T>(IUnionPayRequest<T> request) where T : UnionPayResponse
         {
-            return PageExecuteAsync(request, null, "POST");
+            return PageExecuteAsync(request, null);
         }
 
         public Task<T> PageExecuteAsync<T>(IUnionPayRequest<T> request, string optionsName) where T : UnionPayResponse
         {
-            return PageExecuteAsync(request, optionsName, "POST");
-        }
-
-        public Task<T> PageExecuteAsync<T>(IUnionPayRequest<T> request, string optionsName, string reqMethod) where T : UnionPayResponse
-        {
             var options = string.IsNullOrEmpty(optionsName) ? OptionsSnapshotAccessor.Value : OptionsSnapshotAccessor.Get(optionsName);
             var version = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
+            var merId = options.MerId;
+
+            if (options.TestMode && (request is UnionPayGatewayPayFileTransferRequest || request is UnionPayNoRedirectPayFileTransferRequest || request is UnionPayQrCodePayFileTransferRequest || request is UnionPayWapPayFileTransferRequest))
+            {
+                merId = "700000000000001";
+            }
+
             var txtParams = new UnionPayDictionary(request.GetParameters())
             {
                 { VERSION, version },
                 { ENCODING, options.Encoding },
                 { SIGNMETHOD, options.SignMethod },
                 { ACCESSTYPE, options.AccessType },
-                { MERID, options.MerId }
+                { MERID, merId }
             };
+
+            if (request.HasEncryptCertId())
+            {
+                if (txtParams.TryGetValue(ACCNO, out var accNo))
+                {
+                    if (!string.IsNullOrEmpty(accNo))
+                    {
+                        // 对敏感信息加密
+                        txtParams[ACCNO] = UnionPaySignature.EncryptData(accNo, options.EncryptCertificate.key);
+
+                        txtParams.Add(ENCRYPTCERTID, options.EncryptCertificate.certId);
+                    }
+                }
+            }
 
             UnionPaySignature.Sign(txtParams, options.SignCertificate.certId, options.SignCertificate.key, options.SecureKey);
 
             var rsp = Activator.CreateInstance<T>();
 
             var url = request.GetRequestUrl(options.TestMode);
-            if (reqMethod.ToUpper() == "GET")
-            {
-                //拼接get请求的url
-                var tmpUrl = url;
-                if (txtParams != null && txtParams.Count > 0)
-                {
-                    if (tmpUrl.Contains("?"))
-                    {
-                        tmpUrl = tmpUrl + "&" + UnionPayUtility.BuildQuery(txtParams);
-                    }
-                    else
-                    {
-                        tmpUrl = tmpUrl + "?" + UnionPayUtility.BuildQuery(txtParams);
-                    }
-                }
-                rsp.Body = tmpUrl;
-            }
-            else
-            {
-                //输出post表单
-                rsp.Body = BuildHtmlRequest(url, txtParams, reqMethod);
-            }
 
+            //输出post表单
+            rsp.Body = BuildHtmlRequest(url, txtParams);
             return Task.FromResult(rsp);
         }
 
@@ -164,7 +170,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         #region Common Method
 
-        private string BuildHtmlRequest(string url, UnionPayDictionary dicPara, string strMethod)
+        private string BuildHtmlRequest(string url, UnionPayDictionary dicPara)
         {
             var sbHtml = new StringBuilder();
             sbHtml.Append("<form id='submit' name='submit' action='" + url + "' method='post' style='display:none;'>");

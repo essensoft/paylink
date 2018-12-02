@@ -7,6 +7,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
     {
         public X509Certificate cert;
         public string certId;
-        public AsymmetricKeyParameter key;
+        public ICipherParameters key;
     }
 }

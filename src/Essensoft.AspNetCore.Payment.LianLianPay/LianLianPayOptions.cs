@@ -6,8 +6,8 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     public class LianLianPayOptions
     {
-        internal AsymmetricKeyParameter PrivateKey;
-        internal AsymmetricKeyParameter PublicKey;
+        internal ICipherParameters PrivateKey;
+        internal ICipherParameters PublicKey;
 
         private string rsaPrivateKey;
         private string rsaPublicKey;

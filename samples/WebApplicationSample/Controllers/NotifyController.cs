@@ -375,13 +375,13 @@ namespace WebApplicationSample.Controllers
         /// 网关支付 - 跳转网关页面支付通知
         /// </summary>
         /// <returns></returns>
-        [Route("frontconsume62")]
+        [Route("gatewaypayfrontconsume")]
         [HttpPost]
-        public async Task<IActionResult> FrontConsume62()
+        public async Task<IActionResult> GatewayPayFrontConsume()
         {
             try
             {
-                var notify = await _client.ExecuteAsync<UnionPayForm_6_2_FrontConsumeNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<UnionPayGatewayPayFrontConsumeNotifyResponse>(Request);
                 Console.WriteLine("OrderId: " + notify.OrderId + " respCode :" + notify.RespCode);
                 return UnionPayNotifyResult.Ok;
             }
