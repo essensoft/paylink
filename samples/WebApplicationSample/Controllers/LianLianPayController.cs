@@ -18,17 +18,30 @@ namespace WebApplicationSample.Controllers
             _notifyClient = notifyClient;
         }
 
+        /// <summary>
+        /// 连连支付指引页
+        /// </summary>
+        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
         }
 
+        /// <summary>
+        /// WEB快捷支付
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult WebQuickPay()
         {
             return View();
         }
 
+        /// <summary>
+        /// WEB快捷支付
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> WebQuickPay(LianLianPayWebQuickPayViewModel viewModel)
         {
@@ -49,12 +62,21 @@ namespace WebApplicationSample.Controllers
             return Redirect(response.GatewayUrl);
         }
 
+        /// <summary>
+        /// H5快捷支付
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult H5QuickPay()
         {
             return View();
         }
 
+        /// <summary>
+        /// H5快捷支付
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> H5QuickPay(LianLianPayH5QuickPayViewModel viewModel)
         {
@@ -75,12 +97,21 @@ namespace WebApplicationSample.Controllers
             return Redirect(response.GatewayUrl);
         }
 
+        /// <summary>
+        /// 订单查询
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult OrderQuery()
         {
             return View();
         }
 
+        /// <summary>
+        /// 订单查询
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> OrderQuery(LianLianPayOrderQueryViewModel viewModel)
         {
@@ -95,12 +126,21 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 退款
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Refund()
         {
             return View();
         }
 
+        /// <summary>
+        /// 退款
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Refund(LianLianPayRefundViewModel viewModel)
         {
@@ -119,12 +159,21 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 退款查询
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult RefundQuery()
         {
             return View();
         }
 
+        /// <summary>
+        /// 退款查询
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> RefundQuery(LianLianPayRefundQueryViewModel viewModel)
         {
@@ -139,6 +188,10 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 快捷支付 - 同步跳转
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> QuickPayReturn()
         {

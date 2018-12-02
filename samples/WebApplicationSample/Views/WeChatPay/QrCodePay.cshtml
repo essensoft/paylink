@@ -1,45 +1,41 @@
-﻿@model QPayUnifiedOrderViewModel
+﻿@model WeChatPayQrCodePayViewModel
 @{
     ViewData["Title"] = "扫码支付-统一下单";
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a asp-controller="QPay" asp-action="Index">QQ钱包</a></li>
+        <li class="breadcrumb-item"><a asp-controller="WeChatPay" asp-action="Index">微信支付</a></li>
         <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
     </ol>
 </nav>
 <br />
 <div class="card">
     <div class="card-body">
-        <form asp-controller="QPay" asp-action="QRPay">
+        <form asp-controller="WeChatPay" asp-action="QrCodePay">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="OutTradeNo"></label>
-                <input type="text" class="form-control" asp-for="OutTradeNo" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")" />
+                <input type="text" class="form-control" asp-for="OutTradeNo" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")">
             </div>
             <div class="form-group">
                 <label asp-for="Body"></label>
-                <input type="text" class="form-control" asp-for="Body" value="扫码支付测试" />
-            </div>
-            <div class="form-group">
-                <label asp-for="FeeType"></label>
-                <input type="text" class="form-control" asp-for="FeeType" value="CNY" />
+                <input type="text" class="form-control" asp-for="Body" value="微信扫码支付测试">
             </div>
             <div class="form-group">
                 <label asp-for="TotalFee"></label>
-                <input type="text" class="form-control" asp-for="TotalFee" value="1" />
+                <input type="text" class="form-control" asp-for="TotalFee" value="1">
             </div>
             <div class="form-group">
                 <label asp-for="SpbillCreateIp"></label>
-                <input type="text" class="form-control" asp-for="SpbillCreateIp" value="127.0.0.1" />
-            </div>
-            <div class="form-group">
-                <label asp-for="TradeType"></label>
-                <input type="text" class="form-control" asp-for="TradeType" value="NATIVE" />
+                <input type="text" class="form-control" asp-for="SpbillCreateIp" value="127.0.0.1">
             </div>
             <div class="form-group">
                 <label asp-for="NotifyUrl"></label>
-                <input type="text" class="form-control" asp-for="NotifyUrl" value="http://*/notify/qpay/unifiedorder" />
+                <input type="text" class="form-control" asp-for="NotifyUrl" value="http://*/notify/wechatpay/unifiedorder">
+            </div>
+            <div class="form-group">
+                <label asp-for="TradeType"></label>
+                <input type="text" class="form-control" asp-for="TradeType" value="NATIVE">
             </div>
             <button type="submit" class="btn btn-primary">提交请求</button>
         </form>
