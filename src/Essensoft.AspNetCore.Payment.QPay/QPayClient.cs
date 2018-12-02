@@ -15,6 +15,10 @@ namespace Essensoft.AspNetCore.Payment.QPay
         private const string NONCE_STR = "nonce_str";
         private const string SIGN = "sign";
 
+        private ILogger _logger;
+        private IHttpClientFactory _clientFactory;
+        private IOptionsSnapshot<QPayOptions> _optionsSnapshotAccessor;
+
         #region QPayClient Constructors
 
         public QPayClient(
@@ -28,10 +32,6 @@ namespace Essensoft.AspNetCore.Payment.QPay
         }
 
         #endregion
-
-        private ILogger _logger;
-        private IHttpClientFactory _clientFactory;
-        private IOptionsSnapshot<QPayOptions> _optionsSnapshotAccessor;
 
         #region IQPayClient Members
 
