@@ -12,6 +12,9 @@ namespace Essensoft.AspNetCore.Payment.QPay
 {
     public class QPayNotifyClient : IQPayNotifyClient
     {
+        private ILogger _logger;
+        private IOptionsSnapshot<QPayOptions> _optionsSnapshotAccessor;
+
         #region QPayNotifyClient Constructors
 
         public QPayNotifyClient(
@@ -23,9 +26,6 @@ namespace Essensoft.AspNetCore.Payment.QPay
         }
 
         #endregion
-
-        private ILogger _logger;
-        private IOptionsSnapshot<QPayOptions> _optionsSnapshotAccessor;
 
         #region IQPayNotifyClient Members
 

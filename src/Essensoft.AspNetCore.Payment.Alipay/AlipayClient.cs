@@ -36,6 +36,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         private const string APP_AUTH_TOKEN = "app_auth_token";
         private const string RETURN_URL = "return_url";
 
+        private ILogger _logger;
+        private IHttpClientFactory _clientFactory;
+        private IOptionsSnapshot<AlipayOptions> _optionsSnapshotAccessor;
+
         #region AlipayClient Constructors
 
         public AlipayClient(
@@ -49,10 +53,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         }
 
         #endregion
-
-        private ILogger _logger;
-        private IHttpClientFactory _clientFactory;
-        private IOptionsSnapshot<AlipayOptions> _optionsSnapshotAccessor;
 
         #region IAlipayClient Members
 

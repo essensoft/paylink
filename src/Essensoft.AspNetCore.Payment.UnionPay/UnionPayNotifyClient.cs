@@ -10,6 +10,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 {
     public class UnionPayNotifyClient : IUnionPayNotifyClient
     {
+        private ILogger _logger;
+        private IOptionsSnapshot<UnionPayOptions> _optionsSnapshotAccessor;
+
         #region UnionPayNotifyClient Constructors
 
         public UnionPayNotifyClient(
@@ -21,9 +24,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         }
 
         #endregion
-
-        private ILogger _logger;
-        private IOptionsSnapshot<UnionPayOptions> _optionsSnapshotAccessor;
 
         #region IUnionPayNotifyClient Members
 

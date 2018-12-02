@@ -31,6 +31,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         private const string signType = "signType";
         private const string paySign = "paySign";
 
+        private ILogger _logger;
+        private IHttpClientFactory _clientFactory;
+        private IOptionsSnapshot<WeChatPayOptions> _optionsSnapshotAccessor;
+
         #region WeChatPayClient Constructors
 
         public WeChatPayClient(
@@ -44,10 +48,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         }
 
         #endregion
-
-        private ILogger _logger;
-        private IHttpClientFactory _clientFactory;
-        private IOptionsSnapshot<WeChatPayOptions> _optionsSnapshotAccessor;
 
         #region IWeChatPayClient Members
 
