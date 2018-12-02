@@ -3,6 +3,9 @@ using Essensoft.AspNetCore.Payment.QPay.Response;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Request
 {
+    /// <summary>
+    /// 提交付款码支付
+    /// </summary>
     public class QPayMicroPayRequest : IQPayRequest<QPayMicroPayResponse>
     {
         /// <summary>

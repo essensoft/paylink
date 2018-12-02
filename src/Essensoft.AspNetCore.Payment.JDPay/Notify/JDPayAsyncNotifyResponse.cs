@@ -4,6 +4,9 @@ using Essensoft.AspNetCore.Payment.JDPay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.JDPay.Notify
 {
+    /// <summary>
+    /// 异步通知接口
+    /// </summary>
     [XmlRoot("jdpay")]
     public class JDPayAsyncNotifyResponse : JDPayNotifyResponse
     {

@@ -2,6 +2,9 @@
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
 {
+    /// <summary>
+    /// 申请退款 - 退款结果通知
+    /// </summary>
     [XmlRoot("xml")]
     public class WeChatPayRefundNotifyResponse : WeChatPayNotifyResponse
     {
