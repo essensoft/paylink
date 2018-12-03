@@ -66,7 +66,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 { MERID, merId }
             };
 
-            if (request.HasEncryptCertId())
+            if (request.HasEncryptCertId() && options.EncryptCertificate?.key != null)
             {
                 if (txtParams.TryGetValue(ACCNO, out var accNo))
                 {
@@ -139,7 +139,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 { MERID, merId }
             };
 
-            if (request.HasEncryptCertId())
+            if (request.HasEncryptCertId() && options.EncryptCertificate?.key != null)
             {
                 if (txtParams.TryGetValue(ACCNO, out var accNo))
                 {
