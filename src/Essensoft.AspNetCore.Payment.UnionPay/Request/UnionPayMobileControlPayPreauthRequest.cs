@@ -54,11 +54,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         public string OrderId { get; set; }
 
         /// <summary>
-        /// 标记化支付信息域
-        /// </summary>
-        public string TokenPayData { get; set; }
-
-        /// <summary>
         /// 订单描述
         /// </summary>
         public string OrderDesc { get; set; }
@@ -79,34 +74,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         public string SubMerName { get; set; }
 
         /// <summary>
-        /// 商户简称
+        /// 前台通知地址	
         /// </summary>
-        public string MerAbbr { get; set; }
-
-        /// <summary>
-        /// 商户类别
-        /// </summary>
-        public string MerCatCode { get; set; }
-
-        /// <summary>
-        /// 商户名称
-        /// </summary>
-        public string MerName { get; set; }
-
-        /// <summary>
-        /// 收单机构代码
-        /// </summary>
-        public string AcqInsCode { get; set; }
-
-        /// <summary>
-        /// 银行卡验证信息及身份信息
-        /// </summary>
-        public string CustomerInfo { get; set; }
-
-        /// <summary>
-        /// 有卡交易信息域
-        /// </summary>
-        public string CardTransData { get; set; }
+        public string FrontUrl { get; set; }
 
         /// <summary>
         /// 账号
@@ -114,9 +84,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         public string AccNo { get; set; }
 
         /// <summary>
-        /// 账号类型(卡介质)
+        /// 支付卡类型
         /// </summary>
-        public string AccType { get; set; }
+        public string PayCardType { get; set; }
 
         /// <summary>
         /// 保留域
@@ -124,14 +94,14 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         public string Reserved { get; set; }
 
         /// <summary>
-        /// 持卡人IP
-        /// </summary>
-        public string CustomerIp { get; set; }
-
-        /// <summary>
         /// 发卡机构代码
         /// </summary>
         public string IssInsCode { get; set; }
+
+        /// <summary>
+        /// 分账域
+        /// </summary>
+        public string AccSplitData { get; set; }
 
         /// <summary>
         /// 风控信息域
@@ -139,9 +109,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         public string RiskRateInfo { get; set; }
 
         /// <summary>
-        /// 前台通知地址	
+        /// 默认支付方式
         /// </summary>
-        public string FrontUrl { get; set; }
+        public string DefaultPayType { get; set; }
 
         /// <summary>
         /// 请求方保留域
@@ -149,14 +119,14 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         public string ReqReserved { get; set; }
 
         /// <summary>
-        /// 终端号
+        /// 银行卡验证信息及身份信息
         /// </summary>
-        public string TermId { get; set; }
+        public string CustomerInfo { get; set; }
 
         /// <summary>
-        /// 终端信息域
+        /// 支付超时时间
         /// </summary>
-        public string UserMac { get; set; }
+        public string PayTimeOut { get; set; }
 
         #region IUnionPayRequest
 
@@ -185,27 +155,21 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "txnSubType", TxnSubType },
                 { "channelType", ChannelType },
                 { "orderId", OrderId },
-                { "tokenPayData", TokenPayData },
                 { "orderDesc", OrderDesc },
                 { "subMerId", SubMerId },
                 { "subMerAbbr", SubMerAbbr },
                 { "subMerName", SubMerName },
-                { "merAbbr", MerAbbr },
-                { "merCatCode", MerCatCode },
-                { "merName", MerName },
-                { "acqInsCode", AcqInsCode },
-                { "customerInfo", CustomerInfo },
-                { "cardTransData", CardTransData },
-                { "accNo", AccNo },
-                { "accType", AccType },
-                { "reserved", Reserved },
-                { "customerIp", CustomerIp },
-                { "issInsCode", IssInsCode },
-                { "riskRateInfo", RiskRateInfo },
                 { "frontUrl", FrontUrl },
+                { "accNo", AccNo },
+                { "payCardType", PayCardType },
+                { "reserved", Reserved },
+                { "issInsCode", IssInsCode },
+                { "accSplitData", AccSplitData },
+                { "riskRateInfo", RiskRateInfo },
+                { "defaultPayType", DefaultPayType },
                 { "reqReserved", ReqReserved },
-                { "termId", TermId },
-                { "userMac", UserMac }
+                { "customerInfo", CustomerInfo },
+                { "payTimeout", PayTimeOut },
             };
             return parameters;
         }
