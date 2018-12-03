@@ -189,12 +189,12 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
 
         public string GetRequestUrl(bool isTest)
         {
-            return isTest ? "https://gateway.test.95516.com/gateway/api/backTransReq.do" : "https://gateway.95516.com/gateway/api/backTransReq.do";
+            return isTest ? "https://gateway.test.95516.com/gateway/api/appTransReq.do" : "https://gateway.95516.com/gateway/api/appTransReq.do";
         }
 
         public bool HasEncryptCertId()
         {
-            return true;
+            return false;
         }
 
         #endregion
