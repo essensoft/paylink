@@ -8,6 +8,9 @@ using Microsoft.Extensions.Options;
 
 namespace Essensoft.AspNetCore.Payment.QPay
 {
+    /// <summary>
+    /// QPay 客户端。
+    /// </summary>
     public class QPayClient : IQPayClient
     {
         private const string APPID = "appid";
@@ -43,7 +46,6 @@ namespace Essensoft.AspNetCore.Payment.QPay
         public async Task<T> ExecuteAsync<T>(IQPayRequest<T> request, string optionsName) where T : QPayResponse
         {
             var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
-            // 字典排序
             var sortedTxtParams = new QPayDictionary(request.GetParameters())
             {
                 { MCHID, options.MchId },
@@ -89,7 +91,6 @@ namespace Essensoft.AspNetCore.Payment.QPay
         public async Task<T> ExecuteAsync<T>(IQPayCertificateRequest<T> request, string optionsName, string certificateName) where T : QPayResponse
         {
             var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
-            // 字典排序
             var sortedTxtParams = new QPayDictionary(request.GetParameters())
             {
                 { MCHID, options.MchId },
@@ -129,17 +130,17 @@ namespace Essensoft.AspNetCore.Payment.QPay
         {
             if (string.IsNullOrEmpty(response.Body))
             {
-                throw new Exception("sign check fail: Body is Empty!");
+                throw new QPayException("sign check fail: Body is Empty!");
             }
 
             if (response.Parameters.Count == 0)
             {
-                throw new Exception("sign check fail: Parameters is Empty!");
+                throw new QPayException("sign check fail: Parameters is Empty!");
             }
 
             if (!response.Parameters.TryGetValue("sign", out var sign))
             {
-                throw new Exception("sign check fail: sign is Empty!");
+                throw new QPayException("sign check fail: sign is Empty!");
             }
 
             if (response.Parameters["return_code"] == "SUCCESS" && !string.IsNullOrEmpty(sign))
@@ -147,7 +148,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
                 var cal_sign = QPaySignature.SignWithKey(response.Parameters, options.Key);
                 if (cal_sign != sign)
                 {
-                    throw new Exception("sign check fail: check Sign and Data Fail!");
+                    throw new QPayException("sign check fail: check Sign and Data Fail!");
                 }
             }
         }

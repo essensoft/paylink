@@ -224,7 +224,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<QPayUnifiedOrderNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<QPayUnifiedOrderNotify>(Request);
                 if ("SUCCESS" == notify.TradeState)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -248,7 +248,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<QPayMicroPayNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<QPayMicroPayNotify>(Request);
                 if ("SUCCESS" == notify.TradeState)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);

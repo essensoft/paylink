@@ -10,6 +10,9 @@ using Microsoft.Extensions.Options;
 
 namespace Essensoft.AspNetCore.Payment.QPay
 {
+    /// <summary>
+    /// QPay 通知解析客户端。
+    /// </summary>
     public class QPayNotifyClient : IQPayNotifyClient
     {
         private readonly ILogger _logger;
@@ -29,12 +32,12 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         #region IQPayNotifyClient Members
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : QPayNotifyResponse
+        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : QPayNotify
         {
             return await ExecuteAsync<T>(request, null);
         }
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : QPayNotifyResponse
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : QPayNotify
         {
             var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
@@ -50,27 +53,27 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         #region Common Method
 
-        private void CheckNotifySign(QPayNotifyResponse response, QPayOptions options)
+        private void CheckNotifySign(QPayNotify response, QPayOptions options)
         {
             if (string.IsNullOrEmpty(response.Body))
             {
-                throw new Exception("sign check fail: Body is Empty!");
+                throw new QPayException("sign check fail: Body is Empty!");
             }
 
             if (response.Parameters.Count == 0)
             {
-                throw new Exception("sign check fail: Parameters is Empty!");
+                throw new QPayException("sign check fail: Parameters is Empty!");
             }
 
             if (!response.Parameters.TryGetValue("sign", out var sign))
             {
-                throw new Exception("sign check fail: sign is Empty!");
+                throw new QPayException("sign check fail: sign is Empty!");
             }
 
             var cal_sign = QPaySignature.SignWithKey(response.Parameters, options.Key);
             if (cal_sign != sign)
             {
-                throw new Exception("sign check fail: check Sign and Data Fail!");
+                throw new QPayException("sign check fail: check Sign and Data Fail!");
             }
         }
 

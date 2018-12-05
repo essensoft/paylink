@@ -1,7 +1,7 @@
 ﻿namespace Essensoft.AspNetCore.Payment.QPay.Parser
 {
     /// <summary>
-    /// QQ钱包结果解析
+    /// QPay 解析器。
     /// </summary>
     public interface IQPayParser<T> where T : QPayObject
     {
