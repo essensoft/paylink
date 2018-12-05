@@ -401,7 +401,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _notifyClient.ExecuteAsync<AlipayTradePagePayReturnResponse>(Request);
+                var notify = await _notifyClient.ExecuteAsync<AlipayTradePagePayReturn>(Request);
                 ViewData["response"] = "支付成功";
                 return View();
             }
@@ -421,7 +421,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _notifyClient.ExecuteAsync<AlipayTradeWapPayReturnResponse>(Request);
+                var notify = await _notifyClient.ExecuteAsync<AlipayTradeWapPayReturn>(Request);
                 ViewData["response"] = "支付成功";
                 return View();
             }
