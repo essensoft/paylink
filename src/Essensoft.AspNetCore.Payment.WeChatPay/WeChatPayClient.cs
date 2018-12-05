@@ -82,7 +82,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
                 var parser = new WeChatPayXmlParser<T>();
                 var rsp = parser.Parse(body);
-                CheckResponseSign(rsp, options);
+
+                if (request.IsCheckResponseSign())
+                {
+                    CheckResponseSign(rsp, options);
+                }
+
                 return rsp;
             }
         }
@@ -201,7 +206,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
                 var parser = new WeChatPayXmlParser<T>();
                 var rsp = parser.Parse(body);
-                CheckResponseSign(rsp, options, signType, excludeSignType);
+
+                if (request.IsCheckResponseSign())
+                {
+                    CheckResponseSign(rsp, options, signType, excludeSignType);
+                }
+
                 return rsp;
             }
         }
@@ -261,15 +271,17 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 throw new Exception("sign check fail: Body is Empty!");
             }
 
-            if (response.Parameters.TryGetValue("sign", out var sign))
+            if (!response.Parameters.TryGetValue("sign", out var sign))
             {
-                if (response.Parameters["return_code"] == "SUCCESS" && !string.IsNullOrEmpty(sign))
+                throw new Exception("sign check fail: sign is Empty!");
+            }
+
+            if (response.Parameters["return_code"] == "SUCCESS" && !string.IsNullOrEmpty(sign))
+            {
+                var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key, useMD5, excludeSignType);
+                if (cal_sign != sign)
                 {
-                    var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key, useMD5, excludeSignType);
-                    if (cal_sign != sign)
-                    {
-                        throw new Exception("sign check fail: check Sign and Data Fail!");
-                    }
+                    throw new Exception("sign check fail: check Sign and Data Fail!");
                 }
             }
         }

@@ -21,5 +21,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// </summary>
         /// <returns>文本请求参数字典</returns>
         IDictionary<string, string> GetParameters();
+
+        /// <summary>
+        /// 是否验证应答内容签名
+        /// </summary>
+        /// <returns>是否验证</returns>
+        bool IsCheckResponseSign();
     }
 }
