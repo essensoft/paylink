@@ -90,12 +90,12 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 var body = await client.DoPostAsync(request.GetRequestUrl(options.TestMode), query);
                 _logger.Log(options.LogLevel, "Response:{content}", body);
 
-                var dic = ParseQueryString(body);
-
                 if (string.IsNullOrEmpty(body))
                 {
                     throw new Exception("sign check fail: Body is Empty!");
                 }
+
+                var dic = ParseQueryString(body);
 
                 var ifValidateCNName = !options.TestMode;
                 if (!UnionPaySignature.Validate(dic, options.RootCertificate.cert, options.MiddleCertificate.cert, options.SecureKey, ifValidateCNName))
