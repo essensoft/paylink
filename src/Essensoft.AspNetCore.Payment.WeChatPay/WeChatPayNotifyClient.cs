@@ -14,8 +14,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     public class WeChatPayNotifyClient : IWeChatPayNotifyClient
     {
-        private ILogger _logger;
-        private IOptionsSnapshot<WeChatPayOptions> _optionsSnapshotAccessor;
+        private readonly ILogger _logger;
+        private readonly IOptionsSnapshot<WeChatPayOptions> _optionsSnapshotAccessor;
 
         #region WeChatPayNotifyClient Constructors
 

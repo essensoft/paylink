@@ -21,9 +21,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         private const string ENCRYPTCERTID = "encryptCertId";
         private const string ACCNO = "accNo";
 
-        private ILogger _logger;
-        private IHttpClientFactory _clientFactory;
-        private IOptionsSnapshot<UnionPayOptions> _optionsSnapshotAccessor;
+        private readonly ILogger _logger;
+        private readonly IHttpClientFactory _clientFactory;
+        private readonly IOptionsSnapshot<UnionPayOptions> _optionsSnapshotAccessor;
 
         #region UnionPayClient Constructors
 

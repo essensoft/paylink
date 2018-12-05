@@ -21,9 +21,9 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         private const string TIME_STAMP = "time_stamp";
         private const string SIGN = "sign";
 
-        private ILogger _logger;
-        private IHttpClientFactory _clientFactory;
-        private IOptionsSnapshot<LianLianPayOptions> _optionsSnapshotAccessor;
+        private readonly ILogger _logger;
+        private readonly IHttpClientFactory _clientFactory;
+        private readonly IOptionsSnapshot<LianLianPayOptions> _optionsSnapshotAccessor;
 
         #region LianLianPayClient Constructors
 

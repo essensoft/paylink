@@ -15,8 +15,8 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 {
     public class JDPayNotifyClient : IJDPayNotifyClient
     {
-        private ILogger _logger;
-        private IOptionsSnapshot<JDPayOptions> _optionsSnapshotAccessor;
+        private readonly ILogger _logger;
+        private readonly IOptionsSnapshot<JDPayOptions> _optionsSnapshotAccessor;
 
         #region JDPayNotifyClient Constructors
 
