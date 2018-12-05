@@ -12,8 +12,8 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     public class LianLianPayNotifyClient : ILianLianPayNotifyClient
     {
-        private ILogger _logger;
-        private IOptionsSnapshot<LianLianPayOptions> _optionsSnapshotAccessor;
+        private readonly ILogger _logger;
+        private readonly IOptionsSnapshot<LianLianPayOptions> _optionsSnapshotAccessor;
 
         #region LianLianPayNotifyClient Constructors
 
