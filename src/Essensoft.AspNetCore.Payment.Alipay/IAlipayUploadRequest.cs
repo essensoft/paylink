@@ -4,7 +4,7 @@ using Essensoft.AspNetCore.Payment.Alipay.Utility;
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
     /// <summary>
-    /// Alipay上传请求接口，支持同时上传多个文件。
+    /// Alipay 上传请求接口，支持同时上传多个文件。
     /// </summary>
     public interface IAlipayUploadRequest<T> : IAlipayRequest<T> where T : AlipayResponse
     {

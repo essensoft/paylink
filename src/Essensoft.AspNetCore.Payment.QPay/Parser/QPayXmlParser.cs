@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace Essensoft.AspNetCore.Payment.QPay.Parser
 {
     /// <summary>
-    /// QPay XML 解析器。
+    /// QPay XML 解释器。
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public class QPayXmlParser<T> : IQPayParser<T> where T : QPayObject

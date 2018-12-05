@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
 {
     /// <summary>
-    /// WeChatPay ListPropert解析。
+    /// WeChatPay ListPropert 解释器。
     /// </summary>
     public class WeChatPayListPropertyParser
     {

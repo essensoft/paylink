@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Essensoft.AspNetCore.Payment.QPay.Parser
 {
     /// <summary>
-    /// QPay ListProperty 解析器。
+    /// QPay ListProperty 解释器。
     /// </summary>
     public class QPayListPropertyParser
     {
