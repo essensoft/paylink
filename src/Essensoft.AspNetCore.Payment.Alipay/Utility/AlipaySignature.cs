@@ -5,6 +5,9 @@ using System.Text;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Utility
 {
+    /// <summary>
+    /// Alipay Ç©ÃûÀà¡£
+    /// </summary>
     public class AlipaySignature
     {
         public static readonly byte[] AES_IV = InitIv(16);

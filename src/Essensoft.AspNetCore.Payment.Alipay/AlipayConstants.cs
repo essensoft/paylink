@@ -1,6 +1,6 @@
 ﻿namespace Essensoft.AspNetCore.Payment.Alipay
 {
-    public class AlipayConstants
+    internal class AlipayConstants
     {
         public const string RESPONSE_SUFFIX = "_response";
         public const string ERROR_RESPONSE = "error_response";

@@ -15,7 +15,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
         {
             if (!"AES".Equals(encryptType))
             {
-                throw new Exception("API only support AES!");
+                throw new AlipayException("API only support AES!");
             }
 
             var item = ParseEncryptData(request, body);

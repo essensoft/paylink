@@ -11,6 +11,9 @@ using Microsoft.Extensions.Options;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
+    /// <summary>
+    /// Alipay 通知解析客户端。
+    /// </summary>
     public class AlipayNotifyClient : IAlipayNotifyClient
     {
         private readonly ILogger _logger;
@@ -30,12 +33,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         #region IAlipayNotifyClient Members
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : AlipayNotifyResponse
+        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : AlipayNotify
         {
             return await ExecuteAsync<T>(request, null);
         }
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : AlipayNotifyResponse
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : AlipayNotify
         {
             var options = _optionsSnapshotAccessor.Get(optionsName);
             var parameters = await GetParametersAsync(request);
@@ -77,18 +80,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         {
             if (parameters == null || parameters.Count == 0)
             {
-                throw new Exception("sign check fail: content is Empty!");
+                throw new AlipayException("sign check fail: content is Empty!");
             }
 
             if (!parameters.TryGetValue("sign", out var sign))
             {
-                throw new Exception("sign check fail: sign is Empty!");
+                throw new AlipayException("sign check fail: sign is Empty!");
             }
 
             var prestr = GetSignContent(parameters);
             if (!AlipaySignature.RSACheckContent(prestr, sign, publicRSAParameters, signType))
             {
-                throw new Exception("sign check fail: check Sign Data Fail!");
+                throw new AlipayException("sign check fail: check Sign Data Fail!");
             }
         }
 

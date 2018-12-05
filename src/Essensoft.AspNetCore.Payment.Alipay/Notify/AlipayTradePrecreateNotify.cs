@@ -3,11 +3,13 @@
 namespace Essensoft.AspNetCore.Payment.Alipay.Notify
 {
     /// <summary>
-    /// App支付异步通知
-    /// 更新时间：2017-09-13
+    /// 当面付异步通知-仅用于扫码支付
+    /// 更新时间：2017/08/24 
     /// </summary>
-    public class AlipayTradeAppPayNotifyResponse : AlipayNotifyResponse
+    public class AlipayTradePrecreateNotify : AlipayNotify
     {
+        // 公共参数
+
         /// <summary>
         /// 通知时间
         /// </summary>
@@ -25,24 +27,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         /// </summary>
         [JsonProperty("notify_id")]
         public string NotifyId { get; set; }
-
-        /// <summary>
-        /// 支付宝分配给开发者的应用Id
-        /// </summary>
-        [JsonProperty("app_id")]
-        public string AppId { get; set; }
-
-        /// <summary>
-        /// 编码格式
-        /// </summary>
-        [JsonProperty("charset")]
-        public string Charset { get; set; }
-
-        /// <summary>
-        /// 接口版本
-        /// </summary>
-        [JsonProperty("version")]
-        public string Version { get; set; }
 
         /// <summary>
         /// 签名类型
@@ -63,6 +47,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         /// </summary>
         [JsonProperty("trade_no")]
         public string TradeNo { get; set; }
+
+        /// <summary>
+        /// 开发者的app_id
+        /// </summary>
+        [JsonProperty("app_id")]
+        public string AppId { get; set; }
 
         /// <summary>
         /// 商户订单号
@@ -143,6 +133,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         public string RefundFee { get; set; }
 
         /// <summary>
+        /// 实际退款金额
+        /// </summary>
+        [JsonProperty("send_back_fee")]
+        public string SendBackFee { get; set; }
+
+        /// <summary>
         /// 订单标题
         /// </summary>
         [JsonProperty("subject")]
@@ -183,17 +179,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         /// </summary>
         [JsonProperty("fund_bill_list")]
         public string FundBillList { get; set; }
-
-        /// <summary>
-        /// 回传参数
-        /// </summary>
-        [JsonProperty("passback_params")]
-        public string PassbackParams { get; set; }
-
-        /// <summary>
-        /// 优惠券信息
-        /// </summary>
-        [JsonProperty("voucher_detail_list")]
-        public string VoucherDetailList { get; set; }
     }
 }
