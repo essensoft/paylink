@@ -2,6 +2,9 @@
 
 namespace Essensoft.AspNetCore.Payment.JDPay
 {
+    /// <summary>
+    /// JDPay 字典类。
+    /// </summary>
     public class JDPayDictionary : SortedDictionary<string, string>
     {
         public JDPayDictionary() { }

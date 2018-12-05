@@ -5,6 +5,9 @@ using Org.BouncyCastle.Crypto;
 
 namespace Essensoft.AspNetCore.Payment.JDPay
 {
+    /// <summary>
+    /// JDPay 选项。
+    /// </summary>
     public class JDPayOptions
     {
         internal byte[] DesKeyBase64;

@@ -14,6 +14,9 @@ using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.JDPay
 {
+    /// <summary>
+    /// JDPay 客户端。
+    /// </summary>
     public class JDPayClient : IJDPayClient
     {
         private readonly ILogger _logger;
@@ -88,7 +91,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                     }
                     else
                     {
-                        throw new Exception("sign check fail: check Sign and Data Fail!");
+                        throw new JDPayException("sign check fail: check Sign and Data Fail!");
                     }
                 }
                 return rsp;
@@ -156,7 +159,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 var dic = JsonConvert.DeserializeObject<JDPayDictionary>(body);
                 if (!JDPaySecurity.VerifySign(dic, options.SingKey))
                 {
-                    throw new Exception("sign check fail: check Sign and Data Fail!");
+                    throw new JDPayException("sign check fail: check Sign and Data Fail!");
                 }
 
                 var rsp = JsonConvert.DeserializeObject<T>(body);

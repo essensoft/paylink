@@ -283,7 +283,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<JDPayAsyncNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<JDPayAsyncNotify>(Request);
                 Console.WriteLine("TradeNum: " + notify.TradeNum + " tradeType :" + notify.TradeType);// notify.TradeType 0-消费 1-退款
                 return JDPayNotifyResult.Success;
             }
@@ -299,7 +299,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<JDPayDefrayPayNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<JDPayDefrayPayNotify>(Request);
                 Console.WriteLine("trade_no: " + notify.TradeNo + " trade_amount :" + notify.TradeAmount);
                 return JDPayNotifyResult.Success;
             }

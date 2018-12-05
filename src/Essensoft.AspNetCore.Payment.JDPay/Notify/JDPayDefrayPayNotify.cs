@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Notify
     /// <summary>
     /// 代付交易 - 异步通知接口
     /// </summary>
-    public class JDPayDefrayPayNotifyResponse : JDPayNotifyResponse
+    public class JDPayDefrayPayNotify : JDPayNotify
     {
         /// <summary>
         /// 提交者会员号

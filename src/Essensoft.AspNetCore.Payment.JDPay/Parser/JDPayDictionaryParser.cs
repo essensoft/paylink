@@ -7,7 +7,11 @@ using Essensoft.AspNetCore.Payment.JDPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.JDPay.Parser
 {
-    public class JDPayDictionaryParser<T> where T : JDPayNotifyResponse
+    /// <summary>
+    /// JDPay 字典解释器。
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class JDPayDictionaryParser<T> where T : JDPayNotify
     {
         private static readonly Dictionary<Type, Dictionary<string, PropertyInfo>> DicProperties = new Dictionary<Type, Dictionary<string, PropertyInfo>>();
 

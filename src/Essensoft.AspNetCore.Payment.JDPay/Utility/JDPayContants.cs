@@ -1,6 +1,6 @@
 ﻿namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 {
-    public class JDPayContants
+    internal class JDPayContants
     {
         public const string VERSION = "version";
         public const string MERCHANT = "merchant";

@@ -6,7 +6,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Notify
     /// 支付成功页面跳转
     /// </summary>
     [XmlRoot("jdpay")]
-    public class JDPaySyncReturnResponse : JDPayNotifyResponse
+    public class JDPaySyncReturn : JDPayNotify
     {
         /// <summary>
         /// 交易流水号
