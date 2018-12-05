@@ -20,6 +20,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             return new WeChatPayDictionary();
         }
 
+        public bool IsCheckResponseSign()
+        {
+            return false;
+        }
+
         #endregion
     }
 }
