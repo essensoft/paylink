@@ -209,6 +209,15 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
                 sortedTxtParams.Add(workwx_sign, WeChatPaySignature.SignWithSecret(sortedTxtParams, options.Secret, sign_list));
             }
+            if(request is WeChatPayQueryWorkWxRedPackRequest)
+            {
+                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
+                {
+                    sortedTxtParams.Add(appid, options.AppId);
+                }
+
+                sortedTxtParams.Add(mch_id, options.MchId);
+            }
             else // 其他接口
             {
                 if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
