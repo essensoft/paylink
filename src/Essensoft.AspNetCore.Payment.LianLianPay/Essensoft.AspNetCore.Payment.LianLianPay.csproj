@@ -15,6 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Essensoft.AspNetCore.Payment.LianLianPay</PackageId>
+    <PackageTags>Essensoft;Payment;LianLianPay;连连支付;</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
