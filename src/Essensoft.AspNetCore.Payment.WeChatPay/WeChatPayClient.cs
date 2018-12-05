@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Security;
@@ -33,6 +34,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         private const string nonceStr = "nonceStr";
         private const string signType = "signType";
         private const string paySign = "paySign";
+        private const string workwx_sign = "workwx_sign";
 
         private readonly ILogger _logger;
         private readonly IHttpClientFactory _clientFactory;
@@ -184,6 +186,28 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 }
 
                 sortedTxtParams.Add(mch_id, options.MchId);
+            }
+            else if (request is WeChatPaySendWorkWxRedPackRequest)
+            {
+                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(wxappid)))
+                {
+                    sortedTxtParams.Add(wxappid, options.AppId);
+                }
+
+                sortedTxtParams.Add(mch_id, options.MchId);
+
+                var sign_list = new List<string>
+                {
+                    "act_name",
+                    "mch_billno",
+                    "mch_id",
+                    "nonce_str",
+                    "re_openid",
+                    "total_amount",
+                    "wxappid",
+                };
+
+                sortedTxtParams.Add(workwx_sign, WeChatPaySignature.SignWithSecret(sortedTxtParams, options.Secret, sign_list));
             }
             else // 其他接口
             {

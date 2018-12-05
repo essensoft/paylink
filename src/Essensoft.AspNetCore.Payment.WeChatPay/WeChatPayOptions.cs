@@ -19,6 +19,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         public string AppId { get; set; }
 
         /// <summary>
+        /// 企业微信密钥(企业微信Secret，其它业务无需配置)
+        /// </summary>
+        public string Secret { get; set; }
+
+        /// <summary>
         /// 商户号
         /// </summary>
         public string MchId { get; set; }
