@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
                 return match.Groups[1].ToString();
             }
 
-            throw new Exception("Invalid XML response format!");
+            throw new AlipayException("Invalid XML response format!");
         }
 
         private static string GetSign(string body)

@@ -3,10 +3,10 @@
 namespace Essensoft.AspNetCore.Payment.Alipay.Notify
 {
     /// <summary>
-    /// 手机网站支付结果异步通知
-    /// 更新时间：2017-07-21
+    /// App支付异步通知
+    /// 更新时间：2017-09-13
     /// </summary>
-    public class AlipayTradeWapPayNotifyResponse : AlipayNotifyResponse
+    public class AlipayTradeAppPayNotify : AlipayNotify
     {
         /// <summary>
         /// 通知时间
@@ -27,7 +27,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         public string NotifyId { get; set; }
 
         /// <summary>
-        /// 开发者的app_id
+        /// 支付宝分配给开发者的应用Id
         /// </summary>
         [JsonProperty("app_id")]
         public string AppId { get; set; }
@@ -55,6 +55,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         /// </summary>
         [JsonProperty("sign")]
         public string Sign { get; set; }
+
+        // 业务参数
 
         /// <summary>
         /// 支付宝交易号

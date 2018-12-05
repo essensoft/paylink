@@ -4,6 +4,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
+    /// <summary>
+    /// Alipay 选项。
+    /// </summary>
     public class AlipayOptions
     {
         internal RSAParameters PrivateRSAParameters;

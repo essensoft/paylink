@@ -6,7 +6,7 @@ using System.Text;
 namespace Essensoft.AspNetCore.Payment.Alipay.Utility
 {
     /// <summary>
-    /// Alipay系统工具类。
+    /// Alipay 工具类。
     /// </summary>
     public static class AlipayUtility
     {
