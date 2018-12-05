@@ -152,8 +152,6 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 var body = await client.DoPostAsync(request.GetRequestUrl(), content, "application/x-www-form-urlencoded");
                 _logger.Log(options.LogLevel, "Response:{content}", body);
 
-                var rsp = JsonConvert.DeserializeObject<T>(body);
-
                 // 验签
                 var dic = JsonConvert.DeserializeObject<JDPayDictionary>(body);
                 if (!JDPaySecurity.VerifySign(dic, options.SingKey))
@@ -161,6 +159,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                     throw new Exception("sign check fail: check Sign and Data Fail!");
                 }
 
+                var rsp = JsonConvert.DeserializeObject<T>(body);
                 rsp.Body = body;
                 return rsp;
             }

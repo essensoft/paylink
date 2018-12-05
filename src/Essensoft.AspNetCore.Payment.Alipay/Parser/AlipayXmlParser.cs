@@ -157,6 +157,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
         public T Parse(string body)
         {
+            if (string.IsNullOrEmpty(body))
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
+
             T rsp = null;
 
             try
