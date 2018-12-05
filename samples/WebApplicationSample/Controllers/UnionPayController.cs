@@ -73,7 +73,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _notifyClient.ExecuteAsync<UnionPayGatewayPayFrontConsumeReturnResponse>(Request);
+                var notify = await _notifyClient.ExecuteAsync<UnionPayGatewayPayFrontConsumeReturn>(Request);
                 ViewData["response"] = "支付成功";
                 return View();
             }

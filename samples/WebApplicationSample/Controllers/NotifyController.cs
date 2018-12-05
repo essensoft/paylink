@@ -381,7 +381,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<UnionPayGatewayPayFrontConsumeNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<UnionPayGatewayPayFrontConsumeNotify>(Request);
                 Console.WriteLine("OrderId: " + notify.OrderId + " respCode :" + notify.RespCode);
                 return UnionPayNotifyResult.Success;
             }

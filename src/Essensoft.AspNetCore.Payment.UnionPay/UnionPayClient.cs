@@ -11,6 +11,9 @@ using Microsoft.Extensions.Options;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay
 {
+    /// <summary>
+    /// UnionPay 客户端。
+    /// </summary>
     public class UnionPayClient : IUnionPayClient
     {
         private const string VERSION = "version";
@@ -95,7 +98,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 var ifValidateCNName = !options.TestMode;
                 if (!UnionPaySignature.Validate(dic, options.RootCertificate.cert, options.MiddleCertificate.cert, options.SecureKey, ifValidateCNName))
                 {
-                    throw new Exception("sign check fail: check Sign and Data Fail!");
+                    throw new UnionPayException("sign check fail: check Sign and Data Fail!");
                 }
 
                 var parser = new UnionPayDictionaryParser<T>();
@@ -245,7 +248,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 key = temp.ToString();
                 if (key.Length == 0)
                 {
-                    throw new Exception("QueryString format illegal");
+                    throw new UnionPayException("QueryString format illegal");
                 }
                 Dictionary[key] = string.Empty;
             }
@@ -253,7 +256,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             {
                 if (key.Length == 0)
                 {
-                    throw new Exception("QueryString format illegal");
+                    throw new UnionPayException("QueryString format illegal");
                 }
                 Dictionary[key] = temp.ToString();
             }

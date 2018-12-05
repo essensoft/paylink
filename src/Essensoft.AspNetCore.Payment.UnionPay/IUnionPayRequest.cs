@@ -2,6 +2,10 @@
 
 namespace Essensoft.AspNetCore.Payment.UnionPay
 {
+    /// <summary>
+    /// UnionPay 请求接口。
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IUnionPayRequest<T> where T : UnionPayResponse
     {
         /// <summary>

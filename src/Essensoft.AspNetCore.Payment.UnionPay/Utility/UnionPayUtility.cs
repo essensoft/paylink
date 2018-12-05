@@ -7,6 +7,9 @@ using System.Text;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 {
+    /// <summary>
+    /// UnionPay 工具类。
+    /// </summary>
     public static class UnionPayUtility
     {
         /// <summary>
