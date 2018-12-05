@@ -39,7 +39,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<AlipayTradePrecreateNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<AlipayTradePrecreateNotify>(Request);
                 if ("TRADE_SUCCESS" == notify.TradeStatus)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -64,7 +64,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<AlipayTradeAppPayNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<AlipayTradeAppPayNotify>(Request);
                 if ("TRADE_SUCCESS" == notify.TradeStatus)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -89,7 +89,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<AlipayTradePagePayNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<AlipayTradePagePayNotify>(Request);
                 if ("TRADE_SUCCESS" == notify.TradeStatus)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -114,7 +114,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<AlipayTradeWapPayNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<AlipayTradeWapPayNotify>(Request);
                 if ("TRADE_SUCCESS" == notify.TradeStatus)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
