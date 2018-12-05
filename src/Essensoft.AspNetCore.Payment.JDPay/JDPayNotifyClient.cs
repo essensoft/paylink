@@ -13,6 +13,9 @@ using Microsoft.Extensions.Options;
 
 namespace Essensoft.AspNetCore.Payment.JDPay
 {
+    /// <summary>
+    /// JDPay 通知解析客户端。
+    /// </summary>
     public class JDPayNotifyClient : IJDPayNotifyClient
     {
         private readonly ILogger _logger;
@@ -32,19 +35,19 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         #region IJDPayNotifyClient Members
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : JDPayNotifyResponse
+        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : JDPayNotify
         {
             return await ExecuteAsync<T>(request, null);
         }
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : JDPayNotifyResponse
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : JDPayNotify
         {
             var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             if (request.HasFormContentType || request.Method == "GET")
             {
                 var rspInstance = Activator.CreateInstance<T>();
 
-                var parameters = GetParameters(request, options, !(rspInstance is JDPayDefrayPayNotifyResponse));
+                var parameters = GetParameters(request, options, !(rspInstance is JDPayDefrayPayNotify));
 
                 var query = JDPayUtility.BuildQuery(parameters);
                 _logger.Log(options.LogLevel, "Request:{query}", query);
@@ -52,7 +55,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 var parser = new JDPayDictionaryParser<T>();
                 var rsp = parser.Parse(parameters);
 
-                if (rsp is JDPayDefrayPayNotifyResponse)
+                if (rsp is JDPayDefrayPayNotify)
                 {
                     CheckNotifyDefrayPaySign(rsp.Parameters, options);
                 }
@@ -102,13 +105,13 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                         return rsp;
                     }
 
-                    throw new Exception("sign check fail: check Sign and Data Fail!");
+                    throw new JDPayException("sign check fail: check Sign and Data Fail!");
                 }
 
-                throw new Exception("encrypt is Empty!");
+                throw new JDPayException("encrypt is Empty!");
             }
 
-            throw new Exception("content type is not supported!");
+            throw new JDPayException("content type is not supported!");
         }
 
         #endregion
@@ -156,18 +159,18 @@ namespace Essensoft.AspNetCore.Payment.JDPay
         {
             if (parameters.Count == 0)
             {
-                throw new Exception("sign check fail: parameters is Empty!");
+                throw new JDPayException("sign check fail: parameters is Empty!");
             }
 
             if (!parameters.TryGetValue(JDPayContants.SIGN, out var sign))
             {
-                throw new Exception("sign check fail: sign is Empty!");
+                throw new JDPayException("sign check fail: sign is Empty!");
             }
 
             var signContent = JDPaySecurity.GetSignContent(parameters);
             if (!JDPaySecurity.RSACheckContent(signContent, sign, options.PublicKey))
             {
-                throw new Exception("sign check fail: check Sign and Data Fail");
+                throw new JDPayException("sign check fail: check Sign and Data Fail");
             }
         }
 
@@ -175,17 +178,17 @@ namespace Essensoft.AspNetCore.Payment.JDPay
         {
             if (parameters.Count == 0)
             {
-                throw new Exception("sign check fail: parameters is Empty!");
+                throw new JDPayException("sign check fail: parameters is Empty!");
             }
 
             if (!parameters.TryGetValue(JDPayContants.SIGN_DATA, out var sign_data))
             {
-                throw new Exception("sign check fail: sign is Empty!");
+                throw new JDPayException("sign check fail: sign is Empty!");
             }
 
             if (!JDPaySecurity.VerifySign(parameters, options.SingKey))
             {
-                throw new Exception("sign check fail: check Sign and Data Fail!");
+                throw new JDPayException("sign check fail: check Sign and Data Fail!");
             }
         }
 

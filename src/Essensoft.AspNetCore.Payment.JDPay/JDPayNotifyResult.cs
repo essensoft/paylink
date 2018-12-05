@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.JDPay
 {
     /// <summary>
-    /// 京东支付 - 通知应答
+    /// JDPay 通知应答。
     /// </summary>
     public class JDPayNotifyResult
     {

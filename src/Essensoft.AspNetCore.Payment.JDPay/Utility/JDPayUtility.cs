@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 {
+    /// <summary>
+    /// JDPay 工具类。
+    /// </summary>
     public static class JDPayUtility
     {
         /// <summary>

@@ -2,6 +2,10 @@
 
 namespace Essensoft.AspNetCore.Payment.JDPay
 {
+    /// <summary>
+    /// JDPay NPP10 接口请求。
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IJDPayNPP10Request<T> where T : JDPayResponse
     {
         /// <summary>

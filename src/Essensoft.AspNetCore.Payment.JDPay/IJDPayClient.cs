@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.JDPay
 {
     /// <summary>
-    /// JDPay客户端。
+    /// JDPay 客户端。
     /// </summary>
     public interface IJDPayClient
     {

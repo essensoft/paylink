@@ -324,7 +324,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _notifyClient.ExecuteAsync<JDPaySyncReturnResponse>(Request);
+                var notify = await _notifyClient.ExecuteAsync<JDPaySyncReturn>(Request);
                 ViewData["response"] = "支付成功";
                 return View();
             }

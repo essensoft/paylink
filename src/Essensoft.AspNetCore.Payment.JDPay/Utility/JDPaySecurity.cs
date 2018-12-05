@@ -14,6 +14,9 @@ using X509Certificate = Org.BouncyCastle.X509.X509Certificate;
 
 namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 {
+    /// <summary>
+    /// JDPay 安全类。
+    /// </summary>
     public class JDPaySecurity
     {
         private const int MAX_MSG_LENGTH = 16 * 1024;
@@ -140,7 +143,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             var dsb = ByteArrayToInt(dataSizeByte, 0);
             if (dsb > MAX_MSG_LENGTH)
             {
-                throw new Exception("msg over MAX_MSG_LENGTH or msg error");
+                throw new JDPayException("msg over MAX_MSG_LENGTH or msg error");
             }
             var tempData = new byte[dsb];
             for (var i = 0; i < dsb; i++)
@@ -180,7 +183,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
         {
             if (b.Length % 2 != 0)
             {
-                throw new Exception("长度不是偶数");
+                throw new JDPayException("长度不是偶数");
             }
             var b2 = new byte[b.Length / 2];
             for (var n = 0; n < b.Length; n += 2)
@@ -296,7 +299,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
                 }
                 else
                 {
-                    throw new Exception("不支持的加密方式");
+                    throw new JDPayException("不支持的加密方式");
                 }
             }
 
