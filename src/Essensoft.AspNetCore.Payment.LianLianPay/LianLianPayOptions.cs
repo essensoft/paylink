@@ -4,6 +4,9 @@ using Org.BouncyCastle.Crypto;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
+    /// <summary>
+    /// LianLianPay 选项。
+    /// </summary>
     public class LianLianPayOptions
     {
         internal ICipherParameters PrivateKey;

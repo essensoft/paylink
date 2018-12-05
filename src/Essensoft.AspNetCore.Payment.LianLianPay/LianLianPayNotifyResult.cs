@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     /// <summary>
-    /// 连连支付 - 通知应答
+    /// LianLianPay 通知应答。
     /// </summary>
     public class LianLianPayNotifyResult
     {

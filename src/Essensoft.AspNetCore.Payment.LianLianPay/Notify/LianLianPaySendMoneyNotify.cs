@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Notify
     /// <summary>
     /// 付款类异步通知
     /// </summary>
-    public class LianLianPaySendMoneyNotifyResponse : LianLianPayNotifyResponse
+    public class LianLianPaySendMoneyNotify : LianLianPayNotify
     {
         /// <summary>
         /// 商户编号是商户在连连支付支付平台上开设的商户号码，为18位数字，如：201304121000001004。

@@ -1,10 +1,9 @@
 ﻿namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     /// <summary>
-    /// LianLianPay 响应。
+    /// LianLianPay 通知。
     /// </summary>
-    public abstract class LianLianPayResponse : LianLianPayObject
+    public abstract class LianLianPayNotify : LianLianPayObject
     {
-
     }
 }

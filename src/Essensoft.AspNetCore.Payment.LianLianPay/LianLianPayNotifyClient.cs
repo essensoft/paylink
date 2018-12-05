@@ -10,6 +10,9 @@ using Microsoft.Extensions.Options;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
+    /// <summary>
+    /// LianLianPay 通知解析客户端。
+    /// </summary>
     public class LianLianPayNotifyClient : ILianLianPayNotifyClient
     {
         private readonly ILogger _logger;
@@ -29,12 +32,12 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
         #region ILianLianPayNotifyClient Members
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : LianLianPayNotifyResponse
+        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : LianLianPayNotify
         {
             return await ExecuteAsync<T>(request, null);
         }
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : LianLianPayNotifyResponse
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : LianLianPayNotify
         {
             var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             if (request.HasFormContentType)
@@ -60,7 +63,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
                 return rsp;
             }
 
-            throw new Exception("content type is not supported");
+            throw new LianLianPayException("content type is not supported");
         }
 
         #endregion
@@ -82,18 +85,18 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         {
             if (para.Count == 0)
             {
-                throw new Exception("sign check fail: para is Empty!");
+                throw new LianLianPayException("sign check fail: para is Empty!");
             }
 
             if (!para.TryGetValue("sign", out var sign))
             {
-                throw new Exception("sign check fail: sign is Empty!");
+                throw new LianLianPayException("sign check fail: sign is Empty!");
             }
 
             var prestr = LianLianPaySecurity.GetSignContent(para);
             if (!MD5WithRSA.VerifyData(prestr, sign, options.PublicKey))
             {
-                throw new Exception("sign check fail: check Sign and Data Fail JSON also");
+                throw new LianLianPayException("sign check fail: check Sign and Data Fail JSON also");
             }
         }
 

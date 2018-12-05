@@ -6,6 +6,9 @@ using Org.BouncyCastle.Crypto;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
 {
+    /// <summary>
+    /// LianLianPay °²È«Àà¡£
+    /// </summary>
     public class LianLianPaySecurity
     {
         public static string GetSignContent(LianLianPayDictionary para, List<string> exclude = null)
