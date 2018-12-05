@@ -4,7 +4,7 @@
     /// LianLianPay API响应解释器接口。
     /// </summary>
     /// <typeparam name="T">领域对象</typeparam>
-    public interface ILianLianPayParser<T> where T : LianLianPayResponse
+    public interface ILianLianPayParser<T> where T : LianLianPayObject
     {
         /// <summary>
         /// 把响应字符串解释成相应的领域对象。

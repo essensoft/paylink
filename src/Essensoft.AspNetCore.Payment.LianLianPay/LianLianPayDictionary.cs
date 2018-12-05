@@ -3,6 +3,9 @@ using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
+    /// <summary>
+    /// LianLianPay 字典。
+    /// </summary>
     public class LianLianPayDictionary : SortedDictionary<string, string>
     {
         private const string DATE_TIME_FORMAT = "yyyyMMddHHmmss";

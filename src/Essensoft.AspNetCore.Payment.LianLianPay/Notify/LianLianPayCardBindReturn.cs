@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Notify
     /// <summary>
     /// 签约类同步通知
     /// </summary>
-    public class LianLianPayCardBindReturnResponse : LianLianPayNotifyResponse
+    public class LianLianPayCardBindReturn : LianLianPayNotify
     {
         /// <summary>
         /// 交易结果代码。 

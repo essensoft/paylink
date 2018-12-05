@@ -7,17 +7,12 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Parser
     /// <summary>
     /// LianLianPay JSON响应通用解释器。
     /// </summary>
-    public class LianLianPayJsonParser<T> : ILianLianPayParser<T> where T : LianLianPayResponse
+    public class LianLianPayJsonParser<T> : ILianLianPayParser<T> where T : LianLianPayObject
     {
         #region ILianLianPayParser<T> Members
 
         public T Parse(string body)
         {
-            if (string.IsNullOrEmpty(body))
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
-
             T rsp = null;
             var parameters = new LianLianPayDictionary();
 

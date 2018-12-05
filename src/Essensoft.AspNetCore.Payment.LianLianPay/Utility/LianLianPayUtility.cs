@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Http;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
 {
+    /// <summary>
+    /// LianLianPay 工具类。
+    /// </summary>
     public static class LianLianPayUtility
     {
         /// <summary>

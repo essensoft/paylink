@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     /// <summary>
-    /// LianLianPay客户端。
+    /// LianLianPay 客户端。
     /// </summary>
     public interface ILianLianPayClient
     {

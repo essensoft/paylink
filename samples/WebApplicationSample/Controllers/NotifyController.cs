@@ -330,7 +330,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<LianLianPayReceiveMoneyNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<LianLianPayReceiveMoneyNotify>(Request);
                 Console.WriteLine("NoOrder: " + notify.NoOrder);
                 return LianLianPayNotifyResult.Success;
             }
@@ -346,7 +346,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<LianLianPayRefundNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<LianLianPayRefundNotify>(Request);
                 Console.WriteLine("NoRefund: " + notify.NoRefund);
                 return LianLianPayNotifyResult.Success;
             }

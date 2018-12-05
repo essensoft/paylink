@@ -12,6 +12,9 @@ using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
+    /// <summary>
+    /// LianLianPay 客户端。
+    /// </summary>
     public class LianLianPayClient : ILianLianPayClient
     {
         private const string OID_PARTNER = "oid_partner";
@@ -48,7 +51,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         public async Task<T> ExecuteAsync<T>(ILianLianPayRequest<T> request, string optionsName) where T : LianLianPayResponse
         {
             var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
-            // 字典排序
             var txtParams = new LianLianPayDictionary(request.GetParameters())
             {
                 { OID_PARTNER, options.OidPartner },
@@ -117,23 +119,23 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         {
             if (string.IsNullOrEmpty(response.Body))
             {
-                throw new Exception("sign check fail: Body is Empty!");
+                throw new LianLianPayException("sign check fail: Body is Empty!");
             }
 
             if (response.Parameters.Count == 0)
             {
-                throw new Exception("sign check fail: Parameters is Empty!");
+                throw new LianLianPayException("sign check fail: Parameters is Empty!");
             }
 
             if (!response.Parameters.TryGetValue("sign", out var sign))
             {
-                throw new Exception("sign check fail: sign is Empty!");
+                throw new LianLianPayException("sign check fail: sign is Empty!");
             }
 
             var prestr = LianLianPaySecurity.GetSignContent(response.Parameters, excludePara);
             if (!MD5WithRSA.VerifyData(prestr, sign, options.PublicKey))
             {
-                throw new Exception("sign check fail: check Sign and Data Fail JSON also");
+                throw new LianLianPayException("sign check fail: check Sign and Data Fail JSON also");
             }
         }
 
