@@ -111,7 +111,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             var signType = true; // ture:MD5，false:HMAC-SHA256
             var excludeSignType = true;
             var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
-            var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
+            var sortedTxtParams = new WeChatPayDictionary(request.GetParameters())
+            {
+                { nonce_str, Guid.NewGuid().ToString("N") }
+            };
 
             if (request is WeChatPayTransfersRequest)
             {
@@ -209,7 +212,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
                 sortedTxtParams.Add(workwx_sign, WeChatPaySignature.SignWithSecret(sortedTxtParams, options.Secret, sign_list));
             }
-            if(request is WeChatPayQueryWorkWxRedPackRequest)
+            else if (request is WeChatPayQueryWorkWxRedPackRequest)
             {
                 if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
                 {
@@ -217,6 +220,29 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 }
 
                 sortedTxtParams.Add(mch_id, options.MchId);
+            }
+            else if (request is WeChatPayPayWwSpTrans2PockeRequest)
+            {
+                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
+                {
+                    sortedTxtParams.Add(appid, options.AppId);
+                }
+
+                sortedTxtParams.Add(mch_id, options.MchId);
+
+                var sign_list = new List<string>
+                {
+                    "amount",
+                    "appid",
+                    "desc",
+                    "mch_id",
+                    "nonce_str",
+                    "openid",
+                    "partner_trade_no",
+                    "ww_msg_type",
+                };
+
+                sortedTxtParams.Add(workwx_sign, WeChatPaySignature.SignWithSecret(sortedTxtParams, options.Secret, sign_list));
             }
             else // 其他接口
             {
@@ -228,7 +254,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 sortedTxtParams.Add(mch_id, options.MchId);
             }
 
-            sortedTxtParams.Add(nonce_str, Guid.NewGuid().ToString("N"));
             sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType, excludeSignType));
 
             var content = WeChatPayUtility.BuildContent(sortedTxtParams);
