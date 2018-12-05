@@ -113,6 +113,11 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
             return parameters;
         }
 
+        public bool IsCheckResponseSign()
+        {
+            return true;
+        }
+
         #endregion
     }
 }
