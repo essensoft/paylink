@@ -15,6 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Essensoft.AspNetCore.Payment.WeChatPay</PackageId>
+    <PackageTags>Essensoft;Payment;WeChatPay;微信支付;</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

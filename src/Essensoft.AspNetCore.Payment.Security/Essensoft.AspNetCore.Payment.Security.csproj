@@ -15,6 +15,7 @@
     <RepositoryType>git</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Essensoft.AspNetCore.Payment.Security</PackageId>
+    <PackageTags>Essensoft;Payment;Security;</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
