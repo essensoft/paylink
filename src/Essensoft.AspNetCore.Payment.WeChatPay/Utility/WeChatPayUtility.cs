@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Net.Http.Headers;
 using System.Text;
-using Microsoft.AspNetCore.Http;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
 {
+    /// <summary>
+    /// WeChatPay 工具类。
+    /// </summary>
     public static class WeChatPayUtility
     {
         /// <summary>
@@ -24,13 +25,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
                 }
             }
             return content.Append("</xml>").ToString();
-        }
-
-        internal static bool HasTextJsonContentType(this HttpRequest request)
-        {
-            // Content-Type: text/json;charset=UTF-8
-            MediaTypeHeaderValue.TryParse(request.ContentType, out var contentType);
-            return contentType != null && contentType.MediaType.Equals("text/json", StringComparison.OrdinalIgnoreCase);
         }
 
         public static string GetTimeStamp()

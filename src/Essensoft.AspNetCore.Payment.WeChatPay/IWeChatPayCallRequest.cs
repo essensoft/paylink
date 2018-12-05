@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     /// <summary>
-    /// WeChatPay API调起请求
+    /// WeChatPay 调起请求。
     /// </summary>
     public interface IWeChatPayCallRequest
     {

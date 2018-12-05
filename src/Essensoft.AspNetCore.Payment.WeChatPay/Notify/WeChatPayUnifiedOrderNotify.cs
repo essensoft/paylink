@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
     /// 统一下单 - 支付结果通知
     /// </summary>
     [XmlRoot("xml")]
-    public class WeChatPayUnifiedOrderNotifyResponse : WeChatPayNotifyResponse
+    public class WeChatPayUnifiedOrderNotify : WeChatPayNotify
     {
         /// <summary>
         /// 返回状态码

@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     /// <summary>
-    /// 微信支付 - 通知应答
+    /// WeChatPay 通知应答。
     /// </summary>
     public class WeChatPayNotifyResult
     {
