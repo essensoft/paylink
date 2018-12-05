@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     /// <summary>
-    /// LianLianPay 请求接口
+    /// LianLianPay 请求接口。
     /// </summary>
     /// <typeparam name="T"></typeparam>
     public interface ILianLianPayRequest<T> where T : LianLianPayResponse

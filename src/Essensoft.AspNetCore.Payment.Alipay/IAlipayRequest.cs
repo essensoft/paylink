@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
     /// <summary>
-    /// Alipay请求接口。
+    /// Alipay 请求接口。
     /// </summary>
     public interface IAlipayRequest<T> where T : AlipayResponse
     {

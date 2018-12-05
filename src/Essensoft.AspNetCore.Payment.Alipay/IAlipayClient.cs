@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
     /// <summary>
-    /// Alipay客户端。
+    /// Alipay 客户端。
     /// </summary>
     public interface IAlipayClient
     {

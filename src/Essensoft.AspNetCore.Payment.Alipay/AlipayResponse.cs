@@ -4,6 +4,9 @@ using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
+    /// <summary>
+    /// Alipay 响应。
+    /// </summary>
     [Serializable]
     public abstract class AlipayResponse
     {

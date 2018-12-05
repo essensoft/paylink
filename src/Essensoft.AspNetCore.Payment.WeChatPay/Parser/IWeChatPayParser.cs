@@ -1,7 +1,7 @@
 ﻿namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
 {
     /// <summary>
-    /// WeChatPay 解析。
+    /// WeChatPay 解释器。
     /// </summary>
     public interface IWeChatPayParser<T> where T : WeChatPayObject
     {
