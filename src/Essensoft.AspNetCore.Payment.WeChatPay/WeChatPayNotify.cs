@@ -1,9 +1,9 @@
 ﻿namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     /// <summary>
-    /// WeChatPay 应答。
+    /// WeChatPay 通知。
     /// </summary>
-    public abstract class WeChatPayResponse : WeChatPayObject
+    public abstract class WeChatPayNotify : WeChatPayObject
     {
     }
 }

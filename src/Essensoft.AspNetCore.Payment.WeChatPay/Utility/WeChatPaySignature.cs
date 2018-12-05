@@ -4,6 +4,9 @@ using Essensoft.AspNetCore.Payment.Security;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
 {
+    /// <summary>
+    /// WeChatPay 签名类。
+    /// </summary>
     public class WeChatPaySignature
     {
         public static string SignWithKey(SortedDictionary<string, string> parameters, string key, bool signType = true, bool excludeSignType = true)

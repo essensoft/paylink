@@ -154,7 +154,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<WeChatPayUnifiedOrderNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<WeChatPayUnifiedOrderNotify>(Request);
                 if (notify.ReturnCode == "SUCCESS")
                 {
                     if (notify.ResultCode == "SUCCESS")
@@ -182,7 +182,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<WeChatPayRefundNotifyResponse>(Request);
+                var notify = await _client.ExecuteAsync<WeChatPayRefundNotify>(Request);
                 if (notify.ReturnCode == "SUCCESS")
                 {
                     if (notify.RefundStatus == "SUCCESS")

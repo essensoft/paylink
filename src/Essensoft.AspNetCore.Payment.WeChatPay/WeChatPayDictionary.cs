@@ -2,6 +2,9 @@
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
+    /// <summary>
+    /// WeChatPay 字典。
+    /// </summary>
     public class WeChatPayDictionary : SortedDictionary<string, string>
     {
         public WeChatPayDictionary() { }

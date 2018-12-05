@@ -10,6 +10,9 @@ using Microsoft.Extensions.Options;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
+    /// <summary>
+    /// WeChatPay 客户端。
+    /// </summary>
     public class WeChatPayClient : IWeChatPayClient
     {
         private const string appid = "appid";
@@ -59,7 +62,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         public async Task<T> ExecuteAsync<T>(IWeChatPayRequest<T> request, string optionsName) where T : WeChatPayResponse
         {
             var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
-            // 字典排序
+
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters())
             {
                 { mch_id, options.MchId },
@@ -81,14 +84,14 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 _logger.Log(options.LogLevel, "Response:{body}", body);
 
                 var parser = new WeChatPayXmlParser<T>();
-                var rsp = parser.Parse(body);
+                var response = parser.Parse(body);
 
                 if (request.IsCheckResponseSign())
                 {
-                    CheckResponseSign(rsp, options);
+                    CheckResponseSign(response, options);
                 }
 
-                return rsp;
+                return response;
             }
         }
 
@@ -106,8 +109,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             var signType = true; // ture:MD5，false:HMAC-SHA256
             var excludeSignType = true;
             var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
-            // 字典排序
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
+
             if (request is WeChatPayTransfersRequest)
             {
                 if (string.IsNullOrEmpty(sortedTxtParams.GetValue(mch_appid)))
@@ -127,7 +130,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             {
                 if (options.PublicKey == null)
                 {
-                    throw new ArgumentNullException(nameof(options.RsaPublicKey));
+                    throw new WeChatPayException("WeChatPayPayBankRequest: PublicKey is null!");
                 }
 
                 var no = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(sortedTxtParams.GetValue(enc_bank_no), options.PublicKey);
@@ -204,14 +207,14 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 _logger.Log(options.LogLevel, "Response:{body}", body);
 
                 var parser = new WeChatPayXmlParser<T>();
-                var rsp = parser.Parse(body);
+                var response = parser.Parse(body);
 
                 if (request.IsCheckResponseSign())
                 {
-                    CheckResponseSign(rsp, options, signType, excludeSignType);
+                    CheckResponseSign(response, options, signType, excludeSignType);
                 }
 
-                return rsp;
+                return response;
             }
         }
 
@@ -256,6 +259,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 sortedTxtParams.Add(signType, "MD5");
                 sortedTxtParams.Add(paySign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key));
             }
+
             return Task.FromResult(sortedTxtParams);
         }
 
@@ -267,17 +271,17 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         {
             if (string.IsNullOrEmpty(response.Body))
             {
-                throw new Exception("sign check fail: Body is Empty!");
+                throw new WeChatPayException("sign check fail: Body is Empty!");
             }
 
             if (response.Parameters.Count == 0)
             {
-                throw new Exception("sign check fail: Parameters is Empty!");
+                throw new WeChatPayException("sign check fail: Parameters is Empty!");
             }
 
             if (!response.Parameters.TryGetValue("sign", out var sign))
             {
-                throw new Exception("sign check fail: sign is Empty!");
+                throw new WeChatPayException("sign check fail: sign is Empty!");
             }
 
             if (response.Parameters["return_code"] == "SUCCESS" && !string.IsNullOrEmpty(sign))
@@ -285,7 +289,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key, useMD5, excludeSignType);
                 if (cal_sign != sign)
                 {
-                    throw new Exception("sign check fail: check Sign and Data Fail!");
+                    throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
                 }
             }
         }

@@ -4,6 +4,9 @@ using Org.BouncyCastle.Crypto;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
+    /// <summary>
+    /// WeChatPay 选项。
+    /// </summary>
     public class WeChatPayOptions
     {
         internal ICipherParameters PublicKey;

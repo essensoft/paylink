@@ -4,6 +4,9 @@ using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
 {
+    /// <summary>
+    /// WeChatPay ListPropert解析。
+    /// </summary>
     public class WeChatPayListPropertyParser
     {
         public List<T> Parse<T, TChildren>(WeChatPayDictionary dic, int index = -1)
@@ -37,6 +40,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
                         {
                             key += $"_{index}";
                         }
+
                         key += $"_{i}";
 
                         var value = dic.GetValue(key);
@@ -47,6 +51,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
                                 flag = false;
                                 break;
                             }
+
                             continue;
                         }
 

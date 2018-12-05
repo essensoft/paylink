@@ -6,16 +6,15 @@ using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
 {
-    public class WeChatPayXmlParser<T> : IWeChatPayParser<T> where T : WeChatPayResponse
+    /// <summary>
+    /// WeChatPay Xml解析。
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class WeChatPayXmlParser<T> : IWeChatPayParser<T> where T : WeChatPayObject
     {
         public T Parse(string body)
         {
-            if (string.IsNullOrEmpty(body))
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
-
-            T rsp = null;
+            T result = null;
             var parameters = new WeChatPayDictionary();
 
             try
@@ -23,7 +22,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
                 using (var sr = new StringReader(body))
                 {
                     var xmldes = new XmlSerializer(typeof(T));
-                    rsp = (T)xmldes.Deserialize(sr);
+                    result = (T)xmldes.Deserialize(sr);
                 }
 
                 var bodyDoc = XDocument.Parse(body).Element("xml");
@@ -34,36 +33,26 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
             }
             catch { }
 
-            if (rsp == null)
+            if (result == null)
             {
-                rsp = Activator.CreateInstance<T>();
+                result = Activator.CreateInstance<T>();
             }
 
-            if (rsp != null)
+            if (result != null)
             {
-                rsp.Body = body;
+                result.Body = body;
 
-                rsp.Parameters = parameters;
+                result.Parameters = parameters;
 
-                rsp.Execute();
+                result.Execute();
             }
 
-            return rsp;
+            return result;
         }
 
         public T Parse(string body, string data)
         {
-            if (string.IsNullOrEmpty(body))
-            {
-                throw new ArgumentNullException(nameof(body));
-            }
-
-            if (string.IsNullOrEmpty(data))
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
-
-            T rsp = null;
+            T result = null;
             var parameters = new WeChatPayDictionary();
 
             try
@@ -81,7 +70,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
                 using (var sr = new StringReader(sb.ToString()))
                 {
                     var xmldes = new XmlSerializer(typeof(T));
-                    rsp = (T)xmldes.Deserialize(sr);
+                    result = (T)xmldes.Deserialize(sr);
                 }
 
                 foreach (var xe in bodyDoc.Elements())
@@ -91,21 +80,21 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
             }
             catch { }
 
-            if (rsp == null)
+            if (result == null)
             {
-                rsp = Activator.CreateInstance<T>();
+                result = Activator.CreateInstance<T>();
             }
 
-            if (rsp != null)
+            if (result != null)
             {
-                rsp.Body = data;
+                result.Body = data;
 
-                rsp.Parameters = parameters;
+                result.Parameters = parameters;
 
-                rsp.Execute();
+                result.Execute();
             }
 
-            return rsp;
+            return result;
         }
     }
 }
