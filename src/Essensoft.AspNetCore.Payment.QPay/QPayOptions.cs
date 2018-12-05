@@ -2,6 +2,9 @@
 
 namespace Essensoft.AspNetCore.Payment.QPay
 {
+    /// <summary>
+    /// QPay 选项。
+    /// </summary>
     public class QPayOptions
     {
         /// <summary>

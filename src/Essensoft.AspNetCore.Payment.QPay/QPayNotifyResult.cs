@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.QPay
 {
     /// <summary>
-    /// QQ钱包 - 通知应答
+    /// QPay 通知响应。
     /// </summary>
     public class QPayNotifyResult
     {

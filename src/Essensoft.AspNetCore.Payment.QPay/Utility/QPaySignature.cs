@@ -4,6 +4,9 @@ using Essensoft.AspNetCore.Payment.Security;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Utility
 {
+    /// <summary>
+    /// QPay 签名类。
+    /// </summary>
     public class QPaySignature
     {
         public static string SignWithKey(SortedDictionary<string, string> parameters, string key, bool excludeSignType = true)

@@ -1,9 +1,9 @@
 ﻿namespace Essensoft.AspNetCore.Payment.QPay
 {
     /// <summary>
-    /// QPay 响应。
+    /// QPay 通知。
     /// </summary>
-    public abstract class QPayResponse : QPayObject
+    public abstract class QPayNotify : QPayObject
     {
     }
 }

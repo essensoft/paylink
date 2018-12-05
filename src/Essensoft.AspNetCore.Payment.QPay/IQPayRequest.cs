@@ -2,6 +2,10 @@
 
 namespace Essensoft.AspNetCore.Payment.QPay
 {
+    /// <summary>
+    /// QPay 请求接口。
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
     public interface IQPayRequest<T> where T : QPayResponse
     {
         /// <summary>

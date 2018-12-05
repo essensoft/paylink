@@ -4,6 +4,9 @@ using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Parser
 {
+    /// <summary>
+    /// QPay ListProperty 解析器。
+    /// </summary>
     public class QPayListPropertyParser
     {
         public List<T> Parse<T, TChildren>(QPayDictionary dic, int index = -1)

@@ -3,6 +3,9 @@ using System.Text;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Utility
 {
+    /// <summary>
+    /// QPay 工具类。
+    /// </summary>
     public static class QPayUtility
     {
         /// <summary>

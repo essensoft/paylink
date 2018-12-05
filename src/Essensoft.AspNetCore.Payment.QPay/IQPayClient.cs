@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.QPay
 {
     /// <summary>
-    /// QPay客户端。
+    /// QPay 客户端。
     /// </summary>
     public interface IQPayClient
     {

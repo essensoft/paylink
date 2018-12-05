@@ -2,6 +2,9 @@
 
 namespace Essensoft.AspNetCore.Payment.QPay
 {
+    /// <summary>
+    /// QPay 字典。
+    /// </summary>
     public class QPayDictionary : SortedDictionary<string, string>
     {
         public QPayDictionary() { }
