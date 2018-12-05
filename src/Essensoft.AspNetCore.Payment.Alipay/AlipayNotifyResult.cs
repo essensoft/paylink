@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
     /// <summary>
-    /// Alipay 通知应答
+    /// Alipay 通知响应
     /// </summary>
     public class AlipayNotifyResult
     {
