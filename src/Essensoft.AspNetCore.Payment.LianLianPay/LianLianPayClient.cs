@@ -14,7 +14,6 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
     public class LianLianPayClient : ILianLianPayClient
     {
-        private const string VERSION = "version";
         private const string OID_PARTNER = "oid_partner";
         private const string SIGN_TYPE = "sign_type";
         private const string BUSI_PARTNER = "busi_partner";
@@ -77,6 +76,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             {
                 content = Serialize(txtParams);
             }
+
             _logger.Log(options.LogLevel, "Request:{content}", content);
 
             using (var client = _clientFactory.CreateClient())
@@ -99,7 +99,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
                     excludePara.Add("agreement_list");
                 }
 
-                CheckNotifySign(rsp.Parameters, excludePara, options);
+                CheckNotifySign(rsp, excludePara, options);
                 return rsp;
             }
         }
@@ -113,20 +113,27 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             return JsonConvert.SerializeObject(value, new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore });
         }
 
-        private void CheckNotifySign(LianLianPayDictionary parameters, List<string> excludePara, LianLianPayOptions options)
+        private void CheckNotifySign(LianLianPayResponse response, List<string> excludePara, LianLianPayOptions options)
         {
-            if (parameters.Count == 0)
+            if (string.IsNullOrEmpty(response.Body))
             {
-                throw new Exception("sign check fail: para is Empty!");
+                throw new Exception("sign check fail: Body is Empty!");
             }
 
-            if (parameters.TryGetValue("sign", out var sign))
+            if (response.Parameters.Count == 0)
             {
-                var prestr = LianLianPaySecurity.GetSignContent(parameters, excludePara);
-                if (!MD5WithRSA.VerifyData(prestr, sign, options.PublicKey))
-                {
-                    throw new Exception("sign check fail: check Sign and Data Fail JSON also");
-                }
+                throw new Exception("sign check fail: Parameters is Empty!");
+            }
+
+            if (!response.Parameters.TryGetValue("sign", out var sign))
+            {
+                throw new Exception("sign check fail: sign is Empty!");
+            }
+
+            var prestr = LianLianPaySecurity.GetSignContent(response.Parameters, excludePara);
+            if (!MD5WithRSA.VerifyData(prestr, sign, options.PublicKey))
+            {
+                throw new Exception("sign check fail: check Sign and Data Fail JSON also");
             }
         }
 

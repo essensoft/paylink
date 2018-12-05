@@ -124,8 +124,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
         public T Parse(string body)
         {
-            T rsp = null;
+            if (string.IsNullOrEmpty(body))
+            {
+                throw new ArgumentNullException(nameof(body));
+            }
 
+            T rsp = null;
             IDictionary json = null;
 
             try

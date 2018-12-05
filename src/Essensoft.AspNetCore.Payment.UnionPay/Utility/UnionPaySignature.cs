@@ -44,6 +44,11 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 
         public static bool Validate(Dictionary<string, string> data, X509Certificate rootCert, X509Certificate middleCert, string secureKey, bool ifValidateCNName)
         {
+            if (data == null)
+            {
+                return false;
+            }
+
             if (!data.ContainsKey("signMethod") || !data.ContainsKey("signature") || !data.ContainsKey("version"))
             {
                 return false;

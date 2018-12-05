@@ -52,9 +52,14 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         private void CheckNotifySign(QPayNotifyResponse response, QPayOptions options)
         {
-            if (response?.Parameters?.Count == 0)
+            if (string.IsNullOrEmpty(response.Body))
             {
                 throw new Exception("sign check fail: Body is Empty!");
+            }
+
+            if (response.Parameters.Count == 0)
+            {
+                throw new Exception("sign check fail: Parameters is Empty!");
             }
 
             if (!response.Parameters.TryGetValue("sign", out var sign))

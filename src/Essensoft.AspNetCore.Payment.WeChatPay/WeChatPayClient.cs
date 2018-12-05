@@ -201,7 +201,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             using (var client = _clientFactory.CreateClient(certificateName))
             {
                 var body = await client.DoPostAsync(request.GetRequestUrl(), content);
-
                 _logger.Log(options.LogLevel, "Response:{body}", body);
 
                 var parser = new WeChatPayXmlParser<T>();
@@ -269,6 +268,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             if (string.IsNullOrEmpty(response.Body))
             {
                 throw new Exception("sign check fail: Body is Empty!");
+            }
+
+            if (response.Parameters.Count == 0)
+            {
+                throw new Exception("sign check fail: Parameters is Empty!");
             }
 
             if (!response.Parameters.TryGetValue("sign", out var sign))

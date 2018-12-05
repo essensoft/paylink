@@ -90,11 +90,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 var body = await client.DoPostAsync(request.GetRequestUrl(options.TestMode), query);
                 _logger.Log(options.LogLevel, "Response:{content}", body);
 
-                if (string.IsNullOrEmpty(body))
-                {
-                    throw new Exception("sign check fail: Body is Empty!");
-                }
-
                 var dic = ParseQueryString(body);
 
                 var ifValidateCNName = !options.TestMode;
@@ -183,12 +178,18 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         private static Dictionary<string, string> ParseQueryString(string str)
         {
+            if (string.IsNullOrEmpty(str))
+            {
+                return null;
+            }
+
             var Dictionary = new Dictionary<string, string>();
             var key = string.Empty;
             var isKey = true;
             var isOpen = false; // 值里有嵌套
             var openName = '\0'; // 关闭符
             var sb = new StringBuilder();
+
             for (var i = 0; i < str.Length; i++) // 遍历整个带解析的字符串
             {
                 var curChar = str[i];// 取当前字符
