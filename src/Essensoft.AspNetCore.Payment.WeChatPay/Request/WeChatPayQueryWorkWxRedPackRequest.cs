@@ -4,7 +4,7 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Response;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 企业红包 - 查询红包记录
+    /// 企业支付 - 查询红包记录
     /// </summary>
     public class WeChatPayQueryWorkWxRedPackRequest : IWeChatPayCertificateRequest<WeChatPayQueryWorkWxRedPackResponse>
     {
