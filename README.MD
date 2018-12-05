@@ -18,7 +18,7 @@ Essensoft.AspNetCore.Payment.UnionPay       | [![NuGet](https://img.shields.io/n
 Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Security.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Security)
 
 ## 交流方式
-* QQ群 [522457525](https://shang.qq.com/wpa/qunwpa?idkey=aac56c8f02f54893267d3ac90787c1794a7687f3c31a923812a36b67c4ee6271)
+* [Payment QQ交流群: 522457525](https://shang.qq.com/wpa/qunwpa?idkey=aac56c8f02f54893267d3ac90787c1794a7687f3c31a923812a36b67c4ee6271)
 
 ## 支持渠道
 
@@ -59,16 +59,19 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 
 ## 开发环境
 * Windows 10
-* VS2017 15.9.x
-* .NET Core SDK 2.1.x (x64)
+* VS2017 15.9.3
+* .NET Core 2.2、.NET Core 2.1
+
+## 运行环境
+* .NET Core 2.*
 
 ## 使用方式
 
-* [配置参数(多商户)](docs/Configuration.md)
+* [配置参数(支持多商户)](docs/Configuration.md)
 
-* [配置HttpClient(API证书)](docs/Using-HttpClient.md)
+* [配置HttpClient(支持API证书)](docs/Using-HttpClient.md)
 
-* [参考示例项目](samples/WebApplicationSample)
+* [查看示例项目](samples/WebApplicationSample)
 
 ----
 
