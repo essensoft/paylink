@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.UnionPay
 {
     /// <summary>
-    /// 银联支付 - 通知应答
+    /// UnionPay 通知应答
     /// </summary>
     public class UnionPayNotifyResult
     {

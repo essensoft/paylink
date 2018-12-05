@@ -14,6 +14,9 @@ using Org.BouncyCastle.X509.Store;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 {
+    /// <summary>
+    /// UnionPay 签名类。
+    /// </summary>
     public class UnionPaySignature
     {
         private static readonly string UNIONPAY_CNNAME = "中国银联股份有限公司";
@@ -24,7 +27,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
         {
             if (!reqData.ContainsKey("signMethod"))
             {
-                throw new Exception("signMethod must Not null");
+                throw new UnionPayException("signMethod must Not null");
             }
 
             var signMethod = reqData["signMethod"];
@@ -38,7 +41,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             }
             else
             {
-                throw new Exception("Error signMethod [" + signMethod + "] in Sign. ");
+                throw new UnionPayException("Error signMethod [" + signMethod + "] in Sign. ");
             }
         }
 
@@ -90,12 +93,12 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
         {
             if (!data.ContainsKey("signMethod"))
             {
-                throw new Exception("signMethod must Not null");
+                throw new UnionPayException("signMethod must Not null");
             }
 
             if (!data.ContainsKey("version"))
             {
-                throw new Exception("version must Not null");
+                throw new UnionPayException("version must Not null");
             }
 
             var signMethod = data["signMethod"];
@@ -112,7 +115,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             }
             else
             {
-                throw new Exception("Error signMethod [" + signMethod + "] in SignByCertInfo. ");
+                throw new UnionPayException("Error signMethod [" + signMethod + "] in SignByCertInfo. ");
             }
         }
 
@@ -120,7 +123,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
         {
             if (!data.ContainsKey("signMethod"))
             {
-                throw new Exception("signMethod must Not null");
+                throw new UnionPayException("signMethod must Not null");
             }
 
             var stringData = GetSignContent(data, true, false);
@@ -142,7 +145,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             }
             else
             {
-                throw new Exception("Error signMethod [" + signMethod + "] in SignBySecureKey. ");
+                throw new UnionPayException("Error signMethod [" + signMethod + "] in SignBySecureKey. ");
             }
         }
 

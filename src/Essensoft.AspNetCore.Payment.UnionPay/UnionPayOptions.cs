@@ -3,6 +3,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay
 {
+    /// <summary>
+    /// UnionPay 选项。
+    /// </summary>
     public class UnionPayOptions
     {
         internal UnionPayCertificate EncryptCertificate;

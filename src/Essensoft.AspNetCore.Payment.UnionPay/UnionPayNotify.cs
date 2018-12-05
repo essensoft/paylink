@@ -1,9 +1,9 @@
 ﻿namespace Essensoft.AspNetCore.Payment.UnionPay
 {
     /// <summary>
-    /// UnionPay 基础对象。
+    /// UnionPay 通知。
     /// </summary>
-    public abstract class UnionPayObject
+    public abstract class UnionPayNotify : UnionPayObject
     {
     }
 }

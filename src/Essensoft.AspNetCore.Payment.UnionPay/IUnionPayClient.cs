@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.UnionPay
 {
     /// <summary>
-    /// UnionPay客户端。
+    /// UnionPay 客户端。
     /// </summary>
     public interface IUnionPayClient
     {

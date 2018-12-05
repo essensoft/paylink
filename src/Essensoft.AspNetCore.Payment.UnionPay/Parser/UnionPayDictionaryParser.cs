@@ -4,7 +4,11 @@ using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay.Parser
 {
-    public class UnionPayDictionaryParser<T> where T : UnionPayResponse
+    /// <summary>
+    /// UnionPay 字典解释器。
+    /// </summary>
+    /// <typeparam name="T"></typeparam>
+    public class UnionPayDictionaryParser<T> where T : UnionPayObject
     {
         public T Parse(IDictionary dic)
         {

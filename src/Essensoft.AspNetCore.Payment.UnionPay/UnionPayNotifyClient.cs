@@ -27,12 +27,12 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         #region IUnionPayNotifyClient Members
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : UnionPayNotifyResponse
+        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : UnionPayNotify
         {
             return await ExecuteAsync<T>(request, null);
         }
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : UnionPayNotifyResponse
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : UnionPayNotify
         {
             var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             var parameters = await GetParametersAsync(request);
@@ -65,13 +65,13 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         {
             if (dic == null || dic.Count == 0)
             {
-                throw new Exception("sign check fail: sign is Empty!");
+                throw new UnionPayException("sign check fail: sign is Empty!");
             }
 
             var ifValidateCNName = !options.TestMode;
             if (!UnionPaySignature.Validate(dic, options.RootCertificate.cert, options.MiddleCertificate.cert, options.SecureKey, ifValidateCNName))
             {
-                throw new Exception("sign check fail: check Sign and Data Fail!");
+                throw new UnionPayException("sign check fail: check Sign and Data Fail!");
             }
         }
 

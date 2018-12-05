@@ -2,6 +2,9 @@
 
 namespace Essensoft.AspNetCore.Payment.UnionPay
 {
+    /// <summary>
+    /// UnionPay 字典。
+    /// </summary>
     public class UnionPayDictionary : Dictionary<string, string>
     {
         public UnionPayDictionary() { }
