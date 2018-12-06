@@ -292,6 +292,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 {
                     sortedTxtParams.Add(partnerid, options.MchId);
                 }
+
                 sortedTxtParams.Add(noncestr, Guid.NewGuid().ToString("N"));
                 sortedTxtParams.Add(timestamp, WeChatPayUtility.GetTimeStamp());
                 sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key));
