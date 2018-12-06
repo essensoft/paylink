@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Essensoft.AspNetCore.Payment.Security;
@@ -10,6 +11,8 @@ using Org.BouncyCastle.Crypto.Operators;
 using Org.BouncyCastle.Pkcs;
 using Org.BouncyCastle.Security;
 using Org.BouncyCastle.X509.Store;
+using SHA1 = Essensoft.AspNetCore.Payment.Security.SHA1;
+using SHA256 = Essensoft.AspNetCore.Payment.Security.SHA256;
 using X509Certificate = Org.BouncyCastle.X509.X509Certificate;
 
 namespace Essensoft.AspNetCore.Payment.JDPay.Utility
@@ -127,14 +130,14 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
         public static string EncryptECB(string data, byte[] key)
         {
             var resultByte = InitResultByteArray(data);
-            var desdata = DES3.Encode(resultByte, key, iv, DESCipherMode.ECB, DESPaddingMode.Zeros);
+            var desdata = Security.TripleDES.Encode(resultByte, key, iv, CipherMode.ECB, PaddingMode.Zeros);
             return BitConverter.ToString(desdata).Replace("-", "").ToLower();
         }
 
         public static string DecryptECB(string data, byte[] key)
         {
             var hexSourceData = Hex2byte(data);
-            var unDesResult = DES3.Decode(hexSourceData, key, iv, DESCipherMode.ECB, DESPaddingMode.Zeros);
+            var unDesResult = Security.TripleDES.Decode(hexSourceData, key, iv, CipherMode.ECB, PaddingMode.Zeros);
             var dataSizeByte = new byte[4];
             dataSizeByte[0] = unDesResult[0];
             dataSizeByte[1] = unDesResult[1];

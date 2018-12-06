@@ -228,7 +228,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
                 }
 
-                var encryptContent = AES.Encrypt(txtParams[BIZ_CONTENT], options.EncyptKey, AlipaySignature.AES_IV, AESCipherMode.CBC, AESPaddingMode.PKCS7);
+                var encryptContent = AES.Encrypt(txtParams[BIZ_CONTENT], options.EncyptKey, AlipaySignature.AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
                 txtParams.Remove(BIZ_CONTENT);
                 txtParams.Add(BIZ_CONTENT, encryptContent);
                 txtParams.Add(ENCRYPT_TYPE, options.EncyptType);
@@ -398,7 +398,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                     throw new AlipayException("api only support Aes!");
                 }
 
-                var encryptContent = AES.Encrypt(result[BIZ_CONTENT], options.EncyptKey, AlipaySignature.AES_IV, AESCipherMode.CBC, AESPaddingMode.PKCS7);
+                var encryptContent = AES.Encrypt(result[BIZ_CONTENT], options.EncyptKey, AlipaySignature.AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
                 result.Remove(BIZ_CONTENT);
                 result.Add(BIZ_CONTENT, encryptContent);
                 result.Add(ENCRYPT_TYPE, options.EncyptType);
