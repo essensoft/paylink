@@ -63,7 +63,7 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 * .NET Core 2.2、.NET Core 2.1
 
 ## 运行环境
-* .NET Core 2.*
+* .NET Core 2.1+
 
 ## 使用方式
 
