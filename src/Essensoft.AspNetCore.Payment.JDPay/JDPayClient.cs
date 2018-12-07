@@ -67,7 +67,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                     var reqBody = JDPaySecurity.DecryptECB(base64EncryptStr, options.DesKeyBase64);
                     _logger.Log(options.LogLevel, "Encrypt Content:{body}", reqBody);
 
-                    var reqBodyDoc = new XmlDocument { XmlResolver = null };
+                    var reqBodyDoc = new XmlDocument();
                     reqBodyDoc.LoadXml(reqBody);
 
                     var sign = JDPayUtility.GetValue(reqBodyDoc, "sign");
@@ -156,8 +156,8 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 _logger.Log(options.LogLevel, "Response:{content}", body);
 
                 // 验签
-                var dic = JsonConvert.DeserializeObject<JDPayDictionary>(body);
-                if (!JDPaySecurity.VerifySign(dic, options.SingKey))
+                var dictionary = JsonConvert.DeserializeObject<JDPayDictionary>(body);
+                if (!JDPaySecurity.VerifySign(dictionary, options.SingKey))
                 {
                     throw new JDPayException("sign check fail: check Sign and Data Fail!");
                 }
@@ -172,9 +172,9 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         #region Common Method
 
-        private string BuildEncryptXml<T>(IJDPayRequest<T> request, JDPayDictionary dic, JDPayOptions options) where T : JDPayResponse
+        private string BuildEncryptXml<T>(IJDPayRequest<T> request, JDPayDictionary dictionary, JDPayOptions options) where T : JDPayResponse
         {
-            var xmldoc = JDPayUtility.SortedDictionary2AllXml(dic);
+            var xmldoc = JDPayUtility.SortedDictionary2AllXml(dictionary);
             var smlStr = JDPayUtility.ConvertXmlToString(xmldoc);
             var sha256SourceSignString = SHA256.Compute(smlStr);
             var encyptBytes = RSA_ECB_PKCS1Padding.Encrypt(Encoding.UTF8.GetBytes(sha256SourceSignString), options.PrivateKey);
@@ -192,9 +192,9 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             return JDPayUtility.SortedDictionary2XmlStr(reqdic);
         }
 
-        private JDPayDictionary BuildEncryptDic<T>(IJDPayRequest<T> request, IDictionary<string, string> parameters, JDPayOptions options) where T : JDPayResponse
+        private JDPayDictionary BuildEncryptDic<T>(IJDPayRequest<T> request, IDictionary<string, string> dictionary, JDPayOptions options) where T : JDPayResponse
         {
-            var signDic = new JDPayDictionary(parameters)
+            var signDic = new JDPayDictionary(dictionary)
             {
                 { JDPayContants.VERSION, request.GetApiVersion() },
                 { JDPayContants.MERCHANT, options.Merchant }
@@ -210,7 +210,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 { JDPayContants.SIGN, sign }
             };
 
-            foreach (var iter in parameters)
+            foreach (var iter in dictionary)
             {
                 if (!string.IsNullOrEmpty(iter.Value))
                 {
@@ -220,11 +220,11 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             return encyptDic;
         }
 
-        private string BuildHtmlRequest<T>(IJDPayRequest<T> request, IDictionary<string, string> parameters) where T : JDPayResponse
+        private string BuildHtmlRequest<T>(IJDPayRequest<T> request, IDictionary<string, string> dictionary) where T : JDPayResponse
         {
             var sb = new StringBuilder();
             sb.Append("<form id='submit' name='submit' action='" + request.GetRequestUrl() + "' method='post' style='display:none;'>");
-            foreach (var iter in parameters)
+            foreach (var iter in dictionary)
             {
                 if (!string.IsNullOrEmpty(iter.Value))
                 {

@@ -13,17 +13,17 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <summary>
         /// 组装普通文本请求参数。
         /// </summary>
-        /// <param name="parameters">Key-Value形式请求参数字典</param>
+        /// <param name="dictionary">Key-Value形式请求参数字典</param>
         /// <returns>URL编码后的请求数据</returns>
-        public static string BuildQuery(IDictionary<string, string> parameters)
+        public static string BuildQuery(IDictionary<string, string> dictionary)
         {
-            if (parameters == null || parameters.Count == 0)
+            if (dictionary == null || dictionary.Count == 0)
             {
-                throw new ArgumentNullException(nameof(parameters));
+                throw new ArgumentNullException(nameof(dictionary));
             }
 
             var content = new StringBuilder();
-            foreach (var iter in parameters)
+            foreach (var iter in dictionary)
             {
                 if (!string.IsNullOrEmpty(iter.Value))
                 {
@@ -36,12 +36,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <summary>
         /// 清除字典中值为空的项。
         /// </summary>
-        /// <param name="dict">待清除的字典</param>
+        /// <param name="dictionary">待清除的字典</param>
         /// <returns>清除后的字典</returns>
-        public static IDictionary<string, T> CleanupDictionary<T>(IDictionary<string, T> dict)
+        public static IDictionary<string, T> CleanupDictionary<T>(IDictionary<string, T> dictionary)
         {
-            var newDict = new Dictionary<string, T>(dict.Count);
-            foreach (var dem in dict)
+            var newDict = new Dictionary<string, T>();
+            foreach (var dem in dictionary)
             {
                 if (dem.Value != null)
                 {

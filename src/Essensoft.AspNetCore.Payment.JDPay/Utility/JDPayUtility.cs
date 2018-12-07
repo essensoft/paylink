@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.IO;
 using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http.Headers;
@@ -20,12 +19,12 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
         /// <summary>
         /// 组装普通文本请求参数。
         /// </summary>
-        /// <param name="parameters">Key-Value形式请求参数字典</param>
+        /// <param name="dictionary">Key-Value形式请求参数字典</param>
         /// <returns>URL编码后的请求数据</returns>
-        public static string BuildQuery(IDictionary<string, string> parameters)
+        public static string BuildQuery(IDictionary<string, string> dictionary)
         {
             var content = new StringBuilder();
-            foreach (var iter in parameters)
+            foreach (var iter in dictionary)
             {
                 if (!string.IsNullOrEmpty(iter.Value))
                 {
@@ -40,11 +39,6 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             // Content-Type: text/xml
             MediaTypeHeaderValue.TryParse(request.ContentType, out var contentType);
             return contentType != null && contentType.MediaType.Equals("text/xml", StringComparison.OrdinalIgnoreCase);
-        }
-
-        internal static object TryTo<T>(this object Object)
-        {
-            return Object.TryTo(typeof(T));
         }
 
         /// <summary>
@@ -96,6 +90,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
                 }
             }
             catch { }
+
             return GetDefault(destinationType);
         }
 
@@ -112,51 +107,41 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             {
                 return nodeList[0].InnerText;
             }
+
             return string.Empty;
         }
 
-        public static XmlDocument SortedDictionary2AllXml(JDPayDictionary dic)
+        public static XmlDocument SortedDictionary2AllXml(JDPayDictionary dictionary)
         {
-            var xmldoc = new XmlDocument { XmlResolver = null };
+            var xmldoc = new XmlDocument();
             var xmldecl = xmldoc.CreateXmlDeclaration("1.0", "UTF-8", null);
             xmldoc.AppendChild(xmldecl);
-            SortedDictionary2Xml(xmldoc, dic);
+            SortedDictionary2Xml(xmldoc, dictionary);
             return xmldoc;
         }
 
-        public static string SortedDictionary2XmlStr(JDPayDictionary dic)
+        public static string SortedDictionary2XmlStr(JDPayDictionary dictionary)
         {
-            var xmldoc = new XmlDocument { XmlResolver = null };
-            SortedDictionary2Xml(xmldoc, dic);
+            var xmldoc = new XmlDocument();
+            SortedDictionary2Xml(xmldoc, dictionary);
             return ConvertXmlToString(xmldoc);
         }
 
-        public static void SortedDictionary2Xml(XmlDocument xmldoc, JDPayDictionary dic)
+        public static void SortedDictionary2Xml(XmlDocument xmldoc, JDPayDictionary dictionary)
         {
             var xmlelem = xmldoc.CreateElement("", "jdpay", "");
             xmldoc.AppendChild(xmlelem);
-            foreach (var kv in dic)
+            foreach (var iter in dictionary)
             {
-                var xe = xmldoc.CreateElement(kv.Key);
-                xe.InnerText = kv.Value;
+                var xe = xmldoc.CreateElement(iter.Key);
+                xe.InnerText = iter.Value;
                 xmlelem.AppendChild(xe);
             }
         }
 
         public static string ConvertXmlToString(XmlDocument xmlDoc)
         {
-            var stream = new MemoryStream();
-            var writer = new XmlTextWriter(stream, Encoding.UTF8)
-            {
-                Formatting = Formatting.Indented
-            };
-            xmlDoc.Save(writer);
-            var sr = new StreamReader(stream, Encoding.UTF8);
-            stream.Position = 0;
-            var xmlString = sr.ReadToEnd();
-            sr.Close();
-            stream.Close();
-            return FotmatXmlString(xmlString);
+            return FotmatXmlString(xmlDoc.OuterXml);
         }
 
         public static string FotmatXmlString(string xmlString)

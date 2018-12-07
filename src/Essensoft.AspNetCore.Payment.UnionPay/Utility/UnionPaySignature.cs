@@ -23,21 +23,21 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
 
         private static readonly Dictionary<string, X509Certificate> validateCerts = new Dictionary<string, X509Certificate>();
 
-        public static void Sign(Dictionary<string, string> reqData, string certId, ICipherParameters key, string secureKey)
+        public static void Sign(Dictionary<string, string> dictionary, string certId, ICipherParameters key, string secureKey)
         {
-            if (!reqData.ContainsKey("signMethod"))
+            if (!dictionary.ContainsKey("signMethod"))
             {
                 throw new UnionPayException("signMethod must Not null");
             }
 
-            var signMethod = reqData["signMethod"];
+            var signMethod = dictionary["signMethod"];
             if ("01" == signMethod)
             {
-                SignByCertInfo(reqData, certId, key);
+                SignByCertInfo(dictionary, certId, key);
             }
             else if ("11" == signMethod || "12" == signMethod)
             {
-                SignBySecureKey(reqData, secureKey);
+                SignBySecureKey(dictionary, secureKey);
             }
             else
             {
@@ -45,29 +45,29 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             }
         }
 
-        public static bool Validate(Dictionary<string, string> data, X509Certificate rootCert, X509Certificate middleCert, string secureKey, bool ifValidateCNName)
+        public static bool Validate(Dictionary<string, string> dictionary, X509Certificate rootCert, X509Certificate middleCert, string secureKey, bool ifValidateCNName)
         {
-            if (data == null)
+            if (dictionary == null)
             {
                 return false;
             }
 
-            if (!data.ContainsKey("signMethod") || !data.ContainsKey("signature") || !data.ContainsKey("version"))
+            if (!dictionary.ContainsKey("signMethod") || !dictionary.ContainsKey("signature") || !dictionary.ContainsKey("version"))
             {
                 return false;
             }
 
-            var signMethod = data["signMethod"];
+            var signMethod = dictionary["signMethod"];
             var result = false;
 
             if ("01" == signMethod)
             {
-                var signValue = data["signature"];
-                data.Remove("signature");
+                var signValue = dictionary["signature"];
+                dictionary.Remove("signature");
 
-                var stringData = GetSignContent(data, true, false);
+                var stringData = GetSignContent(dictionary, true, false);
                 var stringSignDigest = SHA256.Compute(stringData);
-                var signPubKeyCert = data["signPubKeyCert"];
+                var signPubKeyCert = dictionary["signPubKeyCert"];
 
                 var cert = VerifyAndGetPubKey(signPubKeyCert, rootCert, middleCert, ifValidateCNName);
                 if (cert == null)
@@ -79,7 +79,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             }
             else if ("11" == signMethod || "12" == signMethod)
             {
-                return ValidateBySecureKey(data, secureKey);
+                return ValidateBySecureKey(dictionary, secureKey);
             }
             else
             {
@@ -89,29 +89,29 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             return result;
         }
 
-        public static void SignByCertInfo(Dictionary<string, string> data, string certId, ICipherParameters key)
+        public static void SignByCertInfo(Dictionary<string, string> dictionary, string certId, ICipherParameters key)
         {
-            if (!data.ContainsKey("signMethod"))
+            if (!dictionary.ContainsKey("signMethod"))
             {
                 throw new UnionPayException("signMethod must Not null");
             }
 
-            if (!data.ContainsKey("version"))
+            if (!dictionary.ContainsKey("version"))
             {
                 throw new UnionPayException("version must Not null");
             }
 
-            var signMethod = data["signMethod"];
+            var signMethod = dictionary["signMethod"];
             if ("01" == signMethod)
             {
-                data["certId"] = certId;
+                dictionary["certId"] = certId;
 
-                var stringData = GetSignContent(data, true, false);
+                var stringData = GetSignContent(dictionary, true, false);
                 var stringSignDigest = SHA256.Compute(stringData);
                 var stringSign = SHA256WithRSA.SignData(stringSignDigest, key);
 
                 //设置签名域值
-                data["signature"] = stringSign;
+                dictionary["signature"] = stringSign;
             }
             else
             {
@@ -119,29 +119,29 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             }
         }
 
-        public static void SignBySecureKey(Dictionary<string, string> data, string secureKey)
+        public static void SignBySecureKey(Dictionary<string, string> dictionary, string secureKey)
         {
-            if (!data.ContainsKey("signMethod"))
+            if (!dictionary.ContainsKey("signMethod"))
             {
                 throw new UnionPayException("signMethod must Not null");
             }
 
-            var stringData = GetSignContent(data, true, false);
-            var signMethod = data["signMethod"];
+            var stringData = GetSignContent(dictionary, true, false);
+            var signMethod = dictionary["signMethod"];
 
             if ("11" == signMethod)
             {
                 var strBeforeSha256 = stringData + "&" + SHA256.Compute(secureKey);
                 var strAfterSha256 = SHA256.Compute(strBeforeSha256);
                 //设置签名域值
-                data["signature"] = strAfterSha256;
+                dictionary["signature"] = strAfterSha256;
             }
             else if ("12" == signMethod)
             {
                 var strBeforeSm3 = stringData + "&" + SM3.Compute(secureKey);
                 var strAfterSm3 = SM3.Compute(strBeforeSm3);
                 //设置签名域值
-                data["signature"] = strAfterSm3;
+                dictionary["signature"] = strAfterSm3;
             }
             else
             {
@@ -149,14 +149,14 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             }
         }
 
-        public static string GetSignContent(Dictionary<string, string> data, bool sort, bool encode)
+        public static string GetSignContent(Dictionary<string, string> dictionary, bool sort, bool encode)
         {
-            if (data == null || data.Count == 0)
+            if (dictionary == null || dictionary.Count == 0)
             {
                 return string.Empty;
             }
 
-            var list = new List<string>(data.Keys);
+            var list = new List<string>(dictionary.Keys);
 
             if (sort)
             {
@@ -166,7 +166,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             var sb = new StringBuilder();
             foreach (var key in list)
             {
-                var value = encode ? WebUtility.UrlEncode(data[key]) : data[key];
+                var value = encode ? WebUtility.UrlEncode(dictionary[key]) : dictionary[key];
                 sb.Append(key).Append("=").Append(value).Append("&");
             }
 
@@ -358,30 +358,30 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             return part;
         }
 
-        public static bool ValidateBySecureKey(Dictionary<string, string> rspData, string secureKey)
+        public static bool ValidateBySecureKey(Dictionary<string, string> dictionary, string secureKey)
         {
-            if (!rspData.ContainsKey("signMethod") || !rspData.ContainsKey("signature"))
+            if (!dictionary.ContainsKey("signMethod") || !dictionary.ContainsKey("signature"))
             {
                 return false;
             }
 
             var result = false;
-            var signMethod = rspData["signMethod"];
+            var signMethod = dictionary["signMethod"];
 
             if ("11" == signMethod)
             {
-                var stringSign = rspData["signature"];
-                rspData.Remove("signature");
-                var stringData = GetSignContent(rspData, true, false);
+                var stringSign = dictionary["signature"];
+                dictionary.Remove("signature");
+                var stringData = GetSignContent(dictionary, true, false);
                 var strBeforeSha256 = stringData + "&" + SHA256.Compute(secureKey);
                 var strAfterSha256 = SHA256.Compute(strBeforeSha256);
                 result = stringSign == strAfterSha256;
             }
             else if ("12" == signMethod)
             {
-                var stringSign = rspData["signature"];
-                rspData.Remove("signature");
-                var stringData = GetSignContent(rspData, true, false);
+                var stringSign = dictionary["signature"];
+                dictionary.Remove("signature");
+                var stringData = GetSignContent(dictionary, true, false);
                 var strBeforeSm3 = stringData + "&" + SM3.Compute(secureKey);
                 var strAfterSm3 = SM3.Compute(strBeforeSm3);
                 result = stringSign == strAfterSm3;

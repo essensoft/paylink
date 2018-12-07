@@ -61,15 +61,15 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             return parameters;
         }
 
-        private void CheckNotifySign(UnionPayDictionary dic, UnionPayOptions options)
+        private void CheckNotifySign(UnionPayDictionary dictionary, UnionPayOptions options)
         {
-            if (dic == null || dic.Count == 0)
+            if (dictionary == null || dictionary.Count == 0)
             {
                 throw new UnionPayException("sign check fail: sign is Empty!");
             }
 
             var ifValidateCNName = !options.TestMode;
-            if (!UnionPaySignature.Validate(dic, options.RootCertificate.cert, options.MiddleCertificate.cert, options.SecureKey, ifValidateCNName))
+            if (!UnionPaySignature.Validate(dictionary, options.RootCertificate.cert, options.MiddleCertificate.cert, options.SecureKey, ifValidateCNName))
             {
                 throw new UnionPayException("sign check fail: check Sign and Data Fail!");
             }

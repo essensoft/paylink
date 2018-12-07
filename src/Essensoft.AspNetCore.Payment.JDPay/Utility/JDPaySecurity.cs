@@ -25,15 +25,15 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
         private const int MAX_MSG_LENGTH = 16 * 1024;
         private static readonly byte[] iv = { 1, 2, 3, 4, 5, 6, 7, 8 };
 
-        public static string GetSignContent(JDPayDictionary para)
+        public static string GetSignContent(JDPayDictionary dictionary)
         {
-            if (para == null || para.Count == 0)
+            if (dictionary == null || dictionary.Count == 0)
             {
                 return string.Empty;
             }
 
             var sb = new StringBuilder();
-            foreach (var iter in para)
+            foreach (var iter in dictionary)
             {
                 if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign")
                 {
@@ -44,15 +44,15 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             return sb.Remove(sb.Length - 1, 1).ToString();
         }
 
-        private static string GetNPP10Sign(JDPayDictionary para, string algorithm, string salt)
+        private static string GetNPP10Sign(JDPayDictionary dictionary, string algorithm, string salt)
         {
-            if (para == null || para.Count == 0)
+            if (dictionary == null || dictionary.Count == 0)
             {
                 return string.Empty;
             }
 
             var sb = new StringBuilder();
-            foreach (var iter in para)
+            foreach (var iter in dictionary)
             {
                 if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign_type" && iter.Key != "sign_data" && iter.Key != "encrypt_type" && iter.Key != "encrypt_data" && iter.Key != "salt")
                 {
@@ -93,15 +93,15 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             return sign;
         }
 
-        private static string GetNPP10SignContentOrEncryptContent(JDPayDictionary para)
+        private static string GetNPP10SignContentOrEncryptContent(JDPayDictionary dictionary)
         {
-            if (para == null || para.Count == 0)
+            if (dictionary == null || dictionary.Count == 0)
             {
                 return string.Empty;
             }
 
             var sb = new StringBuilder();
-            foreach (var iter in para)
+            foreach (var iter in dictionary)
             {
                 if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign_type" && iter.Key != "sign_data" && iter.Key != "encrypt_type" && iter.Key != "encrypt_data" && iter.Key != "salt")
                 {
@@ -188,6 +188,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             {
                 throw new JDPayException("长度不是偶数");
             }
+
             var b2 = new byte[b.Length / 2];
             for (var n = 0; n < b.Length; n += 2)
             {
@@ -195,6 +196,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
                 // 两位一组，表示一个字节,把这样表示的16进制字符串，还原成一个进制字节
                 b2[n / 2] = (byte)Convert.ToInt32(item, 16);
             }
+
             b = null;
             return b2;
         }
@@ -207,6 +209,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
                 var shift = (4 - 1 - i) * 8;
                 value += (b[i + offset] & 0x000000FF) << shift;//往高位游
             }
+
             return value;
         }
 
@@ -215,7 +218,8 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             var digital = "0123456789abcdef";
             var hex2char = hex.ToCharArray();
             var bytes = new byte[hex.Length / 2];
-            int temp;
+            var temp = 0;
+
             for (var i = 0; i < bytes.Length; i++)
             {
                 temp = digital.IndexOf(hex2char[2 * i]) * 16;
@@ -230,10 +234,12 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
         {
             var hexstring = "0123456789ABCDEF";
             var stringBuilder = new StringBuilder("");
+
             if (src == null || src.Length <= 0)
             {
                 return null;
             }
+
             for (var i = 0; i < src.Length; i++)
             {
                 var v = src[i] & 0xFF;
@@ -244,10 +250,12 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
                 }
                 stringBuilder.Append(hv);
             }
+
             var srcStr = stringBuilder.ToString();
             var chars = srcStr.ToCharArray();
             var bytes = new byte[srcStr.Length / 2];
-            int temp;
+            var temp = 0;
+
             for (var i = 0; i < bytes.Length; i++)
             {
                 temp = hexstring.IndexOf(chars[2 * i]) << 4;
@@ -258,37 +266,37 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             return Encoding.UTF8.GetString(bytes);
         }
 
-        public static bool VerifySign(JDPayDictionary dic, string key)
+        public static bool VerifySign(JDPayDictionary dictionary, string key)
         {
-            dic.TryGetValue(JDPayContants.SIGN_TYPE, out var algorithm);
-            dic.TryGetValue(JDPayContants.SIGN_DATA, out var sign);
-            dic.Remove(JDPayContants.SIGN_TYPE);
-            dic.Remove(JDPayContants.SIGN_DATA);
-            return Verify(sign, dic, algorithm, key);
+            dictionary.TryGetValue(JDPayContants.SIGN_TYPE, out var algorithm);
+            dictionary.TryGetValue(JDPayContants.SIGN_DATA, out var sign);
+            dictionary.Remove(JDPayContants.SIGN_TYPE);
+            dictionary.Remove(JDPayContants.SIGN_DATA);
+            return Verify(sign, dictionary, algorithm, key);
         }
 
-        private static bool Verify(string signStr, JDPayDictionary dic, string algorithm, string salt)
+        private static bool Verify(string signStr, JDPayDictionary dictionary, string algorithm, string salt)
         {
-            if (string.IsNullOrEmpty(signStr) || null == dic || dic.Count == 0)
+            if (string.IsNullOrEmpty(signStr) || dictionary == null || dictionary.Count == 0)
             {
                 return false;
             }
-            var newsign = GetNPP10Sign(dic, algorithm, salt);
+            var newsign = GetNPP10Sign(dictionary, algorithm, salt);
             return newsign == signStr;
         }
 
-        public static JDPayDictionary EncryptData(string signCert, string password, string envelopCert, JDPayDictionary dic, string singKey, string encryptType, bool isEncrypt)
+        public static JDPayDictionary EncryptData(string signCert, string password, string envelopCert, JDPayDictionary dictionary, string singKey, string encryptType, bool isEncrypt)
         {
             var encryptData = new JDPayDictionary();
-            var data = GetNPP10SignContentOrEncryptContent(dic);
+            var data = GetNPP10SignContentOrEncryptContent(dictionary);
 
-            dic.TryGetValue(JDPayContants.CUSTOMER_NO, out var customerNo);
-            dic.TryGetValue(JDPayContants.SIGN_TYPE, out var signType);
+            dictionary.TryGetValue(JDPayContants.CUSTOMER_NO, out var customerNo);
+            dictionary.TryGetValue(JDPayContants.SIGN_TYPE, out var signType);
 
             if (!isEncrypt || string.IsNullOrEmpty(encryptType))
             {
-                dic.Add(JDPayContants.SIGN_DATA, GetNPP10Sign(data, signType, singKey));
-                encryptData = dic;
+                dictionary.Add(JDPayContants.SIGN_DATA, GetNPP10Sign(data, signType, singKey));
+                encryptData = dictionary;
             }
             else
             {

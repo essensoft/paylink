@@ -26,9 +26,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
                 }
 
                 var bodyDoc = XDocument.Parse(body).Element("xml");
-                foreach (var xe in bodyDoc.Elements())
+                foreach (var element in bodyDoc.Elements())
                 {
-                    parameters.Add(xe.Name.LocalName, xe.Value);
+                    parameters.Add(element.Name.LocalName, element.Value);
                 }
             }
             catch { }

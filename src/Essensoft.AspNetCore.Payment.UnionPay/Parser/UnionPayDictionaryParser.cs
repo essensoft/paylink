@@ -10,18 +10,18 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Parser
     /// <typeparam name="T"></typeparam>
     public class UnionPayDictionaryParser<T> where T : UnionPayObject
     {
-        public T Parse(IDictionary dic)
+        public T Parse(IDictionary dictionary)
         {
-            if (dic == null || dic.Count == 0)
+            if (dictionary == null || dictionary.Count == 0)
             {
-                throw new ArgumentNullException(nameof(dic));
+                throw new ArgumentNullException(nameof(dictionary));
             }
 
             T rsp = null;
 
             try
             {
-                var jsonText = JsonConvert.SerializeObject(dic);
+                var jsonText = JsonConvert.SerializeObject(dictionary);
                 rsp = JsonConvert.DeserializeObject<T>(jsonText);
             }
             catch { }
