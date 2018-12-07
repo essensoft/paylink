@@ -12,14 +12,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
     {
         public static readonly byte[] AES_IV = InitIv(16);
 
-        public static string GetSignContent(IDictionary<string, string> para)
+        public static string GetSignContent(IDictionary<string, string> dictionary)
         {
-            if (para == null || para.Count == 0)
+            if (dictionary == null || dictionary.Count == 0)
             {
                 return string.Empty;
             }
 
-            var sortPara = new SortedDictionary<string, string>(para);
+            var sortPara = new SortedDictionary<string, string>(dictionary);
             var sb = new StringBuilder();
             foreach (var iter in sortPara)
             {

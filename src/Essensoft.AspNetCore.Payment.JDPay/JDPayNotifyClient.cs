@@ -81,7 +81,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                     var reqBody = JDPaySecurity.DecryptECB(base64EncryptStr, options.DesKeyBase64);
                     _logger.Log(options.LogLevel, "Encrypt Content:{reqBody}", reqBody);
 
-                    var reqBodyDoc = new XmlDocument { XmlResolver = null };
+                    var reqBodyDoc = new XmlDocument();
                     reqBodyDoc.LoadXml(reqBody);
 
                     var sign = JDPayUtility.GetValue(reqBodyDoc, "sign");
@@ -95,6 +95,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                     {
                         reqBodyStr = reqBodyStr.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", xmlh);
                     }
+
                     var sha256SourceSignString = SHA256.Compute(reqBodyStr);
                     var decryptByte = RSA_ECB_PKCS1Padding.Decrypt(Convert.FromBase64String(sign), options.PublicKey);
                     var decryptStr = JDPaySecurity.BytesToString(decryptByte);
@@ -120,7 +121,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         private JDPayDictionary GetParameters(HttpRequest request, JDPayOptions options, bool isDecrypt = true)
         {
-            var parameters = new JDPayDictionary();
+            var dictionary = new JDPayDictionary();
 
             if (request.Method == "POST")
             {
@@ -133,7 +134,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                         {
                             value = iter.Key == JDPayContants.SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, options.DesKeyBase64);
                         }
-                        parameters.Add(iter.Key, value);
+                        dictionary.Add(iter.Key, value);
                     }
                 }
             }
@@ -148,45 +149,45 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                         {
                             value = iter.Key == JDPayContants.SIGN ? iter.Value.ToString() : JDPaySecurity.DecryptECB(iter.Value, options.DesKeyBase64);
                         }
-                        parameters.Add(iter.Key, value);
+                        dictionary.Add(iter.Key, value);
                     }
                 }
             }
-            return parameters;
+            return dictionary;
         }
 
-        private void CheckNotifySign(JDPayDictionary parameters, JDPayOptions options)
+        private void CheckNotifySign(JDPayDictionary dictionary, JDPayOptions options)
         {
-            if (parameters.Count == 0)
+            if (dictionary.Count == 0)
             {
-                throw new JDPayException("sign check fail: parameters is Empty!");
+                throw new JDPayException("sign check fail: dictionary is Empty!");
             }
 
-            if (!parameters.TryGetValue(JDPayContants.SIGN, out var sign))
+            if (!dictionary.TryGetValue(JDPayContants.SIGN, out var sign))
             {
                 throw new JDPayException("sign check fail: sign is Empty!");
             }
 
-            var signContent = JDPaySecurity.GetSignContent(parameters);
+            var signContent = JDPaySecurity.GetSignContent(dictionary);
             if (!JDPaySecurity.RSACheckContent(signContent, sign, options.PublicKey))
             {
                 throw new JDPayException("sign check fail: check Sign and Data Fail");
             }
         }
 
-        private void CheckNotifyDefrayPaySign(JDPayDictionary parameters, JDPayOptions options)
+        private void CheckNotifyDefrayPaySign(JDPayDictionary dictionary, JDPayOptions options)
         {
-            if (parameters.Count == 0)
+            if (dictionary.Count == 0)
             {
-                throw new JDPayException("sign check fail: parameters is Empty!");
+                throw new JDPayException("sign check fail: dictionary is Empty!");
             }
 
-            if (!parameters.TryGetValue(JDPayContants.SIGN_DATA, out var sign_data))
+            if (!dictionary.TryGetValue(JDPayContants.SIGN_DATA, out var sign_data))
             {
                 throw new JDPayException("sign check fail: sign is Empty!");
             }
 
-            if (!JDPaySecurity.VerifySign(parameters, options.SingKey))
+            if (!JDPaySecurity.VerifySign(dictionary, options.SingKey))
             {
                 throw new JDPayException("sign check fail: check Sign and Data Fail!");
             }

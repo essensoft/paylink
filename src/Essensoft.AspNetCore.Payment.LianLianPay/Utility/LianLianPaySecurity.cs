@@ -11,15 +11,15 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
     /// </summary>
     public class LianLianPaySecurity
     {
-        public static string GetSignContent(LianLianPayDictionary para, List<string> exclude = null)
+        public static string GetSignContent(LianLianPayDictionary dictionary, List<string> exclude = null)
         {
-            if (para == null || para.Count == 0)
+            if (dictionary == null || dictionary.Count == 0)
             {
                 return string.Empty;
             }
 
             var sb = new StringBuilder();
-            foreach (var iter in para)
+            foreach (var iter in dictionary)
             {
                 if (exclude != null && exclude.Contains(iter.Key))
                 {
@@ -60,15 +60,15 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
 
         private static string LianlianpayEncrypt(string req, ICipherParameters public_key, string hmack_key, string version, string aes_key, string nonce)
         {
-            var b64Hmack_key = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(hmack_key, public_key);
-            var b64Aes_key = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(aes_key, public_key);
-            var b64Nonce = Convert.ToBase64String(Encoding.UTF8.GetBytes(nonce));
+            var base64_hmack_key = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(hmack_key, public_key);
+            var base64_aes_key = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(aes_key, public_key);
+            var base64_nonce = Convert.ToBase64String(Encoding.UTF8.GetBytes(nonce));
             var iv = CreateCtrIv(Encoding.UTF8.GetBytes(nonce));
             var encry = AES_CTR_NoPadding.Encrypt(req, aes_key, iv);
-            var message = b64Nonce + "$" + encry;
-            var sign = HMACSHA256.Compute(Encoding.UTF8.GetBytes(message), Encoding.UTF8.GetBytes(hmack_key));
-            var b64Sign = Convert.ToBase64String(sign);
-            return version + "$" + b64Hmack_key + "$" + b64Aes_key + "$" + b64Nonce + "$" + encry + "$" + b64Sign;
+            var data = base64_nonce + "$" + encry;
+            var sign = HMACSHA256.Compute(Encoding.UTF8.GetBytes(data), Encoding.UTF8.GetBytes(hmack_key));
+            var base64_sign = Convert.ToBase64String(sign);
+            return version + "$" + base64_hmack_key + "$" + base64_aes_key + "$" + base64_nonce + "$" + encry + "$" + base64_sign;
         }
 
         private static string LianlianpayDecrypt(string base64_ciphertext, string base64_encrypted_aes_key, string base64_nonce, ICipherParameters trader_pri_key)

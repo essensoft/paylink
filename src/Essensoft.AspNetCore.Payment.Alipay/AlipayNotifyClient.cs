@@ -47,7 +47,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             var parser = new AlipayDictionaryParser<T>();
             var rsp = parser.Parse(parameters);
-            CheckNotifySign(parameters, options.PublicRSAParameters, options.SignType);
+            CheckNotifySign(parameters, options);
             return rsp;
         }
 
@@ -76,34 +76,34 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             return parameters;
         }
 
-        private void CheckNotifySign(IDictionary<string, string> parameters, RSAParameters publicRSAParameters, string signType)
+        private void CheckNotifySign(IDictionary<string, string> dictionary, AlipayOptions options)
         {
-            if (parameters == null || parameters.Count == 0)
+            if (dictionary == null || dictionary.Count == 0)
             {
-                throw new AlipayException("sign check fail: content is Empty!");
+                throw new AlipayException("sign check fail: dictionary is Empty!");
             }
 
-            if (!parameters.TryGetValue("sign", out var sign))
+            if (!dictionary.TryGetValue("sign", out var sign))
             {
                 throw new AlipayException("sign check fail: sign is Empty!");
             }
 
-            var prestr = GetSignContent(parameters);
-            if (!AlipaySignature.RSACheckContent(prestr, sign, publicRSAParameters, signType))
+            var prestr = GetSignContent(dictionary);
+            if (!AlipaySignature.RSACheckContent(prestr, sign, options.PublicRSAParameters, options.SignType))
             {
                 throw new AlipayException("sign check fail: check Sign Data Fail!");
             }
         }
 
-        private string GetSignContent(IDictionary<string, string> parameters)
+        private string GetSignContent(IDictionary<string, string> dictionary)
         {
-            if (parameters == null || parameters.Count == 0)
+            if (dictionary == null || dictionary.Count == 0)
             {
-                throw new ArgumentNullException(nameof(parameters));
+                throw new ArgumentNullException(nameof(dictionary));
             }
 
             var sb = new StringBuilder();
-            foreach (var iter in parameters)
+            foreach (var iter in dictionary)
             {
                 if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign" && iter.Key != "sign_type")
                 {

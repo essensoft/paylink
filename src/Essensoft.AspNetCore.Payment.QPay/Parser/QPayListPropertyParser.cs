@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Parser
     /// </summary>
     public class QPayListPropertyParser
     {
-        public List<T> Parse<T, TChildren>(QPayDictionary dic, int index = -1)
+        public List<T> Parse<T, TChildren>(QPayDictionary dictionary, int index = -1)
         {
             var flag = true;
             var list = new List<T>();
@@ -22,16 +22,16 @@ namespace Essensoft.AspNetCore.Payment.QPay.Parser
                 var properties = type.GetProperties();
                 var isFirstProperty = true;
 
-                foreach (var item in properties)
+                foreach (var propertie in properties)
                 {
-                    if (item.PropertyType == typeof(List<TChildren>))
+                    if (propertie.PropertyType == typeof(List<TChildren>))
                     {
-                        var chidrenList = Parse<TChildren, object>(dic, i);
-                        item.SetValue(obj, chidrenList);
+                        var chidrenList = Parse<TChildren, object>(dictionary, i);
+                        propertie.SetValue(obj, chidrenList);
                         continue;
                     }
 
-                    var renameAttribute = item.GetCustomAttributes(typeof(XmlElementAttribute), true);
+                    var renameAttribute = propertie.GetCustomAttributes(typeof(XmlElementAttribute), true);
                     if (renameAttribute.Length > 0)
                     {
                         var key = ((XmlElementAttribute)renameAttribute[0]).ElementName;
@@ -42,7 +42,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Parser
                         }
                         key += $"_{i}";
 
-                        var value = dic.GetValue(key);
+                        var value = dictionary.GetValue(key);
                         if (value == null)
                         {
                             if (isFirstProperty)
@@ -54,7 +54,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Parser
                         }
 
                         isFirstProperty = false;
-                        item.SetValue(obj, Convert.ChangeType(value, item.PropertyType));
+                        propertie.SetValue(obj, Convert.ChangeType(value, propertie.PropertyType));
                     }
                 }
 

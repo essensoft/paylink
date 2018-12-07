@@ -32,20 +32,17 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
         /// </summary>
         /// <param name="client">客户端</param>
         /// <param name="url">请求地址</param>
-        /// <param name="parameters">请求参数</param>
+        /// <param name="dictionary">请求参数</param>
         /// <returns>响应内容</returns>
-        public static async Task<string> DoGetAsync(this HttpClient client, string url, IDictionary<string, string> parameters)
+        public static async Task<string> DoGetAsync(this HttpClient client, string url, IDictionary<string, string> dictionary)
         {
-            if (parameters?.Count > 0)
+            if (url.Contains("?"))
             {
-                if (url.Contains("?"))
-                {
-                    url = url + "&" + UnionPayUtility.BuildQuery(parameters);
-                }
-                else
-                {
-                    url = url + "?" + UnionPayUtility.BuildQuery(parameters);
-                }
+                url = url + "&" + UnionPayUtility.BuildQuery(dictionary);
+            }
+            else
+            {
+                url = url + "?" + UnionPayUtility.BuildQuery(dictionary);
             }
 
             using (var response = await client.GetAsync(url))
