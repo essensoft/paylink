@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageId>Essensoft.AspNetCore.Payment.JDPay</PackageId>
-    <PackageTags>Essensoft;Payment;JDPay;京东支付;</PackageTags>
+    <PackageTags>Essensoft;AspNetCore;Payment;JDPay;京东支付;</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

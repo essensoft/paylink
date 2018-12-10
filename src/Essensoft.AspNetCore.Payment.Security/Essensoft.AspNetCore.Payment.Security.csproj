@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageId>Essensoft.AspNetCore.Payment.Security</PackageId>
-    <PackageTags>Essensoft;Payment;Security;</PackageTags>
+    <PackageTags>Essensoft;AspNetCore;Payment;Security;</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
