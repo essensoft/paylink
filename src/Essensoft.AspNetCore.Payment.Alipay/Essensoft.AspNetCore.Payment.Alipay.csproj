@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageId>Essensoft.AspNetCore.Payment.Alipay</PackageId>
-    <PackageTags>Essensoft;Payment;Alipay;支付宝;</PackageTags>
+    <PackageTags>Essensoft;AspNetCore;Payment;Alipay;支付宝;</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

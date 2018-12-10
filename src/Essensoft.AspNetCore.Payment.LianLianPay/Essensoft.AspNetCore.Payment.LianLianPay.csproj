@@ -14,7 +14,7 @@
     <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageId>Essensoft.AspNetCore.Payment.LianLianPay</PackageId>
-    <PackageTags>Essensoft;Payment;LianLianPay;连连支付;</PackageTags>
+    <PackageTags>Essensoft;AspNetCore;Payment;LianLianPay;连连支付;</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
