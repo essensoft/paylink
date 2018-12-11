@@ -135,9 +135,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
         public string CustomerInfo { get; set; }
 
         /// <summary>
-        /// 订单接收超时时间
+        /// 支付超时时间
         /// </summary>
-        public string OrderTimeOut { get; set; }
+        public string PayTimeOut { get; set; }
 
         #region IUnionPayRequest
 
@@ -182,7 +182,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Request
                 { "defaultPayType", DefaultPayType },
                 { "reqReserved", ReqReserved },
                 { "customerInfo", CustomerInfo },
-                { "orderTimeout", OrderTimeOut },
+                { "payTimeout", PayTimeOut },
             };
             return parameters;
         }
