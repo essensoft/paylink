@@ -78,7 +78,7 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 ## 打赏
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/Essensoft/Payment/master/samples/WebApplicationSample/wwwroot/images/payment.png">
+    <img src="https://raw.githubusercontent.com/Essensoft/Payment/master/images/payment.png">
 </p>
 
 ---
