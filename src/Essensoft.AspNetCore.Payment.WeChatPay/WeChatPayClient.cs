@@ -327,22 +327,19 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             if (response.Parameters.Count == 0)
             {
                 throw new WeChatPayException("sign check fail: Parameters is Empty!");
-            }          
+            }
 
             if (response.Parameters["return_code"] == "SUCCESS")
             {
-                //签名只有在返回状态码为Success时才会返回，才需要验证，否则会隐藏掉失败信息，调用方会一直认为是签名错误，实际上可能是缺少其他参数
                 if (!response.Parameters.TryGetValue("sign", out var sign))
                 {
                     throw new WeChatPayException("sign check fail: sign is Empty!");
                 }
-                if (!string.IsNullOrEmpty(sign))
+
+                var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key, useMD5, excludeSignType);
+                if (cal_sign != sign)
                 {
-                    var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key, useMD5, excludeSignType);
-                    if (cal_sign != sign)
-                    {
-                        throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
-                    }
+                    throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
                 }
             }
         }
