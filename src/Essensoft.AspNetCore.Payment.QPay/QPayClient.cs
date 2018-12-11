@@ -138,13 +138,13 @@ namespace Essensoft.AspNetCore.Payment.QPay
                 throw new QPayException("sign check fail: Parameters is Empty!");
             }
 
-            if (!response.Parameters.TryGetValue("sign", out var sign))
+            if (response.Parameters["return_code"] == "SUCCESS")
             {
-                throw new QPayException("sign check fail: sign is Empty!");
-            }
+                if (!response.Parameters.TryGetValue("sign", out var sign))
+                {
+                    throw new QPayException("sign check fail: sign is Empty!");
+                }
 
-            if (response.Parameters["return_code"] == "SUCCESS" && !string.IsNullOrEmpty(sign))
-            {
                 var cal_sign = QPaySignature.SignWithKey(response.Parameters, options.Key);
                 if (cal_sign != sign)
                 {
