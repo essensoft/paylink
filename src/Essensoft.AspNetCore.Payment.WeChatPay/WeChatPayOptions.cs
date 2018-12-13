@@ -53,5 +53,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// 日志等级
         /// </summary>
         public LogLevel LogLevel { get; set; } = LogLevel.Information;
+        /// <summary>
+        /// 通知地址
+        /// </summary>
+        public string NotifyUrl { get; set; }
+        /// <summary>
+        /// 创建机器IP
+        /// </summary>
+        public string CreateIP { get; set; }
     }
 }

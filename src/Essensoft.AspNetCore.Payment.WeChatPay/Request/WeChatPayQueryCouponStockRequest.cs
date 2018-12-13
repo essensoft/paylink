@@ -64,6 +64,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             return true;
         }
 
+        public bool IsSupportSignTypeMd5()
+        {
+            return true;
+        }
         #endregion
     }
 }

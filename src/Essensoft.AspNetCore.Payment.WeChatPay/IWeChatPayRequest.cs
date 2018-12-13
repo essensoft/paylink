@@ -27,5 +27,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// </summary>
         /// <returns>是否验证</returns>
         bool IsCheckResponseSign();
+        /// <summary>
+        /// 是否支持Md5签名方式，有些请求是不支持此方式的。
+        /// client在执行请求时，将根据此参数来决定使用哪种签名方式
+        /// </summary>
+        /// <returns>true:支持md5签名方式，false:不支持，只支持HMAC-SHA256方式</returns>
+        bool IsSupportSignTypeMd5();
     }
 }

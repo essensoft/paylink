@@ -76,7 +76,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 sortedTxtParams.Add(appid, options.AppId);
             }
 
-            sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key));
+            var isSupportSignTypeMd5 = request.IsSupportSignTypeMd5();
+            sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key,isSupportSignTypeMd5,isSupportSignTypeMd5));
             var content = WeChatPayUtility.BuildContent(sortedTxtParams);
             _logger.Log(options.LogLevel, "Request:{content}", content);
 

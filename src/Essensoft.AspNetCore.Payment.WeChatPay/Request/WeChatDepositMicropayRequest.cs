@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
-using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+﻿using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 提交刷卡支付
+    /// 微信酒店押金支付接口
     /// </summary>
-    public class WeChatPayMicroPayRequest : IWeChatPayRequest<WeChatPayMicroPayResponse>
+    public class WeChatDepositMicropayRequest : IWeChatPayRequest<WechatDepositMicropayResponse>
     {
         /// <summary>
         /// 应用ID
@@ -97,13 +99,14 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         public string GetRequestUrl()
         {
-            return "https://api.mch.weixin.qq.com/pay/micropay";
+            return "https://api.mch.weixin.qq.com/deposit/micropay";
         }
 
         public IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
             {
+                { "deposit","Y"},
                 { "appid", AppId },
                 { "sub_appid", SubAppId },
                 { "sub_mch_id", SubMchId },
@@ -120,7 +123,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { "time_start", TimeStart },
                 { "time_expire", TimeExpire },
                 { "auth_code", AuthCode },
-                { "scene_info", SceneInfo }
+                { "scene_info", SceneInfo },
+                { "sign_type","HMAC-SHA256"}
             };
             return parameters;
         }
@@ -132,7 +136,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         public bool IsSupportSignTypeMd5()
         {
-            return true;
+            return false;
         }
         #endregion
     }
