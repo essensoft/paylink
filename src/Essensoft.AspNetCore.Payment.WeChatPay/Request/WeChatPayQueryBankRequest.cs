@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
     /// 查询企业付款银行卡
     /// </summary>
-    public class WeChatPayQueryBankRequest : IWeChatPayCertificateRequest<WeChatPayQueryBankResponse>
+    public class WeChatPayQueryBankRequest : WeChatPayCertificateRequest<WeChatPayQueryBankResponse>
     {
         /// <summary>
         /// 商户企业付款单号
@@ -15,25 +17,30 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         #region IWeChatPayCertificateRequest Members
 
-        public string GetRequestUrl()
+        public override string GetRequestUrl()
         {
             return "https://api.mch.weixin.qq.com/mmpaysptrans/query_bank";
         }
 
-        public IDictionary<string, string> GetParameters()
+        protected override IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
             {
-                { "partner_trade_no", PartnerTradeNo }
+                { ConstKey.Key_partner_trade_no, PartnerTradeNo }
             };
             return parameters;
         }
-
-        public bool IsCheckResponseSign()
+        public override void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options)
         {
-            return false;
         }
 
+        protected override void HandleParametersInOptions(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
+        {
+            base.HandleParametersInOptions(sortedTxtParams, options);
+
+            sortedTxtParams.Add(ConstKey.Key_mch_id, options.MchId);
+            sortedTxtParams.Add(ConstKey.Key_sign_type, ConstKey.Key_MD5);
+        }
         #endregion
     }
 }

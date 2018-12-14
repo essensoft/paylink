@@ -16,25 +16,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
     /// </summary>
     public class WeChatPayClient : IWeChatPayClient
     {
-        private const string appid = "appid";
-        private const string mch_id = "mch_id";
-        private const string mch_appid = "mch_appid";
-        private const string mchid = "mchid";
-        private const string wxappid = "wxappid";
-        private const string sign_type = "sign_type";
-        private const string nonce_str = "nonce_str";
-        private const string sign = "sign";
-        private const string enc_bank_no = "enc_bank_no";
-        private const string enc_true_name = "enc_true_name";
-        private const string partnerid = "partnerid";
-        private const string noncestr = "noncestr";
-        private const string timestamp = "timestamp";
-        private const string appId = "appId";
-        private const string timeStamp = "timeStamp";
-        private const string nonceStr = "nonceStr";
-        private const string signType = "signType";
-        private const string paySign = "paySign";
-        private const string workwx_sign = "workwx_sign";
 
         private readonly ILogger _logger;
         private readonly IHttpClientFactory _clientFactory;
@@ -65,19 +46,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         {
             var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
 
-            var sortedTxtParams = new WeChatPayDictionary(request.GetParameters())
-            {
-                { mch_id, options.MchId },
-                { nonce_str, Guid.NewGuid().ToString("N") }
-            };
-
-            if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
-            {
-                sortedTxtParams.Add(appid, options.AppId);
-            }
-
-            var isSupportSignTypeMd5 = request.IsSupportSignTypeMd5();
-            sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key,isSupportSignTypeMd5,isSupportSignTypeMd5));
+            var sortedTxtParams = request.HandleParametersAndSign(options);
             var content = WeChatPayUtility.BuildContent(sortedTxtParams);
             _logger.Log(options.LogLevel, "Request:{content}", content);
 
@@ -89,10 +58,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 var parser = new WeChatPayXmlParser<T>();
                 var response = parser.Parse(body);
 
-                if (request.IsCheckResponseSign())
-                {
-                    CheckResponseSign(response, options);
-                }
+                request.CheckResponseSign(response, options);
 
                 return response;
             }
@@ -109,144 +75,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         public async Task<T> ExecuteAsync<T>(IWeChatPayCertificateRequest<T> request, string optionsName, string certificateName) where T : WeChatPayResponse
         {
-            var signType = true; // ture:MD5，false:HMAC-SHA256
-            var excludeSignType = true;
             var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
-            var sortedTxtParams = new WeChatPayDictionary(request.GetParameters())
-            {
-                { nonce_str, Guid.NewGuid().ToString("N") }
-            };
-
-            if (request is WeChatPayTransfersRequest)
-            {
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(mch_appid)))
-                {
-                    sortedTxtParams.Add(mch_appid, options.AppId);
-                }
-
-                sortedTxtParams.Add(mchid, options.MchId);
-            }
-            else if (request is WeChatPayGetPublicKeyRequest)
-            {
-                sortedTxtParams.Add(mch_id, options.MchId);
-                sortedTxtParams.Add(sign_type, "MD5");
-                excludeSignType = false;
-            }
-            else if (request is WeChatPayPayBankRequest)
-            {
-                if (options.PublicKey == null)
-                {
-                    throw new WeChatPayException("WeChatPayPayBankRequest: PublicKey is null!");
-                }
-
-                var no = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(sortedTxtParams.GetValue(enc_bank_no), options.PublicKey);
-                sortedTxtParams.SetValue(enc_bank_no, no);
-
-                var name = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(sortedTxtParams.GetValue(enc_true_name), options.PublicKey);
-                sortedTxtParams.SetValue(enc_true_name, name);
-
-                sortedTxtParams.Add(mch_id, options.MchId);
-                sortedTxtParams.Add(sign_type, "MD5");
-            }
-            else if (request is WeChatPayQueryBankRequest)
-            {
-                sortedTxtParams.Add(mch_id, options.MchId);
-                sortedTxtParams.Add(sign_type, "MD5");
-            }
-            else if (request is WeChatPayGetTransferInfoRequest)
-            {
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
-                {
-                    sortedTxtParams.Add(appid, options.AppId);
-                }
-
-                sortedTxtParams.Add(mch_id, options.MchId);
-                sortedTxtParams.Add(sign_type, "MD5");
-            }
-            else if (request is WeChatPayDownloadFundFlowRequest)
-            {
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
-                {
-                    sortedTxtParams.Add(appid, options.AppId);
-                }
-
-                sortedTxtParams.Add(mch_id, options.MchId);
-                signType = false; // HMAC-SHA256
-            }
-            else if (request is WeChatPayRefundRequest)
-            {
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
-                {
-                    sortedTxtParams.Add(appid, options.AppId);
-                }
-
-                sortedTxtParams.Add(mch_id, options.MchId);
-            }
-            else if (request is WeChatPaySendRedPackRequest || request is WeChatPaySendGroupRedPackRequest)
-            {
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(wxappid)))
-                {
-                    sortedTxtParams.Add(wxappid, options.AppId);
-                }
-
-                sortedTxtParams.Add(mch_id, options.MchId);
-            }
-            else if (request is WeChatPaySendWorkWxRedPackRequest)
-            {
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(wxappid)))
-                {
-                    sortedTxtParams.Add(wxappid, options.AppId);
-                }
-
-                sortedTxtParams.Add(mch_id, options.MchId);
-
-                var sign_list = new List<string>
-                {
-                    "act_name",
-                    "mch_billno",
-                    "mch_id",
-                    "nonce_str",
-                    "re_openid",
-                    "total_amount",
-                    "wxappid",
-                };
-
-                sortedTxtParams.Add(workwx_sign, WeChatPaySignature.SignWithSecret(sortedTxtParams, options.Secret, sign_list));
-            }
-            else if (request is WeChatPayPayWwSpTrans2PockeRequest)
-            {
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
-                {
-                    sortedTxtParams.Add(appid, options.AppId);
-                }
-
-                sortedTxtParams.Add(mch_id, options.MchId);
-
-                var sign_list = new List<string>
-                {
-                    "amount",
-                    "appid",
-                    "desc",
-                    "mch_id",
-                    "nonce_str",
-                    "openid",
-                    "partner_trade_no",
-                    "ww_msg_type",
-                };
-
-                sortedTxtParams.Add(workwx_sign, WeChatPaySignature.SignWithSecret(sortedTxtParams, options.Secret, sign_list));
-            }
-            else // 其他接口
-            {
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
-                {
-                    sortedTxtParams.Add(appid, options.AppId);
-                }
-
-                sortedTxtParams.Add(mch_id, options.MchId);
-            }
-
-            sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType, excludeSignType));
+            var sortedTxtParams = request.HandleParametersAndSign(options);
 
             var content = WeChatPayUtility.BuildContent(sortedTxtParams);
             _logger.Log(options.LogLevel, "Request:{content}", content);
@@ -259,10 +89,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 var parser = new WeChatPayXmlParser<T>();
                 var response = parser.Parse(body);
 
-                if (request.IsCheckResponseSign())
-                {
-                    CheckResponseSign(response, options, signType, excludeSignType);
-                }
+                request.CheckResponseSign(response, options);
 
                 return response;
             }
@@ -284,30 +111,29 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
             if (request is WeChatPayAppCallPaymentRequest)
             {
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
+                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(ConstKey.Key_appid)))
                 {
-                    sortedTxtParams.Add(appid, options.AppId);
+                    sortedTxtParams.Add(ConstKey.Key_appid, options.AppId);
                 }
 
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(partnerid)))
+                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(ConstKey.Key_partnerid)))
                 {
-                    sortedTxtParams.Add(partnerid, options.MchId);
+                    sortedTxtParams.Add(ConstKey.Key_partnerid, options.MchId);
                 }
-                sortedTxtParams.Add(noncestr, Guid.NewGuid().ToString("N"));
-                sortedTxtParams.Add(timestamp, WeChatPayUtility.GetTimeStamp());
-                sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key));
-            }
-            else if (request is WeChatPayLiteAppCallPaymentRequest || request is WeChatPayH5CallPaymentRequest)
+                sortedTxtParams.Add(ConstKey.Key_noncestr, Guid.NewGuid().ToString("N"));
+                sortedTxtParams.Add(ConstKey.Key_timestamp, WeChatPayUtility.GetTimeStamp());
+                sortedTxtParams.Add(ConstKey.Key_sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key));
+            } else if (request is WeChatPayLiteAppCallPaymentRequest || request is WeChatPayH5CallPaymentRequest)
             {
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appId)))
+                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(ConstKey.Key_appId)))
                 {
-                    sortedTxtParams.Add(appId, options.AppId);
+                    sortedTxtParams.Add(ConstKey.Key_appId, options.AppId);
                 }
 
-                sortedTxtParams.Add(timeStamp, WeChatPayUtility.GetTimeStamp());
-                sortedTxtParams.Add(nonceStr, Guid.NewGuid().ToString("N"));
-                sortedTxtParams.Add(signType, "MD5");
-                sortedTxtParams.Add(paySign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key));
+                sortedTxtParams.Add(ConstKey.Key_timeStamp, WeChatPayUtility.GetTimeStamp());
+                sortedTxtParams.Add(ConstKey.Key_nonceStr, Guid.NewGuid().ToString("N"));
+                sortedTxtParams.Add(ConstKey.Key_signType, "MD5");
+                sortedTxtParams.Add(ConstKey.Key_paySign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key));
             }
 
             return Task.FromResult(sortedTxtParams);
@@ -315,38 +141,5 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         #endregion
 
-        #region Common Method
-
-        private void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options, bool useMD5 = true, bool excludeSignType = true)
-        {
-            if (string.IsNullOrEmpty(response.Body))
-            {
-                throw new WeChatPayException("sign check fail: Body is Empty!");
-            }
-
-            if (response.Parameters.Count == 0)
-            {
-                throw new WeChatPayException("sign check fail: Parameters is Empty!");
-            }          
-
-            if (response.Parameters["return_code"] == "SUCCESS")
-            {
-                //签名只有在返回状态码为Success时才会返回，才需要验证，否则会隐藏掉失败信息，调用方会一直认为是签名错误，实际上可能是缺少其他参数
-                if (!response.Parameters.TryGetValue("sign", out var sign))
-                {
-                    throw new WeChatPayException("sign check fail: sign is Empty!");
-                }
-                if (!string.IsNullOrEmpty(sign))
-                {
-                    var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key, useMD5, excludeSignType);
-                    if (cal_sign != sign)
-                    {
-                        throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
-                    }
-                }
-            }
-        }
-
-        #endregion
     }
 }

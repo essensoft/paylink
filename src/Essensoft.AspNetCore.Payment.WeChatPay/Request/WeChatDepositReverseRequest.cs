@@ -1,13 +1,16 @@
-using System.Collections.Generic;
-using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+﻿using Essensoft.AspNetCore.Payment.WeChatPay.Response;
 using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 查询退款
+    /// 酒店押金撤销
+    /// 调用支付接口后请勿立即调用撤销订单 API，建议支付后至少 15s 后再调用撤销订单接口
     /// </summary>
-    public class WeChatPayRefundQueryRequest : WechatPayRequest<WeChatPayRefundQueryResponse>
+    public class WeChatDepositReverseRequest : WeChatPayCertificateRequest<WeChatDepositReverseResponse>
     {
         /// <summary>
         /// 应用ID
@@ -34,26 +37,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// </summary>
         public string OutTradeNo { get; set; }
 
-        /// <summary>
-        /// 商户退款单号
-        /// </summary>
-        public string OutRefundNo { get; set; }
-
-        /// <summary>
-        /// 微信退款单号
-        /// </summary>
-        public string RefundId { get; set; }
-
-        /// <summary>
-        /// 偏移量
-        /// </summary>
-        public string Offset { get; set; }
-
-        #region IWeChatPayRequest Members
+        #region IWeChatPayCertificateRequest Members
 
         public override string GetRequestUrl()
         {
-            return "https://api.mch.weixin.qq.com/pay/refundquery";
+            return "https://api.mch.weixin.qq.com/deposit/reverse";
         }
 
         protected override IDictionary<string, string> GetParameters()
@@ -65,11 +53,17 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { ConstKey.Key_sub_mch_id, SubMchId },
                 { ConstKey.Key_transaction_id, TransactionId },
                 { ConstKey.Key_out_trade_no, OutTradeNo },
-                { ConstKey.Key_out_refund_no, OutRefundNo },
-                { ConstKey.Key_refund_id, RefundId },
-                { ConstKey.Key_offset, Offset }
+                { ConstKey.Key_sign_type, ConstKey.Key_HMAC_SHA256 }
             };
             return parameters;
+        }
+        protected override void HandleSign(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
+        {
+            sortedTxtParams.Add(ConstKey.Key_sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, false, false));
+        }
+        public override void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options)
+        {
+            DoCheckResponseSign(response, options, false, false);
         }
 
         #endregion

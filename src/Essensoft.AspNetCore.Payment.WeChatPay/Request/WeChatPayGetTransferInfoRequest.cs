@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
     /// 查询企业付款
     /// </summary>
-    public class WeChatPayGetTransferInfoRequest : IWeChatPayCertificateRequest<WeChatPayGetTransferInfoResponse>
+    public class WeChatPayGetTransferInfoRequest : WeChatPayCertificateRequest<WeChatPayGetTransferInfoResponse>
     {
         /// <summary>
         /// 应用ID
@@ -20,26 +22,37 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         #region IWeChatPayCertificateRequest Members
 
-        public string GetRequestUrl()
+        public override string GetRequestUrl()
         {
             return "https://api.mch.weixin.qq.com/mmpaymkttransfers/gettransferinfo";
         }
 
-        public IDictionary<string, string> GetParameters()
+        protected override IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
             {
-                { "appid", AppId },
-                { "partner_trade_no", PartnerTradeNo }
+                { ConstKey.Key_appid, AppId },
+                { ConstKey.Key_partner_trade_no, PartnerTradeNo }
             };
             return parameters;
         }
-
-        public bool IsCheckResponseSign()
+        public override void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options)
         {
-            return false;
         }
 
+        protected override void HandleParametersInOptions(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
+        {
+            base.HandleParametersInOptions(sortedTxtParams, options);
+
+            if (string.IsNullOrEmpty(sortedTxtParams.GetValue(ConstKey.Key_appid)))
+            {
+                sortedTxtParams.Add(ConstKey.Key_appid, options.AppId);
+            }
+
+            sortedTxtParams.Add(ConstKey.Key_mch_id, options.MchId);
+            sortedTxtParams.Add(ConstKey.Key_sign_type, ConstKey.Key_MD5);
+
+        }
         #endregion
     }
 }

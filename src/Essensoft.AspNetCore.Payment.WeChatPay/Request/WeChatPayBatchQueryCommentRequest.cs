@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
     /// 拉取订单评价数据
     /// </summary>
-    public class WeChatPayBatchQueryCommentRequest : IWeChatPayCertificateRequest<WeChatPayBatchQueryCommentResponse>
+    public class WeChatPayBatchQueryCommentRequest : WeChatPayCertificateRequest<WeChatPayBatchQueryCommentResponse>
     {
         /// <summary>
         /// 应用ID
@@ -35,29 +36,37 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         #region IWeChatPayCertificateRequest Members
 
-        public string GetRequestUrl()
+        public override string GetRequestUrl()
         {
             return "https://api.mch.weixin.qq.com/billcommentsp/batchquerycomment";
         }
 
-        public IDictionary<string, string> GetParameters()
+        protected override IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
             {
-                { "appid", AppId },
-                { "begin_time", BeginTime },
-                { "end_time", EndTime },
-                { "offset", Offset },
-                { "limit", Limit }
+                { ConstKey.Key_appid, AppId },
+                { ConstKey.Key_begin_time, BeginTime },
+                { ConstKey.Key_end_time, EndTime },
+                { ConstKey.Key_offset, Offset },
+                { ConstKey.Key_limit, Limit }
             };
             return parameters;
         }
-
-        public bool IsCheckResponseSign()
+        public override void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options)
         {
-            return false;
         }
+        protected override void HandleParametersInOptions(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
+        {
+            base.HandleParametersInOptions(sortedTxtParams, options);
 
+            if (string.IsNullOrEmpty(sortedTxtParams.GetValue(ConstKey.Key_appid)))
+            {
+                sortedTxtParams.Add(ConstKey.Key_appid, options.AppId);
+            }
+
+            sortedTxtParams.Add(ConstKey.Key_mch_id, options.MchId);
+        }
         #endregion
     }
 }

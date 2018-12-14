@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
     /// 查询代金券批次
     /// </summary>
-    public class WeChatPayQueryCouponStockRequest : IWeChatPayRequest<WeChatPayQueryCouponStockResponse>
+    public class WeChatPayQueryCouponStockRequest : WechatPayRequest<WeChatPayQueryCouponStockResponse>
     {
         /// <summary>
         /// 应用ID
@@ -40,34 +41,25 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         #region IWeChatPayRequest Members
 
-        public string GetRequestUrl()
+        public override string GetRequestUrl()
         {
             return "https://api.mch.weixin.qq.com/mmpaymkttransfers/query_coupon_stock";
         }
 
-        public IDictionary<string, string> GetParameters()
+        protected override IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
             {
-                { "appid", AppId },
-                { "coupon_stock_id", CouponStockId },
-                { "op_user_id", OpUserId },
-                { "device_info", DeviceInfo },
-                { "version", Version },
-                { "type", Type }
+                { ConstKey.Key_appid, AppId },
+                { ConstKey.Key_coupon_stock_id, CouponStockId },
+                { ConstKey.Key_op_user_id, OpUserId },
+                { ConstKey.Key_device_info, DeviceInfo },
+                { ConstKey.Key_version, Version },
+                { ConstKey.Key_type, Type }
             };
             return parameters;
         }
 
-        public bool IsCheckResponseSign()
-        {
-            return true;
-        }
-
-        public bool IsSupportSignTypeMd5()
-        {
-            return true;
-        }
         #endregion
     }
 }

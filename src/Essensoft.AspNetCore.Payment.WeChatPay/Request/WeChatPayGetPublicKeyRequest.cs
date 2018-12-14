@@ -1,28 +1,39 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
     /// 获取RSA加密公钥
     /// </summary>
-    public class WeChatPayGetPublicKeyRequest : IWeChatPayCertificateRequest<WeChatPayGetPublicKeyResponse>
+    public class WeChatPayGetPublicKeyRequest : WeChatPayCertificateRequest<WeChatPayGetPublicKeyResponse>
     {
         #region IWeChatPayCertificateRequest Members
 
-        public string GetRequestUrl()
+        public override string GetRequestUrl()
         {
             return "https://fraud.mch.weixin.qq.com/risk/getpublickey";
         }
 
-        public IDictionary<string, string> GetParameters()
+        protected override IDictionary<string, string> GetParameters()
         {
             return new WeChatPayDictionary();
         }
-
-        public bool IsCheckResponseSign()
+        public override void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options)
         {
-            return false;
+        }
+        protected override void HandleParametersInOptions(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
+        {
+            base.HandleParametersInOptions(sortedTxtParams, options);
+
+            sortedTxtParams.Add(ConstKey.Key_mch_id, options.MchId);
+            sortedTxtParams.Add(ConstKey.Key_sign_type, ConstKey.Key_MD5);
+        }
+        protected override void HandleSign(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
+        {
+            sortedTxtParams.Add(ConstKey.Key_sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, true, false));
         }
 
         #endregion

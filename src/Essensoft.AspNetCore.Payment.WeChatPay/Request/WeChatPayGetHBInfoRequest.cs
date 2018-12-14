@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
     /// 查询红包记录
     /// </summary>
-    public class WeChatPayGetHBInfoRequest : IWeChatPayCertificateRequest<WeChatPayGetHBInfoResponse>
+    public class WeChatPayGetHBInfoRequest : WeChatPayCertificateRequest<WeChatPayGetHBInfoResponse>
     {
         /// <summary>
         /// 应用ID
@@ -25,27 +26,33 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         #region IWeChatPayCertificateRequest Members
 
-        public string GetRequestUrl()
+        public override string GetRequestUrl()
         {
             return "https://api.mch.weixin.qq.com/mmpaymkttransfers/gethbinfo";
         }
 
-        public IDictionary<string, string> GetParameters()
+        protected override IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
             {
-                { "appid", AppId },
-                { "mch_billno", MchBillNo },
-                { "bill_type", BillType }
+                { ConstKey.Key_appid, AppId },
+                { ConstKey.Key_mch_billno, MchBillNo },
+                { ConstKey.Key_bill_type, BillType }
             };
             return parameters;
         }
 
-        public bool IsCheckResponseSign()
+        protected override void HandleParametersInOptions(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
         {
-            return true;
-        }
+            base.HandleParametersInOptions(sortedTxtParams, options);
 
+            if (string.IsNullOrEmpty(sortedTxtParams.GetValue(ConstKey.Key_appid)))
+            {
+                sortedTxtParams.Add(ConstKey.Key_appid, options.AppId);
+            }
+
+            sortedTxtParams.Add(ConstKey.Key_mch_id, options.MchId);
+        }
         #endregion
     }
 }

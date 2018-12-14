@@ -1,4 +1,5 @@
 ﻿using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
     /// <summary>
     /// 微信酒店押金支付接口
     /// </summary>
-    public class WeChatDepositMicropayRequest : IWeChatPayRequest<WechatDepositMicropayResponse>
+    public class WeChatDepositMicropayRequest : WechatPayRequest<WechatDepositMicropayResponse>
     {
         /// <summary>
         /// 应用ID
@@ -97,46 +98,44 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         #region IWeChatPayRequest Members
 
-        public string GetRequestUrl()
+        public override string GetRequestUrl()
         {
             return "https://api.mch.weixin.qq.com/deposit/micropay";
         }
 
-        public IDictionary<string, string> GetParameters()
+        protected override IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
             {
-                { "deposit","Y"},
-                { "appid", AppId },
-                { "sub_appid", SubAppId },
-                { "sub_mch_id", SubMchId },
-                { "device_info", DeviceInfo },
-                { "body", Body },
-                { "detail", Detail },
-                { "attach", Attach },
-                { "out_trade_no", OutTradeNo },
-                { "total_fee", TotalFee },
-                { "fee_type", FeeType },
-                { "spbill_create_ip", SpbillCreateIp },
-                { "goods_tag", GoodsTag },
-                { "limit_pay", LimitPay },
-                { "time_start", TimeStart },
-                { "time_expire", TimeExpire },
-                { "auth_code", AuthCode },
-                { "scene_info", SceneInfo },
-                { "sign_type","HMAC-SHA256"}
+                { ConstKey.Key_deposit,"Y"},
+                { ConstKey.Key_appid, AppId },
+                { ConstKey.Key_sub_appid, SubAppId },
+                { ConstKey.Key_sub_mch_id, SubMchId },
+                { ConstKey.Key_device_info, DeviceInfo },
+                { ConstKey.Key_body, Body },
+                { ConstKey.Key_detail, Detail },
+                { ConstKey.Key_attach, Attach },
+                { ConstKey.Key_out_trade_no, OutTradeNo },
+                { ConstKey.Key_total_fee, TotalFee },
+                { ConstKey.Key_fee_type, FeeType },
+                { ConstKey.Key_spbill_create_ip, SpbillCreateIp },
+                { ConstKey.Key_goods_tag, GoodsTag },
+                { ConstKey.Key_limit_pay, LimitPay },
+                { ConstKey.Key_time_start, TimeStart },
+                { ConstKey.Key_time_expire, TimeExpire },
+                { ConstKey.Key_auth_code, AuthCode },
+                { ConstKey.Key_scene_info, SceneInfo },
+                { ConstKey.Key_sign_type,ConstKey.Key_HMAC_SHA256}
             };
             return parameters;
         }
-
-        public bool IsCheckResponseSign()
+        protected override void HandleSign(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
         {
-            return true;
+            sortedTxtParams.Add(ConstKey.Key_sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, false, false));
         }
-
-        public bool IsSupportSignTypeMd5()
+        public override void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options)
         {
-            return false;
+            DoCheckResponseSign(response, options, false, false);
         }
         #endregion
     }

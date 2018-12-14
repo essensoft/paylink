@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
     /// 企业支付 - 发放企业红包
     /// </summary>
-    public class WeChatPaySendWorkWxRedPackRequest : IWeChatPayCertificateRequest<WeChatPaySendWorkWxRedPackResponse>
+    public class WeChatPaySendWorkWxRedPackRequest : WeChatPayCertificateRequest<WeChatPaySendWorkWxRedPackResponse>
     {
         /// <summary>
         /// 商户订单号
@@ -65,35 +67,54 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         #region IWeChatPayCertificateRequest Members
 
-        public string GetRequestUrl()
+        public override string GetRequestUrl()
         {
             return "https://api.mch.weixin.qq.com/mmpaymkttransfers/sendworkwxredpack";
         }
 
-        public IDictionary<string, string> GetParameters()
+        protected override IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
             {
-                { "mch_billno", MchBillNo },
-                { "wxappid", WxAppId },
-                { "sender_name", SenderName },
-                { "agentid", AgentId },
-                { "sender_header_media_id", SenderHeaderMediaId },
-                { "re_openid", ReOpenId },
-                { "total_amount", TotalAmount },
-                { "wishing", Wishing },
-                { "act_name", ActName },
-                { "remark", Remark },
-                { "scene_id", SceneId },
+                { ConstKey.Key_mch_billno, MchBillNo },
+                { ConstKey.Key_wxappid, WxAppId },
+                { ConstKey.Key_sender_name, SenderName },
+                { ConstKey.Key_agentid, AgentId },
+                { ConstKey.Key_sender_header_media_id, SenderHeaderMediaId },
+                { ConstKey.Key_re_openid, ReOpenId },
+                { ConstKey.Key_total_amount, TotalAmount },
+                { ConstKey.Key_wishing, Wishing },
+                { ConstKey.Key_act_name, ActName },
+                { ConstKey.Key_remark, Remark },
+                { ConstKey.Key_scene_id, SceneId },
             };
             return parameters;
         }
 
-        public bool IsCheckResponseSign()
+        protected override void HandleParametersInOptions(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
         {
-            return true;
-        }
+            base.HandleParametersInOptions(sortedTxtParams, options);
 
+            if (string.IsNullOrEmpty(sortedTxtParams.GetValue(ConstKey.Key_wxappid)))
+            {
+                sortedTxtParams.Add(ConstKey.Key_wxappid, options.AppId);
+            }
+
+            sortedTxtParams.Add(ConstKey.Key_mch_id, options.MchId);
+
+            var sign_list = new List<string>
+                {
+                    "act_name",
+                    "mch_billno",
+                    "mch_id",
+                    "nonce_str",
+                    "re_openid",
+                    "total_amount",
+                    "wxappid",
+                };
+
+            sortedTxtParams.Add(ConstKey.Key_workwx_sign, WeChatPaySignature.SignWithSecret(sortedTxtParams, options.Secret, sign_list));
+        }
         #endregion
     }
 }

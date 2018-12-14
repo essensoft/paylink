@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
     /// 企业支付 - 向员工付款
     /// </summary>
-    public class WeChatPayPayWwSpTrans2PockeRequest : IWeChatPayCertificateRequest<WeChatPayPayWwSpTrans2PockeResponse>
+    public class WeChatPayPayWwSpTrans2PockeRequest : WeChatPayCertificateRequest<WeChatPayPayWwSpTrans2PockeResponse>
     {
         /// <summary>
         /// 公众账号appid
@@ -80,38 +82,62 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         #region IWeChatPayCertificateRequest Members
 
-        public string GetRequestUrl()
+        public override string GetRequestUrl()
         {
             return "https://api.mch.weixin.qq.com/mmpaymkttransfers/promotion/paywwsptrans2pocket";
         }
 
-        public IDictionary<string, string> GetParameters()
+        protected override IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
             {
-                { "appid", AppId },
-                { "device_info", DeviceInfo },
-                { "partner_trade_no", PartnerTradeNo },
-                { "openid", OpenId },
-                { "check_name", CheckName },
-                { "re_user_name", ReUserName },
-                { "amount", Amount },
-                { "desc", Desc },
-                { "spbill_create_ip", SpbillCreateIp },
-                { "ww_msg_type", WwMsgType },
-                { "approval_number", ApprovalNumber },
-                { "approval_type", ApprovalType },
-                { "act_name", ActName },
-                { "agentid", AgentId },
+                { ConstKey.Key_appid, AppId },
+                { ConstKey.Key_device_info, DeviceInfo },
+                { ConstKey.Key_partner_trade_no, PartnerTradeNo },
+                { ConstKey.Key_openid, OpenId },
+                { ConstKey.Key_check_name, CheckName },
+                { ConstKey.Key_re_user_name, ReUserName },
+                { ConstKey.Key_amount, Amount },
+                { ConstKey.Key_desc, Desc },
+                { ConstKey.Key_spbill_create_ip, SpbillCreateIp },
+                { ConstKey.Key_ww_msg_type, WwMsgType },
+                { ConstKey.Key_approval_number, ApprovalNumber },
+                { ConstKey.Key_approval_type, ApprovalType },
+                { ConstKey.Key_act_name, ActName },
+                { ConstKey.Key_agentid, AgentId },
             };
             return parameters;
         }
-
-        public bool IsCheckResponseSign()
+        public override void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options)
         {
-            return false;
         }
 
+        protected override void HandleParametersInOptions(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
+        {
+            base.HandleParametersInOptions(sortedTxtParams, options);
+
+
+            if (string.IsNullOrEmpty(sortedTxtParams.GetValue(ConstKey.Key_appid)))
+            {
+                sortedTxtParams.Add(ConstKey.Key_appid, options.AppId);
+            }
+
+            sortedTxtParams.Add(ConstKey.Key_mch_id, options.MchId);
+
+            var sign_list = new List<string>
+                {
+                    "amount",
+                    "appid",
+                    "desc",
+                    "mch_id",
+                    "nonce_str",
+                    "openid",
+                    "partner_trade_no",
+                    "ww_msg_type",
+                };
+
+            sortedTxtParams.Add(ConstKey.Key_workwx_sign, WeChatPaySignature.SignWithSecret(sortedTxtParams, options.Secret, sign_list));
+        }
         #endregion
     }
 }

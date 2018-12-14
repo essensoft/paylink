@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
     /// 查询代金券信息
     /// </summary>
-    public class WeChatPayQueryCouponsInfoRequest : IWeChatPayRequest<WeChatPayQueryCouponsInfoResponse>
+    public class WeChatPayQueryCouponsInfoRequest : WechatPayRequest<WeChatPayQueryCouponsInfoResponse>
     {
         /// <summary>
         /// 应用ID
@@ -50,36 +51,27 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         #region IWeChatPayRequest Members
 
-        public string GetRequestUrl()
+        public override string GetRequestUrl()
         {
             return "https://api.mch.weixin.qq.com/mmpaymkttransfers/querycouponsinfo";
         }
 
-        public IDictionary<string, string> GetParameters()
+        protected override IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
             {
-                { "appid", AppId },
-                { "coupon_id", CouponId },
-                { "openid", OpenId },
-                { "stock_id", StockId },
-                { "op_user_id", OpUserId },
-                { "device_info", DeviceInfo },
-                { "version", Version },
-                { "type", Type }
+                { ConstKey.Key_appid, AppId },
+                { ConstKey.Key_coupon_id, CouponId },
+                { ConstKey.Key_openid, OpenId },
+                { ConstKey.Key_stock_id, StockId },
+                { ConstKey.Key_op_user_id, OpUserId },
+                { ConstKey.Key_device_info, DeviceInfo },
+                { ConstKey.Key_version, Version },
+                { ConstKey.Key_type, Type }
             };
             return parameters;
         }
 
-        public bool IsCheckResponseSign()
-        {
-            return true;
-        }
-
-        public bool IsSupportSignTypeMd5()
-        {
-            return true;
-        }
         #endregion
     }
 }

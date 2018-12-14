@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
 {
     [XmlRoot("xml")]
-    internal class WeChatPayQueryWorkWxRedPackResponse : WeChatPayResponse
+    public class WeChatPayQueryWorkWxRedPackResponse : WeChatPayResponse
     {
         /// <summary>
         /// 返回状态码

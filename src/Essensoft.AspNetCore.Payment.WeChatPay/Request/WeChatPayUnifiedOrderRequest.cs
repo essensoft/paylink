@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
     /// 统一下单
     /// </summary>
-    public class WeChatPayUnifiedOrderRequest : IWeChatPayRequest<WeChatPayUnifiedOrderResponse>
+    public class WeChatPayUnifiedOrderRequest : WechatPayRequest<WeChatPayUnifiedOrderResponse>
     {
         /// <summary>
         /// 应用ID
@@ -116,49 +117,40 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         #region IWeChatPayRequest Members
 
-        public string GetRequestUrl()
+        public override string GetRequestUrl()
         {
             return "https://api.mch.weixin.qq.com/pay/unifiedorder";
         }
 
-        public IDictionary<string, string> GetParameters()
+        protected override IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
             {
-                { "appid", AppId },
-                { "sub_appid", SubAppId },
-                { "sub_mch_id", SubMchId },
-                { "device_info", DeviceInfo },
-                { "body", Body },
-                { "detail", Detail },
-                { "attach", Attach },
-                { "out_trade_no", OutTradeNo },
-                { "fee_type", FeeType },
-                { "total_fee", TotalFee },
-                { "spbill_create_ip", SpbillCreateIp },
-                { "time_start", TimeStart },
-                { "time_expire", TimeExpire },
-                { "goods_tag", GoodsTag },
-                { "notify_url", NotifyUrl },
-                { "trade_type", TradeType },
-                { "product_id", ProductId },
-                { "limit_pay", LimitPay },
-                { "openid", OpenId },
-                { "sub_openid", SubOpenId },
-                { "scene_info", SceneInfo }
+                { ConstKey.Key_appid, AppId },
+                { ConstKey.Key_sub_appid, SubAppId },
+                { ConstKey.Key_sub_mch_id, SubMchId },
+                { ConstKey.Key_device_info, DeviceInfo },
+                { ConstKey.Key_body, Body },
+                { ConstKey.Key_detail, Detail },
+                { ConstKey.Key_attach, Attach },
+                { ConstKey.Key_out_trade_no, OutTradeNo },
+                { ConstKey.Key_fee_type, FeeType },
+                { ConstKey.Key_total_fee, TotalFee },
+                { ConstKey.Key_spbill_create_ip, SpbillCreateIp },
+                { ConstKey.Key_time_start, TimeStart },
+                { ConstKey.Key_time_expire, TimeExpire },
+                { ConstKey.Key_goods_tag, GoodsTag },
+                { ConstKey.Key_notify_url, NotifyUrl },
+                { ConstKey.Key_trade_type, TradeType },
+                { ConstKey.Key_product_id, ProductId },
+                { ConstKey.Key_limit_pay, LimitPay },
+                { ConstKey.Key_openid, OpenId },
+                { ConstKey.Key_sub_openid, SubOpenId },
+                { ConstKey.Key_scene_info, SceneInfo }
             };
             return parameters;
         }
 
-        public bool IsCheckResponseSign()
-        {
-            return true;
-        }
-
-        public bool IsSupportSignTypeMd5()
-        {
-            return true;
-        }
         #endregion
     }
 }

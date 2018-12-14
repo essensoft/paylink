@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
     /// 下载对账单
     /// </summary>
-    public class WeChatPayDownloadBillRequest : IWeChatPayRequest<WeChatPayDownloadBillResponse>
+    public class WeChatPayDownloadBillRequest : WechatPayRequest<WeChatPayDownloadBillResponse>
     {
         /// <summary>
         /// 应用ID
@@ -40,34 +41,30 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         #region IWeChatPayRequest Members
 
-        public string GetRequestUrl()
+        public override string GetRequestUrl()
         {
             return "https://api.mch.weixin.qq.com/pay/downloadbill";
         }
 
-        public IDictionary<string, string> GetParameters()
+        protected override IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
             {
-                { "appid", AppId },
-                { "sub_appid", SubAppId },
-                { "sub_mch_id", SubMchId },
-                { "bill_date", BillDate },
-                { "bill_type", BillType },
-                { "tar_type", TarType }
+                { ConstKey.Key_appid, AppId },
+                { ConstKey.Key_sub_appid, SubAppId },
+                { ConstKey.Key_sub_mch_id, SubMchId },
+                { ConstKey.Key_bill_date, BillDate },
+                { ConstKey.Key_bill_type, BillType },
+                { ConstKey.Key_tar_type, TarType }
             };
             return parameters;
         }
 
-        public bool IsCheckResponseSign()
+        public override void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options)
         {
-            return false;
+
         }
 
-        public bool IsSupportSignTypeMd5()
-        {
-            return true;
-        }
         #endregion
     }
 }
