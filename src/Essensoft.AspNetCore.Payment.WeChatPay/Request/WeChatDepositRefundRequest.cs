@@ -1,15 +1,13 @@
 ﻿using Essensoft.AspNetCore.Payment.WeChatPay.Response;
 using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 酒店押金消费接口请求
+    /// 酒店押金退款请求
     /// </summary>
-    public class WeChatDepositConsumeRequest : WeChatPayCertificateRequest<WeChatDepositConsumeResponse>
+    public class WeChatDepositRefundRequest : WeChatPayCertificateRequest<WeChatDepositRefundResponse>
     {
         /// <summary>
         /// 应用ID
@@ -30,31 +28,39 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// 微信订单号
         /// </summary>
         public string TransactionId { get; set; }
-
         /// <summary>
-        /// 商户订单号
+        /// 押金退款单号
         /// </summary>
-        public string OutTradeNo { get; set; }
-
+        public string OutRefundNo { get; set; }
         /// <summary>
         /// 押金总金额
         /// </summary>
         public int TotalFee { get; set; }
         /// <summary>
-        /// 消费金额
+        /// 申请退款金额
         /// </summary>
-        public int ConsumeFee { get; set; }
+        public int RefundFee { get; set; }
 
         /// <summary>
-        /// 货币类型
+        /// 退款货币种类
         /// </summary>
-        public string FeeType { get; set; }
+        public string RefundFeeType { get; set; }
+
+        /// <summary>
+        /// 退款原因
+        /// </summary>
+        public int RefundDesc { get; set; }
+
+        /// <summary>
+        /// 退款资金来源
+        /// </summary>
+        public string RefundAccount { get; set; }
 
         #region IWeChatPayRequest Members
 
         public override string GetRequestUrl()
         {
-            return "https://api.mch.weixin.qq.com/deposit/consume";
+            return "https://api.mch.weixin.qq.com/deposit/refund";
         }
 
         protected override IDictionary<string, string> GetParameters()
@@ -64,11 +70,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { ConstKey.Key_appid, AppId },
                 { ConstKey.Key_sub_appid, SubAppId },
                 { ConstKey.Key_sub_mch_id, SubMchId },
-                { ConstKey.Key_out_trade_no, OutTradeNo },
                 { ConstKey.Key_transaction_id,TransactionId},
+                { ConstKey.Key_out_refund_no,OutRefundNo},
                 { ConstKey.Key_total_fee, TotalFee },
-                { ConstKey.Key_consume_fee,ConsumeFee},
-                { ConstKey.Key_fee_type, FeeType },
+                { ConstKey.Key_refund_fee,RefundFee},
+                { ConstKey.Key_refund_fee_type, RefundFeeType },
+                { ConstKey.Key_refund_desc,RefundDesc},
+                { ConstKey.Key_refund_account, RefundAccount },
                 { ConstKey.Key_sign_type,ConstKey.Key_HMAC_SHA256}
             };
             return parameters;
