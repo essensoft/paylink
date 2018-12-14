@@ -15,12 +15,12 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
         /// <summary>
         /// 组装普通文本请求参数。
         /// </summary>
-        /// <param name="parameters">Key-Value形式请求参数字典</param>
+        /// <param name="dictionary">Key-Value形式请求参数字典</param>
         /// <returns>URL编码后的请求数据</returns>
-        public static string BuildQuery(IDictionary<string, string> parameters)
+        public static string BuildQuery(IDictionary<string, string> dictionary)
         {
             var content = new StringBuilder();
-            foreach (var iter in parameters)
+            foreach (var iter in dictionary)
             {
                 if (!string.IsNullOrEmpty(iter.Value))
                 {

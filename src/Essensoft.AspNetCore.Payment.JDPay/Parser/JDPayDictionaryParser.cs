@@ -15,11 +15,11 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Parser
     {
         private static readonly Dictionary<Type, Dictionary<string, PropertyInfo>> DicProperties = new Dictionary<Type, Dictionary<string, PropertyInfo>>();
 
-        public T Parse(JDPayDictionary dic)
+        public T Parse(JDPayDictionary dictionary)
         {
-            if (dic == null || dic.Count == 0)
+            if (dictionary == null || dictionary.Count == 0)
             {
-                throw new ArgumentNullException(nameof(dic));
+                throw new ArgumentNullException(nameof(dictionary));
             }
 
             if (!DicProperties.ContainsKey(typeof(T)))
@@ -31,7 +31,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Parser
 
             var rsp = Activator.CreateInstance<T>();
 
-            foreach (var item in dic)
+            foreach (var item in dictionary)
             {
                 if (propertiesMap.ContainsKey(item.Key))
                 {
@@ -41,7 +41,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Parser
 
             if (rsp != null)
             {
-                rsp.Parameters = dic;
+                rsp.Parameters = dictionary;
             }
 
             return rsp;

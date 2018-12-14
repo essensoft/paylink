@@ -25,9 +25,9 @@ namespace Essensoft.AspNetCore.Payment.QPay.Parser
                 }
 
                 var doc = XDocument.Parse(body).Root;
-                foreach (var xe in doc.Elements())
+                foreach (var element in doc.Elements())
                 {
-                    parameters.Add(xe.Name.LocalName, xe.Value);
+                    parameters.Add(element.Name.LocalName, element.Value);
                 }
             }
             catch { }

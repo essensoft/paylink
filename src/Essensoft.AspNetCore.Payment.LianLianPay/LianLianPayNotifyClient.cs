@@ -72,28 +72,28 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
         private async Task<LianLianPayDictionary> GetParametersAsync(HttpRequest request)
         {
-            var parameters = new LianLianPayDictionary();
-            var form = await request.ReadFormAsync();
-            foreach (var iter in form)
+            var dictionary = new LianLianPayDictionary();
+            var formCollection = await request.ReadFormAsync();
+            foreach (var iter in formCollection)
             {
-                parameters.Add(iter.Key, iter.Value);
+                dictionary.Add(iter.Key, iter.Value);
             }
-            return parameters;
+            return dictionary;
         }
 
-        private void CheckNotifySign(LianLianPayDictionary para, LianLianPayOptions options)
+        private void CheckNotifySign(LianLianPayDictionary dictionary, LianLianPayOptions options)
         {
-            if (para.Count == 0)
+            if (dictionary == null || dictionary.Count == 0)
             {
-                throw new LianLianPayException("sign check fail: para is Empty!");
+                throw new LianLianPayException("sign check fail: dictionary is Empty!");
             }
 
-            if (!para.TryGetValue("sign", out var sign))
+            if (!dictionary.TryGetValue("sign", out var sign))
             {
                 throw new LianLianPayException("sign check fail: sign is Empty!");
             }
 
-            var prestr = LianLianPaySecurity.GetSignContent(para);
+            var prestr = LianLianPaySecurity.GetSignContent(dictionary);
             if (!MD5WithRSA.VerifyData(prestr, sign, options.PublicKey))
             {
                 throw new LianLianPayException("sign check fail: check Sign and Data Fail JSON also");

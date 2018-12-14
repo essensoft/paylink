@@ -93,16 +93,16 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 var body = await client.DoPostAsync(request.GetRequestUrl(options.TestMode), query);
                 _logger.Log(options.LogLevel, "Response:{content}", body);
 
-                var dic = ParseQueryString(body);
+                var dictionary = ParseQueryString(body);
 
                 var ifValidateCNName = !options.TestMode;
-                if (!UnionPaySignature.Validate(dic, options.RootCertificate.cert, options.MiddleCertificate.cert, options.SecureKey, ifValidateCNName))
+                if (!UnionPaySignature.Validate(dictionary, options.RootCertificate.cert, options.MiddleCertificate.cert, options.SecureKey, ifValidateCNName))
                 {
                     throw new UnionPayException("sign check fail: check Sign and Data Fail!");
                 }
 
                 var parser = new UnionPayDictionaryParser<T>();
-                var rsp = parser.Parse(dic);
+                var rsp = parser.Parse(dictionary);
                 rsp.Body = body;
                 return rsp;
             }
@@ -166,13 +166,13 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         #region Common Method
 
-        private string BuildHtmlRequest(string url, UnionPayDictionary dicPara)
+        private string BuildHtmlRequest(string url, UnionPayDictionary dictionary)
         {
             var sbHtml = new StringBuilder();
             sbHtml.Append("<form id='submit' name='submit' action='" + url + "' method='post' style='display:none;'>");
-            foreach (var temp in dicPara)
+            foreach (var iter in dictionary)
             {
-                sbHtml.Append("<input  name='" + temp.Key + "' value='" + temp.Value + "'/>");
+                sbHtml.Append("<input  name='" + iter.Key + "' value='" + iter.Value + "'/>");
             }
             sbHtml.Append("<input type='submit' style='display:none;'></form>");
             sbHtml.Append("<script>document.forms['submit'].submit();</script>");
@@ -241,7 +241,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             return Dictionary;
         }
 
-        private static void PutKeyValueToDictionary(StringBuilder temp, bool isKey, string key, Dictionary<string, string> Dictionary)
+        private static void PutKeyValueToDictionary(StringBuilder temp, bool isKey, string key, Dictionary<string, string> dictionary)
         {
             if (isKey)
             {
@@ -250,7 +250,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 {
                     throw new UnionPayException("QueryString format illegal");
                 }
-                Dictionary[key] = string.Empty;
+                dictionary[key] = string.Empty;
             }
             else
             {
@@ -258,7 +258,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
                 {
                     throw new UnionPayException("QueryString format illegal");
                 }
-                Dictionary[key] = temp.ToString();
+                dictionary[key] = temp.ToString();
             }
         }
 

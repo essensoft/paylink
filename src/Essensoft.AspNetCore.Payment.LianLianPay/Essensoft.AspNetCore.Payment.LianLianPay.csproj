@@ -1,44 +1,39 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.0;netcoreapp2.1;netcoreapp2.2;</TargetFrameworks>
+    <TargetFrameworks>netcoreapp2.1;netcoreapp2.2;</TargetFrameworks>
     <Company>Essensoft</Company>
     <Authors>Roc</Authors>
     <Product>Payment</Product>
-    <Version>2.1.0</Version>
-    <AssemblyVersion>2.1.0.0</AssemblyVersion>
-    <FileVersion>2.1.0.0</FileVersion>
+    <Version>2.2.0</Version>
+    <AssemblyVersion>2.2.0.0</AssemblyVersion>
+    <FileVersion>2.2.0.0</FileVersion>
     <Description>Essensoft.AspNetCore.Payment.LianLianPay</Description>
     <Copyright>© Essensoft 2018</Copyright>
     <PackageProjectUrl>https://github.com/Essensoft/Payment</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Essensoft.AspNetCore.Payment.LianLianPay</PackageId>
-    <PackageTags>Essensoft;Payment;LianLianPay;连连支付;</PackageTags>
+    <PackageTags>Essensoft;AspNetCore;Payment;LianLianPay;连连支付;</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
   </ItemGroup>
-  
-  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.0.*" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="2.0.*" />
-  </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.1.*" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="2.1.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="[2.1.3,2.2.0)" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="[2.1.1,2.2.0)" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.2' ">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.*" />
-    <PackageReference Include="Microsoft.Extensions.Http" Version="2.2.*" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="[2.2.0,2.3.0)" />
+    <PackageReference Include="Microsoft.Extensions.Http" Version="[2.2.0,2.3.0)" />
   </ItemGroup>
   
   <ItemGroup>

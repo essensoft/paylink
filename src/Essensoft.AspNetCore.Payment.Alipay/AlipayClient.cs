@@ -228,7 +228,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
                 }
 
-                var encryptContent = AES.Encrypt(txtParams[BIZ_CONTENT], options.EncyptKey, AlipaySignature.AES_IV, AESCipherMode.CBC, AESPaddingMode.PKCS7);
+                var encryptContent = AES.Encrypt(txtParams[BIZ_CONTENT], options.EncyptKey, AlipaySignature.AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
                 txtParams.Remove(BIZ_CONTENT);
                 txtParams.Add(BIZ_CONTENT, encryptContent);
                 txtParams.Add(ENCRYPT_TYPE, options.EncyptType);
@@ -275,7 +275,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             var item = ParseRespItem(request, body, parser, options.EncyptKey, options.EncyptType);
             rsp = parser.Parse(item.RealContent);
 
-            CheckResponseSign(request, item.RespContent, rsp.IsError, parser, options.PublicRSAParameters, options.SignType);
+            CheckResponseSign(request, item.RespContent, rsp.IsError, parser, options);
 
             return rsp;
         }
@@ -302,7 +302,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         }
 
-        private void CheckResponseSign<T>(IAlipayRequest<T> request, string responseBody, bool isError, IAlipayParser<T> parser, RSAParameters parameters, string signType) where T : AlipayResponse
+        private void CheckResponseSign<T>(IAlipayRequest<T> request, string responseBody, bool isError, IAlipayParser<T> parser, AlipayOptions options) where T : AlipayResponse
         {
             var signItem = parser.GetSignItem(request, responseBody);
             if (signItem == null)
@@ -312,13 +312,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             if (!isError || isError && !string.IsNullOrEmpty(signItem.Sign))
             {
-                var rsaCheckContent = AlipaySignature.RSACheckContent(signItem.SignSourceDate, signItem.Sign, parameters, signType);
+                var rsaCheckContent = AlipaySignature.RSACheckContent(signItem.SignSourceDate, signItem.Sign, options.PublicRSAParameters, options.SignType);
                 if (!rsaCheckContent)
                 {
                     if (!string.IsNullOrEmpty(signItem.SignSourceDate) && signItem.SignSourceDate.Contains("\\/"))
                     {
                         var srouceData = signItem.SignSourceDate.Replace("\\/", "/");
-                        var jsonCheck = AlipaySignature.RSACheckContent(srouceData, signItem.Sign, parameters, signType);
+                        var jsonCheck = AlipaySignature.RSACheckContent(srouceData, signItem.Sign, options.PublicRSAParameters, options.SignType);
                         if (!jsonCheck)
                         {
                             throw new AlipayException("sign check fail: check Sign and Data Fail JSON also");
@@ -329,7 +329,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                         throw new AlipayException("sign check fail: check Sign and Data Fail!");
                     }
                 }
-
             }
         }
 
@@ -337,18 +336,15 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         #region Common Method
 
-        private string BuildHtmlRequest(IDictionary<string, string> sParaTemp, string strMethod, AlipayOptions options)
+        private string BuildHtmlRequest(IDictionary<string, string> dictionary, string strMethod, AlipayOptions options)
         {
-            //待请求参数数组
-            var dicPara = new Dictionary<string, string>(sParaTemp);
-
             var sbHtml = new StringBuilder();
             sbHtml.Append("<form id='submit' name='submit' action='" + options.ServerUrl + "?charset=" + options.Charset +
                  "' method='" + strMethod + "' style='display:none;'>");
 
-            foreach (var temp in dicPara)
+            foreach (var iter in dictionary)
             {
-                sbHtml.Append("<input  name='" + temp.Key + "' value='" + temp.Value + "'/>");
+                sbHtml.Append("<input  name='" + iter.Key + "' value='" + iter.Value + "'/>");
             }
             sbHtml.Append("<input type='submit' style='display:none;'></form>");
             //表单实现自动提交
@@ -398,7 +394,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                     throw new AlipayException("api only support Aes!");
                 }
 
-                var encryptContent = AES.Encrypt(result[BIZ_CONTENT], options.EncyptKey, AlipaySignature.AES_IV, AESCipherMode.CBC, AESPaddingMode.PKCS7);
+                var encryptContent = AES.Encrypt(result[BIZ_CONTENT], options.EncyptKey, AlipaySignature.AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
                 result.Remove(BIZ_CONTENT);
                 result.Add(BIZ_CONTENT, encryptContent);
                 result.Add(ENCRYPT_TYPE, options.EncyptType);

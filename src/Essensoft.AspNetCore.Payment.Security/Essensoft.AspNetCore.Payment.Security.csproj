@@ -5,21 +5,21 @@
     <Company>Essensoft</Company>
     <Authors>Roc</Authors>
     <Product>Payment</Product>
-    <Version>2.1.0</Version>
-    <AssemblyVersion>2.1.0.0</AssemblyVersion>
-    <FileVersion>2.1.0.0</FileVersion>
+    <Version>2.2.0</Version>
+    <AssemblyVersion>2.2.0.0</AssemblyVersion>
+    <FileVersion>2.2.0.0</FileVersion>
     <Description>Essensoft.AspNetCore.Payment.Security</Description>
     <Copyright>© Essensoft 2018</Copyright>
     <PackageProjectUrl>https://github.com/Essensoft/Payment</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>Essensoft.AspNetCore.Payment.Security</PackageId>
-    <PackageTags>Essensoft;Payment;Security;</PackageTags>
+    <PackageTags>Essensoft;AspNetCore;Payment;Security;</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>

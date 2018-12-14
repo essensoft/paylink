@@ -1,4 +1,5 @@
 ﻿using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Security;
@@ -8,6 +9,7 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using MD5 = Essensoft.AspNetCore.Payment.Security.MD5;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
@@ -49,7 +51,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             if (notify is WeChatPayRefundNotify)
             {
                 var key = MD5.Compute(options.Key).ToLower();
-                var data = AES.Decrypt((notify as WeChatPayRefundNotify).ReqInfo, key, AESCipherMode.ECB, AESPaddingMode.PKCS7);
+                var data = AES.Decrypt((notify as WeChatPayRefundNotify).ReqInfo, key, CipherMode.ECB, PaddingMode.PKCS7);
                 _logger.Log(options.LogLevel, "Decrypt Content:{data}", data); // AES-256-ECB 解密内容
                 notify = parser.Parse(body, data);
             }

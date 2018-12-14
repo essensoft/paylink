@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
@@ -23,7 +24,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
             var bodyIndexContent = body.Substring(0, item.startIndex);
             var bodyEndContent = body.Substring(item.endIndex);
-            var encryptContent = AES.Decrypt(item.encryptContent, encryptKey, AlipaySignature.AES_IV, AESCipherMode.CBC, AESPaddingMode.PKCS7);
+            var encryptContent = AES.Decrypt(item.encryptContent, encryptKey, AlipaySignature.AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
 
             return bodyIndexContent + encryptContent + bodyEndContent;
         }
