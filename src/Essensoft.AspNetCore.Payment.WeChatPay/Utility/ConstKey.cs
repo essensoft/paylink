@@ -27,6 +27,7 @@
         //c
         public const string Key_check_name = "check_name";
         public const string Key_client_ip = "client_ip";
+        public const string Key_consume_fee = "consume_fee";
         public const string Key_consume_mch_id = "consume_mch_id";
         public const string Key_coupon_id = "coupon_id";
         public const string Key_coupon_stock_id = "coupon_stock_id";

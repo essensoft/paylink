@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
 {
+    /// <summary>
+    /// 酒店押金撤销响应结果
+    /// </summary>
+    [XmlRoot("xml")]
     public class WeChatDepositReverseResponse : WeChatPayResponse
     {
         /// <summary>
@@ -76,98 +77,5 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// </summary>
         [XmlElement("sign")]
         public string Sign { get; set; }
-
-        /// <summary>
-        /// 微信订单号	
-        /// </summary>
-        [XmlElement("transaction_id")]
-        public string TransactionId { get; set; }
-
-        /// <summary>
-        /// 商户订单号	
-        /// </summary>
-        [XmlElement("out_trade_no")]
-        public string OutTradeNo { get; set; }
-
-        /// <summary>
-        /// 商户退款单号	
-        /// </summary>
-        [XmlElement("out_refund_no")]
-        public string OutRefundNo { get; set; }
-
-        /// <summary>
-        /// 微信退款单号	
-        /// </summary>
-        [XmlElement("refund_id")]
-        public string RefundId { get; set; }
-
-        /// <summary>
-        /// 申请退款金额	
-        /// </summary>
-        [XmlElement("refund_fee")]
-        public string RefundFee { get; set; }
-
-        /// <summary>
-        /// 退款金额	
-        /// </summary>
-        [XmlElement("settlement_refund_fee")]
-        public string SettlementRefundFee { get; set; }
-
-        /// <summary>
-        /// 订单金额	
-        /// </summary>
-        [XmlElement("total_fee")]
-        public int TotalFee { get; set; }
-
-        /// <summary>
-        /// 应结订单金额
-        /// </summary>
-        [XmlElement("settlement_total_fee")]
-        public int SettlementTotalFee { get; set; }
-
-        /// <summary>
-        /// 货币种类
-        /// </summary>
-        [XmlElement("fee_type")]
-        public string FeeType { get; set; }
-
-        /// <summary>
-        /// 现金支付金额	
-        /// </summary>
-        [XmlElement("cash_fee")]
-        public int CashFee { get; set; }
-
-        /// <summary>
-        /// 现金退款金额	
-        /// </summary>
-        [XmlElement("cash_refund_fee")]
-        public int CashRefundFee { get; set; }
-
-        /// <summary>
-        /// 代金券退款总金额	
-        /// </summary>
-        [XmlElement("coupon_refund_fee")]
-        public int RefundCount { get; set; }
-
-        /// <summary>
-        /// 退款代金券使用数量	
-        /// </summary>
-        [XmlElement("coupon_refund_count")]
-        public int CouponRefundCount { get; set; }
-
-        ///// <summary>
-        ///// 退款代金券信息
-        ///// </summary>
-        //[XmlIgnore]
-        //public List<CouponRefundInfo> CouponRefundInfos { get; set; }
-
-        ///// <summary>
-        ///// 处理 _$n / _$n_$m
-        ///// </summary>
-        //internal override void Execute()
-        //{
-        //    var parser = new WeChatPayListPropertyParser();
-        //    CouponRefundInfos = parser.Parse<CouponRefundInfo, object>(Parameters);
-        //}
     }
 }
