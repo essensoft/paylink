@@ -7,7 +7,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
     /// <summary>
     /// 授权码查询openid
     /// </summary>
-    public class WeChatPayAuthCodeToOpenIdRequest : WechatPayRequest<WeChatPayAuthCodeToOpenIdResponse>
+    public class WeChatPayAuthCodeToOpenIdRequest : WeChatPayRequest<WeChatPayAuthCodeToOpenIdResponse>
     {
         /// <summary>
         /// 应用ID

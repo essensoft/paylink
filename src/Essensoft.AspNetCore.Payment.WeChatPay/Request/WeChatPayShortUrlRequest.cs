@@ -7,7 +7,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
     /// <summary>
     /// 转换短链接
     /// </summary>
-    public class WeChatPayShortUrlRequest : WechatPayRequest<WeChatPayShortUrlResponse>
+    public class WeChatPayShortUrlRequest : WeChatPayRequest<WeChatPayShortUrlResponse>
     {
         /// <summary>
         /// 应用ID

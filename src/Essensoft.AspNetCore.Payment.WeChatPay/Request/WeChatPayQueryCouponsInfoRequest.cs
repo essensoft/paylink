@@ -7,7 +7,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
     /// <summary>
     /// 查询代金券信息
     /// </summary>
-    public class WeChatPayQueryCouponsInfoRequest : WechatPayRequest<WeChatPayQueryCouponsInfoResponse>
+    public class WeChatPayQueryCouponsInfoRequest : WeChatPayRequest<WeChatPayQueryCouponsInfoResponse>
     {
         /// <summary>
         /// 应用ID

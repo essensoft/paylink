@@ -7,7 +7,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
     /// <summary>
     /// 关闭订单
     /// </summary>
-    public class WeChatPayCloseOrderRequest : WechatPayRequest<WeChatPayCloseOrderResponse>
+    public class WeChatPayCloseOrderRequest : WeChatPayRequest<WeChatPayCloseOrderResponse>
     {
         /// <summary>
         /// 应用ID

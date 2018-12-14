@@ -6,7 +6,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
     /// <summary>
     /// 微信支付请求类的一些公用实现
     /// </summary>
-    public abstract class WechatPayRequest<T> : WeChatRequestBase, IWeChatPayRequest<T> where T : WeChatPayResponse
+    public abstract class WeChatPayRequest<T> : WeChatRequestBase, IWeChatPayRequest<T> where T : WeChatPayResponse
     {
         /// <summary>
         /// 处理配置选项中的参数和通用参数

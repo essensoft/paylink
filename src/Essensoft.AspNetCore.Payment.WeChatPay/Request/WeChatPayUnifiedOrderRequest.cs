@@ -7,7 +7,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
     /// <summary>
     /// 统一下单
     /// </summary>
-    public class WeChatPayUnifiedOrderRequest : WechatPayRequest<WeChatPayUnifiedOrderResponse>
+    public class WeChatPayUnifiedOrderRequest : WeChatPayRequest<WeChatPayUnifiedOrderResponse>
     {
         /// <summary>
         /// 应用ID

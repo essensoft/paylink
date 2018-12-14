@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
     /// <summary>
     /// 微信酒店押金支付接口
     /// </summary>
-    public class WeChatDepositMicropayRequest : WechatPayRequest<WechatDepositMicropayResponse>
+    public class WeChatDepositMicropayRequest : WeChatPayRequest<WechatDepositMicropayResponse>
     {
         /// <summary>
         /// 应用ID
