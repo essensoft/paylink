@@ -175,6 +175,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 }
 
                 sortedTxtParams.Add(mch_id, options.MchId);
+                sortedTxtParams.Add(sign_type, SIGN_TYPE_HMAC_SHA256);
                 signType = false; // HMAC-SHA256
             }
             else if (request is WeChatPayRefundRequest)
@@ -333,7 +334,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         #region Common Method
 
-        private void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options, bool signType = true, bool excludeSignType = true)
+        private void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options, bool signType = true)
         {
             if (string.IsNullOrEmpty(response.Body))
             {
