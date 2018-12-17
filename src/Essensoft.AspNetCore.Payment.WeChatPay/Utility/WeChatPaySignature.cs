@@ -9,12 +9,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
     /// </summary>
     public class WeChatPaySignature
     {
-        public static string SignWithKey(SortedDictionary<string, string> dictionary, string key, bool signType = true, bool excludeSignType = true)
+        public static string SignWithKey(SortedDictionary<string, string> dictionary, string key, bool signType = true)
         {
             var sb = new StringBuilder();
             foreach (var iter in dictionary)
             {
-                if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign" && (excludeSignType ? iter.Key != "sign_type" : true))
+                if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign")
                 {
                     sb.Append(iter.Key).Append('=').Append(iter.Value).Append("&");
                 }
