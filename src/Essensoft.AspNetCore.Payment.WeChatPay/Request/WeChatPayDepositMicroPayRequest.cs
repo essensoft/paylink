@@ -4,7 +4,7 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Response;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 支付押金
+    /// 酒店押金 - 支付押金
     /// </summary>
     public class WeChatPayDepositMicroPayRequest : IWeChatPayRequest<WeChatPayDepositMicroPayResponse>
     {
