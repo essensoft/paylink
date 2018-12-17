@@ -241,7 +241,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
                 sortedTxtParams.Add(workwx_sign, WeChatPaySignature.SignWithSecret(sortedTxtParams, options.Secret, sign_list));
             }
-            else if (request is WeChatPayDepositReverseRequest || request is WeChatPayDepositConsumeRequest)
+            else if (request is WeChatPayDepositReverseRequest || request is WeChatPayDepositConsumeRequest || request is WeChatPayDepositRefundRequest)
             {
                 if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
                 {
