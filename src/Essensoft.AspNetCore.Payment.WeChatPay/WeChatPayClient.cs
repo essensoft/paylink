@@ -241,6 +241,16 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
                 sortedTxtParams.Add(workwx_sign, WeChatPaySignature.SignWithSecret(sortedTxtParams, options.Secret, sign_list));
             }
+            else if (request is WeChatPayDepositReverseRequest)
+            {
+                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
+                {
+                    sortedTxtParams.Add(appid, options.AppId);
+                }
+
+                sortedTxtParams.Add(mch_id, options.MchId);
+                signType = false; // HMAC-SHA256
+            }
             else // 其他接口
             {
                 if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
