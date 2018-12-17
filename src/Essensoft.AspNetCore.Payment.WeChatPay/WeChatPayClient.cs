@@ -63,6 +63,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         public async Task<T> ExecuteAsync<T>(IWeChatPayRequest<T> request, string optionsName) where T : WeChatPayResponse
         {
+            var signType = true; // ture:MD5，false:HMAC-SHA256
             var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
 
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters())
@@ -71,12 +72,19 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 { nonce_str, Guid.NewGuid().ToString("N") }
             };
 
-            if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
+            if (request is WeChatPayDepositMicroPayRequest)
             {
-                sortedTxtParams.Add(appid, options.AppId);
+                signType = false;
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
+                {
+                    sortedTxtParams.Add(appid, options.AppId);
+                }
             }
 
-            sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key));
+            sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
             var content = WeChatPayUtility.BuildContent(sortedTxtParams);
             _logger.Log(options.LogLevel, "Request:{content}", content);
 
