@@ -72,7 +72,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 { nonce_str, Guid.NewGuid().ToString("N") }
             };
 
-            if (request is WeChatPayDepositMicroPayRequest || request is WeChatPayDepositOrderQueryRequest)
+            if (request is WeChatPayDepositMicroPayRequest || request is WeChatPayDepositOrderQueryRequest || request is WeChatPayDepositRefundQueryRequest)
             {
                 signType = false; // HMAC-SHA256
             }
