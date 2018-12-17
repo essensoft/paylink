@@ -72,16 +72,14 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 { nonce_str, Guid.NewGuid().ToString("N") }
             };
 
-            if (request is WeChatPayDepositMicroPayRequest)
+            if (request is WeChatPayDepositMicroPayRequest || request is WeChatPayDepositOrderQueryRequest)
             {
-                signType = false;
+                signType = false; // HMAC-SHA256
             }
-            else
+
+            if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
             {
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(appid)))
-                {
-                    sortedTxtParams.Add(appid, options.AppId);
-                }
+                sortedTxtParams.Add(appid, options.AppId);
             }
 
             sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
