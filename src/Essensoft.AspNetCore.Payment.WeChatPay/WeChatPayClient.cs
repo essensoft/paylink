@@ -36,6 +36,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         private const string paySign = "paySign";
         private const string workwx_sign = "workwx_sign";
 
+        private const string SIGN_TYPE_MD5 = "MD5";
+        private const string SIGN_TYPE_HMAC_SHA256 = "HMAC-SHA256";
+
         private readonly ILogger _logger;
         private readonly IHttpClientFactory _clientFactory;
         private readonly IOptionsSnapshot<WeChatPayOptions> _optionsSnapshotAccessor;
@@ -74,6 +77,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
             if (request is WeChatPayDepositMicroPayRequest || request is WeChatPayDepositOrderQueryRequest || request is WeChatPayDepositRefundQueryRequest)
             {
+                sortedTxtParams.Add(sign_type, SIGN_TYPE_HMAC_SHA256);
                 signType = false; // HMAC-SHA256
             }
 
@@ -115,7 +119,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         public async Task<T> ExecuteAsync<T>(IWeChatPayCertificateRequest<T> request, string optionsName, string certificateName) where T : WeChatPayResponse
         {
             var signType = true; // ture:MD5，false:HMAC-SHA256
-            var excludeSignType = true;
             var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters())
             {
@@ -134,8 +137,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             else if (request is WeChatPayGetPublicKeyRequest)
             {
                 sortedTxtParams.Add(mch_id, options.MchId);
-                sortedTxtParams.Add(sign_type, "MD5");
-                excludeSignType = false;
+                sortedTxtParams.Add(sign_type, SIGN_TYPE_MD5);
             }
             else if (request is WeChatPayPayBankRequest)
             {
@@ -151,12 +153,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 sortedTxtParams.SetValue(enc_true_name, name);
 
                 sortedTxtParams.Add(mch_id, options.MchId);
-                sortedTxtParams.Add(sign_type, "MD5");
             }
             else if (request is WeChatPayQueryBankRequest)
             {
                 sortedTxtParams.Add(mch_id, options.MchId);
-                sortedTxtParams.Add(sign_type, "MD5");
             }
             else if (request is WeChatPayGetTransferInfoRequest)
             {
@@ -166,7 +166,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 }
 
                 sortedTxtParams.Add(mch_id, options.MchId);
-                sortedTxtParams.Add(sign_type, "MD5");
             }
             else if (request is WeChatPayDownloadFundFlowRequest)
             {
@@ -249,6 +248,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 }
 
                 sortedTxtParams.Add(mch_id, options.MchId);
+                sortedTxtParams.Add(sign_type, SIGN_TYPE_HMAC_SHA256);
                 signType = false; // HMAC-SHA256
             }
             else // 其他接口
@@ -261,7 +261,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 sortedTxtParams.Add(mch_id, options.MchId);
             }
 
-            sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType, excludeSignType));
+            sortedTxtParams.Add(sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
 
             var content = WeChatPayUtility.BuildContent(sortedTxtParams);
             _logger.Log(options.LogLevel, "Request:{content}", content);
@@ -276,7 +276,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
                 if (request.IsCheckResponseSign())
                 {
-                    CheckResponseSign(response, options, signType, excludeSignType);
+                    CheckResponseSign(response, options, signType);
                 }
 
                 return response;
@@ -322,7 +322,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
                 sortedTxtParams.Add(timeStamp, WeChatPayUtility.GetTimeStamp());
                 sortedTxtParams.Add(nonceStr, Guid.NewGuid().ToString("N"));
-                sortedTxtParams.Add(signType, "MD5");
+                sortedTxtParams.Add(signType, SIGN_TYPE_MD5);
                 sortedTxtParams.Add(paySign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key));
             }
 
@@ -333,7 +333,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         #region Common Method
 
-        private void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options, bool useMD5 = true, bool excludeSignType = true)
+        private void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options, bool signType = true, bool excludeSignType = true)
         {
             if (string.IsNullOrEmpty(response.Body))
             {
@@ -352,7 +352,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                     throw new WeChatPayException("sign check fail: sign is Empty!");
                 }
 
-                var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key, useMD5, excludeSignType);
+                var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key, signType);
                 if (cal_sign != sign)
                 {
                     throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
