@@ -28,7 +28,7 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 
 ### 微信支付
 
-* 付款码支付(刷卡)、JSAPI支付(公众号)、Native支付(扫码)、APP支付、H5支付、小程序支付、企业付款(零钱/银行卡)、现金红包
+* 付款码支付(刷卡)、JSAPI支付(公众号)、Native支付(扫码)、APP支付、H5支付、小程序支付、企业付款(零钱/银行卡)、现金红包、酒店押金
 
 ### QQ钱包
 
