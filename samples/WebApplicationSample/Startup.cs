@@ -1,4 +1,8 @@
-﻿using System.Text.Encodings.Web;
+﻿using System;
+using System.Buffers.Text;
+using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
+using System.Text.Encodings.Web;
 using System.Text.Unicode;
 using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.JDPay;
@@ -47,13 +51,13 @@ namespace WebApplicationSample
             //    return handler;
             //});
 
-            //services.AddHttpClient("wechatpayCertificateName").ConfigurePrimaryHttpMessageHandler(() =>
-            //{
-            //    var certificate = new X509Certificate2("", "", X509KeyStorageFlags.MachineKeySet);
-            //    var handler = new HttpClientHandler();
-            //    handler.ClientCertificates.Add(certificate);
-            //    return handler;
-            //});
+            services.AddHttpClient("wechatpayCertificateName").ConfigurePrimaryHttpMessageHandler(() =>
+            {
+                var certificate = new X509Certificate2(Convert.FromBase64String(Configuration["WeChatPay:Certificate"]), Configuration["WeChatPay:MchId"], X509KeyStorageFlags.MachineKeySet);
+                var handler = new HttpClientHandler();
+                handler.ClientCertificates.Add(certificate);
+                return handler;
+            });
 
             // 引入Payment 依赖注入
             services.AddAlipay();
