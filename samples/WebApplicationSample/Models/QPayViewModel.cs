@@ -148,4 +148,32 @@ namespace WebApplicationSample.Models
         [Display(Name = "tar_type")]
         public string TarType { get; set; }
     }
+    public class QPayB2CPayViewModel
+    {
+        [Required]
+        [Display(Name = "out_trade_no")]
+        public string OutTradeNo { get; set; }
+        [Display(Name = "uin")]
+        public string Uin { get; set; }
+        [Display(Name = "appid")]
+        public string AppId { get; set; }
+        [Display(Name = "openid")]
+        public string OpenId { get; set; }
+        [Display(Name = "total_fee")]
+        [Required]
+        public string TotalFee { get; set; }
+        [Display(Name = "memo")]
+        public string Memo { get; set; }
+        [Required]
+        [Display(Name = "op_user_id")]
+        public string OpUserId { get; set; }
+        [Required]
+        [Display(Name = "op_user_passwd")]
+        public string OpUserPasswd { get; set; }
+        [Required]
+        [Display(Name = "spbill_create_ip")]
+        public string SpbillCreateIp { get; set; }
+        [Display(Name = "notify_url")]
+        public string NotifyUrl { get; set; }
+    }
 }

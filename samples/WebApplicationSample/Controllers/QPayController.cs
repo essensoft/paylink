@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Security.Cryptography;
+using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.QPay;
 using Essensoft.AspNetCore.Payment.QPay.Request;
 using Microsoft.AspNetCore.Mvc;
@@ -328,6 +329,41 @@ namespace WebApplicationSample.Controllers
                 TarType = viewModel.TarType
             };
             var response = await _client.ExecuteAsync(request);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+        /// <summary>
+        /// 企业付款
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult B2CPay()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 企业付款
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> B2CPay(QPayB2CPayViewModel viewModel)
+        {
+            var request = new QPayEPayB2CRequest
+            {
+                OutTradeNo = viewModel.OutTradeNo,
+                TotalFee = viewModel.TotalFee,
+                SpbillCreateIp = viewModel.SpbillCreateIp,
+                NotifyUrl = viewModel.NotifyUrl,
+                AppId = viewModel.AppId,
+                Memo = viewModel.Memo,
+                OpenId = viewModel.OpenId,
+                OpUserId = viewModel.OpUserId,
+                OpUserPasswd= Essensoft.AspNetCore.Payment.Security.MD5.Compute(viewModel.OpUserPasswd),
+                CheckRealName="1",
+                Uin= viewModel.Uin
+            };
+            var response = await _client.ExecuteAsync(request,"test");
             ViewData["response"] = response.Body;
             return View();
         }
