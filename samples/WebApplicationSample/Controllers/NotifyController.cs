@@ -13,7 +13,6 @@ using Essensoft.AspNetCore.Payment.UnionPay.Notify;
 using Essensoft.AspNetCore.Payment.WeChatPay;
 using Essensoft.AspNetCore.Payment.WeChatPay.Notify;
 using Microsoft.AspNetCore.Mvc;
-using WebApplicationSample.Helpers;
 
 namespace WebApplicationSample.Controllers
 {
@@ -255,6 +254,26 @@ namespace WebApplicationSample.Controllers
                     return QPayNotifyResult.Success;
                 }
                 return NoContent();
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
+        /// <summary>
+        /// 企业付款 - 用户到账通知
+        /// </summary>
+        /// <returns></returns>
+        [Route("b2cpay")]
+        [HttpPost]
+        public async Task<IActionResult> B2CPay()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<QPayEPayB2CNotify>(Request);
+                Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
+                return QPayNotifyResult.Success;
             }
             catch
             {
