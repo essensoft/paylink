@@ -19,7 +19,6 @@ namespace Essensoft.AspNetCore.Payment.QPay
         private const string NONCE_STR = "nonce_str";
         private const string SIGN = "sign";
         private const string UIN = "uin";
-        private const string OPENID = "openid";
         
         private readonly ILogger _logger;
         private readonly IHttpClientFactory _clientFactory;
