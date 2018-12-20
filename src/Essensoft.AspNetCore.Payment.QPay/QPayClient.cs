@@ -55,9 +55,16 @@ namespace Essensoft.AspNetCore.Payment.QPay
                 { NONCE_STR, Guid.NewGuid().ToString("N") }
             };
 
-            if (string.IsNullOrEmpty(sortedTxtParams.GetValue(APPID)))
+            if (request is QPayEPayQueryRequest)
             {
-                sortedTxtParams.Add(APPID, options.AppId);
+
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(APPID)))
+                {
+                    sortedTxtParams.Add(APPID, options.AppId);
+                }
             }
 
             sortedTxtParams.Add(SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
