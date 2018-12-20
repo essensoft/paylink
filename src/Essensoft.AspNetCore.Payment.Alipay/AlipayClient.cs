@@ -54,24 +54,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         #endregion
 
-        #region IAlipayClient Members
-
-        public async Task<T> ExecuteAsync<T>(IAlipayRequest<T> request) where T : AlipayResponse
-        {
-            return await ExecuteAsync(request, null);
-        }
-
-        public async Task<T> ExecuteAsync<T>(IAlipayRequest<T> request, string optionsName) where T : AlipayResponse
-        {
-            return await ExecuteAsync(request, optionsName, null, null);
-        }
-
-        public async Task<T> ExecuteAsync<T>(IAlipayRequest<T> request, string optionsName, string accessToken) where T : AlipayResponse
-        {
-            return await ExecuteAsync(request, optionsName, accessToken, null);
-        }
-
-        #endregion
 
         #region IAlipayClient Members
 
@@ -85,10 +67,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             return await PageExecuteAsync(request, null, "POST");
         }
 
-        #endregion
-
-        #region IAlipayClient Members
-
         public async Task<T> PageExecuteAsync<T>(IAlipayRequest<T> request, string accessToken, string reqMethod) where T : AlipayResponse
         {
             return await PageExecuteAsync(request, null, accessToken, reqMethod);
@@ -98,9 +76,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         {
             var options = _optionsSnapshotAccessor.Get(optionsName);
             var apiVersion = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
+
+            // 添加协议级请求参数
             var txtParams = new AlipayDictionary(request.GetParameters())
             {
-                { BIZ_CONTENT, Serialize(request.GetBizModel()) },
                 { METHOD, request.GetApiName() },
                 { VERSION, apiVersion },
                 { APP_ID, options.AppId },
@@ -115,6 +94,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 { CHARSET, options.Charset },
                 { RETURN_URL, request.GetReturnUrl() }
             };
+
+            // 序列化BizModel
+            txtParams = SerializeBizModel(txtParams, request);
 
             // 添加签名参数
             var signContent = AlipaySignature.GetSignContent(txtParams);
@@ -179,13 +161,29 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         #region IAlipayClient Members
 
+        public async Task<T> ExecuteAsync<T>(IAlipayRequest<T> request) where T : AlipayResponse
+        {
+            return await ExecuteAsync(request, null);
+        }
+
+        public async Task<T> ExecuteAsync<T>(IAlipayRequest<T> request, string optionsName) where T : AlipayResponse
+        {
+            return await ExecuteAsync(request, optionsName, null, null);
+        }
+
+        public async Task<T> ExecuteAsync<T>(IAlipayRequest<T> request, string optionsName, string accessToken) where T : AlipayResponse
+        {
+            return await ExecuteAsync(request, optionsName, accessToken, null);
+        }
+
         public async Task<T> ExecuteAsync<T>(IAlipayRequest<T> request, string optionsName, string accessToken, string appAuthToken) where T : AlipayResponse
         {
             var options = _optionsSnapshotAccessor.Get(optionsName);
             var apiVersion = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
+
+            // 添加协议级请求参数
             var txtParams = new AlipayDictionary(request.GetParameters())
             {
-                { BIZ_CONTENT, Serialize(request.GetBizModel()) },
                 { METHOD, request.GetApiName() },
                 { VERSION, apiVersion },
                 { APP_ID, options.AppId },
@@ -198,6 +196,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 { PROD_CODE, request.GetProdCode() },
                 { CHARSET, options.Charset }
             };
+
+            // 序列化BizModel
+            txtParams = SerializeBizModel(txtParams, request);
 
             if (!string.IsNullOrEmpty(request.GetNotifyUrl()))
             {
@@ -346,7 +347,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             {
                 sbHtml.Append("<input  name='" + iter.Key + "' value='" + iter.Value + "'/>");
             }
+
             sbHtml.Append("<input type='submit' style='display:none;'></form>");
+
             //表单实现自动提交
             sbHtml.Append("<script>document.forms['submit'].submit();</script>");
 
@@ -356,11 +359,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         private AlipayDictionary BuildRequestParams<T>(IAlipayRequest<T> request, string accessToken, string appAuthToken, AlipayOptions options) where T : AlipayResponse
         {
             var apiVersion = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
+
+            // 添加协议级请求参数
             var result = new AlipayDictionary(request.GetParameters())
             {
-                // 序列化BizModel
-                { BIZ_CONTENT, Serialize(request.GetBizModel()) },
-                // 添加协议级请求参数，为空的参数后面会自动过滤，这里不做处理。
                 { METHOD, request.GetApiName() },
                 { VERSION, apiVersion },
                 { APP_ID, options.AppId },
@@ -376,6 +378,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 { RETURN_URL, request.GetReturnUrl() },
                 { APP_AUTH_TOKEN, appAuthToken }
             };
+
+            // 序列化BizModel
+            result = SerializeBizModel(result, request);
 
             if (request.GetNeedEncrypt())
             {
@@ -445,9 +450,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         private static readonly JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
 
-        private string Serialize(AlipayObject bizModel)
+        private AlipayDictionary SerializeBizModel<T>(AlipayDictionary requestParams, IAlipayRequest<T> request) where T : AlipayResponse
         {
-            return bizModel == null ? string.Empty : JsonConvert.SerializeObject(bizModel, jsonSerializerSettings);
+            var result = requestParams;
+            var isBizContentEmpty = !requestParams.ContainsKey(BIZ_CONTENT) || string.IsNullOrEmpty(requestParams[BIZ_CONTENT]);
+            var bizModel = request.GetBizModel();
+
+            if (isBizContentEmpty && bizModel != null)
+            {
+                var content = JsonConvert.SerializeObject(bizModel, jsonSerializerSettings);
+                result.Add(BIZ_CONTENT, content);
+            }
+
+            return result;
         }
 
         #endregion
