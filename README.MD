@@ -32,7 +32,7 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 
 ### QQ钱包
 
-* 付款码支付、扫码支付、公众号支付、APP支付
+* 付款码支付、扫码支付、公众号支付、APP支付、企业付款
 
 ### 京东支付
 * 网页支付、APP支付、扫一扫、付款码、代付
