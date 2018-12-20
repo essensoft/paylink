@@ -14,20 +14,16 @@
         <form asp-controller="QPay" asp-action="B2CPay">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="OutTradeNo"></label>
-                <input type="text" class="form-control" asp-for="OutTradeNo" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")" />
+                <label asp-for="OpenId"></label>
+                <input type="text" class="form-control" asp-for="OpenId" />
             </div>
             <div class="form-group">
                 <label asp-for="Uin"></label>
-                <input type="text" class="form-control" asp-for="Uin" value="" />
+                <input type="text" class="form-control" asp-for="Uin" />
             </div>
             <div class="form-group">
-                <label asp-for="AppId"></label>
-                <input type="text" class="form-control" asp-for="AppId" value="" />
-            </div>
-            <div class="form-group">
-                <label asp-for="OpenId"></label>
-                <input type="text" class="form-control" asp-for="OpenId" value="" />
+                <label asp-for="OutTradeNo"></label>
+                <input type="text" class="form-control" asp-for="OutTradeNo" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")" />
             </div>
             <div class="form-group">
                 <label asp-for="TotalFee"></label>
@@ -35,15 +31,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="Memo"></label>
-                <input type="text" class="form-control" asp-for="Memo" value="" />
+                <input type="text" class="form-control" asp-for="Memo" />
+            </div>
+            <div class="form-group">
+                <label asp-for="CheckRealName"></label>
+                <input type="text" class="form-control" asp-for="CheckRealName" value="0" />
             </div>
             <div class="form-group">
                 <label asp-for="OpUserId"></label>
-                <input type="text" class="form-control" asp-for="OpUserId" value="" />
+                <input type="text" class="form-control" asp-for="OpUserId" />
             </div>
             <div class="form-group">
                 <label asp-for="OpUserPasswd"></label>
-                <input type="text" class="form-control" asp-for="OpUserPasswd" value="" />
+                <input type="text" class="form-control" asp-for="OpUserPasswd" />
             </div>
             <div class="form-group">
                 <label asp-for="SpbillCreateIp"></label>
@@ -51,7 +51,7 @@
             </div>
             <div class="form-group">
                 <label asp-for="NotifyUrl"></label>
-                <input type="text" class="form-control" asp-for="NotifyUrl" value="" />
+                <input type="text" class="form-control" asp-for="NotifyUrl" />
             </div>
             <button type="submit" class="btn btn-primary">提交请求</button>
         </form>
