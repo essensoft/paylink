@@ -1,7 +1,7 @@
-﻿using System.Security.Cryptography;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.QPay;
 using Essensoft.AspNetCore.Payment.QPay.Request;
+using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.AspNetCore.Mvc;
 using WebApplicationSample.Models;
 
@@ -305,6 +305,42 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
+        /// 企业付款
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult B2CPay()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 企业付款
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> B2CPay(QPayB2CPayViewModel viewModel)
+        {
+            var request = new QPayEPayB2CRequest
+            {
+                OpenId = viewModel.OpenId,
+                Uin = viewModel.Uin,
+                OutTradeNo = viewModel.OutTradeNo,
+                TotalFee = viewModel.TotalFee,
+                Memo = viewModel.Memo,
+                CheckRealName = viewModel.CheckRealName,
+                OpUserId = viewModel.OpUserId,
+                OpUserPasswd = MD5.Compute(viewModel.OpUserPasswd),
+                SpbillCreateIp = viewModel.SpbillCreateIp,
+                NotifyUrl = viewModel.NotifyUrl,
+            };
+            var response = await _client.ExecuteAsync(request, "qpayCertificateName");
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
         /// 对账单下载
         /// </summary>
         /// <returns></returns>
@@ -329,41 +365,6 @@ namespace WebApplicationSample.Controllers
                 TarType = viewModel.TarType
             };
             var response = await _client.ExecuteAsync(request);
-            ViewData["response"] = response.Body;
-            return View();
-        }
-        /// <summary>
-        /// 企业付款
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public IActionResult B2CPay()
-        {
-            return View();
-        }
-        /// <summary>
-        /// 企业付款
-        /// </summary>
-        /// <param name="viewModel"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> B2CPay(QPayB2CPayViewModel viewModel)
-        {
-            var request = new QPayEPayB2CRequest
-            {
-                OutTradeNo = viewModel.OutTradeNo,
-                TotalFee = viewModel.TotalFee,
-                SpbillCreateIp = viewModel.SpbillCreateIp,
-                NotifyUrl = viewModel.NotifyUrl,
-                AppId = viewModel.AppId,
-                Memo = viewModel.Memo,
-                OpenId = viewModel.OpenId,
-                OpUserId = viewModel.OpUserId,
-                OpUserPasswd= Essensoft.AspNetCore.Payment.Security.MD5.Compute(viewModel.OpUserPasswd),
-                CheckRealName="1",
-                Uin= viewModel.Uin
-            };
-            var response = await _client.ExecuteAsync(request,"test");
             ViewData["response"] = response.Body;
             return View();
         }
