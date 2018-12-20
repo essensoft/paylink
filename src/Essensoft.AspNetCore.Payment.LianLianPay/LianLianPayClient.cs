@@ -50,7 +50,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
         public async Task<T> ExecuteAsync<T>(ILianLianPayRequest<T> request, string optionsName) where T : LianLianPayResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
             var txtParams = new LianLianPayDictionary(request.GetParameters())
             {
                 { OID_PARTNER, options.OidPartner },

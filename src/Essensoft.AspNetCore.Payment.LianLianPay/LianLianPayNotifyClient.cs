@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : LianLianPayNotify
         {
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
             if (request.HasFormContentType)
             {
                 var parameters = await GetParametersAsync(request);
