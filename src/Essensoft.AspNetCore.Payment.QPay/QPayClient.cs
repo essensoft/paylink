@@ -57,7 +57,9 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
             if (request is QPayEPayQueryRequest)
             {
-
+            }
+            else if (request is QPayEPayStatementDownRequest)
+            {
             }
             else
             {
