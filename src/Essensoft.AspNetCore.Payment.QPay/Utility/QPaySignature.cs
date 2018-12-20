@@ -9,12 +9,12 @@ namespace Essensoft.AspNetCore.Payment.QPay.Utility
     /// </summary>
     public class QPaySignature
     {
-        public static string SignWithKey(SortedDictionary<string, string> dictionary, string key, bool excludeSignType = true)
+        public static string SignWithKey(SortedDictionary<string, string> dictionary, string key)
         {
             var content = new StringBuilder();
             foreach (var iter in dictionary)
             {
-                if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign" && (excludeSignType ? iter.Key != "sign_type" : true))
+                if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign")
                 {
                     content.Append(iter.Key).Append('=').Append(iter.Value).Append("&");
                 }
