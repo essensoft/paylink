@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />
+    <PackageReference Include="Microsoft.Extensions.PlatformAbstractions" Version="1.1.0" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.0" />
   </ItemGroup>
 
@@ -18,6 +19,12 @@
     <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.QPay\Essensoft.AspNetCore.Payment.QPay.csproj" />
     <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.UnionPay\Essensoft.AspNetCore.Payment.UnionPay.csproj" />
     <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.WeChatPay\Essensoft.AspNetCore.Payment.WeChatPay.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="wwwroot\apiclient_cert.p12">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
 </Project>
