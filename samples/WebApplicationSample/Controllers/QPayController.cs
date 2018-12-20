@@ -305,6 +305,35 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
+        /// 对账单下载
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        public IActionResult StatementDown()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 对账单下载
+        /// </summary>
+        /// <param name="viewModel"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public async Task<IActionResult> StatementDown(QPayStatementDownViewModel viewModel)
+        {
+            var request = new QPayStatementDownRequest
+            {
+                BillDate = viewModel.BillDate,
+                BillType = viewModel.BillType,
+                TarType = viewModel.TarType
+            };
+            var response = await _client.ExecuteAsync(request);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
         /// 企业付款
         /// </summary>
         /// <returns></returns>
@@ -331,40 +360,11 @@ namespace WebApplicationSample.Controllers
                 Memo = viewModel.Memo,
                 CheckRealName = viewModel.CheckRealName,
                 OpUserId = viewModel.OpUserId,
-                OpUserPasswd = MD5.Compute(viewModel.OpUserPasswd),
+                OpUserPasswd = MD5.Compute(viewModel.OpUserPasswd).ToUpper(),
                 SpbillCreateIp = viewModel.SpbillCreateIp,
                 NotifyUrl = viewModel.NotifyUrl,
             };
             var response = await _client.ExecuteAsync(request, "qpayCertificateName");
-            ViewData["response"] = response.Body;
-            return View();
-        }
-
-        /// <summary>
-        /// 对账单下载
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet]
-        public IActionResult StatementDown()
-        {
-            return View();
-        }
-
-        /// <summary>
-        /// 对账单下载
-        /// </summary>
-        /// <param name="viewModel"></param>
-        /// <returns></returns>
-        [HttpPost]
-        public async Task<IActionResult> StatementDown(QPayStatementDownViewModel viewModel)
-        {
-            var request = new QPayStatementDownRequest
-            {
-                BillDate = viewModel.BillDate,
-                BillType = viewModel.BillType,
-                TarType = viewModel.TarType
-            };
-            var response = await _client.ExecuteAsync(request);
             ViewData["response"] = response.Body;
             return View();
         }
