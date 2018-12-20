@@ -96,7 +96,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         public async Task<T> PageExecuteAsync<T>(IAlipayRequest<T> request, string optionsName, string accessToken, string reqMethod) where T : AlipayResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
             var apiVersion = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
             var txtParams = new AlipayDictionary(request.GetParameters())
             {
@@ -181,7 +181,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         public async Task<T> ExecuteAsync<T>(IAlipayRequest<T> request, string optionsName, string accessToken, string appAuthToken) where T : AlipayResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
             var apiVersion = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
             var txtParams = new AlipayDictionary(request.GetParameters())
             {
@@ -414,7 +414,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         public Task<T> SdkExecuteAsync<T>(IAlipayRequest<T> request, string optionsName) where T : AlipayResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
 
             // 构造请求参数
             var requestParams = BuildRequestParams(request, null, null, options);

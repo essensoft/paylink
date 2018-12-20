@@ -46,7 +46,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         public async Task<T> ExecuteAsync<T>(IJDPayRequest<T> request, string optionsName) where T : JDPayResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
             // 字典排序
             var sortedTxtParams = new JDPayDictionary(request.GetParameters());
 
@@ -109,7 +109,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         public Task<T> PageExecuteAsync<T>(IJDPayRequest<T> request, string optionsName) where T : JDPayResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
             // 字典排序
             var sortedTxtParams = new JDPayDictionary(request.GetParameters());
             var encyptParams = BuildEncryptDic(request, sortedTxtParams, options);
@@ -131,7 +131,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         public async Task<T> ExecuteAsync<T>(IJDPayNPP10Request<T> request, string optionsName) where T : JDPayResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
             var sortedTxtParams = new JDPayDictionary(request.GetParameters())
             {
                 { JDPayContants.CUSTOMER_NO, options.CustomerNo },

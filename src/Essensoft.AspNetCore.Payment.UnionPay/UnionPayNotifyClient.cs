@@ -34,7 +34,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : UnionPayNotify
         {
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
             var parameters = await GetParametersAsync(request);
 
             var query = UnionPayUtility.BuildQuery(parameters);

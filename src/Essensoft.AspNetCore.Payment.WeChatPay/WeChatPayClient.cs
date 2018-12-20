@@ -67,7 +67,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         public async Task<T> ExecuteAsync<T>(IWeChatPayRequest<T> request, string optionsName) where T : WeChatPayResponse
         {
             var signType = true; // ture:MD5，false:HMAC-SHA256
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
 
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters())
             {
@@ -119,7 +119,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         public async Task<T> ExecuteAsync<T>(IWeChatPayCertificateRequest<T> request, string optionsName, string certificateName) where T : WeChatPayResponse
         {
             var signType = true; // ture:MD5，false:HMAC-SHA256
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters())
             {
                 { nonce_str, Guid.NewGuid().ToString("N") }
@@ -295,7 +295,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         public Task<WeChatPayDictionary> ExecuteAsync(IWeChatPayCallRequest request, string optionsName)
         {
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
 
             if (request is WeChatPayAppCallPaymentRequest)

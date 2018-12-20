@@ -42,7 +42,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : JDPayNotify
         {
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
             if (request.HasFormContentType || request.Method == "GET")
             {
                 var rspInstance = Activator.CreateInstance<T>();

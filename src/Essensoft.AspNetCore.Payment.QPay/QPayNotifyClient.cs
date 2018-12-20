@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : QPayNotify
         {
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
             _logger.Log(options.LogLevel, "Request:{body}", body);
 

@@ -47,7 +47,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         public async Task<T> ExecuteAsync<T>(IQPayRequest<T> request, string optionsName) where T : QPayResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
             var sortedTxtParams = new QPayDictionary(request.GetParameters())
             {
                 { MCHID, options.MchId },
@@ -101,7 +101,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         public async Task<T> ExecuteAsync<T>(IQPayCertificateRequest<T> request, string optionsName, string certificateName) where T : QPayResponse
         {
-            var options = string.IsNullOrEmpty(optionsName) ? _optionsSnapshotAccessor.Value : _optionsSnapshotAccessor.Get(optionsName);
+            var options = _optionsSnapshotAccessor.Get(optionsName);
             var sortedTxtParams = new QPayDictionary(request.GetParameters())
             {
                 { MCHID, options.MchId },
