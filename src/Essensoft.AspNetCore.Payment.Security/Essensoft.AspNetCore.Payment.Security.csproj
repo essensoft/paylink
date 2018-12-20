@@ -10,9 +10,11 @@
     <FileVersion>2.3.0.0</FileVersion>
     <Description>Essensoft.AspNetCore.Payment.Security</Description>
     <Copyright>© Essensoft 2018</Copyright>
+    <PackageLicenseUrl>https://github.com/Essensoft/Payment/blob/master/LICENSE</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/Essensoft/Payment</PackageProjectUrl>
     <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageId>Essensoft.AspNetCore.Payment.Security</PackageId>
     <PackageTags>Essensoft;AspNetCore;Payment;Security;</PackageTags>
   </PropertyGroup>
