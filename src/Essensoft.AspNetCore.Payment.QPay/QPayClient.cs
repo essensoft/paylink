@@ -111,7 +111,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
             if (request is QPayEPayB2CRequest)
             {
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(OPENID)) && string.IsNullOrEmpty(sortedTxtParams.GetValue(UIN)) && string.IsNullOrEmpty(sortedTxtParams.GetValue(APPID)))
+                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(UIN)) && string.IsNullOrEmpty(sortedTxtParams.GetValue(APPID)))
                 {
                     sortedTxtParams.Add(APPID, options.AppId);
                 }
