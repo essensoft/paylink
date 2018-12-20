@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.QPay.Parser;
+using Essensoft.AspNetCore.Payment.QPay.Request;
 using Essensoft.AspNetCore.Payment.QPay.Utility;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -17,7 +18,9 @@ namespace Essensoft.AspNetCore.Payment.QPay
         private const string MCHID = "mch_id";
         private const string NONCE_STR = "nonce_str";
         private const string SIGN = "sign";
-
+        private const string UIN = "uin";
+        private const string OPENID = "openid";
+        
         private readonly ILogger _logger;
         private readonly IHttpClientFactory _clientFactory;
         private readonly IOptionsSnapshot<QPayOptions> _optionsSnapshotAccessor;
@@ -97,9 +100,19 @@ namespace Essensoft.AspNetCore.Payment.QPay
                 { NONCE_STR, Guid.NewGuid().ToString("N") }
             };
 
-            if (string.IsNullOrEmpty(sortedTxtParams.GetValue(APPID)))
+            if (request is QPayEPayB2CRequest)
             {
-                sortedTxtParams.Add(APPID, options.AppId);
+                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(OPENID)) && string.IsNullOrEmpty(sortedTxtParams.GetValue(UIN)) && string.IsNullOrEmpty(sortedTxtParams.GetValue(APPID)))
+                {
+                    sortedTxtParams.Add(APPID, options.AppId);
+                }
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(APPID)))
+                {
+                    sortedTxtParams.Add(APPID, options.AppId);
+                }
             }
 
             sortedTxtParams.Add(SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
