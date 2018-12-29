@@ -4,7 +4,7 @@
     <NoWarn>$(NoWarn);CS1570;CS1591</NoWarn>
     <Description>Essensoft.AspNetCore.Payment</Description>
     <Copyright>© Essensoft 2018</Copyright>
-    <PackageIconUrl>https://github.com/Essensoft/Payment/blob/master/images/payment-icon.png</PackageIconUrl>
+    <PackageIconUrl>https://github.com/Essensoft/Payment/blob/master/images/icon.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/Essensoft/Payment</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
