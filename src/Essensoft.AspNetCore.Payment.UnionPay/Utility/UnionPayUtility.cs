@@ -35,14 +35,6 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             return Object.TryTo(typeof(T));
         }
 
-        /// <summary>
-        /// 尝试将对象实例转换成目标类型
-        /// </summary>
-        /// <typeparam name="T">对象实例类型</typeparam>
-        /// <typeparam name="R">目标类型</typeparam>
-        /// <param name="Object">对象实例</param>
-        /// <param name="DefaultValue">默认值</param>
-        /// <returns>转换后类型</returns>
         internal static object TryTo(this object Object, Type destinationType)
         {
             try

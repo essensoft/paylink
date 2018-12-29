@@ -13,7 +13,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
         /// <summary>
         /// 执行HTTP POST请求。
         /// </summary>
-        /// <param name="client">客户端</param>
+        /// <param name="client"></param>
         /// <param name="url">请求地址</param>
         /// <param name="content">内容</param>
         /// <returns>响应内容</returns>
@@ -30,7 +30,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
         /// <summary>
         /// 执行HTTP GET请求。
         /// </summary>
-        /// <param name="client">客户端</param>
+        /// <param name="client"></param>
         /// <param name="url">请求地址</param>
         /// <param name="dictionary">请求参数</param>
         /// <returns>响应内容</returns>

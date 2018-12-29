@@ -15,6 +15,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <summary>
         /// 执行HTTP POST请求。
         /// </summary>
+        /// <param name="client"></param>
         /// <param name="url">请求地址</param>
         /// <param name="dictionary">请求参数</param>
         /// <returns>HTTP响应</returns>
@@ -31,6 +32,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <summary>
         /// 执行HTTP POST请求。
         /// </summary>
+        /// <param name="client"></param>
         /// <param name="url">请求地址</param>
         /// <param name="content">请求内容</param>
         /// <returns>HTTP响应</returns>
@@ -47,6 +49,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <summary>
         /// 执行HTTP GET请求。
         /// </summary>
+        /// <param name="client"></param>
         /// <param name="url">请求地址</param>
         /// <param name="dictionary">请求参数</param>
         /// <returns>HTTP响应</returns>
@@ -71,6 +74,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <summary>
         /// 执行带文件上传的HTTP POST请求。
         /// </summary>
+        /// <param name="client"></param>
         /// <param name="url">请求地址</param>
         /// <param name="textParams">请求文本参数</param>
         /// <param name="fileParams">请求文件参数</param>

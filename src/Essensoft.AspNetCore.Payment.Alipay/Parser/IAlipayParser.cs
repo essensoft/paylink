@@ -28,7 +28,6 @@
         /// <param name="body"></param>
         /// <param name="encryptType"></param>
         /// <param name="encryptKey"></param>
-        /// <param name="charset"></param>
         /// <returns></returns>
         string EncryptSourceData(IAlipayRequest<T> request, string body, string encryptType, string encryptKey);
     }
