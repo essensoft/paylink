@@ -1,4 +1,4 @@
-# Payment
+![Payment](https://raw.githubusercontent.com/Essensoft/Payment/master/images/icon.png)
 
 ## 简介
 
