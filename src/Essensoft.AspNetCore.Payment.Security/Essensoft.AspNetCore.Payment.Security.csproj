@@ -1,27 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="..\..\common.props" />
+
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Company>Essensoft</Company>
-    <Authors>Roc</Authors>
-    <Product>Payment</Product>
-    <Version>2.3.0</Version>
-    <AssemblyVersion>2.3.0.0</AssemblyVersion>
-    <FileVersion>2.3.0.0</FileVersion>
-    <Description>Essensoft.AspNetCore.Payment.Security</Description>
-    <Copyright>© Essensoft 2018</Copyright>
-    <PackageLicenseUrl>https://github.com/Essensoft/Payment/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/Essensoft/Payment</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageId>Essensoft.AspNetCore.Payment.Security</PackageId>
     <PackageTags>Essensoft;AspNetCore;Payment;Security;</PackageTags>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
