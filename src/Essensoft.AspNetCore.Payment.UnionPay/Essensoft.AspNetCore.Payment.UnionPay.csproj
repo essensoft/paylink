@@ -1,27 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <Import Project="..\..\common.props" />
+
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.1;netcoreapp2.2;</TargetFrameworks>
-    <Company>Essensoft</Company>
-    <Authors>Roc</Authors>
-    <Product>Payment</Product>
-    <Version>2.3.0</Version>
-    <AssemblyVersion>2.3.0.0</AssemblyVersion>
-    <FileVersion>2.3.0.0</FileVersion>
-    <Description>Essensoft.AspNetCore.Payment.UnionPay</Description>
-    <Copyright>© Essensoft 2018</Copyright>
-    <PackageLicenseUrl>https://github.com/Essensoft/Payment/blob/master/LICENSE</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/Essensoft/Payment</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
-    <RepositoryType>git</RepositoryType>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageId>Essensoft.AspNetCore.Payment.UnionPay</PackageId>
     <PackageTags>Essensoft;AspNetCore;Payment;UnionPay;银联支付;</PackageTags>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,12 +13,12 @@
   </ItemGroup>
   
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.1' ">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="[2.1.3,2.2.0)" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="[2.1.3,2.2.0)" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="[2.1.1,2.2.0)" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.2' ">
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="[2.2.0,2.3.0)" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="[2.2.0,2.3.0)" />
     <PackageReference Include="Microsoft.Extensions.Http" Version="[2.2.0,2.3.0)" />
   </ItemGroup>
   
