@@ -1,4 +1,4 @@
-![Payment](https://raw.githubusercontent.com/Essensoft/Payment/master/images/icon.png)
+![Payment](https://raw.githubusercontent.com/Essensoft/Payment/master/images/Payment-Title.png)
 
 ## 简介
 
@@ -77,7 +77,7 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 
 ## 打赏
 
-![Payment](https://raw.githubusercontent.com/Essensoft/Payment/master/images/payment.png)
+![Payment](https://raw.githubusercontent.com/Essensoft/Payment/master/images/QrCode.png)
 
 ---
 
