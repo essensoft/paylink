@@ -1,3 +1,6 @@
+/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
 body {
     font-family: Monospaced Number,Chinese Quote,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif;
     line-height: 1.5;
@@ -34,10 +37,6 @@ ul, ol {
     .carousel-caption {
         display: none
     }
-}
-
-.col-blue {
-    color: #007bff !important;
 }
 
 .bg-white {
