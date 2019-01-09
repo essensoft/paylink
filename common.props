@@ -1,14 +1,14 @@
 <Project>
   <PropertyGroup>
-    <Version>2.3.0</Version>
+    <Version>2.3.1</Version>
     <NoWarn>$(NoWarn);CS1570;CS1591</NoWarn>
     <Description>Essensoft.AspNetCore.Payment</Description>
-    <Copyright>© Essensoft 2018</Copyright>
+    <Copyright>© Essensoft 2019</Copyright>
     <PackageIconUrl>https://raw.githubusercontent.com/Essensoft/Payment/master/images/Payment.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/Essensoft/Payment</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/Essensoft/Payment</RepositoryUrl>
-    <License>https://raw.githubusercontent.com/Essensoft/Payment/master/LICENSE</License>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/Essensoft/Payment/master/LICENSE</PackageLicenseUrl>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)' == 'Release' ">

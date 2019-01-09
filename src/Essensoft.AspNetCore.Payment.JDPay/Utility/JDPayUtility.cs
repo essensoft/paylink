@@ -44,23 +44,21 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
         /// <summary>
         /// 尝试将对象实例转换成目标类型
         /// </summary>
-        /// <typeparam name="T">对象实例类型</typeparam>
-        /// <typeparam name="R">目标类型</typeparam>
-        /// <param name="Object">对象实例</param>
-        /// <param name="DefaultValue">默认值</param>
+        /// <param name="obj">对象实例</param>
+        /// <param name="destinationType">目的类型</param>
         /// <returns>转换后类型</returns>
-        internal static object TryTo(this object Object, Type destinationType)
+        internal static object TryTo(this object obj, Type destinationType)
         {
             try
             {
-                if (Object == null || Convert.IsDBNull(Object))
+                if (obj == null || Convert.IsDBNull(obj))
                 {
                     return GetDefault(destinationType);
                 }
 
-                if (Object as string != null)
+                if (obj as string != null)
                 {
-                    var ObjectValue = Object as string;
+                    var ObjectValue = obj as string;
                     if (destinationType.IsEnum)
                     {
                         return Enum.Parse(destinationType, ObjectValue, true);
@@ -71,22 +69,22 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
                         return GetDefault(destinationType);
                     }
                 }
-                if (Object as IConvertible != null)
+                if (obj as IConvertible != null)
                 {
                     var destination =
                        destinationType.IsGenericType && destinationType.GetGenericTypeDefinition() == typeof(Nullable<>) ?
                            Nullable.GetUnderlyingType(destinationType) : destinationType;
-                    return Convert.ChangeType(Object, destination);
+                    return Convert.ChangeType(obj, destination);
                 }
-                if (destinationType.IsAssignableFrom(Object.GetType()))
+                if (destinationType.IsAssignableFrom(obj.GetType()))
                 {
-                    return Object;
+                    return obj;
                 }
 
-                var Converter = TypeDescriptor.GetConverter(Object.GetType());
+                var Converter = TypeDescriptor.GetConverter(obj.GetType());
                 if (Converter.CanConvertTo(destinationType))
                 {
-                    return Converter.ConvertTo(Object, destinationType);
+                    return Converter.ConvertTo(obj, destinationType);
                 }
             }
             catch { }

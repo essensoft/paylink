@@ -12,9 +12,10 @@ namespace Essensoft.AspNetCore.Payment.QPay.Utility
         /// <summary>
         /// 执行HTTP POST请求。
         /// </summary>
+        /// <param name="client">HttpClient</param>
         /// <param name="url">请求地址</param>
-        /// <param name="content">请求参数</param>
-        /// <returns>HTTP响应</returns>
+        /// <param name="content">请求内容</param>
+        /// <returns>HTTP响应内容</returns>
         public static async Task<string> DoPostAsync(this HttpClient client, string url, string content)
         {
             using (var requestContent = new StringContent(content, Encoding.UTF8, "application/xml"))
