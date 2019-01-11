@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -87,44 +87,31 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
                 return await DoPostAsync(client, url, textParams);
             }
 
-            var boundary = DateTime.Now.Ticks.ToString("X"); // 随机分隔线
-
-            var reqStream = new MemoryStream();
-            var itemBoundaryBytes = Encoding.UTF8.GetBytes("\r\n--" + boundary + "\r\n");
-            var endBoundaryBytes = Encoding.UTF8.GetBytes("\r\n--" + boundary + "--\r\n");
-
-            // 组装文本请求参数
-            var textTemplate = "Content-Disposition:form-data;name=\"{0}\"\r\nContent-Type:text/plain\r\n\r\n{1}";
-            foreach (var iter in textParams)
+            // 随机分隔线
+            var boundary = DateTime.Now.Ticks.ToString("X");
+            using (var requestContent = new MultipartFormDataContent(boundary))
             {
-                var textEntry = string.Format(textTemplate, iter.Key, iter.Value);
-                var itemBytes = Encoding.UTF8.GetBytes(textEntry);
-                reqStream.Write(itemBoundaryBytes, 0, itemBoundaryBytes.Length);
-                reqStream.Write(itemBytes, 0, itemBytes.Length);
-            }
+                // 组装文本请求参数
+                foreach (var iter in textParams)
+                {
+                    var streamContent = new StringContent(iter.Value, Encoding.UTF8, "text/plain");
+                    requestContent.Add(streamContent, iter.Key);
+                }
 
-            // 组装文件请求参数
-            var fileTemplate = "Content-Disposition:form-data;name=\"{0}\";filename=\"{1}\"\r\nContent-Type:{2}\r\n\r\n";
-            foreach (var iter in fileParams)
-            {
-                var key = iter.Key;
-                var fileItem = iter.Value;
-                var fileEntry = string.Format(fileTemplate, key, fileItem.GetFileName(), fileItem.GetMimeType());
-                var itemBytes = Encoding.UTF8.GetBytes(fileEntry);
-                reqStream.Write(itemBoundaryBytes, 0, itemBoundaryBytes.Length);
-                reqStream.Write(itemBytes, 0, itemBytes.Length);
+                // 组装文件请求参数
+                foreach (var iter in fileParams)
+                {
+                    var fileItem = iter.Value;
+                    var byteArrayContent = new ByteArrayContent(fileItem.GetContent());
+                    byteArrayContent.Headers.ContentType = new MediaTypeHeaderValue(fileItem.GetMimeType());
+                    requestContent.Add(byteArrayContent, iter.Key, fileItem.GetFileName());
+                }
 
-                var fileBytes = fileItem.GetContent();
-                reqStream.Write(fileBytes, 0, fileBytes.Length);
-            }
-
-            reqStream.Write(endBoundaryBytes, 0, endBoundaryBytes.Length);
-
-            using (var requestContent = new StringContent(reqStream.ToString(), Encoding.UTF8, "multipart/form-data;boundary=" + boundary))
-            using (var response = await client.PostAsync(url, requestContent))
-            using (var responseContent = response.Content)
-            {
-                return await responseContent.ReadAsStringAsync();
+                using (var response = await client.PostAsync(url, requestContent))
+                using (var responseContent = response.Content)
+                {
+                    return await responseContent.ReadAsStringAsync();
+                }
             }
         }
     }
