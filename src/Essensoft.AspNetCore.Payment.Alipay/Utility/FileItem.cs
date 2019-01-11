@@ -27,6 +27,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             {
                 throw new ArgumentException("fileInfo is null or not exists!");
             }
+
             this.fileInfo = fileInfo;
         }
 
@@ -82,6 +83,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             {
                 fileName = fileInfo.FullName;
             }
+
             return fileName;
         }
 
@@ -91,6 +93,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             {
                 mimeType = AlipayUtility.GetMimeType(GetContent());
             }
+
             return mimeType;
         }
 
