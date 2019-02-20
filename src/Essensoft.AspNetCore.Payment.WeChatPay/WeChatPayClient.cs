@@ -100,7 +100,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
                 if (request.IsCheckResponseSign())
                 {
-                    CheckResponseSign(response, options);
+                    CheckResponseSign(response, options,signType);
                 }
 
                 return response;
