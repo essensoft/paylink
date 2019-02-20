@@ -64,6 +64,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { "sub_appid", SubAppId },
                 { "sub_mch_id", SubMchId },
                 { "transaction_id", TransactionId },
+                { "out_trade_no",OutTradeNo},
                 { "total_fee", TotalFee },
                 { "consume_fee", ConsumeFee },
                 { "fee_type", FeeType },
