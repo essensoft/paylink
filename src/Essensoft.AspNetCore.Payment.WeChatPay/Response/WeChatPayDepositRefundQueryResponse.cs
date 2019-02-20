@@ -115,19 +115,19 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 商户退款单号
         /// </summary>
         [XmlElement("out_refund_no")]
-        public int out_refund_no { get; set; }
+        public string out_refund_no { get; set; }
 
         /// <summary>
         /// 微信退款单号
         /// </summary>
         [XmlElement("refund_id")]
-        public int RefundId { get; set; }
+        public string RefundId { get; set; }
 
         /// <summary>
         /// 退款渠道
         /// </summary>
         [XmlElement("refund_channel")]
-        public int RefundChannel { get; set; }
+        public string RefundChannel { get; set; }
 
         /// <summary>
         /// 申请退款金额
@@ -145,24 +145,24 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 退款状态
         /// </summary>
         [XmlElement("refund_status")]
-        public int RefundStatus { get; set; }
+        public string RefundStatus { get; set; }
 
         /// <summary>
         /// 退款资金来源
         /// </summary>
         [XmlElement("refund_account")]
-        public int RefundAccount { get; set; }
+        public string RefundAccount { get; set; }
 
         /// <summary>
         /// 退款入账账户
         /// </summary>
         [XmlElement("refund_recv_accout")]
-        public int RefundRecvAccout { get; set; }
+        public string RefundRecvAccout { get; set; }
 
         /// <summary>
         /// 退款成功时间
         /// </summary>
         [XmlElement("refund_success_time")]
-        public int RefundSuccessTime { get; set; }
+        public string RefundSuccessTime { get; set; }
     }
 }
