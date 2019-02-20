@@ -2,6 +2,7 @@
 using System.Text.Unicode;
 using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.JDPay;
+using Essensoft.AspNetCore.Payment.LcswPay;
 using Essensoft.AspNetCore.Payment.LianLianPay;
 using Essensoft.AspNetCore.Payment.QPay;
 using Essensoft.AspNetCore.Payment.UnionPay;
@@ -62,6 +63,7 @@ namespace WebApplicationSample
             services.AddUnionPay();
             services.AddWeChatPay();
             services.AddLianLianPay();
+            services.AddLcswPay();
 
             // 在 appsettings.json 中 配置选项
             services.Configure<AlipayOptions>(Configuration.GetSection("Alipay"));
@@ -70,6 +72,7 @@ namespace WebApplicationSample
             services.Configure<UnionPayOptions>(Configuration.GetSection("UnionPay"));
             services.Configure<WeChatPayOptions>(Configuration.GetSection("WeChatPay"));
             services.Configure<LianLianPayOptions>(Configuration.GetSection("LianLianPay"));
+            services.Configure<LcswPayOption>(Configuration.GetSection("LcswPay"));
 
             services.AddWebEncoders(opt =>
             {

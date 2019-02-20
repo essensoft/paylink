@@ -15,6 +15,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.Alipay\Essensoft.AspNetCore.Payment.Alipay.csproj" />
     <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.JDPay\Essensoft.AspNetCore.Payment.JDPay.csproj" />
+    <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.LcswPay\Essensoft.AspNetCore.Payment.LcswPay.csproj" />
     <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.LianLianPay\Essensoft.AspNetCore.Payment.LianLianPay.csproj" />
     <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.QPay\Essensoft.AspNetCore.Payment.QPay.csproj" />
     <ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.UnionPay\Essensoft.AspNetCore.Payment.UnionPay.csproj" />

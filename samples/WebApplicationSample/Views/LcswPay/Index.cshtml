@@ -1,0 +1,27 @@
+﻿@{
+    ViewData["Title"] = "利楚商务扫呗支付";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">首页</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+    </ol>
+</nav>
+<br />
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">产品</th>
+            <th scope="col">接口</th>
+            <th scope="col">#</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>注册终端</td>
+            <td><a href="http://www.lcsw.cn/doc/api/payment.html#注册终端（获取accesstoken）" target="_blank">注册终端</a></td>
+            <td><a asp-controller="LcswPay" asp-action="Sign">立即测试</a></td>
+        </tr>
+</table>

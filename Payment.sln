@@ -28,6 +28,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-
 		common.props = common.props
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Essensoft.AspNetCore.Payment.LcswPay", "src\Essensoft.AspNetCore.Payment.LcswPay\Essensoft.AspNetCore.Payment.LcswPay.csproj", "{63CD1592-AF28-4B1A-A153-B4E26BAFB192}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,10 @@ Global
 		{A57153DC-67DE-4141-A13C-216CE6C5129C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A57153DC-67DE-4141-A13C-216CE6C5129C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A57153DC-67DE-4141-A13C-216CE6C5129C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63CD1592-AF28-4B1A-A153-B4E26BAFB192}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63CD1592-AF28-4B1A-A153-B4E26BAFB192}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63CD1592-AF28-4B1A-A153-B4E26BAFB192}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63CD1592-AF28-4B1A-A153-B4E26BAFB192}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -79,6 +85,7 @@ Global
 		{66655C56-A98C-4F67-9F41-FECF0AFFA28E} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
 		{16843D79-807F-4973-AF26-66FF7141BAAD} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
 		{A57153DC-67DE-4141-A13C-216CE6C5129C} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
+		{63CD1592-AF28-4B1A-A153-B4E26BAFB192} = {D3871E61-CA47-4BD0-8BF9-B64A42B2200D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C5BE9B18-CD29-4490-84EA-68EDEEF75428}

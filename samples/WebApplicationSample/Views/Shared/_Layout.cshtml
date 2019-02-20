@@ -45,6 +45,9 @@
                     <li class="nav-item @Html.IsActive("UnionPay")">
                         <a class="nav-link" asp-controller="UnionPay" asp-action="Index">银联支付</a>
                     </li>
+                    <li class="nav-item @Html.IsActive("LcswPay")">
+                        <a class="nav-link" asp-controller="LcswPay" asp-action="Index">利楚商务扫呗支付</a>
+                    </li>
                 </ul>
                 <ul class="navbar-nav navbar-right">
                     <li class="nav-item @Html.IsActive("Home", "Gratuity")">
