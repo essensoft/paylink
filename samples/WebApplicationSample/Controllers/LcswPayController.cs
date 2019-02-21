@@ -20,6 +20,7 @@ namespace WebApplicationSample.Controllers
         {
             return View();
         }
+        #region 注册终端
         public ActionResult Sign()
         {
             var viewModel = new LcswPaySignViewModel
@@ -45,5 +46,44 @@ namespace WebApplicationSample.Controllers
             }
             return View(viewModel);
         }
+        #endregion
+        #region 刷卡（条码）支付
+        public IActionResult BarcodePay()
+        {
+            var viewModel = new LcswPayBarcodePayViewModel {
+                PayType ="000",
+                TotalFee = "1",
+                TerminalTrace = $"trace{DateTime.Now.ToString("yyyyMMddHHmmssfff")}",
+                TerminalTime = DateTime.Now.ToString("yyyyMMddHHmmss"),
+                Attach = "这是附加数据，将会原样返回",
+                OrderBody = "这是测试订单"
+            };
+            return View(viewModel);
+        } 
+        [HttpPost]
+        public async Task<IActionResult> BarcodePay(LcswPayBarcodePayViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var request = new LcswPayBarcodePayRequest
+                {
+                    PayType = viewModel.PayType,
+                    ServiceId = "010",
+                    TerminalTrace = viewModel.TerminalTrace,
+                    TerminalTime = viewModel.TerminalTime,
+                    AuthNo = viewModel.AuthNo,
+                    TotalFee = viewModel.TotalFee,
+                    SubAppid = viewModel.SubAppid,
+                    OrderBody = viewModel.OrderBody,
+                    Attach = viewModel.Attach,
+                    GoodsDetail = viewModel.GoodsDetail,
+                    GoodsTag = viewModel.GoodsTag
+                };
+                var response = await _client.ExecuteAsync(request);
+                ViewData["response"] = response.Body;
+            }
+            return View(viewModel);
+        }
+        #endregion
     }
 }
