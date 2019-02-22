@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.LcswPay;
 using Essensoft.AspNetCore.Payment.LcswPay.Request;
@@ -53,7 +51,7 @@ namespace WebApplicationSample.Controllers
             var viewModel = new LcswPayBarcodePayViewModel {
                 PayType ="000",
                 TotalFee = "1",
-                TerminalTrace = $"trace{DateTime.Now.ToString("yyyyMMddHHmmssfff")}",
+                TerminalTrace = "trace20190221162123197",
                 TerminalTime = DateTime.Now.ToString("yyyyMMddHHmmss"),
                 Attach = "这是附加数据，将会原样返回",
                 OrderBody = "这是测试订单"
@@ -78,6 +76,39 @@ namespace WebApplicationSample.Controllers
                     Attach = viewModel.Attach,
                     GoodsDetail = viewModel.GoodsDetail,
                     GoodsTag = viewModel.GoodsTag
+                };
+                var response = await _client.ExecuteAsync(request);
+                ViewData["response"] = response.Body;
+            }
+            return View(viewModel);
+        }
+        #endregion
+        #region 支付查询
+        public IActionResult Query()
+        {
+            var viewModel = new LcswPayQueryViewModel
+            {
+                PayType = "000",
+                OutTradeNo = "300559750021119022116220200005",
+                TerminalTrace = $"trace{DateTime.Now.ToString("yyyyMMddHHmmssfff")}",
+                TerminalTime = DateTime.Now.ToString("yyyyMMddHHmmss")
+            };
+            return View(viewModel);
+        }
+        [HttpPost]
+        public async  Task<IActionResult> Query(LcswPayQueryViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var request = new LcswPayQueryRequest
+                {
+                    PayType = viewModel.PayType,
+                    ServiceId = "020",
+                    TerminalTrace = viewModel.TerminalTrace,
+                    TerminalTime = viewModel.TerminalTime,
+                    PayTrace = viewModel.PayTrace,
+                    PayTime = viewModel.PayTime,
+                    OutTradeNo = viewModel.OutTradeNo
                 };
                 var response = await _client.ExecuteAsync(request);
                 ViewData["response"] = response.Body;

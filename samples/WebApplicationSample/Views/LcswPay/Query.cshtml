@@ -1,0 +1,53 @@
+﻿@model LcswPayQueryViewModel
+@{
+    ViewData["Title"] = "支付查询";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="LcswPay" asp-action="Index">利楚商务扫呗支付</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+    </ol>
+</nav>
+<br />
+<div class="card">
+    <div class="card-body">
+        <form asp-controller="LcswPay" asp-action="Query">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="PayType"></label>
+                <input type="text" class="form-control" asp-for="PayType"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="TerminalTime"></label>
+                <input type="text" class="form-control" asp-for="TerminalTime"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="TerminalTrace"></label>
+                <input type="text" class="form-control" asp-for="TerminalTrace"  />
+            </div>
+            <div class="form-group">
+                <label asp-for="PayTrace"></label>
+                <input type="text" class="form-control" asp-for="PayTrace"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="PayTime"></label>
+                <input type="text" class="form-control" asp-for="PayTime"/>
+            </div>
+            <div class="form-group">
+                <label asp-for="OutTradeNo"></label>
+                <input type="text" class="form-control" asp-for="OutTradeNo"/>
+            </div>
+            <button type="submit" class="btn btn-primary">提交请求</button>
+        </form>
+        <hr />
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label>Response:</label>
+                <textarea class="form-control" rows="10">@ViewData["response"]</textarea>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
