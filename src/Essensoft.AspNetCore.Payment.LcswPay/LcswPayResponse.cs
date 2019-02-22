@@ -37,22 +37,26 @@ namespace Essensoft.AspNetCore.Payment.LcswPay
         /// <summary>
         /// 获取所有参与签名计算的参数列表
         /// </summary>
-        [JsonIgnore]
-        public abstract List<LcswPayParaInfo> SignedParaInfos { get; }
+        public abstract void AddSignedParasWhenReturnCodeSuccess(List<LcswPayParaInfo> signedParas);
         /// <summary>
         /// 是否签名正确
         /// </summary>
         public void CheckSign()
         {
-            var signedParas = SignedParaInfos;
-            signedParas.Insert(0, new LcswPayParaInfo("return_msg", ReturnMsg));
-            signedParas.Insert(0, new LcswPayParaInfo("return_code", ReturnCode));
-            var sign = LcswPaySignature.CalcSignWithAllRequiredPara(signedParas);
-
-            if( IsReturnCodeSuccess && !sign.Equals(KeySign, System.StringComparison.OrdinalIgnoreCase))
+            if (IsReturnCodeSuccess)
             {
-               throw new LcswPayException($"返回的签名不正确,应该是：{sign},实际是:{KeySign},原始字符串：{Body}");
-            }
+                var signedParas = new List<LcswPayParaInfo>();
+                signedParas.Add(new LcswPayParaInfo("return_code", ReturnCode));
+                signedParas.Add( new LcswPayParaInfo("return_msg", ReturnMsg));
+                AddSignedParasWhenReturnCodeSuccess(signedParas);
+
+                var sign = LcswPaySignature.CalcSignWithAllRequiredPara(signedParas);
+
+                if (!sign.Equals(KeySign, System.StringComparison.OrdinalIgnoreCase))
+                {
+                    throw new LcswPayException($"返回的签名不正确,应该是：{sign},实际是:{KeySign},原始字符串：{Body}");
+                }
+            }           
         }
 
     }

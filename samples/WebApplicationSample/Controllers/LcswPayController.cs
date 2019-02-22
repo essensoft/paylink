@@ -116,5 +116,41 @@ namespace WebApplicationSample.Controllers
             return View(viewModel);
         }
         #endregion
+        #region 支付退款申请
+        public IActionResult Refund()
+        {
+            var viewModel = new LcswPayRefundViewModel
+            {
+                PayType = "000",
+                OutTradeNo = "300559750021119022116220200005",
+                TerminalTrace = $"trace{DateTime.Now.ToString("yyyyMMddHHmmssfff")}",
+                TerminalTime = DateTime.Now.ToString("yyyyMMddHHmmss"),
+                RefundFee = "1"
+            };
+            return View(viewModel);
+        }
+        [HttpPost]
+        public async Task<IActionResult> Refund(LcswPayRefundViewModel viewModel)
+        {
+            if (ModelState.IsValid)
+            {
+                var request = new LcswPayRefundRequest
+                {
+                    PayType = viewModel.PayType,
+                    ServiceId = "030",
+                    TerminalTrace = viewModel.TerminalTrace,
+                    TerminalTime = viewModel.TerminalTime,
+                    RefundFee = viewModel.RefundFee,
+                    OutTradeNo = viewModel.OutTradeNo,
+                    PayTrace = viewModel.PayTrace,
+                    PayTime = viewModel.PayTime,
+                    AuthCode = viewModel.AuthCode
+                };
+                var response = await _client.ExecuteAsync(request);
+                ViewData["response"] = response.Body;
+            }
+            return View(viewModel);
+        }
+        #endregion
     }
 }

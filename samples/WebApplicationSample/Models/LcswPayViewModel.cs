@@ -117,4 +117,52 @@ namespace WebApplicationSample.Models
         [Required(ErrorMessage ="请输入订单号")]
         public string OutTradeNo { get; set; }
     }
+    public class LcswPayRefundViewModel
+    {
+        /// <summary>
+        /// 请求类型，010微信，020 支付宝，060qq钱包，080京东钱包，090口碑，100翼支付，110银联二维码，000自动识别类型
+        /// </summary>
+        [Display(Name = "请求类型")]
+        [Required(ErrorMessage = "请输入请求类型")]
+        public string PayType { get; set; }
+        /// <summary>
+        /// 终端退款流水号，填写商户系统的退款流水号
+        /// </summary>
+        [Display(Name = "终端流水号")]
+        [Required(ErrorMessage = "请输入终端流水号")]
+        public string TerminalTrace { get; set; }
+        /// <summary>
+        /// 终端退款时间，yyyyMMddHHmmss，全局统一时间格式
+        /// </summary>
+        [Display(Name = "终端交易时间")]
+        [Required(ErrorMessage = "请输入终端交易时间")]
+        public string TerminalTime { get; set; }
+        /// <summary>
+        /// 退款金额，单位分
+        /// </summary>
+        [Display(Name = "退款金额")]
+        [Required(ErrorMessage = "请输入退款金额")]
+        public string RefundFee { get; set; }
+        /// <summary>
+        /// 订单号，查询凭据，利楚订单号、微信订单号、支付宝订单号任意一个
+        /// </summary>
+        [Display(Name = "订单号")]
+        [Required(ErrorMessage = "请输入订单号")]
+        public string OutTradeNo { get; set; }
+        /// <summary>
+        /// 当前支付终端流水号，与pay_time同时传递
+        /// </summary>
+        [Display(Name = "当前支付终端流水号")]
+        public string PayTrace { get; set; }
+        /// <summary>
+        /// 当前支付终端交易时间，yyyyMMddHHmmss，全局统一时间格式，与pay_trace同时传递
+        /// </summary>
+        [Display(Name = "当前支付终端交易时间")]
+        public string PayTime { get; set; }
+        /// <summary>
+        /// 短信或邮箱验证码
+        /// </summary>
+        [Display(Name = "短信或邮箱验证码")]
+        public string AuthCode { get; set; }
+    }
 }

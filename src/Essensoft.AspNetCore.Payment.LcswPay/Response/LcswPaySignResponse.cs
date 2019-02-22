@@ -44,23 +44,17 @@ namespace Essensoft.AspNetCore.Payment.LcswPay.Response
         /// </summary>
         public bool IsResultCodeSuccess => ResultCode == "01";
 
-        public override List<LcswPayParaInfo> SignedParaInfos
+
+        public override void AddSignedParasWhenReturnCodeSuccess(List<LcswPayParaInfo> signedParas)
         {
-            get
-            {
-                var result = new List<LcswPayParaInfo>();
-                if (IsReturnCodeSuccess)
-                {
-                    //如果响应成功和业务处理成功则返回的业务参数也需要参与签名计算
-                    result.Add(new LcswPayParaInfo("result_code", ResultCode));
-                    result.Add(new LcswPayParaInfo("merchant_no", MerchantNo));
-                    result.Add(new LcswPayParaInfo("terminal_id", TerminalId));
-                    result.Add(new LcswPayParaInfo("terminal_trace", TerminalTrace));
-                    result.Add(new LcswPayParaInfo("terminal_time", TerminalTime));
-                    result.Add(new LcswPayParaInfo("access_token", AccessToken));
-                }
-                return result;
-            }
+            signedParas.AddRange(new List<LcswPayParaInfo> {
+                new LcswPayParaInfo("result_code", ResultCode),
+                    new LcswPayParaInfo("merchant_no", MerchantNo),
+                    new LcswPayParaInfo("terminal_id", TerminalId),
+                    new LcswPayParaInfo("terminal_trace", TerminalTrace),
+                    new LcswPayParaInfo("terminal_time", TerminalTime),
+                    new LcswPayParaInfo("access_token", AccessToken)
+            });
         }
     }
 }

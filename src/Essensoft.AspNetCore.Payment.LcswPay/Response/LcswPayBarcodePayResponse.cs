@@ -85,8 +85,9 @@ namespace Essensoft.AspNetCore.Payment.LcswPay.Response
         [JsonProperty("receipt_fee")]
         public string ReceiptFee { get; set; }
 
-        public override List<LcswPayParaInfo> SignedParaInfos => IsReturnCodeSuccess ?
-            new List<LcswPayParaInfo> {
+        public override void AddSignedParasWhenReturnCodeSuccess(List<LcswPayParaInfo> signedParas)
+        {
+            signedParas.AddRange(new List<LcswPayParaInfo> {
             new LcswPayParaInfo("result_code",ResultCode),
             new LcswPayParaInfo("pay_type",PayType),
             new LcswPayParaInfo("merchant_name",MerchantName),
@@ -97,8 +98,7 @@ namespace Essensoft.AspNetCore.Payment.LcswPay.Response
             new LcswPayParaInfo("total_fee",TotalFee),
             new LcswPayParaInfo("end_time",EndTime),
             new LcswPayParaInfo("out_trade_no",OutTradeNo)
+        });
         }
-            :
-            new List<LcswPayParaInfo>();
     }
 }
