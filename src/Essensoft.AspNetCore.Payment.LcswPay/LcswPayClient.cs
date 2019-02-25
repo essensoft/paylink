@@ -34,16 +34,30 @@ namespace Essensoft.AspNetCore.Payment.LcswPay
         #endregion
         public async Task<T> ExecuteAsync<T>(ILcswPayResquest<T> request) where T : LcswPayResponse
         {
-            return await ExecuteAsync(request, null);
+            return await ExecuteAsync(request, (string)null);
         }
 
         public async Task<T> ExecuteAsync<T>(ILcswPayResquest<T> request, string optionsName) where T : LcswPayResponse
         {
             var option = _optionsSnapshotAccessor.Get(optionsName);
+            return await ExecuteAsync(request, option);
+        }
+
+        public async Task<T> ExecuteAsync<T>(ILcswPayResquest<T> request, LcswPayOption option) where T : LcswPayResponse
+        {
             //赋值通用参数
-            request.PayVersion = option.Version;
-            request.MerchantNo = option.MerchantNo;
-            request.TerminalId = option.TerminalId;
+            if (string.IsNullOrEmpty(request.PayVersion) && !string.IsNullOrEmpty(option.Version))
+            {
+                request.PayVersion = option.Version;
+            }
+            if (string.IsNullOrEmpty(request.MerchantNo) && !string.IsNullOrEmpty(option.MerchantNo))
+            {
+                request.MerchantNo = option.MerchantNo;
+            }
+            if (string.IsNullOrEmpty(request.TerminalId) && !string.IsNullOrEmpty(option.TerminalId))
+            {
+                request.TerminalId = option.TerminalId;
+            }
             //计算签名
             var signParas = request.GetSignInfo();
             var requestParas = signParas.GetAllParasAndSign(option);
