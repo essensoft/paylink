@@ -45,7 +45,7 @@ namespace Essensoft.AspNetCore.Payment.LcswPay.Utility
             {
                 if (para.IsRequired)
                 {
-                    builder.Append(split).Append(para.ParaName).Append("=").Append(para.ParaValue);
+                    builder.Append(split).Append(para.ParaName).Append("=").Append(para.ParaValue ?? "null");
                     split = "&";
                 }
             }
