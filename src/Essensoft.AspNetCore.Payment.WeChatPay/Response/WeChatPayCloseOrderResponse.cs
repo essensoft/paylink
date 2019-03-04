@@ -56,6 +56,16 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// </summary>
         [XmlElement("sign")]
         public string Sign { get; set; }
+        /// <summary>
+        /// 业务结果
+        /// </summary>
+        [XmlElement("result_code")]
+        public string ResultCode { get; set; }
+        /// <summary>
+        /// 业务结果描述
+        /// </summary>
+        [XmlElement("result_msg")]
+        public string ResultMsg { get; set; }
 
         /// <summary>
         /// 错误代码
