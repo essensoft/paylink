@@ -69,7 +69,7 @@ namespace Essensoft.AspNetCore.Payment.LcswPay.Response
         /// <summary>
         /// 退款订单状态，SUCCESS退款成功，FAIL退款失败，REFUNDING退款中，NOREFUND退款超时等
         /// </summary>
-        [JsonProperty("trade_status")]
+        [JsonProperty("trade_state")]
         public string TradeStatus { get; set; }
         /// <summary>
         /// 通道订单号，微信订单号、支付宝订单号等，返回时不参与签名
