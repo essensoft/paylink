@@ -82,7 +82,7 @@ namespace Essensoft.AspNetCore.Payment.LcswPay.Request
                     new LcswPayParaInfo("terminal_id",TerminalId),
                     new LcswPayParaInfo("terminal_trace",TerminalTrace),
                     new LcswPayParaInfo("terminal_time",TerminalTime),
-                    new LcswPayParaInfo("out_refund_no",OutRefundNo,false),
+                    new LcswPayParaInfo("out_refund_no",OutRefundNo),
                     new LcswPayParaInfo("pay_trace",PayTrace,false),
                     new LcswPayParaInfo("pay_time",PayTime,false)
                 }
