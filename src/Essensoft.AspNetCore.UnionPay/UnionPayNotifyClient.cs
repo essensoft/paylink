@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Essensoft.AspNetCore.UnionPay
 {
@@ -16,9 +17,15 @@ namespace Essensoft.AspNetCore.UnionPay
             Options = options;
         }
 
-        public UnionPayNotifyClient(IOptions<UnionPayOptions> optionsAccessor)
-            : this(optionsAccessor?.Value ?? new UnionPayOptions())
+        public UnionPayNotifyClient(IOptionsMonitor<UnionPayOptions> optionsAccessor, ILogger<UnionPayNotifyClient> logger) : this(optionsAccessor?.CurrentValue ?? new UnionPayOptions())
         {
+            optionsAccessor.OnChange(newOption =>
+            {
+                if (newOption.Equals(Options))
+                    return;
+                Options = newOption;
+                logger.LogDebug($"{nameof(UnionPayOptions)}配置已更新");
+            });
         }
 
         public Task<T> ExecuteAsync<T>(HttpRequest request) where T : UnionPayNotifyResponse

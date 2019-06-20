@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
+using Microsoft.Extensions.Logging;
 
 namespace Essensoft.AspNetCore.JdPay
 {
@@ -42,9 +43,17 @@ namespace Essensoft.AspNetCore.JdPay
             }
         }
 
-        public JdPayClient(IOptions<JdPayOptions> optionsAccessor)
-            : this(optionsAccessor?.Value ?? new JdPayOptions())
+
+        public JdPayClient(IOptionsMonitor<JdPayOptions> optionsAccessor, ILogger<JdPayClient> logger)
+            : this(optionsAccessor?.CurrentValue ?? new JdPayOptions())
         {
+            optionsAccessor.OnChange(newOption =>
+            {
+                if (newOption.Equals(Options))
+                    return;
+                Options = newOption;
+                logger.LogDebug($"{nameof(JdPayOptions)}配置已更新");
+            });
         }
 
 

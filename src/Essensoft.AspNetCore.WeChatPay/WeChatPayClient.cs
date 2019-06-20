@@ -3,6 +3,7 @@ using Essensoft.AspNetCore.WeChatPay.Utility;
 using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Essensoft.AspNetCore.WeChatPay
 {
@@ -26,9 +27,16 @@ namespace Essensoft.AspNetCore.WeChatPay
             Client = new HttpClientEx();
         }
 
-        public WeChatPayClient(IOptions<WeChatPayOptions> optionsAccessor)
-            : this(optionsAccessor?.Value ?? new WeChatPayOptions())
+        public WeChatPayClient(IOptionsMonitor<WeChatPayOptions> optionsAccessor, ILogger<WeChatPayClient> logger)
+            : this(optionsAccessor?.CurrentValue ?? new WeChatPayOptions())
         {
+            optionsAccessor.OnChange(newOption =>
+            {
+                if (newOption.Equals(Options))
+                    return;
+                Options = newOption;
+                logger.LogDebug($"{nameof(WeChatPayOptions)}配置已更新");
+            });
         }
 
         public WeChatPayClient(string appId, string appSecret, string mchId, string key)

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Essensoft.AspNetCore.Alipay
 {
@@ -59,9 +60,16 @@ namespace Essensoft.AspNetCore.Alipay
             }
         }
 
-        public AlipayClient(IOptions<AlipayOptions> optionsAccessor)
-            : this(optionsAccessor?.Value ?? new AlipayOptions())
+        public AlipayClient(IOptionsMonitor<AlipayOptions> optionsAccessor,ILogger<AlipayClient> logger)
+            : this(optionsAccessor?.CurrentValue ?? new AlipayOptions())
         {
+            optionsAccessor.OnChange(newOption =>
+            {
+                if (newOption.Equals(Options))
+                    return;
+                Options = newOption;
+                logger.LogDebug($"{nameof(AlipayOptions)}配置已更新");
+            });
         }
 
         public AlipayClient(string serverUrl, string appId, string privateKey)

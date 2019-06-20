@@ -6,6 +6,7 @@ using System;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Essensoft.AspNetCore.WeChatPay
 {
@@ -39,9 +40,16 @@ namespace Essensoft.AspNetCore.WeChatPay
             Client = new HttpClientEx(clientHandler);
         }
 
-        public WeChatPayCertificateClient(IOptions<WeChatPayOptions> optionsAccessor)
-            : this(optionsAccessor?.Value ?? new WeChatPayOptions())
+        public WeChatPayCertificateClient(IOptionsMonitor<WeChatPayOptions> optionsAccessor, ILogger<WeChatPayCertificateClient> logger)
+            : this(optionsAccessor?.CurrentValue ?? new WeChatPayOptions())
         {
+            optionsAccessor.OnChange(newOption =>
+            {
+                if (newOption.Equals(Options))
+                    return;
+                Options = newOption;
+                logger.LogDebug($"{nameof(WeChatPayOptions)}配置已更新");
+            });
         }
 
         public WeChatPayCertificateClient(string appId, string appSecret, string mchId, string key, string certificate)

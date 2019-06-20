@@ -5,6 +5,7 @@ using System;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Essensoft.AspNetCore.QPay
 {
@@ -32,9 +33,16 @@ namespace Essensoft.AspNetCore.QPay
             Client = new HttpClientEx(clientHandler);
         }
 
-        public QPayCertificateClient(IOptions<QPayOptions> optionsAccessor)
-            : this(optionsAccessor?.Value ?? new QPayOptions())
+        public QPayCertificateClient(IOptionsMonitor<QPayOptions> optionsAccessor, ILogger<QPayCertificateClient> logger)
+            : this(optionsAccessor?.CurrentValue ?? new QPayOptions())
         {
+            optionsAccessor.OnChange(newOption =>
+            {
+                if (newOption.Equals(Options))
+                    return;
+                Options = newOption;
+                logger.LogDebug($"{nameof(QPayOptions)}配置已更新");
+            });
         }
 
         public QPayCertificateClient(string appId, string appSecret, string mchId, string key, string certificate)

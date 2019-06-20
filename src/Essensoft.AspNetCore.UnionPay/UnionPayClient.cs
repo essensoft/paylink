@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Essensoft.AspNetCore.UnionPay
 {
@@ -30,11 +31,23 @@ namespace Essensoft.AspNetCore.UnionPay
 
         protected internal HttpClientEx Client { get; set; }
 
-        public UnionPayClient(IOptions<UnionPayOptions> optionsAccessor)
+        public UnionPayClient(IOptionsMonitor<UnionPayOptions> optionsAccessor, ILogger<UnionPayClient> logger)
         {
-            Options = optionsAccessor?.Value ?? new UnionPayOptions();
+            Options = optionsAccessor?.CurrentValue ?? new UnionPayOptions();
             Client = new HttpClientEx();
+            Init();
+            optionsAccessor.OnChange(newOption =>
+            {
+                if (newOption.Equals(Options))
+                    return;
+                Options = newOption;
+                Init();
+                logger.LogDebug($"{nameof(UnionPayOptions)}配置已更新");
+            });
+        }
 
+        private void Init()
+        {
             if (string.IsNullOrEmpty(Options.SignCert) || string.IsNullOrEmpty(Options.SignCertPassword))
             {
                 throw new Exception("SignCert or SignCertPassword is Empty!");

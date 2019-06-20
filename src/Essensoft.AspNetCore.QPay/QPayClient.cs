@@ -3,6 +3,7 @@ using Essensoft.AspNetCore.QPay.Utility;
 using Microsoft.Extensions.Options;
 using System;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Essensoft.AspNetCore.QPay
 {
@@ -23,9 +24,16 @@ namespace Essensoft.AspNetCore.QPay
             Client = new HttpClientEx();
         }
 
-        public QPayClient(IOptions<QPayOptions> optionsAccessor)
-            : this(optionsAccessor?.Value ?? new QPayOptions())
+        public QPayClient(IOptionsMonitor<QPayOptions> optionsAccessor, ILogger<QPayClient> logger)
+            : this(optionsAccessor?.CurrentValue ?? new QPayOptions())
         {
+            optionsAccessor.OnChange(newOption =>
+            {
+                if (newOption.Equals(Options))
+                    return;
+                Options = newOption;
+                logger.LogDebug($"{nameof(QPayOptions)}配置已更新");
+            });
         }
 
         public QPayClient(string mchId, string key)
