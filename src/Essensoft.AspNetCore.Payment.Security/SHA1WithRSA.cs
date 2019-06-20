@@ -1,28 +1,42 @@
 ﻿using System;
+using System.Security.Cryptography;
 using System.Text;
-using Org.BouncyCastle.Crypto;
-using Org.BouncyCastle.Security;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {
     public class SHA1WithRSA
     {
-        public static string SignData(string data, ICipherParameters key)
+        public static string Sign(string data, RSAParameters privateKey)
         {
-            var signer = SignerUtilities.GetSigner("SHA1WithRSA");
-            signer.Init(true, key);
-            var bytes = Encoding.UTF8.GetBytes(data);
-            signer.BlockUpdate(bytes, 0, bytes.Length);
-            return Convert.ToBase64String(signer.GenerateSignature());
+            if (string.IsNullOrEmpty(data))
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            using (var rsa = RSA.Create())
+            {
+                rsa.ImportParameters(privateKey);
+                return Convert.ToBase64String(rsa.SignData(Encoding.UTF8.GetBytes(data), HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1));
+            }
         }
 
-        public static bool VerifyData(string data, string sign, ICipherParameters key)
+        public static bool Verify(string data, string sign, RSAParameters publicKey)
         {
-            var verifier = SignerUtilities.GetSigner("SHA1WithRSA");
-            verifier.Init(false, key);
-            var bytes = Encoding.UTF8.GetBytes(data);
-            verifier.BlockUpdate(bytes, 0, bytes.Length);
-            return verifier.VerifySignature(Convert.FromBase64String(sign));
+            if (string.IsNullOrEmpty(data))
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            if (string.IsNullOrEmpty(sign))
+            {
+                throw new ArgumentNullException(nameof(sign));
+            }
+
+            using (var rsa = RSA.Create())
+            {
+                rsa.ImportParameters(publicKey);
+                return rsa.VerifyData(Encoding.UTF8.GetBytes(data), Convert.FromBase64String(sign), HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
+            }
         }
     }
 }

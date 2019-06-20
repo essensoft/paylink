@@ -9,6 +9,16 @@ namespace Essensoft.AspNetCore.Payment.Security
     {
         public static byte[] Encrypt(byte[] data, ICipherParameters key)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             var cipher = CipherUtilities.GetCipher("RSA/NONE/PKCS1Padding");
             cipher.Init(true, key);
             return cipher.DoFinal(data);
@@ -16,6 +26,16 @@ namespace Essensoft.AspNetCore.Payment.Security
 
         public static byte[] Decrypt(byte[] data, ICipherParameters key)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             var cipher = CipherUtilities.GetCipher("RSA/NONE/PKCS1Padding");
             cipher.Init(false, key);
             return cipher.DoFinal(data);
@@ -23,6 +43,16 @@ namespace Essensoft.AspNetCore.Payment.Security
 
         public static string Encrypt(string data, ICipherParameters key)
         {
+            if (string.IsNullOrEmpty(data))
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             var cipher = CipherUtilities.GetCipher("RSA/NONE/PKCS1Padding");
             cipher.Init(true, key);
             return Convert.ToBase64String(cipher.DoFinal(Encoding.UTF8.GetBytes(data)));
@@ -30,6 +60,16 @@ namespace Essensoft.AspNetCore.Payment.Security
 
         public static string Decrypt(string data, ICipherParameters key)
         {
+            if (string.IsNullOrEmpty(data))
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             var cipher = CipherUtilities.GetCipher("RSA/NONE/PKCS1Padding");
             cipher.Init(false, key);
             return Encoding.UTF8.GetString(cipher.DoFinal(Convert.FromBase64String(data)));

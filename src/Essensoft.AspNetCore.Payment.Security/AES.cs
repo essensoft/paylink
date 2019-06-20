@@ -8,6 +8,21 @@ namespace Essensoft.AspNetCore.Payment.Security
     {
         public static string Encrypt(string data, string key, byte[] iv, CipherMode cipherMode, PaddingMode paddingMode)
         {
+            if (string.IsNullOrEmpty(data))
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (iv == null)
+            {
+                throw new ArgumentNullException(nameof(iv));
+            }
+
             using (var aes = Aes.Create())
             {
                 aes.Key = Encoding.UTF8.GetBytes(key);
@@ -25,6 +40,21 @@ namespace Essensoft.AspNetCore.Payment.Security
 
         public static string Decrypt(string data, string key, byte[] iv, CipherMode cipherMode, PaddingMode paddingMode)
         {
+            if (string.IsNullOrEmpty(data))
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (iv == null)
+            {
+                throw new ArgumentNullException(nameof(iv));
+            }
+
             using (var aes = Aes.Create())
             {
                 aes.Key = Encoding.UTF8.GetBytes(key);
@@ -42,6 +72,16 @@ namespace Essensoft.AspNetCore.Payment.Security
 
         public static string Encrypt(string data, string key, CipherMode cipherMode, PaddingMode paddingMode)
         {
+            if (string.IsNullOrEmpty(data))
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             using (var aes = Aes.Create())
             {
                 aes.Key = Encoding.UTF8.GetBytes(key);
@@ -58,6 +98,16 @@ namespace Essensoft.AspNetCore.Payment.Security
 
         public static string Decrypt(string data, string key, CipherMode cipherMode, PaddingMode paddingMode)
         {
+            if (string.IsNullOrEmpty(data))
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             using (var aes = Aes.Create())
             {
                 aes.Key = Encoding.UTF8.GetBytes(key);

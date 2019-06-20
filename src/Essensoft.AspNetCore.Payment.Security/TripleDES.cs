@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Security.Cryptography;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {
@@ -6,6 +7,21 @@ namespace Essensoft.AspNetCore.Payment.Security
     {
         public static byte[] Encode(byte[] data, byte[] key, byte[] iv, CipherMode cipherMode, PaddingMode paddingMode)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (iv == null)
+            {
+                throw new ArgumentNullException(nameof(iv));
+            }
+
             using (var des = System.Security.Cryptography.TripleDES.Create())
             {
                 des.Key = key;
@@ -22,6 +38,21 @@ namespace Essensoft.AspNetCore.Payment.Security
 
         public static byte[] Decode(byte[] data, byte[] key, byte[] iv, CipherMode cipherMode, PaddingMode paddingMode)
         {
+            if (data == null)
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
+            if (iv == null)
+            {
+                throw new ArgumentNullException(nameof(iv));
+            }
+
             using (var des = System.Security.Cryptography.TripleDES.Create())
             {
                 des.Key = key;
