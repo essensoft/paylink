@@ -35,26 +35,6 @@ namespace WebApplicationSample
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            // 引入HttpClient
-            services.AddHttpClient();
-
-            //引入HttpClient API证书的使用(仅QPay / WeChatPay的部分API使用到)。
-            //services.AddHttpClient("qpayCertificateName").ConfigurePrimaryHttpMessageHandler(() =>
-            //{
-            //    var certificate = new X509Certificate2("", "", X509KeyStorageFlags.MachineKeySet);
-            //    var handler = new HttpClientHandler();
-            //    handler.ClientCertificates.Add(certificate);
-            //    return handler;
-            //});
-
-            //services.AddHttpClient("wechatpayCertificateName").ConfigurePrimaryHttpMessageHandler(() =>
-            //{
-            //    var certificate = new X509Certificate2("", "", X509KeyStorageFlags.MachineKeySet);
-            //    var handler = new HttpClientHandler();
-            //    handler.ClientCertificates.Add(certificate);
-            //    return handler;
-            //});
-
             // 引入Payment 依赖注入
             services.AddAlipay();
             services.AddJDPay();
