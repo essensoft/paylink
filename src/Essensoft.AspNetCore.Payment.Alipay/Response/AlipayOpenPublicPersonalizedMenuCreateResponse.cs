@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +11,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 该套个性化菜单key
         /// </summary>
         [JsonProperty("menu_key")]
-        [XmlElement("menu_key")]
         public string MenuKey { get; set; }
     }
 }

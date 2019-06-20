@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Essensoft.AspNetCore.Payment.Alipay.Domain;
+﻿using Essensoft.AspNetCore.Payment.Alipay.Domain;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -13,7 +12,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 广告投放出去的优惠信息
         /// </summary>
         [JsonProperty("discount")]
-        [XmlElement("discount")]
         public DiscountInfo Discount { get; set; }
     }
 }

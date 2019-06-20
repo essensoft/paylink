@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 支付宝端生成的发票id，该字段可从发票详情查询接口获得
         /// </summary>
         [JsonProperty("invoice_id")]
-        [XmlElement("invoice_id")]
         public string InvoiceId { get; set; }
     }
 }

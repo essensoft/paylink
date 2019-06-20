@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 服务端生成的设备码（由我方提供的sdk生成）
         /// </summary>
         [JsonProperty("device_code")]
-        [XmlElement("device_code")]
         public string DeviceCode { get; set; }
     }
 }

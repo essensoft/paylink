@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,56 +13,60 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 代理人身份信息
         /// </summary>
         [JsonProperty("agent")]
-        [XmlElement("agent")]
         public InsPerson Agent { get; set; }
+
+        /// <summary>
+        /// 中介(经办)组织信息
+        /// </summary>
+        [JsonProperty("agent_organization")]
+        public AgentOrganization AgentOrganization { get; set; }
+
+        /// <summary>
+        /// 技术对接主体组织信息,技术isv
+        /// </summary>
+        [JsonProperty("agent_tech_organization")]
+        public AgentOrganization AgentTechOrganization { get; set; }
 
         /// <summary>
         /// 代理人userId
         /// </summary>
         [JsonProperty("agent_user_id")]
-        [XmlElement("agent_user_id")]
         public string AgentUserId { get; set; }
 
         /// <summary>
         /// 投保人身份信息
         /// </summary>
         [JsonProperty("applicant")]
-        [XmlElement("applicant")]
         public InsPerson Applicant { get; set; }
 
         /// <summary>
         /// 车辆信息
         /// </summary>
         [JsonProperty("car")]
-        [XmlElement("car")]
         public Car Car { get; set; }
 
         /// <summary>
         /// 车主身份信息
         /// </summary>
         [JsonProperty("car_owner")]
-        [XmlElement("car_owner")]
         public InsPerson CarOwner { get; set; }
 
         /// <summary>
         /// 投保城市编码
         /// </summary>
         [JsonProperty("city_code")]
-        [XmlElement("city_code")]
         public string CityCode { get; set; }
 
         /// <summary>
         /// 被保人身份信息
         /// </summary>
         [JsonProperty("insured")]
-        [XmlElement("insured")]
         public InsPerson Insured { get; set; }
 
         /// <summary>
         /// 外部询价申请业务单号（幂等字段）
         /// </summary>
         [JsonProperty("out_biz_no")]
-        [XmlElement("out_biz_no")]
         public string OutBizNo { get; set; }
     }
 }

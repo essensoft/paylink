@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 标签组发圈人的单个过滤器信息
         /// </summary>
         [JsonProperty("a")]
-        [XmlElement("a")]
         public LabelFilter A { get; set; }
     }
 }

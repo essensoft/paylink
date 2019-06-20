@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 已生效的销账/出账机构
         /// </summary>
         [JsonProperty("effect_biz_value")]
-        [XmlElement("effect_biz_value")]
         public string EffectBizValue { get; set; }
     }
 }

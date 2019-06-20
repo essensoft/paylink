@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 吱口令内容详情
         /// </summary>
         [JsonProperty("share_code_desc")]
-        [XmlElement("share_code_desc")]
         public string ShareCodeDesc { get; set; }
     }
 }

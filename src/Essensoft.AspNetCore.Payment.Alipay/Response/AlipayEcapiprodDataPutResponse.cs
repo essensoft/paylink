@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +11,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 数据版本
         /// </summary>
         [JsonProperty("data_version")]
-        [XmlElement("data_version")]
         public string DataVersion { get; set; }
     }
 }

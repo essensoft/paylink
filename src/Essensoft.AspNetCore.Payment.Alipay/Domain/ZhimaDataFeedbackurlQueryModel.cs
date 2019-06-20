@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 在支付宝商户版注册支付宝账号id
         /// </summary>
         [JsonProperty("merchant_id")]
-        [XmlElement("merchant_id")]
         public string MerchantId { get; set; }
     }
 }

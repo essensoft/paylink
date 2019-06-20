@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,14 +13,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 值域域名的描述值，固定为”金融”
         /// </summary>
         [JsonProperty("description")]
-        [XmlElement("description")]
         public string Description { get; set; }
 
         /// <summary>
         /// 值域域名，固定为“FINANCE”
         /// </summary>
         [JsonProperty("domain_name")]
-        [XmlElement("domain_name")]
         public string DomainName { get; set; }
     }
 }

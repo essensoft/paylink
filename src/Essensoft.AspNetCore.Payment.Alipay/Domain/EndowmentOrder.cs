@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,28 +13,24 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// apply_amount：申购金额，以分为单位
         /// </summary>
         [JsonProperty("apply_amount")]
-        [XmlElement("apply_amount")]
         public string ApplyAmount { get; set; }
 
         /// <summary>
         /// 订单id，订单的唯一标识，可以用来做幂等
         /// </summary>
         [JsonProperty("order_id")]
-        [XmlElement("order_id")]
         public string OrderId { get; set; }
 
         /// <summary>
         /// pay_time：支付时间，格式：YYYYMMDDHHMISS
         /// </summary>
         [JsonProperty("pay_time")]
-        [XmlElement("pay_time")]
         public string PayTime { get; set; }
 
         /// <summary>
         /// ta_requestId:TA的唯一业务流水号
         /// </summary>
         [JsonProperty("ta_request_id")]
-        [XmlElement("ta_request_id")]
         public string TaRequestId { get; set; }
     }
 }

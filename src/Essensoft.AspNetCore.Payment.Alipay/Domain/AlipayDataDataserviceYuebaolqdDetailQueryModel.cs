@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 服务入参，格式为yyyymmdd
         /// </summary>
         [JsonProperty("report_date")]
-        [XmlElement("report_date")]
         public string ReportDate { get; set; }
     }
 }

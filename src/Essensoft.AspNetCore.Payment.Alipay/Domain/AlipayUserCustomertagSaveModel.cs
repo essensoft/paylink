@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,28 +13,24 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 业务场景码。由支付宝产品经理分配，相当于存储标签的使用凭证。
         /// </summary>
         [JsonProperty("biz_type")]
-        [XmlElement("biz_type")]
         public string BizType { get; set; }
 
         /// <summary>
         /// 标签名字
         /// </summary>
         [JsonProperty("tag_name")]
-        [XmlElement("tag_name")]
         public string TagName { get; set; }
 
         /// <summary>
         /// 标签值，常见为T,F
         /// </summary>
         [JsonProperty("tag_value")]
-        [XmlElement("tag_value")]
         public string TagValue { get; set; }
 
         /// <summary>
         /// 支付宝会员uid
         /// </summary>
         [JsonProperty("user_id")]
-        [XmlElement("user_id")]
         public string UserId { get; set; }
     }
 }

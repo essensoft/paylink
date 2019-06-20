@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 用户车辆ID,支付宝系统唯一
         /// </summary>
         [JsonProperty("vi_id")]
-        [XmlElement("vi_id")]
         public string ViId { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 待删除的广告位id
         /// </summary>
         [JsonProperty("advert_id")]
-        [XmlElement("advert_id")]
         public string AdvertId { get; set; }
     }
 }

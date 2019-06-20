@@ -1,6 +1,5 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -15,8 +14,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 资产负债报表数据列表
         /// </summary>
         [JsonProperty("alm_report_data")]
-        [XmlArray("alm_report_data")]
-        [XmlArrayItem("alm_report_data")]
         public List<AlmReportData> AlmReportData { get; set; }
     }
 }

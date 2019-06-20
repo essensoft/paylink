@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,14 +13,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 广告ID，唯一标识一条广告
         /// </summary>
         [JsonProperty("ad_id")]
-        [XmlElement("ad_id")]
         public string AdId { get; set; }
 
         /// <summary>
         /// 操作类型，目前包括上线和下线(ONLINE和OFFLINE)
         /// </summary>
         [JsonProperty("operate_type")]
-        [XmlElement("operate_type")]
         public string OperateType { get; set; }
     }
 }

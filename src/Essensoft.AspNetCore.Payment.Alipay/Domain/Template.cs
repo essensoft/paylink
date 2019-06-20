@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,14 +13,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 消息模板上下文，即模板中定义的参数及参数值
         /// </summary>
         [JsonProperty("context")]
-        [XmlElement("context")]
         public Context Context { get; set; }
 
         /// <summary>
         /// 消息模板ID
         /// </summary>
         [JsonProperty("template_id")]
-        [XmlElement("template_id")]
         public string TemplateId { get; set; }
     }
 }

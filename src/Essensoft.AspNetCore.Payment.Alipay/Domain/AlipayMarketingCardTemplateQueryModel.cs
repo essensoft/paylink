@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 支付宝卡模板ID（模板创建接口返回的支付宝端模板ID）
         /// </summary>
         [JsonProperty("template_id")]
-        [XmlElement("template_id")]
         public string TemplateId { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 营业执照图片base64加密后内容
         /// </summary>
         [JsonProperty("image_content")]
-        [XmlElement("image_content")]
         public string ImageContent { get; set; }
     }
 }

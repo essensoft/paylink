@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 站点会员信息
         /// </summary>
         [JsonProperty("member")]
-        [XmlElement("member")]
         public Member Member { get; set; }
     }
 }

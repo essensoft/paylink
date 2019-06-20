@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 12
         /// </summary>
         [JsonProperty("rucan")]
-        [XmlElement("rucan")]
         public string Rucan { get; set; }
     }
 }

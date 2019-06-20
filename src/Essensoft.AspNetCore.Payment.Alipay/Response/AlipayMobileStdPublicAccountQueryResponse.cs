@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using System.Xml.Serialization;
+﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 using Newtonsoft.Json;
 
@@ -14,8 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 绑定账户列表
         /// </summary>
         [JsonProperty("public_bind_accounts")]
-        [XmlArray("public_bind_accounts")]
-        [XmlArrayItem("public_bind_account")]
         public List<PublicBindAccount> PublicBindAccounts { get; set; }
     }
 }

@@ -1,6 +1,5 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -15,8 +14,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 需要删除的渠道ID列表
         /// </summary>
         [JsonProperty("channel_ids")]
-        [XmlArray("channel_ids")]
-        [XmlArrayItem("string")]
         public List<string> ChannelIds { get; set; }
     }
 }

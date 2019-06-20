@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 自定义报表规则的KEY
         /// </summary>
         [JsonProperty("condition_key")]
-        [XmlElement("condition_key")]
         public string ConditionKey { get; set; }
     }
 }

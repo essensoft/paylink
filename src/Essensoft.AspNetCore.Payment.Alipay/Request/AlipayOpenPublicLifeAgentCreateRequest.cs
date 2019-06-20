@@ -1,11 +1,11 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Response;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Request
 {
     /// <summary>
-    /// AOP API: alipay.open.public.life.agent.create
+    /// alipay.open.public.life.agent.create
     /// </summary>
     public class AlipayOpenPublicLifeAgentCreateRequest : IAlipayUploadRequest<AlipayOpenPublicLifeAgentCreateResponse>
     {
@@ -94,29 +94,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// </summary>
         public FileItem SpecialLicensePic { get; set; }
 
-        #region IAlipayUploadRequest Members
-
-        public IDictionary<string, FileItem> GetFileParameters()
-        {
-            IDictionary<string, FileItem> parameters = new Dictionary<string, FileItem>
-            {
-                { "background_pic", BackgroundPic },
-                { "business_license_auth_pic", BusinessLicenseAuthPic },
-                { "business_license_pic", BusinessLicensePic },
-                { "logo_pic", LogoPic },
-                { "own_intellectual_pic", OwnIntellectualPic },
-                { "shop_scene_pic", ShopScenePic },
-                { "shop_sign_board_pic", ShopSignBoardPic },
-                { "special_license_pic", SpecialLicensePic }
-            };
-            return parameters;
-        }
-
-        #endregion
-
         #region IAlipayRequest Members
-
-        private bool needEncrypt;
+        private bool needEncrypt = false;
         private string apiVersion = "1.0";
         private string terminalType;
         private string terminalInfo;
@@ -125,60 +104,74 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         private string returnUrl;
         private AlipayObject bizModel;
 
-        public void SetNeedEncrypt(bool needEncrypt){
-             this.needEncrypt=needEncrypt;
+        public void SetNeedEncrypt(bool needEncrypt)
+        {
+            this.needEncrypt = needEncrypt;
         }
 
-        public bool GetNeedEncrypt(){
+        public bool GetNeedEncrypt()
+        {
 
             return needEncrypt;
         }
 
-        public void SetNotifyUrl(string notifyUrl){
+        public void SetNotifyUrl(string notifyUrl)
+        {
             this.notifyUrl = notifyUrl;
         }
 
-        public string GetNotifyUrl(){
+        public string GetNotifyUrl()
+        {
             return notifyUrl;
         }
 
-        public void SetReturnUrl(string returnUrl){
+        public void SetReturnUrl(string returnUrl)
+        {
             this.returnUrl = returnUrl;
         }
 
-        public string GetReturnUrl(){
+        public string GetReturnUrl()
+        {
             return returnUrl;
         }
 
-        public void SetTerminalType(string terminalType){
-			this.terminalType=terminalType;
-		}
-
-        public string GetTerminalType(){
-    		return terminalType;
-    	}
-
-        public void SetTerminalInfo(string terminalInfo){
-    		this.terminalInfo=terminalInfo;
-    	}
-
-        public string GetTerminalInfo(){
-    		return terminalInfo;
-    	}
-
-        public void SetProdCode(string prodCode){
-            this.prodCode=prodCode;
+        public void SetTerminalType(string terminalType)
+        {
+            this.terminalType = terminalType;
         }
 
-        public string GetProdCode(){
+        public string GetTerminalType()
+        {
+            return terminalType;
+        }
+
+        public void SetTerminalInfo(string terminalInfo)
+        {
+            this.terminalInfo = terminalInfo;
+        }
+
+        public string GetTerminalInfo()
+        {
+            return terminalInfo;
+        }
+
+        public void SetProdCode(string prodCode)
+        {
+            this.prodCode = prodCode;
+        }
+
+        public string GetProdCode()
+        {
             return prodCode;
         }
 
-        public void SetApiVersion(string apiVersion){
-            this.apiVersion=apiVersion;
+        public void SetApiVersion(string apiVersion)
+        {
+            this.apiVersion = apiVersion;
         }
 
-        public string GetApiVersion(){
+        public string GetApiVersion()
+        {
             return apiVersion;
         }
 
@@ -212,6 +205,26 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public void SetBizModel(AlipayObject bizModel)
         {
             this.bizModel = bizModel;
+        }
+
+        #endregion
+
+        #region IAlipayUploadRequest Members
+
+        public IDictionary<string, FileItem> GetFileParameters()
+        {
+            IDictionary<string, FileItem> parameters = new Dictionary<string, FileItem>
+            {
+                { "background_pic", BackgroundPic },
+                { "business_license_auth_pic", BusinessLicenseAuthPic },
+                { "business_license_pic", BusinessLicensePic },
+                { "logo_pic", LogoPic },
+                { "own_intellectual_pic", OwnIntellectualPic },
+                { "shop_scene_pic", ShopScenePic },
+                { "shop_sign_board_pic", ShopSignBoardPic },
+                { "special_license_pic", SpecialLicensePic }
+            };
+            return parameters;
         }
 
         #endregion

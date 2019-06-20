@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using System.Xml.Serialization;
+﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 using Newtonsoft.Json;
 
@@ -14,8 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 汇率信息列表
         /// </summary>
         [JsonProperty("client_rate_list")]
-        [XmlArray("client_rate_list")]
-        [XmlArrayItem("ex_client_rate_v_o")]
         public List<ExClientRateVO> ClientRateList { get; set; }
     }
 }

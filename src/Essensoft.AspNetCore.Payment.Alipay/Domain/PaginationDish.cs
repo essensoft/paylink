@@ -1,6 +1,5 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -15,36 +14,30 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 出参列表
         /// </summary>
         [JsonProperty("list")]
-        [XmlArray("list")]
-        [XmlArrayItem("kbdish_info")]
         public List<KbdishInfo> List { get; set; }
 
         /// <summary>
         /// 表示当前页数
         /// </summary>
         [JsonProperty("page_no")]
-        [XmlElement("page_no")]
         public string PageNo { get; set; }
 
         /// <summary>
         /// 表示每页条数
         /// </summary>
         [JsonProperty("page_size")]
-        [XmlElement("page_size")]
         public string PageSize { get; set; }
 
         /// <summary>
         /// 总条数
         /// </summary>
         [JsonProperty("total_count")]
-        [XmlElement("total_count")]
         public string TotalCount { get; set; }
 
         /// <summary>
         /// 总页数
         /// </summary>
         [JsonProperty("total_page")]
-        [XmlElement("total_page")]
         public string TotalPage { get; set; }
     }
 }

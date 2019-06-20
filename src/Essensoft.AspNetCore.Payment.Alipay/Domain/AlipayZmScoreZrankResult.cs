@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 芝麻分分段 Z0-Z7
         /// </summary>
         [JsonProperty("zrank")]
-        [XmlElement("zrank")]
         public string Zrank { get; set; }
     }
 }

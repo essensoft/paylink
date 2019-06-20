@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 库存ID, 库存创建接口返回
         /// </summary>
         [JsonProperty("stock_id")]
-        [XmlElement("stock_id")]
         public string StockId { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,21 +13,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 报名编号（通过调用报名信息同步接口返回）
         /// </summary>
         [JsonProperty("apply_third_id")]
-        [XmlElement("apply_third_id")]
         public string ApplyThirdId { get; set; }
 
         /// <summary>
         /// 备注
         /// </summary>
         [JsonProperty("audit_remark")]
-        [XmlElement("audit_remark")]
         public string AuditRemark { get; set; }
 
         /// <summary>
         /// 报名结果状态
         /// </summary>
         [JsonProperty("listing_status")]
-        [XmlElement("listing_status")]
         public string ListingStatus { get; set; }
     }
 }

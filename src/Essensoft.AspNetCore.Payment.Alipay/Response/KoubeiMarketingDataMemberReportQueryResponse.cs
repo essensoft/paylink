@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +11,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 查询成功时返回json格式数据
         /// </summary>
         [JsonProperty("report_data")]
-        [XmlElement("report_data")]
         public string ReportData { get; set; }
     }
 }

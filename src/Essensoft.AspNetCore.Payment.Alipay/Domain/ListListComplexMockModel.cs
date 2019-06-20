@@ -1,6 +1,5 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -15,8 +14,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 复杂对象list
         /// </summary>
         [JsonProperty("cm_list")]
-        [XmlArray("cm_list")]
-        [XmlArrayItem("complext_mock_model")]
         public List<ComplextMockModel> CmList { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +11,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 码库id
         /// </summary>
         [JsonProperty("code_inventory_id")]
-        [XmlElement("code_inventory_id")]
         public string CodeInventoryId { get; set; }
     }
 }

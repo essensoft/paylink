@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// message_id 是发布接口调用之后拿到的返回值，用来撤回已经发布的对应内容
         /// </summary>
         [JsonProperty("message_id")]
-        [XmlElement("message_id")]
         public string MessageId { get; set; }
     }
 }

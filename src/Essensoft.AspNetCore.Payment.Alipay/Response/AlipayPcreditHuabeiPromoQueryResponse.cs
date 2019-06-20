@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +11,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 花呗颜值分
         /// </summary>
         [JsonProperty("facescore")]
-        [XmlElement("facescore")]
         public string Facescore { get; set; }
     }
 }

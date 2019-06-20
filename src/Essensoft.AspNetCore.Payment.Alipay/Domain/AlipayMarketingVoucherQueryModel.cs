@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 券ID(券唯一标识, 发券接口返回参数)
         /// </summary>
         [JsonProperty("voucher_id")]
-        [XmlElement("voucher_id")]
         public string VoucherId { get; set; }
     }
 }

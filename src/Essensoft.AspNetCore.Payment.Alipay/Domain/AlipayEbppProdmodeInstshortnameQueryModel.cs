@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 出账机构中文名称
         /// </summary>
         [JsonProperty("chargeinst_cn_name")]
-        [XmlElement("chargeinst_cn_name")]
         public string ChargeinstCnName { get; set; }
     }
 }

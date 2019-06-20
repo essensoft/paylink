@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,21 +13,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 数据类型，支持枚举：文本：STRING；数值：NUMBER；长整型：LONG；浮点型：DOUBLE；日期：DATE；布尔：BOOLEAN；金额：MONEY
         /// </summary>
         [JsonProperty("data_type")]
-        [XmlElement("data_type")]
         public string DataType { get; set; }
 
         /// <summary>
         /// 数据限制类型，支持枚举：固定值：FIX；单选值：SELECT；区间值：RANGE;
         /// </summary>
         [JsonProperty("limit_type")]
-        [XmlElement("limit_type")]
         public string LimitType { get; set; }
 
         /// <summary>
         /// 数据格式值；如：范围值:(1,10)，固定值:1
         /// </summary>
         [JsonProperty("value")]
-        [XmlElement("value")]
         public string Value { get; set; }
     }
 }

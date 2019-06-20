@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,21 +13,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 担保方案查询类型，TYZBL：通用自保理业务场景
         /// </summary>
         [JsonProperty("bsn_type")]
-        [XmlElement("bsn_type")]
         public string BsnType { get; set; }
 
         /// <summary>
         /// 销售产品码，特殊可选，某些场景是必填的
         /// </summary>
         [JsonProperty("sale_pd_code")]
-        [XmlElement("sale_pd_code")]
         public string SalePdCode { get; set; }
 
         /// <summary>
         /// 用户身份信息
         /// </summary>
         [JsonProperty("user")]
-        [XmlElement("user")]
         public Member User { get; set; }
     }
 }

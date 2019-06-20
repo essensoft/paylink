@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 产品编码;由蚂蚁保险平台分配,商户通过该产品编码投保特定的保险产品
         /// </summary>
         [JsonProperty("prod_code")]
-        [XmlElement("prod_code")]
         public string ProdCode { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 判断请求操作是否成功，值为 true 或者 false
         /// </summary>
         [JsonProperty("success")]
-        [XmlElement("success")]
         public bool Success { get; set; }
     }
 }

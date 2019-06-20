@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +11,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 权益ID
         /// </summary>
         [JsonProperty("benefit_id")]
-        [XmlElement("benefit_id")]
         public string BenefitId { get; set; }
     }
 }

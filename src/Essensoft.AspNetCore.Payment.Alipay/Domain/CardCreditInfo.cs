@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,14 +13,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 是否允许超扣
         /// </summary>
         [JsonProperty("allowoverpay")]
-        [XmlElement("allowoverpay")]
         public string Allowoverpay { get; set; }
 
         /// <summary>
         /// 超扣额度
         /// </summary>
         [JsonProperty("creditquota")]
-        [XmlElement("creditquota")]
         public string Creditquota { get; set; }
     }
 }

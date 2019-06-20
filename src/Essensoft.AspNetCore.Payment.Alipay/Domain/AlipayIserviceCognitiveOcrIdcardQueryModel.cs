@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 身份证图片base64编码内容
         /// </summary>
         [JsonProperty("image_content")]
-        [XmlElement("image_content")]
         public string ImageContent { get; set; }
+
+        /// <summary>
+        /// face: 身份证正面  back: 身份证反面  缺省值是：face
+        /// </summary>
+        [JsonProperty("side")]
+        public string Side { get; set; }
     }
 }

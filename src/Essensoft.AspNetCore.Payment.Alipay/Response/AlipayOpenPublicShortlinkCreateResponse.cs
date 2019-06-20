@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +11,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 生成的带参推广短链接
         /// </summary>
         [JsonProperty("shortlink")]
-        [XmlElement("shortlink")]
         public string Shortlink { get; set; }
     }
 }

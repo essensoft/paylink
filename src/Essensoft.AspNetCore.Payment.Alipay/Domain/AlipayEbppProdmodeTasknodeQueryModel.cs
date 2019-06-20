@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 任务编号
         /// </summary>
         [JsonProperty("task_id")]
-        [XmlElement("task_id")]
         public string TaskId { get; set; }
     }
 }

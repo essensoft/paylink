@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 银联编号
         /// </summary>
         [JsonProperty("bank_code")]
-        [XmlElement("bank_code")]
         public string BankCode { get; set; }
     }
 }

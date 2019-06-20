@@ -1,6 +1,5 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -15,8 +14,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 省份编码，国标码
         /// </summary>
         [JsonProperty("province_code")]
-        [XmlArray("province_code")]
-        [XmlArrayItem("string")]
         public List<string> ProvinceCode { get; set; }
     }
 }

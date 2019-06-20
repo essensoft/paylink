@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,14 +13,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 机具编号
         /// </summary>
         [JsonProperty("device_id")]
-        [XmlElement("device_id")]
         public string DeviceId { get; set; }
 
         /// <summary>
         /// 解绑时间
         /// </summary>
         [JsonProperty("unbind_time")]
-        [XmlElement("unbind_time")]
         public string UnbindTime { get; set; }
     }
 }

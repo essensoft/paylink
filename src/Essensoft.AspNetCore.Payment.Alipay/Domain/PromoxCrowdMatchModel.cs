@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,14 +13,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 客群码
         /// </summary>
         [JsonProperty("crowd_code")]
-        [XmlElement("crowd_code")]
         public string CrowdCode { get; set; }
 
         /// <summary>
         /// 是否匹配
         /// </summary>
         [JsonProperty("is_match")]
-        [XmlElement("is_match")]
         public bool IsMatch { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +11,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 支付宝卡模板ID
         /// </summary>
         [JsonProperty("template_id")]
-        [XmlElement("template_id")]
         public string TemplateId { get; set; }
     }
 }
