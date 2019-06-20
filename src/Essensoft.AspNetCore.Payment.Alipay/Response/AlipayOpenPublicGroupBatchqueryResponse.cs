@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using System.Xml.Serialization;
+﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 using Newtonsoft.Json;
 
@@ -14,8 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 用户分组列表，包含每个分组的id、name、以及规则模型
         /// </summary>
         [JsonProperty("groups")]
-        [XmlArray("groups")]
-        [XmlArrayItem("query_group")]
         public List<QueryGroup> Groups { get; set; }
     }
 }

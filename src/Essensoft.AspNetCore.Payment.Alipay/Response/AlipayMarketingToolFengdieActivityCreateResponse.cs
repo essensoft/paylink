@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +11,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// H5应用的唯一id
         /// </summary>
         [JsonProperty("activity_id")]
-        [XmlElement("activity_id")]
         public long ActivityId { get; set; }
     }
 }

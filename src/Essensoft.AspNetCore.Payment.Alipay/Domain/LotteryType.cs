@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,14 +13,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 彩种ID
         /// </summary>
         [JsonProperty("lottery_type_id")]
-        [XmlElement("lottery_type_id")]
         public long LotteryTypeId { get; set; }
 
         /// <summary>
         /// 彩种名称
         /// </summary>
         [JsonProperty("lottery_type_name")]
-        [XmlElement("lottery_type_name")]
         public string LotteryTypeName { get; set; }
     }
 }

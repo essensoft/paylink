@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,14 +13,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 5555
         /// </summary>
         [JsonProperty("numberone")]
-        [XmlElement("numberone")]
         public string Numberone { get; set; }
 
         /// <summary>
         /// 22
         /// </summary>
         [JsonProperty("numbertowe")]
-        [XmlElement("numbertowe")]
         public string Numbertowe { get; set; }
     }
 }

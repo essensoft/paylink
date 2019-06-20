@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 物流类型,   POST 平邮,  EXPRESS 其他快递,  VIRTUAL 虚拟物品,  EMS EMS,  DIRECT 无需物流。
         /// </summary>
         [JsonProperty("logistics_type")]
-        [XmlElement("logistics_type")]
         public string LogisticsType { get; set; }
     }
 }

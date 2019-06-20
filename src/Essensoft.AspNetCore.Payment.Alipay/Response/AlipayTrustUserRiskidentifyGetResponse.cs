@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Essensoft.AspNetCore.Payment.Alipay.Domain;
+﻿using Essensoft.AspNetCore.Payment.Alipay.Domain;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -13,7 +12,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 行业关注名单识别结果
         /// </summary>
         [JsonProperty("ali_trust_risk_identify")]
-        [XmlElement("ali_trust_risk_identify")]
         public AliTrustRiskIdentify AliTrustRiskIdentify { get; set; }
     }
 }

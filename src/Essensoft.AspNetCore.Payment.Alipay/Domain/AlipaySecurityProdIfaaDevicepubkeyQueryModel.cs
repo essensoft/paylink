@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,28 +13,24 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 用于协商ECDH的publickey，base6编码
         /// </summary>
         [JsonProperty("ecdh_publickey")]
-        [XmlElement("ecdh_publickey")]
         public string EcdhPublickey { get; set; }
 
         /// <summary>
         /// 已返回记录的最大ID，初次请求输入0
         /// </summary>
         [JsonProperty("max_id")]
-        [XmlElement("max_id")]
         public string MaxId { get; set; }
 
         /// <summary>
         /// 安全设备的ID。
         /// </summary>
         [JsonProperty("security_device_id")]
-        [XmlElement("security_device_id")]
         public string SecurityDeviceId { get; set; }
 
         /// <summary>
         /// 安全设备类型，SGX或者加密机
         /// </summary>
         [JsonProperty("security_schema")]
-        [XmlElement("security_schema")]
         public string SecuritySchema { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 基金编号：基金产品编号
         /// </summary>
         [JsonProperty("fund_code")]
-        [XmlElement("fund_code")]
         public string FundCode { get; set; }
     }
 }

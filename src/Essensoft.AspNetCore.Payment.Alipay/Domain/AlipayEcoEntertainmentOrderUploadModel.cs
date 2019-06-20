@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 数娱充值ISV订单回流模型
         /// </summary>
         [JsonProperty("entertainment_order_info")]
-        [XmlElement("entertainment_order_info")]
         public EntertainmentOrderInfo EntertainmentOrderInfo { get; set; }
     }
 }

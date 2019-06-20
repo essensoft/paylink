@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// query_type不填, 返回uid  query_type=1, 返回手机号  query_type=2, 返回图片
         /// </summary>
         [JsonProperty("query_type")]
-        [XmlElement("query_type")]
         public string QueryType { get; set; }
     }
 }

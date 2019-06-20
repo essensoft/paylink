@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,14 +11,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 被解绑的机具编号
         /// </summary>
         [JsonProperty("device_id")]
-        [XmlElement("device_id")]
         public string DeviceId { get; set; }
 
         /// <summary>
         /// 机具厂商PID
         /// </summary>
         [JsonProperty("merchant_pid")]
-        [XmlElement("merchant_pid")]
         public string MerchantPid { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +11,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// result是一个所有结果集合的json串。  result结果集是一个json格式数组， 是门店热力图信息  lng: 位置经度 lat:位置维度 cnt：会员数量
         /// </summary>
         [JsonProperty("result")]
-        [XmlElement("result")]
         public string Result { get; set; }
     }
 }

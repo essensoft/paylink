@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Response;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Request
 {
     /// <summary>
-    /// AOP API: alipay.point.order.add
+    /// alipay.point.order.add
     /// </summary>
     public class AlipayPointOrderAddRequest : IAlipayRequest<AlipayPointOrderAddResponse>
     {
@@ -22,12 +22,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// <summary>
         /// 发放集分宝时间
         /// </summary>
-        public DateTime? OrderTime { get; set; }
+        public Nullable<DateTime> OrderTime { get; set; }
 
         /// <summary>
         /// 发放集分宝的数量
         /// </summary>
-        public long? PointCount { get; set; }
+        public Nullable<long> PointCount { get; set; }
 
         /// <summary>
         /// 用户标识符，用于指定集分宝发放的用户，和user_symbol_type一起使用，确定一个唯一的支付宝用户
@@ -40,8 +40,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string UserSymbolType { get; set; }
 
         #region IAlipayRequest Members
-
-        private bool  needEncrypt;
+        private bool needEncrypt = false;
         private string apiVersion = "1.0";
         private string terminalType;
         private string terminalInfo;
@@ -50,52 +49,64 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         private string returnUrl;
         private AlipayObject bizModel;
 
-        public void SetNeedEncrypt(bool needEncrypt){
-             this.needEncrypt=needEncrypt;
+        public void SetNeedEncrypt(bool needEncrypt)
+        {
+            this.needEncrypt = needEncrypt;
         }
 
-        public bool GetNeedEncrypt(){
+        public bool GetNeedEncrypt()
+        {
 
             return needEncrypt;
         }
 
-        public void SetNotifyUrl(string notifyUrl){
+        public void SetNotifyUrl(string notifyUrl)
+        {
             this.notifyUrl = notifyUrl;
         }
 
-        public string GetNotifyUrl(){
+        public string GetNotifyUrl()
+        {
             return notifyUrl;
         }
 
-        public void SetReturnUrl(string returnUrl){
+        public void SetReturnUrl(string returnUrl)
+        {
             this.returnUrl = returnUrl;
         }
 
-        public string GetReturnUrl(){
+        public string GetReturnUrl()
+        {
             return returnUrl;
         }
 
-        public void SetTerminalType(string terminalType){
-			this.terminalType=terminalType;
-		}
-
-        public string GetTerminalType(){
-    		return terminalType;
-    	}
-
-        public void SetTerminalInfo(string terminalInfo){
-    		this.terminalInfo=terminalInfo;
-    	}
-
-        public string GetTerminalInfo(){
-    		return terminalInfo;
-    	}
-
-        public void SetProdCode(string prodCode){
-            this.prodCode=prodCode;
+        public void SetTerminalType(string terminalType)
+        {
+            this.terminalType = terminalType;
         }
 
-        public string GetProdCode(){
+        public string GetTerminalType()
+        {
+            return terminalType;
+        }
+
+        public void SetTerminalInfo(string terminalInfo)
+        {
+            this.terminalInfo = terminalInfo;
+        }
+
+        public string GetTerminalInfo()
+        {
+            return terminalInfo;
+        }
+
+        public void SetProdCode(string prodCode)
+        {
+            this.prodCode = prodCode;
+        }
+
+        public string GetProdCode()
+        {
             return prodCode;
         }
 
@@ -104,11 +115,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
             return "alipay.point.order.add";
         }
 
-        public void SetApiVersion(string apiVersion){
-            this.apiVersion=apiVersion;
+        public void SetApiVersion(string apiVersion)
+        {
+            this.apiVersion = apiVersion;
         }
 
-        public string GetApiVersion(){
+        public string GetApiVersion()
+        {
             return apiVersion;
         }
 

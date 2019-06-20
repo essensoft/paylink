@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,14 +13,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 外部奖品ID
         /// </summary>
         [JsonProperty("out_prize_id")]
-        [XmlElement("out_prize_id")]
         public string OutPrizeId { get; set; }
 
         /// <summary>
         /// 奖品状态，可枚举，分别为“可用”(ENABLED)、“不可用”(DISABLED)、“不满足使用规则”(NOT_MATCH_USE_CONDITION)
         /// </summary>
         [JsonProperty("status")]
-        [XmlElement("status")]
         public string Status { get; set; }
     }
 }

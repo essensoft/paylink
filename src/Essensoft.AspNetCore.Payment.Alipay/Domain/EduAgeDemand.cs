@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,14 +13,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 结束年龄
         /// </summary>
         [JsonProperty("age_end")]
-        [XmlElement("age_end")]
         public string AgeEnd { get; set; }
 
         /// <summary>
         /// 开始年龄
         /// </summary>
         [JsonProperty("age_start")]
-        [XmlElement("age_start")]
         public string AgeStart { get; set; }
     }
 }

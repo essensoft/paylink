@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +11,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 是否阿里小号
         /// </summary>
         [JsonProperty("is_alixiaohao")]
-        [XmlElement("is_alixiaohao")]
         public bool IsAlixiaohao { get; set; }
     }
 }

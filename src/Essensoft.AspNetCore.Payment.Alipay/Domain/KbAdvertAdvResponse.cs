@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,28 +13,24 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 推广ID
         /// </summary>
         [JsonProperty("adv_id")]
-        [XmlElement("adv_id")]
         public string AdvId { get; set; }
 
         /// <summary>
         /// 指定推广活动的名称
         /// </summary>
         [JsonProperty("name")]
-        [XmlElement("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// 单张券推广  只有type=single_voucher才会有值
         /// </summary>
         [JsonProperty("single_voucher")]
-        [XmlElement("single_voucher")]
         public KbAdvertAdvSingleVoucherResponse SingleVoucher { get; set; }
 
         /// <summary>
         /// 推广类型
         /// </summary>
         [JsonProperty("type")]
-        [XmlElement("type")]
         public string Type { get; set; }
     }
 }

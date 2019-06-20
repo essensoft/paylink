@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,42 +13,36 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 群成员性别，m表示男，f表示女
         /// </summary>
         [JsonProperty("gender")]
-        [XmlElement("gender")]
         public string Gender { get; set; }
 
         /// <summary>
         /// 群内昵称
         /// </summary>
         [JsonProperty("group_nick_name")]
-        [XmlElement("group_nick_name")]
         public string GroupNickName { get; set; }
 
         /// <summary>
         /// 邀请人id
         /// </summary>
         [JsonProperty("inviter_uid")]
-        [XmlElement("inviter_uid")]
         public string InviterUid { get; set; }
 
         /// <summary>
         /// 群成员头像url
         /// </summary>
         [JsonProperty("member_img")]
-        [XmlElement("member_img")]
         public string MemberImg { get; set; }
 
         /// <summary>
         /// 用户昵称
         /// </summary>
         [JsonProperty("nick_name")]
-        [XmlElement("nick_name")]
         public string NickName { get; set; }
 
         /// <summary>
         /// 群成员用户id
         /// </summary>
         [JsonProperty("uid")]
-        [XmlElement("uid")]
         public string Uid { get; set; }
     }
 }

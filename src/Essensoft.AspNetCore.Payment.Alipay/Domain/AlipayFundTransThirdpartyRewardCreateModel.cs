@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,49 +13,42 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 打赏金额，单位：人民币分
         /// </summary>
         [JsonProperty("amount")]
-        [XmlElement("amount")]
         public string Amount { get; set; }
 
         /// <summary>
         /// 扩展参数，json格式
         /// </summary>
         [JsonProperty("ext_param")]
-        [XmlElement("ext_param")]
         public string ExtParam { get; set; }
 
         /// <summary>
         /// 外部业务号，用于幂等控制
         /// </summary>
         [JsonProperty("out_no")]
-        [XmlElement("out_no")]
         public string OutNo { get; set; }
 
         /// <summary>
         /// 收款用户的支付宝userId
         /// </summary>
         [JsonProperty("receiver_user_id")]
-        [XmlElement("receiver_user_id")]
         public string ReceiverUserId { get; set; }
 
         /// <summary>
         /// 场景码，需业务方分配方可使用
         /// </summary>
         [JsonProperty("scene")]
-        [XmlElement("scene")]
         public string Scene { get; set; }
 
         /// <summary>
         /// 付款用户的支付宝userId
         /// </summary>
         [JsonProperty("sender_user_id")]
-        [XmlElement("sender_user_id")]
         public string SenderUserId { get; set; }
 
         /// <summary>
         /// 打赏的标题（理由）
         /// </summary>
         [JsonProperty("title")]
-        [XmlElement("title")]
         public string Title { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,21 +13,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 商户生成的外部投保业务号;当保单凭证号不传时则必传.
         /// </summary>
         [JsonProperty("out_biz_no")]
-        [XmlElement("out_biz_no")]
         public string OutBizNo { get; set; }
 
         /// <summary>
         /// 保单凭证号;商户生成的外部投保业务号不传时则必传.
         /// </summary>
         [JsonProperty("policy_no")]
-        [XmlElement("policy_no")]
         public string PolicyNo { get; set; }
 
         /// <summary>
         /// 产品编码;当保单凭证号不传时则必传.
         /// </summary>
         [JsonProperty("prod_code")]
-        [XmlElement("prod_code")]
         public string ProdCode { get; set; }
     }
 }

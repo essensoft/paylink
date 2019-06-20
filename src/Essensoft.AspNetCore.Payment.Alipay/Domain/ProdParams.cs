@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 预授权业务信息
         /// </summary>
         [JsonProperty("auth_biz_params")]
-        [XmlElement("auth_biz_params")]
         public string AuthBizParams { get; set; }
     }
 }

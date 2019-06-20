@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,21 +13,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 取消类型：RENEW-退款并重新生成新订单（反结场景），REFUND-仅退款不生成新订单（先付撤销、外卖退款场景）
         /// </summary>
         [JsonProperty("action")]
-        [XmlElement("action")]
         public string Action { get; set; }
 
         /// <summary>
         /// 取消时间
         /// </summary>
         [JsonProperty("cancel_time")]
-        [XmlElement("cancel_time")]
         public string CancelTime { get; set; }
 
         /// <summary>
         /// pos业务订单外部主键信息
         /// </summary>
         [JsonProperty("pos_order_key")]
-        [XmlElement("pos_order_key")]
         public PosOrderKey PosOrderKey { get; set; }
     }
 }

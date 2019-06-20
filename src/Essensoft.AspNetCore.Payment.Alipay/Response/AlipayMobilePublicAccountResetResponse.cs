@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,21 +11,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 这是新账户绑定成功后产生的协议号
         /// </summary>
         [JsonProperty("agreement_id")]
-        [XmlElement("agreement_id")]
         public string AgreementId { get; set; }
 
         /// <summary>
         /// 结果码
         /// </summary>
         [JsonProperty("code")]
-        [XmlElement("code")]
-        public new string Code { get; set; }
+        public override string Code { get; set; }
 
         /// <summary>
         /// 结果信息
         /// </summary>
         [JsonProperty("msg")]
-        [XmlElement("msg")]
-        public new string Msg { get; set; }
+        public override string Msg { get; set; }
     }
 }

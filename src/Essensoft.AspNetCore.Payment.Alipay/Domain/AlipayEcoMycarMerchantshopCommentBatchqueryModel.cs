@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,21 +13,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 当前页号（从1开始）
         /// </summary>
         [JsonProperty("page_num")]
-        [XmlElement("page_num")]
         public long PageNum { get; set; }
 
         /// <summary>
         /// 分页数量，每页不超过100条。
         /// </summary>
         [JsonProperty("page_size")]
-        [XmlElement("page_size")]
         public long PageSize { get; set; }
 
         /// <summary>
         /// 门店id
         /// </summary>
         [JsonProperty("shop_id")]
-        [XmlElement("shop_id")]
         public long ShopId { get; set; }
     }
 }

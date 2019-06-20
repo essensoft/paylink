@@ -1,11 +1,11 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Response;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Request
 {
     /// <summary>
-    /// AOP API: alipay.mobile.code.create
+    /// alipay.mobile.code.create
     /// </summary>
     public class AlipayMobileCodeCreateRequest : IAlipayRequest<AlipayMobileCodeCreateResponse>
     {
@@ -27,7 +27,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// <summary>
         /// 如果是true，则扫一扫下发跳转地址直接取自bizLinkedId  否则，从路由信息里取跳转地址
         /// </summary>
-        public bool? IsDirect { get; set; }
+        public Nullable<bool> IsDirect { get; set; }
 
         /// <summary>
         /// 备注信息字段
@@ -42,12 +42,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// <summary>
         /// 编码启动时间（yyy-MM-dd hh:mm:ss），为空表示立即启用
         /// </summary>
-        public DateTime? StartDate { get; set; }
+        public Nullable<DateTime> StartDate { get; set; }
 
         /// <summary>
         /// 超时时间,单位秒；若不传则为永久。发码超时时间需要找码平台技术评估
         /// </summary>
-        public long? Timeout { get; set; }
+        public Nullable<long> Timeout { get; set; }
 
         /// <summary>
         /// 支付宝用户id
@@ -55,8 +55,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string UserId { get; set; }
 
         #region IAlipayRequest Members
-
-        private bool  needEncrypt;
+        private bool needEncrypt = false;
         private string apiVersion = "1.0";
         private string terminalType;
         private string terminalInfo;
@@ -65,52 +64,64 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         private string returnUrl;
         private AlipayObject bizModel;
 
-        public void SetNeedEncrypt(bool needEncrypt){
-             this.needEncrypt=needEncrypt;
+        public void SetNeedEncrypt(bool needEncrypt)
+        {
+            this.needEncrypt = needEncrypt;
         }
 
-        public bool GetNeedEncrypt(){
+        public bool GetNeedEncrypt()
+        {
 
             return needEncrypt;
         }
 
-        public void SetNotifyUrl(string notifyUrl){
+        public void SetNotifyUrl(string notifyUrl)
+        {
             this.notifyUrl = notifyUrl;
         }
 
-        public string GetNotifyUrl(){
+        public string GetNotifyUrl()
+        {
             return notifyUrl;
         }
 
-        public void SetReturnUrl(string returnUrl){
+        public void SetReturnUrl(string returnUrl)
+        {
             this.returnUrl = returnUrl;
         }
 
-        public string GetReturnUrl(){
+        public string GetReturnUrl()
+        {
             return returnUrl;
         }
 
-        public void SetTerminalType(string terminalType){
-			this.terminalType=terminalType;
-		}
-
-        public string GetTerminalType(){
-    		return terminalType;
-    	}
-
-        public void SetTerminalInfo(string terminalInfo){
-    		this.terminalInfo=terminalInfo;
-    	}
-
-        public string GetTerminalInfo(){
-    		return terminalInfo;
-    	}
-
-        public void SetProdCode(string prodCode){
-            this.prodCode=prodCode;
+        public void SetTerminalType(string terminalType)
+        {
+            this.terminalType = terminalType;
         }
 
-        public string GetProdCode(){
+        public string GetTerminalType()
+        {
+            return terminalType;
+        }
+
+        public void SetTerminalInfo(string terminalInfo)
+        {
+            this.terminalInfo = terminalInfo;
+        }
+
+        public string GetTerminalInfo()
+        {
+            return terminalInfo;
+        }
+
+        public void SetProdCode(string prodCode)
+        {
+            this.prodCode = prodCode;
+        }
+
+        public string GetProdCode()
+        {
             return prodCode;
         }
 
@@ -119,11 +130,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
             return "alipay.mobile.code.create";
         }
 
-        public void SetApiVersion(string apiVersion){
-            this.apiVersion=apiVersion;
+        public void SetApiVersion(string apiVersion)
+        {
+            this.apiVersion = apiVersion;
         }
 
-        public string GetApiVersion(){
+        public string GetApiVersion()
+        {
             return apiVersion;
         }
 

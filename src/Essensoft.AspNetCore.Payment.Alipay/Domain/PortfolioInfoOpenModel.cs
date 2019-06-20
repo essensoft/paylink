@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,35 +13,30 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 头图素材id
         /// </summary>
         [JsonProperty("cover_image_id")]
-        [XmlElement("cover_image_id")]
         public string CoverImageId { get; set; }
 
         /// <summary>
         /// 头图素材type；  枚举（PICTURE/VIDEO）
         /// </summary>
         [JsonProperty("cover_image_type")]
-        [XmlElement("cover_image_type")]
         public string CoverImageType { get; set; }
 
         /// <summary>
         /// 头图链接
         /// </summary>
         [JsonProperty("cover_image_url")]
-        [XmlElement("cover_image_url")]
         public string CoverImageUrl { get; set; }
 
         /// <summary>
         /// 作品集id
         /// </summary>
         [JsonProperty("portfolio_id")]
-        [XmlElement("portfolio_id")]
         public string PortfolioId { get; set; }
 
         /// <summary>
         /// 作品集标题
         /// </summary>
         [JsonProperty("portfolio_title")]
-        [XmlElement("portfolio_title")]
         public string PortfolioTitle { get; set; }
     }
 }

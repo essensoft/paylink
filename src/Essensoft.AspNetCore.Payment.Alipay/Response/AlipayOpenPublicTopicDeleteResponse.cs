@@ -1,8 +1,9 @@
-namespace Essensoft.AspNetCore.Payment.Alipay.Response
+﻿namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
     /// <summary>
     /// AlipayOpenPublicTopicDeleteResponse.
     /// </summary>
     public class AlipayOpenPublicTopicDeleteResponse : AlipayResponse
-    {}
+    {
+    }
 }

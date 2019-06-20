@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 using Essensoft.AspNetCore.Payment.Alipay.Response;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
@@ -6,12 +6,12 @@ using Essensoft.AspNetCore.Payment.Alipay.Utility;
 namespace Essensoft.AspNetCore.Payment.Alipay.Request
 {
     /// <summary>
-    /// AOP API: alipay.open.mini.version.audit.apply
+    /// alipay.open.mini.version.audit.apply
     /// </summary>
     public class AlipayOpenMiniVersionAuditApplyRequest : IAlipayUploadRequest<AlipayOpenMiniVersionAuditApplyResponse>
     {
         /// <summary>
-        /// 小程序类目，格式为 第一个一级类目_第一个二级类目;第二个一级类目_第二个二级类目，详细类目可以参考https://docs.alipay.com/isv/10325，如果不填默认采用当前小程序应用类目
+        /// 小程序类目，格式为 第一个一级类目_第一个二级类目;第二个一级类目_第二个二级类目，详细类目可以参考https://docs.alipay.com/isv/10325，如果不填默认采用当前小程序应用类目。使用默认应用类目后不需要再次上传营业执照号、营业执照名、营业执照截图、营业执照有效期。
         /// </summary>
         public string AppCategoryIds { get; set; }
 
@@ -21,7 +21,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string AppDesc { get; set; }
 
         /// <summary>
-        /// 小程序应用英文名称，如果不填默认采用当前小程序应用英文名称
+        /// 小程序应用英文名称，如果不填默认采用当前小程序应用英文名称，3～30个字符
         /// </summary>
         public string AppEnglishName { get; set; }
 
@@ -36,7 +36,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string AppName { get; set; }
 
         /// <summary>
-        /// 小程序应用简介，一句话描述小程序功能，如果不填默认采用当前小程序应用简介
+        /// 小程序应用简介，一句话描述小程序功能，如果不填默认采用当前小程序应用简介，10~32个字符
         /// </summary>
         public string AppSlogan { get; set; }
 
@@ -46,7 +46,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string AppVersion { get; set; }
 
         /// <summary>
-        /// 第五张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息
+        /// 第五张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序第五张营业执照照片
         /// </summary>
         public FileItem FifthLicensePic { get; set; }
 
@@ -56,7 +56,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public FileItem FifthScreenShot { get; set; }
 
         /// <summary>
-        /// 第一张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息
+        /// 第一张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序第一张营业执照照片
         /// </summary>
         public FileItem FirstLicensePic { get; set; }
 
@@ -66,7 +66,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public FileItem FirstScreenShot { get; set; }
 
         /// <summary>
-        /// 第四张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息
+        /// 第四张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序第四张营业执照照片
         /// </summary>
         public FileItem FourthLicensePic { get; set; }
 
@@ -76,17 +76,17 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public FileItem FourthScreenShot { get; set; }
 
         /// <summary>
-        /// 营业执照名称，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息
+        /// 营业执照名称，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填类目采用当前小程序应用营业执照名称。
         /// </summary>
         public string LicenseName { get; set; }
 
         /// <summary>
-        /// 营业执照号，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息
+        /// 营业执照号，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序应用营业执照号。
         /// </summary>
         public string LicenseNo { get; set; }
 
         /// <summary>
-        /// 营业执照有效期，格式为yyyy-MM-dd，9999-12-31表示长期，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息
+        /// 营业执照有效期，格式为yyyy-MM-dd，9999-12-31表示长期，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序营业执照有效期
         /// </summary>
         public string LicenseValidDate { get; set; }
 
@@ -96,7 +96,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string Memo { get; set; }
 
         /// <summary>
-        /// 门头照图片，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息
+        /// 门头照图片，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序门头照图片
         /// </summary>
         public FileItem OutDoorPic { get; set; }
 
@@ -106,7 +106,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string RegionType { get; set; }
 
         /// <summary>
-        /// 第二张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息
+        /// 第二张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序第二张营业执照照片
         /// </summary>
         public FileItem SecondLicensePic { get; set; }
 
@@ -131,7 +131,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public List<RegionInfo> ServiceRegionInfo { get; set; }
 
         /// <summary>
-        /// 第三张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息
+        /// 第三张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序第三张营业执照照片
         /// </summary>
         public FileItem ThirdLicensePic { get; set; }
 
@@ -141,37 +141,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public FileItem ThirdScreenShot { get; set; }
 
         /// <summary>
-        /// 小程序版本描述
+        /// 小程序版本描述，30-500个字符
         /// </summary>
         public string VersionDesc { get; set; }
 
-        #region IAlipayUploadRequest Members
-
-        public IDictionary<string, FileItem> GetFileParameters()
-        {
-            IDictionary<string, FileItem> parameters = new Dictionary<string, FileItem>
-            {
-                { "app_logo", AppLogo },
-                { "fifth_license_pic", FifthLicensePic },
-                { "fifth_screen_shot", FifthScreenShot },
-                { "first_license_pic", FirstLicensePic },
-                { "first_screen_shot", FirstScreenShot },
-                { "fourth_license_pic", FourthLicensePic },
-                { "fourth_screen_shot", FourthScreenShot },
-                { "out_door_pic", OutDoorPic },
-                { "second_license_pic", SecondLicensePic },
-                { "second_screen_shot", SecondScreenShot },
-                { "third_license_pic", ThirdLicensePic },
-                { "third_screen_shot", ThirdScreenShot }
-            };
-            return parameters;
-        }
-
-        #endregion
-
         #region IAlipayRequest Members
-
-        private bool needEncrypt;
+        private bool needEncrypt = false;
         private string apiVersion = "1.0";
         private string terminalType;
         private string terminalInfo;
@@ -180,60 +155,74 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         private string returnUrl;
         private AlipayObject bizModel;
 
-        public void SetNeedEncrypt(bool needEncrypt){
-             this.needEncrypt=needEncrypt;
+        public void SetNeedEncrypt(bool needEncrypt)
+        {
+            this.needEncrypt = needEncrypt;
         }
 
-        public bool GetNeedEncrypt(){
+        public bool GetNeedEncrypt()
+        {
 
             return needEncrypt;
         }
 
-        public void SetNotifyUrl(string notifyUrl){
+        public void SetNotifyUrl(string notifyUrl)
+        {
             this.notifyUrl = notifyUrl;
         }
 
-        public string GetNotifyUrl(){
+        public string GetNotifyUrl()
+        {
             return notifyUrl;
         }
 
-        public void SetReturnUrl(string returnUrl){
+        public void SetReturnUrl(string returnUrl)
+        {
             this.returnUrl = returnUrl;
         }
 
-        public string GetReturnUrl(){
+        public string GetReturnUrl()
+        {
             return returnUrl;
         }
 
-        public void SetTerminalType(string terminalType){
-			this.terminalType=terminalType;
-		}
-
-        public string GetTerminalType(){
-    		return terminalType;
-    	}
-
-        public void SetTerminalInfo(string terminalInfo){
-    		this.terminalInfo=terminalInfo;
-    	}
-
-        public string GetTerminalInfo(){
-    		return terminalInfo;
-    	}
-
-        public void SetProdCode(string prodCode){
-            this.prodCode=prodCode;
+        public void SetTerminalType(string terminalType)
+        {
+            this.terminalType = terminalType;
         }
 
-        public string GetProdCode(){
+        public string GetTerminalType()
+        {
+            return terminalType;
+        }
+
+        public void SetTerminalInfo(string terminalInfo)
+        {
+            this.terminalInfo = terminalInfo;
+        }
+
+        public string GetTerminalInfo()
+        {
+            return terminalInfo;
+        }
+
+        public void SetProdCode(string prodCode)
+        {
+            this.prodCode = prodCode;
+        }
+
+        public string GetProdCode()
+        {
             return prodCode;
         }
 
-        public void SetApiVersion(string apiVersion){
-            this.apiVersion=apiVersion;
+        public void SetApiVersion(string apiVersion)
+        {
+            this.apiVersion = apiVersion;
         }
 
-        public string GetApiVersion(){
+        public string GetApiVersion()
+        {
             return apiVersion;
         }
 
@@ -273,6 +262,30 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public void SetBizModel(AlipayObject bizModel)
         {
             this.bizModel = bizModel;
+        }
+
+        #endregion
+
+        #region IAlipayUploadRequest Members
+
+        public IDictionary<string, FileItem> GetFileParameters()
+        {
+            IDictionary<string, FileItem> parameters = new Dictionary<string, FileItem>
+            {
+                { "app_logo", AppLogo },
+                { "fifth_license_pic", FifthLicensePic },
+                { "fifth_screen_shot", FifthScreenShot },
+                { "first_license_pic", FirstLicensePic },
+                { "first_screen_shot", FirstScreenShot },
+                { "fourth_license_pic", FourthLicensePic },
+                { "fourth_screen_shot", FourthScreenShot },
+                { "out_door_pic", OutDoorPic },
+                { "second_license_pic", SecondLicensePic },
+                { "second_screen_shot", SecondScreenShot },
+                { "third_license_pic", ThirdLicensePic },
+                { "third_screen_shot", ThirdScreenShot }
+            };
+            return parameters;
         }
 
         #endregion

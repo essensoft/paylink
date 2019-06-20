@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 人员管理场景的部门id
         /// </summary>
         [JsonProperty("dept_id")]
-        [XmlElement("dept_id")]
         public string DeptId { get; set; }
     }
 }

@@ -1,3 +1,4 @@
+﻿using System;
 using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Response;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
@@ -5,12 +6,12 @@ using Essensoft.AspNetCore.Payment.Alipay.Utility;
 namespace Essensoft.AspNetCore.Payment.Alipay.Request
 {
     /// <summary>
-    /// AOP API: alipay.open.agent.facetoface.sign
+    /// alipay.open.agent.facetoface.sign
     /// </summary>
     public class AlipayOpenAgentFacetofaceSignRequest : IAlipayUploadRequest<AlipayOpenAgentFacetofaceSignResponse>
     {
         /// <summary>
-        /// 代商户操作事务编号，通过alipay.open.isv.agent.create接口进行创建。
+        /// 代商户操作事务编号，通过alipay.open.agent.create接口进行创建。
         /// </summary>
         public string BatchNo { get; set; }
 
@@ -37,7 +38,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// <summary>
         /// 营业期限是否长期有效
         /// </summary>
-        public bool? LongTerm { get; set; }
+        public Nullable<bool> LongTerm { get; set; }
 
         /// <summary>
         /// 所属MCCCode，详情可参考  <a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.59bgD2&treeId=222&articleId=105364&docType=1#s1  ">商家经营类目</a> 中的“经营类目编码”
@@ -59,26 +60,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// </summary>
         public FileItem SpecialLicensePic { get; set; }
 
-        #region IAlipayUploadRequest Members
-
-        public IDictionary<string, FileItem> GetFileParameters()
-        {
-            IDictionary<string, FileItem> parameters = new Dictionary<string, FileItem>
-            {
-                { "business_license_auth_pic", BusinessLicenseAuthPic },
-                { "business_license_pic", BusinessLicensePic },
-                { "shop_scene_pic", ShopScenePic },
-                { "shop_sign_board_pic", ShopSignBoardPic },
-                { "special_license_pic", SpecialLicensePic }
-            };
-            return parameters;
-        }
-
-        #endregion
-
         #region IAlipayRequest Members
-
-        private bool needEncrypt;
+        private bool needEncrypt = false;
         private string apiVersion = "1.0";
         private string terminalType;
         private string terminalInfo;
@@ -87,60 +70,74 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         private string returnUrl;
         private AlipayObject bizModel;
 
-        public void SetNeedEncrypt(bool needEncrypt){
-             this.needEncrypt=needEncrypt;
+        public void SetNeedEncrypt(bool needEncrypt)
+        {
+            this.needEncrypt = needEncrypt;
         }
 
-        public bool GetNeedEncrypt(){
+        public bool GetNeedEncrypt()
+        {
 
             return needEncrypt;
         }
 
-        public void SetNotifyUrl(string notifyUrl){
+        public void SetNotifyUrl(string notifyUrl)
+        {
             this.notifyUrl = notifyUrl;
         }
 
-        public string GetNotifyUrl(){
+        public string GetNotifyUrl()
+        {
             return notifyUrl;
         }
 
-        public void SetReturnUrl(string returnUrl){
+        public void SetReturnUrl(string returnUrl)
+        {
             this.returnUrl = returnUrl;
         }
 
-        public string GetReturnUrl(){
+        public string GetReturnUrl()
+        {
             return returnUrl;
         }
 
-        public void SetTerminalType(string terminalType){
-			this.terminalType=terminalType;
-		}
-
-        public string GetTerminalType(){
-    		return terminalType;
-    	}
-
-        public void SetTerminalInfo(string terminalInfo){
-    		this.terminalInfo=terminalInfo;
-    	}
-
-        public string GetTerminalInfo(){
-    		return terminalInfo;
-    	}
-
-        public void SetProdCode(string prodCode){
-            this.prodCode=prodCode;
+        public void SetTerminalType(string terminalType)
+        {
+            this.terminalType = terminalType;
         }
 
-        public string GetProdCode(){
+        public string GetTerminalType()
+        {
+            return terminalType;
+        }
+
+        public void SetTerminalInfo(string terminalInfo)
+        {
+            this.terminalInfo = terminalInfo;
+        }
+
+        public string GetTerminalInfo()
+        {
+            return terminalInfo;
+        }
+
+        public void SetProdCode(string prodCode)
+        {
+            this.prodCode = prodCode;
+        }
+
+        public string GetProdCode()
+        {
             return prodCode;
         }
 
-        public void SetApiVersion(string apiVersion){
-            this.apiVersion=apiVersion;
+        public void SetApiVersion(string apiVersion)
+        {
+            this.apiVersion = apiVersion;
         }
 
-        public string GetApiVersion(){
+        public string GetApiVersion()
+        {
             return apiVersion;
         }
 
@@ -170,6 +167,23 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public void SetBizModel(AlipayObject bizModel)
         {
             this.bizModel = bizModel;
+        }
+
+        #endregion
+
+        #region IAlipayUploadRequest Members
+
+        public IDictionary<string, FileItem> GetFileParameters()
+        {
+            IDictionary<string, FileItem> parameters = new Dictionary<string, FileItem>
+            {
+                { "business_license_auth_pic", BusinessLicenseAuthPic },
+                { "business_license_pic", BusinessLicensePic },
+                { "shop_scene_pic", ShopScenePic },
+                { "shop_sign_board_pic", ShopSignBoardPic },
+                { "special_license_pic", SpecialLicensePic }
+            };
+            return parameters;
         }
 
         #endregion

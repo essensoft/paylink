@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 标签id, 只支持生活号自定义标签
         /// </summary>
         [JsonProperty("label_id")]
-        [XmlElement("label_id")]
         public string LabelId { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 网商内部代收付申请单编号，外部机构根据此编号查询申请状态。
         /// </summary>
         [JsonProperty("in_apply_no")]
-        [XmlElement("in_apply_no")]
         public string InApplyNo { get; set; }
     }
 }

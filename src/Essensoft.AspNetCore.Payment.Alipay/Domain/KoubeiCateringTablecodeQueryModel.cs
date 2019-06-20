@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 用户在isv界面通过扫一扫传入的url文本
         /// </summary>
         [JsonProperty("url_context")]
-        [XmlElement("url_context")]
         public string UrlContext { get; set; }
     }
 }

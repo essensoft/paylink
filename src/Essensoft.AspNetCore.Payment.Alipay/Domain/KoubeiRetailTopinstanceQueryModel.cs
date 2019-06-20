@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 券或者电子DM单（VOUCHER、DM）
         /// </summary>
         [JsonProperty("instance_type")]
-        [XmlElement("instance_type")]
         public string InstanceType { get; set; }
     }
 }

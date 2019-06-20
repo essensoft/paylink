@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +11,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 用户的集分宝余额
         /// </summary>
         [JsonProperty("point_amount")]
-        [XmlElement("point_amount")]
         public long PointAmount { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 内容id，通过调用koubei.marketing.campaign.retail.dm.create接口创建内容时返回的内容ID
         /// </summary>
         [JsonProperty("content_id")]
-        [XmlElement("content_id")]
         public string ContentId { get; set; }
     }
 }

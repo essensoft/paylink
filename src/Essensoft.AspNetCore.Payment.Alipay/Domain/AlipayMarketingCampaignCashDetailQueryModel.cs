@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 要查询的现金红包活动号
         /// </summary>
         [JsonProperty("crowd_no")]
-        [XmlElement("crowd_no")]
         public string CrowdNo { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,14 +13,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 当前文字颜色
         /// </summary>
         [JsonProperty("color")]
-        [XmlElement("color")]
         public string Color { get; set; }
 
         /// <summary>
         /// 模板中占位符的值
         /// </summary>
         [JsonProperty("value")]
-        [XmlElement("value")]
         public string Value { get; set; }
     }
 }

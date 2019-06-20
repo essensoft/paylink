@@ -1,6 +1,5 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -15,29 +14,24 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// crowd_code ＋ 客群匹配接口 ＋ 客群码，创建客群时可获取
         /// </summary>
         [JsonProperty("crowd_code")]
-        [XmlArray("crowd_code")]
-        [XmlArrayItem("string")]
         public List<string> CrowdCode { get; set; }
 
         /// <summary>
         /// scene_code ＋ 客群匹配接口 ＋ 客群归属的场景，在icrowd平台上可以看到
         /// </summary>
         [JsonProperty("scene_code")]
-        [XmlElement("scene_code")]
         public string SceneCode { get; set; }
 
         /// <summary>
         /// uid ＋ 客群匹配接口 ＋ 用户唯一ID，目前只支持支付宝账号，其他ID类型请联系接口负责人确认是否支持
         /// </summary>
         [JsonProperty("uid")]
-        [XmlElement("uid")]
         public string Uid { get; set; }
 
         /// <summary>
         /// uid_type ＋ 客群匹配接口 ＋ ID类型，目前只支持支付宝账号（USER_ID），其他ID类型请联系接口负责人确认是否支持
         /// </summary>
         [JsonProperty("uid_type")]
-        [XmlElement("uid_type")]
         public string UidType { get; set; }
     }
 }

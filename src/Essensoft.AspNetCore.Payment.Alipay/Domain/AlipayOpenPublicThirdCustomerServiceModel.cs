@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 服务窗商户在渠道商处对应的用户id
         /// </summary>
         [JsonProperty("channel_uid")]
-        [XmlElement("channel_uid")]
         public string ChannelUid { get; set; }
     }
 }

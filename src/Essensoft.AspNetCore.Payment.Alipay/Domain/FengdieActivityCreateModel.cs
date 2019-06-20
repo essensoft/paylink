@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 云凤蝶站点的 id
         /// </summary>
         [JsonProperty("activity_id")]
-        [XmlElement("activity_id")]
         public long ActivityId { get; set; }
     }
 }

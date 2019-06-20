@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using System.Xml.Serialization;
+﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 using Newtonsoft.Json;
 
@@ -14,8 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 标签列表
         /// </summary>
         [JsonProperty("labels")]
-        [XmlArray("labels")]
-        [XmlArrayItem("life_label")]
         public List<LifeLabel> Labels { get; set; }
     }
 }

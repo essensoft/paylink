@@ -1,5 +1,4 @@
-using System.Xml.Serialization;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +11,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 支付冻结金的地址
         /// </summary>
         [JsonProperty("pay_freeze_url")]
-        [XmlElement("pay_freeze_url")]
         public string PayFreezeUrl { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 人群组ID，人群组创建成功时返回的ID
         /// </summary>
         [JsonProperty("crowd_group_id")]
-        [XmlElement("crowd_group_id")]
         public string CrowdGroupId { get; set; }
     }
 }

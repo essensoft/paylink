@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 关系新鲜度，如V_CT_RL30D（最近30天有联系）详细描述见产品文档。
         /// </summary>
         [JsonProperty("recency")]
-        [XmlElement("recency")]
         public string Recency { get; set; }
     }
 }

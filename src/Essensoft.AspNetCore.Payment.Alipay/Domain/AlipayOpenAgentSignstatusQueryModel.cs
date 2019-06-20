@@ -1,6 +1,5 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -15,15 +14,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// isv要查询签约状态的商户账号，是支付宝账号pid（2088开头）
         /// </summary>
         [JsonProperty("pid")]
-        [XmlElement("pid")]
         public string Pid { get; set; }
 
         /// <summary>
         /// isv要查询商户签约状态的产品码，产品码是支付宝内部对产品的唯一标识
         /// </summary>
         [JsonProperty("product_codes")]
-        [XmlArray("product_codes")]
-        [XmlArrayItem("string")]
         public List<string> ProductCodes { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-using System;
-using System.Xml.Serialization;
+﻿using System;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -14,7 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 流程全局唯一ID
         /// </summary>
         [JsonProperty("puid")]
-        [XmlElement("puid")]
         public string Puid { get; set; }
     }
 }

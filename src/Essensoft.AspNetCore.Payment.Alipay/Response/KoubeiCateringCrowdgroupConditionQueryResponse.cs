@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using System.Xml.Serialization;
+﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 using Newtonsoft.Json;
 
@@ -14,8 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// isv创建的用户规则分组描述
         /// </summary>
         [JsonProperty("condition_list")]
-        [XmlArray("condition_list")]
-        [XmlArrayItem("user_crowd_conditions")]
         public List<UserCrowdConditions> ConditionList { get; set; }
     }
 }
