@@ -1,13 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
+using Essensoft.AspNetCore.Payment.Security;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Utility
 {
-    /// <summary>
-    /// Alipay «©√˚¿‡°£
-    /// </summary>
     public class AlipaySignature
     {
         public static readonly byte[] AES_IV = InitIv(16);
@@ -32,24 +29,33 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             return sb.Remove(sb.Length - 1, 1).ToString();
         }
 
-        public static string RSASignContent(string data, RSAParameters parameters, string signType)
+        public static string RSASignContent(string data, string privateKey, string signType)
         {
-            using (var rsa = RSA.Create())
+            var key = RSAUtilities.GetRSAParametersFormRsaPrivateKey(privateKey);
+            switch (signType)
             {
-                rsa.ImportParameters(parameters);
-                var type = "RSA2" == signType ? HashAlgorithmName.SHA256 : HashAlgorithmName.SHA1;
-                return Convert.ToBase64String(rsa.SignData(Encoding.UTF8.GetBytes(data), type, RSASignaturePadding.Pkcs1));
+                case "RSA2":
+                    return SHA256WithRSA.Sign(data, key);
+                default:
+                    return SHA1WithRSA.Sign(data, key);
             }
         }
 
-        public static bool RSACheckContent(string data, string sign, RSAParameters parameters, string signType)
+        public static bool RSACheckContent(string data, string sign, string publicKey, string signType)
         {
-            using (var rsa = RSA.Create())
+            var key = RSAUtilities.GetRSAParametersFormPublicKey(publicKey);
+            switch (signType)
             {
-                var type = "RSA2" == signType ? HashAlgorithmName.SHA256 : HashAlgorithmName.SHA1;
-                rsa.ImportParameters(parameters);
-                return rsa.VerifyData(Encoding.UTF8.GetBytes(data), Convert.FromBase64String(sign), type, RSASignaturePadding.Pkcs1);
+                case "RSA2":
+                    return SHA256WithRSA.Verify(data, sign, key);
+                default:
+                    return SHA1WithRSA.Verify(data, sign, key);
             }
+        }
+
+        public static string AESEncrypt(string data, string encyptKey)
+        {
+            return AES.Encrypt(data, encyptKey, AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
         }
 
         private static byte[] InitIv(int blockSize)

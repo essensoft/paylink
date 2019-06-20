@@ -162,7 +162,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
             if (rsp != null)
             {
-                rsp.Body = body;
+                rsp.ResponseBody = body;
             }
 
             return rsp;

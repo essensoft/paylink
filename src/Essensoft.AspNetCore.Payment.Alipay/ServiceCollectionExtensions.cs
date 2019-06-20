@@ -15,8 +15,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             this IServiceCollection services,
             Action<AlipayOptions> setupAction)
         {
-            services.AddScoped<IAlipayClient, AlipayClient>();
-            services.AddScoped<IAlipayNotifyClient, AlipayNotifyClient>();
+            services.AddHttpClient(nameof(AlipayClient));
+
+            services.AddSingleton<IAlipayClient, AlipayClient>();
+            services.AddSingleton<IAlipayNotifyClient, AlipayNotifyClient>();
+
             if (setupAction != null)
             {
                 services.Configure(setupAction);
