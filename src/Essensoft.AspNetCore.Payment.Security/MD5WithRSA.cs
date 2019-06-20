@@ -9,6 +9,16 @@ namespace Essensoft.AspNetCore.Payment.Security
     {
         public static string SignData(string data, ICipherParameters key)
         {
+            if (string.IsNullOrEmpty(data))
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             var signer = SignerUtilities.GetSigner("MD5WithRSA");
             signer.Init(true, key);
             var bytes = Encoding.UTF8.GetBytes(data);
@@ -18,6 +28,21 @@ namespace Essensoft.AspNetCore.Payment.Security
 
         public static bool VerifyData(string data, string sign, ICipherParameters key)
         {
+            if (string.IsNullOrEmpty(data))
+            {
+                throw new ArgumentNullException(nameof(data));
+            }
+
+            if (string.IsNullOrEmpty(sign))
+            {
+                throw new ArgumentNullException(nameof(sign));
+            }
+
+            if (key == null)
+            {
+                throw new ArgumentNullException(nameof(key));
+            }
+
             var verifier = SignerUtilities.GetSigner("MD5WithRSA");
             verifier.Init(false, key);
             var bytes = Encoding.UTF8.GetBytes(data);
