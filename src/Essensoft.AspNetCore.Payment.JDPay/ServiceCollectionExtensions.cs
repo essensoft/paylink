@@ -15,8 +15,11 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             this IServiceCollection services,
             Action<JDPayOptions> setupAction)
         {
-            services.AddScoped<IJDPayClient, JDPayClient>();
-            services.AddScoped<IJDPayNotifyClient, JDPayNotifyClient>();
+            services.AddHttpClient(nameof(JDPayClient));
+
+            services.AddSingleton<IJDPayClient, JDPayClient>();
+            services.AddSingleton<IJDPayNotifyClient, JDPayNotifyClient>();
+
             if (setupAction != null)
             {
                 services.Configure(setupAction);

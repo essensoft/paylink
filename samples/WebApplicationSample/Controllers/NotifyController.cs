@@ -318,10 +318,12 @@ namespace WebApplicationSample.Controllers
     public class JDPayNotifyController : Controller
     {
         private readonly IJDPayNotifyClient _client;
+        private readonly IOptions<JDPayOptions> _optionsAccessor;
 
-        public JDPayNotifyController(IJDPayNotifyClient client)
+        public JDPayNotifyController(IJDPayNotifyClient client, IOptions<JDPayOptions> optionsAccessor)
         {
             _client = client;
+            _optionsAccessor = optionsAccessor;
         }
 
         [Route("async")]
@@ -330,7 +332,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<JDPayAsyncNotify>(Request);
+                var notify = await _client.ExecuteAsync<JDPayAsyncNotify>(Request, _optionsAccessor.Value);
                 Console.WriteLine("TradeNum: " + notify.TradeNum + " tradeType :" + notify.TradeType);// notify.TradeType 0-消费 1-退款
                 return JDPayNotifyResult.Success;
             }
@@ -346,7 +348,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<JDPayDefrayPayNotify>(Request);
+                var notify = await _client.ExecuteAsync<JDPayDefrayPayNotify>(Request, _optionsAccessor.Value);
                 Console.WriteLine("trade_no: " + notify.TradeNo + " trade_amount :" + notify.TradeAmount);
                 return JDPayNotifyResult.Success;
             }

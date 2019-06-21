@@ -8,8 +8,6 @@ using Essensoft.AspNetCore.Payment.JDPay.Parser;
 using Essensoft.AspNetCore.Payment.JDPay.Request;
 using Essensoft.AspNetCore.Payment.JDPay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.JDPay
@@ -19,44 +17,30 @@ namespace Essensoft.AspNetCore.Payment.JDPay
     /// </summary>
     public class JDPayClient : IJDPayClient
     {
-        private readonly ILogger _logger;
-        private readonly IHttpClientFactory _clientFactory;
-        private readonly IOptionsSnapshot<JDPayOptions> _optionsSnapshotAccessor;
+        private readonly IHttpClientFactory _httpClientFactory;
 
         #region JDPayClient Constructors
 
         public JDPayClient(
-            ILogger<JDPayClient> logger,
-            IHttpClientFactory clientFactory,
-            IOptionsSnapshot<JDPayOptions> optionsAccessor)
+            IHttpClientFactory httpClientFactory)
         {
-            _logger = logger;
-            _clientFactory = clientFactory;
-            _optionsSnapshotAccessor = optionsAccessor;
+            _httpClientFactory = httpClientFactory;
         }
 
         #endregion
 
         #region IJDPayClient Members
 
-        public async Task<T> ExecuteAsync<T>(IJDPayRequest<T> request) where T : JDPayResponse
+        public async Task<T> ExecuteAsync<T>(IJDPayRequest<T> request, JDPayOptions options) where T : JDPayResponse
         {
-            return await ExecuteAsync(request, null);
-        }
-
-        public async Task<T> ExecuteAsync<T>(IJDPayRequest<T> request, string optionsName) where T : JDPayResponse
-        {
-            var options = _optionsSnapshotAccessor.Get(optionsName);
             // 字典排序
             var sortedTxtParams = new JDPayDictionary(request.GetParameters());
 
             var content = BuildEncryptXml(request, sortedTxtParams, options);
-            _logger.Log(options.LogLevel, "Request:{content}", content);
 
-            using (var client = _clientFactory.CreateClient())
+            using (var client = _httpClientFactory.CreateClient(nameof(JDPayClient)))
             {
                 var body = await client.DoPostAsync(request.GetRequestUrl(), content);
-                _logger.Log(options.LogLevel, "Response:{content}", body);
 
                 var parser = new JDPayXmlParser<T>();
                 var rsp = parser.Parse(JDPayUtility.FotmatXmlString(body));
@@ -65,7 +49,6 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                     var encrypt = rsp.Encrypt;
                     var base64EncryptStr = Encoding.UTF8.GetString(Convert.FromBase64String(encrypt));
                     var reqBody = JDPaySecurity.DecryptECB(base64EncryptStr, options.DesKeyBase64);
-                    _logger.Log(options.LogLevel, "Encrypt Content:{body}", reqBody);
 
                     var reqBodyDoc = new XmlDocument();
                     reqBodyDoc.LoadXml(reqBody);
@@ -102,14 +85,8 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         #region IJDPayClient Members
 
-        public Task<T> PageExecuteAsync<T>(IJDPayRequest<T> request) where T : JDPayResponse
+        public Task<T> PageExecuteAsync<T>(IJDPayRequest<T> request, JDPayOptions options) where T : JDPayResponse
         {
-            return PageExecuteAsync(request, null);
-        }
-
-        public Task<T> PageExecuteAsync<T>(IJDPayRequest<T> request, string optionsName) where T : JDPayResponse
-        {
-            var options = _optionsSnapshotAccessor.Get(optionsName);
             // 字典排序
             var sortedTxtParams = new JDPayDictionary(request.GetParameters());
             var encyptParams = BuildEncryptDic(request, sortedTxtParams, options);
@@ -124,14 +101,8 @@ namespace Essensoft.AspNetCore.Payment.JDPay
 
         #region IJDPayClient Members
 
-        public async Task<T> ExecuteAsync<T>(IJDPayNPP10Request<T> request) where T : JDPayResponse
+        public async Task<T> ExecuteAsync<T>(IJDPayNPP10Request<T> request, JDPayOptions options) where T : JDPayResponse
         {
-            return await ExecuteAsync(request, null);
-        }
-
-        public async Task<T> ExecuteAsync<T>(IJDPayNPP10Request<T> request, string optionsName) where T : JDPayResponse
-        {
-            var options = _optionsSnapshotAccessor.Get(optionsName);
             var sortedTxtParams = new JDPayDictionary(request.GetParameters())
             {
                 { JDPayContants.CUSTOMER_NO, options.CustomerNo },
@@ -148,12 +119,10 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             var encryptDic = JDPaySecurity.EncryptData(options.PrivateCret, options.Password, options.PublicCert, sortedTxtParams, options.SingKey, options.EncryptType, isEncrypt);
 
             var content = JDPayUtility.BuildQuery(encryptDic);
-            _logger.Log(options.LogLevel, "Request:{content}", content);
 
-            using (var client = _clientFactory.CreateClient())
+            using (var client = _httpClientFactory.CreateClient(nameof(JDPayClient)))
             {
                 var body = await client.DoPostAsync(request.GetRequestUrl(), content, "application/x-www-form-urlencoded");
-                _logger.Log(options.LogLevel, "Response:{content}", body);
 
                 // 验签
                 var dictionary = JsonConvert.DeserializeObject<JDPayDictionary>(body);

@@ -1,6 +1,5 @@
 ﻿using System;
 using Essensoft.AspNetCore.Payment.Security;
-using Microsoft.Extensions.Logging;
 using Org.BouncyCastle.Crypto;
 
 namespace Essensoft.AspNetCore.Payment.JDPay
@@ -105,10 +104,5 @@ namespace Essensoft.AspNetCore.Payment.JDPay
         /// 京东代付 签名类型 SHA-256
         /// </summary>
         public string SignType { get; set; } = "SHA-256";
-
-        /// <summary>
-        /// 日志等级
-        /// </summary>
-        public LogLevel LogLevel { get; set; } = LogLevel.Information;
     }
 }
