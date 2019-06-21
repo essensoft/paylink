@@ -1,26 +1,16 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.UnionPay.Parser;
 using Essensoft.AspNetCore.Payment.UnionPay.Utility;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay
 {
     public class UnionPayNotifyClient : IUnionPayNotifyClient
     {
-        private readonly ILogger _logger;
-        private readonly IOptionsSnapshot<UnionPayOptions> _optionsSnapshotAccessor;
-
         #region UnionPayNotifyClient Constructors
 
-        public UnionPayNotifyClient(
-            ILogger<UnionPayNotifyClient> logger,
-            IOptionsSnapshot<UnionPayOptions> optionsAccessor)
+        public UnionPayNotifyClient()
         {
-            _logger = logger;
-            _optionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
@@ -32,14 +22,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             return await ExecuteAsync<T>(request, null);
         }
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : UnionPayNotify
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, UnionPayOptions options) where T : UnionPayNotify
         {
-            var options = _optionsSnapshotAccessor.Get(optionsName);
             var parameters = await GetParametersAsync(request);
-
-            var query = UnionPayUtility.BuildQuery(parameters);
-            _logger.Log(options.LogLevel, "Request:{query}", query);
-
             var parser = new UnionPayDictionaryParser<T>();
             var rsp = parser.Parse(parameters);
             CheckNotifySign(parameters, options);

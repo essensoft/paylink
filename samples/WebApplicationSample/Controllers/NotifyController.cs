@@ -393,10 +393,12 @@ namespace WebApplicationSample.Controllers
     public class UnionPayNotifyController : Controller
     {
         private readonly IUnionPayNotifyClient _client;
+        private readonly IOptions<UnionPayOptions> _optionsAccessor;
 
-        public UnionPayNotifyController(IUnionPayNotifyClient client)
+        public UnionPayNotifyController(IUnionPayNotifyClient client, IOptions<UnionPayOptions> optionsAccessor)
         {
             _client = client;
+            _optionsAccessor = optionsAccessor;
         }
 
         /// <summary>
@@ -409,7 +411,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<UnionPayGatewayPayFrontConsumeNotify>(Request);
+                var notify = await _client.ExecuteAsync<UnionPayGatewayPayFrontConsumeNotify>(Request, _optionsAccessor.Value);
                 Console.WriteLine("OrderId: " + notify.OrderId + " respCode :" + notify.RespCode);
                 return UnionPayNotifyResult.Success;
             }

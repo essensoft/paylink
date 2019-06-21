@@ -4,6 +4,7 @@ using Essensoft.AspNetCore.Payment.UnionPay;
 using Essensoft.AspNetCore.Payment.UnionPay.Notify;
 using Essensoft.AspNetCore.Payment.UnionPay.Request;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using WebApplicationSample.Models;
 
 namespace WebApplicationSample.Controllers
@@ -12,11 +13,13 @@ namespace WebApplicationSample.Controllers
     {
         private readonly IUnionPayClient _client;
         private readonly IUnionPayNotifyClient _notifyClient;
+        private readonly IOptions<UnionPayOptions> _optionsAccessor;
 
-        public UnionPayController(IUnionPayClient client, IUnionPayNotifyClient notifyClient)
+        public UnionPayController(IUnionPayClient client, IUnionPayNotifyClient notifyClient, IOptions<UnionPayOptions> optionsAccessor)
         {
             _client = client;
             _notifyClient = notifyClient;
+            _optionsAccessor = optionsAccessor;
         }
 
         /// <summary>
@@ -60,7 +63,7 @@ namespace WebApplicationSample.Controllers
                 FrontUrl = viewModel.FrontUrl,
                 BackUrl = viewModel.BackUrl
             };
-            var response = await _client.PageExecuteAsync(request);
+            var response = await _client.PageExecuteAsync(request, _optionsAccessor.Value);
             return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
@@ -73,7 +76,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _notifyClient.ExecuteAsync<UnionPayGatewayPayFrontConsumeReturn>(Request);
+                var notify = await _notifyClient.ExecuteAsync<UnionPayGatewayPayFrontConsumeReturn>(Request, _optionsAccessor.Value);
                 ViewData["response"] = "支付成功";
                 return View();
             }
