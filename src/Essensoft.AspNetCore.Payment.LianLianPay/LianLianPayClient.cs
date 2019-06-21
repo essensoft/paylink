@@ -7,12 +7,11 @@ using Essensoft.AspNetCore.Payment.LianLianPay.Request;
 using Essensoft.AspNetCore.Payment.LianLianPay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
-    /// <summary>
+       /// <summary>
     /// LianLianPay 客户端。
     /// </summary>
     public class LianLianPayClient : ILianLianPayClient
@@ -23,34 +22,22 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         private const string TIME_STAMP = "time_stamp";
         private const string SIGN = "sign";
 
-        private readonly ILogger _logger;
-        private readonly IHttpClientFactory _clientFactory;
-        private readonly IOptionsSnapshot<LianLianPayOptions> _optionsSnapshotAccessor;
+        private readonly IHttpClientFactory _httpClientFactory;
 
         #region LianLianPayClient Constructors
 
         public LianLianPayClient(
-            ILogger<LianLianPayClient> logger,
-            IHttpClientFactory clientFactory,
-            IOptionsSnapshot<LianLianPayOptions> optionsAccessor)
+            IHttpClientFactory httpClientFactory)
         {
-            _logger = logger;
-            _clientFactory = clientFactory;
-            _optionsSnapshotAccessor = optionsAccessor;
+            _httpClientFactory = httpClientFactory;
         }
 
         #endregion
 
         #region ILianLianPayClient Members
 
-        public async Task<T> ExecuteAsync<T>(ILianLianPayRequest<T> request) where T : LianLianPayResponse
+        public async Task<T> ExecuteAsync<T>(ILianLianPayRequest<T> request, LianLianPayOptions options) where T : LianLianPayResponse
         {
-            return await ExecuteAsync(request, null);
-        }
-
-        public async Task<T> ExecuteAsync<T>(ILianLianPayRequest<T> request, string optionsName) where T : LianLianPayResponse
-        {
-            var options = _optionsSnapshotAccessor.Get(optionsName);
             var txtParams = new LianLianPayDictionary(request.GetParameters())
             {
                 { OID_PARTNER, options.OidPartner },
@@ -79,13 +66,9 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
                 content = Serialize(txtParams);
             }
 
-            _logger.Log(options.LogLevel, "Request:{content}", content);
-
-            using (var client = _clientFactory.CreateClient())
+            using (var client = _httpClientFactory.CreateClient(nameof(LianLianPay)))
             {
                 var body = await client.DoPostAsync(request.GetRequestUrl(), content);
-                _logger.Log(options.LogLevel, "Response:{body}", body);
-
                 var parser = new LianLianPayJsonParser<T>();
                 var rsp = parser.Parse(body);
 

@@ -367,10 +367,12 @@ namespace WebApplicationSample.Controllers
     public class LianLianPayNotifyController : Controller
     {
         private readonly ILianLianPayNotifyClient _client;
+        private readonly IOptions<LianLianPayOptions> _optionsAccessor;
 
-        public LianLianPayNotifyController(ILianLianPayNotifyClient client)
+        public LianLianPayNotifyController(ILianLianPayNotifyClient client, IOptions<LianLianPayOptions> optionsAccessor)
         {
             _client = client;
+            _optionsAccessor = optionsAccessor;
         }
 
         [Route("receivemoney")]
@@ -379,7 +381,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<LianLianPayReceiveMoneyNotify>(Request);
+                var notify = await _client.ExecuteAsync<LianLianPayReceiveMoneyNotify>(Request, _optionsAccessor.Value);
                 Console.WriteLine("NoOrder: " + notify.NoOrder);
                 return LianLianPayNotifyResult.Success;
             }
@@ -395,7 +397,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<LianLianPayRefundNotify>(Request);
+                var notify = await _client.ExecuteAsync<LianLianPayRefundNotify>(Request, _optionsAccessor.Value);
                 Console.WriteLine("NoRefund: " + notify.NoRefund);
                 return LianLianPayNotifyResult.Success;
             }
