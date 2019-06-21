@@ -1,4 +1,4 @@
-![Payment](https://raw.githubusercontent.com/Essensoft/Payment/master/images/Payment-Title.png)
+![Payment](https://raw.githubusercontent.com/essensoft/media/master/images/github/payment.png)
 
 ## 简介
 
@@ -59,17 +59,12 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 
 ## 开发环境
 * Windows 10
-* VS2017 15.9.3
-* .NET Core 2.2、.NET Core 2.1
+* VS2019
 
 ## 运行环境
-* .NET Core 2.1+
+* .NET Core 2.2、.NET Core 2.1
 
 ## 使用方式
-
-* [配置参数(支持多商户)](docs/Configuration.md)
-
-* [配置HttpClient(支持API证书)](docs/Using-HttpClient.md)
 
 * [查看示例项目](samples/WebApplicationSample)
 
@@ -77,7 +72,7 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 
 ## 打赏
 
-![Payment](https://raw.githubusercontent.com/Essensoft/Payment/master/images/QrCode.png)
+![Payment](https://raw.githubusercontent.com/essensoft/media/master/images/github/qrcode.png)
 
 ---
 
