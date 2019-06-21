@@ -1,5 +1,6 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.QPay.Response;
+using Essensoft.AspNetCore.Payment.QPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Request
 {
@@ -8,11 +9,6 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
     /// </summary>
     public class QPayUnifiedOrderRequest : IQPayRequest<QPayUnifiedOrderResponse>
     {
-        /// <summary>
-        /// 应用ID
-        /// </summary>
-        public string AppId { get; set; }
-
         /// <summary>
         /// 子商户应用ID
         /// </summary>
@@ -51,7 +47,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
         /// <summary>
         /// 终端IP
         /// </summary>
-        public string SpbillCreateIp { get; set; }
+        public string SpBillCreateIp { get; set; }
 
         /// <summary>
         /// 交易起始时间
@@ -93,6 +89,11 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
         /// </summary>
         public string DeviceInfo { get; set; }
 
+        /// <summary>
+        /// 小程序跳转地址和参数
+        /// </summary>
+        public string MiniAppParam { get; set; }
+
         #region IQPayRequest Members
 
         public string GetRequestUrl()
@@ -104,7 +105,6 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
         {
             var parameters = new QPayDictionary
             {
-                { "appid", AppId },
                 { "sub_appid", SubAppId },
                 { "sub_mch_id", SubMchId },
                 { "body", Body },
@@ -112,7 +112,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
                 { "out_trade_no", OutTradeNo },
                 { "fee_type", FeeType },
                 { "total_fee", TotalFee },
-                { "spbill_create_ip", SpbillCreateIp },
+                { "spbill_create_ip", SpBillCreateIp },
                 { "time_start", TimeStart },
                 { "time_expire", TimeExpire },
                 { "limit_pay", LimitPay },
@@ -120,12 +120,22 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
                 { "promotion_tag", PromotionTag },
                 { "trade_type", TradeType },
                 { "notify_url", NotifyUrl },
-                { "device_info", DeviceInfo }
+                { "device_info", DeviceInfo },
+                { "mini_app_param",  MiniAppParam },
             };
             return parameters;
         }
 
-        public bool IsCheckResponseSign()
+        public void PrimaryHandler(QPayOptions options, QPayDictionary sortedTxtParams)
+        {
+            sortedTxtParams.Add(QPayConsts.NONCE_STR, QPayUtility.GenerateNonceStr());
+            sortedTxtParams.Add(QPayConsts.APPID, options.AppId);
+            sortedTxtParams.Add(QPayConsts.MCH_ID, options.MchId);
+
+            sortedTxtParams.Add(QPayConsts.SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
+        }
+
+        public bool GetNeedCheckSign()
         {
             return true;
         }

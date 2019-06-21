@@ -5,43 +5,34 @@ using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.QPay.Parser;
 using Essensoft.AspNetCore.Payment.QPay.Utility;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Essensoft.AspNetCore.Payment.QPay
 {
-    /// <summary>
-    /// QPay 通知解析客户端。
-    /// </summary>
     public class QPayNotifyClient : IQPayNotifyClient
     {
-        private readonly ILogger _logger;
-        private readonly IOptionsSnapshot<QPayOptions> _optionsSnapshotAccessor;
-
         #region QPayNotifyClient Constructors
 
-        public QPayNotifyClient(
-            ILogger<QPayNotifyClient> logger,
-            IOptionsSnapshot<QPayOptions> optionsAccessor)
+        public QPayNotifyClient()
         {
-            _logger = logger;
-            _optionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
 
         #region IQPayNotifyClient Members
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : QPayNotify
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, QPayOptions options) where T : QPayNotify
         {
-            return await ExecuteAsync<T>(request, null);
-        }
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : QPayNotify
-        {
-            var options = _optionsSnapshotAccessor.Get(optionsName);
+            if (string.IsNullOrEmpty(options.Key))
+            {
+                throw new ArgumentNullException(nameof(options.Key));
+            }
+
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
-            _logger.Log(options.LogLevel, "Request:{body}", body);
 
             var parser = new QPayXmlParser<T>();
             var rsp = parser.Parse(body);
@@ -55,22 +46,22 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         private void CheckNotifySign(QPayNotify response, QPayOptions options)
         {
-            if (string.IsNullOrEmpty(response.Body))
+            if (string.IsNullOrEmpty(response.ResponseBody))
             {
                 throw new QPayException("sign check fail: Body is Empty!");
             }
 
-            if (response.Parameters.Count == 0)
+            if (response.ResponseParameters.Count == 0)
             {
                 throw new QPayException("sign check fail: Parameters is Empty!");
             }
 
-            if (!response.Parameters.TryGetValue("sign", out var sign))
+            if (!response.ResponseParameters.TryGetValue("sign", out var sign))
             {
                 throw new QPayException("sign check fail: sign is Empty!");
             }
 
-            var cal_sign = QPaySignature.SignWithKey(response.Parameters, options.Key);
+            var cal_sign = QPaySignature.SignWithKey(response.ResponseParameters, options.Key);
             if (cal_sign != sign)
             {
                 throw new QPayException("sign check fail: check Sign and Data Fail!");

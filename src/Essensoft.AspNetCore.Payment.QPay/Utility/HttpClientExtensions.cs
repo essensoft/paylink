@@ -1,12 +1,10 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Utility
 {
-    /// <summary>
-    /// HTTP客户端扩展。
-    /// </summary>
     public static class HttpClientExtensions
     {
         /// <summary>
@@ -14,15 +12,15 @@ namespace Essensoft.AspNetCore.Payment.QPay.Utility
         /// </summary>
         /// <param name="client">HttpClient</param>
         /// <param name="url">请求地址</param>
-        /// <param name="content">请求内容</param>
-        /// <returns>HTTP响应内容</returns>
-        public static async Task<string> DoPostAsync(this HttpClient client, string url, string content)
+        /// <param name="textParams">请求参数</param>
+        /// <returns>响应内容</returns>
+        public static async Task<string> PostAsync(this HttpClient client, string url, IDictionary<string, string> textParams)
         {
-            using (var requestContent = new StringContent(content, Encoding.UTF8, "application/xml"))
-            using (var response = await client.PostAsync(url, requestContent))
-            using (var responseContent = response.Content)
+            using (var reqContent = new StringContent(QPayUtility.BuildContent(textParams), Encoding.UTF8, "application/xml"))
+            using (var resp = await client.PostAsync(url, reqContent))
+            using (var respContent = resp.Content)
             {
-                return await responseContent.ReadAsStringAsync();
+                return await respContent.ReadAsStringAsync();
             }
         }
     }

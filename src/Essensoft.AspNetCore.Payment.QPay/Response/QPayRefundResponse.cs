@@ -105,7 +105,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Response
         /// 商户退款单号
         /// </summary>
         [XmlElement("out_refund_no")]
-        public int OutRefundNo { get; set; }
+        public string OutRefundNo { get; set; }
 
         /// <summary>
         /// QQ钱包退款单号

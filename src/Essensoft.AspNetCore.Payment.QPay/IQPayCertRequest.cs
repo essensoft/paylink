@@ -2,7 +2,7 @@
 
 namespace Essensoft.AspNetCore.Payment.QPay
 {
-    public interface IQPayRequest<T> where T : QPayResponse
+    public interface IQPayCertRequest<T> where T : QPayResponse
     {
         /// <summary>
         /// 获取API接口链接

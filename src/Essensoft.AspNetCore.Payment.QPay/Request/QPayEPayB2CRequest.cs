@@ -1,22 +1,18 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.QPay.Response;
+using Essensoft.AspNetCore.Payment.QPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Request
 {
     /// <summary>
     /// 企业付款 - 企业付款到余额
     /// </summary>
-    public class QPayEPayB2CRequest : IQPayCertificateRequest<QPayEPayB2CResponse>
+    public class QPayEPayB2CRequest : IQPayCertRequest<QPayEPayB2CResponse>
     {
         /// <summary>
         /// 字符集
         /// </summary>
         public string InputCharset { get; set; } = "UTF-8";
-
-        /// <summary>
-        /// 应用ID
-        /// </summary>
-        public string AppId { get; set; }
 
         /// <summary>
         /// 用户opeind
@@ -41,7 +37,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
         /// <summary>
         /// 付款金额
         /// </summary>
-        public string TotalFee { get; set; }
+        public int TotalFee { get; set; }
 
         /// <summary>
         /// 付款备注
@@ -76,7 +72,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
         /// <summary>
         /// IP地址
         /// </summary>
-        public string SpbillCreateIp { get; set; }
+        public string SpBillCreateIp { get; set; }
 
         /// <summary>
         /// 用户到账结果通知
@@ -95,7 +91,6 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
             var parameters = new QPayDictionary
             {
                 { "input_charset", InputCharset },
-                { "appid", AppId },
                 { "openid", OpenId },
                 { "uin", Uin },
                 { "out_trade_no", OutTradeNo },
@@ -107,13 +102,22 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
                 { "check_real_name", CheckRealName },
                 { "op_user_id", OpUserId },
                 { "op_user_passwd", OpUserPasswd },
-                { "spbill_create_ip", SpbillCreateIp },
+                { "spbill_create_ip", SpBillCreateIp },
                 { "notify_url", NotifyUrl },
             };
             return parameters;
         }
 
-        public bool IsCheckResponseSign()
+        public void PrimaryHandler(QPayOptions options, QPayDictionary sortedTxtParams)
+        {
+            sortedTxtParams.Add(QPayConsts.NONCE_STR, QPayUtility.GenerateNonceStr());
+            sortedTxtParams.Add(QPayConsts.APPID, options.AppId);
+            sortedTxtParams.Add(QPayConsts.MCH_ID, options.MchId);
+
+            sortedTxtParams.Add(QPayConsts.SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
+        }
+
+        public bool GetNeedCheckSign()
         {
             return false;
         }

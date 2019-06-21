@@ -3,6 +3,7 @@ using Essensoft.AspNetCore.Payment.QPay;
 using Essensoft.AspNetCore.Payment.QPay.Request;
 using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using WebApplicationSample.Models;
 
 namespace WebApplicationSample.Controllers
@@ -10,10 +11,12 @@ namespace WebApplicationSample.Controllers
     public class QPayController : Controller
     {
         private readonly IQPayClient _client;
+        private readonly IOptions<QPayOptions> _optionsAccessor;
 
-        public QPayController(IQPayClient client)
+        public QPayController(IQPayClient client, IOptions<QPayOptions> optionsAccessor)
         {
             _client = client;
+            _optionsAccessor = optionsAccessor;
         }
 
         /// <summary>
@@ -49,14 +52,14 @@ namespace WebApplicationSample.Controllers
                 Body = viewModel.Body,
                 FeeType = viewModel.FeeType,
                 TotalFee = viewModel.TotalFee,
-                SpbillCreateIp = viewModel.SpbillCreateIp,
+                SpBillCreateIp = viewModel.SpBillCreateIp,
                 DeviceInfo = viewModel.DeviceInfo,
                 AuthCode = viewModel.AuthCode,
                 TradeType = viewModel.TradeType,
                 NotifyUrl = viewModel.NotifyUrl
             };
-            var response = await _client.ExecuteAsync(request);
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -84,13 +87,13 @@ namespace WebApplicationSample.Controllers
                 Body = viewModel.Body,
                 FeeType = viewModel.FeeType,
                 TotalFee = viewModel.TotalFee,
-                SpbillCreateIp = viewModel.SpbillCreateIp,
+                SpBillCreateIp = viewModel.SpBillCreateIp,
                 TradeType = viewModel.TradeType,
                 NotifyUrl = viewModel.NotifyUrl
             };
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
             ViewData["qrcode"] = response.CodeUrl;
-            ViewData["response"] = response.Body;
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -118,12 +121,12 @@ namespace WebApplicationSample.Controllers
                 Body = viewModel.Body,
                 FeeType = viewModel.FeeType,
                 TotalFee = viewModel.TotalFee,
-                SpbillCreateIp = viewModel.SpbillCreateIp,
+                SpBillCreateIp = viewModel.SpBillCreateIp,
                 TradeType = viewModel.TradeType,
                 NotifyUrl = viewModel.NotifyUrl
             };
-            var response = await _client.ExecuteAsync(request);
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -151,12 +154,12 @@ namespace WebApplicationSample.Controllers
                 Body = viewModel.Body,
                 FeeType = viewModel.FeeType,
                 TotalFee = viewModel.TotalFee,
-                SpbillCreateIp = viewModel.SpbillCreateIp,
+                SpBillCreateIp = viewModel.SpBillCreateIp,
                 TradeType = viewModel.TradeType,
                 NotifyUrl = viewModel.NotifyUrl
             };
-            var response = await _client.ExecuteAsync(request);
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -183,8 +186,8 @@ namespace WebApplicationSample.Controllers
                 TransactionId = viewModel.TransactionId,
                 OutTradeNo = viewModel.OutTradeNo
             };
-            var response = await _client.ExecuteAsync(request);
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -210,8 +213,8 @@ namespace WebApplicationSample.Controllers
             {
                 OutTradeNo = viewModel.OutTradeNo
             };
-            var response = await _client.ExecuteAsync(request, "qpayCertificateName");
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -237,13 +240,13 @@ namespace WebApplicationSample.Controllers
             {
                 OutTradeNo = viewModel.OutTradeNo
             };
-            var response = await _client.ExecuteAsync(request);
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
         /// <summary>
-        /// 关闭订单
+        /// 申请退款
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -253,7 +256,7 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// 关闭订单
+        /// 申请退款
         /// </summary>
         /// <param name="viewModel"></param>
         /// <returns></returns>
@@ -267,10 +270,10 @@ namespace WebApplicationSample.Controllers
                 OutTradeNo = viewModel.OutTradeNo,
                 RefundFee = viewModel.RefundFee,
                 OpUserId = viewModel.OpUserId,
-                OpUserPasswd = viewModel.OpUserPasswd
+                OpUserPasswd = MD5.Compute(viewModel.OpUserPasswd).ToUpper(),
             };
-            var response = await _client.ExecuteAsync(request, "qpayCertificateName");
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -299,8 +302,8 @@ namespace WebApplicationSample.Controllers
                 TransactionId = viewModel.TransactionId,
                 OutTradeNo = viewModel.OutTradeNo
             };
-            var response = await _client.ExecuteAsync(request);
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -322,14 +325,14 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> StatementDown(QPayStatementDownViewModel viewModel)
         {
-            var request = new QPayStatementDownRequest
+            var request = new QPaySpDownloadStatementDownRequest
             {
                 BillDate = viewModel.BillDate,
                 BillType = viewModel.BillType,
                 TarType = viewModel.TarType
             };
-            var response = await _client.ExecuteAsync(request);
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -361,11 +364,11 @@ namespace WebApplicationSample.Controllers
                 CheckRealName = viewModel.CheckRealName,
                 OpUserId = viewModel.OpUserId,
                 OpUserPasswd = MD5.Compute(viewModel.OpUserPasswd).ToUpper(),
-                SpbillCreateIp = viewModel.SpbillCreateIp,
+                SpBillCreateIp = viewModel.SpBillCreateIp,
                 NotifyUrl = viewModel.NotifyUrl,
             };
-            var response = await _client.ExecuteAsync(request, "qpayCertificateName");
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
     }

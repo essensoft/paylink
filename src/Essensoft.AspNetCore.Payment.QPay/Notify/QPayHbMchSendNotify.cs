@@ -3,10 +3,10 @@
 namespace Essensoft.AspNetCore.Payment.QPay.Notify
 {
     /// <summary>
-    /// 企业付款 - 用户到账通知
+    /// 现金红包 - 领取结果通知
     /// </summary>
     [XmlRoot("xml")]
-    public class QPayEPayB2CNotify : QPayNotify
+    public class QPayHbMchSendNotify : QPayNotify
     {
         /// <summary>
         /// 应用ID
@@ -39,16 +39,10 @@ namespace Essensoft.AspNetCore.Payment.QPay.Notify
         public string OpenId { get; set; }
 
         /// <summary>
-        /// 收款用户QQ号码
-        /// </summary>
-        [XmlElement("uin")]
-        public string Uin { get; set; }
-
-        /// <summary>
         /// 金额
         /// </summary>
         [XmlElement("total_fee")]
-        public int TotalFee { get; set; }
+        public long TotalFee { get; set; }
 
         /// <summary>
         /// 时间(红包领取或退款成功时间)
@@ -60,7 +54,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Notify
         /// 状态
         /// </summary>
         [XmlElement("state")]
-        public string State { get; set; }
+        public int State { get; set; }
 
         /// <summary>
         /// 退款原因

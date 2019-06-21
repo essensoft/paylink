@@ -42,7 +42,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Response
         public string SubAppId { get; set; }
 
         /// <summary>
-        /// 商户号ID
+        /// 商户号
         /// </summary>
         [XmlElement("mch_id")]
         public string MchId { get; set; }

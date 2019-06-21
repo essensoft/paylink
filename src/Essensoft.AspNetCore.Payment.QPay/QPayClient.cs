@@ -1,146 +1,117 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
+using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.QPay.Parser;
-using Essensoft.AspNetCore.Payment.QPay.Request;
 using Essensoft.AspNetCore.Payment.QPay.Utility;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Essensoft.AspNetCore.Payment.QPay
 {
-    /// <summary>
-    /// QPay 客户端。
-    /// </summary>
     public class QPayClient : IQPayClient
     {
-        private const string APPID = "appid";
-        private const string MCHID = "mch_id";
-        private const string NONCE_STR = "nonce_str";
-        private const string SIGN = "sign";
-        private const string UIN = "uin";
-        
-        private readonly ILogger _logger;
-        private readonly IHttpClientFactory _clientFactory;
-        private readonly IOptionsSnapshot<QPayOptions> _optionsSnapshotAccessor;
+        public const string Prefix = nameof(QPayClient) + ".";
+
+        private readonly IHttpClientFactory _httpClientFactory;
+        private readonly QPayCertificateManager _certificateManager;
 
         #region QPayClient Constructors
 
-        public QPayClient(
-            ILogger<QPayClient> logger,
-            IHttpClientFactory clientFactory,
-            IOptionsSnapshot<QPayOptions> optionsAccessor)
+        public QPayClient(IHttpClientFactory httpClientFactory, QPayCertificateManager certificateManager)
         {
-            _logger = logger;
-            _clientFactory = clientFactory;
-            _optionsSnapshotAccessor = optionsAccessor;
+            _httpClientFactory = httpClientFactory;
+            _certificateManager = certificateManager;
         }
 
         #endregion
 
         #region IQPayClient Members
 
-        public async Task<T> ExecuteAsync<T>(IQPayRequest<T> request) where T : QPayResponse
+        public async Task<T> ExecuteAsync<T>(IQPayRequest<T> request, QPayOptions options) where T : QPayResponse
         {
-            return await ExecuteAsync(request, null);
-        }
-
-        public async Task<T> ExecuteAsync<T>(IQPayRequest<T> request, string optionsName) where T : QPayResponse
-        {
-            var options = _optionsSnapshotAccessor.Get(optionsName);
-            var sortedTxtParams = new QPayDictionary(request.GetParameters())
+            if (options == null)
             {
-                { MCHID, options.MchId },
-                { NONCE_STR, Guid.NewGuid().ToString("N") }
-            };
-
-            if (request is QPayEPayQueryRequest)
-            {
-            }
-            else if (request is QPayEPayStatementDownRequest)
-            {
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(APPID)))
-                {
-                    sortedTxtParams.Add(APPID, options.AppId);
-                }
+                throw new ArgumentNullException(nameof(options));
             }
 
-            sortedTxtParams.Add(SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
-
-            var content = QPayUtility.BuildContent(sortedTxtParams);
-            _logger.Log(options.LogLevel, "Request:{content}", content);
-
-            using (var client = _clientFactory.CreateClient())
+            if (string.IsNullOrEmpty(options.MchId))
             {
-                var body = await client.DoPostAsync(request.GetRequestUrl(), content);
-                _logger.Log(options.LogLevel, "Response:{body}", body);
-
-                var parser = new QPayXmlParser<T>();
-                var rsp = parser.Parse(body);
-
-                if (request.IsCheckResponseSign())
-                {
-                    CheckResponseSign(rsp, options);
-                }
-
-                return rsp;
+                throw new ArgumentNullException(nameof(options.MchId));
             }
+
+            if (string.IsNullOrEmpty(options.Key))
+            {
+                throw new ArgumentNullException(nameof(options.Key));
+            }
+
+            var sortedTxtParams = new QPayDictionary(request.GetParameters());
+
+            request.PrimaryHandler(options, sortedTxtParams);
+
+            var client = _httpClientFactory.CreateClient(nameof(QPayClient));
+            var body = await client.PostAsync(request.GetRequestUrl(), sortedTxtParams);
+            var parser = new QPayXmlParser<T>();
+            var rsp = parser.Parse(body);
+
+            if (request.GetNeedCheckSign())
+            {
+                CheckResponseSign(rsp, options);
+            }
+
+            return rsp;
         }
 
         #endregion
 
         #region IQPayClient Members
 
-        public async Task<T> ExecuteAsync<T>(IQPayCertificateRequest<T> request, string certificateName) where T : QPayResponse
+        public async Task<T> ExecuteAsync<T>(IQPayCertRequest<T> request, QPayOptions options) where T : QPayResponse
         {
-            return await ExecuteAsync(request, null, certificateName);
-        }
-
-        public async Task<T> ExecuteAsync<T>(IQPayCertificateRequest<T> request, string optionsName, string certificateName) where T : QPayResponse
-        {
-            var options = _optionsSnapshotAccessor.Get(optionsName);
-            var sortedTxtParams = new QPayDictionary(request.GetParameters())
+            if (options == null)
             {
-                { MCHID, options.MchId },
-                { NONCE_STR, Guid.NewGuid().ToString("N") }
-            };
-
-            if (request is QPayEPayB2CRequest)
-            {
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(UIN)) && string.IsNullOrEmpty(sortedTxtParams.GetValue(APPID)))
-                {
-                    sortedTxtParams.Add(APPID, options.AppId);
-                }
-            }
-            else
-            {
-                if (string.IsNullOrEmpty(sortedTxtParams.GetValue(APPID)))
-                {
-                    sortedTxtParams.Add(APPID, options.AppId);
-                }
+                throw new ArgumentNullException(nameof(options));
             }
 
-            sortedTxtParams.Add(SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
-            var content = QPayUtility.BuildContent(sortedTxtParams);
-            _logger.Log(options.LogLevel, "Request:{content}", content);
-            using (var client = string.IsNullOrEmpty(certificateName) ? _clientFactory.CreateClient() : _clientFactory.CreateClient(certificateName))
+            if (string.IsNullOrEmpty(options.MchId))
             {
-                var body = await client.DoPostAsync(request.GetRequestUrl(), content);
-                _logger.Log(options.LogLevel, "Response:{body}", body);
-
-                var parser = new QPayXmlParser<T>();
-                var rsp = parser.Parse(body);
-
-                if (request.IsCheckResponseSign())
-                {
-                    CheckResponseSign(rsp, options);
-                }
-
-                return rsp;
+                throw new ArgumentNullException(nameof(options.MchId));
             }
+
+            if (string.IsNullOrEmpty(options.Key))
+            {
+                throw new ArgumentNullException(nameof(options.Key));
+            }
+
+            if (string.IsNullOrEmpty(options.Certificate))
+            {
+                throw new ArgumentNullException(nameof(options.Certificate));
+            }
+
+            var sortedTxtParams = new QPayDictionary(request.GetParameters());
+
+            request.PrimaryHandler(options, sortedTxtParams);
+
+            var hash = options.GetCertificateHash();
+            if (!_certificateManager.Contains(hash))
+            {
+                var certificate = File.Exists(options.Certificate) ?
+                    new X509Certificate2(options.Certificate, options.CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet) :
+                    new X509Certificate2(Convert.FromBase64String(options.Certificate), options.CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet);
+
+                _certificateManager.TryAdd(hash, certificate);
+            }
+
+            var client = _httpClientFactory.CreateClient(Prefix + hash);
+            var body = await client.PostAsync(request.GetRequestUrl(), sortedTxtParams);
+            var parser = new QPayXmlParser<T>();
+            var rsp = parser.Parse(body);
+
+            if (request.GetNeedCheckSign())
+            {
+                CheckResponseSign(rsp, options);
+            }
+
+            return rsp;
         }
 
         #endregion
@@ -149,24 +120,24 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
         private void CheckResponseSign(QPayResponse response, QPayOptions options)
         {
-            if (string.IsNullOrEmpty(response.Body))
+            if (string.IsNullOrEmpty(response.ResponseBody))
             {
                 throw new QPayException("sign check fail: Body is Empty!");
             }
 
-            if (response.Parameters.Count == 0)
+            if (response.ResponseParameters.Count == 0)
             {
                 throw new QPayException("sign check fail: Parameters is Empty!");
             }
 
-            if (response.Parameters["return_code"] == "SUCCESS")
+            if (response.ResponseParameters["return_code"] == "SUCCESS")
             {
-                if (!response.Parameters.TryGetValue("sign", out var sign))
+                if (!response.ResponseParameters.TryGetValue("sign", out var sign))
                 {
                     throw new QPayException("sign check fail: sign is Empty!");
                 }
 
-                var cal_sign = QPaySignature.SignWithKey(response.Parameters, options.Key);
+                var cal_sign = QPaySignature.SignWithKey(response.ResponseParameters, options.Key);
                 if (cal_sign != sign)
                 {
                     throw new QPayException("sign check fail: check Sign and Data Fail!");

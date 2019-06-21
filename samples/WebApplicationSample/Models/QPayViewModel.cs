@@ -22,7 +22,7 @@ namespace WebApplicationSample.Models
 
         [Required]
         [Display(Name = "spbill_create_ip")]
-        public string SpbillCreateIp { get; set; }
+        public string SpBillCreateIp { get; set; }
 
         [Required]
         [Display(Name = "device_info")]
@@ -61,7 +61,7 @@ namespace WebApplicationSample.Models
 
         [Required]
         [Display(Name = "spbill_create_ip")]
-        public string SpbillCreateIp { get; set; }
+        public string SpBillCreateIp { get; set; }
 
         [Required]
         [Display(Name = "trade_type")]
@@ -163,7 +163,7 @@ namespace WebApplicationSample.Models
 
         [Display(Name = "total_fee")]
         [Required]
-        public string TotalFee { get; set; }
+        public int TotalFee { get; set; }
 
         [Display(Name = "memo")]
         public string Memo { get; set; }
@@ -181,7 +181,7 @@ namespace WebApplicationSample.Models
 
         [Required]
         [Display(Name = "spbill_create_ip")]
-        public string SpbillCreateIp { get; set; }
+        public string SpBillCreateIp { get; set; }
 
         [Display(Name = "notify_url")]
         public string NotifyUrl { get; set; }
