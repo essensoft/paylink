@@ -4,6 +4,7 @@ using Essensoft.AspNetCore.Payment.JDPay;
 using Essensoft.AspNetCore.Payment.JDPay.Notify;
 using Essensoft.AspNetCore.Payment.JDPay.Request;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using WebApplicationSample.Models;
 
 namespace WebApplicationSample.Controllers
@@ -12,11 +13,13 @@ namespace WebApplicationSample.Controllers
     {
         private readonly IJDPayClient _client;
         private readonly IJDPayNotifyClient _notifyClient;
+        private readonly IOptions<JDPayOptions> _optionsAccessor;
 
-        public JDPayController(IJDPayClient client, IJDPayNotifyClient notifyClient)
+        public JDPayController(IJDPayClient client, IJDPayNotifyClient notifyClient, IOptions<JDPayOptions> optionsAccessor)
         {
             _client = client;
             _notifyClient = notifyClient;
+            _optionsAccessor = optionsAccessor;
         }
 
         /// <summary>
@@ -59,7 +62,7 @@ namespace WebApplicationSample.Controllers
                 UserId = viewModel.UserId
             };
 
-            var response = await _client.PageExecuteAsync(request);
+            var response = await _client.PageExecuteAsync(request, _optionsAccessor.Value);
             return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
@@ -94,7 +97,7 @@ namespace WebApplicationSample.Controllers
                 UserId = viewModel.UserId
             };
 
-            var response = await _client.PageExecuteAsync(request);
+            var response = await _client.PageExecuteAsync(request, _optionsAccessor.Value);
             return Content(response.Body, "text/html", Encoding.UTF8);
         }
 
@@ -128,7 +131,7 @@ namespace WebApplicationSample.Controllers
                 TradeType = viewModel.TradeType
             };
 
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
             ViewData["qrcode"] = response.QrCode;
             ViewData["response"] = response.Body;
             return View();
@@ -159,7 +162,7 @@ namespace WebApplicationSample.Controllers
                 TradeType = viewModel.TradeType
             };
 
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
             ViewData["response"] = response.Body;
             return View();
         }
@@ -191,7 +194,7 @@ namespace WebApplicationSample.Controllers
                 NotifyUrl = viewModel.NotifyUrl
             };
 
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
             ViewData["response"] = response.Body;
             return View();
         }
@@ -221,7 +224,7 @@ namespace WebApplicationSample.Controllers
                 TradeType = viewModel.TradeType
             };
 
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
             ViewData["response"] = response.Body;
             return View();
         }
@@ -277,7 +280,7 @@ namespace WebApplicationSample.Controllers
                 BankCardId = viewModel.BankCardId
             };
 
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
             ViewData["response"] = response.Body;
             return View();
         }
@@ -308,7 +311,7 @@ namespace WebApplicationSample.Controllers
                 TradeType = viewModel.TradeType
             };
 
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
             ViewData["response"] = response.Body;
             return View();
         }
@@ -324,7 +327,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _notifyClient.ExecuteAsync<JDPaySyncReturn>(Request);
+                var notify = await _notifyClient.ExecuteAsync<JDPaySyncReturn>(Request, _optionsAccessor.Value);
                 ViewData["response"] = "支付成功";
                 return View();
             }

@@ -8,8 +8,6 @@ using Essensoft.AspNetCore.Payment.JDPay.Parser;
 using Essensoft.AspNetCore.Payment.JDPay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Essensoft.AspNetCore.Payment.JDPay
 {
@@ -18,39 +16,23 @@ namespace Essensoft.AspNetCore.Payment.JDPay
     /// </summary>
     public class JDPayNotifyClient : IJDPayNotifyClient
     {
-        private readonly ILogger _logger;
-        private readonly IOptionsSnapshot<JDPayOptions> _optionsSnapshotAccessor;
-
         #region JDPayNotifyClient Constructors
 
-        public JDPayNotifyClient(
-            ILogger<JDPayNotifyClient> logger,
-            IOptionsSnapshot<JDPayOptions> optionsAccessor)
+        public JDPayNotifyClient()
         {
-            _logger = logger;
-            _optionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
 
         #region IJDPayNotifyClient Members
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : JDPayNotify
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, JDPayOptions options) where T : JDPayNotify
         {
-            return await ExecuteAsync<T>(request, null);
-        }
-
-        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : JDPayNotify
-        {
-            var options = _optionsSnapshotAccessor.Get(optionsName);
             if (request.HasFormContentType || request.Method == "GET")
             {
                 var rspInstance = Activator.CreateInstance<T>();
 
                 var parameters = GetParameters(request, options, !(rspInstance is JDPayDefrayPayNotify));
-
-                var query = JDPayUtility.BuildQuery(parameters);
-                _logger.Log(options.LogLevel, "Request:{query}", query);
 
                 var parser = new JDPayDictionaryParser<T>();
                 var rsp = parser.Parse(parameters);
@@ -70,8 +52,6 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             if (request.HasTextXmlContentType())
             {
                 var body = await new StreamReader(request.Body).ReadToEndAsync();
-                _logger.Log(options.LogLevel, "Request:{body}", body);
-
                 var parser = new JDPayXmlParser<T>();
                 var rsp = parser.Parse(JDPayUtility.FotmatXmlString(body));
                 if (!string.IsNullOrEmpty(rsp.Encrypt))
@@ -79,7 +59,6 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                     var encrypt = rsp.Encrypt;
                     var base64EncryptStr = Encoding.UTF8.GetString(Convert.FromBase64String(encrypt));
                     var reqBody = JDPaySecurity.DecryptECB(base64EncryptStr, options.DesKeyBase64);
-                    _logger.Log(options.LogLevel, "Encrypt Content:{reqBody}", reqBody);
 
                     var reqBodyDoc = new XmlDocument();
                     reqBodyDoc.LoadXml(reqBody);
