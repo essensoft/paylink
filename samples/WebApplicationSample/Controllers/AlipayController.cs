@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Alipay;
@@ -405,15 +404,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var parameters = new Dictionary<string, string>();
-                {
-                    foreach (var iter in Request.Query)
-                    {
-                        parameters.Add(iter.Key, iter.Value);
-                    }
-                }
-
-                var notify = await _notifyClient.ExecuteAsync<AlipayTradePagePayReturn>(parameters, _optionsAccessor.Value);
+                var notify = await _notifyClient.ExecuteAsync<AlipayTradePagePayReturn>(Request, _optionsAccessor.Value);
                 ViewData["response"] = "支付成功";
                 return View();
             }
@@ -433,15 +424,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var parameters = new Dictionary<string, string>();
-                {
-                    foreach (var iter in Request.Query)
-                    {
-                        parameters.Add(iter.Key, iter.Value);
-                    }
-                }
-
-                var notify = await _notifyClient.ExecuteAsync<AlipayTradeWapPayReturn>(parameters, _optionsAccessor.Value);
+                var notify = await _notifyClient.ExecuteAsync<AlipayTradeWapPayReturn>(Request, _optionsAccessor.Value);
                 ViewData["response"] = "支付成功";
                 return View();
             }

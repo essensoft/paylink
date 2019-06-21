@@ -4,6 +4,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Alipay.Parser;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
+using Microsoft.AspNetCore.Http;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
@@ -20,7 +21,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         #region IAlipayNotifyClient Members
 
-        public Task<T> ExecuteAsync<T>(IDictionary<string, string> parameters, AlipayOptions options) where T : AlipayNotify
+        public Task<T> ExecuteAsync<T>(HttpRequest request, AlipayOptions options) where T : AlipayNotify
         {
             if (options == null)
             {
@@ -37,6 +38,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 throw new ArgumentNullException(nameof(options.AppPrivateKey));
             }
 
+            var parameters = GetParameters(request);
             var parser = new AlipayDictionaryParser<T>();
             var rsp = parser.Parse(parameters);
             CheckNotifySign(parameters, options);
@@ -46,6 +48,26 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         #endregion
 
         #region Common Method
+
+        private Dictionary<string, string> GetParameters(HttpRequest request)
+        {
+            var parameters = new Dictionary<string, string>();
+            if (request.Method == "POST")
+            {
+                foreach (var iter in request.Form)
+                {
+                    parameters.Add(iter.Key, iter.Value);
+                }
+            }
+            else
+            {
+                foreach (var iter in request.Query)
+                {
+                    parameters.Add(iter.Key, iter.Value);
+                }
+            }
+            return parameters;
+        }
 
         private void CheckNotifySign(IDictionary<string, string> dictionary, AlipayOptions options)
         {
