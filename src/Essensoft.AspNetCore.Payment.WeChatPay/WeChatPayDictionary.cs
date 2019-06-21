@@ -1,12 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
-    /// <summary>
-    /// WeChatPay 字典。
-    /// </summary>
     public class WeChatPayDictionary : SortedDictionary<string, string>
     {
+        private const string DATE_TIME_FORMAT = "yyyyMMddHHmmss";
+
         public WeChatPayDictionary() { }
 
         public WeChatPayDictionary(IDictionary<string, string> dictionary)
@@ -25,6 +25,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             {
                 strValue = (string)value;
             }
+            else if (value is DateTime?)
+            {
+                var dateTime = value as DateTime?;
+                strValue = dateTime.Value.ToString(DATE_TIME_FORMAT);
+            }
             else if (value is int?)
             {
                 strValue = (value as int?).Value.ToString();
@@ -39,7 +44,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             }
             else if (value is bool?)
             {
-                strValue = (value as bool?).Value.ToString().ToLower();
+                strValue = (value as bool?).Value.ToString().ToLowerInvariant();
             }
             else
             {

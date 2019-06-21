@@ -140,10 +140,12 @@ namespace WebApplicationSample.Controllers
     public class WeChatPayNotifyController : Controller
     {
         private readonly IWeChatPayNotifyClient _client;
+        private readonly IOptions<WeChatPayOptions> _optionsAccessor;
 
-        public WeChatPayNotifyController(IWeChatPayNotifyClient client)
+        public WeChatPayNotifyController(IWeChatPayNotifyClient client, IOptions<WeChatPayOptions> optionsAccessor)
         {
             _client = client;
+            _optionsAccessor = optionsAccessor;
         }
 
         /// <summary>
@@ -156,7 +158,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<WeChatPayUnifiedOrderNotify>(Request);
+                var notify = await _client.ExecuteAsync<WeChatPayUnifiedOrderNotify>(Request, _optionsAccessor.Value);
                 if (notify.ReturnCode == "SUCCESS")
                 {
                     if (notify.ResultCode == "SUCCESS")
@@ -184,7 +186,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<WeChatPayRefundNotify>(Request);
+                var notify = await _client.ExecuteAsync<WeChatPayRefundNotify>(Request, _optionsAccessor.Value);
                 if (notify.ReturnCode == "SUCCESS")
                 {
                     if (notify.RefundStatus == "SUCCESS")

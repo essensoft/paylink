@@ -2,6 +2,7 @@
 using Essensoft.AspNetCore.Payment.WeChatPay;
 using Essensoft.AspNetCore.Payment.WeChatPay.Request;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using WebApplicationSample.Models;
 
@@ -10,10 +11,12 @@ namespace WebApplicationSample.Controllers
     public class WeChatPayController : Controller
     {
         private readonly IWeChatPayClient _client;
+        private readonly IOptions<WeChatPayOptions> _optionsAccessor;
 
-        public WeChatPayController(IWeChatPayClient client)
+        public WeChatPayController(IWeChatPayClient client, IOptions<WeChatPayOptions> optionsAccessor)
         {
             _client = client;
+            _optionsAccessor = optionsAccessor;
         }
 
         /// <summary>
@@ -48,11 +51,11 @@ namespace WebApplicationSample.Controllers
                 Body = viewModel.Body,
                 OutTradeNo = viewModel.OutTradeNo,
                 TotalFee = viewModel.TotalFee,
-                SpbillCreateIp = viewModel.SpbillCreateIp,
+                SpBillCreateIp = viewModel.SpBillCreateIp,
                 AuthCode = viewModel.AuthCode
             };
-            var response = await _client.ExecuteAsync(request);
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -79,25 +82,25 @@ namespace WebApplicationSample.Controllers
                 Body = viewModel.Body,
                 OutTradeNo = viewModel.OutTradeNo,
                 TotalFee = viewModel.TotalFee,
-                SpbillCreateIp = viewModel.SpbillCreateIp,
+                SpBillCreateIp = viewModel.SpBillCreateIp,
                 NotifyUrl = viewModel.NotifyUrl,
                 TradeType = viewModel.TradeType,
                 OpenId = viewModel.OpenId
             };
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
             if (response.ReturnCode == "SUCCESS" && response.ResultCode == "SUCCESS")
             {
-                var req = new WeChatPayH5CallPaymentRequest
+                var req = new WeChatPayJsApiSdkRequest
                 {
                     Package = "prepay_id=" + response.PrepayId
                 };
-                var parameter = await _client.ExecuteAsync(req);
+                var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
                 // 将参数(parameter)给 公众号前端 让他在微信内H5调起支付(https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6)
                 ViewData["parameter"] = JsonConvert.SerializeObject(parameter);
-                ViewData["response"] = response.Body;
+                ViewData["response"] = response.ResponseBody;
                 return View();
             }
-            ViewData["response"] = response.Body;
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -124,14 +127,14 @@ namespace WebApplicationSample.Controllers
                 Body = viewModel.Body,
                 OutTradeNo = viewModel.OutTradeNo,
                 TotalFee = viewModel.TotalFee,
-                SpbillCreateIp = viewModel.SpbillCreateIp,
+                SpBillCreateIp = viewModel.SpBillCreateIp,
                 NotifyUrl = viewModel.NotifyUrl,
                 TradeType = viewModel.TradeType
             };
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
             // response.CodeUrl 给前端生成二维码
             ViewData["qrcode"] = response.CodeUrl;
-            ViewData["response"] = response.Body;
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -158,25 +161,25 @@ namespace WebApplicationSample.Controllers
                 Body = viewModel.Body,
                 OutTradeNo = viewModel.OutTradeNo,
                 TotalFee = viewModel.TotalFee,
-                SpbillCreateIp = viewModel.SpbillCreateIp,
+                SpBillCreateIp = viewModel.SpBillCreateIp,
                 NotifyUrl = viewModel.NotifyUrl,
                 TradeType = viewModel.TradeType
             };
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
             if (response.ReturnCode == "SUCCESS" && response.ResultCode == "SUCCESS")
             {
-                var req = new WeChatPayAppCallPaymentRequest
+                var req = new WeChatPayAppSdkRequest
                 {
                     PrepayId = response.PrepayId
                 };
-                var parameter = await _client.ExecuteAsync(req);
+                var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
                 // 将参数(parameter)给 ios/android端 让他调起微信APP(https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5)
                 ViewData["parameter"] = JsonConvert.SerializeObject(parameter);
-                ViewData["response"] = response.Body;
+                ViewData["response"] = response.ResponseBody;
                 return View();
             }
-            ViewData["response"] = response.Body;
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -203,11 +206,11 @@ namespace WebApplicationSample.Controllers
                 Body = viewModel.Body,
                 OutTradeNo = viewModel.OutTradeNo,
                 TotalFee = viewModel.TotalFee,
-                SpbillCreateIp = viewModel.SpbillCreateIp,
+                SpBillCreateIp = viewModel.SpBillCreateIp,
                 NotifyUrl = viewModel.NotifyUrl,
                 TradeType = viewModel.TradeType
             };
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
             // mweb_url为拉起微信支付收银台的中间页面，可通过访问该url来拉起微信客户端，完成支付,mweb_url的有效期为5分钟。
             return Redirect(response.MwebUrl);
@@ -236,26 +239,26 @@ namespace WebApplicationSample.Controllers
                 Body = viewModel.Body,
                 OutTradeNo = viewModel.OutTradeNo,
                 TotalFee = viewModel.TotalFee,
-                SpbillCreateIp = viewModel.SpbillCreateIp,
+                SpBillCreateIp = viewModel.SpBillCreateIp,
                 NotifyUrl = viewModel.NotifyUrl,
                 TradeType = viewModel.TradeType,
                 OpenId = viewModel.OpenId
             };
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
             if (response.ReturnCode == "SUCCESS" && response.ResultCode == "SUCCESS")
             {
-                var req = new WeChatPayLiteAppCallPaymentRequest
+                var req = new WeChatPayLiteAppSdkRequest
                 {
                     Package = "prepay_id=" + response.PrepayId
                 };
-                var parameter = await _client.ExecuteAsync(req);
+                var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
                 // 将参数(parameter)给 小程序前端 让他调起支付API(https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7&index=5)
                 ViewData["parameter"] = JsonConvert.SerializeObject(parameter);
-                ViewData["response"] = response.Body;
+                ViewData["response"] = response.ResponseBody;
                 return View();
             }
-            ViewData["response"] = response.Body;
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -282,8 +285,8 @@ namespace WebApplicationSample.Controllers
                 TransactionId = viewModel.TransactionId,
                 OutTradeNo = viewModel.OutTradeNo
             };
-            var response = await _client.ExecuteAsync(request);
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -310,8 +313,8 @@ namespace WebApplicationSample.Controllers
                 TransactionId = viewModel.TransactionId,
                 OutTradeNo = viewModel.OutTradeNo
             };
-            var response = await _client.ExecuteAsync(request, "wechatpayCertificateName");
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -337,8 +340,8 @@ namespace WebApplicationSample.Controllers
             {
                 OutTradeNo = viewModel.OutTradeNo
             };
-            var response = await _client.ExecuteAsync(request);
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -370,8 +373,8 @@ namespace WebApplicationSample.Controllers
                 RefundDesc = viewModel.RefundDesc,
                 NotifyUrl = viewModel.NotifyUrl
             };
-            var response = await _client.ExecuteAsync(request, "wechatpayCertificateName");
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -400,8 +403,8 @@ namespace WebApplicationSample.Controllers
                 TransactionId = viewModel.TransactionId,
                 OutTradeNo = viewModel.OutTradeNo
             };
-            var response = await _client.ExecuteAsync(request);
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -429,8 +432,8 @@ namespace WebApplicationSample.Controllers
                 BillType = viewModel.BillType,
                 TarType = viewModel.TarType
             };
-            var response = await _client.ExecuteAsync(request);
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -458,8 +461,8 @@ namespace WebApplicationSample.Controllers
                 AccountType = viewModel.AccountType,
                 TarType = viewModel.TarType
             };
-            var response = await _client.ExecuteAsync(request, "wechatpayCertificateName");
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -481,7 +484,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> Transfers(WeChatPayTransfersViewModel viewModel)
         {
-            var request = new WeChatPayTransfersRequest
+            var request = new WeChatPayPromotionTransfersRequest
             {
                 PartnerTradeNo = viewModel.PartnerTradeNo,
                 OpenId = viewModel.OpenId,
@@ -489,10 +492,10 @@ namespace WebApplicationSample.Controllers
                 ReUserName = viewModel.ReUserName,
                 Amount = viewModel.Amount,
                 Desc = viewModel.Desc,
-                SpbillCreateIp = viewModel.SpbillCreateIp
+                SpBillCreateIp = viewModel.SpBillCreateIp
             };
-            var response = await _client.ExecuteAsync(request, "wechatpayCertificateName");
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -518,8 +521,8 @@ namespace WebApplicationSample.Controllers
             {
                 PartnerTradeNo = viewModel.PartnerTradeNo
             };
-            var response = await _client.ExecuteAsync(request, "wechatpayCertificateName");
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -550,8 +553,8 @@ namespace WebApplicationSample.Controllers
                 Amount = viewModel.Amount,
                 Desc = viewModel.Desc
             };
-            var response = await _client.ExecuteAsync(request, "wechatpayCertificateName");
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -577,8 +580,8 @@ namespace WebApplicationSample.Controllers
             {
                 PartnerTradeNo = viewModel.PartnerTradeNo
             };
-            var response = await _client.ExecuteAsync(request, "wechatpayCertificateName");
-            ViewData["response"] = response.Body;
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.ResponseBody;
             return View();
         }
 
@@ -592,9 +595,9 @@ namespace WebApplicationSample.Controllers
         {
             if (Request.Method == "POST")
             {
-                var request = new WeChatPayGetPublicKeyRequest();
-                var response = await _client.ExecuteAsync(request, "wechatpayCertificateName");
-                ViewData["response"] = response.Body;
+                var request = new WeChatPayRiskGetPublicKeyRequest();
+                var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+                ViewData["response"] = response.ResponseBody;
                 return View();
             }
 

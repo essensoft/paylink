@@ -1,12 +1,14 @@
 ﻿using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.Security;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
     /// 企业付款到银行卡
     /// </summary>
-    public class WeChatPayPayBankRequest : IWeChatPayCertificateRequest<WeChatPayPayBankResponse>
+    public class WeChatPayPayBankRequest : IWeChatPayCertRequest<WeChatPayPayBankResponse>
     {
         /// <summary>
         /// 商户企业付款单号
@@ -59,7 +61,33 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             return parameters;
         }
 
-        public bool IsCheckResponseSign()
+        public WeChatPaySignType GetSignType()
+        {
+            return WeChatPaySignType.MD5;
+        }
+
+        public void PrimaryHandler(WeChatPayOptions options, WeChatPaySignType signType, WeChatPayDictionary sortedTxtParams)
+        {
+            if (string.IsNullOrEmpty(options.RsaPublicKey))
+            {
+                throw new WeChatPayException("WeChatPayPayBankRequest: RsaPublicKey is null!");
+            }
+
+            sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
+            sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
+
+            var key = RSAUtilities.GetAsymmetricKeyParameterFormRsaPublicKey(options.RsaPublicKey);
+
+            var no = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(sortedTxtParams.GetValue(WeChatPayConsts.enc_bank_no), key);
+            sortedTxtParams.SetValue(WeChatPayConsts.enc_bank_no, no);
+
+            var name = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(sortedTxtParams.GetValue(WeChatPayConsts.enc_true_name), key);
+            sortedTxtParams.SetValue(WeChatPayConsts.enc_true_name, name);
+
+            sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
+        }
+
+        public bool GetNeedCheckSign()
         {
             return false;
         }

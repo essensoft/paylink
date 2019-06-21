@@ -3,6 +3,9 @@ using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Domain
 {
+    /// <summary>
+    /// 退款信息
+    /// </summary>
     public class RefundInfo
     {
         /// <summary>

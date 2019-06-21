@@ -2,6 +2,9 @@
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Domain
 {
+    /// <summary>
+    /// 代金券或立减优惠信息
+    /// </summary>
     public class CouponInfo
     {
         /// <summary>
@@ -11,13 +14,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Domain
         public string CouponType { get; set; }
 
         /// <summary>
-        /// 代金券ID
+        /// 代金券或立减优惠ID
         /// </summary>
         [XmlElement("coupon_id")]
         public string CouponId { get; set; }
 
         /// <summary>
-        /// 代金券金额
+        /// 代金券或立减优惠金额
         /// </summary>
         [XmlElement("coupon_fee")]
         public int CouponFee { get; set; }

@@ -5,20 +5,16 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Domain;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
 {
     [XmlRoot("xml")]
-    public class WeChatPayGetHBInfoResponse : WeChatPayResponse
+    public class WeChatPayGetHbInfoResponse : WeChatPayResponse
     {
         /// <summary>
         /// 返回状态码
-        /// 此字段是通信标识，非交易标识，
-        /// 交易是否成功需要查看result_code来判断
         /// </summary>
         [XmlElement("return_code")]
         public string ReturnCode { get; set; }
 
         /// <summary>
-        /// 返回信息，如非空，为错误原因
-        /// 签名失败
-        /// 参数格式校验错误
+        /// 返回信息
         /// </summary>
         [XmlElement("return_msg")]
         public string ReturnMsg { get; set; }
@@ -81,19 +77,19 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 红包类型
         /// </summary>
         [XmlElement("hb_type")]
-        public string HBType { get; set; }
+        public string HbType { get; set; }
 
         /// <summary>
         /// 红包个数
         /// </summary>
         [XmlElement("total_num")]
-        public string TotalNum { get; set; }
+        public int TotalNum { get; set; }
 
         /// <summary>
         /// 红包金额
         /// </summary>
         [XmlElement("total_amount")]
-        public string TotalAmount { get; set; }
+        public int TotalAmount { get; set; }
 
         /// <summary>
         /// 失败原因
@@ -117,7 +113,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 红包退款金额
         /// </summary>
         [XmlElement("refund_amount")]
-        public string RefundAmount { get; set; }
+        public int RefundAmount { get; set; }
 
         /// <summary>
         /// 祝福语
@@ -142,6 +138,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// </summary>
         [XmlArray("hblist")]
         [XmlArrayItem("hbinfo")]
-        public List<HBInfo> HBList { get; set; }
+        public List<HbInfo> HbList { get; set; }
     }
 }

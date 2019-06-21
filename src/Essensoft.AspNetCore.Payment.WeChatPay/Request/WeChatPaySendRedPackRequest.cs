@@ -1,12 +1,13 @@
 ﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
     /// 发放普通红包
     /// </summary>
-    public class WeChatPaySendRedPackRequest : IWeChatPayCertificateRequest<WeChatPaySendRedPackResponse>
+    public class WeChatPaySendRedPackRequest : IWeChatPayCertRequest<WeChatPaySendRedPackResponse>
     {
         /// <summary>
         /// 商户订单号
@@ -17,11 +18,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// 子商户号
         /// </summary>
         public string SubMchId { get; set; }
-
-        /// <summary>
-        /// 公众账号appid
-        /// </summary>
-        public string WXAppId { get; set; }
 
         /// <summary>
         /// 触达用户appid
@@ -78,11 +74,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// </summary>
         public string RiskInfo { get; set; }
 
-        /// <summary>
-        /// 扣钱方mchid
-        /// </summary>
-        public string ConsumeMchId { get; set; }
-
         #region IWeChatPayCertificateRequest Members
 
         public string GetRequestUrl()
@@ -96,7 +87,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             {
                 { "mch_billno", MchBillNo },
                 { "sub_mch_id", SubMchId },
-                { "wxappid", WXAppId },
                 { "msgappid", MsgAppId },
                 { "send_name", SendName },
                 { "re_openid", ReOpenId },
@@ -108,12 +98,25 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { "remark", Remark },
                 { "scene_id", SceneId },
                 { "risk_info", RiskInfo },
-                { "consume_mch_id", ConsumeMchId }
             };
             return parameters;
         }
 
-        public bool IsCheckResponseSign()
+        public WeChatPaySignType GetSignType()
+        {
+            return WeChatPaySignType.MD5;
+        }
+
+        public void PrimaryHandler(WeChatPayOptions options, WeChatPaySignType signType, WeChatPayDictionary sortedTxtParams)
+        {
+            sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
+            sortedTxtParams.Add(WeChatPayConsts.wxappid, options.AppId);
+            sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
+
+            sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
+        }
+
+        public bool GetNeedCheckSign()
         {
             return true;
         }

@@ -18,7 +18,7 @@ namespace WebApplicationSample.Models
 
         [Required]
         [Display(Name = "spbill_create_ip")]
-        public string SpbillCreateIp { get; set; }
+        public string SpBillCreateIp { get; set; }
 
         [Required]
         [Display(Name = "auth_code")]
@@ -41,7 +41,7 @@ namespace WebApplicationSample.Models
 
         [Required]
         [Display(Name = "spbill_create_ip")]
-        public string SpbillCreateIp { get; set; }
+        public string SpBillCreateIp { get; set; }
 
         [Required]
         [Display(Name = "notify_url")]
@@ -72,7 +72,7 @@ namespace WebApplicationSample.Models
 
         [Required]
         [Display(Name = "spbill_create_ip")]
-        public string SpbillCreateIp { get; set; }
+        public string SpBillCreateIp { get; set; }
 
         [Required]
         [Display(Name = "notify_url")]
@@ -99,7 +99,7 @@ namespace WebApplicationSample.Models
 
         [Required]
         [Display(Name = "spbill_create_ip")]
-        public string SpbillCreateIp { get; set; }
+        public string SpBillCreateIp { get; set; }
 
         [Required]
         [Display(Name = "notify_url")]
@@ -126,7 +126,7 @@ namespace WebApplicationSample.Models
 
         [Required]
         [Display(Name = "spbill_create_ip")]
-        public string SpbillCreateIp { get; set; }
+        public string SpBillCreateIp { get; set; }
 
         [Required]
         [Display(Name = "notify_url")]
@@ -153,7 +153,7 @@ namespace WebApplicationSample.Models
 
         [Required]
         [Display(Name = "spbill_create_ip")]
-        public string SpbillCreateIp { get; set; }
+        public string SpBillCreateIp { get; set; }
 
         [Required]
         [Display(Name = "notify_url")]
@@ -290,7 +290,7 @@ namespace WebApplicationSample.Models
 
         [Required]
         [Display(Name = "spbill_create_ip")]
-        public string SpbillCreateIp { get; set; }
+        public string SpBillCreateIp { get; set; }
     }
 
     public class WeChatPayGetTransferInfoViewModel
