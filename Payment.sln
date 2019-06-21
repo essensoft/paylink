@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26124.0
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{DD8CC860-F3E3-40F4-8A8F-20BF66EA051C}"
 EndProject
@@ -26,6 +26,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-items", "{E2D9A588-E676-446B-BE7B-B3AAAD9FC9B6}"
 	ProjectSection(SolutionItems) = preProject
 		common.props = common.props
+		LICENSE = LICENSE
+		README.MD = README.MD
 	EndProjectSection
 EndProject
 Global
