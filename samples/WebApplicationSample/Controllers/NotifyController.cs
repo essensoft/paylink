@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.Alipay.Notify;
@@ -42,13 +41,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var parameters = new Dictionary<string, string>();
-                foreach (var iter in Request.Form)
-                {
-                    parameters.Add(iter.Key, iter.Value);
-                }
-
-                var notify = await _client.ExecuteAsync<AlipayTradePrecreateNotify>(parameters, _optionsAccessor.Value);
+                var notify = await _client.ExecuteAsync<AlipayTradePrecreateNotify>(Request, _optionsAccessor.Value);
                 if ("TRADE_SUCCESS" == notify.TradeStatus)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -73,13 +66,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var parameters = new Dictionary<string, string>();
-                foreach (var iter in Request.Form)
-                {
-                    parameters.Add(iter.Key, iter.Value);
-                }
-
-                var notify = await _client.ExecuteAsync<AlipayTradeAppPayNotify>(parameters, _optionsAccessor.Value);
+                var notify = await _client.ExecuteAsync<AlipayTradeAppPayNotify>(Request, _optionsAccessor.Value);
                 if ("TRADE_SUCCESS" == notify.TradeStatus)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -104,13 +91,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var parameters = new Dictionary<string, string>();
-                foreach (var iter in Request.Form)
-                {
-                    parameters.Add(iter.Key, iter.Value);
-                }
-
-                var notify = await _client.ExecuteAsync<AlipayTradePagePayNotify>(parameters, _optionsAccessor.Value);
+                var notify = await _client.ExecuteAsync<AlipayTradePagePayNotify>(Request, _optionsAccessor.Value);
                 if ("TRADE_SUCCESS" == notify.TradeStatus)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -135,13 +116,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var parameters = new Dictionary<string, string>();
-                foreach (var iter in Request.Form)
-                {
-                    parameters.Add(iter.Key, iter.Value);
-                }
-
-                var notify = await _client.ExecuteAsync<AlipayTradeWapPayNotify>(parameters, _optionsAccessor.Value);
+                var notify = await _client.ExecuteAsync<AlipayTradeWapPayNotify>(Request, _optionsAccessor.Value);
                 if ("TRADE_SUCCESS" == notify.TradeStatus)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
