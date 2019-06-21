@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.QPay.Response
 {
     [XmlRoot("xml")]
-    public class QPayStatementDownResponse : QPayResponse
+    public class QPaySpDownloadStatementDownResponse : QPayResponse
     {
         /// <summary>
         /// 返回状态码

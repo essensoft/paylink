@@ -66,19 +66,19 @@ namespace Essensoft.AspNetCore.Payment.QPay.Notify
         /// 订单金额
         /// </summary>
         [XmlElement("total_fee")]
-        public string TotalFee { get; set; }
+        public int TotalFee { get; set; }
 
         /// <summary>
         /// 用户支付金额
         /// </summary>
         [XmlElement("cash_fee")]
-        public string CashFee { get; set; }
+        public int CashFee { get; set; }
 
         /// <summary>
         /// QQ钱包优惠金额
         /// </summary>
         [XmlElement("coupon_fee")]
-        public string CouponFee { get; set; }
+        public int CouponFee { get; set; }
 
         /// <summary>
         /// QQ钱包订单号

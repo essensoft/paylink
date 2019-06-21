@@ -1,12 +1,13 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.QPay.Response;
+using Essensoft.AspNetCore.Payment.QPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Request
 {
     /// <summary>
     /// 对账单下载
     /// </summary>
-    public class QPayStatementDownRequest : IQPayRequest<QPayStatementDownResponse>
+    public class QPaySpDownloadStatementDownRequest : IQPayRequest<QPaySpDownloadStatementDownResponse>
     {
         /// <summary>
         /// 对账单时间
@@ -41,7 +42,16 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
             return parameters;
         }
 
-        public bool IsCheckResponseSign()
+        public void PrimaryHandler(QPayOptions options, QPayDictionary sortedTxtParams)
+        {
+            sortedTxtParams.Add(QPayConsts.NONCE_STR, QPayUtility.GenerateNonceStr());
+            sortedTxtParams.Add(QPayConsts.APPID, options.AppId);
+            sortedTxtParams.Add(QPayConsts.MCH_ID, options.MchId);
+
+            sortedTxtParams.Add(QPayConsts.SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
+        }
+
+        public bool GetNeedCheckSign()
         {
             return false;
         }

@@ -1,5 +1,6 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.QPay.Response;
+using Essensoft.AspNetCore.Payment.QPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Request
 {
@@ -8,11 +9,6 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
     /// </summary>
     public class QPayRefundQueryRequest : IQPayRequest<QPayRefundQueryResponse>
     {
-        /// <summary>
-        /// 应用ID
-        /// </summary>
-        public string AppId { get; set; }
-
         /// <summary>
         /// 子商户应用ID
         /// </summary>
@@ -54,7 +50,6 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
         {
             var parameters = new QPayDictionary
             {
-                { "appid", AppId },
                 { "sub_appid", SubAppId },
                 { "sub_mch_id", SubMchId },
                 { "refund_id", RefundId },
@@ -65,7 +60,16 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
             return parameters;
         }
 
-        public bool IsCheckResponseSign()
+        public void PrimaryHandler(QPayOptions options, QPayDictionary sortedTxtParams)
+        {
+            sortedTxtParams.Add(QPayConsts.NONCE_STR, QPayUtility.GenerateNonceStr());
+            sortedTxtParams.Add(QPayConsts.APPID, options.AppId);
+            sortedTxtParams.Add(QPayConsts.MCH_ID, options.MchId);
+
+            sortedTxtParams.Add(QPayConsts.SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
+        }
+
+        public bool GetNeedCheckSign()
         {
             return true;
         }

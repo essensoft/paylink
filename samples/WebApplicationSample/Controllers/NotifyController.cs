@@ -235,10 +235,12 @@ namespace WebApplicationSample.Controllers
     public class QPayNotifyController : Controller
     {
         private readonly IQPayNotifyClient _client;
+        private readonly IOptions<QPayOptions> _optionsAccessor;
 
-        public QPayNotifyController(IQPayNotifyClient client)
+        public QPayNotifyController(IQPayNotifyClient client, IOptions<QPayOptions> optionsAccessor)
         {
             _client = client;
+            _optionsAccessor = optionsAccessor;
         }
 
         /// <summary>
@@ -251,7 +253,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<QPayUnifiedOrderNotify>(Request);
+                var notify = await _client.ExecuteAsync<QPayUnifiedOrderNotify>(Request, _optionsAccessor.Value);
                 if ("SUCCESS" == notify.TradeState)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -275,7 +277,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<QPayMicroPayNotify>(Request);
+                var notify = await _client.ExecuteAsync<QPayMicroPayNotify>(Request, _optionsAccessor.Value);
                 if ("SUCCESS" == notify.TradeState)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -299,7 +301,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<QPayEPayB2CNotify>(Request);
+                var notify = await _client.ExecuteAsync<QPayEPayB2CNotify>(Request, _optionsAccessor.Value);
                 Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
                 return QPayNotifyResult.Success;
             }

@@ -15,10 +15,22 @@ namespace Essensoft.AspNetCore.Payment.QPay.Notify
         public string AppId { get; set; }
 
         /// <summary>
-        /// 商户号ID
+        /// 子商户应用ID
+        /// </summary>
+        [XmlElement("sub_appid")]
+        public string SubAppId { get; set; }
+
+        /// <summary>
+        /// 商户号
         /// </summary>
         [XmlElement("mch_id")]
         public string MchId { get; set; }
+
+        /// <summary>
+        /// 子商户号
+        /// </summary>
+        [XmlElement("sub_mch_id")]
+        public string SubMchId { get; set; }
 
         /// <summary>
         /// 随机字符串
@@ -66,19 +78,19 @@ namespace Essensoft.AspNetCore.Payment.QPay.Notify
         /// 订单金额
         /// </summary>
         [XmlElement("total_fee")]
-        public string TotalFee { get; set; }
+        public int TotalFee { get; set; }
 
         /// <summary>
         /// 用户支付金额
         /// </summary>
         [XmlElement("cash_fee")]
-        public string CashFee { get; set; }
+        public int CashFee { get; set; }
 
         /// <summary>
         /// QQ钱包优惠金额
         /// </summary>
         [XmlElement("coupon_fee")]
-        public string CouponFee { get; set; }
+        public int CouponFee { get; set; }
 
         /// <summary>
         /// QQ钱包订单号
