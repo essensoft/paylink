@@ -2,16 +2,12 @@
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
-    /// <summary>
-    /// WeChatPay 请求接口。
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
     public interface IWeChatPayRequest<T> where T : WeChatPayResponse
     {
         /// <summary>
-        /// API接口地址
+        /// 获取API接口链接
         /// </summary>
-        /// <returns></returns>
+        /// <returns>API接口链接</returns>
         string GetRequestUrl();
 
         /// <summary>
@@ -23,9 +19,23 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         IDictionary<string, string> GetParameters();
 
         /// <summary>
-        /// 是否验证响应内容签名
+        /// 获取签名类型
         /// </summary>
-        /// <returns>是否验证</returns>
-        bool IsCheckResponseSign();
+        /// <returns>签名类型</returns>
+        WeChatPaySignType GetSignType();
+
+        /// <summary>
+        /// 基本参数处理器
+        /// </summary>
+        /// <param name="options">配置选项</param>
+        /// <param name="signType">签名类型</param>
+        /// <param name="sortedTxtParams">排序文本参数</param>
+        void PrimaryHandler(WeChatPayOptions options, WeChatPaySignType signType, WeChatPayDictionary sortedTxtParams);
+
+        /// <summary>
+        /// 是否需要检查响应内容签名
+        /// </summary>
+        /// <returns>是否需要检查</returns>
+        bool GetNeedCheckSign();
     }
 }

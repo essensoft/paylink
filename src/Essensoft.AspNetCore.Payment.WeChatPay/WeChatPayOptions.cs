@@ -1,57 +1,59 @@
 ﻿using Essensoft.AspNetCore.Payment.Security;
-using Microsoft.Extensions.Logging;
-using Org.BouncyCastle.Crypto;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
-    /// <summary>
-    /// WeChatPay 选项。
-    /// </summary>
     public class WeChatPayOptions
     {
-        internal ICipherParameters PublicKey;
-
-        private string rsaPublicKey;
+        private string certificatePassword;
 
         /// <summary>
-        /// 应用账号(公众账号ID/小程序ID/企业号CorpId)
+        /// 微信应用账号(公众平台AppId/开放平台AppId/小程序AppId/企业微信CorpId)
         /// </summary>
         public string AppId { get; set; }
 
         /// <summary>
-        /// 企业微信密钥(企业微信Secret，其它业务无需配置)
+        /// 微信应用密钥(企业微信Secret，目前仅"企业红包API"使用)
         /// </summary>
         public string Secret { get; set; }
 
         /// <summary>
-        /// 商户号
+        /// 微信支付 商户号
         /// </summary>
         public string MchId { get; set; }
 
         /// <summary>
-        /// API秘钥
+        /// 微信支付 API秘钥
         /// </summary>
         public string Key { get; set; }
 
         /// <summary>
-        /// RSA公钥 企业付款到银行卡
+        /// 微信支付 API证书(文件名/文件的Base64编码)
         /// </summary>
-        public string RsaPublicKey
+        public string Certificate { get; set; }
+
+        /// <summary>
+        /// 微信支付 API证书密码(默认为商户号)
+        /// </summary>
+        public string CertificatePassword
         {
-            get => rsaPublicKey;
+            get
+            {
+                return string.IsNullOrEmpty(certificatePassword) ? MchId : certificatePassword;
+            }
             set
             {
-                rsaPublicKey = value;
-                if (!string.IsNullOrEmpty(rsaPublicKey))
-                {
-                    PublicKey = RSAUtilities.GetPublicKeyParameterFormAsn1PublicKey(rsaPublicKey);
-                }
+                certificatePassword = value;
             }
         }
 
         /// <summary>
-        /// 日志等级
+        /// 微信支付 RSA公钥(目前仅"企业付款到银行卡API"使用，调用"获取RSA加密公钥API"即可获取)
         /// </summary>
-        public LogLevel LogLevel { get; set; } = LogLevel.Information;
+        public string RsaPublicKey { get; set; }
+
+        public string GetCertificateHash()
+        {
+            return MD5.Compute(Certificate);
+        }
     }
 }

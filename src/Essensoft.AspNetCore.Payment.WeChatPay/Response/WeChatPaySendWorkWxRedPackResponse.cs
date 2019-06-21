@@ -7,16 +7,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
     {
         /// <summary>
         /// 返回状态码
-        /// 此字段是通信标识，非交易标识，
-        /// 交易是否成功需要查看result_code来判断
         /// </summary>
         [XmlElement("return_code")]
         public string ReturnCode { get; set; }
 
         /// <summary>
-        /// 返回信息，如非空，为错误原因
-        /// 签名失败
-        /// 参数格式校验错误
+        /// 返回信息
         /// </summary>
         [XmlElement("return_msg")]
         public string ReturnMsg { get; set; }
@@ -58,7 +54,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         public string MchId { get; set; }
 
         /// <summary>
-        /// 公众账号ID
+        /// 应用号
         /// </summary>
         [XmlElement("wxappid")]
         public string WxAppId { get; set; }
@@ -73,7 +69,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 付款金额
         /// </summary>
         [XmlElement("total_amount")]
-        public string TotalAmount { get; set; }
+        public int TotalAmount { get; set; }
 
         /// <summary>
         /// 微信单号

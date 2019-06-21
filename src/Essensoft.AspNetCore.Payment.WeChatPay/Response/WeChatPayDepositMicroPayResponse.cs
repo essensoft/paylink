@@ -7,28 +7,24 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
     {
         /// <summary>
         /// 返回状态码
-        /// 此字段是通信标识，非交易标识，
-        /// 交易是否成功需要查看result_code来判断
         /// </summary>
         [XmlElement("return_code")]
         public string ReturnCode { get; set; }
 
         /// <summary>
-        /// 返回信息，如非空，为错误原因
-        /// 签名失败
-        /// 参数格式校验错误
+        /// 返回信息
         /// </summary>
         [XmlElement("return_msg")]
         public string ReturnMsg { get; set; }
 
         /// <summary>
-        /// 公众账号ID
+        /// 应用号
         /// </summary>
         [XmlElement("appid")]
         public string AppId { get; set; }
 
         /// <summary>
-        /// 子商户公众账号ID
+        /// 子商户应用号
         /// </summary>
         [XmlElement("sub_appid")]
         public string SubAppId { get; set; }
@@ -127,7 +123,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 标价金额		
         /// </summary>
         [XmlElement("total_fee")]
-        public string TotalFee { get; set; }
+        public int TotalFee { get; set; }
 
         /// <summary>
         /// 现金支付币种	
@@ -139,19 +135,19 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 现金支付金额	
         /// </summary>
         [XmlElement("cash_fee")]
-        public string CashFee { get; set; }
+        public int CashFee { get; set; }
 
         /// <summary>
         /// 应结订单金额	
         /// </summary>
         [XmlElement("settlement_total_fee")]
-        public string SettlementTotalFee { get; set; }
+        public int SettlementTotalFee { get; set; }
 
         /// <summary>
         /// 代金券金额	
         /// </summary>
         [XmlElement("coupon_fee")]
-        public string CouponFee { get; set; }
+        public int CouponFee { get; set; }
 
         /// <summary>
         /// 微信支付订单号	

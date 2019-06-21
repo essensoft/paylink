@@ -1,20 +1,16 @@
 ﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
     /// 酒店押金 - 撤销订单
     /// </summary>
-    public class WeChatPayDepositReverseRequest : IWeChatPayCertificateRequest<WeChatPayDepositReverseResponse>
+    public class WeChatPayDepositReverseRequest : IWeChatPayCertRequest<WeChatPayDepositReverseResponse>
     {
         /// <summary>
-        /// 应用ID
-        /// </summary>
-        public string AppId { get; set; }
-
-        /// <summary>
-        /// 子商户公众账号ID
+        /// 子商户应用号
         /// </summary>
         public string SubAppId { get; set; }
 
@@ -44,7 +40,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary
             {
-                { "appid", AppId },
                 { "sub_appid", SubAppId },
                 { "sub_mch_id", SubMchId },
                 { "transaction_id", TransactionId },
@@ -53,7 +48,26 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             return parameters;
         }
 
-        public bool IsCheckResponseSign()
+        public WeChatPaySignType GetSignType()
+        {
+            return WeChatPaySignType.HMAC_SHA256;
+        }
+
+        public void PrimaryHandler(WeChatPayOptions options, WeChatPaySignType signType, WeChatPayDictionary sortedTxtParams)
+        {
+            sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
+            sortedTxtParams.Add(WeChatPayConsts.appid, options.AppId);
+            sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
+
+            if (signType == WeChatPaySignType.HMAC_SHA256)
+            {
+                sortedTxtParams.Add(WeChatPayConsts.sign_type, WeChatPayConsts.HMAC_SHA256);
+            }
+
+            sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
+        }
+
+        public bool GetNeedCheckSign()
         {
             return true;
         }

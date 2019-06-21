@@ -1,18 +1,14 @@
 ﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
     /// 下载资金账单
     /// </summary>
-    public class WeChatPayDownloadFundFlowRequest : IWeChatPayCertificateRequest<WeChatPayDownloadFundFlowResponse>
+    public class WeChatPayDownloadFundFlowRequest : IWeChatPayCertRequest<WeChatPayDownloadFundFlowResponse>
     {
-        /// <summary>
-        /// 应用ID
-        /// </summary>
-        public string AppId { get; set; }
-
         /// <summary>
         /// 资金账单日期
         /// 下载对账单的日期，格式：20140603
@@ -45,7 +41,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary
             {
-                { "appid", AppId },
                 { "bill_date", BillDate },
                 { "account_type", AccountType },
                 { "tar_type", TarType }
@@ -53,7 +48,26 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             return parameters;
         }
 
-        public bool IsCheckResponseSign()
+        public WeChatPaySignType GetSignType()
+        {
+            return WeChatPaySignType.HMAC_SHA256;
+        }
+
+        public void PrimaryHandler(WeChatPayOptions options, WeChatPaySignType signType, WeChatPayDictionary sortedTxtParams)
+        {
+            sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
+            sortedTxtParams.Add(WeChatPayConsts.appid, options.AppId);
+            sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
+
+            if (signType == WeChatPaySignType.HMAC_SHA256)
+            {
+                sortedTxtParams.Add(WeChatPayConsts.sign_type, WeChatPayConsts.HMAC_SHA256);
+            }
+
+            sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
+        }
+
+        public bool GetNeedCheckSign()
         {
             return false;
         }

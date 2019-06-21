@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.WeChatPay.Response;
+using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
@@ -9,12 +10,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
     public class WeChatPayMicroPayRequest : IWeChatPayRequest<WeChatPayMicroPayResponse>
     {
         /// <summary>
-        /// 应用ID
-        /// </summary>
-        public string AppId { get; set; }
-
-        /// <summary>
-        /// 子商户公众账号ID
+        /// 子商户应用号
         /// </summary>
         public string SubAppId { get; set; }
 
@@ -61,7 +57,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// <summary>
         /// 终端IP
         /// </summary>
-        public string SpbillCreateIp { get; set; }
+        public string SpBillCreateIp { get; set; }
 
         /// <summary>
         /// 订单优惠标记
@@ -104,7 +100,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary
             {
-                { "appid", AppId },
                 { "sub_appid", SubAppId },
                 { "sub_mch_id", SubMchId },
                 { "device_info", DeviceInfo },
@@ -114,7 +109,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { "out_trade_no", OutTradeNo },
                 { "total_fee", TotalFee },
                 { "fee_type", FeeType },
-                { "spbill_create_ip", SpbillCreateIp },
+                { "spbill_create_ip", SpBillCreateIp },
                 { "goods_tag", GoodsTag },
                 { "limit_pay", LimitPay },
                 { "time_start", TimeStart },
@@ -125,7 +120,22 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             return parameters;
         }
 
-        public bool IsCheckResponseSign()
+        public WeChatPaySignType GetSignType()
+        {
+            return WeChatPaySignType.MD5;
+        }
+
+
+        public void PrimaryHandler(WeChatPayOptions options, WeChatPaySignType signType, WeChatPayDictionary sortedTxtParams)
+        {
+            sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
+            sortedTxtParams.Add(WeChatPayConsts.appid, options.AppId);
+            sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
+
+            sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
+        }
+
+        public bool GetNeedCheckSign()
         {
             return true;
         }

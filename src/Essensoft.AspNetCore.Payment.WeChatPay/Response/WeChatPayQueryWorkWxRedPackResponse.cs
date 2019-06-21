@@ -7,16 +7,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
     {
         /// <summary>
         /// 返回状态码
-        /// 此字段是通信标识，非交易标识，
-        /// 交易是否成功需要查看result_code来判断
         /// </summary>
         [XmlElement("return_code")]
         public string ReturnCode { get; set; }
 
         /// <summary>
-        /// 返回信息，如非空，为错误原因
-        /// 签名失败
-        /// 参数格式校验错误
+        /// 返回信息
         /// </summary>
         [XmlElement("return_msg")]
         public string ReturnMsg { get; set; }
@@ -79,7 +75,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 红包金额
         /// </summary>
         [XmlElement("total_amount")]
-        public string TotalAmount { get; set; }
+        public int TotalAmount { get; set; }
 
         /// <summary>
         /// 失败原因
@@ -103,7 +99,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 红包退款金额
         /// </summary>
         [XmlElement("refund_amount")]
-        public string RefundAmount { get; set; }
+        public int RefundAmount { get; set; }
 
         /// <summary>
         /// 祝福语
@@ -124,7 +120,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         public string ActName { get; set; }
 
         /// <summary>
-        /// 领取红包的Openid
+        /// 领取红包的OpenId
         /// </summary>
         [XmlElement("openid")]
         public string OpenId { get; set; }
@@ -133,7 +129,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 金额
         /// </summary>
         [XmlElement("amount")]
-        public string Amount { get; set; }
+        public int Amount { get; set; }
 
         /// <summary>
         /// 接收时间

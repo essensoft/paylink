@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,52 +8,46 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Notify;
 using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
 using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using MD5 = Essensoft.AspNetCore.Payment.Security.MD5;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
-    /// <summary>
-    /// WeChatPay 通知解析客户端。
-    /// </summary>
     public class WeChatPayNotifyClient : IWeChatPayNotifyClient
     {
-        private readonly ILogger _logger;
-        private readonly IOptionsSnapshot<WeChatPayOptions> _optionsSnapshotAccessor;
-
         #region WeChatPayNotifyClient Constructors
 
-        public WeChatPayNotifyClient(
-            ILogger<WeChatPayNotifyClient> logger,
-            IOptionsSnapshot<WeChatPayOptions> optionsAccessor)
+        public WeChatPayNotifyClient()
         {
-            _logger = logger;
-            _optionsSnapshotAccessor = optionsAccessor;
         }
 
         #endregion
 
         #region IWeChatPayNotifyClient Members
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : WeChatPayNotify
+        public async Task<T> ExecuteAsync<T>(HttpRequest request, WeChatPayOptions options) where T : WeChatPayNotify
         {
-            return await ExecuteAsync<T>(request, null);
-        }
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request, string optionsName) where T : WeChatPayNotify
-        {
-            var options = _optionsSnapshotAccessor.Get(optionsName);
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            if (string.IsNullOrEmpty(options.Key))
+            {
+                throw new ArgumentNullException(nameof(options.Key));
+            }
+
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
-            _logger.Log(options.LogLevel, "Request:{body}", body);
-
             var parser = new WeChatPayXmlParser<T>();
             var notify = parser.Parse(body);
             if (notify is WeChatPayRefundNotify)
             {
-                var key = MD5.Compute(options.Key).ToLower();
+                var key = MD5.Compute(options.Key).ToLowerInvariant();
                 var data = AES.Decrypt((notify as WeChatPayRefundNotify).ReqInfo, key, CipherMode.ECB, PaddingMode.PKCS7);
-                _logger.Log(options.LogLevel, "Decrypt Content:{data}", data); // AES-256-ECB 解密内容
                 notify = parser.Parse(body, data);
             }
             else
@@ -69,22 +64,22 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         private void CheckNotifySign(WeChatPayNotify notify, WeChatPayOptions options)
         {
-            if (string.IsNullOrEmpty(notify.Body))
+            if (string.IsNullOrEmpty(notify.ResponseBody))
             {
                 throw new WeChatPayException("sign check fail: Body is Empty!");
             }
 
-            if (notify.Parameters.Count == 0)
+            if (notify.ResponseParameters.Count == 0)
             {
                 throw new WeChatPayException("sign check fail: Parameters is Empty!");
             }
 
-            if (!notify.Parameters.TryGetValue("sign", out var sign))
+            if (!notify.ResponseParameters.TryGetValue("sign", out var sign))
             {
                 throw new WeChatPayException("sign check fail: sign is Empty!");
             }
 
-            var cal_sign = WeChatPaySignature.SignWithKey(notify.Parameters, options.Key);
+            var cal_sign = WeChatPaySignature.SignWithKey(notify.ResponseParameters, options.Key, WeChatPaySignType.MD5);
             if (cal_sign != sign)
             {
                 throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
