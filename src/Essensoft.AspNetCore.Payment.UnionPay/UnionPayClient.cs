@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.UnionPay.Parser;
 using Essensoft.AspNetCore.Payment.UnionPay.Request;
 using Essensoft.AspNetCore.Payment.UnionPay.Utility;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay
 {
@@ -24,34 +22,22 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         private const string ENCRYPTCERTID = "encryptCertId";
         private const string ACCNO = "accNo";
 
-        private readonly ILogger _logger;
-        private readonly IHttpClientFactory _clientFactory;
-        private readonly IOptionsSnapshot<UnionPayOptions> _optionsSnapshotAccessor;
+        private readonly IHttpClientFactory _httpClientFactory;
 
         #region UnionPayClient Constructors
 
         public UnionPayClient(
-            ILogger<UnionPayClient> logger,
-            IHttpClientFactory clientFactory,
-            IOptionsSnapshot<UnionPayOptions> optionsAccessor)
+            IHttpClientFactory httpClientFactory)
         {
-            _logger = logger;
-            _clientFactory = clientFactory;
-            _optionsSnapshotAccessor = optionsAccessor;
+            _httpClientFactory = httpClientFactory;
         }
 
         #endregion
 
         #region IUnionPayClient Members
 
-        public async Task<T> ExecuteAsync<T>(IUnionPayRequest<T> request) where T : UnionPayResponse
+        public async Task<T> ExecuteAsync<T>(IUnionPayRequest<T> request, UnionPayOptions options) where T : UnionPayResponse
         {
-            return await ExecuteAsync(request, null);
-        }
-
-        public async Task<T> ExecuteAsync<T>(IUnionPayRequest<T> request, string optionsName) where T : UnionPayResponse
-        {
-            var options = _optionsSnapshotAccessor.Get(optionsName);
             var version = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
 
             var merId = options.MerId;
@@ -86,12 +72,10 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             UnionPaySignature.Sign(txtParams, options.SignCertificate.certId, options.SignCertificate.key, options.SecureKey);
 
             var query = UnionPayUtility.BuildQuery(txtParams);
-            _logger.Log(options.LogLevel, "Request:{query}", query);
 
-            using (var client = _clientFactory.CreateClient())
+            using (var client = _httpClientFactory.CreateClient(nameof(UnionPayClient)))
             {
                 var body = await client.DoPostAsync(request.GetRequestUrl(options.TestMode), query);
-                _logger.Log(options.LogLevel, "Response:{content}", body);
 
                 var dictionary = ParseQueryString(body);
 
@@ -112,14 +96,8 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
         #region IUnionPayClient Members
 
-        public Task<T> PageExecuteAsync<T>(IUnionPayRequest<T> request) where T : UnionPayResponse
+        public Task<T> PageExecuteAsync<T>(IUnionPayRequest<T> request, UnionPayOptions options) where T : UnionPayResponse
         {
-            return PageExecuteAsync(request, null);
-        }
-
-        public Task<T> PageExecuteAsync<T>(IUnionPayRequest<T> request, string optionsName) where T : UnionPayResponse
-        {
-            var options = _optionsSnapshotAccessor.Get(optionsName);
             var version = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
             var merId = options.MerId;
 
