@@ -3,6 +3,7 @@ using Essensoft.AspNetCore.Payment.LianLianPay;
 using Essensoft.AspNetCore.Payment.LianLianPay.Notify;
 using Essensoft.AspNetCore.Payment.LianLianPay.Request;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using WebApplicationSample.Models;
 
 namespace WebApplicationSample.Controllers
@@ -11,11 +12,13 @@ namespace WebApplicationSample.Controllers
     {
         private readonly ILianLianPayClient _client;
         private readonly ILianLianPayNotifyClient _notifyClient;
+        private readonly IOptions<LianLianPayOptions> _optionsAccessor;
 
-        public LianLianPayController(ILianLianPayClient client, ILianLianPayNotifyClient notifyClient)
+        public LianLianPayController(ILianLianPayClient client, ILianLianPayNotifyClient notifyClient, IOptions<LianLianPayOptions> optionsAccessor)
         {
             _client = client;
             _notifyClient = notifyClient;
+            _optionsAccessor = optionsAccessor;
         }
 
         /// <summary>
@@ -58,7 +61,7 @@ namespace WebApplicationSample.Controllers
                 FlagPayProduct = "0",
                 FlagChnl = "2"
             };
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
             return Redirect(response.GatewayUrl);
         }
 
@@ -93,7 +96,7 @@ namespace WebApplicationSample.Controllers
                 FlagPayProduct = "0",
                 FlagChnl = "3"
             };
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
             return Redirect(response.GatewayUrl);
         }
 
@@ -121,7 +124,7 @@ namespace WebApplicationSample.Controllers
                 DtOrder = viewModel.DtOrder,
                 OidPayBill = viewModel.OidPayBill
             };
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
             ViewData["response"] = response.Body;
             return View();
         }
@@ -154,7 +157,7 @@ namespace WebApplicationSample.Controllers
                 OidPaybill = viewModel.OidPayBill,
                 NotifyUrl = viewModel.NotifyUrl
             };
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
             ViewData["response"] = response.Body;
             return View();
         }
@@ -183,7 +186,7 @@ namespace WebApplicationSample.Controllers
                 DtRefund = viewModel.DtRefund,
                 OidRefundNo = viewModel.OidRefundNo
             };
-            var response = await _client.ExecuteAsync(request);
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
             ViewData["response"] = response.Body;
             return View();
         }
@@ -197,7 +200,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _notifyClient.ExecuteAsync<LianLianPayReceiveMoneyReturnResponse>(Request);
+                var notify = await _notifyClient.ExecuteAsync<LianLianPayReceiveMoneyReturnResponse>(Request, _optionsAccessor.Value);
                 ViewData["response"] = "支付成功";
                 return View();
             }

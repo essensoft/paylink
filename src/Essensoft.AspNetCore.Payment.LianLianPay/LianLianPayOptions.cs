@@ -62,10 +62,5 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
         /// 签名方式
         /// </summary>
         public string SignType { get; } = "RSA";
-
-        /// <summary>
-        /// 日志等级
-        /// </summary>
-        public LogLevel LogLevel { get; set; } = LogLevel.Information;
     }
 }
