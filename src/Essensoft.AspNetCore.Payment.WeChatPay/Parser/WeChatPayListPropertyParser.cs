@@ -22,7 +22,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
                 foreach (var field in properties)
                 {
                     var name = $"{GetKeyName(field)}_{i}";
-                    field.SetValue(item, Convert.ChangeType(dictionary.GetValue(name), field.PropertyType));
+                    var value = dictionary.GetValue(name);
+                    if (!string.IsNullOrEmpty(value))
+                    {
+                        field.SetValue(item, Convert.ChangeType(value, field.PropertyType));
+                    }
                 }
                 list.Add(item);
             }
@@ -54,7 +58,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
                             foreach (var subfield in subProperties)
                             {
                                 var name = $"{GetKeyName(subfield)}_{i}_{j}";
-                                subfield.SetValue(item, Convert.ChangeType(dictionary.GetValue(name), subfield.PropertyType));
+                                var value = dictionary.GetValue(name);
+                                if (!string.IsNullOrEmpty(value))
+                                {
+                                    subfield.SetValue(item, Convert.ChangeType(value, subfield.PropertyType));
+                                }
                             }
                             sublist.Add(subItem);
                         }
@@ -63,7 +71,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
                     else
                     {
                         var name = $"{GetKeyName(field)}_{i}";
-                        field.SetValue(item, Convert.ChangeType(dictionary.GetValue(name), field.PropertyType));
+                        var value = dictionary.GetValue(name);
+                        if (!string.IsNullOrEmpty(value))
+                        {
+                            field.SetValue(item, Convert.ChangeType(value, field.PropertyType));
+                        }
                     }
                 }
                 list.Add(item);
