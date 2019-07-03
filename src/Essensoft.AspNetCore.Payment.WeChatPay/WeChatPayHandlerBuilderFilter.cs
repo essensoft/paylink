@@ -21,8 +21,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 throw new ArgumentNullException(nameof(next));
             }
 
-            return builder =>
+            return (builder) =>
             {
+                next(builder);
+
                 if (builder.PrimaryHandler is HttpClientHandler handler)
                 {
                     if (builder.Name.Contains(WeChatPayClient.Prefix))
