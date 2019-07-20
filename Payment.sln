@@ -3,9 +3,20 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 15.0.26124.0
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "build", "build", "{59995AF2-2461-4C43-AACE-EB5F36D8BE3A}"
+	ProjectSection(SolutionItems) = preProject
+		Directory.Build.props = Directory.Build.props
+	EndProjectSection
+EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{DD8CC860-F3E3-40F4-8A8F-20BF66EA051C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationSample", "samples\WebApplicationSample\WebApplicationSample.csproj", "{53148C9A-E48E-45B1-B382-6485E4DA1006}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-items", "{E2D9A588-E676-446B-BE7B-B3AAAD9FC9B6}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE = LICENSE
+		README.MD = README.MD
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D3871E61-CA47-4BD0-8BF9-B64A42B2200D}"
 EndProject
@@ -22,13 +33,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Payment.LianLianPay", "src\Essensoft.AspNetCore.Payment.LianLianPay\Essensoft.AspNetCore.Payment.LianLianPay.csproj", "{16843D79-807F-4973-AF26-66FF7141BAAD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essensoft.AspNetCore.Payment.JDPay", "src\Essensoft.AspNetCore.Payment.JDPay\Essensoft.AspNetCore.Payment.JDPay.csproj", "{A57153DC-67DE-4141-A13C-216CE6C5129C}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "solution-items", "solution-items", "{E2D9A588-E676-446B-BE7B-B3AAAD9FC9B6}"
-	ProjectSection(SolutionItems) = preProject
-		common.props = common.props
-		LICENSE = LICENSE
-		README.MD = README.MD
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
