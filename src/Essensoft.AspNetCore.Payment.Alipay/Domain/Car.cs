@@ -59,6 +59,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string LicenseAddress { get; set; }
 
         /// <summary>
+        /// 贷款车标识
+        /// </summary>
+        [JsonProperty("loan_flag")]
+        public string LoanFlag { get; set; }
+
+        /// <summary>
         /// 座位数
         /// </summary>
         [JsonProperty("seat_number")]

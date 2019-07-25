@@ -21,5 +21,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("string")]
         public List<GavintestNewLeveaOne> String { get; set; }
-}
+    }
 }

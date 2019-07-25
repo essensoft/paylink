@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayPassInstanceAddModel : AlipayObject
     {
         /// <summary>
-        /// 支付宝用户识别信息：  包括partner_id（商户的签约账号）和out_trade_no（某笔订单号）
+        /// 支付宝用户识别信息：uid发券组件。对接文档：https://docs.open.alipay.com/199/sy3hs4
         /// </summary>
         [JsonProperty("recognition_info")]
         public string RecognitionInfo { get; set; }

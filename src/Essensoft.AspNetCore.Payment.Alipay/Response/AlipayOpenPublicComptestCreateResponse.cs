@@ -12,5 +12,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonProperty("result")]
         public string Result { get; set; }
+
+        /// <summary>
+        /// 2
+        /// </summary>
+        [JsonProperty("resulttwo")]
+        public string Resulttwo { get; set; }
     }
 }

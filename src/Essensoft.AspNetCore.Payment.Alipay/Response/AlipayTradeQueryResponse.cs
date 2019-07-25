@@ -220,6 +220,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string TradeNo { get; set; }
 
         /// <summary>
+        /// 返回的交易结算信息，包含分账、补差等信息
+        /// </summary>
+        [JsonProperty("trade_settle_info")]
+        public TradeSettleInfo TradeSettleInfo { get; set; }
+
+        /// <summary>
         /// 交易状态：WAIT_BUYER_PAY（交易创建，等待买家付款）、TRADE_CLOSED（未付款交易超时关闭，或支付完成后全额退款）、TRADE_SUCCESS（交易支付成功）、TRADE_FINISHED（交易结束，不可退款）
         /// </summary>
         [JsonProperty("trade_status")]

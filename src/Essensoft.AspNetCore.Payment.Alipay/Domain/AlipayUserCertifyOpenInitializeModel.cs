@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayUserCertifyOpenInitializeModel : AlipayObject
     {
         /// <summary>
-        /// 认证场景码。入参支持的认证场景码和商户签约的认证场景相关，取值如下:  CERT：多因子证照认证  FACE：多因子人脸认证  FACE_CERT ：多因子证照和人脸认证  TRUSTED：多因子快捷认证
+        /// 认证场景码。入参支持的认证场景码和商户签约的认证场景相关，取值如下: FACE：多因子人脸认证 CERT_PHOTO：多因子证照认证 CERT_PHOTO_FACE ：多因子证照和人脸认证 SMART_FACE：多因子快捷认证
         /// </summary>
         [JsonProperty("biz_code")]
         public string BizCode { get; set; }

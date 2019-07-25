@@ -16,13 +16,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Address { get; set; }
 
         /// <summary>
-        /// 城市编码，城市编码是与国家统计局一致，请查询:  http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/  国标省市区号下载：http://aopsdkdownload.cn-hangzhou.alipay-pub.aliyun-inc.com/doc/2016.xls?spm=a219a.7629140.0.0.qRW4KQ&file=2016.xls
+        /// 城市编码。请按照https://gw.alipayobjects.com/os/basement_prod/253c4dcb-b8a4-4a1e-8be2-79e191a9b6db.xlsx 表格中内容填写。  （参考资料：  http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/）
         /// </summary>
         [JsonProperty("city_code")]
         public string CityCode { get; set; }
 
         /// <summary>
-        /// 区县编码，区县编码是与国家统计局一致，请查询: http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/ 国标省市区号下载：http://aopsdkdownload.cn-hangzhou.alipay-pub.aliyun-inc.com/doc/2016.xls?spm=a219a.7629140.0.0.qRW4KQ&file=2016.xls
+        /// 区县编码。请按照https://gw.alipayobjects.com/os/basement_prod/253c4dcb-b8a4-4a1e-8be2-79e191a9b6db.xlsx 表格中内容填写。  （参考资料：  http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/）
         /// </summary>
         [JsonProperty("district_code")]
         public string DistrictCode { get; set; }
@@ -46,7 +46,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Poiid { get; set; }
 
         /// <summary>
-        /// 省份编码，  省份编码是与国家统计局一致，请查询:  http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/  国标省市区号下载：http://aopsdkdownload.cn-hangzhou.alipay-pub.aliyun-inc.com/doc/2016.xls?spm=a219a.7629140.0.0.qRW4KQ&file=2016.xls
+        /// 省份编码。请按照https://gw.alipayobjects.com/os/basement_prod/253c4dcb-b8a4-4a1e-8be2-79e191a9b6db.xlsx 表格中内容填写。  （参考资料：  http://www.stats.gov.cn/tjsj/tjbz/tjyqhdmhcxhfdm/）
         /// </summary>
         [JsonProperty("province_code")]
         public string ProvinceCode { get; set; }
