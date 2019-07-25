@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class SendRule : AlipayObject
     {
         /// <summary>
-        /// 是否允许重复发奖：  true代表允许，false代表不允许  默认不设置，表明用户领取券后如果没有核销则不允许再次领取券  如果设置为true，表明如果用户领取券后没有核销，还可以继续领取该券
+        /// 是否允许重复发奖：  true代表允许，false代表不允许  默认不设置，表明用户领取券后如果没有核销则不允许再次领取券  如果设置为true，表明如果用户领取券后没有核销，还可以继续领取该券（只有配置publish_channels中type为URL_WITH_TOKEN外部发券时，该字段生效）
         /// </summary>
         [JsonProperty("allow_repeat_send")]
         public string AllowRepeatSend { get; set; }

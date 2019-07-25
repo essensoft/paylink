@@ -16,7 +16,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AuthToken { get; set; }
 
         /// <summary>
-        /// Iphone6 16G
+        /// 对一笔交易的具体描述信息。如果是多种商品，请将商品描述字符串累加传给body。
         /// </summary>
         [JsonProperty("body")]
         public string Body { get; set; }

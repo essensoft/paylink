@@ -22,6 +22,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OrderBizInfo { get; set; }
 
         /// <summary>
+        /// 原始业务请求单号。如对某一次退款进行履约时，该字段传退款时的退款请求号
+        /// </summary>
+        [JsonProperty("orig_request_no")]
+        public string OrigRequestNo { get; set; }
+
+        /// <summary>
         /// 标识一笔交易多次请求，同一笔交易多次信息同步时需要保证唯一
         /// </summary>
         [JsonProperty("out_request_no")]

@@ -130,7 +130,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ParkingNumber { get; set; }
 
         /// <summary>
-        /// 高德地图唯一标识
+        /// 高德地图唯一标识，查看方法可参考 https://openclub.alipay.com/club/history/read/5150  若需新增高德兴趣点，请访问高德网站http://map.amap.com/help/index.html?type=addpoi
         /// </summary>
         [JsonProperty("parking_poiid")]
         public string ParkingPoiid { get; set; }

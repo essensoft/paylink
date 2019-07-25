@@ -40,6 +40,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ExtraParam { get; set; }
 
         /// <summary>
+        /// 用户实名信息参数，包含：姓名+身份证号的hash值、指定用户的uid。商户传入用户实名信息参数，支付宝会对比用户在支付宝端的实名信息。  姓名+身份证号hash值使用SHA256摘要方式与UTF8编码,返回十六进制的字符串。
+        /// </summary>
+        [JsonProperty("identity_params")]
+        public string IdentityParams { get; set; }
+
+        /// <summary>
         /// 业务订单的简单描述，如商品名称等  长度不超过100个字母或50个汉字
         /// </summary>
         [JsonProperty("order_title")]
@@ -76,7 +82,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string PayeeUserId { get; set; }
 
         /// <summary>
-        /// 销售产品码，后续新接入预授权当面付的业务，本字段取值固定为PRE_AUTH。
+        /// 销售产品码，后续新接入预授权当面付的业务，新当面资金授权取值PRE_AUTH，境外预授权取值OVERSEAS_INSTORE_AUTH。
         /// </summary>
         [JsonProperty("product_code")]
         public string ProductCode { get; set; }

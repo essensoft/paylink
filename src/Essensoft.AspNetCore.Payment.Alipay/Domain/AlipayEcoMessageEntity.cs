@@ -22,7 +22,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AppCode { get; set; }
 
         /// <summary>
-        /// 证件号码.(certificate_type/certificate_number/certificate_username) 或者 alipay_user_id 必须有一个不为空。两个都不为空则以alipay_user_id为准.
+        /// 证件号码.(certificate_type/certificate_number/certificate_username) 或者 alipay_user_id 必须有一个不为空。两个都不为空则以alipay_user_id为准.  该字段为敏感字段，须做md5处理后传输。示例中值的明文为310101198011110010.
         /// </summary>
         [JsonProperty("certificate_number")]
         public string CertificateNumber { get; set; }
@@ -46,7 +46,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string CityCode { get; set; }
 
         /// <summary>
-        /// 消息扩展信息，json格式字符串. 大部分情况下为空
+        /// 消息参数信息，json格式字符串.   该字段与msg_type对应，不同类型的消息需要传不同的参数信息，详情参考接口补充说明.
         /// </summary>
         [JsonProperty("ext_info")]
         public string ExtInfo { get; set; }
@@ -58,7 +58,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public long IndustryType { get; set; }
 
         /// <summary>
-        /// 消息类型. 1=动账.2=账单.3=缴费.4=办件进度.5=证件到期.6=违章提醒
+        /// 消息类型. 1=动账.2=账单.3=缴费.4=办件进度.5=证件到期.6=违章提醒.  更多请参考接口补充说明
         /// </summary>
         [JsonProperty("msg_type")]
         public long MsgType { get; set; }

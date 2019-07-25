@@ -29,6 +29,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BatchNo { get; set; }
 
         /// <summary>
+        /// JSON格式扩展信息
+        /// </summary>
+        [JsonProperty("ext_info")]
+        public string ExtInfo { get; set; }
+
+        /// <summary>
         /// 物流单信息
         /// </summary>
         [JsonProperty("logistics_infos")]

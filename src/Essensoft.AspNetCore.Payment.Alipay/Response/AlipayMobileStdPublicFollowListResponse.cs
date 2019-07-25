@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Essensoft.AspNetCore.Payment.Alipay.Domain;
+using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -17,7 +18,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 用户数据
         /// </summary>
         [JsonProperty("data")]
-        public Domain.Data Data { get; set; }
+        public Data Data { get; set; }
 
         /// <summary>
         /// 与nextUserId对应，标准Alipay UserId

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
@@ -20,6 +21,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("out_trade_no")]
         public string OutTradeNo { get; set; }
+
+        /// <summary>
+        /// 查询选项，商户通过上送该字段来定制查询返回信息
+        /// </summary>
+        [JsonProperty("query_options")]
+        public List<string> QueryOptions { get; set; }
 
         /// <summary>
         /// 支付宝交易号，和商户订单号不能同时为空

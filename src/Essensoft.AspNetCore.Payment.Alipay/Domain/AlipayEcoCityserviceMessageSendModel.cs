@@ -17,7 +17,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public long BatchSize { get; set; }
 
         /// <summary>
-        /// 敏感字段加密类型，空表示不加密，目前支持md5，默认加密字段是msg_list中每条消息的“certificate_number”字段
+        /// 敏感字段加密类型，目前支持md5，默认加密字段是msg_list中每条消息的“certificate_number”字段
         /// </summary>
         [JsonProperty("encrypt_type")]
         public string EncryptType { get; set; }

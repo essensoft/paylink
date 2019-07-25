@@ -69,5 +69,35 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("quote_type")]
         public string QuoteType { get; set; }
+
+        /// <summary>
+        /// 税务机构编码
+        /// </summary>
+        [JsonProperty("tax_inst_code")]
+        public string TaxInstCode { get; set; }
+
+        /// <summary>
+        /// 税务机构名称
+        /// </summary>
+        [JsonProperty("tax_inst_name")]
+        public string TaxInstName { get; set; }
+
+        /// <summary>
+        /// 完税凭证编码
+        /// </summary>
+        [JsonProperty("tax_payment_code")]
+        public string TaxPaymentCode { get; set; }
+
+        /// <summary>
+        /// 完税评审日期，格式：yyyymmdd
+        /// </summary>
+        [JsonProperty("tax_payment_date")]
+        public string TaxPaymentDate { get; set; }
+
+        /// <summary>
+        /// 是否完税标识
+        /// </summary>
+        [JsonProperty("tax_type")]
+        public string TaxType { get; set; }
     }
 }

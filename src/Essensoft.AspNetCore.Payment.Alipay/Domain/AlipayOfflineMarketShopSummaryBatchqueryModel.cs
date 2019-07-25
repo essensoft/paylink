@@ -10,6 +10,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayOfflineMarketShopSummaryBatchqueryModel : AlipayObject
     {
         /// <summary>
+        /// 表示接口查询门店的业务渠道限制：ALL、 POS、不传。不传代表只查询普通门店，传入POS代表只查询简易门店，传入ALL代表查询普通门店和简易门店。
+        /// </summary>
+        [JsonProperty("biz_channel")]
+        public string BizChannel { get; set; }
+
+        /// <summary>
         /// 品牌名
         /// </summary>
         [JsonProperty("brand_name")]
