@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 using Essensoft.AspNetCore.Payment.Security;
@@ -7,7 +7,7 @@ using Org.BouncyCastle.Crypto;
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
 {
     /// <summary>
-    /// LianLianPay ��ȫ�ࡣ
+    /// LianLianPay 安全类。
     /// </summary>
     public class LianLianPaySecurity
     {
