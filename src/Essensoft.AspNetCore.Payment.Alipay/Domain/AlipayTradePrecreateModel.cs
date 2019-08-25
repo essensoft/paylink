@@ -41,7 +41,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string DisablePayChannels { get; set; }
 
         /// <summary>
-        /// 可打折金额. 参与优惠计算的金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000] 如果该值未传入，但传入了【订单总金额】，【不可打折金额】则该值默认为【订单总金额】-【不可打折金额】
+        /// 可打折金额. 参与优惠计算的金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000] 如果该值未传入，但传入了【订单总金额】和【不可打折金额】，则该值默认为【订单总金额】-【不可打折金额】
         /// </summary>
         [JsonProperty("discountable_amount")]
         public string DiscountableAmount { get; set; }
@@ -155,7 +155,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string TotalAmount { get; set; }
 
         /// <summary>
-        /// 不可打折金额. 不参与优惠计算的金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000] 如果该值未传入，但传入了【订单总金额】,【打折金额】，则该值默认为【订单总金额】-【打折金额】
+        /// 不可打折金额. 不参与优惠计算的金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000] 如果该值未传入，但传入了【订单总金额】和【打折金额】，则该值默认为【订单总金额】-【打折金额】
         /// </summary>
         [JsonProperty("undiscountable_amount")]
         public string UndiscountableAmount { get; set; }

@@ -175,7 +175,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 经度；最长15位字符（包括小数点）， 注：高德坐标系。经纬度是门店搜索和活动推荐的重要参数，录入时请确保经纬度参数准确。高德经纬度查询：http://lbs.amap.com/console/show/picker
         /// </summary>
         [JsonProperty("longitude")]
-        public long Longitude { get; set; }
+        public string Longitude { get; set; }
 
         /// <summary>
         /// 门店首图，非常重要，推荐尺寸2000*1500。

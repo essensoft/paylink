@@ -10,6 +10,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayTradeAppPayModel : AlipayObject
     {
         /// <summary>
+        /// 签约参数。如果希望在sdk中支付并签约，需要在这里传入签约信息。
+        /// </summary>
+        [JsonProperty("agreement_sign_params")]
+        public SignParams AgreementSignParams { get; set; }
+
+        /// <summary>
         /// 对一笔交易的具体描述信息。如果是多种商品，请将商品描述字符串累加传给body。
         /// </summary>
         [JsonProperty("body")]

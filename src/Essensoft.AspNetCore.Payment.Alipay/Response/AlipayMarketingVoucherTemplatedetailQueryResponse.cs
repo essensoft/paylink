@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     public class AlipayMarketingVoucherTemplatedetailQueryResponse : AlipayResponse
     {
         /// <summary>
-        /// 面额。每张代金券可以抵扣的金额。币种为人民币，单位为元。该数值不小于0，小数点以后最多两位。
+        /// 面额。每张代金券可以抵扣的金额。币种为人民币，单位为元。该数值不小于0，小数点以后最多两位。当券类型为无资金单品券（ITEM_CASHLESS_FIX_VOUCHER、ITEM_CASHLESS_DISCOUNT_VOUCHER、ITEM_CASHLESS_SPE_VOUCHER）时，暂不支持查询本参数，出参为0
         /// </summary>
         [JsonProperty("amount")]
         public string Amount { get; set; }
@@ -62,7 +62,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string TemplateId { get; set; }
 
         /// <summary>
-        /// 总金额面额。币种为人民币，单位为元。该数值不小于0，小数点以后最多两位。仅代金券
+        /// 总金额面额。币种为人民币，单位为元。该数值不小于0，小数点以后最多两位。仅代金券有效。当券类型为无资金单品券（ITEM_CASHLESS_FIX_VOUCHER、ITEM_CASHLESS_DISCOUNT_VOUCHER、ITEM_CASHLESS_SPE_VOUCHER）时，暂不支持查询本参数，出参为0
         /// </summary>
         [JsonProperty("total_amount")]
         public string TotalAmount { get; set; }
@@ -98,7 +98,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public long VoucherQuantity { get; set; }
 
         /// <summary>
-        /// 券类型。可枚举，暂时只支持"代金券"(FIX_VOUCHER)
+        /// 券类型。可枚举，暂时只支持代金券(FIX_VOUCHER)、无资金单品代金券（ITEM_CASHLESS_FIX_VOUCHER）、无资金单品折扣券（ITEM_CASHLESS_DISCOUNT_VOUCHER）、无资金单品特价券（ITEM_CASHLESS_SPE_VOUCHER）
         /// </summary>
         [JsonProperty("voucher_type")]
         public string VoucherType { get; set; }

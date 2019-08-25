@@ -15,7 +15,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public FileItem FileContent { get; set; }
 
         /// <summary>
-        /// 业务场景描述
+        /// 业务场景描述，比如订单信息同步场景对应SYNC_ORDER
         /// </summary>
         public string Scene { get; set; }
 

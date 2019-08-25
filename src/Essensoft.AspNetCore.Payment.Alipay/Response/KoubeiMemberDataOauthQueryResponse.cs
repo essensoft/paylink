@@ -30,5 +30,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonProperty("operator_type")]
         public string OperatorType { get; set; }
+
+        /// <summary>
+        /// 操作人身份是商家员工(MER_STAFF)或服务商员工(PROVIDER_STAFF)时将返回其可操作的门店id列表
+        /// </summary>
+        [JsonProperty("shop_ids")]
+        public string ShopIds { get; set; }
     }
 }

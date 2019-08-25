@@ -1,0 +1,30 @@
+﻿using System;
+using Newtonsoft.Json;
+
+namespace Essensoft.AspNetCore.Payment.Alipay.Domain
+{
+    /// <summary>
+    /// AlipayCommerceTransportVehicleownerSettlementQueryModel Data Structure.
+    /// </summary>
+    [Serializable]
+    public class AlipayCommerceTransportVehicleownerSettlementQueryModel : AlipayObject
+    {
+        /// <summary>
+        /// 业务扣款协议号，由用户申请办理时生成并同步给外部。非支付宝收单必传。
+        /// </summary>
+        [JsonProperty("biz_agreement_no")]
+        public string BizAgreementNo { get; set; }
+
+        /// <summary>
+        /// 订单支付时传入的商户订单号，商户订单号和交易号两者不能同时为空
+        /// </summary>
+        [JsonProperty("out_trade_no")]
+        public string OutTradeNo { get; set; }
+
+        /// <summary>
+        /// 收单机构交易流水号，商户订单号和交易流水号两者不能同时为空
+        /// </summary>
+        [JsonProperty("trade_no")]
+        public string TradeNo { get; set; }
+    }
+}
