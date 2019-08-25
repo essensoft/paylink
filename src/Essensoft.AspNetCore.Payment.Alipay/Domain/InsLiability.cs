@@ -59,6 +59,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string LiabilityPremium { get; set; }
 
         /// <summary>
+        /// 责任险种比率
+        /// </summary>
+        [JsonProperty("liability_rates")]
+        public string LiabilityRates { get; set; }
+
+        /// <summary>
         /// options
         /// </summary>
         [JsonProperty("options")]

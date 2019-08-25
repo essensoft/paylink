@@ -16,6 +16,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ApplicationNo { get; set; }
 
         /// <summary>
+        /// URL to download approval letter  Approval letter 文件下载地址
+        /// </summary>
+        [JsonProperty("approval_letter_url")]
+        public string ApprovalLetterUrl { get; set; }
+
+        /// <summary>
         /// 泰国移民局发放的批准或拒绝码。  IMM’s code of approve or reject. Ex. “PAC2019020987654” , “NAC2019020987654”
         /// </summary>
         [JsonProperty("imm_code")]
@@ -62,6 +68,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("status_date_time")]
         public string StatusDateTime { get; set; }
+
+        /// <summary>
+        /// URL to download TM.6  TM6 文件下载地址
+        /// </summary>
+        [JsonProperty("tm_6_url")]
+        public string Tm6Url { get; set; }
 
         /// <summary>
         /// URL to download TM.88  TM88 文件下载地址。

@@ -16,6 +16,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Address { get; set; }
 
         /// <summary>
+        /// 干系人地址区县编码
+        /// </summary>
+        [JsonProperty("area_code")]
+        public string AreaCode { get; set; }
+
+        /// <summary>
         /// 生日
         /// </summary>
         [JsonProperty("birthday")]

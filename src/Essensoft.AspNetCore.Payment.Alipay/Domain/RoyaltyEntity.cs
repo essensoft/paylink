@@ -22,7 +22,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Memo { get; set; }
 
         /// <summary>
-        /// 分账方全称
+        /// 分账方全称，新增分账关系时作为请求参数必填，解绑分账关系时作为请求参数可不填，分账关系查询时不作为返回结果返回
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }

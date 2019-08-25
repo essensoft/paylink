@@ -28,7 +28,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Identity { get; set; }
 
         /// <summary>
-        /// 参与方的标识类型，目前支持如下类型：  1、ALIPAY_USER_ID 支付宝的会员ID  2、ALIPAY_ANONYMOUS_USER_ID 支付宝匿名账号  3、BANKCARD_ACCOUNT 银行卡账号(仅支持参与者为收款方时指定)  4、ALIPAY_LOGON_ID：支付宝登录号，支持邮箱和手机号格式
+        /// 参与方的标识类型，目前支持如下类型：  1、ALIPAY_USER_ID 支付宝的会员ID  2、ALIPAY_LOGON_ID：支付宝登录号，支持邮箱和手机号格式
         /// </summary>
         [JsonProperty("identity_type")]
         public string IdentityType { get; set; }
@@ -40,7 +40,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string MerchantUserInfo { get; set; }
 
         /// <summary>
-        /// 参与方名称
+        /// 参与方真实姓名，如果非空，将校验收款支付宝账号姓名一致性。当identity_type=ALIPAY_LOGON_ID时，本字段必填。
         /// </summary>
         [JsonProperty("name")]
         public string Name { get; set; }

@@ -40,6 +40,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public InsPerson Applicant { get; set; }
 
         /// <summary>
+        /// 机构投保业务归属地信息
+        /// </summary>
+        [JsonProperty("apply_business_city")]
+        public ApplyBusinessCity ApplyBusinessCity { get; set; }
+
+        /// <summary>
         /// 车辆信息
         /// </summary>
         [JsonProperty("car")]

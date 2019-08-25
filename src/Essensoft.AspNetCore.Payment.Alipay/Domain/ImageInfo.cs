@@ -16,9 +16,21 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Image { get; set; }
 
         /// <summary>
-        /// 传入图片类型，ID表示aftsId，URL表示图片url地址
+        /// 传入图片类型
         /// </summary>
         [JsonProperty("image_type")]
         public string ImageType { get; set; }
+
+        /// <summary>
+        /// 图片数据md5值
+        /// </summary>
+        [JsonProperty("md_5")]
+        public string Md5 { get; set; }
+
+        /// <summary>
+        /// 图片数据标识名
+        /// </summary>
+        [JsonProperty("name")]
+        public string Name { get; set; }
     }
 }
