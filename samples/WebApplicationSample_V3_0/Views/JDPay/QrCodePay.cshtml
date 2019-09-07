@@ -1,0 +1,69 @@
+﻿@model JDPayUnifiedOrderViewModel
+@{
+    ViewData["Title"] = "扫码支付";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="JDPay" asp-action="Index">京东支付</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+    </ol>
+</nav>
+<br />
+<div class="card">
+    <div class="card-body">
+        <form asp-controller="JDPay" asp-action="QrCodePay">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="TradeNum"></label>
+                <input type="text" class="form-control" asp-for="TradeNum" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TradeName"></label>
+                <input type="text" class="form-control" asp-for="TradeName" value="扫码支付测试" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TradeTime"></label>
+                <input type="text" class="form-control" asp-for="TradeTime" value="@DateTime.Now.ToString("yyyyMMddHHmmss")" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Amount"></label>
+                <input type="text" class="form-control" asp-for="Amount" value="1" />
+            </div>
+            <div class="form-group">
+                <label asp-for="OrderType"></label>
+                <input type="text" class="form-control" asp-for="OrderType" value="1" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Currency"></label>
+                <input type="text" class="form-control" asp-for="Currency" value="CNY" />
+            </div>
+            <div class="form-group">
+                <label asp-for="TradeType"></label>
+                <input type="text" class="form-control" asp-for="TradeType" value="QR" />
+            </div>
+            <div class="form-group">
+                <label asp-for="NotifyUrl"></label>
+                <input type="text" class="form-control" asp-for="NotifyUrl" value="http://*/notify/jdpay/async" />
+            </div>
+            <button type="submit" class="btn btn-primary">提交请求</button>
+        </form>
+        <hr />
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label>QrCode:</label>
+                @if (!string.IsNullOrEmpty(ViewData["qrcode"] as string))
+                {
+                <embed src="../Home/QrCode?size=168&data=@ViewData["qrcode"]" width="168" height="168" type="image/svg+xml" />
+                }
+            </div>
+            <div class="form-group">
+                <label>Response:</label>
+                <textarea class="form-control" rows="10">@ViewData["response"]</textarea>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+

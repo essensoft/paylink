@@ -1,0 +1,93 @@
+﻿@using WebApplicationSample_V3_0.Helpers
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Payment</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute"
+              crossorigin="anonymous"
+              integrity="sha256-eSi1q2PG6J7g7ib17yAaWMcrr5GrtohYChqibrV7PBE=" />
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white navbar-shadow">
+        <div class="container">
+            <a asp-controller="Home" asp-action="Index" class="navbar-brand"><img src="~/images/payment.png" /></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item @Html.IsActive("Alipay")">
+                        <a class="nav-link" asp-controller="Alipay" asp-action="Index">支付宝</a>
+                    </li>
+                    <li class="nav-item @Html.IsActive("WeChatPay")">
+                        <a class="nav-link" asp-controller="WeChatPay" asp-action="Index">微信支付</a>
+                    </li>
+                    <li class="nav-item @Html.IsActive("QPay")">
+                        <a class="nav-link" asp-controller="QPay" asp-action="Index">QQ钱包</a>
+                    </li>
+                    <li class="nav-item @Html.IsActive("JDPay")">
+                        <a class="nav-link" asp-controller="JDPay" asp-action="Index">京东支付</a>
+                    </li>
+                    <li class="nav-item @Html.IsActive("LianLianPay")">
+                        <a class="nav-link" asp-controller="LianLianPay" asp-action="Index">连连支付</a>
+                    </li>
+                    <li class="nav-item @Html.IsActive("UnionPay")">
+                        <a class="nav-link" asp-controller="UnionPay" asp-action="Index">银联支付</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav navbar-right">
+                    <li class="nav-item @Html.IsActive("Home", "Gratuity")">
+                        <a class="nav-link" asp-controller="Home" asp-action="Gratuity">打赏</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container body-content">
+        @RenderBody()
+    </div>
+    <footer>
+        <div class="container">
+            <ul class="list-style-none d-flex">
+                <li class="mr-3"><p>&copy; @DateTime.Now.Year Payment</p></li>
+                <li class="mr-3"><a target="_blank" href="https://github.com/Essensoft/Payment">GitHub</a></li>
+                <li class="mr-3"><a target="_blank" href="https://gitee.com/Essensoft/Payment">Gitee</a></li>
+                <li class="mr-3">Payment 交流群：<a target="_blank" href="https://shang.qq.com/wpa/qunwpa?idkey=aac56c8f02f54893267d3ac90787c1794a7687f3c31a923812a36b67c4ee6271">522457525</a></li>
+            </ul>
+        </div>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                crossorigin="anonymous"
+                integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=">
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                crossorigin="anonymous"
+                integrity="sha256-E/V4cWE4qvAeO5MOhjtGtqDzPndRO1LBk8lJ/PR7CA4=">
+        </script>
+    </environment>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    @RenderSection("Scripts", false)
+</body>
+</html>

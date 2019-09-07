@@ -1,0 +1,54 @@
+﻿@model LianLianPayH5QuickPayViewModel
+@{
+    ViewData["Title"] = "H5快捷支付";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="LianLianPay" asp-action="Index">连连支付</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+    </ol>
+</nav>
+<br />
+<div class="card">
+    <div class="card-body">
+        <form asp-controller="LianLianPay" asp-action="H5QuickPay" target="_blank">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NoOrder"></label>
+                <input type="text" class="form-control" asp-for="NoOrder" value="@DateTime.Now.ToString("yyyyMMddHHmmssfff")" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DtOrder"></label>
+                <input type="text" class="form-control" asp-for="DtOrder" value="@DateTime.Now.ToString("yyyyMMddHHmmss")" />
+            </div>
+            <div class="form-group">
+                <label asp-for="MoneyOrder"></label>
+                <input type="text" class="form-control" asp-for="MoneyOrder" value="0.01" />
+            </div>
+            <div class="form-group">
+                <label asp-for="NameGoods"></label>
+                <input type="text" class="form-control" asp-for="NameGoods" value="WAP快捷支付测试" />
+            </div>
+            <div class="form-group">
+                <label asp-for="UserId"></label>
+                <input type="text" class="form-control" asp-for="UserId" />
+            </div>
+            <div class="form-group">
+                <label asp-for="NotifyUrl"></label>
+                <input type="text" class="form-control" asp-for="NotifyUrl" value="http://*/notify/lianlianpay/receivemoney" />
+            </div>
+            <div class="form-group">
+                <label asp-for="UrlReturn"></label>
+                <input type="text" class="form-control" asp-for="UrlReturn" value="http://*/lianlianpay/quickpayreturn" />
+            </div>
+            <div class="form-group">
+                <label asp-for="RiskItem"></label>
+                <input type="text" class="form-control" asp-for="RiskItem" value='{"frms_ware_category":"1999","user_info_full_name":"你好"}' />
+            </div>
+            <button type="submit" class="btn btn-primary">提交请求</button>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
