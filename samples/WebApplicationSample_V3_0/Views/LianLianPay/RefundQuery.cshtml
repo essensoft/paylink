@@ -1,0 +1,41 @@
+﻿@model LianLianPayRefundQueryViewModel
+@{
+    ViewData["Title"] = "退款查询";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="LianLianPay" asp-action="Index">连连支付</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+    </ol>
+</nav>
+<br />
+<div class="card">
+    <div class="card-body">
+        <form asp-controller="LianLianPay" asp-action="RefundQuery">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="NoRefund"></label>
+                <input type="text" class="form-control" asp-for="NoRefund" />
+            </div>
+            <div class="form-group">
+                <label asp-for="DtRefund"></label>
+                <input type="text" class="form-control" asp-for="DtRefund" />
+            </div>
+            <div class="form-group">
+                <label asp-for="OidRefundNo"></label>
+                <input type="text" class="form-control" asp-for="OidRefundNo" />
+            </div>
+            <button type="submit" class="btn btn-primary">提交请求</button>
+        </form>
+        <hr />
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label>Response:</label>
+                <textarea class="form-control" rows="10">@ViewData["response"]</textarea>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

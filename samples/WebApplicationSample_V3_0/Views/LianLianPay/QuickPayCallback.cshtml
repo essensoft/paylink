@@ -1,0 +1,15 @@
+﻿@{
+    ViewData["Title"] = "快捷支付-同步通知";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="LianLianPay" asp-action="Index">连连支付</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+    </ol>
+</nav>
+<br />
+<div class="card">
+    <div class="card-body">
+        @ViewData["response"]
+    </div>
+</div>
