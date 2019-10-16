@@ -22,7 +22,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AccountSceneCode { get; set; }
 
         /// <summary>
-        /// 查询的账号类型，如查询托管账户值为TRUSTEESHIP_ACCOUNT，查询余额户值为ACCTRANS_ACCOUNT
+        /// 查询的账号类型，如查询托管账户值为TRUSTEESHIP_ACCOUNT，查询余额账户值为ACCTRANS_ACCOUNT。查询余额账户时必填。
         /// </summary>
         [JsonProperty("account_type")]
         public string AccountType { get; set; }
@@ -34,7 +34,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AlipayUserId { get; set; }
 
         /// <summary>
-        /// JSON格式，传递业务扩展参数，使用前请与支付宝工程师联系！
+        /// JSON格式，传递业务扩展参数。
         /// </summary>
         [JsonProperty("ext_info")]
         public string ExtInfo { get; set; }

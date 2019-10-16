@@ -40,6 +40,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string InvoiceAmount { get; set; }
 
         /// <summary>
+        /// 凭证对应商品别名，在口碑商品创建时候设置
+        /// </summary>
+        [JsonProperty("item_alias")]
+        public string ItemAlias { get; set; }
+
+        /// <summary>
         /// 口碑商品ID
         /// </summary>
         [JsonProperty("item_id")]

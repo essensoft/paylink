@@ -35,6 +35,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BizData { get; set; }
 
         /// <summary>
+        /// 保险产品销售单元编码
+        /// </summary>
+        [JsonProperty("csu_no")]
+        public string CsuNo { get; set; }
+
+        /// <summary>
         /// 生效时间
         /// </summary>
         [JsonProperty("effect_start_time")]

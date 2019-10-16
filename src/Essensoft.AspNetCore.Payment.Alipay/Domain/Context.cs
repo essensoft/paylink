@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class Context : AlipayObject
     {
         /// <summary>
-        /// 底部链接描述文字，如“查看详情”
+        /// 底部链接描述文字，如“查看详情”，最多能传8个汉字或16个英文字符，长度超出会报错
         /// </summary>
         [JsonProperty("action_name")]
         public string ActionName { get; set; }

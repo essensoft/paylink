@@ -16,7 +16,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BizTid { get; set; }
 
         /// <summary>
-        /// 交易流水号. 如果需要调用alipay.commerce.iot.device.broadcast.query接口,查询设备是否播报,则trade_id必填,否则无法获取播报结果
+        /// 交易流水号. 在以下情况下必填: 1. 如果需要调用alipay.commerce.iot.device.broadcast.query接口,查询设备是否播报,则trade_id必填; 2. 如果是交易播报则交易流水号必填,也就是说voice_content里面包含money参数的,则trade_id必填
         /// </summary>
         [JsonProperty("trade_id")]
         public string TradeId { get; set; }

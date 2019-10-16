@@ -14,5 +14,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("application_no")]
         public string ApplicationNo { get; set; }
+
+        /// <summary>
+        /// payToIssue:支付后出单 issue:直接出单
+        /// </summary>
+        [JsonProperty("issue_type")]
+        public string IssueType { get; set; }
     }
 }
