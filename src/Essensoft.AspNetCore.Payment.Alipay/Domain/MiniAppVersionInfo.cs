@@ -40,6 +40,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public long CoverageRate { get; set; }
 
         /// <summary>
+        /// 版本生成失败错误原因
+        /// </summary>
+        [JsonProperty("error_msg")]
+        public string ErrorMsg { get; set; }
+
+        /// <summary>
         /// iOS客户端版本号信息
         /// </summary>
         [JsonProperty("ios_client_version_info")]

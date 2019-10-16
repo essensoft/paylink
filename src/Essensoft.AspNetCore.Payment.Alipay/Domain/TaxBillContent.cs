@@ -16,6 +16,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AntiFakeCode { get; set; }
 
         /// <summary>
+        /// 复审
+        /// </summary>
+        [JsonProperty("checker")]
+        public string Checker { get; set; }
+
+        /// <summary>
+        /// 开票人
+        /// </summary>
+        [JsonProperty("clerk")]
+        public string Clerk { get; set; }
+
+        /// <summary>
         /// 总金额
         /// </summary>
         [JsonProperty("einv_amount")]
@@ -40,6 +52,24 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string EinvNo { get; set; }
 
         /// <summary>
+        /// 收款人
+        /// </summary>
+        [JsonProperty("payee")]
+        public string Payee { get; set; }
+
+        /// <summary>
+        /// 卖方地址、电话
+        /// </summary>
+        [JsonProperty("payee_address")]
+        public string PayeeAddress { get; set; }
+
+        /// <summary>
+        /// 卖方开户行
+        /// </summary>
+        [JsonProperty("payee_bank_name")]
+        public string PayeeBankName { get; set; }
+
+        /// <summary>
         /// 卖方名称
         /// </summary>
         [JsonProperty("payee_name")]
@@ -52,6 +82,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string PayeeRegisterNo { get; set; }
 
         /// <summary>
+        /// 买方地址、电话
+        /// </summary>
+        [JsonProperty("payer_address")]
+        public string PayerAddress { get; set; }
+
+        /// <summary>
+        /// 买方开户行
+        /// </summary>
+        [JsonProperty("payer_bank_name")]
+        public string PayerBankName { get; set; }
+
+        /// <summary>
         /// 买方名称
         /// </summary>
         [JsonProperty("payer_name")]
@@ -62,6 +104,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("payer_register_no")]
         public string PayerRegisterNo { get; set; }
+
+        /// <summary>
+        /// 价税合计（大写）
+        /// </summary>
+        [JsonProperty("sum_amount")]
+        public string SumAmount { get; set; }
 
         /// <summary>
         /// 税额

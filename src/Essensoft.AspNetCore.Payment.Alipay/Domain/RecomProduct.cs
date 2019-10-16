@@ -53,6 +53,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string CompanyServicePhone { get; set; }
 
         /// <summary>
+        /// 产品销售单元
+        /// </summary>
+        [JsonProperty("csu_no")]
+        public string CsuNo { get; set; }
+
+        /// <summary>
         /// 最大允许购买份数
         /// </summary>
         [JsonProperty("max_quan")]
@@ -99,6 +105,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("restriction_type")]
         public string RestrictionType { get; set; }
+
+        /// <summary>
+        /// 保额(单位:分)
+        /// </summary>
+        [JsonProperty("sum_insured")]
+        public long SumInsured { get; set; }
 
         /// <summary>
         /// 推荐返回结果对象：1：保险产品，2：保险权益

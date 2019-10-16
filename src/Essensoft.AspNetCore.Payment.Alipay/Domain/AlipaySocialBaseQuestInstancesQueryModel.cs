@@ -1,16 +1,23 @@
 ﻿using System;
+using System.Collections.Generic;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
-    /// AlipayOpenPublicFollowingFollowModel Data Structure.
+    /// AlipaySocialBaseQuestInstancesQueryModel Data Structure.
     /// </summary>
     [Serializable]
-    public class AlipayOpenPublicFollowingFollowModel : AlipayObject
+    public class AlipaySocialBaseQuestInstancesQueryModel : AlipayObject
     {
         /// <summary>
-        /// 关注来源ID
+        /// 目标ID列表，列表长度不能超过20
+        /// </summary>
+        [JsonProperty("quest_ids")]
+        public List<string> QuestIds { get; set; }
+
+        /// <summary>
+        /// 调用方标识
         /// </summary>
         [JsonProperty("source_id")]
         public string SourceId { get; set; }

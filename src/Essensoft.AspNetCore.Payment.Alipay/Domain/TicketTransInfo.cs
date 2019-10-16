@@ -22,6 +22,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string LastModifyTime { get; set; }
 
         /// <summary>
+        /// 流水涉及凭证数量，若为普通商品则为1， 若为次卡则为操作的凭证份数
+        /// </summary>
+        [JsonProperty("quantity")]
+        public string Quantity { get; set; }
+
+        /// <summary>
         /// 凭证流水id
         /// </summary>
         [JsonProperty("ticket_trans_id")]

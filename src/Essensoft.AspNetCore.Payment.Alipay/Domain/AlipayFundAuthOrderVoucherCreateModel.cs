@@ -28,7 +28,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ExtraParam { get; set; }
 
         /// <summary>
-        /// 用户实名信息参数，包含：姓名+身份证号的hash值、指定用户的uid。商户传入用户实名信息参数，支付宝会对比用户在支付宝端的实名信息。  姓名+身份证号hash值使用SHA256摘要方式与UTF8编码,返回十六进制的字符串。
+        /// 用户实名信息参数，包含：姓名+身份证号的hash值、指定用户的uid。商户传入用户实名信息参数，支付宝会对比用户在支付宝端的实名信息。 姓名+身份证号hash值使用SHA256摘要方式与UTF8编码,返回十六进制的字符串。 identity_hash和alipay_user_id都是可选的，如果两个都传，则会先校验identity_hash，然后校验alipay_user_id。其中identity_hash的待加密字样如"张三4566498798498498498498"
         /// </summary>
         [JsonProperty("identity_params")]
         public string IdentityParams { get; set; }

@@ -68,5 +68,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("status")]
         public string Status { get; set; }
+
+        /// <summary>
+        /// 二级商户信息
+        /// </summary>
+        [JsonProperty("sub_merchant")]
+        public SubMerchant SubMerchant { get; set; }
     }
 }

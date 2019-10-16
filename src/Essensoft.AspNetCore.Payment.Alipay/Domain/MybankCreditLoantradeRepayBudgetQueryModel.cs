@@ -16,7 +16,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ApplyRepayPrin { get; set; }
 
         /// <summary>
-        /// TOTAL_AMT：总额还款，PRIN_AMT：本金还款，如果为空，默认为本金还款
+        /// TOTAL_AMT：总额试算 PRIN_AMT：本金试算 CLEAR_AMT：结清试算 如果为空，默认为本金还款
         /// </summary>
         [JsonProperty("budget_type")]
         public string BudgetType { get; set; }
@@ -50,5 +50,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("loan_ar_no")]
         public string LoanArNo { get; set; }
+
+        /// <summary>
+        /// 还款场景， 主动还款 CUST_REPAY 机构代客还款 ORG_REPAY 默认值为主动还款
+        /// </summary>
+        [JsonProperty("repay_scene")]
+        public string RepayScene { get; set; }
     }
 }

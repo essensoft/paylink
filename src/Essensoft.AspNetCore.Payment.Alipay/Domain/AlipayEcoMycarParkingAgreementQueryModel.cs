@@ -20,5 +20,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("car_number")]
         public string CarNumber { get; set; }
+
+        /// <summary>
+        /// 接口版本号，不填则默认为v2.0，建议使用最新版v2.1
+        /// </summary>
+        [JsonProperty("ver")]
+        public string Ver { get; set; }
     }
 }
