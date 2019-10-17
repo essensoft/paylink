@@ -4,7 +4,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
 {
     /// <summary>
     /// 电脑网站支付页面回跳参数
-    /// 更新时间：2017-11-02
+    /// 更新时间：2019-10-10
+    /// https://docs.open.alipay.com/203/107090/
+    /// 暂缺根据官方文档(https://opensupport.alipay.com/support/knowledge/20070/201602425007?ant_source=zsearch)
+    /// 参考：手机网站支付同步通知参数说明
     /// </summary>
     public class AlipayTradePagePayReturn : AlipayNotify
     {
@@ -51,12 +54,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         /// </summary>
         [JsonProperty("version")]
         public string Version { get; set; }
-
-        /// <summary>
-        /// 授权方的app_id
-        /// </summary>
-        [JsonProperty("auth_app_id")]
-        public string AuthAppId { get; set; }
 
         // 业务参数
 
