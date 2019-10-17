@@ -31,18 +31,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         public string NotifyId { get; set; }
 
         /// <summary>
-        /// 编码格式
-        /// </summary>
-        [JsonProperty("charset")]
-        public string Charset { get; set; }
-
-        /// <summary>
-        /// 接口版本
-        /// </summary>
-        [JsonProperty("version")]
-        public string Version { get; set; }
-
-        /// <summary>
         /// 签名类型
         /// </summary>
         [JsonProperty("sign_type")]
