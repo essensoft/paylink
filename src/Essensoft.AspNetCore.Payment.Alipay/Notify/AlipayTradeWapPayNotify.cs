@@ -4,7 +4,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
 {
     /// <summary>
     /// 手机网站支付结果异步通知
-    /// 更新时间：2017-07-21
+    /// 更新时间：2018-01-19
+    /// https://docs.open.alipay.com/203/105286/
     /// </summary>
     public class AlipayTradeWapPayNotify : AlipayNotify
     {
