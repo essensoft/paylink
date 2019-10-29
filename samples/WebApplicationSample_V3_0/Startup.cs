@@ -1,4 +1,4 @@
-using Essensoft.AspNetCore.Payment.Alipay;
+ï»¿using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.JDPay;
 using Essensoft.AspNetCore.Payment.LianLianPay;
 using Essensoft.AspNetCore.Payment.QPay;
@@ -24,7 +24,7 @@ namespace WebApplicationSample_V3_0
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // ÒıÈëPayment ÒÀÀµ×¢Èë
+            // å¼•å…¥Payment ä¾èµ–æ³¨å…¥
             services.AddAlipay();
             services.AddJDPay();
             services.AddQPay();
@@ -32,7 +32,7 @@ namespace WebApplicationSample_V3_0
             services.AddWeChatPay();
             services.AddLianLianPay();
 
-            // ÔÚ appsettings.json ÖĞ ÅäÖÃÑ¡Ïî
+            // åœ¨ appsettings.json ä¸­ é…ç½®é€‰é¡¹
             services.Configure<AlipayOptions>(Configuration.GetSection("Alipay"));
             services.Configure<JDPayOptions>(Configuration.GetSection("JDPay"));
             services.Configure<QPayOptions>(Configuration.GetSection("QPay"));
