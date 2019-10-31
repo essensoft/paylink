@@ -1,5 +1,4 @@
 ﻿using Essensoft.AspNetCore.Payment.Security;
-using Microsoft.Extensions.Logging;
 using Org.BouncyCastle.Crypto;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay

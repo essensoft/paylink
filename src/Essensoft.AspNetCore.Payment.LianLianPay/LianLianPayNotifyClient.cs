@@ -1,12 +1,9 @@
-﻿using System;
-using System.IO;
+﻿using System.IO;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.LianLianPay.Parser;
 using Essensoft.AspNetCore.Payment.LianLianPay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
 using Microsoft.AspNetCore.Http;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
