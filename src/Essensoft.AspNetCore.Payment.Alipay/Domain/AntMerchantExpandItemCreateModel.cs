@@ -11,10 +11,22 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AntMerchantExpandItemCreateModel : AlipayObject
     {
         /// <summary>
+        /// 详情地址
+        /// </summary>
+        [JsonProperty("detail_url")]
+        public string DetailUrl { get; set; }
+
+        /// <summary>
         /// 商品扩展信息：可以解析成 Map<String, String> 的 json string
         /// </summary>
         [JsonProperty("ext_info")]
         public string ExtInfo { get; set; }
+
+        /// <summary>
+        /// 外部商品ID
+        /// </summary>
+        [JsonProperty("external_item_id")]
+        public string ExternalItemId { get; set; }
 
         /// <summary>
         /// 前台类目id：target_type + target_id 和 front_category_id 二选一
@@ -27,6 +39,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("label_list")]
         public List<ItemLabelCreateInfo> LabelList { get; set; }
+
+        /// <summary>
+        /// 主图地址
+        /// </summary>
+        [JsonProperty("main_pic")]
+        public string MainPic { get; set; }
 
         /// <summary>
         /// 商品名称

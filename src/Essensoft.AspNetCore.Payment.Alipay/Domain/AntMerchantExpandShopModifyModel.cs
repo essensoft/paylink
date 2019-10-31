@@ -11,6 +11,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AntMerchantExpandShopModifyModel : AlipayObject
     {
         /// <summary>
+        /// 门店结算卡信息。本业务当前只允许传入一张结算卡
+        /// </summary>
+        [JsonProperty("biz_cards")]
+        public List<SettleCardInfo> BizCards { get; set; }
+
+        /// <summary>
         /// 品牌id。若无需更新本信息项，可以不填写
         /// </summary>
         [JsonProperty("brand_id")]

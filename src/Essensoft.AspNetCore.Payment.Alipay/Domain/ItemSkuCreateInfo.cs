@@ -23,6 +23,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<ItemExtInfo> ExtInfo { get; set; }
 
         /// <summary>
+        /// 外部SKU ID
+        /// </summary>
+        [JsonProperty("external_sku_id")]
+        public string ExternalSkuId { get; set; }
+
+        /// <summary>
+        /// 库存
+        /// </summary>
+        [JsonProperty("inventory")]
+        public long Inventory { get; set; }
+
+        /// <summary>
         /// 标价，单位分
         /// </summary>
         [JsonProperty("original_price")]

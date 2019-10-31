@@ -10,25 +10,31 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayCommerceEducateLocalfaceCompareSyncModel : AlipayObject
     {
         /// <summary>
-        /// 算法版本
+        /// 客户端BehaviourLog-> aesCypher 参数
+        /// </summary>
+        [JsonProperty("aes_cypher")]
+        public string AesCypher { get; set; }
+
+        /// <summary>
+        /// 参照示例传入
         /// </summary>
         [JsonProperty("alg_ver")]
         public string AlgVer { get; set; }
 
         /// <summary>
-        /// 图片encode base64处理后的字符串
+        /// 客户端BehaviourLog->imageBlob参数
         /// </summary>
         [JsonProperty("auth_img")]
         public string AuthImg { get; set; }
 
         /// <summary>
-        /// SCHOOL_FACE_PAYMENT: 校园刷脸支付  SCHOOL_ENTRANCE_GUARD:校园门禁
+        /// SCHOOL_PAYMENT: 校园刷脸支付 SCHOOL_ENTRANCE_GUARD:校园门禁
         /// </summary>
         [JsonProperty("biz_code")]
         public string BizCode { get; set; }
 
         /// <summary>
-        /// 业务流水唯一ID
+        /// 业务流水唯一ID,isv自定义，保证唯一性
         /// </summary>
         [JsonProperty("biz_id")]
         public string BizId { get; set; }
@@ -46,19 +52,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string FaceDataType { get; set; }
 
         /// <summary>
-        /// 人脸本地1:N比对后的用户ID
+        /// 参数来源填写特征文件中对应的face_id 人脸本地1:N比对后的用户ID
         /// </summary>
         [JsonProperty("fuid")]
         public string Fuid { get; set; }
 
         /// <summary>
-        /// ISV的名称
+        /// 必须是由支付宝业务方分配的英文简称(例如:yikeshixx),不能是中文
         /// </summary>
         [JsonProperty("isv_name")]
         public string IsvName { get; set; }
 
         /// <summary>
-        /// 学校机构编码
+        /// 国家统一分配的学校社会信用代码(institution_id)
         /// </summary>
         [JsonProperty("organize_id")]
         public string OrganizeId { get; set; }

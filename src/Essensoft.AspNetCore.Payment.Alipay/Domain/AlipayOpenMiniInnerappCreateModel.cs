@@ -70,6 +70,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string IsvAppId { get; set; }
 
         /// <summary>
+        /// 需要创建的小程序appId，面向手淘场景，其他场景勿用
+        /// </summary>
+        [JsonProperty("mini_app_id")]
+        public string MiniAppId { get; set; }
+
+        /// <summary>
         /// 创建的小程序所属的PID
         /// </summary>
         [JsonProperty("pid")]

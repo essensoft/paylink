@@ -9,6 +9,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     public class ZolozIdentificationCustomerCertifyzhubQueryResponse : AlipayResponse
     {
         /// <summary>
+        /// 是否为攻击
+        /// </summary>
+        [JsonProperty("attack")]
+        public bool Attack { get; set; }
+
+        /// <summary>
         /// 业务单据号，用于核对和排查
         /// </summary>
         [JsonProperty("biz_id")]

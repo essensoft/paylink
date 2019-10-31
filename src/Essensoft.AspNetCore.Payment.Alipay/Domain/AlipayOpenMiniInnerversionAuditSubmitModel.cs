@@ -113,6 +113,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ServicePhone { get; set; }
 
         /// <summary>
+        /// 特殊资质图片地址列表，逗号分隔；部分类目需要特殊资质，如果需要特殊资质，最少一张，最多三张。
+        /// </summary>
+        [JsonProperty("special_license_pic_list")]
+        public string SpecialLicensePicList { get; set; }
+
+        /// <summary>
         /// 小程序版本变更描述，30-500个字符，区分于app_desc
         /// </summary>
         [JsonProperty("version_desc")]

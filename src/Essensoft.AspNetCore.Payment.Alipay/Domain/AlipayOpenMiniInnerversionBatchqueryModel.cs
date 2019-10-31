@@ -11,6 +11,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayOpenMiniInnerversionBatchqueryModel : AlipayObject
     {
         /// <summary>
+        /// 端参数，可不选，默认支付宝端 枚举列举：支付宝：com.alipay.alipaywallet，高德：com.amap.app
+        /// </summary>
+        [JsonProperty("bundle_id")]
+        public string BundleId { get; set; }
+
+        /// <summary>
         /// 小程序ID
         /// </summary>
         [JsonProperty("mini_app_id")]

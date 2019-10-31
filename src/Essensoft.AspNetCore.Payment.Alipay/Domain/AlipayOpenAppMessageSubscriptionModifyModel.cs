@@ -28,6 +28,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string CommType { get; set; }
 
         /// <summary>
+        /// 消息标签，用于消息子类型过滤。使用前请确认消息topic是否支持
+        /// </summary>
+        [JsonProperty("tag")]
+        public string Tag { get; set; }
+
+        /// <summary>
         /// 消息主题名称
         /// </summary>
         [JsonProperty("topic")]
