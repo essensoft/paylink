@@ -6,12 +6,11 @@ using Essensoft.AspNetCore.Payment.LianLianPay.Parser;
 using Essensoft.AspNetCore.Payment.LianLianPay.Request;
 using Essensoft.AspNetCore.Payment.LianLianPay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
-using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay
 {
-       /// <summary>
+    /// <summary>
     /// LianLianPay 客户端。
     /// </summary>
     public class LianLianPayClient : ILianLianPayClient

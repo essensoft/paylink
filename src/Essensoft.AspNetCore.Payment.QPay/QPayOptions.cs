@@ -31,14 +31,8 @@ namespace Essensoft.AspNetCore.Payment.QPay
         /// </summary>
         public string CertificatePassword
         {
-            get
-            {
-                return string.IsNullOrEmpty(certificatePassword) ? MchId : certificatePassword;
-            }
-            set
-            {
-                certificatePassword = value;
-            }
+            get => string.IsNullOrEmpty(certificatePassword) ? MchId : certificatePassword;
+            set => certificatePassword = value;
         }
 
         public string GetCertificateHash()
