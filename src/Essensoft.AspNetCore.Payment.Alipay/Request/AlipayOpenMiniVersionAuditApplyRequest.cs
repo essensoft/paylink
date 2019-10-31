@@ -46,6 +46,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string AppVersion { get; set; }
 
         /// <summary>
+        /// 端参数
+        /// </summary>
+        public string BundleId { get; set; }
+
+        /// <summary>
         /// 第五张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序第五张营业执照照片
         /// </summary>
         public FileItem FifthLicensePic { get; set; }
@@ -64,6 +69,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// 实例化的小程序可以不用传第一张应用截图，小程序第一张应用截图，不能超过4MB，图片格式只支持jpg，png
         /// </summary>
         public FileItem FirstScreenShot { get; set; }
+
+        /// <summary>
+        /// 第一张特殊资质图片，不能超过4MB，图片格式只支持jpg、png、jepg，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325 中是否需要特殊资质，如果不填默认采用当前小程序第一张特殊资质
+        /// </summary>
+        public FileItem FirstSpecialLicensePic { get; set; }
 
         /// <summary>
         /// 第四张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序第四张营业执照照片
@@ -116,6 +126,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public FileItem SecondScreenShot { get; set; }
 
         /// <summary>
+        /// 第二张特殊资质图片文件，不能超过4MB，图片格式只支持jpg、png、jepg，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325 中是否需要特殊资质，如果不填默认采用当前小程序第二张特殊资质图片
+        /// </summary>
+        public FileItem SecondSpecialLicensePic { get; set; }
+
+        /// <summary>
         /// 小程序客服邮箱，如果不填默认采用当前小程序的应用客服邮箱
         /// </summary>
         public string ServiceEmail { get; set; }
@@ -131,6 +146,21 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public List<RegionInfo> ServiceRegionInfo { get; set; }
 
         /// <summary>
+        /// 测试账号
+        /// </summary>
+        public string TestAccout { get; set; }
+
+        /// <summary>
+        /// 测试附件，请上传10M以内附件，支持格式zip,rar
+        /// </summary>
+        public FileItem TestFileName { get; set; }
+
+        /// <summary>
+        /// 测试账号密码
+        /// </summary>
+        public string TestPassword { get; set; }
+
+        /// <summary>
         /// 第三张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序第三张营业执照照片
         /// </summary>
         public FileItem ThirdLicensePic { get; set; }
@@ -139,6 +169,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// 小程序第三张应用截图，不能超过4MB，图片格式只支持jpg，png
         /// </summary>
         public FileItem ThirdScreenShot { get; set; }
+
+        /// <summary>
+        /// 第三张特殊资质图片文件，不能超过4MB，图片格式只支持jpg、png、jepg，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要特殊资质，如果不填默认采用当前小程序第三张特殊资质
+        /// </summary>
+        public FileItem ThirdSpecialLicensePic { get; set; }
 
         /// <summary>
         /// 小程序版本描述，30-500个字符
@@ -241,6 +276,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
                 { "app_name", AppName },
                 { "app_slogan", AppSlogan },
                 { "app_version", AppVersion },
+                { "bundle_id", BundleId },
                 { "license_name", LicenseName },
                 { "license_no", LicenseNo },
                 { "license_valid_date", LicenseValidDate },
@@ -249,6 +285,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
                 { "service_email", ServiceEmail },
                 { "service_phone", ServicePhone },
                 { "service_region_info", ServiceRegionInfo },
+                { "test_accout", TestAccout },
+                { "test_password", TestPassword },
                 { "version_desc", VersionDesc }
             };
             return parameters;
@@ -277,13 +315,17 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
                 { "fifth_screen_shot", FifthScreenShot },
                 { "first_license_pic", FirstLicensePic },
                 { "first_screen_shot", FirstScreenShot },
+                { "first_special_license_pic", FirstSpecialLicensePic },
                 { "fourth_license_pic", FourthLicensePic },
                 { "fourth_screen_shot", FourthScreenShot },
                 { "out_door_pic", OutDoorPic },
                 { "second_license_pic", SecondLicensePic },
                 { "second_screen_shot", SecondScreenShot },
+                { "second_special_license_pic", SecondSpecialLicensePic },
+                { "test_file_name", TestFileName },
                 { "third_license_pic", ThirdLicensePic },
-                { "third_screen_shot", ThirdScreenShot }
+                { "third_screen_shot", ThirdScreenShot },
+                { "third_special_license_pic", ThirdSpecialLicensePic }
             };
             return parameters;
         }

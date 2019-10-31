@@ -46,6 +46,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Longitude { get; set; }
 
         /// <summary>
+        /// 业务上游流量来源
+        /// </summary>
+        [JsonProperty("source")]
+        public string Source { get; set; }
+
+        /// <summary>
         /// 蚂蚁统一会员ID
         /// </summary>
         [JsonProperty("user_id")]

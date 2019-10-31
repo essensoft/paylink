@@ -22,7 +22,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public CertInfo CertInfo { get; set; }
 
         /// <summary>
-        /// 明细流水号
+        /// 支付宝系统内部明细单号。
+        /// </summary>
+        [JsonProperty("detail_id")]
+        public string DetailId { get; set; }
+
+        /// <summary>
+        /// 明细流水号（注：只有境外代发使用，其他场景请使用out_biz_no）
         /// </summary>
         [JsonProperty("detail_no")]
         public string DetailNo { get; set; }
@@ -50,6 +56,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("need_retry")]
         public string NeedRetry { get; set; }
+
+        /// <summary>
+        /// 商户明细订单号
+        /// </summary>
+        [JsonProperty("out_biz_no")]
+        public string OutBizNo { get; set; }
 
         /// <summary>
         /// 收款方信息。

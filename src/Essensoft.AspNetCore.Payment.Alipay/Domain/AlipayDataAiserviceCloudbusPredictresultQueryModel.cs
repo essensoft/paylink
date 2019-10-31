@@ -32,5 +32,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("plan_id")]
         public string PlanId { get; set; }
+
+        /// <summary>
+        /// 线路结果类型： 枚举值    0： 单向线路，  1： 双向线路。
+        /// </summary>
+        [JsonProperty("type")]
+        public string Type { get; set; }
     }
 }

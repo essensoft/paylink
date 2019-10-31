@@ -16,6 +16,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AppVersion { get; set; }
 
         /// <summary>
+        /// 端参数
+        /// </summary>
+        [JsonProperty("bundle_id")]
+        public string BundleId { get; set; }
+
+        /// <summary>
         /// 模板的配置参数
         /// </summary>
         [JsonProperty("ext")]

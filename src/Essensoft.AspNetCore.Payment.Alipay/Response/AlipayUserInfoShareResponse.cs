@@ -274,7 +274,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string UserName { get; set; }
 
         /// <summary>
-        /// 用户状态（Q/T/B/W）。  Q代表快速注册用户  T代表已认证用户  B代表被冻结账户  W代表已注册，未激活的账户
+        /// 用户状态（Q/T/B/W）。 Q代表快速注册用户 T代表正常用户 B代表被冻结账户 W代表已注册，未激活的账户
         /// </summary>
         [JsonProperty("user_status")]
         public string UserStatus { get; set; }

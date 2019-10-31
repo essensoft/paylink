@@ -10,6 +10,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayOpenMiniTemplateUsageQueryModel : AlipayObject
     {
         /// <summary>
+        /// 端参数，可不选，默认支付宝端
+        /// </summary>
+        [JsonProperty("bundle_id")]
+        public string BundleId { get; set; }
+
+        /// <summary>
         /// 查询的页数，默认第一页
         /// </summary>
         [JsonProperty("page_num")]

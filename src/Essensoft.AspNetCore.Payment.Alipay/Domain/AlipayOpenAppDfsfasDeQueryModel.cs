@@ -14,5 +14,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("desd")]
         public string Desd { get; set; }
+
+        /// <summary>
+        /// 1
+        /// </summary>
+        [JsonProperty("desdde")]
+        public string Desdde { get; set; }
     }
 }

@@ -10,6 +10,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AssetProduceItem : AlipayObject
     {
         /// <summary>
+        /// 生产指令动作类别：套组则为ASSEMBLE，组装
+        /// </summary>
+        [JsonProperty("action_type")]
+        public string ActionType { get; set; }
+
+        /// <summary>
         /// 申请日期，格式yyyy-MM-dd HH：mm:ss
         /// </summary>
         [JsonProperty("apply_date")]

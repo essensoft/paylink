@@ -74,6 +74,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string Status { get; set; }
 
         /// <summary>
+        /// 付款金额，收银台场景下付款成功后的支付金额，订单状态为SUCCESS才返回，其他状态不返回。
+        /// </summary>
+        [JsonProperty("trans_amount")]
+        public string TransAmount { get; set; }
+
+        /// <summary>
         /// 商户在查询代发订单信息时返回其在代发请求中传入的账单属性。
         /// </summary>
         [JsonProperty("transfer_bill_info")]

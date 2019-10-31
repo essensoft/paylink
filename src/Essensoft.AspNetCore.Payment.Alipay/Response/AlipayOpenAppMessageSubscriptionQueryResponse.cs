@@ -14,6 +14,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string CommType { get; set; }
 
         /// <summary>
+        /// 消息标签
+        /// </summary>
+        [JsonProperty("tag")]
+        public string Tag { get; set; }
+
+        /// <summary>
         /// 消息主题名称
         /// </summary>
         [JsonProperty("topic")]

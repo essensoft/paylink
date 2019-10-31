@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
     /// 参考其他通知额外补充了 公共参数
     /// </summary>
     public class AlipayFundAuthOperationCancelNotify : AlipayNotify
-    {       
+    {
         // 公共参数
 
         /// <summary>

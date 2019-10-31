@@ -10,6 +10,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayCommerceIotSdarttoolPrintSendModel : AlipayObject
     {
         /// <summary>
+        /// 扩展字段
+        /// </summary>
+        [JsonProperty("ext_info")]
+        public string ExtInfo { get; set; }
+
+        /// <summary>
         /// 唯一请求流水号
         /// </summary>
         [JsonProperty("outer_no")]
@@ -44,5 +50,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonProperty("supplier_id")]
         public string SupplierId { get; set; }
+
+        /// <summary>
+        /// 走纸行数默为03
+        /// </summary>
+        [JsonProperty("walk_paper")]
+        public string WalkPaper { get; set; }
     }
 }
