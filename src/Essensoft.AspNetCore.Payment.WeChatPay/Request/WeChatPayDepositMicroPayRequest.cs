@@ -141,6 +141,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             {
                 sortedTxtParams.Add(WeChatPayConsts.sign_type, WeChatPayConsts.HMAC_SHA256);
             }
+
+            sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
         }
 
         public bool GetNeedCheckSign()
