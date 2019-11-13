@@ -1,4 +1,4 @@
-﻿namespace Essensoft.AspNetCore.Payment.Alipay
+﻿namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 {
     /// <summary>
     /// 签名项目

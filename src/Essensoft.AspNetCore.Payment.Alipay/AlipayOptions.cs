@@ -1,10 +1,23 @@
-﻿namespace Essensoft.AspNetCore.Payment.Alipay
+﻿using Essensoft.AspNetCore.Payment.Alipay.Utility;
+using Org.BouncyCastle.X509;
+
+namespace Essensoft.AspNetCore.Payment.Alipay
 {
     /// <summary>
     /// Alipay 选项。
     /// </summary>
     public class AlipayOptions
     {
+        internal string AppCertSN;
+        internal X509Certificate AlipayPublicCertificate;
+        internal string AlipayPublicCertSN;
+        internal string AlipayPublicCertKey;
+        internal string RootCertSN;
+
+        private string appCert;
+        private string alipayPublicCert;
+        private string rootCert;
+
         /// <summary>
         /// 蚂蚁金服开放平台 应用ID
         /// </summary>
@@ -60,5 +73,56 @@
         /// 加密秘钥
         /// </summary>
         public string EncyptKey { get; set; }
+
+        /// <summary>
+        /// 商户证书
+        /// </summary>
+        public string AppCert
+        {
+            get => appCert;
+            set
+            {
+                appCert = value;
+                if (!string.IsNullOrEmpty(value))
+                {
+                    var cert = AntCertificationUtil.ParseCert(value);
+                    AppCertSN = AntCertificationUtil.GetCertSN(cert);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 公钥证书
+        /// </summary>
+        public string AlipayPublicCert
+        {
+            get => alipayPublicCert;
+            set
+            {
+                alipayPublicCert = value;
+                if (!string.IsNullOrEmpty(value))
+                {
+                    AlipayPublicCertificate = AntCertificationUtil.ParseCert(value);
+                    AlipayPublicCertSN = AntCertificationUtil.GetCertSN(AlipayPublicCertificate);
+                    AlipayPublicCertKey = AntCertificationUtil.ExtractPemPublicKeyFromCert(AlipayPublicCertificate);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 根证书
+        /// </summary>
+        public string RootCert
+        {
+            get => rootCert;
+            set
+            {
+                rootCert = value;
+                if (!string.IsNullOrEmpty(value))
+                {
+                    RootCertSN = AntCertificationUtil.GetRootCertSN(value);
+                }
+            }
+        }
     }
 }

@@ -30,7 +30,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
         private static string GetSign(string body)
         {
             var json = JsonConvert.DeserializeObject<IDictionary>(body);
-            return (string)json[AlipayConstants.SIGN];
+            return json[AlipayConstants.SIGN]?.ToString();
         }
 
         private static string GetSignSourceData(IAlipayRequest<T> request, string body)
@@ -38,8 +38,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
             var rootNode = AlipayUtility.GetRootElement(request.GetApiName());
             var errorRootNode = AlipayConstants.ERROR_RESPONSE;
 
-            var indexOfRootNode = body.IndexOf(rootNode);
-            var indexOfErrorRoot = body.IndexOf(errorRootNode);
+            var indexOfRootNode = body.IndexOf(rootNode, StringComparison.Ordinal);
+            var indexOfErrorRoot = body.IndexOf(errorRootNode, StringComparison.Ordinal);
 
             string result = null;
             if (indexOfRootNode > 0)
@@ -57,16 +57,21 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
         private static string ParseSignSourceData(string body, string rootNode, int indexOfRootNode)
         {
             var signDataStartIndex = indexOfRootNode + rootNode.Length + 2;
-            var indexOfSign = body.IndexOf("\"" + AlipayConstants.SIGN + "\"");
+            var indexOfSign = body.IndexOf("\"" + AlipayConstants.SIGN + "\"", StringComparison.Ordinal);
             if (indexOfSign < 0)
             {
                 return null;
             }
 
-            var signDataEndIndex = indexOfSign - 1;
-            var length = signDataEndIndex - signDataStartIndex;
+            var signSourceData = AlipaySignature.ExtractSignContent(body, signDataStartIndex);
 
-            return body.Substring(signDataStartIndex, length);
+            //如果提取的待验签原始内容后还有rootNode
+            if (body.LastIndexOf(rootNode, StringComparison.Ordinal) > signSourceData.EndIndex)
+            {
+                throw new AlipayException("检测到响应报文中有重复的" + rootNode + "，验签失败。");
+            }
+
+            return signSourceData.SourceData;
         }
 
         /// <summary>
@@ -80,8 +85,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
             var rootNode = request.GetApiName().Replace(".", "_") + AlipayConstants.RESPONSE_SUFFIX;
             var errorRootNode = AlipayConstants.ERROR_RESPONSE;
 
-            var indexOfRootNode = body.IndexOf(rootNode);
-            var indexOfErrorRoot = body.IndexOf(errorRootNode);
+            var indexOfRootNode = body.IndexOf(rootNode, StringComparison.Ordinal);
+            var indexOfErrorRoot = body.IndexOf(errorRootNode, StringComparison.Ordinal);
 
             EncryptParseItem result = null;
             if (indexOfRootNode > 0)
@@ -99,7 +104,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
         private static EncryptParseItem ParseEncryptItem(string body, string rootNode, int indexOfRootNode)
         {
             var signDataStartIndex = indexOfRootNode + rootNode.Length + 2;
-            var indexOfSign = body.IndexOf("\"" + AlipayConstants.SIGN + "\"");
+            var indexOfSign = body.IndexOf("\"" + AlipayConstants.SIGN + "\"", StringComparison.Ordinal);
 
             var signDataEndIndex = indexOfSign - 1;
 
@@ -181,6 +186,25 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
                 SignSourceDate = GetSignSourceData(request, responseBody)
             };
             return signItem;
+        }
+
+        public CertItem GetCertItem(IAlipayRequest<T> request, string responseBody)
+        {
+            if (string.IsNullOrEmpty(responseBody))
+            {
+                return null;
+            }
+
+            var certItem = new CertItem();
+
+            var json = JsonConvert.DeserializeObject<IDictionary>(responseBody);
+            certItem.Sign = json["sign"]?.ToString();
+            certItem.CertSN = json["alipay_cert_sn"]?.ToString();
+
+            var signSourceData = GetSignSourceData(request, responseBody);
+            certItem.SignSourceDate = signSourceData;
+
+            return certItem;
         }
 
         #endregion

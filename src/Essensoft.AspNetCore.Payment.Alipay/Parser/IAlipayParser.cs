@@ -22,6 +22,14 @@
         SignItem GetSignItem(IAlipayRequest<T> request, string responseBody);
 
         /// <summary>
+        /// 解析证书以及签名内容
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="responseBody"></param>
+        /// <returns></returns>
+        CertItem GetCertItem(IAlipayRequest<T> request, string responseBody);
+
+        /// <summary>
         /// 将响应串解密
         /// </summary>
         /// <param name="request"></param>
