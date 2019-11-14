@@ -468,13 +468,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             //为空时添加默认支付宝公钥证书密钥
             if (_certificateManager.IsEmpty)
             {
-                _certificateManager.Add(options.AlipayPublicCertSN, options.AlipayPublicCertKey);
+                _certificateManager.TryAdd(options.AlipayPublicCertSN, options.AlipayPublicCertKey);
             }
 
             //如果响应的支付宝公钥证书序号已经缓存过，则直接使用缓存的公钥
-            if (_certificateManager.Contains(certItem.CertSN))
+            if (_certificateManager.TryGet(certItem.CertSN, out var publicKey))
             {
-                return _certificateManager.Get(certItem.CertSN);
+                return publicKey;
             }
 
             //否则重新下载新的支付宝公钥证书并更新缓存
@@ -482,6 +482,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             {
                 BizContent = "{\"alipay_cert_sn\":\"" + certItem.CertSN + "\"}"
             };
+
             var response = await CertificateExecuteAsync(request, options);
             if (response.IsError)
             {
@@ -499,7 +500,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             var alipayCert = AntCertificationUtil.ParseCert(alipayCertContent);
             var alipayCertSN = AntCertificationUtil.GetCertSN(alipayCert);
             var newAlipayPublicKey = AntCertificationUtil.ExtractPemPublicKeyFromCert(alipayCert);
-            _certificateManager.Add(alipayCertSN, newAlipayPublicKey);
+            _certificateManager.TryAdd(alipayCertSN, newAlipayPublicKey);
 
             return newAlipayPublicKey;
         }
