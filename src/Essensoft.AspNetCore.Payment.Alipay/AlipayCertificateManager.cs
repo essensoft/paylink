@@ -21,19 +21,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             return _SN2PublicKey.TryAdd(sn, publicKey);
         }
 
-        public void Add(string sn, string publicKey)
-        {
-            TryAdd(sn, publicKey);
-        }
-
         public bool TryGet(string sn, out string publicKey)
         {
             return _SN2PublicKey.TryGetValue(sn, out publicKey);
-        }
-
-        public string Get(string sn)
-        {
-            return TryGet(sn, out var publicKey) ? publicKey : null;
         }
     }
 }
