@@ -46,17 +46,17 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 
 ## 官方文档
 
-* [支付宝-蚂蚁金服-文档中心](https://docs.open.alipay.com/catalog)
+* [支付宝-文档中心](https://docs.open.alipay.com/catalog)
 
 * [微信支付-开发文档](https://pay.weixin.qq.com/wiki/doc/api/index.html)
 
-* [QQ钱包商户平台-开发文档](https://qpay.qq.com/buss/qpaywiki.shtml)
+* [QQ钱包-开发文档](https://qpay.qq.com/buss/doc.shtml)
 
-* [京东支付文档](http://payapi.jd.com)
+* [京东支付-开发文档](http://payapi.jd.com)
 
 * [连连支付开放平台](http://open.lianlianpay.com)
 
-* [银联支付-中国银联技术开放平台-产品API](https://open.unionpay.com/tjweb/api/list?tagId=20)
+* [银联支付-文档中心](https://open.unionpay.com/tjweb/doc/index)
 
 ## 开发环境
 * Windows 10
