@@ -23,40 +23,26 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 
 ## 支持渠道
 
-### 支付宝
+### 支付宝 [文档中心](https://docs.open.alipay.com/catalog)
 
 * 当面付、APP支付、手机网站支付、电脑网站支付、单笔转账到支付宝账户...
 
-### 微信支付
+### 微信支付 [开发文档](https://pay.weixin.qq.com/wiki/doc/api/index.html)
 
 * 付款码支付(刷卡)、JSAPI支付(公众号)、Native支付(扫码)、APP支付、H5支付、小程序支付、企业付款(零钱/银行卡)、现金红包、酒店押金
 
-### QQ钱包
+### QQ钱包 [开发文档](https://qpay.qq.com/buss/doc.shtml)
 
 * 付款码支付、扫码支付、公众号支付、APP支付、企业付款
 
-### 京东支付
+### 京东支付 [开发文档](http://payapi.jd.com)
 * 网页支付、APP支付、扫一扫、付款码、代付
 
-### 连连支付
+### 连连支付 [开放平台](http://open.lianlianpay.com)
 * 网银支付、银行卡支付、掌上银行支付、实时付款
 
-### 银联支付
+### 银联支付 [文档中心](https://open.unionpay.com/tjweb/doc/index)
 * 在线网关支付、无跳转支付、手机支付控件、手机网页支付（WAP支付）、二维码支付(商户)
-
-## 官方文档
-
-* [支付宝-文档中心](https://docs.open.alipay.com/catalog)
-
-* [微信支付-开发文档](https://pay.weixin.qq.com/wiki/doc/api/index.html)
-
-* [QQ钱包-开发文档](https://qpay.qq.com/buss/doc.shtml)
-
-* [京东支付-开发文档](http://payapi.jd.com)
-
-* [连连支付开放平台](http://open.lianlianpay.com)
-
-* [银联支付-文档中心](https://open.unionpay.com/tjweb/doc/index)
 
 ## 开发环境
 * Windows 10
