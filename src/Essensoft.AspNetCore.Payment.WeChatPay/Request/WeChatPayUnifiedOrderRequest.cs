@@ -110,6 +110,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// </summary>
         public string SceneInfo { get; set; }
 
+        /// <summary>
+        /// 是否指定服务商分账
+        /// </summary>
+        public string ProfitSharing { get; set; }
+
         #region IWeChatPayRequest Members
 
         public string GetRequestUrl()
@@ -140,7 +145,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { "limit_pay", LimitPay },
                 { "openid", OpenId },
                 { "sub_openid", SubOpenId },
-                { "scene_info", SceneInfo }
+                { "scene_info", SceneInfo },
+                { "profit_sharing", ProfitSharing }
             };
             return parameters;
         }
