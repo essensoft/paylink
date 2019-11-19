@@ -5,7 +5,7 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 下载资金账单
+    /// 下载资金账单 (普通商户)
     /// </summary>
     public class WeChatPayDownloadFundFlowRequest : IWeChatPayCertRequest<WeChatPayDownloadFundFlowResponse>
     {

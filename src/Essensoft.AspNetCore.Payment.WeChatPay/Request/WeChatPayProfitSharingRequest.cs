@@ -5,20 +5,10 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 单次分账
+    /// 分账 - 单次分账 (普通商户 / 服务商)
     /// </summary>
     public class WeChatPayProfitSharingRequest : IWeChatPayCertRequest<WeChatPayProfitSharingResponse>
     {
-        /// <summary>
-        /// 子商户号
-        /// </summary>
-        public string SubMchId { get; set; }
-
-        /// <summary>
-        /// 子商户应用号
-        /// </summary>
-        public string SubAppId { get; set; }
-
         /// <summary>
         /// 微信订单号
         /// </summary>
@@ -45,8 +35,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary
             {
-                { "sub_mch_id", SubMchId },
-                { "sub_appid", SubAppId },
                 { "transaction_id", TransactionId },
                 { "out_order_no", OutOrderNo },
                 { "receivers", Receivers },

@@ -5,7 +5,7 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 发放普通红包
+    /// 发放普通红包 (普通商户 / 服务商)
     /// </summary>
     public class WeChatPaySendRedPackRequest : IWeChatPayCertRequest<WeChatPaySendRedPackResponse>
     {
@@ -13,11 +13,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// 商户订单号
         /// </summary>
         public string MchBillNo { get; set; }
-
-        /// <summary>
-        /// 子商户号
-        /// </summary>
-        public string SubMchId { get; set; }
 
         /// <summary>
         /// 触达用户appid
@@ -86,7 +81,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             var parameters = new WeChatPayDictionary
             {
                 { "mch_billno", MchBillNo },
-                { "sub_mch_id", SubMchId },
                 { "msgappid", MsgAppId },
                 { "send_name", SendName },
                 { "re_openid", ReOpenId },
@@ -112,6 +106,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(WeChatPayConsts.wxappid, options.AppId);
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
+            sortedTxtParams.Add(WeChatPayConsts.sub_mch_id, options.SubMchId);
 
             sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
         }

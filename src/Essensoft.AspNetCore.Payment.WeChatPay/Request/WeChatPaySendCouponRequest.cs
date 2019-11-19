@@ -5,7 +5,7 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 发放代金券
+    /// 发放代金券 (普通商户)
     /// </summary>
     public class WeChatPaySendCouponRequest : IWeChatPayCertRequest<WeChatPaySendCouponResponse>
     {
