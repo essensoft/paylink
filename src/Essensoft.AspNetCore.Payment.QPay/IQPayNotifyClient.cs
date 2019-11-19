@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿#if NETCOREAPP3_0
+
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
 namespace Essensoft.AspNetCore.Payment.QPay
@@ -15,3 +17,5 @@ namespace Essensoft.AspNetCore.Payment.QPay
         Task<T> ExecuteAsync<T>(HttpRequest request, QPayOptions options) where T : QPayNotify;
     }
 }
+
+#endif

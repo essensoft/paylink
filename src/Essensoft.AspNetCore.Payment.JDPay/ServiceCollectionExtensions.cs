@@ -18,7 +18,12 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             services.AddHttpClient(nameof(JDPayClient));
 
             services.AddSingleton<IJDPayClient, JDPayClient>();
+
+#if NETCOREAPP3_0
+
             services.AddSingleton<IJDPayNotifyClient, JDPayNotifyClient>();
+
+#endif
 
             if (setupAction != null)
             {

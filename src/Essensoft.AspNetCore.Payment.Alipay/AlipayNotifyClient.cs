@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if NETCOREAPP3_0
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,16 +12,16 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 {
     public class AlipayNotifyClient : IAlipayNotifyClient
     {
-        #region AlipayNotifyClient Constructors
+#region AlipayNotifyClient Constructors
 
         public AlipayNotifyClient()
         {
 
         }
 
-        #endregion
+#endregion
 
-        #region IAlipayNotifyClient Members
+#region IAlipayNotifyClient Members
 
         public Task<T> ExecuteAsync<T>(HttpRequest request, AlipayOptions options) where T : AlipayNotify
         {
@@ -45,9 +47,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             return Task.FromResult(rsp);
         }
 
-        #endregion
+#endregion
 
-        #region Common Method
+#region Common Method
 
         private Dictionary<string, string> GetParameters(HttpRequest request)
         {
@@ -107,6 +109,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             return sb.Remove(sb.Length - 1, 1).ToString();
         }
 
-        #endregion
+#endregion
     }
 }
+
+#endif

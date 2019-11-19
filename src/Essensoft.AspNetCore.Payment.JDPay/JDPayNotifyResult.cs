@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿#if NETCOREAPP3_0
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace Essensoft.AspNetCore.Payment.JDPay
 {
@@ -27,3 +29,5 @@ namespace Essensoft.AspNetCore.Payment.JDPay
         public static IActionResult Failure => _failure;
     }
 }
+
+#endif

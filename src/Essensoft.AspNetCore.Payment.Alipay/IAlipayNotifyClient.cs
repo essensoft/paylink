@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿#if NETCOREAPP3_0
+
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
@@ -18,3 +20,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         Task<T> ExecuteAsync<T>(HttpRequest request, AlipayOptions options) where T : AlipayNotify;
     }
 }
+
+#endif

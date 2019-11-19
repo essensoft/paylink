@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq.Expressions;
 using System.Net;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
-using Microsoft.AspNetCore.Http;
 
 namespace Essensoft.AspNetCore.Payment.JDPay.Utility
 {
@@ -34,12 +32,16 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             return content.ToString().Substring(0, content.Length - 1);
         }
 
-        internal static bool HasTextXmlContentType(this HttpRequest request)
+#if NETCOREAPP3_0
+
+        internal static bool HasTextXmlContentType(this Microsoft.AspNetCore.Http.HttpRequest request)
         {
             // Content-Type: text/xml
-            MediaTypeHeaderValue.TryParse(request.ContentType, out var contentType);
+            System.Net.Http.Headers.MediaTypeHeaderValue.TryParse(request.ContentType, out var contentType);
             return contentType != null && contentType.MediaType.Equals("text/xml", StringComparison.OrdinalIgnoreCase);
         }
+
+#endif
 
         /// <summary>
         /// 尝试将对象实例转换成目标类型
