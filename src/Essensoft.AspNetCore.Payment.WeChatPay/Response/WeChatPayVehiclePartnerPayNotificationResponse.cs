@@ -76,17 +76,5 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// </summary>
         [XmlElement("user_state")]
         public string UserState { get; set; }
-
-        /// <summary>
-        /// 用户标识	
-        /// </summary>
-        [XmlElement("openid")]
-        public string OpenId { get; set; }
-
-        /// <summary>
-        /// 用户子标识	
-        /// </summary>
-        [XmlElement("sub_openid")]
-        public string SubOpenId { get; set; }
     }
 }

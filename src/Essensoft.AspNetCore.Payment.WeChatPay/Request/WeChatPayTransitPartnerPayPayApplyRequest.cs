@@ -5,20 +5,10 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 微信代扣 - 乘车码代扣 - 申请扣款
+    /// 微信代扣 - 乘车码代扣 - 申请扣款 (服务商)
     /// </summary>
     public class WeChatPayTransitPartnerPayPayApplyRequest : IWeChatPayRequest<WeChatPayTransitPartnerPayPayApplyResponse>
     {
-        /// <summary>
-        /// 子商户应用号
-        /// </summary>
-        public string SubAppId { get; set; }
-
-        /// <summary>
-        /// 子商户号
-        /// </summary>
-        public string SubMchId { get; set; }
-
         /// <summary>
         /// 商品描述
         /// </summary>
@@ -96,8 +86,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary
             {
-                { "sub_appid", SubAppId },
-                { "sub_mch_id", SubMchId },
                 { "body", Body },
                 { "detail", Detail },
                 { "attach", Attach },
@@ -124,7 +112,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(WeChatPayConsts.appid, options.AppId);
+            sortedTxtParams.Add(WeChatPayConsts.sub_appid, options.SubAppId);
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
+            sortedTxtParams.Add(WeChatPayConsts.sub_mch_id, options.SubMchId);
 
             if (signType == WeChatPaySignType.HMAC_SHA256)
             {

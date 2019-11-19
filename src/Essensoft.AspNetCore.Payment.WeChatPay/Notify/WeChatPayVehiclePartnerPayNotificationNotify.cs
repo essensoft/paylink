@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
 {
     /// <summary>
-    /// 微信代扣 - 车主平台 - 车牌状态变更通知
+    /// 微信代扣 - 车主平台 - 车牌状态变更通知 (普通商户 / 服务商)
     /// </summary>
     [XmlRoot("xml")]
     public class WeChatPayVehiclePartnerPayNotificationNotify : WeChatPayNotify
@@ -45,6 +45,24 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
         public string VehicleEventType { get; set; }
 
         /// <summary>
+        /// 车牌变更事件信息
+        /// </summary>
+        [XmlElement("vehicle_event_des")]
+        public string VehicleEventDes { get; set; }
+
+        /// <summary>
+        /// 用户标识	
+        /// </summary>
+        [XmlElement("openid")]
+        public string OpenId { get; set; }
+
+        /// <summary>
+        /// 用户子标识	
+        /// </summary>
+        [XmlElement("sub_openid")]
+        public string SubOpenId { get; set; }
+
+        /// <summary>
         /// 随机字符串
         /// </summary>
         [XmlElement("nonce_str")]
@@ -67,5 +85,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
         /// </summary>
         [XmlElement("vehicle_event_createtime")]
         public string VehicleEventCreateTime { get; set; }
+
+        /// <summary>
+        /// 车牌信息
+        /// </summary>
+        [XmlElement("plate_number_info")]
+        public string PlateNumberInfo { get; set; }
     }
 }

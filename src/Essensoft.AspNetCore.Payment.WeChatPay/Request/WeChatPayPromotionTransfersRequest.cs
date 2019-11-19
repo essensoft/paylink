@@ -5,7 +5,7 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 企业付款到零钱
+    /// 企业付款到零钱 (普通商户)
     /// </summary>
     public class WeChatPayPromotionTransfersRequest : IWeChatPayCertRequest<WeChatPayPromotionTransfersResponse>
     {
