@@ -69,6 +69,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// </summary>
         public string Receipt { get; set; }
 
+        /// <summary>
+        /// 是否指定服务商分账
+        /// </summary>
+        public string ProfitSharing { get; set; }
+
         #region IWeChatPayRequest Members
 
         public string GetRequestUrl()
@@ -92,6 +97,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { "trade_type", TradeType },
                 { "contract_id", ContractId },
                 { "receipt", Receipt },
+                { "profit_sharing", ProfitSharing }
             };
             return parameters;
         }

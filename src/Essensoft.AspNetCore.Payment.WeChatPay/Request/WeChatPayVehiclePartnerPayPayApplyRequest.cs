@@ -74,6 +74,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// </summary>
         public string SceneInfo { get; set; }
 
+        /// <summary>
+        /// 是否指定服务商分账
+        /// </summary>
+        public string ProfitSharing { get; set; }
 
         #region IWeChatPayRequest Members
 
@@ -99,6 +103,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { "version", Version },
                 { "trade_scene", TradeScene },
                 { "scene_info", SceneInfo },
+                { "profit_sharing", ProfitSharing }
             };
             return parameters;
         }
