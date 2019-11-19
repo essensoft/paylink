@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿#if NETCOREAPP3_0
+
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay
@@ -18,3 +20,5 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         Task<T> ExecuteAsync<T>(HttpRequest request, UnionPayOptions options) where T : UnionPayNotify;
     }
 }
+
+#endif

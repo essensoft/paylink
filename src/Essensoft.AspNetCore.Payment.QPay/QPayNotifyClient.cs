@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if NETCOREAPP3_0
+
+using System;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,15 +12,15 @@ namespace Essensoft.AspNetCore.Payment.QPay
 {
     public class QPayNotifyClient : IQPayNotifyClient
     {
-        #region QPayNotifyClient Constructors
+#region QPayNotifyClient Constructors
 
         public QPayNotifyClient()
         {
         }
 
-        #endregion
+#endregion
 
-        #region IQPayNotifyClient Members
+#region IQPayNotifyClient Members
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request, QPayOptions options) where T : QPayNotify
         {
@@ -40,9 +42,9 @@ namespace Essensoft.AspNetCore.Payment.QPay
             return rsp;
         }
 
-        #endregion
+#endregion
 
-        #region Common Method
+#region Common Method
 
         private void CheckNotifySign(QPayNotify response, QPayOptions options)
         {
@@ -68,6 +70,8 @@ namespace Essensoft.AspNetCore.Payment.QPay
             }
         }
 
-        #endregion
+#endregion
     }
 }
+
+#endif

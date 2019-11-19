@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿#if NETCOREAPP3_0
+
+using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.UnionPay.Parser;
 using Essensoft.AspNetCore.Payment.UnionPay.Utility;
 using Microsoft.AspNetCore.Http;
@@ -7,15 +9,15 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 {
     public class UnionPayNotifyClient : IUnionPayNotifyClient
     {
-        #region UnionPayNotifyClient Constructors
+#region UnionPayNotifyClient Constructors
 
         public UnionPayNotifyClient()
         {
         }
 
-        #endregion
+#endregion
 
-        #region IUnionPayNotifyClient Members
+#region IUnionPayNotifyClient Members
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : UnionPayNotify
         {
@@ -31,9 +33,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             return rsp;
         }
 
-        #endregion
+#endregion
 
-        #region Common Method
+#region Common Method
 
         private async Task<UnionPayDictionary> GetParametersAsync(HttpRequest request)
         {
@@ -60,6 +62,8 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
             }
         }
 
-        #endregion
+#endregion
     }
 }
+
+#endif

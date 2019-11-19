@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
-using Microsoft.AspNetCore.Http;
 
 namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
 {
@@ -30,11 +29,16 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
             return content.ToString().Substring(0, content.Length - 1);
         }
 
-        internal static bool HasTextJsonContentType(this HttpRequest request)
+#if NETCOREAPP3_0
+
+        internal static bool HasTextJsonContentType(this Microsoft.AspNetCore.Http.HttpRequest request)
         {
             // Content-Type: text/json;charset=UTF-8
             MediaTypeHeaderValue.TryParse(request.ContentType, out var contentType);
             return contentType != null && contentType.MediaType.Equals("text/json", StringComparison.OrdinalIgnoreCase);
         }
+
+#endif
+
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿#if NETCOREAPP3_0
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace Essensoft.AspNetCore.Payment.UnionPay
 {
@@ -21,3 +23,5 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
         public static IActionResult Failure => _failure;
     }
 }
+
+#endif
