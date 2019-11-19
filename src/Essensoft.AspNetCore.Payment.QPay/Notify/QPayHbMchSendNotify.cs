@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.QPay.Notify
 {
     /// <summary>
-    /// 现金红包 - 领取结果通知
+    /// 现金红包 - 领取结果通知 (普通商户)
     /// </summary>
     [XmlRoot("xml")]
     public class QPayHbMchSendNotify : QPayNotify

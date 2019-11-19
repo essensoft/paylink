@@ -5,7 +5,7 @@ using Essensoft.AspNetCore.Payment.QPay.Utility;
 namespace Essensoft.AspNetCore.Payment.QPay.Request
 {
     /// <summary>
-    /// 退款查询
+    /// 退款查询 (普通商户 / 服务商)
     /// </summary>
     public class QPayRefundQueryRequest : IQPayRequest<QPayRefundQueryResponse>
     {
@@ -50,8 +50,6 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
         {
             var parameters = new QPayDictionary
             {
-                { "sub_appid", SubAppId },
-                { "sub_mch_id", SubMchId },
                 { "refund_id", RefundId },
                 { "out_refund_no", OutRefundNo },
                 { "transaction_id", TransactionId },
@@ -64,7 +62,9 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
         {
             sortedTxtParams.Add(QPayConsts.NONCE_STR, QPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(QPayConsts.APPID, options.AppId);
+            sortedTxtParams.Add(QPayConsts.SUB_APPID, options.SubAppId);
             sortedTxtParams.Add(QPayConsts.MCH_ID, options.MchId);
+            sortedTxtParams.Add(QPayConsts.SUB_MCH_ID, options.SubMchId);
 
             sortedTxtParams.Add(QPayConsts.SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
         }

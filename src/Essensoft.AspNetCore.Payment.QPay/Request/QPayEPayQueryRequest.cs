@@ -5,7 +5,7 @@ using Essensoft.AspNetCore.Payment.QPay.Utility;
 namespace Essensoft.AspNetCore.Payment.QPay.Request
 {
     /// <summary>
-    /// 企业付款 - 查询企业付款
+    /// 企业付款 - 查询企业付款 (普通商户)
     /// </summary>
     public class QPayEPayQueryRequest : IQPayRequest<QPayEPayQueryResponse>
     {

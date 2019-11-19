@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.QPay.Notify
 {
     /// <summary>
-    /// 企业付款 - 用户到账通知
+    /// 企业付款 - 用户到账通知 (普通商户)
     /// </summary>
     [XmlRoot("xml")]
     public class QPayEPayB2CNotify : QPayNotify

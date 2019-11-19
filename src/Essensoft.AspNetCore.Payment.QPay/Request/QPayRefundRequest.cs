@@ -5,20 +5,10 @@ using Essensoft.AspNetCore.Payment.QPay.Utility;
 namespace Essensoft.AspNetCore.Payment.QPay.Request
 {
     /// <summary>
-    /// 申请退款
+    /// 申请退款 (普通商户 / 服务商)
     /// </summary>
     public class QPayRefundRequest : IQPayCertRequest<QPayRefundResponse>
     {
-        /// <summary>
-        /// 子商户应用ID
-        /// </summary>
-        public string SubAppId { get; set; }
-
-        /// <summary>
-        /// 子商户号
-        /// </summary>
-        public string SubMchId { get; set; }
-
         /// <summary>
         /// QQ钱包订单号
         /// </summary>
@@ -65,8 +55,6 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
         {
             var parameters = new QPayDictionary
             {
-                { "sub_appid", SubAppId },
-                { "sub_mch_id", SubMchId },
                 { "transaction_id", TransactionId },
                 { "out_trade_no", OutTradeNo },
                 { "out_refund_no", OutRefundNo },
@@ -82,7 +70,9 @@ namespace Essensoft.AspNetCore.Payment.QPay.Request
         {
             sortedTxtParams.Add(QPayConsts.NONCE_STR, QPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(QPayConsts.APPID, options.AppId);
+            sortedTxtParams.Add(QPayConsts.SUB_APPID, options.SubAppId);
             sortedTxtParams.Add(QPayConsts.MCH_ID, options.MchId);
+            sortedTxtParams.Add(QPayConsts.SUB_MCH_ID, options.SubMchId);
 
             sortedTxtParams.Add(QPayConsts.SIGN, QPaySignature.SignWithKey(sortedTxtParams, options.Key));
         }

@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.QPay.Notify
 {
     /// <summary>
-    /// 统一下单 - 支付结果通知
+    /// 统一下单 - 支付结果通知 (普通商户 / 服务商)
     /// </summary>
     [XmlRoot("xml")]
     public class QPayUnifiedOrderNotify : QPayNotify
