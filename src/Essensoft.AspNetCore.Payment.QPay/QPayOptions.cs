@@ -4,6 +4,9 @@ namespace Essensoft.AspNetCore.Payment.QPay
 {
     public class QPayOptions
     {
+        internal string CertificateHash;
+
+        private string certificate;
         private string certificatePassword;
 
         /// <summary>
@@ -12,9 +15,19 @@ namespace Essensoft.AspNetCore.Payment.QPay
         public string AppId { get; set; }
 
         /// <summary>
+        /// QQ钱包 子商户应用号(仅服务商时使用)
+        /// </summary>
+        public string SubAppId { get; set; }
+
+        /// <summary>
         /// QQ钱包 商户号
         /// </summary>
         public string MchId { get; set; }
+
+        /// <summary>
+        /// QQ钱包 子商户号(仅服务商时使用)
+        /// </summary>
+        public string SubMchId { get; set; }
 
         /// <summary>
         /// QQ钱包 API秘钥
@@ -24,7 +37,18 @@ namespace Essensoft.AspNetCore.Payment.QPay
         /// <summary>
         /// QQ钱包 API证书(文件名/文件的Base64编码)
         /// </summary>
-        public string Certificate { get; set; }
+        public string Certificate
+        {
+            get => certificate;
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    certificate = value;
+                    CertificateHash = MD5.Compute(certificate);
+                }
+            }
+        }
 
         /// <summary>
         /// QQ钱包 API证书密码(默认为商户号)
@@ -33,11 +57,6 @@ namespace Essensoft.AspNetCore.Payment.QPay
         {
             get => string.IsNullOrEmpty(certificatePassword) ? MchId : certificatePassword;
             set => certificatePassword = value;
-        }
-
-        public string GetCertificateHash()
-        {
-            return MD5.Compute(Certificate);
         }
     }
 }

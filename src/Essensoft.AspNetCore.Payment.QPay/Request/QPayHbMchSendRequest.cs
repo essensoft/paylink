@@ -5,7 +5,7 @@ using Essensoft.AspNetCore.Payment.QPay.Utility;
 namespace Essensoft.AspNetCore.Payment.QPay.Request
 {
     /// <summary>
-    /// 现金红包 - 创建现金红包
+    /// 现金红包 - 创建现金红包 (普通商户)
     /// </summary>
     public class QPayHbMchSendRequest : IQPayCertRequest<QPayHbMchSendResponse>
     {

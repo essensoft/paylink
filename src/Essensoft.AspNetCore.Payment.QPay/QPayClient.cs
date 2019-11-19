@@ -91,17 +91,16 @@ namespace Essensoft.AspNetCore.Payment.QPay
 
             request.PrimaryHandler(options, sortedTxtParams);
 
-            var hash = options.GetCertificateHash();
-            if (!_certificateManager.Contains(hash))
+            if (!_certificateManager.Contains(options.CertificateHash))
             {
                 var certificate = File.Exists(options.Certificate) ?
                     new X509Certificate2(options.Certificate, options.CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet) :
                     new X509Certificate2(Convert.FromBase64String(options.Certificate), options.CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet);
 
-                _certificateManager.TryAdd(hash, certificate);
+                _certificateManager.TryAdd(options.CertificateHash, certificate);
             }
 
-            var client = _httpClientFactory.CreateClient(Prefix + hash);
+            var client = _httpClientFactory.CreateClient(Prefix + options.CertificateHash);
             var body = await client.PostAsync(request.GetRequestUrl(), sortedTxtParams);
             var parser = new QPayXmlParser<T>();
             var rsp = parser.Parse(body);
