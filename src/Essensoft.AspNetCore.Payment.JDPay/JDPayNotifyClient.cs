@@ -18,15 +18,15 @@ namespace Essensoft.AspNetCore.Payment.JDPay
     /// </summary>
     public class JDPayNotifyClient : IJDPayNotifyClient
     {
-#region JDPayNotifyClient Constructors
+        #region JDPayNotifyClient Constructors
 
         public JDPayNotifyClient()
         {
         }
 
-#endregion
+        #endregion
 
-#region IJDPayNotifyClient Members
+        #region IJDPayNotifyClient Members
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request, JDPayOptions options) where T : JDPayNotify
         {
@@ -96,9 +96,9 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             throw new JDPayException("content type is not supported!");
         }
 
-#endregion
+        #endregion
 
-#region Common Method
+        #region Common Method
 
         private JDPayDictionary GetParameters(HttpRequest request, JDPayOptions options, bool isDecrypt = true)
         {
@@ -174,7 +174,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
             }
         }
 
-#endregion
+        #endregion
     }
 }
 
