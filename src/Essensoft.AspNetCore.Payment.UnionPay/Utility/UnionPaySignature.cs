@@ -17,9 +17,9 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
     /// <summary>
     /// UnionPay 签名类。
     /// </summary>
-    public class UnionPaySignature
+    public static class UnionPaySignature
     {
-        private static readonly string UNIONPAY_CNNAME = "中国银联股份有限公司";
+        private const string UNIONPAY_CNNAME = "中国银联股份有限公司";
 
         private static readonly Dictionary<string, X509Certificate> validateCerts = new Dictionary<string, X509Certificate>();
 
@@ -58,7 +58,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay.Utility
             }
 
             var signMethod = dictionary["signMethod"];
-            var result = false;
+            bool result;
 
             if ("01" == signMethod)
             {

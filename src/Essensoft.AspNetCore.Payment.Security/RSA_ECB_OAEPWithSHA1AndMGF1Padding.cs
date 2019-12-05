@@ -5,7 +5,7 @@ using Org.BouncyCastle.Security;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {
-    public class RSA_ECB_OAEPWithSHA1AndMGF1Padding
+    public static class RSA_ECB_OAEPWithSHA1AndMGF1Padding
     {
         public const string ALGORITHM = "RSA/ECB/OAEPWithSHA1AndMGF1Padding";
 

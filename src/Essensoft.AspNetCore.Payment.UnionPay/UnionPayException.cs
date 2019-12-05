@@ -7,7 +7,15 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
     /// </summary>
     public class UnionPayException : Exception
     {
+        public UnionPayException()
+        {
+        }
+
         public UnionPayException(string messages) : base(messages)
+        {
+        }
+
+        public UnionPayException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }

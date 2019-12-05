@@ -7,7 +7,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
     /// <summary>
     /// JDPay 通知应答。
     /// </summary>
-    public class JDPayNotifyResult
+    public static class JDPayNotifyResult
     {
         private static readonly ContentResult _success = new ContentResult { Content = "success", ContentType = "text/plain", StatusCode = 200 };
         private static readonly ContentResult _ok = new ContentResult { Content = "ok", ContentType = "text/plain", StatusCode = 200 };

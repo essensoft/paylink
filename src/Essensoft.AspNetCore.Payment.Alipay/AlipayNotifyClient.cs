@@ -90,7 +90,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             }
         }
 
-        private string GetSignContent(IDictionary<string, string> dictionary)
+        private static string GetSignContent(IDictionary<string, string> dictionary)
         {
             if (dictionary == null || dictionary.Count == 0)
             {

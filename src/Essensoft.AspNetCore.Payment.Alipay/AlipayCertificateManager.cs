@@ -7,7 +7,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         /// <summary>
         /// 不同支付宝公钥证书序列号对应的公钥内容
         /// </summary>
-        private ConcurrentDictionary<string, string> _SN2PublicKey = new ConcurrentDictionary<string, string>();
+        private readonly ConcurrentDictionary<string, string> _SN2PublicKey = new ConcurrentDictionary<string, string>();
 
         public bool IsEmpty => _SN2PublicKey.IsEmpty;
 

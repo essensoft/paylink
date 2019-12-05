@@ -3,7 +3,7 @@
     /// <summary>
     /// 交易场景
     /// </summary>
-    public class WeChatPayTradeScene
+    public static class WeChatPayTradeScene
     {
         /// <summary>
         /// 车场停车场景

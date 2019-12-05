@@ -7,9 +7,9 @@ using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
 {
-    public class WeChatPayListPropertyParser
+    public static class WeChatPayListPropertyParser
     {
-        public List<T> Parse<T>(WeChatPayDictionary dictionary) where T : new()
+        public static List<T> Parse<T>(WeChatPayDictionary dictionary) where T : new()
         {
             var list = new List<T>();
             var properties = typeof(T).GetProperties();
@@ -33,7 +33,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
             return list;
         }
 
-        public List<T> Parse<T, TChildren>(WeChatPayDictionary dictionary) where T : new() where TChildren : new()
+        public static List<T> Parse<T, TChildren>(WeChatPayDictionary dictionary) where T : new() where TChildren : new()
         {
             var list = new List<T>();
             var properties = typeof(T).GetProperties();
@@ -83,7 +83,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
             return list;
         }
 
-        public List<T> Parse<T, TChildren>(WeChatPayDictionary dictionary, int index) where T : new() where TChildren : new()
+        public static List<T> Parse<T, TChildren>(WeChatPayDictionary dictionary, int index) where T : new() where TChildren : new()
         {
             var flag = true;
             var list = new List<T>();
@@ -138,7 +138,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
             return list;
         }
 
-        private string GetKeyName(PropertyInfo item)
+        private static string GetKeyName(PropertyInfo item)
         {
             var key = item.GetCustomAttributes(typeof(XmlElementAttribute), true);
             if (key.Length > 0)

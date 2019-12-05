@@ -12,7 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
     /// <summary>
     /// 证书相关工具类
     /// </summary>
-    public class AntCertificationUtil
+    public static class AntCertificationUtil
     {
         /// <summary>
         /// 提取根证书序列号

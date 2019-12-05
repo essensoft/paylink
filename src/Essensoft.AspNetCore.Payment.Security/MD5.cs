@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {
-    public class MD5
+    public static class MD5
     {
         public static string Compute(string data)
         {

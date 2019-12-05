@@ -1,6 +1,6 @@
 ﻿namespace Essensoft.AspNetCore.Payment.QPay
 {
-    public class QPayCode
+    public static class QPayCode
     {
         /// <summary>
         /// 成功

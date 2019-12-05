@@ -163,7 +163,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay
                 throw new JDPayException("sign check fail: dictionary is Empty!");
             }
 
-            if (!dictionary.TryGetValue(JDPayContants.SIGN_DATA, out var sign_data))
+            if (!dictionary.TryGetValue(JDPayContants.SIGN_DATA, out _))
             {
                 throw new JDPayException("sign check fail: sign is Empty!");
             }

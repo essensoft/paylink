@@ -5,7 +5,7 @@ using Essensoft.AspNetCore.Payment.Security;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Utility
 {
-    public class AlipaySignature
+    public static class AlipaySignature
     {
         public static readonly byte[] AES_IV = InitIv(16);
 
@@ -85,7 +85,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             var endIndex = ExtractEndPosition(str, beginIndex);
             return new SignSourceData()
             {
-                SourceData = str.Substring(beginIndex, endIndex - beginIndex),
+                SourceData = str[beginIndex..endIndex],
                 BeginIndex = beginIndex,
                 EndIndex = endIndex
             };

@@ -3,7 +3,7 @@
     /// <summary>
     /// 用户状态
     /// </summary>
-    public class WeChatPayUserState
+    public static class WeChatPayUserState
     {
         /// <summary>
         /// 正常用户，已开通车主服务，且已授权访问

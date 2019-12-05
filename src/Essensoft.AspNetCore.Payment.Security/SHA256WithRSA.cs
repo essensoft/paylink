@@ -6,7 +6,7 @@ using Org.BouncyCastle.Security;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {
-    public class SHA256WithRSA
+    public static class SHA256WithRSA
     {
         public static string Sign(string data, RSAParameters privateKey)
         {

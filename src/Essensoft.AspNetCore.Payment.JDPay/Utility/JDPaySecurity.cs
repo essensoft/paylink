@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
     /// <summary>
     /// JDPay 安全类。
     /// </summary>
-    public class JDPaySecurity
+    public static class JDPaySecurity
     {
         private const int MAX_MSG_LENGTH = 16 * 1024;
         private static readonly byte[] iv = { 1, 2, 3, 4, 5, 6, 7, 8 };
@@ -197,7 +197,6 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
                 b2[n / 2] = (byte)Convert.ToInt32(item, 16);
             }
 
-            b = null;
             return b2;
         }
 
@@ -218,11 +217,9 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             var digital = "0123456789abcdef";
             var hex2char = hex.ToCharArray();
             var bytes = new byte[hex.Length / 2];
-            var temp = 0;
-
             for (var i = 0; i < bytes.Length; i++)
             {
-                temp = digital.IndexOf(hex2char[2 * i]) * 16;
+                var temp = digital.IndexOf(hex2char[2 * i]) * 16;
                 temp += digital.IndexOf(hex2char[2 * i + 1]);
                 bytes[i] = (byte)(temp & 0xff);
             }
@@ -254,11 +251,9 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             var srcStr = stringBuilder.ToString();
             var chars = srcStr.ToCharArray();
             var bytes = new byte[srcStr.Length / 2];
-            var temp = 0;
-
             for (var i = 0; i < bytes.Length; i++)
             {
-                temp = hexstring.IndexOf(chars[2 * i]) << 4;
+                var temp = hexstring.IndexOf(chars[2 * i]) << 4;
                 temp += hexstring.IndexOf(chars[2 * i + 1]);
                 bytes[i] = (byte)(temp & 0xff);
             }

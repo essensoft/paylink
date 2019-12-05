@@ -3,7 +3,7 @@ using Essensoft.AspNetCore.Payment.Security;
 
 namespace Essensoft.AspNetCore.Payment.QPay.Utility
 {
-    public class QPaySignature
+    public static class QPaySignature
     {
         public static string SignWithKey(QPayDictionary dictionary, string key)
         {

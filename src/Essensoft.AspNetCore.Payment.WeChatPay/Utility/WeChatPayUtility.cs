@@ -64,7 +64,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
                 return null;
             }
 
-            if (str == string.Empty)
+            if (string.IsNullOrEmpty(str))
             {
                 return string.Empty;
             }
@@ -94,7 +94,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
         {
             if (str == null)
             {
-                throw new ArgumentNullException("str");
+                throw new ArgumentNullException(nameof(str));
             }
 
             if (str.Length < len)

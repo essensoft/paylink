@@ -1,6 +1,6 @@
 ﻿namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
-    public class WeChatPayCode
+    public static class WeChatPayCode
     {
         /// <summary>
         /// 成功

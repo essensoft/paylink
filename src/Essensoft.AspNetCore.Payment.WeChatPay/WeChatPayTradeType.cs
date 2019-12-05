@@ -3,7 +3,7 @@
     /// <summary>
     /// 交易类型
     /// </summary>
-    public class WeChatPayTradeType
+    public static class WeChatPayTradeType
     {
         /// <summary>
         /// 公众号支付/小程序支付
