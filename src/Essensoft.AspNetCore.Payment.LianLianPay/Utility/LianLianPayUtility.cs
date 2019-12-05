@@ -29,7 +29,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
             return content.ToString().Substring(0, content.Length - 1);
         }
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
 
         internal static bool HasTextJsonContentType(this Microsoft.AspNetCore.Http.HttpRequest request)
         {

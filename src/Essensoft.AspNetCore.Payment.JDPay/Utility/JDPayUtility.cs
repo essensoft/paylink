@@ -32,7 +32,7 @@ namespace Essensoft.AspNetCore.Payment.JDPay.Utility
             return content.ToString().Substring(0, content.Length - 1);
         }
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
 
         internal static bool HasTextXmlContentType(this Microsoft.AspNetCore.Http.HttpRequest request)
         {

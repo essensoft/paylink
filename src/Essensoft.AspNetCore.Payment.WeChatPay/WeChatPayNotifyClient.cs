@@ -1,4 +1,4 @@
-﻿#if NETCOREAPP3_0
+﻿#if NETCOREAPP3_1
 
 using System;
 using System.IO;
@@ -16,15 +16,15 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     public class WeChatPayNotifyClient : IWeChatPayNotifyClient
     {
-#region WeChatPayNotifyClient Constructors
+        #region WeChatPayNotifyClient Constructors
 
         public WeChatPayNotifyClient()
         {
         }
 
-#endregion
+        #endregion
 
-#region IWeChatPayNotifyClient Members
+        #region IWeChatPayNotifyClient Members
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request, WeChatPayOptions options) where T : WeChatPayNotify
         {
@@ -60,9 +60,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             return notify;
         }
 
-#endregion
+        #endregion
 
-#region Common Method
+        #region Common Method
 
         private void CheckNotifySign(WeChatPayNotify notify, WeChatPayOptions options)
         {
@@ -88,7 +88,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             }
         }
 
-#endregion
+        #endregion
     }
 }
 

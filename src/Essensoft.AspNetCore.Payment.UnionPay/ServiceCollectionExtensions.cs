@@ -19,7 +19,7 @@ namespace Essensoft.AspNetCore.Payment.UnionPay
 
             services.AddSingleton<IUnionPayClient, UnionPayClient>();
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
 
             services.AddSingleton<IUnionPayNotifyClient, UnionPayNotifyClient>();
 #endif
