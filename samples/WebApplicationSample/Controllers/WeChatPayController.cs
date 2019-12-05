@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Text.Json;
+using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.WeChatPay;
 using Essensoft.AspNetCore.Payment.WeChatPay.Request;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
 using WebApplicationSample.Models;
 
 namespace WebApplicationSample.Controllers
@@ -96,7 +96,7 @@ namespace WebApplicationSample.Controllers
                 };
                 var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
                 // 将参数(parameter)给 公众号前端 让他在微信内H5调起支付(https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6)
-                ViewData["parameter"] = JsonConvert.SerializeObject(parameter);
+                ViewData["parameter"] = JsonSerializer.Serialize(parameter);
                 ViewData["response"] = response.ResponseBody;
                 return View();
             }
@@ -175,7 +175,7 @@ namespace WebApplicationSample.Controllers
                 };
                 var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
                 // 将参数(parameter)给 ios/android端 让他调起微信APP(https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5)
-                ViewData["parameter"] = JsonConvert.SerializeObject(parameter);
+                ViewData["parameter"] = JsonSerializer.Serialize(parameter);
                 ViewData["response"] = response.ResponseBody;
                 return View();
             }
@@ -254,7 +254,7 @@ namespace WebApplicationSample.Controllers
                 };
                 var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
                 // 将参数(parameter)给 小程序前端 让他调起支付API(https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7&index=5)
-                ViewData["parameter"] = JsonConvert.SerializeObject(parameter);
+                ViewData["parameter"] = JsonSerializer.Serialize(parameter);
                 ViewData["response"] = response.ResponseBody;
                 return View();
             }
