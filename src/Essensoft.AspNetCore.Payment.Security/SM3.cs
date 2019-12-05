@@ -5,7 +5,7 @@ using Org.BouncyCastle.Security;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {
-    public class SM3
+    public static class SM3
     {
         public static string Compute(string data)
         {

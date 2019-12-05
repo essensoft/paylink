@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay.Utility
     /// <summary>
     /// LianLianPay 安全类。
     /// </summary>
-    public class LianLianPaySecurity
+    public static class LianLianPaySecurity
     {
         public static string GetSignContent(LianLianPayDictionary dictionary, List<string> exclude = null)
         {

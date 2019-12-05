@@ -5,7 +5,7 @@ using Org.BouncyCastle.Security;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {
-    public class MD5WithRSA
+    public static class MD5WithRSA
     {
         public static string SignData(string data, ICipherParameters key)
         {

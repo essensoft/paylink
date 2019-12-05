@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {
-    public class SHA1WithRSA
+    public static class SHA1WithRSA
     {
         public static string Sign(string data, RSAParameters privateKey)
         {

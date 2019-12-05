@@ -3,7 +3,7 @@ using System.Text;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {
-    public class HMACSHA256
+    public static class HMACSHA256
     {
         public static string Compute(string data, string key)
         {

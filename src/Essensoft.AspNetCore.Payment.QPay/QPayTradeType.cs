@@ -1,6 +1,6 @@
 ﻿namespace Essensoft.AspNetCore.Payment.QPay
 {
-    public class QPayTradeType
+    public static class QPayTradeType
     {
         /// <summary>
         /// 公众号支付

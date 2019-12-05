@@ -124,8 +124,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Response
 
         internal override void Execute()
         {
-            var parser = new QPayListPropertyParser();
-            RefundInfos = parser.Parse<RefundInfo>(ResponseParameters);
+            RefundInfos = QPayListPropertyParser.Parse<RefundInfo>(ResponseParameters);
         }
     }
 }

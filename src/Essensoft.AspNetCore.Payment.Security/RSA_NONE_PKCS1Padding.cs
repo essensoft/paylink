@@ -5,7 +5,7 @@ using Org.BouncyCastle.Security;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {
-    public class RSA_NONE_PKCS1Padding
+    public static class RSA_NONE_PKCS1Padding
     {
         public static byte[] Encrypt(byte[] data, ICipherParameters key)
         {

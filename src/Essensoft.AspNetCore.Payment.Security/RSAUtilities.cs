@@ -9,7 +9,7 @@ using Org.BouncyCastle.Security;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {
-    public class RSAUtilities
+    public static class RSAUtilities
     {
         public static ICipherParameters GetKeyParameterFormPrivateKey(string privateKey)
         {

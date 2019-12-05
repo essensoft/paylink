@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {
-    public class TripleDES
+    public static class TripleDES
     {
         public static byte[] Encode(byte[] data, byte[] key, byte[] iv, CipherMode cipherMode, PaddingMode paddingMode)
         {

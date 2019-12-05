@@ -36,7 +36,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Utility
                 return null;
             }
 
-            if (str == string.Empty)
+            if (string.IsNullOrEmpty(str))
             {
                 return string.Empty;
             }
@@ -66,7 +66,7 @@ namespace Essensoft.AspNetCore.Payment.QPay.Utility
         {
             if (str == null)
             {
-                throw new ArgumentNullException("str");
+                throw new ArgumentNullException(nameof(str));
             }
 
             if (str.Length < len)

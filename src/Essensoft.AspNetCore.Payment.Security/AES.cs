@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {
-    public class AES
+    public static class AES
     {
         public static string Encrypt(string data, string key, byte[] iv, CipherMode cipherMode, PaddingMode paddingMode)
         {

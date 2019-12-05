@@ -5,7 +5,7 @@ using Org.BouncyCastle.Security;
 
 namespace Essensoft.AspNetCore.Payment.Security
 {
-    public class AES_CTR_NoPadding
+    public static class AES_CTR_NoPadding
     {
         public static byte[] Encrypt(byte[] data, byte[] key, byte[] iv)
         {

@@ -7,7 +7,15 @@ namespace Essensoft.AspNetCore.Payment.JDPay
     /// </summary>
     public class JDPayException : Exception
     {
+        public JDPayException()
+        {
+        }
+
         public JDPayException(string messages) : base(messages)
+        {
+        }
+
+        public JDPayException(string message, Exception innerException) : base(message, innerException)
         {
         }
     }
