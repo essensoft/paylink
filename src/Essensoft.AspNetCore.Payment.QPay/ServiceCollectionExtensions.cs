@@ -24,7 +24,7 @@ namespace Essensoft.AspNetCore.Payment.QPay
             services.AddSingleton<QPayCertificateManager>();
             services.AddSingleton<IQPayClient, QPayClient>();
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
 
             services.AddSingleton<IQPayNotifyClient, QPayNotifyClient>();
 

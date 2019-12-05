@@ -1,4 +1,4 @@
-﻿#if NETCOREAPP3_0
+﻿#if NETCOREAPP3_1
 
 using System.IO;
 using System.Threading.Tasks;
@@ -14,15 +14,15 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
     /// </summary>
     public class LianLianPayNotifyClient : ILianLianPayNotifyClient
     {
-#region LianLianPayNotifyClient Constructors
+        #region LianLianPayNotifyClient Constructors
 
         public LianLianPayNotifyClient()
         {
         }
 
-#endregion
+        #endregion
 
-#region ILianLianPayNotifyClient Members
+        #region ILianLianPayNotifyClient Members
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request) where T : LianLianPayNotify
         {
@@ -53,9 +53,9 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             throw new LianLianPayException("content type is not supported");
         }
 
-#endregion
+        #endregion
 
-#region Common Method
+        #region Common Method
 
         private async Task<LianLianPayDictionary> GetParametersAsync(HttpRequest request)
         {
@@ -87,7 +87,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
             }
         }
 
-#endregion
+        #endregion
     }
 }
 

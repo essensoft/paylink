@@ -19,7 +19,7 @@ namespace Essensoft.AspNetCore.Payment.LianLianPay
 
             services.AddSingleton<ILianLianPayClient, LianLianPayClient>();
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
 
             services.AddSingleton<ILianLianPayNotifyClient, LianLianPayNotifyClient>();
 

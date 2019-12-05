@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             services.AddSingleton<AlipayCertificateManager>();
             services.AddSingleton<IAlipayClient, AlipayClient>();
 
-#if NETCOREAPP3_0
+#if NETCOREAPP3_1
 
             services.AddSingleton<IAlipayNotifyClient, AlipayNotifyClient>();
 #endif
