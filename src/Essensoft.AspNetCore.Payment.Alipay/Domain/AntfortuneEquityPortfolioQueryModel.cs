@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AntfortuneEquityPortfolioQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AntfortuneEquityPortfolioQueryModel : AlipayObject
     {
         /// <summary>
         /// 组合ID
         /// </summary>
-        [JsonProperty("product_id")]
+        [JsonPropertyName("product_id")]
         public string ProductId { get; set; }
     }
 }

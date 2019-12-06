@@ -1,42 +1,40 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KbAdvertChannelResponse Data Structure.
     /// </summary>
-    [Serializable]
     public class KbAdvertChannelResponse : AlipayObject
     {
         /// <summary>
         /// 渠道ID
         /// </summary>
-        [JsonProperty("channel_id")]
+        [JsonPropertyName("channel_id")]
         public string ChannelId { get; set; }
 
         /// <summary>
         /// 备注
         /// </summary>
-        [JsonProperty("memo")]
+        [JsonPropertyName("memo")]
         public string Memo { get; set; }
 
         /// <summary>
         /// 渠道名称
         /// </summary>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// 渠道状态  EFFECTIVE：有效  INVALID：无效
         /// </summary>
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; set; }
 
         /// <summary>
         /// OFFLINE：线下推广
         /// </summary>
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; set; }
     }
 }

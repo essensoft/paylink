@@ -1,37 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayOpenAppXwbsssQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayOpenAppXwbsssQueryModel : AlipayObject
     {
         /// <summary>
         /// 1
         /// </summary>
-        [JsonProperty("a")]
+        [JsonPropertyName("a")]
         public string A { get; set; }
 
         /// <summary>
         /// 1
         /// </summary>
-        [JsonProperty("b")]
+        [JsonPropertyName("b")]
         public string B { get; set; }
 
         /// <summary>
         /// 1
         /// </summary>
-        [JsonProperty("c")]
+        [JsonPropertyName("c")]
         public List<long> C { get; set; }
 
         /// <summary>
         /// 描述描述描述描述
         /// </summary>
-        [JsonProperty("effect_date")]
+        [JsonPropertyName("effect_date")]
         public string EffectDate { get; set; }
     }
 }

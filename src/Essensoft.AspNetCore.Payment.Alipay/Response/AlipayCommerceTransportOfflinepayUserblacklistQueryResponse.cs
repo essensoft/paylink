@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 黑名单用户ID
         /// </summary>
-        [JsonProperty("black_list")]
+        [JsonPropertyName("black_list")]
         public List<string> BlackList { get; set; }
     }
 }

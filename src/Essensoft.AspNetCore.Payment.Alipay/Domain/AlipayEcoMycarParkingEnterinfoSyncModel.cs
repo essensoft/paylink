@@ -1,30 +1,28 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayEcoMycarParkingEnterinfoSyncModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayEcoMycarParkingEnterinfoSyncModel : AlipayObject
     {
         /// <summary>
         /// 车牌号
         /// </summary>
-        [JsonProperty("car_number")]
+        [JsonPropertyName("car_number")]
         public string CarNumber { get; set; }
 
         /// <summary>
         /// 车辆入场的时间，格式"YYYY-MM-DD HH:mm:ss"，24小时制
         /// </summary>
-        [JsonProperty("in_time")]
+        [JsonPropertyName("in_time")]
         public string InTime { get; set; }
 
         /// <summary>
         /// 支付宝停车场ID ，系统唯一
         /// </summary>
-        [JsonProperty("parking_id")]
+        [JsonPropertyName("parking_id")]
         public string ParkingId { get; set; }
     }
 }

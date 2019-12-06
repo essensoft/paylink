@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// id字典，key为openId，value为userId
         /// </summary>
-        [JsonProperty("dict")]
+        [JsonPropertyName("dict")]
         public string Dict { get; set; }
     }
 }

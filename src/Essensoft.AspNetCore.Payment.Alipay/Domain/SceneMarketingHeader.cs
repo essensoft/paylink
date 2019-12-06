@@ -1,49 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// SceneMarketingHeader Data Structure.
     /// </summary>
-    [Serializable]
     public class SceneMarketingHeader : AlipayObject
     {
         /// <summary>
         /// 图标地址
         /// </summary>
-        [JsonProperty("icon")]
+        [JsonPropertyName("icon")]
         public string Icon { get; set; }
 
         /// <summary>
         /// 子标题
         /// </summary>
-        [JsonProperty("sub_title")]
+        [JsonPropertyName("sub_title")]
         public string SubTitle { get; set; }
 
         /// <summary>
         /// 简要描述
         /// </summary>
-        [JsonProperty("summary")]
+        [JsonPropertyName("summary")]
         public string Summary { get; set; }
 
         /// <summary>
         /// 标签
         /// </summary>
-        [JsonProperty("tags")]
+        [JsonPropertyName("tags")]
         public List<string> Tags { get; set; }
 
         /// <summary>
         /// 标题
         /// </summary>
-        [JsonProperty("title")]
+        [JsonPropertyName("title")]
         public string Title { get; set; }
 
         /// <summary>
         /// 跳转地址
         /// </summary>
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public string Url { get; set; }
     }
 }

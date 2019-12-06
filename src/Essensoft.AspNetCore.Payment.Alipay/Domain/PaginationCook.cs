@@ -1,43 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// PaginationCook Data Structure.
     /// </summary>
-    [Serializable]
     public class PaginationCook : AlipayObject
     {
         /// <summary>
         /// 出参列表
         /// </summary>
-        [JsonProperty("list")]
+        [JsonPropertyName("list")]
         public List<KbdishCookInfo> List { get; set; }
 
         /// <summary>
         /// 表示当前页数
         /// </summary>
-        [JsonProperty("page_no")]
+        [JsonPropertyName("page_no")]
         public string PageNo { get; set; }
 
         /// <summary>
         /// 表示每页条数
         /// </summary>
-        [JsonProperty("page_size")]
+        [JsonPropertyName("page_size")]
         public string PageSize { get; set; }
 
         /// <summary>
         /// 总条数
         /// </summary>
-        [JsonProperty("total_count")]
+        [JsonPropertyName("total_count")]
         public string TotalCount { get; set; }
 
         /// <summary>
         /// 总页数
         /// </summary>
-        [JsonProperty("total_page")]
+        [JsonPropertyName("total_page")]
         public string TotalPage { get; set; }
     }
 }

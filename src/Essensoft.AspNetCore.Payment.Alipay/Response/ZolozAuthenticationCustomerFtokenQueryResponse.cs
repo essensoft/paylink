@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,19 +12,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 图片base64 encodeString
         /// </summary>
-        [JsonProperty("authimg_base_64")]
+        [JsonPropertyName("authimg_base_64")]
         public string AuthimgBase64 { get; set; }
 
         /// <summary>
         /// 支付宝uid
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonPropertyName("uid")]
         public string Uid { get; set; }
 
         /// <summary>
         /// 用户名和手机号信息返回的列表
         /// </summary>
-        [JsonProperty("uid_tel_pair_list")]
+        [JsonPropertyName("uid_tel_pair_list")]
         public List<ZhubUidTelPair> UidTelPairList { get; set; }
     }
 }

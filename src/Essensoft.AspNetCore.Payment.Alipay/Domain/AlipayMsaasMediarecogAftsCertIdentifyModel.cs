@@ -1,60 +1,58 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayMsaasMediarecogAftsCertIdentifyModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayMsaasMediarecogAftsCertIdentifyModel : AlipayObject
     {
         /// <summary>
         /// 扩展入参
         /// </summary>
-        [JsonProperty("ext")]
+        [JsonPropertyName("ext")]
         public string Ext { get; set; }
 
         /// <summary>
         /// 高
         /// </summary>
-        [JsonProperty("h")]
+        [JsonPropertyName("h")]
         public long H { get; set; }
 
         /// <summary>
         /// 车牌号
         /// </summary>
-        [JsonProperty("plate_number")]
+        [JsonPropertyName("plate_number")]
         public string PlateNumber { get; set; }
 
         /// <summary>
         /// 传入资源URL或djangoid或aftsid
         /// </summary>
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public string Url { get; set; }
 
         /// <summary>
         /// 蚂蚁统一会员ID
         /// </summary>
-        [JsonProperty("user_id")]
+        [JsonPropertyName("user_id")]
         public string UserId { get; set; }
 
         /// <summary>
         /// 宽
         /// </summary>
-        [JsonProperty("w")]
+        [JsonPropertyName("w")]
         public long W { get; set; }
 
         /// <summary>
         /// 左上角x
         /// </summary>
-        [JsonProperty("x")]
+        [JsonPropertyName("x")]
         public long X { get; set; }
 
         /// <summary>
         /// 左上角y
         /// </summary>
-        [JsonProperty("y")]
+        [JsonPropertyName("y")]
         public long Y { get; set; }
     }
 }

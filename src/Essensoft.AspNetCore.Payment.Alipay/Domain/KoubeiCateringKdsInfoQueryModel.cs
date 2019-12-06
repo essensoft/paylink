@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KoubeiCateringKdsInfoQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class KoubeiCateringKdsInfoQueryModel : AlipayObject
     {
         /// <summary>
         /// kdsID
         /// </summary>
-        [JsonProperty("kds_id")]
+        [JsonPropertyName("kds_id")]
         public string KdsId { get; set; }
 
         /// <summary>
         /// 门店ID
         /// </summary>
-        [JsonProperty("shop_id")]
+        [JsonPropertyName("shop_id")]
         public string ShopId { get; set; }
     }
 }

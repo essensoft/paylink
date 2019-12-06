@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,13 +10,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 成功关闭时间，时间格式:  yyyyMMddHHmmss
         /// </summary>
-        [JsonProperty("gmt_close")]
+        [JsonPropertyName("gmt_close")]
         public string GmtClose { get; set; }
 
         /// <summary>
         /// 口碑物流单号
         /// </summary>
-        [JsonProperty("logistics_order_no")]
+        [JsonPropertyName("logistics_order_no")]
         public string LogisticsOrderNo { get; set; }
     }
 }

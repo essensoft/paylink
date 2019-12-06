@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,25 +10,25 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 返回结果码，如200，标识成功
         /// </summary>
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public override string Code { get; set; }
 
         /// <summary>
         /// 图片地址
         /// </summary>
-        [JsonProperty("code_img")]
+        [JsonPropertyName("code_img")]
         public string CodeImg { get; set; }
 
         /// <summary>
         /// 码过期时间，单位：秒
         /// </summary>
-        [JsonProperty("expire_second")]
+        [JsonPropertyName("expire_second")]
         public long ExpireSecond { get; set; }
 
         /// <summary>
         /// 结果吗描述信息
         /// </summary>
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public override string Msg { get; set; }
     }
 }

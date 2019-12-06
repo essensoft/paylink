@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// IFAA服务端查询结果，true为支持指纹功能，false为不支持
         /// </summary>
-        [JsonProperty("check_result")]
+        [JsonPropertyName("check_result")]
         public bool CheckResult { get; set; }
     }
 }

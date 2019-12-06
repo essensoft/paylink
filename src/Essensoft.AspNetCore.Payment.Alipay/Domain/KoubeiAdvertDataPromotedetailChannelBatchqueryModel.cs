@@ -1,54 +1,52 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KoubeiAdvertDataPromotedetailChannelBatchqueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class KoubeiAdvertDataPromotedetailChannelBatchqueryModel : AlipayObject
     {
         /// <summary>
         /// 广告id
         /// </summary>
-        [JsonProperty("adv_id")]
+        [JsonPropertyName("adv_id")]
         public string AdvId { get; set; }
 
         /// <summary>
         /// 渠道id(不传查所有id)
         /// </summary>
-        [JsonProperty("channel_id")]
+        [JsonPropertyName("channel_id")]
         public string ChannelId { get; set; }
 
         /// <summary>
         /// 结束时间(精确到天)
         /// </summary>
-        [JsonProperty("end_date")]
+        [JsonPropertyName("end_date")]
         public string EndDate { get; set; }
 
         /// <summary>
         /// 扩展信息
         /// </summary>
-        [JsonProperty("ext_info")]
+        [JsonPropertyName("ext_info")]
         public string ExtInfo { get; set; }
 
         /// <summary>
         /// 当前页码
         /// </summary>
-        [JsonProperty("page_index")]
+        [JsonPropertyName("page_index")]
         public long PageIndex { get; set; }
 
         /// <summary>
         /// 每页大小(分页参数)
         /// </summary>
-        [JsonProperty("page_size")]
+        [JsonPropertyName("page_size")]
         public long PageSize { get; set; }
 
         /// <summary>
         /// 开始时间(精确到天)
         /// </summary>
-        [JsonProperty("start_date")]
+        [JsonPropertyName("start_date")]
         public string StartDate { get; set; }
     }
 }

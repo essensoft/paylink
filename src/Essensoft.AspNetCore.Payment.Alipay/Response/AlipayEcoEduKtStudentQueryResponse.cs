@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,37 +12,37 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 学生姓名
         /// </summary>
-        [JsonProperty("child_name")]
+        [JsonPropertyName("child_name")]
         public string ChildName { get; set; }
 
         /// <summary>
         /// 班级名字
         /// </summary>
-        [JsonProperty("class_name")]
+        [JsonPropertyName("class_name")]
         public string ClassName { get; set; }
 
         /// <summary>
         /// 学校名称
         /// </summary>
-        [JsonProperty("school_name")]
+        [JsonPropertyName("school_name")]
         public string SchoolName { get; set; }
 
         /// <summary>
         /// 学生编号
         /// </summary>
-        [JsonProperty("student_code")]
+        [JsonPropertyName("student_code")]
         public string StudentCode { get; set; }
 
         /// <summary>
         /// 学生身份证
         /// </summary>
-        [JsonProperty("student_identify")]
+        [JsonPropertyName("student_identify")]
         public string StudentIdentify { get; set; }
 
         /// <summary>
         /// 家长信息
         /// </summary>
-        [JsonProperty("users")]
+        [JsonPropertyName("users")]
         public List<UserDetails> Users { get; set; }
     }
 }

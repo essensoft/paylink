@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayFundTransBillCloseModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayFundTransBillCloseModel : AlipayObject
     {
         /// <summary>
         /// 支付宝转账单据号
         /// </summary>
-        [JsonProperty("transfer_no")]
+        [JsonPropertyName("transfer_no")]
         public string TransferNo { get; set; }
 
         /// <summary>
         /// 蚂蚁统一会员ID
         /// </summary>
-        [JsonProperty("user_id")]
+        [JsonPropertyName("user_id")]
         public string UserId { get; set; }
     }
 }

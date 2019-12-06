@@ -1,43 +1,41 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// TemplateOpenCardConfDTO Data Structure.
     /// </summary>
-    [Serializable]
     public class TemplateOpenCardConfDTO : AlipayObject
     {
         /// <summary>
         /// 领卡权益信息
         /// </summary>
-        [JsonProperty("card_rights")]
+        [JsonPropertyName("card_rights")]
         public List<TemplateRightsContentDTO> CardRights { get; set; }
 
         /// <summary>
         /// 配置，预留字段，暂时不用
         /// </summary>
-        [JsonProperty("conf")]
+        [JsonPropertyName("conf")]
         public string Conf { get; set; }
 
         /// <summary>
         /// ISV：外部系统  MER：直连商户
         /// </summary>
-        [JsonProperty("open_card_source_type")]
+        [JsonPropertyName("open_card_source_type")]
         public string OpenCardSourceType { get; set; }
 
         /// <summary>
         /// 开卡连接，必须http、https开头
         /// </summary>
-        [JsonProperty("open_card_url")]
+        [JsonPropertyName("open_card_url")]
         public string OpenCardUrl { get; set; }
 
         /// <summary>
         /// 渠道APPID，提供领卡页面的服务提供方
         /// </summary>
-        [JsonProperty("source_app_id")]
+        [JsonPropertyName("source_app_id")]
         public string SourceAppId { get; set; }
     }
 }

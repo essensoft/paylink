@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,13 +10,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 广告投放平台生成的创意ID
         /// </summary>
-        [JsonProperty("creative_id")]
+        [JsonPropertyName("creative_id")]
         public long CreativeId { get; set; }
 
         /// <summary>
         /// 外部平台导入广告库后，广告投放创意对应的外部资源ID
         /// </summary>
-        [JsonProperty("creative_outer_id")]
+        [JsonPropertyName("creative_outer_id")]
         public string CreativeOuterId { get; set; }
     }
 }

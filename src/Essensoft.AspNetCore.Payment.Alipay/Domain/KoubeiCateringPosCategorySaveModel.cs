@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KoubeiCateringPosCategorySaveModel Data Structure.
     /// </summary>
-    [Serializable]
     public class KoubeiCateringPosCategorySaveModel : AlipayObject
     {
         /// <summary>
         /// 排序菜类列表
         /// </summary>
-        [JsonProperty("category_entity_list")]
+        [JsonPropertyName("category_entity_list")]
         public List<DishCategoryEntity> CategoryEntityList { get; set; }
     }
 }

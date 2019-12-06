@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 自定义报表规则条件的详细信息
         /// </summary>
-        [JsonProperty("report_condition_info")]
+        [JsonPropertyName("report_condition_info")]
         public CustomReportCondition ReportConditionInfo { get; set; }
     }
 }

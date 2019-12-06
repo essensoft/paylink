@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,13 +10,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 返回已设置的一级行业分类名称
         /// </summary>
-        [JsonProperty("primary_category")]
+        [JsonPropertyName("primary_category")]
         public string PrimaryCategory { get; set; }
 
         /// <summary>
         /// 返回已设置的二级行业分类名称
         /// </summary>
-        [JsonProperty("secondary_category")]
+        [JsonPropertyName("secondary_category")]
         public string SecondaryCategory { get; set; }
     }
 }

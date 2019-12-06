@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 冻结订单详情结果
         /// </summary>
-        [JsonProperty("unfreeze_order_detail")]
+        [JsonPropertyName("unfreeze_order_detail")]
         public UnfreezeOrderDetail UnfreezeOrderDetail { get; set; }
     }
 }

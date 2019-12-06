@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KoubeiMerchantKbcloudSubuserlogoutEffectModel Data Structure.
     /// </summary>
-    [Serializable]
     public class KoubeiMerchantKbcloudSubuserlogoutEffectModel : AlipayObject
     {
         /// <summary>
         /// 登录的sessionId
         /// </summary>
-        [JsonProperty("session_id")]
+        [JsonPropertyName("session_id")]
         public string SessionId { get; set; }
     }
 }

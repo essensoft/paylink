@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// SpiDetectionTask Data Structure.
     /// </summary>
-    [Serializable]
     public class SpiDetectionTask : AlipayObject
     {
         /// <summary>
         /// 待检测文本内容
         /// </summary>
-        [JsonProperty("content")]
+        [JsonPropertyName("content")]
         public string Content { get; set; }
 
         /// <summary>
         /// 检测任务编号
         /// </summary>
-        [JsonProperty("data_id")]
+        [JsonPropertyName("data_id")]
         public string DataId { get; set; }
     }
 }

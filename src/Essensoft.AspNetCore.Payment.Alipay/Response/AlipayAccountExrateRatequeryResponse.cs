@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 查询到的汇率对象列表，如果没有查询到则返回空列表
         /// </summary>
-        [JsonProperty("rate_query_response_list")]
+        [JsonPropertyName("rate_query_response_list")]
         public List<ExRefRateInfoVO> RateQueryResponseList { get; set; }
     }
 }

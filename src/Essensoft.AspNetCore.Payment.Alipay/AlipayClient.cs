@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Alipay.Parser;
 using Essensoft.AspNetCore.Payment.Alipay.Request;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
@@ -651,7 +651,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         #region Model Serialize
 
-        private static readonly JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
+        private static readonly JsonSerializerOptions _jsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true };
 
         private AlipayDictionary SerializeBizModel<T>(AlipayDictionary requestParams, IAlipayRequest<T> request) where T : AlipayResponse
         {
@@ -660,7 +660,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             var bizModel = request.GetBizModel();
             if (isBizContentEmpty && bizModel != null)
             {
-                var content = JsonConvert.SerializeObject(bizModel, jsonSerializerSettings);
+                var content = JsonSerializer.Serialize(bizModel, bizModel.GetType(), _jsonSerializerOptions);
                 result.Add(AlipayConstants.BIZ_CONTENT, content);
             }
 

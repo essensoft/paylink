@@ -1,36 +1,34 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayEcoMycarPromoTicketPushModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayEcoMycarPromoTicketPushModel : AlipayObject
     {
         /// <summary>
         /// 核销流水
         /// </summary>
-        [JsonProperty("apply_no")]
+        [JsonPropertyName("apply_no")]
         public string ApplyNo { get; set; }
 
         /// <summary>
         /// 核销状态，0：成功，1：失败
         /// </summary>
-        [JsonProperty("apply_status")]
+        [JsonPropertyName("apply_status")]
         public string ApplyStatus { get; set; }
 
         /// <summary>
         /// 对应TP活动码
         /// </summary>
-        [JsonProperty("code_no")]
+        [JsonPropertyName("code_no")]
         public string CodeNo { get; set; }
 
         /// <summary>
         /// 券ID
         /// </summary>
-        [JsonProperty("ticket_id")]
+        [JsonPropertyName("ticket_id")]
         public string TicketId { get; set; }
     }
 }

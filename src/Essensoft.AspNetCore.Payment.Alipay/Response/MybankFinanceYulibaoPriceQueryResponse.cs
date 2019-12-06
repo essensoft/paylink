@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 余利宝行情信息列表
         /// </summary>
-        [JsonProperty("ylb_price_detail_infos")]
+        [JsonPropertyName("ylb_price_detail_infos")]
         public List<YLBPriceDetailInfo> YlbPriceDetailInfos { get; set; }
     }
 }

@@ -1,40 +1,38 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
     /// <summary>
     /// Alipay 响应。
     /// </summary>
-    [Serializable]
     public abstract class AlipayResponse
     {
         /// <summary>
         /// 错误码
         /// 对应 ErrCode
         /// </summary>
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public virtual string Code { get; set; }
 
         /// <summary>
         /// 错误信息
         /// 对应 ErrMsg
         /// </summary>
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public virtual string Msg { get; set; }
 
         /// <summary>
         /// 子错误码
         /// 对应 SubErrCode
         /// </summary>
-        [JsonProperty("sub_code")]
+        [JsonPropertyName("sub_code")]
         public virtual string SubCode { get; set; }
 
         /// <summary>
         /// 子错误信息
         /// 对应 SubErrMsg
         /// </summary>
-        [JsonProperty("sub_msg")]
+        [JsonPropertyName("sub_msg")]
         public virtual string SubMsg { get; set; }
 
         /// <summary>

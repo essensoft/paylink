@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,13 +10,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 商户请求的批次流水号，同请求中的"batch_no"。
         /// </summary>
-        [JsonProperty("batch_no")]
+        [JsonPropertyName("batch_no")]
         public string BatchNo { get; set; }
 
         /// <summary>
         /// 支付宝系统内部批次请求id。
         /// </summary>
-        [JsonProperty("batch_trans_id")]
+        [JsonPropertyName("batch_trans_id")]
         public string BatchTransId { get; set; }
     }
 }

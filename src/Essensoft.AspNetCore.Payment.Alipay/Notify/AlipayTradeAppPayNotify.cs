@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Notify
 {
@@ -12,187 +12,187 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         /// <summary>
         /// 通知时间
         /// </summary>
-        [JsonProperty("notify_time")]
+        [JsonPropertyName("notify_time")]
         public string NotifyTime { get; set; }
 
         /// <summary>
         /// 通知类型
         /// </summary>
-        [JsonProperty("notify_type")]
+        [JsonPropertyName("notify_type")]
         public string NotifyType { get; set; }
 
         /// <summary>
         /// 通知校验ID
         /// </summary>
-        [JsonProperty("notify_id")]
+        [JsonPropertyName("notify_id")]
         public string NotifyId { get; set; }
 
         /// <summary>
         /// 支付宝分配给开发者的应用Id
         /// </summary>
-        [JsonProperty("app_id")]
+        [JsonPropertyName("app_id")]
         public string AppId { get; set; }
 
         /// <summary>
         /// 编码格式
         /// </summary>
-        [JsonProperty("charset")]
+        [JsonPropertyName("charset")]
         public string Charset { get; set; }
 
         /// <summary>
         /// 接口版本
         /// </summary>
-        [JsonProperty("version")]
+        [JsonPropertyName("version")]
         public string Version { get; set; }
 
         /// <summary>
         /// 签名类型
         /// </summary>
-        [JsonProperty("sign_type")]
+        [JsonPropertyName("sign_type")]
         public string SignType { get; set; }
 
         /// <summary>
         /// 签名
         /// </summary>
-        [JsonProperty("sign")]
+        [JsonPropertyName("sign")]
         public string Sign { get; set; }
 
         /// <summary>
         /// 支付宝交易号
         /// </summary>
-        [JsonProperty("trade_no")]
+        [JsonPropertyName("trade_no")]
         public string TradeNo { get; set; }
 
         /// <summary>
         /// 商户订单号
         /// </summary>
-        [JsonProperty("out_trade_no")]
+        [JsonPropertyName("out_trade_no")]
         public string OutTradeNo { get; set; }
 
         /// <summary>
         /// 商户业务号
         /// </summary>
-        [JsonProperty("out_biz_no")]
+        [JsonPropertyName("out_biz_no")]
         public string OutBizNo { get; set; }
 
         /// <summary>
         /// 买家支付宝用户号
         /// </summary>
-        [JsonProperty("buyer_id")]
+        [JsonPropertyName("buyer_id")]
         public string BuyerId { get; set; }
 
         /// <summary>
         /// 买家支付宝账号
         /// </summary>
-        [JsonProperty("buyer_logon_id")]
+        [JsonPropertyName("buyer_logon_id")]
         public string BuyerLogonId { get; set; }
 
         /// <summary>
         /// 卖家支付宝用户号
         /// </summary>
-        [JsonProperty("seller_id")]
+        [JsonPropertyName("seller_id")]
         public string SellerId { get; set; }
 
         /// <summary>
         /// 卖家支付宝账号
         /// </summary>
-        [JsonProperty("seller_email")]
+        [JsonPropertyName("seller_email")]
         public string SellerEmail { get; set; }
 
         /// <summary>
         /// 交易状态
         /// </summary>
-        [JsonProperty("trade_status")]
+        [JsonPropertyName("trade_status")]
         public string TradeStatus { get; set; }
 
         /// <summary>
         /// 订单金额
         /// </summary>
-        [JsonProperty("total_amount")]
+        [JsonPropertyName("total_amount")]
         public string TotalAmount { get; set; }
 
         /// <summary>
         /// 实收金额
         /// </summary>
-        [JsonProperty("receipt_amount")]
+        [JsonPropertyName("receipt_amount")]
         public string ReceiptAmount { get; set; }
 
         /// <summary>
         /// 开票金额
         /// </summary>
-        [JsonProperty("invoice_amount")]
+        [JsonPropertyName("invoice_amount")]
         public string InvoiceAmount { get; set; }
 
         /// <summary>
         /// 付款金额
         /// </summary>
-        [JsonProperty("buyer_pay_amount")]
+        [JsonPropertyName("buyer_pay_amount")]
         public string BuyerPayAmount { get; set; }
 
         /// <summary>
         /// 集分宝金额
         /// </summary>
-        [JsonProperty("point_amount")]
+        [JsonPropertyName("point_amount")]
         public string PointAmount { get; set; }
 
         /// <summary>
         /// 总退款金额
         /// </summary>
-        [JsonProperty("refund_fee")]
+        [JsonPropertyName("refund_fee")]
         public string RefundFee { get; set; }
 
         /// <summary>
         /// 订单标题
         /// </summary>
-        [JsonProperty("subject")]
+        [JsonPropertyName("subject")]
         public string Subject { get; set; }
 
         /// <summary>
         /// 商品描述
         /// </summary>
-        [JsonProperty("body")]
+        [JsonPropertyName("body")]
         public string Body { get; set; }
 
         /// <summary>
         /// 交易创建时间
         /// </summary>
-        [JsonProperty("gmt_create")]
+        [JsonPropertyName("gmt_create")]
         public string GmtCreate { get; set; }
 
         /// <summary>
         /// 交易付款时间
         /// </summary>
-        [JsonProperty("gmt_payment")]
+        [JsonPropertyName("gmt_payment")]
         public string GmtPayment { get; set; }
 
         /// <summary>
         /// 交易退款时间
         /// </summary>
-        [JsonProperty("gmt_refund")]
+        [JsonPropertyName("gmt_refund")]
         public string GmtRefund { get; set; }
 
         /// <summary>
         /// 交易结束时间
         /// </summary>
-        [JsonProperty("gmt_close")]
+        [JsonPropertyName("gmt_close")]
         public string GmtClose { get; set; }
 
         /// <summary>
         /// 支付金额信息
         /// </summary>
-        [JsonProperty("fund_bill_list")]
+        [JsonPropertyName("fund_bill_list")]
         public string FundBillList { get; set; }
 
         /// <summary>
         /// 回传参数
         /// </summary>
-        [JsonProperty("passback_params")]
+        [JsonPropertyName("passback_params")]
         public string PassbackParams { get; set; }
 
         /// <summary>
         /// 优惠券信息
         /// </summary>
-        [JsonProperty("voucher_detail_list")]
+        [JsonPropertyName("voucher_detail_list")]
         public string VoucherDetailList { get; set; }
     }
 }

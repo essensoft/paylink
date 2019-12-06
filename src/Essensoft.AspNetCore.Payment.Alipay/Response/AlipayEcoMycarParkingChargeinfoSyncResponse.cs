@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 同步结果：0 成功，1 失败
         /// </summary>
-        [JsonProperty("sync_result")]
+        [JsonPropertyName("sync_result")]
         public string SyncResult { get; set; }
     }
 }

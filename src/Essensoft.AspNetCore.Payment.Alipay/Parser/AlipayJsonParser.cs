@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Security.Cryptography;
+using System.Text.Json;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 {
@@ -29,7 +29,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
         private static string GetSign(string body)
         {
-            var json = JsonConvert.DeserializeObject<IDictionary>(body);
+            var json = JsonSerializer.Deserialize<IDictionary>(body);
             return json[AlipayConstants.SIGN]?.ToString();
         }
 
@@ -142,7 +142,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
             {
                 if (body.StartsWith("{") && body.EndsWith("}"))
                 {
-                    json = JsonConvert.DeserializeObject<IDictionary>(body);
+                    json = JsonSerializer.Deserialize<IDictionary>(body);
                 }
 
                 if (json != null)
@@ -150,7 +150,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
                     // 忽略根节点的名称
                     foreach (var key in json.Keys)
                     {
-                        rsp = JsonConvert.DeserializeObject<T>(json[key].ToString());
+                        rsp = JsonSerializer.Deserialize<T>(json[key].ToString());
                         if (rsp != null)
                         {
                             break;
@@ -197,7 +197,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
             var certItem = new CertItem();
 
-            var json = JsonConvert.DeserializeObject<IDictionary>(responseBody);
+            var json = JsonSerializer.Deserialize<IDictionary>(responseBody);
             certItem.Sign = json["sign"]?.ToString();
             certItem.CertSN = json["alipay_cert_sn"]?.ToString();
 

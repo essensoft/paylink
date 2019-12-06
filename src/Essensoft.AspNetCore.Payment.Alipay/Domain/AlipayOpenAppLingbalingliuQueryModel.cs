@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayOpenAppLingbalingliuQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayOpenAppLingbalingliuQueryModel : AlipayObject
     {
         /// <summary>
         /// 12
         /// </summary>
-        [JsonProperty("canshu")]
+        [JsonPropertyName("canshu")]
         public string Canshu { get; set; }
     }
 }

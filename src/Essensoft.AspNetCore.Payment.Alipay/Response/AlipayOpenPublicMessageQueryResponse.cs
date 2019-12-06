@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 发送消息结果集。仅返回该用户已发送的消息
         /// </summary>
-        [JsonProperty("list")]
+        [JsonPropertyName("list")]
         public List<PublicMessageInfo> List { get; set; }
     }
 }

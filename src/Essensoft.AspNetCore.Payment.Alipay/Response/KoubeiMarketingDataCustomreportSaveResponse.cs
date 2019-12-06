@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 自定义报表的规则ID
         /// </summary>
-        [JsonProperty("condition_key")]
+        [JsonPropertyName("condition_key")]
         public string ConditionKey { get; set; }
     }
 }

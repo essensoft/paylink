@@ -1,42 +1,40 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayUserAntpaasRoleDeleteModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayUserAntpaasRoleDeleteModel : AlipayObject
     {
         /// <summary>
         /// 业务场景
         /// </summary>
-        [JsonProperty("biz_scene")]
+        [JsonPropertyName("biz_scene")]
         public string BizScene { get; set; }
 
         /// <summary>
         /// 角色Id
         /// </summary>
-        [JsonProperty("ip_role_id")]
+        [JsonPropertyName("ip_role_id")]
         public string IpRoleId { get; set; }
 
         /// <summary>
         /// 被动建立关系的 会员来源业务平台类型。104-金融云平台，103-淘宝平台，102-保险平台
         /// </summary>
-        [JsonProperty("join_rel_role_biz_platform")]
+        [JsonPropertyName("join_rel_role_biz_platform")]
         public string JoinRelRoleBizPlatform { get; set; }
 
         /// <summary>
         /// 主操作员ID
         /// </summary>
-        [JsonProperty("operator_id")]
+        [JsonPropertyName("operator_id")]
         public string OperatorId { get; set; }
 
         /// <summary>
         /// 角色关系类型，1-保险业务，2-金融云业务
         /// </summary>
-        [JsonProperty("rel_biz_typ")]
+        [JsonPropertyName("rel_biz_typ")]
         public string RelBizTyp { get; set; }
     }
 }

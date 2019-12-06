@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,37 +10,37 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 单次金额限制
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public string Amount { get; set; }
 
         /// <summary>
         /// 执行时间
         /// </summary>
-        [JsonProperty("execute_time")]
+        [JsonPropertyName("execute_time")]
         public string ExecuteTime { get; set; }
 
         /// <summary>
         /// 周期
         /// </summary>
-        [JsonProperty("period")]
+        [JsonPropertyName("period")]
         public string Period { get; set; }
 
         /// <summary>
         /// 周期类型
         /// </summary>
-        [JsonProperty("period_type")]
+        [JsonPropertyName("period_type")]
         public string PeriodType { get; set; }
 
         /// <summary>
         /// 总金额限制
         /// </summary>
-        [JsonProperty("total_amount")]
+        [JsonPropertyName("total_amount")]
         public string TotalAmount { get; set; }
 
         /// <summary>
         /// 总支付次数
         /// </summary>
-        [JsonProperty("total_payments")]
+        [JsonPropertyName("total_payments")]
         public string TotalPayments { get; set; }
     }
 }

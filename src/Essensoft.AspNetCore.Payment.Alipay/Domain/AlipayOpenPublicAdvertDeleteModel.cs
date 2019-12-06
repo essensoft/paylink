@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayOpenPublicAdvertDeleteModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayOpenPublicAdvertDeleteModel : AlipayObject
     {
         /// <summary>
         /// 待删除的广告位id
         /// </summary>
-        [JsonProperty("advert_id")]
+        [JsonPropertyName("advert_id")]
         public string AdvertId { get; set; }
     }
 }

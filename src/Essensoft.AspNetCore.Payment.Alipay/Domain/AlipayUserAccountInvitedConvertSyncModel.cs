@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayUserAccountInvitedConvertSyncModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayUserAccountInvitedConvertSyncModel : AlipayObject
     {
         /// <summary>
         /// 转化标签
         /// </summary>
-        [JsonProperty("convert_tag")]
+        [JsonPropertyName("convert_tag")]
         public string ConvertTag { get; set; }
 
         /// <summary>
         /// 蚂蚁统一会员ID
         /// </summary>
-        [JsonProperty("user_id")]
+        [JsonPropertyName("user_id")]
         public string UserId { get; set; }
     }
 }

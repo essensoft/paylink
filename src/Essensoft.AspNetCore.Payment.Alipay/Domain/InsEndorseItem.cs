@@ -1,30 +1,28 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// InsEndorseItem Data Structure.
     /// </summary>
-    [Serializable]
     public class InsEndorseItem : AlipayObject
     {
         /// <summary>
         /// 批单项新值
         /// </summary>
-        [JsonProperty("new_value")]
+        [JsonPropertyName("new_value")]
         public string NewValue { get; set; }
 
         /// <summary>
         /// 批单项旧值
         /// </summary>
-        [JsonProperty("old_value")]
+        [JsonPropertyName("old_value")]
         public string OldValue { get; set; }
 
         /// <summary>
         /// 批单类型;303:保单改期;311:批改保单标的
         /// </summary>
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public long Type { get; set; }
     }
 }

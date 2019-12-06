@@ -46,7 +46,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string AppVersion { get; set; }
 
         /// <summary>
-        /// 端参数
+        /// 小程序投放的端参数，例如投放到支付宝钱包是支付宝端。该参数可选，默认支付宝端 com.alipay.alipaywallet:支付宝端
         /// </summary>
         public string BundleId { get; set; }
 

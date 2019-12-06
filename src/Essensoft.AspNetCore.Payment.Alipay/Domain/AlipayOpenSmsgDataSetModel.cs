@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayOpenSmsgDataSetModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayOpenSmsgDataSetModel : AlipayObject
     {
         /// <summary>
         /// 测试
         /// </summary>
-        [JsonProperty("paramone")]
+        [JsonPropertyName("paramone")]
         public string Paramone { get; set; }
 
         /// <summary>
         /// 测试参数2
         /// </summary>
-        [JsonProperty("paramtwo")]
+        [JsonPropertyName("paramtwo")]
         public string Paramtwo { get; set; }
     }
 }

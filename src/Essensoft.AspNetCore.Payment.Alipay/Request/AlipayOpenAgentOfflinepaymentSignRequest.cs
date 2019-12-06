@@ -16,7 +16,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string BatchNo { get; set; }
 
         /// <summary>
-        /// 营业执照号码
+        /// 营业执照号码。若填写，请与以下营业执照图片、期限、一起提供。
         /// </summary>
         public string BusinessLicenseNo { get; set; }
 
@@ -46,7 +46,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string Rate { get; set; }
 
         /// <summary>
-        /// 店铺门头照图片，最小5KB，图片格式必须为：png、bmp、gif、jpg、jpeg
+        /// 店铺门头照图片，需要包括招牌信息。最小5KB，图片格式必须为：png、bmp、gif、jpg、jpeg
         /// </summary>
         public FileItem ShopSignBoardPic { get; set; }
 

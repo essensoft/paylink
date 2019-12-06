@@ -1,36 +1,34 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayEcoTextVoiceTransferModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayEcoTextVoiceTransferModel : AlipayObject
     {
         /// <summary>
         /// 被叫号码
         /// </summary>
-        [JsonProperty("called_number")]
+        [JsonPropertyName("called_number")]
         public string CalledNumber { get; set; }
 
         /// <summary>
         /// 内部系统编码，回调消息将回传
         /// </summary>
-        [JsonProperty("out_id")]
+        [JsonPropertyName("out_id")]
         public string OutId { get; set; }
 
         /// <summary>
         /// Tts模板ID
         /// </summary>
-        [JsonProperty("tts_code")]
+        [JsonPropertyName("tts_code")]
         public string TtsCode { get; set; }
 
         /// <summary>
         /// 替换TTS模板中变量的Map
         /// </summary>
-        [JsonProperty("tts_param")]
+        [JsonPropertyName("tts_param")]
         public string TtsParam { get; set; }
     }
 }

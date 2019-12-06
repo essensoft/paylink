@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayEcoRenthouseBillOrderDownloadModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayEcoRenthouseBillOrderDownloadModel : AlipayObject
     {
         /// <summary>
         /// 查询日期
         /// </summary>
-        [JsonProperty("bill_date")]
+        [JsonPropertyName("bill_date")]
         public string BillDate { get; set; }
 
         /// <summary>
         /// 商户编号
         /// </summary>
-        [JsonProperty("merchant_no")]
+        [JsonPropertyName("merchant_no")]
         public string MerchantNo { get; set; }
     }
 }

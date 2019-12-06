@@ -1,30 +1,28 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KdsPrinterModel Data Structure.
     /// </summary>
-    [Serializable]
     public class KdsPrinterModel : AlipayObject
     {
         /// <summary>
         /// 打印机设备Id
         /// </summary>
-        [JsonProperty("device_id")]
+        [JsonPropertyName("device_id")]
         public string DeviceId { get; set; }
 
         /// <summary>
         /// 打印机名称
         /// </summary>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// 打印机id
         /// </summary>
-        [JsonProperty("printer_id")]
+        [JsonPropertyName("printer_id")]
         public string PrinterId { get; set; }
     }
 }

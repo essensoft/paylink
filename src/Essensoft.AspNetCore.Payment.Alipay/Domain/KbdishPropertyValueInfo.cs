@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KbdishPropertyValueInfo Data Structure.
     /// </summary>
-    [Serializable]
     public class KbdishPropertyValueInfo : AlipayObject
     {
         /// <summary>
         /// 属性值排序字段，从1一直递增到5
         /// </summary>
-        [JsonProperty("sort")]
+        [JsonPropertyName("sort")]
         public string Sort { get; set; }
 
         /// <summary>
         /// 销售属性值
         /// </summary>
-        [JsonProperty("value")]
+        [JsonPropertyName("value")]
         public string Value { get; set; }
     }
 }

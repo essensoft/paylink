@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,19 +10,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 推荐结果的扩展信息
         /// </summary>
-        [JsonProperty("ext_info")]
+        [JsonPropertyName("ext_info")]
         public string ExtInfo { get; set; }
 
         /// <summary>
         /// 推荐结果集合, json数组对象, 每个元素至少包含entity_id的属性,其他属性由推荐方案决定。
         /// </summary>
-        [JsonProperty("items")]
+        [JsonPropertyName("items")]
         public string Items { get; set; }
 
         /// <summary>
         /// 本次推荐的唯一标识
         /// </summary>
-        [JsonProperty("recommend_id")]
+        [JsonPropertyName("recommend_id")]
         public string RecommendId { get; set; }
     }
 }

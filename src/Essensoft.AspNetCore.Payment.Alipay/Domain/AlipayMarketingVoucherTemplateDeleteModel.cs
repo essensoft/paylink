@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayMarketingVoucherTemplateDeleteModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayMarketingVoucherTemplateDeleteModel : AlipayObject
     {
         /// <summary>
         /// 券模板ID
         /// </summary>
-        [JsonProperty("template_id")]
+        [JsonPropertyName("template_id")]
         public string TemplateId { get; set; }
     }
 }

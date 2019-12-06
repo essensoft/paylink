@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,37 +12,37 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 订购服务商品ID
         /// </summary>
-        [JsonProperty("commodity_id")]
+        [JsonPropertyName("commodity_id")]
         public string CommodityId { get; set; }
 
         /// <summary>
         /// 当前查询页（本接口支持最多查询100条记录）
         /// </summary>
-        [JsonProperty("current_page")]
+        [JsonPropertyName("current_page")]
         public long CurrentPage { get; set; }
 
         /// <summary>
         /// 订单明细列表
         /// </summary>
-        [JsonProperty("order_items")]
+        [JsonPropertyName("order_items")]
         public List<OrderItem> OrderItems { get; set; }
 
         /// <summary>
         /// 用于区分同一个服务的不同版本
         /// </summary>
-        [JsonProperty("specifications")]
+        [JsonPropertyName("specifications")]
         public string Specifications { get; set; }
 
         /// <summary>
         /// MERCHANT_ORDED（待服务商接单）
         /// </summary>
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; set; }
 
         /// <summary>
         /// 总记录数
         /// </summary>
-        [JsonProperty("total_size")]
+        [JsonPropertyName("total_size")]
         public long TotalSize { get; set; }
     }
 }

@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KeyanColumn Data Structure.
     /// </summary>
-    [Serializable]
     public class KeyanColumn : AlipayObject
     {
         /// <summary>
         /// 密码
         /// </summary>
-        [JsonProperty("password")]
+        [JsonPropertyName("password")]
         public string Password { get; set; }
     }
 }

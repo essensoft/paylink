@@ -1,72 +1,70 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// DeliverAddress Data Structure.
     /// </summary>
-    [Serializable]
     public class DeliverAddress : AlipayObject
     {
         /// <summary>
         /// 地址
         /// </summary>
-        [JsonProperty("address")]
+        [JsonPropertyName("address")]
         public string Address { get; set; }
 
         /// <summary>
         /// 区域编码
         /// </summary>
-        [JsonProperty("address_code")]
+        [JsonPropertyName("address_code")]
         public string AddressCode { get; set; }
 
         /// <summary>
         /// 是否默认收货地址
         /// </summary>
-        [JsonProperty("default_deliver_address")]
+        [JsonPropertyName("default_deliver_address")]
         public string DefaultDeliverAddress { get; set; }
 
         /// <summary>
         /// 收货人所在区县
         /// </summary>
-        [JsonProperty("deliver_area")]
+        [JsonPropertyName("deliver_area")]
         public string DeliverArea { get; set; }
 
         /// <summary>
         /// 收货人所在城市
         /// </summary>
-        [JsonProperty("deliver_city")]
+        [JsonPropertyName("deliver_city")]
         public string DeliverCity { get; set; }
 
         /// <summary>
         /// 收货人全名
         /// </summary>
-        [JsonProperty("deliver_fullname")]
+        [JsonPropertyName("deliver_fullname")]
         public string DeliverFullname { get; set; }
 
         /// <summary>
         /// 收货地址的联系人移动电话
         /// </summary>
-        [JsonProperty("deliver_mobile")]
+        [JsonPropertyName("deliver_mobile")]
         public string DeliverMobile { get; set; }
 
         /// <summary>
         /// 收货地址的联系人固定电话
         /// </summary>
-        [JsonProperty("deliver_phone")]
+        [JsonPropertyName("deliver_phone")]
         public string DeliverPhone { get; set; }
 
         /// <summary>
         /// 收货人所在省份
         /// </summary>
-        [JsonProperty("deliver_province")]
+        [JsonPropertyName("deliver_province")]
         public string DeliverProvince { get; set; }
 
         /// <summary>
         /// 邮政编码
         /// </summary>
-        [JsonProperty("zip")]
+        [JsonPropertyName("zip")]
         public string Zip { get; set; }
     }
 }

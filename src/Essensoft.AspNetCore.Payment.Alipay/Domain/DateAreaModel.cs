@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// DateAreaModel Data Structure.
     /// </summary>
-    [Serializable]
     public class DateAreaModel : AlipayObject
     {
         /// <summary>
         /// 开始时间
         /// </summary>
-        [JsonProperty("begin_date")]
+        [JsonPropertyName("begin_date")]
         public string BeginDate { get; set; }
 
         /// <summary>
         /// 结束时间
         /// </summary>
-        [JsonProperty("end_date")]
+        [JsonPropertyName("end_date")]
         public string EndDate { get; set; }
     }
 }

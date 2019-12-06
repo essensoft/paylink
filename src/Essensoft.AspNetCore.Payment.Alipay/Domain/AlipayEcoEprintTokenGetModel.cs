@@ -1,30 +1,28 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayEcoEprintTokenGetModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayEcoEprintTokenGetModel : AlipayObject
     {
         /// <summary>
         /// 是否优先从缓存中拿取，false则强制刷新，1天20次
         /// </summary>
-        [JsonProperty("cache_first")]
+        [JsonPropertyName("cache_first")]
         public bool CacheFirst { get; set; }
 
         /// <summary>
         /// 应用ID
         /// </summary>
-        [JsonProperty("client_id")]
+        [JsonPropertyName("client_id")]
         public string ClientId { get; set; }
 
         /// <summary>
         /// 应用Secret
         /// </summary>
-        [JsonProperty("client_secret")]
+        [JsonPropertyName("client_secret")]
         public string ClientSecret { get; set; }
     }
 }

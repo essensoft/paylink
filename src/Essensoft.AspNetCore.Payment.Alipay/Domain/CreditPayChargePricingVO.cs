@@ -1,42 +1,40 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// CreditPayChargePricingVO Data Structure.
     /// </summary>
-    [Serializable]
     public class CreditPayChargePricingVO : AlipayObject
     {
         /// <summary>
         /// 实际费用，单位元
         /// </summary>
-        [JsonProperty("actual_charge")]
+        [JsonPropertyName("actual_charge")]
         public string ActualCharge { get; set; }
 
         /// <summary>
         /// 实际费率，小数形式
         /// </summary>
-        [JsonProperty("actual_charge_rate")]
+        [JsonPropertyName("actual_charge_rate")]
         public string ActualChargeRate { get; set; }
 
         /// <summary>
         /// 费用名目
         /// </summary>
-        [JsonProperty("charge_name")]
+        [JsonPropertyName("charge_name")]
         public string ChargeName { get; set; }
 
         /// <summary>
         /// 原始费用，单位元
         /// </summary>
-        [JsonProperty("origin_charge")]
+        [JsonPropertyName("origin_charge")]
         public string OriginCharge { get; set; }
 
         /// <summary>
         /// 原始费率，小数形式
         /// </summary>
-        [JsonProperty("origin_charge_rate")]
+        [JsonPropertyName("origin_charge_rate")]
         public string OriginChargeRate { get; set; }
     }
 }

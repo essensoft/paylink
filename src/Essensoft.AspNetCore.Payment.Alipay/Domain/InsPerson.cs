@@ -1,108 +1,106 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// InsPerson Data Structure.
     /// </summary>
-    [Serializable]
     public class InsPerson : AlipayObject
     {
         /// <summary>
         /// 地址
         /// </summary>
-        [JsonProperty("address")]
+        [JsonPropertyName("address")]
         public string Address { get; set; }
 
         /// <summary>
         /// 干系人地址区县编码
         /// </summary>
-        [JsonProperty("area_code")]
+        [JsonPropertyName("area_code")]
         public string AreaCode { get; set; }
 
         /// <summary>
         /// 生日
         /// </summary>
-        [JsonProperty("birthday")]
+        [JsonPropertyName("birthday")]
         public string Birthday { get; set; }
 
         /// <summary>
         /// 投保参数;标准json格式
         /// </summary>
-        [JsonProperty("biz_data")]
+        [JsonPropertyName("biz_data")]
         public string BizData { get; set; }
 
         /// <summary>
         /// 证件上名称;如果渠道账号字段没填则必填
         /// </summary>
-        [JsonProperty("cert_name")]
+        [JsonPropertyName("cert_name")]
         public string CertName { get; set; }
 
         /// <summary>
         /// 证件号码;如果渠道账号字段没填则必填
         /// </summary>
-        [JsonProperty("cert_no")]
+        [JsonPropertyName("cert_no")]
         public string CertNo { get; set; }
 
         /// <summary>
         /// 证件类型;如果渠道账号字段没填则必填   100:居民身份证;102:护照;103:军官证;104:士兵证;105:港澳居民往来内地通行证;106:台湾同胞往来大陆通行证;109:警官证
         /// </summary>
-        [JsonProperty("cert_type")]
+        [JsonPropertyName("cert_type")]
         public string CertType { get; set; }
 
         /// <summary>
         /// 渠道账号对应的uid;如果证件类型字段没填则必填
         /// </summary>
-        [JsonProperty("channel_user_id")]
+        [JsonPropertyName("channel_user_id")]
         public string ChannelUserId { get; set; }
 
         /// <summary>
         /// 渠道账号来源;1:支付宝账号 2:淘宝账号;如果证件类型字段没填则必填
         /// </summary>
-        [JsonProperty("channel_user_source")]
+        [JsonPropertyName("channel_user_source")]
         public string ChannelUserSource { get; set; }
 
         /// <summary>
         /// 邮箱
         /// </summary>
-        [JsonProperty("email")]
+        [JsonPropertyName("email")]
         public string Email { get; set; }
 
         /// <summary>
         /// 性别;M:男 F:女
         /// </summary>
-        [JsonProperty("gender")]
+        [JsonPropertyName("gender")]
         public string Gender { get; set; }
 
         /// <summary>
         /// 1:卖家；2:支付人;
         /// </summary>
-        [JsonProperty("identity_type")]
+        [JsonPropertyName("identity_type")]
         public string IdentityType { get; set; }
 
         /// <summary>
         /// 国籍
         /// </summary>
-        [JsonProperty("nationality")]
+        [JsonPropertyName("nationality")]
         public string Nationality { get; set; }
 
         /// <summary>
         /// 电话号码
         /// </summary>
-        [JsonProperty("phone")]
+        [JsonPropertyName("phone")]
         public string Phone { get; set; }
 
         /// <summary>
         /// 张三
         /// </summary>
-        [JsonProperty("pronounce_name")]
+        [JsonPropertyName("pronounce_name")]
         public string PronounceName { get; set; }
 
         /// <summary>
         /// 支付宝会员ID;如果是投保人则必填
         /// </summary>
-        [JsonProperty("user_id")]
+        [JsonPropertyName("user_id")]
         public string UserId { get; set; }
     }
 }

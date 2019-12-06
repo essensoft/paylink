@@ -1,25 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KoubeiMarketingDataMallCheckGetModel Data Structure.
     /// </summary>
-    [Serializable]
     public class KoubeiMarketingDataMallCheckGetModel : AlipayObject
     {
         /// <summary>
         /// 安全校验数据内容入参
         /// </summary>
-        [JsonProperty("check_contents")]
+        [JsonPropertyName("check_contents")]
         public List<DataSecCheckContent> CheckContents { get; set; }
 
         /// <summary>
         /// 数据源:USER--C端，MERCHANT--B端
         /// </summary>
-        [JsonProperty("data_source")]
+        [JsonPropertyName("data_source")]
         public string DataSource { get; set; }
     }
 }
