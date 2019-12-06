@@ -1,65 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     public class WeChatPayDictionary : SortedDictionary<string, string>
     {
-        private const string DATE_TIME_FORMAT = "yyyyMMddHHmmss";
-
         public WeChatPayDictionary() { }
 
         public WeChatPayDictionary(IDictionary<string, string> dictionary)
             : base(dictionary)
         { }
 
-        public void Add(string key, object value)
+        public void Add(string key, int value)
         {
-            string strValue;
-
-            if (value == null)
-            {
-                strValue = null;
-            }
-            else if (value is string)
-            {
-                strValue = (string)value;
-            }
-            else if (value is DateTime?)
-            {
-                var dateTime = value as DateTime?;
-                strValue = dateTime.Value.ToString(DATE_TIME_FORMAT);
-            }
-            else if (value is int?)
-            {
-                strValue = (value as int?).Value.ToString();
-            }
-            else if (value is long?)
-            {
-                strValue = (value as long?).Value.ToString();
-            }
-            else if (value is double?)
-            {
-                strValue = (value as double?).Value.ToString();
-            }
-            else if (value is bool?)
-            {
-                strValue = (value as bool?).Value.ToString().ToLowerInvariant();
-            }
-            else
-            {
-                strValue = value.ToString();
-            }
-
-            Add(key, strValue);
+            Add(key, value.ToString());
         }
 
-        public new void Add(string key, string value)
+        public void Add(string key, uint value)
         {
-            if (!string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(value))
-            {
-                base.Add(key, value);
-            }
+            Add(key, value.ToString());
+        }
+
+        public void Add(string key, long value)
+        {
+            Add(key, value.ToString());
         }
 
         public string GetValue(string key)

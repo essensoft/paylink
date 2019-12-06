@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
     <PackageId>Essensoft.AspNetCore.Payment.Security</PackageId>
-    <PackageTags>Essensoft;AspNetCore;Payment;Security;</PackageTags>
+    <PackageTags>Essensoft;Payment;Security</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
