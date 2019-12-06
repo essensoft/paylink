@@ -25,6 +25,14 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             Add(key, value.ToString());
         }
 
+        public new void Add(string key, string value)
+        {
+            if (!string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(value))
+            {
+                base.Add(key, value);
+            }
+        }
+
         public string GetValue(string key)
         {
             return TryGetValue(key, out var o) ? o : null;
@@ -32,7 +40,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         public string SetValue(string key, string value)
         {
-            return base[key] = value;
+            return this[key] = value;
         }
     }
 }
