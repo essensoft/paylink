@@ -1,30 +1,28 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// SignTaskResult Data Structure.
     /// </summary>
-    [Serializable]
     public class SignTaskResult : AlipayObject
     {
         /// <summary>
         /// 业务流水号
         /// </summary>
-        [JsonProperty("biz_id")]
+        [JsonPropertyName("biz_id")]
         public string BizId { get; set; }
 
         /// <summary>
         /// 支付宝签约入口地址
         /// </summary>
-        [JsonProperty("sign_enter_url")]
+        [JsonPropertyName("sign_enter_url")]
         public string SignEnterUrl { get; set; }
 
         /// <summary>
         /// 签名任务流水号
         /// </summary>
-        [JsonProperty("task_id")]
+        [JsonPropertyName("task_id")]
         public string TaskId { get; set; }
     }
 }

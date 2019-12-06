@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 适用门店:门店与门店之间用“,”隔开
         /// </summary>
-        [JsonProperty("limit_shops")]
+        [JsonPropertyName("limit_shops")]
         public string LimitShops { get; set; }
     }
 }

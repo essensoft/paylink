@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AccPayeeInfo Data Structure.
     /// </summary>
-    [Serializable]
     public class AccPayeeInfo : AlipayObject
     {
         /// <summary>
         /// 收款方电子钱包账号。
         /// </summary>
-        [JsonProperty("payee_account")]
+        [JsonPropertyName("payee_account")]
         public string PayeeAccount { get; set; }
 
         /// <summary>
         /// 收款方电子钱包持有者姓名。
         /// </summary>
-        [JsonProperty("payee_name")]
+        [JsonPropertyName("payee_name")]
         public string PayeeName { get; set; }
     }
 }

@@ -1,103 +1,101 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// SceneContent Data Structure.
     /// </summary>
-    [Serializable]
     public class SceneContent : AlipayObject
     {
         /// <summary>
         /// 文章分类
         /// </summary>
-        [JsonProperty("article_classify")]
+        [JsonPropertyName("article_classify")]
         public long ArticleClassify { get; set; }
 
         /// <summary>
         /// 文章作者
         /// </summary>
-        [JsonProperty("author")]
+        [JsonPropertyName("author")]
         public string Author { get; set; }
 
         /// <summary>
         /// 文章id
         /// </summary>
-        [JsonProperty("content_id")]
+        [JsonPropertyName("content_id")]
         public string ContentId { get; set; }
 
         /// <summary>
         /// 文章封面图片
         /// </summary>
-        [JsonProperty("cover")]
+        [JsonPropertyName("cover")]
         public string Cover { get; set; }
 
         /// <summary>
         /// 文章图片列表
         /// </summary>
-        [JsonProperty("image_list")]
+        [JsonPropertyName("image_list")]
         public List<string> ImageList { get; set; }
 
         /// <summary>
         /// 生活号id
         /// </summary>
-        [JsonProperty("public_id")]
+        [JsonPropertyName("public_id")]
         public string PublicId { get; set; }
 
         /// <summary>
         /// public_name为生活号名称，属于公开信息，无需脱敏
         /// </summary>
-        [JsonProperty("public_name")]
+        [JsonPropertyName("public_name")]
         public string PublicName { get; set; }
 
         /// <summary>
         /// 跳转链接
         /// </summary>
-        [JsonProperty("scheme")]
+        [JsonPropertyName("scheme")]
         public string Scheme { get; set; }
 
         /// <summary>
         /// 推荐埋点
         /// </summary>
-        [JsonProperty("scm")]
+        [JsonPropertyName("scm")]
         public string Scm { get; set; }
 
         /// <summary>
         /// 文章摘要
         /// </summary>
-        [JsonProperty("summary")]
+        [JsonPropertyName("summary")]
         public string Summary { get; set; }
 
         /// <summary>
         /// 文章标题
         /// </summary>
-        [JsonProperty("title")]
+        [JsonPropertyName("title")]
         public string Title { get; set; }
 
         /// <summary>
         /// 文章点赞数
         /// </summary>
-        [JsonProperty("total_praise_count")]
+        [JsonPropertyName("total_praise_count")]
         public long TotalPraiseCount { get; set; }
 
         /// <summary>
         /// 文章回复数
         /// </summary>
-        [JsonProperty("total_reply_count")]
+        [JsonPropertyName("total_reply_count")]
         public long TotalReplyCount { get; set; }
 
         /// <summary>
         /// 文章阅读数
         /// </summary>
-        [JsonProperty("total_view_count")]
+        [JsonPropertyName("total_view_count")]
         public long TotalViewCount { get; set; }
 
         /// <summary>
         /// 文章类型
         /// </summary>
-        [JsonProperty("type")]
+        [JsonPropertyName("type")]
         public string Type { get; set; }
     }
 }

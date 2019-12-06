@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayFinanceFundSimilarquotationQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayFinanceFundSimilarquotationQueryModel : AlipayObject
     {
         /// <summary>
         /// 基金代码
         /// </summary>
-        [JsonProperty("fund_code")]
+        [JsonPropertyName("fund_code")]
         public string FundCode { get; set; }
     }
 }

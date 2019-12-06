@@ -1,42 +1,40 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// SortDeskParam Data Structure.
     /// </summary>
-    [Serializable]
     public class SortDeskParam : AlipayObject
     {
         /// <summary>
         /// 区域ID
         /// </summary>
-        [JsonProperty("area_id")]
+        [JsonPropertyName("area_id")]
         public string AreaId { get; set; }
 
         /// <summary>
         /// 桌位编码
         /// </summary>
-        [JsonProperty("desk_no")]
+        [JsonPropertyName("desk_no")]
         public string DeskNo { get; set; }
 
         /// <summary>
         /// 桌位ID
         /// </summary>
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
         /// <summary>
         /// 门店ID
         /// </summary>
-        [JsonProperty("shop_id")]
+        [JsonPropertyName("shop_id")]
         public string ShopId { get; set; }
 
         /// <summary>
         /// 排序顺序
         /// </summary>
-        [JsonProperty("sort")]
+        [JsonPropertyName("sort")]
         public long Sort { get; set; }
     }
 }

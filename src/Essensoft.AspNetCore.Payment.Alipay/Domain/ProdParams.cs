@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// ProdParams Data Structure.
     /// </summary>
-    [Serializable]
     public class ProdParams : AlipayObject
     {
         /// <summary>
         /// 预授权业务信息
         /// </summary>
-        [JsonProperty("auth_biz_params")]
+        [JsonPropertyName("auth_biz_params")]
         public string AuthBizParams { get; set; }
     }
 }

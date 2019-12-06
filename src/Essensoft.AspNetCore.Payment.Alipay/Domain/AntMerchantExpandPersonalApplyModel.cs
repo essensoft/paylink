@@ -1,54 +1,52 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AntMerchantExpandPersonalApplyModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AntMerchantExpandPersonalApplyModel : AlipayObject
     {
         /// <summary>
         /// 企业基本信息
         /// </summary>
-        [JsonProperty("base_info")]
+        [JsonPropertyName("base_info")]
         public BaseInfo BaseInfo { get; set; }
 
         /// <summary>
         /// 营业执照信息
         /// </summary>
-        [JsonProperty("business_license_info")]
+        [JsonPropertyName("business_license_info")]
         public BusinessLicenceInfo BusinessLicenseInfo { get; set; }
 
         /// <summary>
         /// 支付宝登录别名,邮箱地址或手机号码，入驻申请结果会通知到该邮箱地址或手机号码。如填入的是已有的企业版支付宝账号则后续认证与签约基于该账号进行，如填入的邮箱地址或手机号码没有对应的支付宝账号则用该邮箱地址或手机号码创建一个企业版支付宝账户，如填入的是已有的非企业版支付宝账号则预校验失败。
         /// </summary>
-        [JsonProperty("login_id")]
+        [JsonPropertyName("login_id")]
         public string LoginId { get; set; }
 
         /// <summary>
         /// 个体工商户经营者信息
         /// </summary>
-        [JsonProperty("operator_info")]
+        [JsonPropertyName("operator_info")]
         public OperatorInfo OperatorInfo { get; set; }
 
         /// <summary>
         /// 外部入驻申请单据号，需保证在开发者端不重复
         /// </summary>
-        [JsonProperty("out_biz_no")]
+        [JsonPropertyName("out_biz_no")]
         public string OutBizNo { get; set; }
 
         /// <summary>
         /// 工商个体户或个人银行账户信息
         /// </summary>
-        [JsonProperty("personal_bank_account_info")]
+        [JsonPropertyName("personal_bank_account_info")]
         public PersonnalBankAccountInfo PersonalBankAccountInfo { get; set; }
 
         /// <summary>
         /// 门店信息
         /// </summary>
-        [JsonProperty("shop_info")]
+        [JsonPropertyName("shop_info")]
         public ShopInfo ShopInfo { get; set; }
     }
 }

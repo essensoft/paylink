@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,19 +10,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 本次认证的唯一标识，商户需要记录，后续的操作都需要用到
         /// </summary>
-        [JsonProperty("biz_no")]
+        [JsonPropertyName("biz_no")]
         public string BizNo { get; set; }
 
         /// <summary>
         /// 认证不通过的原因
         /// </summary>
-        [JsonProperty("failed_reason")]
+        [JsonPropertyName("failed_reason")]
         public string FailedReason { get; set; }
 
         /// <summary>
         /// 认证是否通过,通过为true，不通过为false
         /// </summary>
-        [JsonProperty("passed")]
+        [JsonPropertyName("passed")]
         public string Passed { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,13 +10,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 文件在商品中心的素材标识
         /// </summary>
-        [JsonProperty("material_id")]
+        [JsonPropertyName("material_id")]
         public string MaterialId { get; set; }
 
         /// <summary>
         /// 文件在商品中心的素材标示，创建/更新商品时使用
         /// </summary>
-        [JsonProperty("material_key")]
+        [JsonPropertyName("material_key")]
         public string MaterialKey { get; set; }
     }
 }

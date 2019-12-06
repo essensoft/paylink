@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// InsOption Data Structure.
     /// </summary>
-    [Serializable]
     public class InsOption : AlipayObject
     {
         /// <summary>
         /// 保额key
         /// </summary>
-        [JsonProperty("coverage")]
+        [JsonPropertyName("coverage")]
         public string Coverage { get; set; }
 
         /// <summary>
         /// 保额value
         /// </summary>
-        [JsonProperty("coverage_text")]
+        [JsonPropertyName("coverage_text")]
         public string CoverageText { get; set; }
     }
 }

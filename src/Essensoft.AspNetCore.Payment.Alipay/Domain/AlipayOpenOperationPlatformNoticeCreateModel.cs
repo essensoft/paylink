@@ -1,30 +1,28 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayOpenOperationPlatformNoticeCreateModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayOpenOperationPlatformNoticeCreateModel : AlipayObject
     {
         /// <summary>
         /// 站内信内容字段
         /// </summary>
-        [JsonProperty("notice_content")]
+        [JsonPropertyName("notice_content")]
         public string NoticeContent { get; set; }
 
         /// <summary>
         /// 站内信title字段
         /// </summary>
-        [JsonProperty("notice_title")]
+        [JsonPropertyName("notice_title")]
         public string NoticeTitle { get; set; }
 
         /// <summary>
         /// 商户pid
         /// </summary>
-        [JsonProperty("pid")]
+        [JsonPropertyName("pid")]
         public string Pid { get; set; }
     }
 }

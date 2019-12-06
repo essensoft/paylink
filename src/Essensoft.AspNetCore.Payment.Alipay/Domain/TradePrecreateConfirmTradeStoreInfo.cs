@@ -1,42 +1,40 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// TradePrecreateConfirmTradeStoreInfo Data Structure.
     /// </summary>
-    [Serializable]
     public class TradePrecreateConfirmTradeStoreInfo : AlipayObject
     {
         /// <summary>
         /// 店铺所在城市id
         /// </summary>
-        [JsonProperty("city_code")]
+        [JsonPropertyName("city_code")]
         public string CityCode { get; set; }
 
         /// <summary>
         /// 店铺所在城市简体中文名
         /// </summary>
-        [JsonProperty("city_name_sc")]
+        [JsonPropertyName("city_name_sc")]
         public string CityNameSc { get; set; }
 
         /// <summary>
         /// 店铺ID(外标)
         /// </summary>
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
         /// <summary>
         /// 店铺MCC
         /// </summary>
-        [JsonProperty("mcc")]
+        [JsonPropertyName("mcc")]
         public string Mcc { get; set; }
 
         /// <summary>
         /// 店铺名称
         /// </summary>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
     }
 }

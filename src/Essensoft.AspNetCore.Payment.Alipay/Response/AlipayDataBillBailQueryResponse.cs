@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 保证金明细列表，最多返回5000条
         /// </summary>
-        [JsonProperty("detail_list")]
+        [JsonPropertyName("detail_list")]
         public List<BailDetailResult> DetailList { get; set; }
     }
 }

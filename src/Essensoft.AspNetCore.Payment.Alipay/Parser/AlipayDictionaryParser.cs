@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 {
@@ -17,8 +17,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
             try
             {
-                var jsonText = JsonConvert.SerializeObject(dictionary);
-                result = JsonConvert.DeserializeObject<T>(jsonText);
+                var jsonText = JsonSerializer.Serialize(dictionary);
+                result = JsonSerializer.Deserialize<T>(jsonText);
             }
             catch { }
 

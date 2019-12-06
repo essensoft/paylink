@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 作品id
         /// </summary>
-        [JsonProperty("works")]
+        [JsonPropertyName("works")]
         public List<CraftsmanWorkOutIdOpenModel> Works { get; set; }
     }
 }

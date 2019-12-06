@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 操作成功投放账户id列表
         /// </summary>
-        [JsonProperty("success_user_id_list")]
+        [JsonPropertyName("success_user_id_list")]
         public List<string> SuccessUserIdList { get; set; }
     }
 }

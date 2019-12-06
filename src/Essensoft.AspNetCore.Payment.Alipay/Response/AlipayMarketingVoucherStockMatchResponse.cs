@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,13 +11,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 已存在券码列表, 已通过创建接口上传的列表
         /// </summary>
-        [JsonProperty("exist_list")]
+        [JsonPropertyName("exist_list")]
         public List<string> ExistList { get; set; }
 
         /// <summary>
         /// 不存券码列表，还未上传过的券码
         /// </summary>
-        [JsonProperty("not_exist_list")]
+        [JsonPropertyName("not_exist_list")]
         public List<string> NotExistList { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 满足条件的所有pid，多个pid使用英文逗号隔开
         /// </summary>
-        [JsonProperty("pids")]
+        [JsonPropertyName("pids")]
         public string Pids { get; set; }
     }
 }

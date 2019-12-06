@@ -1,30 +1,28 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// ExtCategory Data Structure.
     /// </summary>
-    [Serializable]
     public class ExtCategory : AlipayObject
     {
         /// <summary>
         /// 品类编码
         /// </summary>
-        [JsonProperty("category_code")]
+        [JsonPropertyName("category_code")]
         public string CategoryCode { get; set; }
 
         /// <summary>
         /// 品类名称
         /// </summary>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// 父品类编码。顶级类目此值为0
         /// </summary>
-        [JsonProperty("parent_id")]
+        [JsonPropertyName("parent_id")]
         public string ParentId { get; set; }
     }
 }

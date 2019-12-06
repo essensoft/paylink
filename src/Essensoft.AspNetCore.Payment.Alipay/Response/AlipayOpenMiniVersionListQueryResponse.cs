@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 小程序的版本号列表
         /// </summary>
-        [JsonProperty("app_versions")]
+        [JsonPropertyName("app_versions")]
         public List<string> AppVersions { get; set; }
     }
 }

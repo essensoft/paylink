@@ -1,66 +1,64 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AssetDeliveryAddress Data Structure.
     /// </summary>
-    [Serializable]
     public class AssetDeliveryAddress : AlipayObject
     {
         /// <summary>
         /// 详细地址
         /// </summary>
-        [JsonProperty("address")]
+        [JsonPropertyName("address")]
         public string Address { get; set; }
 
         /// <summary>
         /// 市
         /// </summary>
-        [JsonProperty("city")]
+        [JsonPropertyName("city")]
         public string City { get; set; }
 
         /// <summary>
         /// 收件人
         /// </summary>
-        [JsonProperty("contact_name")]
+        [JsonPropertyName("contact_name")]
         public string ContactName { get; set; }
 
         /// <summary>
         /// 联系人电话
         /// </summary>
-        [JsonProperty("contact_phone")]
+        [JsonPropertyName("contact_phone")]
         public string ContactPhone { get; set; }
 
         /// <summary>
         /// 区信息
         /// </summary>
-        [JsonProperty("district")]
+        [JsonPropertyName("district")]
         public string District { get; set; }
 
         /// <summary>
         /// 省
         /// </summary>
-        [JsonProperty("province")]
+        [JsonPropertyName("province")]
         public string Province { get; set; }
 
         /// <summary>
         /// 仓库id
         /// </summary>
-        [JsonProperty("warehouse_id")]
+        [JsonPropertyName("warehouse_id")]
         public string WarehouseId { get; set; }
 
         /// <summary>
         /// 供应商的仓库名称
         /// </summary>
-        [JsonProperty("warehouse_name")]
+        [JsonPropertyName("warehouse_name")]
         public string WarehouseName { get; set; }
 
         /// <summary>
         /// 邮编
         /// </summary>
-        [JsonProperty("zip_code")]
+        [JsonPropertyName("zip_code")]
         public string ZipCode { get; set; }
     }
 }

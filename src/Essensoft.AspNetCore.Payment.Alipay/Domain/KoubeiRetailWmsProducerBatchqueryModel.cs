@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KoubeiRetailWmsProducerBatchqueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class KoubeiRetailWmsProducerBatchqueryModel : AlipayObject
     {
         /// <summary>
         /// 最多查询100个
         /// </summary>
-        [JsonProperty("producer_ids")]
+        [JsonPropertyName("producer_ids")]
         public List<string> ProducerIds { get; set; }
     }
 }

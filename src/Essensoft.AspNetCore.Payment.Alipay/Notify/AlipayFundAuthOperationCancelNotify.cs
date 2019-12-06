@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Notify
 {
@@ -15,37 +15,37 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         /// <summary>
         /// 通知时间
         /// </summary>
-        [JsonProperty("notify_time")]
+        [JsonPropertyName("notify_time")]
         public string NotifyTime { get; set; }
 
         /// <summary>
         /// 通知类型
         /// </summary>
-        [JsonProperty("notify_type")]
+        [JsonPropertyName("notify_type")]
         public string NotifyType { get; set; }
 
         /// <summary>
         /// 通知校验ID
         /// </summary>
-        [JsonProperty("notify_id")]
+        [JsonPropertyName("notify_id")]
         public string NotifyId { get; set; }
 
         /// <summary>
         /// 签名类型
         /// </summary>
-        [JsonProperty("sign_type")]
+        [JsonPropertyName("sign_type")]
         public string SignType { get; set; }
 
         /// <summary>
         /// 签名
         /// </summary>
-        [JsonProperty("sign")]
+        [JsonPropertyName("sign")]
         public string Sign { get; set; }
 
         /// <summary>
         /// 授权方的app_id
         /// </summary>
-        [JsonProperty("auth_app_id")]
+        [JsonPropertyName("auth_app_id")]
         public string AuthAppId { get; set; }
 
         // 业务参数
@@ -53,31 +53,31 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         /// <summary>
         /// 支付宝资金授权订单号
         /// </summary>
-        [JsonProperty("auth_no")]
+        [JsonPropertyName("auth_no")]
         public string AuthNo { get; set; }
 
         /// <summary>
         /// 商户的资金授权订单号
         /// </summary>
-        [JsonProperty("out_order_no")]
+        [JsonPropertyName("out_order_no")]
         public string OutOrderNo { get; set; }
 
         /// <summary>
         /// 支付宝的资金操作流水号
         /// </summary>
-        [JsonProperty("operation_id")]
+        [JsonPropertyName("operation_id")]
         public string OperationId { get; set; }
 
         /// <summary>
         /// 商户资金操作流水号
         /// </summary>
-        [JsonProperty("out_request_no")]
+        [JsonPropertyName("out_request_no")]
         public string OutRequestNo { get; set; }
 
         /// <summary>
         /// 本次撤销触发的资金动作close：关闭冻结明细，无资金解冻unfreeze：产生了资金解冻
         /// </summary>
-        [JsonProperty("action")]
+        [JsonPropertyName("action")]
         public string Action { get; set; }
     }
 }

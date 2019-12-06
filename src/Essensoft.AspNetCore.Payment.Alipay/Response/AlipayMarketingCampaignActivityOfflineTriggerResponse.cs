@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 外部奖品ID
         /// </summary>
-        [JsonProperty("out_prize_id")]
+        [JsonPropertyName("out_prize_id")]
         public string OutPrizeId { get; set; }
     }
 }

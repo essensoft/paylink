@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 外部卡号
         /// </summary>
-        [JsonProperty("external_card_no")]
+        [JsonPropertyName("external_card_no")]
         public string ExternalCardNo { get; set; }
     }
 }

@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// OldListListComplexMockModel Data Structure.
     /// </summary>
-    [Serializable]
     public class OldListListComplexMockModel : AlipayObject
     {
         /// <summary>
         /// 复杂模型list
         /// </summary>
-        [JsonProperty("cm_list")]
+        [JsonPropertyName("cm_list")]
         public List<OldComplextMockModel> CmList { get; set; }
     }
 }

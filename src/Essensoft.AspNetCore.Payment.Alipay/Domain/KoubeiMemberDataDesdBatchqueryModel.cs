@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KoubeiMemberDataDesdBatchqueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class KoubeiMemberDataDesdBatchqueryModel : AlipayObject
     {
         /// <summary>
         /// 21
         /// </summary>
-        [JsonProperty("a")]
+        [JsonPropertyName("a")]
         public string A { get; set; }
 
         /// <summary>
         /// 21
         /// </summary>
-        [JsonProperty("desd")]
+        [JsonPropertyName("desd")]
         public GavintestNewLeveaOne Desd { get; set; }
     }
 }

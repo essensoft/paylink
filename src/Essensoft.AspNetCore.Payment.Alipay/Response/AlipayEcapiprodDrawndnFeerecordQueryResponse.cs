@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,13 +12,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 费用交易流水
         /// </summary>
-        [JsonProperty("fee_records")]
+        [JsonPropertyName("fee_records")]
         public List<FeeRecords> FeeRecords { get; set; }
 
         /// <summary>
         /// 唯一标识这次请求
         /// </summary>
-        [JsonProperty("request_id")]
+        [JsonPropertyName("request_id")]
         public string RequestId { get; set; }
     }
 }

@@ -1,66 +1,64 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// ShopQueryInfo Data Structure.
     /// </summary>
-    [Serializable]
     public class ShopQueryInfo : AlipayObject
     {
         /// <summary>
         /// 门店地址
         /// </summary>
-        [JsonProperty("address")]
+        [JsonPropertyName("address")]
         public string Address { get; set; }
 
         /// <summary>
         /// 是否包含同mid下的其他pid的店铺
         /// </summary>
-        [JsonProperty("is_include_cognate")]
+        [JsonPropertyName("is_include_cognate")]
         public bool IsIncludeCognate { get; set; }
 
         /// <summary>
         /// 纬度
         /// </summary>
-        [JsonProperty("latitude")]
+        [JsonPropertyName("latitude")]
         public string Latitude { get; set; }
 
         /// <summary>
         /// 经度
         /// </summary>
-        [JsonProperty("longitude")]
+        [JsonPropertyName("longitude")]
         public string Longitude { get; set; }
 
         /// <summary>
         /// 门店名称
         /// </summary>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// 商户pid
         /// </summary>
-        [JsonProperty("pid")]
+        [JsonPropertyName("pid")]
         public string Pid { get; set; }
 
         /// <summary>
         /// 内部门店ID
         /// </summary>
-        [JsonProperty("shop_id")]
+        [JsonPropertyName("shop_id")]
         public string ShopId { get; set; }
 
         /// <summary>
         /// 门店类型
         /// </summary>
-        [JsonProperty("shop_type")]
+        [JsonPropertyName("shop_type")]
         public string ShopType { get; set; }
 
         /// <summary>
         /// 外部门店ID
         /// </summary>
-        [JsonProperty("store_id")]
+        [JsonPropertyName("store_id")]
         public string StoreId { get; set; }
     }
 }

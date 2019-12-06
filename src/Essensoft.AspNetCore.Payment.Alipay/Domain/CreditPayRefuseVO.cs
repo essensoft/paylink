@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// CreditPayRefuseVO Data Structure.
     /// </summary>
-    [Serializable]
     public class CreditPayRefuseVO : AlipayObject
     {
         /// <summary>
         /// 拒绝码
         /// </summary>
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public string Code { get; set; }
 
         /// <summary>
         /// 拒绝详情
         /// </summary>
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public string Msg { get; set; }
     }
 }

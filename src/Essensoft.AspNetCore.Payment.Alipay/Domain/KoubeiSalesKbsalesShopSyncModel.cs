@@ -1,84 +1,82 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KoubeiSalesKbsalesShopSyncModel Data Structure.
     /// </summary>
-    [Serializable]
     public class KoubeiSalesKbsalesShopSyncModel : AlipayObject
     {
         /// <summary>
         /// 操作类型
         /// </summary>
-        [JsonProperty("action")]
+        [JsonPropertyName("action")]
         public string Action { get; set; }
 
         /// <summary>
         /// 申请绑定关系类型
         /// </summary>
-        [JsonProperty("action_mode")]
+        [JsonPropertyName("action_mode")]
         public string ActionMode { get; set; }
 
         /// <summary>
         /// 固定填elm
         /// </summary>
-        [JsonProperty("data_source")]
+        [JsonPropertyName("data_source")]
         public string DataSource { get; set; }
 
         /// <summary>
         /// 时间戳
         /// </summary>
-        [JsonProperty("data_version")]
+        [JsonPropertyName("data_version")]
         public string DataVersion { get; set; }
 
         /// <summary>
         /// { opId: 123456, applyInfo: '审核不通过', auditor:'123456'}
         /// </summary>
-        [JsonProperty("ext_info")]
+        [JsonPropertyName("ext_info")]
         public string ExtInfo { get; set; }
 
         /// <summary>
         /// 饿了么门店id
         /// </summary>
-        [JsonProperty("external_shop_id")]
+        [JsonPropertyName("external_shop_id")]
         public string ExternalShopId { get; set; }
 
         /// <summary>
         /// 口碑流水id， 饿了么leads开始的场景有该值  在线开店及绑定无该值
         /// </summary>
-        [JsonProperty("order_id")]
+        [JsonPropertyName("order_id")]
         public string OrderId { get; set; }
 
         /// <summary>
         /// 绑定关系类型
         /// </summary>
-        [JsonProperty("relation_type")]
+        [JsonPropertyName("relation_type")]
         public string RelationType { get; set; }
 
         /// <summary>
         /// 业务场景码
         /// </summary>
-        [JsonProperty("scene")]
+        [JsonPropertyName("scene")]
         public string Scene { get; set; }
 
         /// <summary>
         /// 口碑门店id
         /// </summary>
-        [JsonProperty("shop_id")]
+        [JsonPropertyName("shop_id")]
         public string ShopId { get; set; }
 
         /// <summary>
         /// 审核状态
         /// </summary>
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; set; }
 
         /// <summary>
         /// 饿了么审核任务id
         /// </summary>
-        [JsonProperty("task_id")]
+        [JsonPropertyName("task_id")]
         public string TaskId { get; set; }
     }
 }

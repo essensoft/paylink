@@ -1,60 +1,58 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// MybankCreditSupplychainArUnsignModel Data Structure.
     /// </summary>
-    [Serializable]
     public class MybankCreditSupplychainArUnsignModel : AlipayObject
     {
         /// <summary>
         /// 协议产品码
         /// </summary>
-        [JsonProperty("ar_pd_code")]
+        [JsonPropertyName("ar_pd_code")]
         public string ArPdCode { get; set; }
 
         /// <summary>
         /// 请求幂等控制ID
         /// </summary>
-        [JsonProperty("request_id")]
+        [JsonPropertyName("request_id")]
         public string RequestId { get; set; }
 
         /// <summary>
         /// 合约编号
         /// </summary>
-        [JsonProperty("seller_ar_no")]
+        [JsonPropertyName("seller_ar_no")]
         public string SellerArNo { get; set; }
 
         /// <summary>
         /// 店铺ID
         /// </summary>
-        [JsonProperty("shop_id")]
+        [JsonPropertyName("shop_id")]
         public string ShopId { get; set; }
 
         /// <summary>
         /// 店铺名称
         /// </summary>
-        [JsonProperty("shop_name")]
+        [JsonPropertyName("shop_name")]
         public string ShopName { get; set; }
 
         /// <summary>
         /// 站点，目前只支持ALIPAY
         /// </summary>
-        [JsonProperty("site")]
+        [JsonPropertyName("site")]
         public string Site { get; set; }
 
         /// <summary>
         /// 站点ID
         /// </summary>
-        [JsonProperty("site_user_id")]
+        [JsonPropertyName("site_user_id")]
         public string SiteUserId { get; set; }
 
         /// <summary>
         /// 场景来源
         /// </summary>
-        [JsonProperty("trade_source")]
+        [JsonPropertyName("trade_source")]
         public string TradeSource { get; set; }
     }
 }

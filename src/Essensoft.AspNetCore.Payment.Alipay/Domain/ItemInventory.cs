@@ -1,30 +1,28 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// ItemInventory Data Structure.
     /// </summary>
-    [Serializable]
     public class ItemInventory : AlipayObject
     {
         /// <summary>
         /// 商品库存扩展属性
         /// </summary>
-        [JsonProperty("ext_prop")]
+        [JsonPropertyName("ext_prop")]
         public string ExtProp { get; set; }
 
         /// <summary>
         /// 外部商品ID
         /// </summary>
-        [JsonProperty("external_item_id")]
+        [JsonPropertyName("external_item_id")]
         public string ExternalItemId { get; set; }
 
         /// <summary>
         /// 商品库存数量
         /// </summary>
-        [JsonProperty("inventory")]
+        [JsonPropertyName("inventory")]
         public long Inventory { get; set; }
     }
 }

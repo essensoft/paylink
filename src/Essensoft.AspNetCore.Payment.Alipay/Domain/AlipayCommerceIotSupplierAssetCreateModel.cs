@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayCommerceIotSupplierAssetCreateModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayCommerceIotSupplierAssetCreateModel : AlipayObject
     {
         /// <summary>
         /// 供应商设备信息
         /// </summary>
-        [JsonProperty("record")]
+        [JsonPropertyName("record")]
         public SupplierAssetResponse Record { get; set; }
     }
 }

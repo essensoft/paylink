@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,55 +12,55 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 活动id
         /// </summary>
-        [JsonProperty("activity_id")]
+        [JsonPropertyName("activity_id")]
         public string ActivityId { get; set; }
 
         /// <summary>
         /// 批次id
         /// </summary>
-        [JsonProperty("batch_id")]
+        [JsonPropertyName("batch_id")]
         public string BatchId { get; set; }
 
         /// <summary>
         /// 批次状态  0，未检测  1，检测中  2，未通过  3，已通过
         /// </summary>
-        [JsonProperty("batch_status")]
+        [JsonPropertyName("batch_status")]
         public string BatchStatus { get; set; }
 
         /// <summary>
         /// 失败单品书列表
         /// </summary>
-        [JsonProperty("fail_list")]
+        [JsonPropertyName("fail_list")]
         public List<OpenItem> FailList { get; set; }
 
         /// <summary>
         /// 失败数
         /// </summary>
-        [JsonProperty("fail_num")]
+        [JsonPropertyName("fail_num")]
         public string FailNum { get; set; }
 
         /// <summary>
         /// 单品列表
         /// </summary>
-        [JsonProperty("item_list")]
+        [JsonPropertyName("item_list")]
         public List<OpenItem> ItemList { get; set; }
 
         /// <summary>
         /// 单品数
         /// </summary>
-        [JsonProperty("item_num")]
+        [JsonPropertyName("item_num")]
         public string ItemNum { get; set; }
 
         /// <summary>
         /// 通过单品列表
         /// </summary>
-        [JsonProperty("pass_list")]
+        [JsonPropertyName("pass_list")]
         public List<OpenItem> PassList { get; set; }
 
         /// <summary>
         /// 通过数
         /// </summary>
-        [JsonProperty("pass_num")]
+        [JsonPropertyName("pass_num")]
         public string PassNum { get; set; }
     }
 }

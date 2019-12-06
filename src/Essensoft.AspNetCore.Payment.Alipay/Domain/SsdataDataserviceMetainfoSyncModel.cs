@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// SsdataDataserviceMetainfoSyncModel Data Structure.
     /// </summary>
-    [Serializable]
     public class SsdataDataserviceMetainfoSyncModel : AlipayObject
     {
         /// <summary>
         /// 元数据信息
         /// </summary>
-        [JsonProperty("meta_info")]
+        [JsonPropertyName("meta_info")]
         public string MetaInfo { get; set; }
     }
 }

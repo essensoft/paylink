@@ -1,42 +1,40 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// Streetnumber Data Structure.
     /// </summary>
-    [Serializable]
     public class Streetnumber : AlipayObject
     {
         /// <summary>
         /// 街道方向
         /// </summary>
-        [JsonProperty("direction")]
+        [JsonPropertyName("direction")]
         public string Direction { get; set; }
 
         /// <summary>
         /// 门牌地址到请求坐标的距离
         /// </summary>
-        [JsonProperty("distance")]
+        [JsonPropertyName("distance")]
         public string Distance { get; set; }
 
         /// <summary>
         /// 坐标点
         /// </summary>
-        [JsonProperty("location")]
+        [JsonPropertyName("location")]
         public string Location { get; set; }
 
         /// <summary>
         /// 门牌号
         /// </summary>
-        [JsonProperty("number")]
+        [JsonPropertyName("number")]
         public string Number { get; set; }
 
         /// <summary>
         /// 街道名称
         /// </summary>
-        [JsonProperty("street")]
+        [JsonPropertyName("street")]
         public string Street { get; set; }
     }
 }

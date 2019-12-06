@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipaySecurityAafAdfaBatchqueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipaySecurityAafAdfaBatchqueryModel : AlipayObject
     {
         /// <summary>
         /// 详细地址
         /// </summary>
-        [JsonProperty("address")]
+        [JsonPropertyName("address")]
         public string Address { get; set; }
     }
 }

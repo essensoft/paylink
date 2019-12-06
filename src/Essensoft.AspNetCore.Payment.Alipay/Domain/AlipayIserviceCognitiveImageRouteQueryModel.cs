@@ -1,31 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayIserviceCognitiveImageRouteQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayIserviceCognitiveImageRouteQueryModel : AlipayObject
     {
         /// <summary>
         /// 业务id
         /// </summary>
-        [JsonProperty("biz_id")]
+        [JsonPropertyName("biz_id")]
         public string BizId { get; set; }
 
         /// <summary>
         /// 业务请求详细内容
         /// </summary>
-        [JsonProperty("ctx")]
+        [JsonPropertyName("ctx")]
         public List<string> Ctx { get; set; }
 
         /// <summary>
         /// 业务pv唯一id
         /// </summary>
-        [JsonProperty("trace_id")]
+        [JsonPropertyName("trace_id")]
         public string TraceId { get; set; }
     }
 }

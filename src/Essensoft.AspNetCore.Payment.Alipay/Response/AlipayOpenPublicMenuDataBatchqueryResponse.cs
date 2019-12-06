@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 菜单分析数据列表
         /// </summary>
-        [JsonProperty("data_list")]
+        [JsonPropertyName("data_list")]
         public List<MenuAnalysisData> DataList { get; set; }
     }
 }

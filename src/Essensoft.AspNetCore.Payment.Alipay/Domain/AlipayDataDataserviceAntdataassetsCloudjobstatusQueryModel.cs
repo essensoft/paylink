@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayDataDataserviceAntdataassetsCloudjobstatusQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayDataDataserviceAntdataassetsCloudjobstatusQueryModel : AlipayObject
     {
         /// <summary>
         /// 分区信息
         /// </summary>
-        [JsonProperty("bizdate")]
+        [JsonPropertyName("bizdate")]
         public string Bizdate { get; set; }
 
         /// <summary>
         /// ODPS表的guid
         /// </summary>
-        [JsonProperty("guid")]
+        [JsonPropertyName("guid")]
         public string Guid { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,43 +10,43 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 精确度
         /// </summary>
-        [JsonProperty("accuracy")]
+        [JsonPropertyName("accuracy")]
         public string Accuracy { get; set; }
 
         /// <summary>
         /// 经纬度所在位置
         /// </summary>
-        [JsonProperty("city")]
+        [JsonPropertyName("city")]
         public string City { get; set; }
 
         /// <summary>
         /// 结果码
         /// </summary>
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public override string Code { get; set; }
 
         /// <summary>
         /// 纬度信息
         /// </summary>
-        [JsonProperty("latitude")]
+        [JsonPropertyName("latitude")]
         public string Latitude { get; set; }
 
         /// <summary>
         /// 经度信息
         /// </summary>
-        [JsonProperty("longitude")]
+        [JsonPropertyName("longitude")]
         public string Longitude { get; set; }
 
         /// <summary>
         /// 结果信息
         /// </summary>
-        [JsonProperty("msg")]
+        [JsonPropertyName("msg")]
         public override string Msg { get; set; }
 
         /// <summary>
         /// 经纬度对应位置所在的省份
         /// </summary>
-        [JsonProperty("province")]
+        [JsonPropertyName("province")]
         public string Province { get; set; }
     }
 }

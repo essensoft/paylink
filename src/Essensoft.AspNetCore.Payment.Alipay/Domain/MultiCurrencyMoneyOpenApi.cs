@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// MultiCurrencyMoneyOpenApi Data Structure.
     /// </summary>
-    [Serializable]
     public class MultiCurrencyMoneyOpenApi : AlipayObject
     {
         /// <summary>
         /// 分
         /// </summary>
-        [JsonProperty("cent")]
+        [JsonPropertyName("cent")]
         public long Cent { get; set; }
 
         /// <summary>
         /// 币种类型值
         /// </summary>
-        [JsonProperty("currency_value")]
+        [JsonPropertyName("currency_value")]
         public string CurrencyValue { get; set; }
     }
 }

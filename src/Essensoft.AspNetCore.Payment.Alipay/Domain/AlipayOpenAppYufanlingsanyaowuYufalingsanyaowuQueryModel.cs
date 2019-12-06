@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayOpenAppYufanlingsanyaowuYufalingsanyaowuQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayOpenAppYufanlingsanyaowuYufalingsanyaowuQueryModel : AlipayObject
     {
         /// <summary>
         /// 省份编码，国标码
         /// </summary>
-        [JsonProperty("province_code")]
+        [JsonPropertyName("province_code")]
         public List<string> ProvinceCode { get; set; }
     }
 }

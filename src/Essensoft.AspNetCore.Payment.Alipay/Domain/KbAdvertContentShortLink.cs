@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KbAdvertContentShortLink Data Structure.
     /// </summary>
-    [Serializable]
     public class KbAdvertContentShortLink : AlipayObject
     {
         /// <summary>
         /// 链接地址
         /// </summary>
-        [JsonProperty("url")]
+        [JsonPropertyName("url")]
         public string Url { get; set; }
     }
 }

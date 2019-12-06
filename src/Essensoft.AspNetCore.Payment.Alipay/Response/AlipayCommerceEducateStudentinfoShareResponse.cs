@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 学生信息
         /// </summary>
-        [JsonProperty("student_info_share_result")]
+        [JsonPropertyName("student_info_share_result")]
         public EduStudentInfoShareResult StudentInfoShareResult { get; set; }
     }
 }

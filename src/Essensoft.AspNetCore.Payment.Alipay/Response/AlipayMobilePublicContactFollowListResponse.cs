@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,13 +11,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 返回结果码，如200，标识成功
         /// </summary>
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public override string Code { get; set; }
 
         /// <summary>
         /// 联系人关注者列表
         /// </summary>
-        [JsonProperty("contact_follow_list")]
+        [JsonPropertyName("contact_follow_list")]
         public List<string> ContactFollowList { get; set; }
     }
 }

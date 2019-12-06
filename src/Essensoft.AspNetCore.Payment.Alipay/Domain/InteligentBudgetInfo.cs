@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// InteligentBudgetInfo Data Structure.
     /// </summary>
-    [Serializable]
     public class InteligentBudgetInfo : AlipayObject
     {
         /// <summary>
         /// 预算数量
         /// </summary>
-        [JsonProperty("budget_total")]
+        [JsonPropertyName("budget_total")]
         public string BudgetTotal { get; set; }
 
         /// <summary>
         /// 预算类型，枚举（QUANTITY：数量预算）
         /// </summary>
-        [JsonProperty("budget_type")]
+        [JsonPropertyName("budget_type")]
         public string BudgetType { get; set; }
     }
 }

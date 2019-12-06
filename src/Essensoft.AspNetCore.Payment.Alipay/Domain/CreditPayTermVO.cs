@@ -1,36 +1,34 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// CreditPayTermVO Data Structure.
     /// </summary>
-    [Serializable]
     public class CreditPayTermVO : AlipayObject
     {
         /// <summary>
         /// 期限结束日期
         /// </summary>
-        [JsonProperty("end_date")]
+        [JsonPropertyName("end_date")]
         public string EndDate { get; set; }
 
         /// <summary>
         /// 开始日期
         /// </summary>
-        [JsonProperty("start_date")]
+        [JsonPropertyName("start_date")]
         public string StartDate { get; set; }
 
         /// <summary>
         /// 期数
         /// </summary>
-        [JsonProperty("term")]
+        [JsonPropertyName("term")]
         public long Term { get; set; }
 
         /// <summary>
         /// 期限单位
         /// </summary>
-        [JsonProperty("term_unit")]
+        [JsonPropertyName("term_unit")]
         public string TermUnit { get; set; }
     }
 }

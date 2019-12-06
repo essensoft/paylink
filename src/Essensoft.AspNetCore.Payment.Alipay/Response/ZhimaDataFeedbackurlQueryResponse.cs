@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 反馈模板地址
         /// </summary>
-        [JsonProperty("feedback_url")]
+        [JsonPropertyName("feedback_url")]
         public string FeedbackUrl { get; set; }
     }
 }

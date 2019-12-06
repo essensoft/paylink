@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// CraftsmanSubAssessment Data Structure.
     /// </summary>
-    [Serializable]
     public class CraftsmanSubAssessment : AlipayObject
     {
         /// <summary>
         /// 子评分
         /// </summary>
-        [JsonProperty("score")]
+        [JsonPropertyName("score")]
         public long Score { get; set; }
 
         /// <summary>
         /// 子评分项名
         /// </summary>
-        [JsonProperty("title")]
+        [JsonPropertyName("title")]
         public string Title { get; set; }
     }
 }

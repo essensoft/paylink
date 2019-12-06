@@ -1,36 +1,34 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// FaceSearchResult Data Structure.
     /// </summary>
-    [Serializable]
     public class FaceSearchResult : AlipayObject
     {
         /// <summary>
         /// faceType
         /// </summary>
-        [JsonProperty("face_type")]
+        [JsonPropertyName("face_type")]
         public string FaceType { get; set; }
 
         /// <summary>
         /// 分数
         /// </summary>
-        [JsonProperty("score")]
+        [JsonPropertyName("score")]
         public string Score { get; set; }
 
         /// <summary>
         /// 用户ID
         /// </summary>
-        [JsonProperty("user_id")]
+        [JsonPropertyName("user_id")]
         public string UserId { get; set; }
 
         /// <summary>
         /// 身份证姓名
         /// </summary>
-        [JsonProperty("user_name")]
+        [JsonPropertyName("user_name")]
         public string UserName { get; set; }
     }
 }

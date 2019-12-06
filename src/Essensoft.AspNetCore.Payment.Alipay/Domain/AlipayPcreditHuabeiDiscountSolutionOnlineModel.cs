@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayPcreditHuabeiDiscountSolutionOnlineModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayPcreditHuabeiDiscountSolutionOnlineModel : AlipayObject
     {
         /// <summary>
         /// solution_id，贴息方案实例id
         /// </summary>
-        [JsonProperty("solution_id")]
+        [JsonPropertyName("solution_id")]
         public string SolutionId { get; set; }
     }
 }

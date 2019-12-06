@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,13 +10,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 商户订单号
         /// </summary>
-        [JsonProperty("out_trade_no")]
+        [JsonPropertyName("out_trade_no")]
         public string OutTradeNo { get; set; }
 
         /// <summary>
         /// 支付宝交易号
         /// </summary>
-        [JsonProperty("trade_no")]
+        [JsonPropertyName("trade_no")]
         public string TradeNo { get; set; }
     }
 }

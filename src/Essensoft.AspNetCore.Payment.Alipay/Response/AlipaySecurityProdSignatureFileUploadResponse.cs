@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 文件唯一标识，用于apply接口传入
         /// </summary>
-        [JsonProperty("oss_file_id")]
+        [JsonPropertyName("oss_file_id")]
         public string OssFileId { get; set; }
     }
 }

@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayOpenAuthUnifygwtestQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayOpenAuthUnifygwtestQueryModel : AlipayObject
     {
         /// <summary>
         /// 1
         /// </summary>
-        [JsonProperty("str")]
+        [JsonPropertyName("str")]
         public string Str { get; set; }
     }
 }

@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// QueryProvCityInfo Data Structure.
     /// </summary>
-    [Serializable]
     public class QueryProvCityInfo : AlipayObject
     {
         /// <summary>
         /// 省市编号
         /// </summary>
-        [JsonProperty("adcode")]
+        [JsonPropertyName("adcode")]
         public string Adcode { get; set; }
 
         /// <summary>
         /// 城市名称
         /// </summary>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
     }
 }

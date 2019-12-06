@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// isv创建的用户规则分组描述
         /// </summary>
-        [JsonProperty("condition_list")]
+        [JsonPropertyName("condition_list")]
         public List<UserCrowdConditions> ConditionList { get; set; }
     }
 }
