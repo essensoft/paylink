@@ -23,23 +23,5 @@ namespace Essensoft.AspNetCore.Payment.Security
                 return BitConverter.ToString(hsah).Replace("-", "");
             }
         }
-
-        public static byte[] Compute(byte[] data, byte[] key)
-        {
-            if (data == null)
-            {
-                throw new ArgumentNullException(nameof(data));
-            }
-
-            if (key == null)
-            {
-                throw new ArgumentNullException(nameof(key));
-            }
-
-            using (var hmacSha256 = new System.Security.Cryptography.HMACSHA256(key))
-            {
-                return hmacSha256.ComputeHash(data);
-            }
-        }
     }
 }
