@@ -11,10 +11,6 @@ Package  | NuGet
 -------- | :------------ 
 Essensoft.AspNetCore.Payment.Alipay         | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Alipay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Alipay)
 Essensoft.AspNetCore.Payment.WeChatPay      | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.WeChatPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.WeChatPay)
-Essensoft.AspNetCore.Payment.QPay           | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.QPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.QPay)
-Essensoft.AspNetCore.Payment.JDPay		    | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.JDPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.JDPay)
-Essensoft.AspNetCore.Payment.LianLianPay    | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.LianLianPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.LianLianPay)
-Essensoft.AspNetCore.Payment.UnionPay       | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.UnionPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.UnionPay)
 Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Security.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Security)
 
 ## QQ群
