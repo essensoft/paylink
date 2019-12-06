@@ -29,18 +29,6 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 ### 微信支付 [开发文档](https://pay.weixin.qq.com/wiki/doc/api/index.html)
 * 付款码支付(刷卡)、JSAPI支付(公众号)、Native支付(扫码)、APP支付、H5支付、小程序支付、企业付款(零钱/银行卡)、现金红包、酒店押金、人脸支付、委托扣款、分账
 
-### QQ钱包 [开发文档](https://qpay.qq.com/buss/doc.shtml)
-* 付款码支付、扫码支付、公众号支付、APP支付、企业付款
-
-### 京东支付 [开发文档](http://payapi.jd.com)
-* 网页支付、APP支付、扫一扫、付款码、代付
-
-### 连连支付 [开放平台](http://open.lianlianpay.com)
-* 网银支付、银行卡支付、掌上银行支付、实时付款
-
-### 银联支付 [文档中心](https://open.unionpay.com/tjweb/doc/index)
-* 在线网关支付、无跳转支付、手机支付控件、手机网页支付（WAP支付）、二维码支付(商户)
-
 ## 开发环境
 * Windows 10
 * VS 2019 16.4.0

@@ -33,18 +33,6 @@
                     <li class="nav-item @Html.IsActive("WeChatPay")">
                         <a class="nav-link" asp-controller="WeChatPay" asp-action="Index">微信支付</a>
                     </li>
-                    <li class="nav-item @Html.IsActive("QPay")">
-                        <a class="nav-link" asp-controller="QPay" asp-action="Index">QQ钱包</a>
-                    </li>
-                    <li class="nav-item @Html.IsActive("JDPay")">
-                        <a class="nav-link" asp-controller="JDPay" asp-action="Index">京东支付</a>
-                    </li>
-                    <li class="nav-item @Html.IsActive("LianLianPay")">
-                        <a class="nav-link" asp-controller="LianLianPay" asp-action="Index">连连支付</a>
-                    </li>
-                    <li class="nav-item @Html.IsActive("UnionPay")">
-                        <a class="nav-link" asp-controller="UnionPay" asp-action="Index">银联支付</a>
-                    </li>
                 </ul>
                 <ul class="navbar-nav navbar-right">
                     <li class="nav-item @Html.IsActive("Home", "Gratuity")">
