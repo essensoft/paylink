@@ -1,8 +1,4 @@
 ﻿using Essensoft.AspNetCore.Payment.Alipay;
-using Essensoft.AspNetCore.Payment.JDPay;
-using Essensoft.AspNetCore.Payment.LianLianPay;
-using Essensoft.AspNetCore.Payment.QPay;
-using Essensoft.AspNetCore.Payment.UnionPay;
 using Essensoft.AspNetCore.Payment.WeChatPay;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,19 +22,11 @@ namespace WebApplicationSample
         {
             // 引入Payment 依赖注入
             services.AddAlipay();
-            services.AddJDPay();
-            services.AddQPay();
-            services.AddUnionPay();
             services.AddWeChatPay();
-            services.AddLianLianPay();
 
             // 在 appsettings.json 中 配置选项
             services.Configure<AlipayOptions>(Configuration.GetSection("Alipay"));
-            services.Configure<JDPayOptions>(Configuration.GetSection("JDPay"));
-            services.Configure<QPayOptions>(Configuration.GetSection("QPay"));
-            services.Configure<UnionPayOptions>(Configuration.GetSection("UnionPay"));
             services.Configure<WeChatPayOptions>(Configuration.GetSection("WeChatPay"));
-            services.Configure<LianLianPayOptions>(Configuration.GetSection("LianLianPay"));
 
             services.AddControllersWithViews();
         }
