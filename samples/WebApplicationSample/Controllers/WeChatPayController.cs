@@ -87,19 +87,23 @@ namespace WebApplicationSample.Controllers
                 TradeType = viewModel.TradeType,
                 OpenId = viewModel.OpenId
             };
+
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-            if (response.ReturnCode == "SUCCESS" && response.ResultCode == "SUCCESS")
+            if (response.ReturnCode == WeChatPayCode.Success && response.ResultCode == WeChatPayCode.Success)
             {
                 var req = new WeChatPayJsApiSdkRequest
                 {
                     Package = "prepay_id=" + response.PrepayId
                 };
+
                 var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
+                
                 // 将参数(parameter)给 公众号前端 让他在微信内H5调起支付(https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6)
                 ViewData["parameter"] = JsonSerializer.Serialize(parameter);
                 ViewData["response"] = response.ResponseBody;
                 return View();
             }
+            
             ViewData["response"] = response.ResponseBody;
             return View();
         }
@@ -131,7 +135,9 @@ namespace WebApplicationSample.Controllers
                 NotifyUrl = viewModel.NotifyUrl,
                 TradeType = viewModel.TradeType
             };
+
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            
             // response.CodeUrl 给前端生成二维码
             ViewData["qrcode"] = response.CodeUrl;
             ViewData["response"] = response.ResponseBody;
@@ -167,18 +173,21 @@ namespace WebApplicationSample.Controllers
             };
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
-            if (response.ReturnCode == "SUCCESS" && response.ResultCode == "SUCCESS")
+            if (response.ReturnCode == WeChatPayCode.Success && response.ResultCode == WeChatPayCode.Success)
             {
                 var req = new WeChatPayAppSdkRequest
                 {
                     PrepayId = response.PrepayId
                 };
+
                 var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
+                
                 // 将参数(parameter)给 ios/android端 让他调起微信APP(https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5)
                 ViewData["parameter"] = JsonSerializer.Serialize(parameter);
                 ViewData["response"] = response.ResponseBody;
                 return View();
             }
+
             ViewData["response"] = response.ResponseBody;
             return View();
         }
@@ -210,6 +219,7 @@ namespace WebApplicationSample.Controllers
                 NotifyUrl = viewModel.NotifyUrl,
                 TradeType = viewModel.TradeType
             };
+
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
             // mweb_url为拉起微信支付收银台的中间页面，可通过访问该url来拉起微信客户端，完成支付,mweb_url的有效期为5分钟。
@@ -244,20 +254,23 @@ namespace WebApplicationSample.Controllers
                 TradeType = viewModel.TradeType,
                 OpenId = viewModel.OpenId
             };
-            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
-            if (response.ReturnCode == "SUCCESS" && response.ResultCode == "SUCCESS")
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            if (response.ReturnCode == WeChatPayCode.Success && response.ResultCode == WeChatPayCode.Success)
             {
                 var req = new WeChatPayLiteAppSdkRequest
                 {
                     Package = "prepay_id=" + response.PrepayId
                 };
+                
                 var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
+
                 // 将参数(parameter)给 小程序前端 让他调起支付API(https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7&index=5)
                 ViewData["parameter"] = JsonSerializer.Serialize(parameter);
                 ViewData["response"] = response.ResponseBody;
                 return View();
             }
+
             ViewData["response"] = response.ResponseBody;
             return View();
         }
