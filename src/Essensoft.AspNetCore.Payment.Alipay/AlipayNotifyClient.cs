@@ -41,8 +41,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             }
 
             var parameters = GetParameters(request);
-            var parser = new AlipayDictionaryParser<T>();
-            var rsp = parser.Parse(parameters);
+            var rsp = AlipayDictionaryParser.Parse<T>(parameters);
             CheckNotifySign(parameters, options);
             return Task.FromResult(rsp);
         }

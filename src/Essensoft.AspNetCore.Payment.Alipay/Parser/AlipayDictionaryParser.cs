@@ -4,9 +4,9 @@ using System.Text.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 {
-    public class AlipayDictionaryParser<T> where T : AlipayObject
+    public static class AlipayDictionaryParser
     {
-        public T Parse(IDictionary<string, string> dictionary)
+        public static T Parse<T>(IDictionary<string, string> dictionary) where T : AlipayObject
         {
             if (dictionary == null || dictionary.Count == 0)
             {
