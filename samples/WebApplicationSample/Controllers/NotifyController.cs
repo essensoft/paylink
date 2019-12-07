@@ -34,7 +34,7 @@ namespace WebApplicationSample.Controllers
             try
             {
                 var notify = await _client.ExecuteAsync<AlipayTradePrecreateNotify>(Request, _optionsAccessor.Value);
-                if ("TRADE_SUCCESS" == notify.TradeStatus)
+                if (notify.TradeStatus == AlipayTradeStatus.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
 
@@ -59,7 +59,7 @@ namespace WebApplicationSample.Controllers
             try
             {
                 var notify = await _client.ExecuteAsync<AlipayTradeAppPayNotify>(Request, _optionsAccessor.Value);
-                if ("TRADE_SUCCESS" == notify.TradeStatus)
+                if (notify.TradeStatus == AlipayTradeStatus.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
 
@@ -84,7 +84,7 @@ namespace WebApplicationSample.Controllers
             try
             {
                 var notify = await _client.ExecuteAsync<AlipayTradePagePayNotify>(Request, _optionsAccessor.Value);
-                if ("TRADE_SUCCESS" == notify.TradeStatus)
+                if (notify.TradeStatus == AlipayTradeStatus.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
 
@@ -109,7 +109,7 @@ namespace WebApplicationSample.Controllers
             try
             {
                 var notify = await _client.ExecuteAsync<AlipayTradeWapPayNotify>(Request, _optionsAccessor.Value);
-                if ("TRADE_SUCCESS" == notify.TradeStatus)
+                if (notify.TradeStatus == AlipayTradeStatus.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
 
@@ -151,9 +151,9 @@ namespace WebApplicationSample.Controllers
             try
             {
                 var notify = await _client.ExecuteAsync<WeChatPayUnifiedOrderNotify>(Request, _optionsAccessor.Value);
-                if (notify.ReturnCode == "SUCCESS")
+                if (notify.ReturnCode == WeChatPayCode.Success)
                 {
-                    if (notify.ResultCode == "SUCCESS")
+                    if (notify.ResultCode == WeChatPayCode.Success)
                     {
                         Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
 
@@ -179,9 +179,9 @@ namespace WebApplicationSample.Controllers
             try
             {
                 var notify = await _client.ExecuteAsync<WeChatPayRefundNotify>(Request, _optionsAccessor.Value);
-                if (notify.ReturnCode == "SUCCESS")
+                if (notify.ReturnCode == WeChatPayCode.Success)
                 {
-                    if (notify.RefundStatus == "SUCCESS")
+                    if (notify.RefundStatus == WeChatPayCode.Success)
                     {
                         Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
                         return WeChatPayNotifyResult.Success;
