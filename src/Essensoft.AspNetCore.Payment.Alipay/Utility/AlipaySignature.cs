@@ -54,19 +54,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             }
         }
 
-        public static bool RSACheckContent(string data, string sign, X509Certificate publicCert, string signType)
-        {
-            var publicKey = AntCertificationUtil.ExtractPemPublicKeyFromCert(publicCert);
-            var key = RSAUtilities.GetRSAParametersFormPublicKey(publicKey);
-            switch (signType)
-            {
-                case "RSA2":
-                    return SHA256WithRSA.Verify(data, sign, key);
-                default:
-                    return SHA1WithRSA.Verify(data, sign, key);
-            }
-        }
-
         public static string AESEncrypt(string data, string encyptKey)
         {
             return AES.Encrypt(data, encyptKey, AES_IV, CipherMode.CBC, PaddingMode.PKCS7);

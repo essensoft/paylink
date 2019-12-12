@@ -42,7 +42,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             var parameters = GetParameters(request);
             var rsp = AlipayDictionaryParser.Parse<T>(parameters);
-            CheckNotifySign(parameters, options);
+            CheckNotifySign(parameters, options, false);
             return Task.FromResult(rsp);
         }
 
@@ -62,14 +62,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 throw new ArgumentNullException(nameof(options.SignType));
             }
 
-            if (string.IsNullOrEmpty(options.AlipayPublicCert))
+            if (string.IsNullOrEmpty(options.AlipayPublicCertKey))
             {
-                throw new ArgumentNullException(nameof(options.AlipayPublicCert));
+                throw new ArgumentNullException(nameof(options.AlipayPublicCertKey));
             }
 
             var parameters = GetParameters(request);
             var rsp = AlipayDictionaryParser.Parse<T>(parameters);
-            CheckNotifySignCertificate(parameters, options);
+            CheckNotifySign(parameters, options, true);
             return Task.FromResult(rsp);
         }
 
@@ -97,7 +97,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             return parameters;
         }
 
-        private void CheckNotifySign(IDictionary<string, string> dictionary, AlipayOptions options)
+        private void CheckNotifySign(IDictionary<string, string> dictionary, AlipayOptions options, bool useCert)
         {
             if (dictionary == null || dictionary.Count == 0)
             {
@@ -110,26 +110,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             }
 
             var prestr = GetSignContent(dictionary);
-            if (!AlipaySignature.RSACheckContent(prestr, sign, options.AlipayPublicKey, options.SignType))
-            {
-                throw new AlipayException("sign check fail: check Sign Data Fail!");
-            }
-        }
-
-        private void CheckNotifySignCertificate(IDictionary<string, string> dictionary, AlipayOptions options)
-        {
-            if (dictionary == null || dictionary.Count == 0)
-            {
-                throw new AlipayException("sign check fail: dictionary is Empty!");
-            }
-
-            if (!dictionary.TryGetValue("sign", out var sign))
-            {
-                throw new AlipayException("sign check fail: sign is Empty!");
-            }
-
-            var prestr = GetSignContent(dictionary);
-            if (!AlipaySignature.RSACheckContent(prestr, sign, options.AlipayPublicCertificate, options.SignType))
+            if (!AlipaySignature.RSACheckContent(prestr, sign, useCert ? options.AlipayPublicCertKey : options.AlipayPublicKey, options.SignType))
             {
                 throw new AlipayException("sign check fail: check Sign Data Fail!");
             }

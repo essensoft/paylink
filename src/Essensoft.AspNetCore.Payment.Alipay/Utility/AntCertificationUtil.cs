@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using Org.BouncyCastle.Asn1.X509;
 using Org.BouncyCastle.X509;
 using MD5 = Essensoft.AspNetCore.Payment.Security.MD5;
@@ -56,8 +55,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <returns>X509Certificate证书对象</returns>
         public static X509Certificate ParseCert(string certificate)
         {
-            var certContent = File.Exists(certificate) ? File.ReadAllText(certificate) : certificate;
-            return new X509CertificateParser().ReadCertificate(Encoding.UTF8.GetBytes(certContent));
+            var stream = File.Exists(certificate) ? File.OpenRead(certificate) : (Stream)new MemoryStream(Convert.FromBase64String(certificate));
+            return new X509CertificateParser().ReadCertificate(stream);
         }
 
         /// <summary>
@@ -101,10 +100,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// </summary>
         /// <param name="cert">证书链文本</param>
         /// <returns>证书链集合</returns>
-        private static List<X509Certificate> ReadPemCertChain(string cert)
+        private static List<X509Certificate> ReadPemCertChain(string certificate)
         {
-            var certContent = File.Exists(cert) ? File.ReadAllText(cert) : cert;
-            var collection = new X509CertificateParser().ReadCertificates(Encoding.UTF8.GetBytes(certContent));
+            var stream = File.Exists(certificate) ? File.OpenRead(certificate) : (Stream)new MemoryStream(Convert.FromBase64String(certificate));
+            var collection = new X509CertificateParser().ReadCertificates(stream);
             var result = new List<X509Certificate>();
             foreach (var each in collection)
             {
