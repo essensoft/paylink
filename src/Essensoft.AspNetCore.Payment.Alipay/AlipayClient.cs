@@ -489,15 +489,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 throw new AlipayException("支付宝公钥证书校验失败，请确认是否为支付宝签发的有效公钥证书");
             }
 
-            var alipayCertBase64 = response.AlipayCertContent;
-            var alipayCertBytes = Convert.FromBase64String(alipayCertBase64);
-            var alipayCertContent = Encoding.UTF8.GetString(alipayCertBytes);
-            if (!AntCertificationUtil.IsTrusted(alipayCertContent, options.RootCert))
+            if (!AntCertificationUtil.IsTrusted(response.AlipayCertContent, options.RootCert))
             {
                 throw new AlipayException("支付宝公钥证书校验失败，请确认是否为支付宝签发的有效公钥证书");
             }
 
-            var alipayCert = AntCertificationUtil.ParseCert(alipayCertContent);
+            var alipayCert = AntCertificationUtil.ParseCert(response.AlipayCertContent);
             var alipayCertSN = AntCertificationUtil.GetCertSN(alipayCert);
             var newAlipayPublicKey = AntCertificationUtil.ExtractPemPublicKeyFromCert(alipayCert);
             _certificateManager.TryAdd(alipayCertSN, newAlipayPublicKey);
