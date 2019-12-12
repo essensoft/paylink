@@ -82,9 +82,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             get => appCert;
             set
             {
-                appCert = value;
                 if (!string.IsNullOrEmpty(value))
                 {
+                    appCert = value;
                     var cert = AntCertificationUtil.ParseCert(value);
                     AppCertSN = AntCertificationUtil.GetCertSN(cert);
                 }
@@ -99,9 +99,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             get => alipayPublicCert;
             set
             {
-                alipayPublicCert = value;
                 if (!string.IsNullOrEmpty(value))
                 {
+                    alipayPublicCert = value;
                     AlipayPublicCertificate = AntCertificationUtil.ParseCert(value);
                     AlipayPublicCertSN = AntCertificationUtil.GetCertSN(AlipayPublicCertificate);
                     AlipayPublicCertKey = AntCertificationUtil.ExtractPemPublicKeyFromCert(AlipayPublicCertificate);
@@ -117,9 +117,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             get => rootCert;
             set
             {
-                rootCert = value;
                 if (!string.IsNullOrEmpty(value))
                 {
+                    rootCert = value;
                     RootCertSN = AntCertificationUtil.GetRootCertSN(value);
                 }
             }
