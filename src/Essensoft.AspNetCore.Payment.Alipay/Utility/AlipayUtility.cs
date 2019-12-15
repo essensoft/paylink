@@ -146,7 +146,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// 根据API名称获取响应根节点名称。
         /// </summary>
         /// <param name="api">API名称</param>
-        /// <returns></returns>
         public static string GetRootElement(string api)
         {
             var pos = api.IndexOf(".");

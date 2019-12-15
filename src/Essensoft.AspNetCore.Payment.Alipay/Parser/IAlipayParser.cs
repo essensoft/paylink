@@ -18,7 +18,6 @@
         /// </summary>
         /// <param name="request"></param>
         /// <param name="responseBody"></param>
-        /// <returns></returns>
         SignItem GetSignItem(IAlipayRequest<T> request, string responseBody);
 
         /// <summary>
@@ -26,7 +25,6 @@
         /// </summary>
         /// <param name="request"></param>
         /// <param name="responseBody"></param>
-        /// <returns></returns>
         CertItem GetCertItem(IAlipayRequest<T> request, string responseBody);
 
         /// <summary>
@@ -36,7 +34,6 @@
         /// <param name="body"></param>
         /// <param name="encryptType"></param>
         /// <param name="encryptKey"></param>
-        /// <returns></returns>
         string EncryptSourceData(IAlipayRequest<T> request, string body, string encryptType, string encryptKey);
     }
 }

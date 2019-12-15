@@ -17,7 +17,6 @@ namespace Essensoft.AspNetCore.Payment.Security
         /// -----END RSA PRIVATE KEY-----
         /// </summary>
         /// <param name="privateKey"></param>
-        /// <returns></returns>
         public static RSAParameters GetRSAParametersFormRsaPrivateKey(string privateKey)
         {
             if (string.IsNullOrEmpty(privateKey))
@@ -45,7 +44,6 @@ namespace Essensoft.AspNetCore.Payment.Security
         /// -----END PUBLIC KEY-----
         /// </summary>
         /// <param name="publicKey"></param>
-        /// <returns></returns>
         public static RSAParameters GetRSAParametersFormPublicKey(string publicKey)
         {
             if (string.IsNullOrEmpty(publicKey))
@@ -67,7 +65,6 @@ namespace Essensoft.AspNetCore.Payment.Security
         /// -----END RSA PUBLIC KEY-----
         /// </summary>
         /// <param name="publicKey"></param>
-        /// <returns></returns>
         public static AsymmetricKeyParameter GetAsymmetricKeyParameterFormRsaPublicKey(string publicKey)
         {
             if (string.IsNullOrEmpty(publicKey))

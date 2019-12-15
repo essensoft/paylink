@@ -79,7 +79,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
         /// </summary>
         /// <param name="request"></param>
         /// <param name="body"></param>
-        /// <returns></returns>
         private static EncryptParseItem ParseEncryptData(IAlipayRequest<T> request, string body)
         {
             var rootNode = request.GetApiName().Replace(".", "_") + AlipayConstants.RESPONSE_SUFFIX;

@@ -12,7 +12,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 前言
         /// </summary>
-        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
@@ -21,7 +20,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 打赏
         /// </summary>
-        /// <returns></returns>
         public IActionResult Gratuity()
         {
             return View();
@@ -32,7 +30,6 @@ namespace WebApplicationSample.Controllers
         /// </summary>
         /// <param name="data"></param>
         /// <param name="size"></param>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult QrCode(string data, int size = 168)
         {

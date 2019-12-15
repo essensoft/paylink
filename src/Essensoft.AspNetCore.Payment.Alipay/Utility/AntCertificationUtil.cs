@@ -98,7 +98,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <summary>
         /// 从证书链文本反序列化证书链集合
         /// </summary>
-        /// <param name="cert">证书链文本</param>
+        /// <param name="certificate">证书链文本</param>
         /// <returns>证书链集合</returns>
         private static List<X509Certificate> ReadPemCertChain(string certificate)
         {
