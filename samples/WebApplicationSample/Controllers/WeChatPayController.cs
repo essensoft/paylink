@@ -22,7 +22,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 微信支付指引页
         /// </summary>
-        /// <returns></returns>
         public IActionResult Index()
         {
             return View();
@@ -31,7 +30,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 刷卡支付
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult MicroPay()
         {
@@ -42,7 +40,6 @@ namespace WebApplicationSample.Controllers
         /// 刷卡支付
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> MicroPay(WeChatPayMicroPayViewModel viewModel)
         {
@@ -62,7 +59,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 公众号支付
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult PubPay()
         {
@@ -73,7 +69,6 @@ namespace WebApplicationSample.Controllers
         /// 公众号支付
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> PubPay(WeChatPayPubPayViewModel viewModel)
         {
@@ -111,7 +106,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 扫码支付
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult QrCodePay()
         {
@@ -122,7 +116,6 @@ namespace WebApplicationSample.Controllers
         /// 扫码支付
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> QrCodePay(WeChatPayQrCodePayViewModel viewModel)
         {
@@ -147,7 +140,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// APP支付
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult AppPay()
         {
@@ -158,7 +150,6 @@ namespace WebApplicationSample.Controllers
         /// APP支付
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> AppPay(WeChatPayAppPayViewModel viewModel)
         {
@@ -195,7 +186,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// H5支付
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult H5Pay()
         {
@@ -206,7 +196,6 @@ namespace WebApplicationSample.Controllers
         /// H5支付
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> H5Pay(WeChatPayH5PayViewModel viewModel)
         {
@@ -229,7 +218,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 小程序支付
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult LiteAppPay()
         {
@@ -240,7 +228,6 @@ namespace WebApplicationSample.Controllers
         /// 小程序支付
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> LiteAppPay(WeChatPayLiteAppPayViewModel viewModel)
         {
@@ -278,7 +265,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 查询订单
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult OrderQuery()
         {
@@ -289,7 +275,6 @@ namespace WebApplicationSample.Controllers
         /// 查询订单
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> OrderQuery(WeChatPayOrderQueryViewModel viewModel)
         {
@@ -306,7 +291,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 撤销订单
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult Reverse()
         {
@@ -317,7 +301,6 @@ namespace WebApplicationSample.Controllers
         /// 撤销订单
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Reverse(WeChatPayReverseViewModel viewModel)
         {
@@ -334,7 +317,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 关闭订单
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult CloseOrder()
         {
@@ -345,7 +327,6 @@ namespace WebApplicationSample.Controllers
         /// 关闭订单
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CloseOrder(WeChatPayCloseOrderViewModel viewModel)
         {
@@ -361,7 +342,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 申请退款
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult Refund()
         {
@@ -372,7 +352,6 @@ namespace WebApplicationSample.Controllers
         /// 申请退款
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Refund(WeChatPayRefundViewModel viewModel)
         {
@@ -394,7 +373,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 查询退款
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult RefundQuery()
         {
@@ -405,7 +383,6 @@ namespace WebApplicationSample.Controllers
         /// 查询退款
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> RefundQuery(WeChatPayRefundQueryViewModel viewModel)
         {
@@ -424,7 +401,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 下载对账单
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult DownloadBill()
         {
@@ -435,7 +411,6 @@ namespace WebApplicationSample.Controllers
         /// 下载对账单
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> DownloadBill(WeChatPayDownloadBillViewModel viewModel)
         {
@@ -453,7 +428,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 下载资金账单
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult DownloadFundFlow()
         {
@@ -464,7 +438,6 @@ namespace WebApplicationSample.Controllers
         /// 下载资金账单
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> DownloadFundFlow(WeChatPayDownloadFundFlowViewModel viewModel)
         {
@@ -482,7 +455,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 企业付款到零钱
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult Transfers()
         {
@@ -493,7 +465,6 @@ namespace WebApplicationSample.Controllers
         /// 企业付款到零钱
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> Transfers(WeChatPayTransfersViewModel viewModel)
         {
@@ -515,7 +486,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 查询企业付款
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult GetTransferInfo()
         {
@@ -526,7 +496,6 @@ namespace WebApplicationSample.Controllers
         /// 查询企业付款
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> GetTransferInfo(WeChatPayGetTransferInfoViewModel viewModel)
         {
@@ -542,7 +511,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 企业付款到银行卡
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult PayBank()
         {
@@ -553,7 +521,6 @@ namespace WebApplicationSample.Controllers
         /// 企业付款到银行卡
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> PayBank(WeChatPayPayBankViewModel viewModel)
         {
@@ -574,7 +541,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 查询企业付款银行卡
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         public IActionResult QueryBank()
         {
@@ -585,7 +551,6 @@ namespace WebApplicationSample.Controllers
         /// 查询企业付款银行卡
         /// </summary>
         /// <param name="viewModel"></param>
-        /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> QueryBank(WeChatPayQueryBankViewModel viewModel)
         {
@@ -601,7 +566,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 获取RSA加密公钥
         /// </summary>
-        /// <returns></returns>
         [HttpGet]
         [HttpPost]
         public async Task<IActionResult> GetPublicKey()

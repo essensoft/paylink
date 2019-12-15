@@ -26,7 +26,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 扫码支付异步通知
         /// </summary>
-        /// <returns></returns>
         [Route("precreate")]
         [HttpPost]
         public async Task<IActionResult> Precreate()
@@ -51,7 +50,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// APP支付异步通知
         /// </summary>
-        /// <returns></returns>
         [Route("apppay")]
         [HttpPost]
         public async Task<IActionResult> AppPay()
@@ -76,7 +74,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 电脑网站支付异步通知
         /// </summary>
-        /// <returns></returns>
         [Route("pagepay")]
         [HttpPost]
         public async Task<IActionResult> PagePay()
@@ -101,7 +98,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 手机网站支付异步通知
         /// </summary>
-        /// <returns></returns>
         [Route("wappay")]
         [HttpPost]
         public async Task<IActionResult> WapPay()
@@ -143,7 +139,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 统一下单支付结果通知
         /// </summary>
-        /// <returns></returns>
         [Route("unifiedorder")]
         [HttpPost]
         public async Task<IActionResult> Unifiedorder()
@@ -171,7 +166,6 @@ namespace WebApplicationSample.Controllers
         /// <summary>
         /// 退款结果通知
         /// </summary>
-        /// <returns></returns>
         [Route("refund")]
         [HttpPost]
         public async Task<IActionResult> Refund()

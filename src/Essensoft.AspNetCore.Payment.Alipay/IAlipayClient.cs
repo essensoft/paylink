@@ -36,7 +36,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         /// </summary>
         /// <param name="request">具体的Alipay API请求</param>
         /// <param name="options">配置选项</param>
-        /// <returns></returns>
         Task<T> CertificateExecuteAsync<T>(IAlipayRequest<T> request, AlipayOptions options) where T : AlipayResponse;
 
         /// <summary>
