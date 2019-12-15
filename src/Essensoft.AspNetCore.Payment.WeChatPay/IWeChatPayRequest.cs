@@ -22,7 +22,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// 获取签名类型
         /// </summary>
         /// <returns>签名类型</returns>
-        WeChatPaySignType GetSignType();
+        WeChatPaySignType GetSignType()
+        {
+            return WeChatPaySignType.MD5;
+        }
 
         /// <summary>
         /// 基本参数处理器
@@ -36,6 +39,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// 是否需要检查响应内容签名
         /// </summary>
         /// <returns>是否需要检查</returns>
-        bool GetNeedCheckSign();
+        bool GetNeedCheckSign()
+        {
+            return true;
+        }
     }
 }
