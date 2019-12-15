@@ -32,8 +32,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// 执行 WeChatPay Sdk请求。
         /// </summary>
         /// <param name="request">具体的WeChatPay Sdk请求</param>
-        /// <param name="options">配置选项名称</param>
-        /// <returns>响应字典</returns>
+        /// <param name="options">配置选项</param>
         Task<WeChatPayDictionary> ExecuteAsync(IWeChatPaySdkRequest request, WeChatPayOptions options);
     }
 }
