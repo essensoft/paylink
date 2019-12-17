@@ -167,7 +167,7 @@ namespace WebApplicationSample.Models
         [Display(Name = "out_request_no")]
         public string OutRequestNo { get; set; }
     }
-    
+
     public class AlipayTransferViewModel
     {
         [Required]
