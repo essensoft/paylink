@@ -2,7 +2,6 @@
 using System.Security.Cryptography;
 using System.Text;
 using Essensoft.AspNetCore.Payment.Security;
-using Org.BouncyCastle.X509;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Utility
 {
@@ -32,25 +31,27 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
 
         public static string RSASignContent(string data, string privateKey, string signType)
         {
-            var key = RSAUtilities.GetRSAParametersFormRsaPrivateKey(privateKey);
             switch (signType)
             {
+                case "RSA1":
+                    return SHA1WithRSA.Sign(data, privateKey);
                 case "RSA2":
-                    return SHA256WithRSA.Sign(data, key);
+                    return SHA256WithRSA.Sign(data, privateKey);
                 default:
-                    return SHA1WithRSA.Sign(data, key);
+                    return SHA1WithRSA.Sign(data, privateKey);
             }
         }
 
         public static bool RSACheckContent(string data, string sign, string publicKey, string signType)
         {
-            var key = RSAUtilities.GetRSAParametersFormPublicKey(publicKey);
             switch (signType)
             {
+                case "RSA1":
+                    return SHA1WithRSA.Verify(data, sign, publicKey);
                 case "RSA2":
-                    return SHA256WithRSA.Verify(data, sign, key);
+                    return SHA256WithRSA.Verify(data, sign, publicKey);
                 default:
-                    return SHA1WithRSA.Verify(data, sign, key);
+                    return SHA1WithRSA.Verify(data, sign, publicKey);
             }
         }
 
