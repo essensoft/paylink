@@ -35,7 +35,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         public string SubMchId { get; set; }
 
         /// <summary>
-        /// 微信支付 API秘钥
+        /// 微信支付 API密钥(不是APIv3密钥)
         /// </summary>
         public string Key { get; set; }
 
