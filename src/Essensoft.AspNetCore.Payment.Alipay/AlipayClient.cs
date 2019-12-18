@@ -81,7 +81,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 { AlipayConstants.PROD_CODE, request.GetProdCode() },
                 { AlipayConstants.NOTIFY_URL, request.GetNotifyUrl() },
                 { AlipayConstants.CHARSET, options.Charset },
-                { AlipayConstants.RETURN_URL, request.GetReturnUrl() }
+                { AlipayConstants.RETURN_URL, request.GetReturnUrl() },
+                { AlipayConstants.ALIPAY_ROOT_CERT_SN, options.RootCertSN },
+                { AlipayConstants.APP_CERT_SN, options.AppCertSN }
             };
 
             // 序列化BizModel
@@ -560,7 +562,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 { AlipayConstants.NOTIFY_URL, request.GetNotifyUrl() },
                 { AlipayConstants.CHARSET, options.Charset },
                 { AlipayConstants.RETURN_URL, request.GetReturnUrl() },
-                { AlipayConstants.APP_AUTH_TOKEN, appAuthToken }
+                { AlipayConstants.APP_AUTH_TOKEN, appAuthToken },
+                { AlipayConstants.ALIPAY_ROOT_CERT_SN, options.RootCertSN },
+                { AlipayConstants.APP_CERT_SN, options.AppCertSN }
             };
 
             // 序列化BizModel
@@ -650,7 +654,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         #region Model Serialize
 
-        private static readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true , Encoder = JavaScriptEncoder.Create(UnicodeRanges.All) };
+        private static readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true, Encoder = JavaScriptEncoder.Create(UnicodeRanges.All) };
 
         private AlipayDictionary SerializeBizModel<T>(AlipayDictionary requestParams, IAlipayRequest<T> request) where T : AlipayResponse
         {
