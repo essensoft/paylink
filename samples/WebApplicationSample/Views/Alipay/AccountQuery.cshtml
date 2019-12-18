@@ -1,6 +1,6 @@
-﻿@model AlipayBillDownloadurlQueryViewModel
+﻿@model AlipayAccountQueryViewModel
 @{
-    ViewData["Title"] = "查询对账单下载地址";
+    ViewData["Title"] = "余额查询";
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -11,15 +11,15 @@
 <br />
 <div class="card">
     <div class="card-body">
-        <form asp-controller="Alipay" asp-action="BillDownloadurlQuery">
+        <form asp-controller="Alipay" asp-action="AccountQuery">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="BillDate"></label>
-                <input type="text" class="form-control" asp-for="BillDate" />
+                <label asp-for="AlipayUserId"></label>
+                <input type="text" class="form-control" asp-for="AlipayUserId" />
             </div>
             <div class="form-group">
-                <label asp-for="BillType"></label>
-                <input type="text" class="form-control" asp-for="BillType" />
+                <label asp-for="AccountType"></label>
+                <input type="text" class="form-control" asp-for="AccountType" value="ACCTRANS_ACCOUNT" />
             </div>
             <button type="submit" class="btn btn-primary">提交请求</button>
         </form>

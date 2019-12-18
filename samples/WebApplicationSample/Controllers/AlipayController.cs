@@ -286,7 +286,7 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// 单笔转账到支付宝账户
+        /// 统一转账
         /// </summary>
         [HttpGet]
         public IActionResult Transfer()
@@ -295,28 +295,29 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// 单笔转账到支付宝账户
+        /// 统一转账
         /// </summary>
         [HttpPost]
         public async Task<IActionResult> Transfer(AlipayTransferViewModel viewMode)
         {
-            var model = new AlipayFundTransToaccountTransferModel
+            var model = new AlipayFundTransUniTransferModel
             {
                 OutBizNo = viewMode.OutBizNo,
-                PayeeType = viewMode.PayeeType,
-                PayeeAccount = viewMode.PayeeAccount,
-                Amount = viewMode.Amount,
+                TransAmount = viewMode.TransAmount,
+                ProductCode = viewMode.ProductCode,
+                BizScene = viewMode.BizScene,
+                PayeeInfo = new Participant { Identity = viewMode.PayeeIdentity, IdentityType = viewMode.PayeeIdentityType, Name = viewMode.PayeeName },
                 Remark = viewMode.Remark
             };
-            var req = new AlipayFundTransToaccountTransferRequest();
+            var req = new AlipayFundTransUniTransferRequest();
             req.SetBizModel(model);
-            var response = await _client.ExecuteAsync(req, _optionsAccessor.Value);
+            var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
             ViewData["response"] = response.ResponseBody;
             return View();
         }
 
         /// <summary>
-        /// 查询转账订单
+        /// 查询统一转账订单
         /// </summary>
         [HttpGet]
         public IActionResult TransQuery()
@@ -325,18 +326,18 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// 查询转账订单
+        /// 查询统一转账订单
         /// </summary>
         [HttpPost]
         public async Task<IActionResult> TransQuery(AlipayTransQueryViewModel viewMode)
         {
-            var model = new AlipayFundTransOrderQueryModel
+            var model = new AlipayFundTransCommonQueryModel
             {
                 OutBizNo = viewMode.OutBizNo,
                 OrderId = viewMode.OrderId
             };
 
-            var req = new AlipayFundTransOrderQueryRequest();
+            var req = new AlipayFundTransCommonQueryRequest();
             req.SetBizModel(model);
             var response = await _client.ExecuteAsync(req, _optionsAccessor.Value);
             ViewData["response"] = response.ResponseBody;
@@ -344,27 +345,27 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// 查询对账单下载地址
+        /// 余额查询
         /// </summary>
         [HttpGet]
-        public IActionResult BillDownloadurlQuery()
+        public IActionResult AccountQuery()
         {
             return View();
         }
 
         /// <summary>
-        /// 查询对账单下载地址
+        /// 余额查询
         /// </summary>
         [HttpPost]
-        public async Task<IActionResult> BillDownloadurlQuery(AlipayBillDownloadurlQueryViewModel viewModel)
+        public async Task<IActionResult> AccountQuery(AlipayAccountQueryViewModel viewModel)
         {
-            var model = new AlipayDataDataserviceBillDownloadurlQueryModel
+            var model = new AlipayFundAccountQueryModel
             {
-                BillDate = viewModel.BillDate,
-                BillType = viewModel.BillType
+                AlipayUserId = viewModel.AlipayUserId,
+                AccountType = viewModel.AccountType
             };
 
-            var req = new AlipayDataDataserviceBillDownloadurlQueryRequest();
+            var req = new AlipayFundAccountQueryRequest();
             req.SetBizModel(model);
             var response = await _client.ExecuteAsync(req, _optionsAccessor.Value);
             ViewData["response"] = response.ResponseBody;
