@@ -71,12 +71,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
 
-            var key = RSAUtilities.GetAsymmetricKeyParameterFormRsaPublicKey(options.RsaPublicKey);
-
-            var no = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(sortedTxtParams.GetValue(WeChatPayConsts.enc_bank_no), key);
+            var no = OaepSHA1WithRSA.Encrypt(sortedTxtParams.GetValue(WeChatPayConsts.enc_bank_no), options.RsaPublicKey);
             sortedTxtParams.SetValue(WeChatPayConsts.enc_bank_no, no);
 
-            var name = RSA_ECB_OAEPWithSHA1AndMGF1Padding.Encrypt(sortedTxtParams.GetValue(WeChatPayConsts.enc_true_name), key);
+            var name = OaepSHA1WithRSA.Encrypt(sortedTxtParams.GetValue(WeChatPayConsts.enc_true_name), options.RsaPublicKey);
             sortedTxtParams.SetValue(WeChatPayConsts.enc_true_name, name);
 
             sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
