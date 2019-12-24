@@ -46,6 +46,13 @@ namespace WebApplicationSample.Controllers
                         Dic.Add(iter.Key, iter.Value);
                     }
                 }
+                else
+                {
+                    foreach (var iter in Request.Query)
+                    {
+                        Dic.Add(iter.Key, iter.Value);
+                    }
+                }
 
                 // 激活开发者模式
                 if ("alipay.service.check".Equals(Dic["service"]))
@@ -59,6 +66,8 @@ namespace WebApplicationSample.Controllers
 
                     // 加签方式为公钥证书时，从公钥证书获取的RSA公钥 options.AlipayPublicCertKey
                     var isSuccess = AlipaySignature.RSACheckContent(signContent, signStr, options.AlipayPublicCertKey, options.Charset, options.SignType);
+
+                    // 组XML响应内容
                     var response = MakeVerifyGWResponse(isSuccess, options.AlipayPublicCertKey, options.AppPrivateKey, options.Charset, options.SignType);
 
                     return Content(response, "text/xml");
