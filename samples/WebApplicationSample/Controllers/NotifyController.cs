@@ -32,7 +32,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<AlipayTradePrecreateNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.CertificateExecuteAsync<AlipayTradePrecreateNotify>(Request, _optionsAccessor.Value);
                 if (notify.TradeStatus == AlipayTradeStatus.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -56,7 +56,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<AlipayTradeAppPayNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.CertificateExecuteAsync<AlipayTradeAppPayNotify>(Request, _optionsAccessor.Value);
                 if (notify.TradeStatus == AlipayTradeStatus.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -80,7 +80,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<AlipayTradePagePayNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.CertificateExecuteAsync<AlipayTradePagePayNotify>(Request, _optionsAccessor.Value);
                 if (notify.TradeStatus == AlipayTradeStatus.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -104,7 +104,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<AlipayTradeWapPayNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.CertificateExecuteAsync<AlipayTradeWapPayNotify>(Request, _optionsAccessor.Value);
                 if (notify.TradeStatus == AlipayTradeStatus.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);

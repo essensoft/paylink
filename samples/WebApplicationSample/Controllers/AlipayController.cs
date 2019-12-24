@@ -58,7 +58,7 @@ namespace WebApplicationSample.Controllers
             req.SetBizModel(model);
             req.SetNotifyUrl(viewModel.NotifyUrl);
 
-            var response = await _client.ExecuteAsync(req, _optionsAccessor.Value);
+            var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
             ViewData["qrcode"] = response.QrCode;
             ViewData["response"] = response.ResponseBody;
             return View();
@@ -91,7 +91,7 @@ namespace WebApplicationSample.Controllers
             var req = new AlipayTradePayRequest();
             req.SetBizModel(model);
 
-            var response = await _client.ExecuteAsync(req, _optionsAccessor.Value);
+            var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
             ViewData["response"] = response.ResponseBody;
             return View();
         }
@@ -218,7 +218,7 @@ namespace WebApplicationSample.Controllers
             var req = new AlipayTradeQueryRequest();
             req.SetBizModel(model);
 
-            var response = await _client.ExecuteAsync(req, _optionsAccessor.Value);
+            var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
             ViewData["response"] = response.ResponseBody;
             return View();
         }
@@ -250,7 +250,7 @@ namespace WebApplicationSample.Controllers
             var req = new AlipayTradeRefundRequest();
             req.SetBizModel(model);
 
-            var response = await _client.ExecuteAsync(req, _optionsAccessor.Value);
+            var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
             ViewData["response"] = response.ResponseBody;
             return View();
         }
@@ -280,7 +280,7 @@ namespace WebApplicationSample.Controllers
             var req = new AlipayTradeFastpayRefundQueryRequest();
             req.SetBizModel(model);
 
-            var response = await _client.ExecuteAsync(req, _optionsAccessor.Value);
+            var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
             ViewData["response"] = response.ResponseBody;
             return View();
         }
@@ -339,7 +339,7 @@ namespace WebApplicationSample.Controllers
 
             var req = new AlipayFundTransCommonQueryRequest();
             req.SetBizModel(model);
-            var response = await _client.ExecuteAsync(req, _optionsAccessor.Value);
+            var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
             ViewData["response"] = response.ResponseBody;
             return View();
         }
@@ -367,7 +367,7 @@ namespace WebApplicationSample.Controllers
 
             var req = new AlipayFundAccountQueryRequest();
             req.SetBizModel(model);
-            var response = await _client.ExecuteAsync(req, _optionsAccessor.Value);
+            var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
             ViewData["response"] = response.ResponseBody;
             return View();
         }
