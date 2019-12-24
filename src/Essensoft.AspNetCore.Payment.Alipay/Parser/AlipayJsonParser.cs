@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Security.Cryptography;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
@@ -12,6 +13,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
     /// </summary>
     public class AlipayJsonParser<T> : IAlipayParser<T> where T : AlipayResponse
     {
+        private static readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
+
         public string EncryptSourceData(IAlipayRequest<T> request, string body, string encryptType, string encryptKey)
         {
             if (!"AES".Equals(encryptType))
@@ -29,7 +32,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
         private static string GetSign(string body)
         {
-            var json = JsonSerializer.Deserialize<IDictionary>(body);
+            var json = JsonSerializer.Deserialize<IDictionary>(body, jsonSerializerOptions);
             return json[AlipayConstants.SIGN]?.ToString();
         }
 
@@ -141,7 +144,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
             {
                 if (body.StartsWith("{") && body.EndsWith("}"))
                 {
-                    json = JsonSerializer.Deserialize<IDictionary>(body);
+                    json = JsonSerializer.Deserialize<IDictionary>(body, jsonSerializerOptions);
                 }
 
                 if (json != null)
@@ -149,7 +152,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
                     // 忽略根节点的名称
                     foreach (var key in json.Keys)
                     {
-                        rsp = JsonSerializer.Deserialize<T>(json[key].ToString());
+                        rsp = JsonSerializer.Deserialize<T>(json[key].ToString(), jsonSerializerOptions);
                         if (rsp != null)
                         {
                             break;
@@ -194,15 +197,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
                 return null;
             }
 
-            var certItem = new CertItem();
-
-            var json = JsonSerializer.Deserialize<IDictionary>(responseBody);
-            certItem.Sign = json["sign"]?.ToString();
-            certItem.CertSN = json["alipay_cert_sn"]?.ToString();
-
-            var signSourceData = GetSignSourceData(request, responseBody);
-            certItem.SignSourceDate = signSourceData;
-
+            var json = JsonSerializer.Deserialize<IDictionary>(responseBody, jsonSerializerOptions);
+            var certItem = new CertItem()
+            {
+                Sign = json[AlipayConstants.SIGN]?.ToString(),
+                CertSN = json[AlipayConstants.ALIPAY_CERT_SN]?.ToString(),
+                SignSourceDate = GetSignSourceData(request, responseBody)
+            };
             return certItem;
         }
 

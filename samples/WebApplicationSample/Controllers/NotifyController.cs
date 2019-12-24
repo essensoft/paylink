@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using Essensoft.AspNetCore.Payment.Alipay;
@@ -38,39 +36,82 @@ namespace WebApplicationSample.Controllers
             try
             {
                 // 获取参数
-                var Dic = new Dictionary<string, string>();
-                if (Request.Method == "POST")
+                var parameters = _client.GetParameters(Request);
+
+                parameters.TryGetValue("service", out var service);
+                switch (service)
                 {
-                    foreach (var iter in Request.Form)
-                    {
-                        Dic.Add(iter.Key, iter.Value);
-                    }
+                    // 激活开发者模式
+                    case "alipay.service.check":
+                        {
+                            var options = _optionsAccessor.Value;
+
+                            var sign = parameters["sign"];
+                            parameters.Remove("sign");
+
+                            var signContent = AlipaySignature.GetSignContent(parameters);
+
+                            // 验签
+                            var isSuccess = AlipaySignature.RSACheckContent(signContent, sign, options.AlipayPublicKey, "GBK", options.SignType);
+
+                            // 组XML响应内容
+                            var response = MakeVerifyGWResponse(isSuccess, options.AlipayPublicKey, options.AppPrivateKey, "GBK", options.SignType);
+
+                            return Content(response, "text/xml");
+                        }
                 }
-                else
+
+                parameters.TryGetValue("msg_method", out var msg_method);
+                switch (msg_method)
                 {
-                    foreach (var iter in Request.Query)
-                    {
-                        Dic.Add(iter.Key, iter.Value);
-                    }
-                }
-
-                // 激活开发者模式
-                if ("alipay.service.check".Equals(Dic["service"]))
-                {
-                    var options = _optionsAccessor.Value;
-
-                    var signStr = Dic["sign"];
-                    Dic.Remove("sign");
-
-                    var signContent = AlipaySignature.GetSignContent(Dic);
-
-                    // 加签方式为公钥证书时，从公钥证书获取的RSA公钥 options.AlipayPublicCertKey
-                    var isSuccess = AlipaySignature.RSACheckContent(signContent, signStr, options.AlipayPublicCertKey, options.Charset, options.SignType);
-
-                    // 组XML响应内容
-                    var response = MakeVerifyGWResponse(isSuccess, options.AlipayPublicCertKey, options.AppPrivateKey, options.Charset, options.SignType);
-
-                    return Content(response, "text/xml");
+                    // 资金单据状态变更通知
+                    case "alipay.fund.trans.order.changed":
+                        {
+                            var notify = await _client.CertificateExecuteAsync<AlipayFundTransOrderChangedNotify>(Request, _optionsAccessor.Value);
+                            return AlipayNotifyResult.Success;
+                        }
+                    // 第三方应用授权取消消息
+                    case "alipay.open.auth.appauth.cancelled":
+                        {
+                            var notify = await _client.CertificateExecuteAsync<AlipayOpenAuthAppauthCancelledNotify>(Request, _optionsAccessor.Value);
+                            return AlipayNotifyResult.Success;
+                        }
+                    // 用户授权取消消息
+                    case "alipay.open.auth.userauth.cancelled":
+                        {
+                            var notify = await _client.CertificateExecuteAsync<AlipayOpenAuthUserauthCancelledNotify>(Request, _optionsAccessor.Value);
+                            return AlipayNotifyResult.Success;
+                        }
+                    // 小程序审核通过通知
+                    case "alipay.open.mini.version.audit.passed":
+                        {
+                            var notify = await _client.CertificateExecuteAsync<AlipayOpenMiniVersionAuditPassedNotify>(Request, _optionsAccessor.Value);
+                            return AlipayNotifyResult.Success;
+                        }
+                    // 用户授权取消消息
+                    case "alipay.open.mini.version.audit.rejected":
+                        {
+                            var notify = await _client.CertificateExecuteAsync<AlipayOpenMiniVersionAuditRejectedNotify>(Request, _optionsAccessor.Value);
+                            return AlipayNotifyResult.Success;
+                        }
+                    // 收单资金结算到银行账户，结算退票的异步通知
+                    case "alipay.trade.settle.dishonoured":
+                        {
+                            var notify = await _client.CertificateExecuteAsync<AlipayTradeSettleDishonouredNotify>(Request, _optionsAccessor.Value);
+                            return AlipayNotifyResult.Success;
+                        }
+                    // 收单资金结算到银行账户，结算失败的异步通知
+                    case "alipay.trade.settle.fail":
+                        {
+                            var notify = await _client.CertificateExecuteAsync<AlipayTradeSettleFailNotify>(Request, _optionsAccessor.Value);
+                            return AlipayNotifyResult.Success;
+                        }
+                    // 收单资金结算到银行账户，结算成功的异步通知
+                    case "alipay.trade.settle.success":
+                        {
+                            var notify = await _client.CertificateExecuteAsync<AlipayTradeSettleSuccessNotify>(Request, _optionsAccessor.Value);
+                            return AlipayNotifyResult.Success;
+                        }
                 }
 
                 return NoContent();

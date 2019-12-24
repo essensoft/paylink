@@ -1,5 +1,4 @@
 ﻿using Essensoft.AspNetCore.Payment.Alipay.Utility;
-using Org.BouncyCastle.X509;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
@@ -8,15 +7,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay
     /// </summary>
     public class AlipayOptions
     {
-        internal string AppCertSN;
-        internal X509Certificate AlipayPublicCertificate;
-        internal string AlipayPublicCertSN;
-        public string AlipayPublicCertKey;
-        internal string RootCertSN;
-
         private string appCert;
         private string alipayPublicCert;
         private string rootCert;
+
+        internal string AppCertSN;
+        internal string AlipayPublicCertSN;
+        internal string RootCertSN;
 
         /// <summary>
         /// 蚂蚁金服开放平台 应用ID
@@ -25,7 +22,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         /// <summary>
         /// RSA 支付宝公钥
-        /// 加签方式为公钥证书时，为空
+        /// 加签方式为公钥证书时，留空
         /// </summary>
         public string AlipayPublicKey { get; set; }
 
@@ -87,8 +84,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 if (!string.IsNullOrEmpty(value))
                 {
                     appCert = value;
-                    var cert = AntCertificationUtil.ParseCert(value);
-                    AppCertSN = AntCertificationUtil.GetCertSN(cert);
+                    var appCertificate = AntCertificationUtil.ParseCert(value);
+                    AppCertSN = AntCertificationUtil.GetCertSN(appCertificate);
                 }
             }
         }
@@ -104,9 +101,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 if (!string.IsNullOrEmpty(value))
                 {
                     alipayPublicCert = value;
-                    AlipayPublicCertificate = AntCertificationUtil.ParseCert(value);
-                    AlipayPublicCertSN = AntCertificationUtil.GetCertSN(AlipayPublicCertificate);
-                    AlipayPublicCertKey = AntCertificationUtil.ExtractPemPublicKeyFromCert(AlipayPublicCertificate);
+                    var alipayPublicCertificate = AntCertificationUtil.ParseCert(value);
+                    AlipayPublicCertSN = AntCertificationUtil.GetCertSN(alipayPublicCertificate);
+                    AlipayPublicKey = AntCertificationUtil.ExtractPemPublicKeyFromCert(alipayPublicCertificate);
                 }
             }
         }
