@@ -52,7 +52,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             }
             else if (value is bool?)
             {
-                strValue = (value as bool?).Value.ToString().ToLower();
+                strValue = (value as bool?).Value.ToString().ToLowerInvariant();
             }
             else
             {

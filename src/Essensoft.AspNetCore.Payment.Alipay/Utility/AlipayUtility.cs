@@ -116,7 +116,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         public static string GetMimeType(string fileName)
         {
             string mimeType;
-            fileName = fileName.ToLower();
+            fileName = fileName.ToLowerInvariant();
 
             if (fileName.EndsWith(".bmp", StringComparison.CurrentCulture))
             {

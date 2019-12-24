@@ -70,14 +70,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             //提取出的证书的issuerDN本身是以CN开头的，则无需逆序，直接返回
             if (issuerDN.StartsWith("CN", StringComparison.Ordinal))
             {
-                return MD5.Compute(issuerDN + cert.SerialNumber).ToLower();
+                return MD5.Compute(issuerDN + cert.SerialNumber).ToLowerInvariant();
             }
             else
             {
                 var attributes = issuerDN.Split(',').ToList();
                 attributes.Reverse();
 
-                return MD5.Compute(string.Join(",", attributes.ToArray()) + cert.SerialNumber).ToLower();
+                return MD5.Compute(string.Join(",", attributes.ToArray()) + cert.SerialNumber).ToLowerInvariant();
             }
         }
 
