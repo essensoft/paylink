@@ -90,7 +90,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             // 添加签名参数
             var signContent = AlipaySignature.GetSignContent(txtParams);
-            txtParams.Add(AlipayConstants.SIGN, AlipaySignature.RSASignContent(signContent, options.AppPrivateKey, options.SignType));
+            txtParams.Add(AlipayConstants.SIGN, AlipaySignature.RSASignContent(signContent, options.AppPrivateKey, options.Charset, options.SignType));
 
             string body;
 
@@ -234,7 +234,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             // 添加签名参数
             var signContent = AlipaySignature.GetSignContent(txtParams);
-            txtParams.Add(AlipayConstants.SIGN, AlipaySignature.RSASignContent(signContent, options.AppPrivateKey, options.SignType));
+            txtParams.Add(AlipayConstants.SIGN, AlipaySignature.RSASignContent(signContent, options.AppPrivateKey, options.Charset, options.SignType));
 
             string body;
             var client = _httpClientFactory.CreateClient(nameof(AlipayClient));
@@ -270,13 +270,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             if (!isError || isError && !string.IsNullOrEmpty(signItem.Sign))
             {
-                var rsaCheckContent = AlipaySignature.RSACheckContent(signItem.SignSourceDate, signItem.Sign, options.AlipayPublicKey, options.SignType);
+                var rsaCheckContent = AlipaySignature.RSACheckContent(signItem.SignSourceDate, signItem.Sign, options.AlipayPublicKey, options.Charset, options.SignType);
                 if (!rsaCheckContent)
                 {
                     if (!string.IsNullOrEmpty(signItem.SignSourceDate) && signItem.SignSourceDate.Contains("\\/"))
                     {
                         var srouceData = signItem.SignSourceDate.Replace("\\/", "/");
-                        var jsonCheck = AlipaySignature.RSACheckContent(srouceData, signItem.Sign, options.AlipayPublicKey, options.SignType);
+                        var jsonCheck = AlipaySignature.RSACheckContent(srouceData, signItem.Sign, options.AlipayPublicKey, options.Charset, options.SignType);
                         if (!jsonCheck)
                         {
                             throw new AlipayException("sign check fail: check Sign and Data Fail JSON also");
@@ -404,7 +404,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             // 添加签名参数
             var signContent = AlipaySignature.GetSignContent(txtParams);
-            txtParams.Add(AlipayConstants.SIGN, AlipaySignature.RSASignContent(signContent, options.AppPrivateKey, options.SignType));
+            txtParams.Add(AlipayConstants.SIGN, AlipaySignature.RSASignContent(signContent, options.AppPrivateKey, options.Charset, options.SignType));
 
             string body;
             var client = _httpClientFactory.CreateClient(nameof(AlipayClient));
@@ -446,13 +446,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             if (!isError || isError && !string.IsNullOrEmpty(certItem.Sign))
             {
                 var currentAlipayPublicKey = await LoadAlipayPublicKeyAsync(certItem, options);
-                var rsaCheckContent = AlipaySignature.RSACheckContent(certItem.SignSourceDate, certItem.Sign, currentAlipayPublicKey, options.SignType);
+                var rsaCheckContent = AlipaySignature.RSACheckContent(certItem.SignSourceDate, certItem.Sign, currentAlipayPublicKey, options.Charset, options.SignType);
                 if (!rsaCheckContent)
                 {
                     if (!string.IsNullOrEmpty(certItem.SignSourceDate) && certItem.SignSourceDate.Contains("\\/"))
                     {
                         var srouceData = certItem.SignSourceDate.Replace("\\/", "/");
-                        var jsonCheck = AlipaySignature.RSACheckContent(srouceData, certItem.Sign, currentAlipayPublicKey, options.SignType);
+                        var jsonCheck = AlipaySignature.RSACheckContent(srouceData, certItem.Sign, currentAlipayPublicKey, options.Charset, options.SignType);
                         if (!jsonCheck)
                         {
                             throw new AlipayException("sign check fail: check Sign and Data Fail JSON also");
@@ -635,7 +635,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             // 参数签名
             var signContent = AlipaySignature.GetSignContent(sortedDic);
-            var signResult = AlipaySignature.RSASignContent(signContent, options.AppPrivateKey, options.SignType);
+            var signResult = AlipaySignature.RSASignContent(signContent, options.AppPrivateKey, options.Charset, options.SignType);
 
             // 添加签名结果参数
             sortedDic.Add(AlipayConstants.SIGN, signResult);
