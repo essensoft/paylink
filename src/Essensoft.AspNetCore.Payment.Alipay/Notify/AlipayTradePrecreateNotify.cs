@@ -6,13 +6,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
 {
     /// <summary>
     /// 当面付异步通知-仅用于扫码支付
-    /// 更新时间：2019-08-07
+    /// 更新时间：2019-11-19
     /// https://docs.open.alipay.com/194/103296/
     /// </summary>
     public class AlipayTradePrecreateNotify : AlipayNotify
     {
-        // 公共参数
-
         /// <summary>
         /// 通知时间
         /// </summary>

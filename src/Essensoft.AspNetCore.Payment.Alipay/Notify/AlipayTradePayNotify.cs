@@ -13,24 +13,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
     public class AlipayTradePayNotify : AlipayNotify
     {
         /// <summary>
-        /// 通知时间
-        /// </summary>
-        [JsonPropertyName("notify_time")]
-        public string NotifyTime { get; set; }
-
-        /// <summary>
-        /// 通知类型
-        /// </summary>
-        [JsonPropertyName("notify_type")]
-        public string NotifyType { get; set; }
-
-        /// <summary>
-        /// 通知校验ID
-        /// </summary>
-        [JsonPropertyName("notify_id")]
-        public string NotifyId { get; set; }
-
-        /// <summary>
         /// 支付宝分配给开发者的应用Id
         /// </summary>
         [JsonPropertyName("app_id")]
@@ -41,18 +23,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         /// </summary>
         [JsonPropertyName("auth_app_id")]
         public string AuthAppId { get; set; }
-
-        /// <summary>
-        /// 签名类型
-        /// </summary>
-        [JsonPropertyName("sign_type")]
-        public string SignType { get; set; }
-
-        /// <summary>
-        /// 签名
-        /// </summary>
-        [JsonPropertyName("sign")]
-        public string Sign { get; set; }
 
         /// <summary>
         /// 支付宝交易号
@@ -73,12 +43,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         public string OutBizNo { get; set; }
 
         /// <summary>
-        /// 买家支付宝用户号
-        /// </summary>
-        [JsonPropertyName("buyer_id")]
-        public string BuyerId { get; set; }
-
-        /// <summary>
         /// 买家支付宝账号
         /// </summary>
         [JsonPropertyName("buyer_logon_id")]
@@ -97,16 +61,22 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         public string SellerEmail { get; set; }
 
         /// <summary>
+        /// 交易金额
+        /// </summary>
+        [JsonPropertyName("total_amount")]
+        public string TotalAmount { get; set; }
+
+        /// <summary>
+        /// 买家的支付宝用户 Uid
+        /// </summary>
+        [JsonPropertyName("buyer_id")]
+        public string BuyerId { get; set; }
+
+        /// <summary>
         /// 交易状态
         /// </summary>
         [JsonPropertyName("trade_status")]
         public string TradeStatus { get; set; }
-
-        /// <summary>
-        /// 订单金额
-        /// </summary>
-        [JsonPropertyName("total_amount")]
-        public string TotalAmount { get; set; }
 
         /// <summary>
         /// 实收金额
@@ -115,28 +85,28 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         public string ReceiptAmount { get; set; }
 
         /// <summary>
-        /// 开票金额
-        /// </summary>
-        [JsonPropertyName("invoice_amount")]
-        public string InvoiceAmount { get; set; }
-
-        /// <summary>
-        /// 付款金额
-        /// </summary>
-        [JsonPropertyName("buyer_pay_amount")]
-        public string BuyerPayAmount { get; set; }
-
-        /// <summary>
-        /// 集分宝金额
+        /// 集分宝付款金额
         /// </summary>
         [JsonPropertyName("point_amount")]
         public string PointAmount { get; set; }
 
         /// <summary>
-        /// 总退款金额
+        /// 可给用户开具发票的金额
+        /// </summary>
+        [JsonPropertyName("invoice_amount")]
+        public string InvoiceAmount { get; set; }
+
+        /// <summary>
+        /// 退款金额
         /// </summary>
         [JsonPropertyName("refund_fee")]
         public string RefundFee { get; set; }
+
+        /// <summary>
+        /// 用户支付金额
+        /// </summary>
+        [JsonPropertyName("buyer_pay_amount")]
+        public string BuyerPayAmount { get; set; }
 
         /// <summary>
         /// 订单标题
@@ -145,7 +115,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         public string Subject { get; set; }
 
         /// <summary>
-        /// 商品描述
+        /// 订单描述
         /// </summary>
         [JsonPropertyName("body")]
         public string Body { get; set; }
@@ -197,6 +167,30 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         /// </summary>
         [JsonPropertyName("auth_trade_pay_mode")]
         public string AuthTradePayMode { get; set; }
+
+        /// <summary>
+        /// 通知校验ID
+        /// </summary>
+        [JsonPropertyName("notify_id")]
+        public string NotifyId { get; set; }
+
+        /// <summary>
+        /// 通知时间
+        /// </summary>
+        [JsonPropertyName("notify_time")]
+        public string NotifyTime { get; set; }
+
+        /// <summary>
+        /// 签名类型
+        /// </summary>
+        [JsonPropertyName("sign_type")]
+        public string SignType { get; set; }
+
+        /// <summary>
+        /// 签名
+        /// </summary>
+        [JsonPropertyName("sign")]
+        public string Sign { get; set; }
     }
 }
 

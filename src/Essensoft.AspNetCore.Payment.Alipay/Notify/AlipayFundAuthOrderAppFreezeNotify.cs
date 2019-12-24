@@ -6,7 +6,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
 {
     /// <summary>
     /// 线上资金授权冻结
-    /// 更新时间：2019-09-17
+    /// 更新时间：2019-12-05
     /// https://docs.open.alipay.com/20180417160701241302/vo4kv7/
     /// 参考其他通知额外补充了 公共参数
     /// </summary>
