@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         internal string AppCertSN;
         internal X509Certificate AlipayPublicCertificate;
         internal string AlipayPublicCertSN;
-        internal string AlipayPublicCertKey;
+        public string AlipayPublicCertKey;
         internal string RootCertSN;
 
         private string appCert;
