@@ -25,11 +25,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         /// <summary>
         /// RSA 支付宝公钥
+        /// 加签方式为公钥证书时，为空
         /// </summary>
         public string AlipayPublicKey { get; set; }
 
         /// <summary>
         /// RSA 应用私钥
+        /// 加签方式为公钥证书时，为证书对应的私钥
         /// </summary>
         public string AppPrivateKey { get; set; }
 
@@ -92,7 +94,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         }
 
         /// <summary>
-        /// 公钥证书
+        /// 支付宝公钥证书
         /// </summary>
         public string AlipayPublicCert
         {
