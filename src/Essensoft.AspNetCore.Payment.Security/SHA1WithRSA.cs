@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.Security
             using (var rsa = RSA.Create())
             {
                 rsa.ImportRSAPrivateKey(Convert.FromBase64String(privateKey), out var _);
-                return Convert.ToBase64String(rsa.SignData(Encoding.GetEncoding(charset).GetBytes(data), HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1));
+                return Convert.ToBase64String(rsa.SignData(InternalEncoding.GetEncoding(charset).GetBytes(data), HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1));
             }
         }
 
@@ -55,7 +55,7 @@ namespace Essensoft.AspNetCore.Payment.Security
             using (var rsa = RSA.Create())
             {
                 rsa.ImportSubjectPublicKeyInfo(Convert.FromBase64String(publicKey), out var _);
-                return rsa.VerifyData(Encoding.GetEncoding(charset).GetBytes(data), Convert.FromBase64String(sign), HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
+                return rsa.VerifyData(InternalEncoding.GetEncoding(charset).GetBytes(data), Convert.FromBase64String(sign), HashAlgorithmName.SHA1, RSASignaturePadding.Pkcs1);
             }
         }
     }
