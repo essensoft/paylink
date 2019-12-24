@@ -5,6 +5,7 @@ using System.Text;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
 using Essensoft.AspNetCore.Payment.Alipay.Parser;
 using Essensoft.AspNetCore.Payment.Alipay.Request;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
@@ -481,10 +482,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             }
 
             //否则重新下载新的支付宝公钥证书并更新缓存
-            var request = new AlipayOpenAppAlipaycertDownloadRequest
+            var model = new AlipayOpenAppAlipaycertDownloadModel
             {
-                BizContent = "{\"alipay_cert_sn\":\"" + certItem.CertSN + "\"}"
+                AlipayCertSn = certItem.CertSN
             };
+
+            //下载应用支付宝公钥证书
+            var request = new AlipayOpenAppAlipaycertDownloadRequest();
+            request.SetBizModel(model);
 
             var response = await CertificateExecuteAsync(request, options);
             if (response.IsError)
