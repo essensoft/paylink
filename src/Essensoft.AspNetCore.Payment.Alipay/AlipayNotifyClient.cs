@@ -110,7 +110,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             }
 
             var prestr = GetSignContent(dictionary);
-            if (!AlipaySignature.RSACheckContent(prestr, sign, useCert ? options.AlipayPublicCertKey : options.AlipayPublicKey, options.SignType))
+            if (!AlipaySignature.RSACheckContent(prestr, sign, useCert ? options.AlipayPublicCertKey : options.AlipayPublicKey, options.Charset, options.SignType))
             {
                 throw new AlipayException("sign check fail: check Sign Data Fail!");
             }
