@@ -471,7 +471,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             //为空时添加默认支付宝公钥证书密钥
             if (_certificateManager.IsEmpty)
             {
-                _certificateManager.TryAdd(options.AlipayPublicCertSN, options.AlipayPublicCertKey);
+                _certificateManager.TryAdd(options.AlipayPublicCertSN, options.AlipayPublicKey);
             }
 
             //如果响应的支付宝公钥证书序号已经缓存过，则直接使用缓存的公钥

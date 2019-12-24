@@ -42,7 +42,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             var parameters = GetParameters(request);
             var rsp = AlipayDictionaryParser.Parse<T>(parameters);
-            CheckNotifySign(parameters, options, false);
+            CheckNotifySign(parameters, options);
             return Task.FromResult(rsp);
         }
 
@@ -52,32 +52,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         public Task<T> CertificateExecuteAsync<T>(HttpRequest request, AlipayOptions options) where T : AlipayNotify
         {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
-            if (string.IsNullOrEmpty(options.SignType))
-            {
-                throw new ArgumentNullException(nameof(options.SignType));
-            }
-
-            if (string.IsNullOrEmpty(options.AlipayPublicCertKey))
-            {
-                throw new ArgumentNullException(nameof(options.AlipayPublicCertKey));
-            }
-
-            var parameters = GetParameters(request);
-            var rsp = AlipayDictionaryParser.Parse<T>(parameters);
-            CheckNotifySign(parameters, options, true);
-            return Task.FromResult(rsp);
+            return ExecuteAsync<T>(request, options);
         }
 
         #endregion
 
-        #region Common Method
+        #region IAlipayNotifyClient Members
 
-        private Dictionary<string, string> GetParameters(HttpRequest request)
+        public IDictionary<string, string> GetParameters(HttpRequest request)
         {
             var parameters = new Dictionary<string, string>();
             if (request.Method == "POST")
@@ -97,7 +79,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             return parameters;
         }
 
-        private void CheckNotifySign(IDictionary<string, string> dictionary, AlipayOptions options, bool useCert)
+        #endregion
+
+        #region Common Method
+
+        private void CheckNotifySign(IDictionary<string, string> dictionary, AlipayOptions options)
         {
             if (dictionary == null || dictionary.Count == 0)
             {
@@ -110,7 +96,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             }
 
             var prestr = GetSignContent(dictionary);
-            if (!AlipaySignature.RSACheckContent(prestr, sign, useCert ? options.AlipayPublicCertKey : options.AlipayPublicKey, options.Charset, options.SignType))
+            if (!AlipaySignature.RSACheckContent(prestr, sign, options.AlipayPublicKey, options.Charset, options.SignType))
             {
                 throw new AlipayException("sign check fail: check Sign Data Fail!");
             }
