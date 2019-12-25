@@ -149,7 +149,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
             request.PrimaryHandler(options, signType, sortedTxtParams);
 
-            if (!_certificateManager.Contains(options.CertificateHash))
+            if (!_certificateManager.ContainsKey(options.CertificateHash))
             {
                 var certificate = File.Exists(options.Certificate) ?
                     new X509Certificate2(options.Certificate, options.CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet) :
