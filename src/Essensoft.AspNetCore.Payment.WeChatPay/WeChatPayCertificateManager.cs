@@ -5,21 +5,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     public class WeChatPayCertificateManager
     {
-        private readonly ConcurrentDictionary<string, X509Certificate2> _certDic = new ConcurrentDictionary<string, X509Certificate2>();
+        private readonly ConcurrentDictionary<string, X509Certificate2> _certificateDictionary = new ConcurrentDictionary<string, X509Certificate2>();
 
-        public bool Contains(string hash)
-        {
-            return _certDic.ContainsKey(hash);
-        }
+        public bool ContainsKey(string hash) => _certificateDictionary.ContainsKey(hash);
 
-        public bool TryAdd(string hash, X509Certificate2 certificate)
-        {
-            return _certDic.TryAdd(hash, certificate);
-        }
+        public bool TryAdd(string hash, X509Certificate2 certificate) => _certificateDictionary.TryAdd(hash, certificate);
 
-        public bool TryGet(string hash, out X509Certificate2 certificate)
-        {
-            return _certDic.TryGetValue(hash, out certificate);
-        }
+        public bool TryGetValue(string hash, out X509Certificate2 certificate) => _certificateDictionary.TryGetValue(hash, out certificate);
     }
 }
