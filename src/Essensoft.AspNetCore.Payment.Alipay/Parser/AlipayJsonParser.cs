@@ -187,6 +187,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
                 Sign = GetSign(responseBody),
                 SignSourceDate = GetSignSourceData(request, responseBody)
             };
+
             return signItem;
         }
 
@@ -204,6 +205,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
                 CertSN = json[AlipayConstants.ALIPAY_CERT_SN]?.ToString(),
                 SignSourceDate = GetSignSourceData(request, responseBody)
             };
+
             return certItem;
         }
 

@@ -90,35 +90,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 throw new AlipayException("sign check fail: dictionary is Empty!");
             }
 
-            if (!dictionary.TryGetValue("sign", out var sign))
+            if (!dictionary.TryGetValue(AlipayConstants.SIGN, out var sign))
             {
                 throw new AlipayException("sign check fail: sign is Empty!");
             }
 
-            var prestr = GetSignContent(dictionary);
+            dictionary.Remove(AlipayConstants.SIGN);
+            dictionary.Remove(AlipayConstants.SIGN_TYPE);
+            var prestr = AlipaySignature.GetSignContent(dictionary);
             if (!AlipaySignature.RSACheckContent(prestr, sign, options.AlipayPublicKey, options.Charset, options.SignType))
             {
                 throw new AlipayException("sign check fail: check Sign Data Fail!");
             }
-        }
-
-        private static string GetSignContent(IDictionary<string, string> dictionary)
-        {
-            if (dictionary == null || dictionary.Count == 0)
-            {
-                throw new ArgumentNullException(nameof(dictionary));
-            }
-
-            var sortPara = new SortedDictionary<string, string>(dictionary);
-            var sb = new StringBuilder();
-            foreach (var iter in sortPara)
-            {
-                if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign" && iter.Key != "sign_type")
-                {
-                    sb.Append(iter.Key).Append("=").Append(iter.Value).Append("&");
-                }
-            }
-            return sb.Remove(sb.Length - 1, 1).ToString();
         }
 
         #endregion
