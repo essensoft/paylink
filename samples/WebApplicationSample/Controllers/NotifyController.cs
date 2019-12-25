@@ -35,10 +35,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                // 获取参数
-                var parameters = _client.GetParameters(Request);
-
-                parameters.TryGetValue("service", out var service);
+                var service = Request.Form["service"].ToString();
                 switch (service)
                 {
                     // 激活开发者模式
@@ -46,6 +43,8 @@ namespace WebApplicationSample.Controllers
                         {
                             var options = _optionsAccessor.Value;
 
+                            // 获取参数
+                            var parameters = _client.GetParameters(Request);
                             var sign = parameters["sign"];
                             parameters.Remove("sign");
 
@@ -61,7 +60,7 @@ namespace WebApplicationSample.Controllers
                         }
                 }
 
-                parameters.TryGetValue("msg_method", out var msg_method);
+                var msg_method = Request.Form["msg_method"].ToString();
                 switch (msg_method)
                 {
                     // 资金单据状态变更通知
@@ -217,7 +216,6 @@ namespace WebApplicationSample.Controllers
                 return NoContent();
             }
         }
-
 
         private string MakeVerifyGWResponse(bool isSuccess, string certPublicKey, string appPrivateKey, string charset, string signType)
         {

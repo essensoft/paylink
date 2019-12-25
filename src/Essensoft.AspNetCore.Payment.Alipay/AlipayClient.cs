@@ -18,14 +18,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay
     public class AlipayClient : IAlipayClient
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly AlipayCertificateManager _certificateManager;
+        private readonly AlipayPublicKeyManager _alipayPublicKeyManager;
 
         #region AlipayClient Constructors
 
-        public AlipayClient(IHttpClientFactory httpClientFactory, AlipayCertificateManager certificateManager)
+        public AlipayClient(IHttpClientFactory httpClientFactory, AlipayPublicKeyManager certificateManager)
         {
             _httpClientFactory = httpClientFactory;
-            _certificateManager = certificateManager;
+            _alipayPublicKeyManager = certificateManager;
         }
 
         #endregion
@@ -433,81 +433,79 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         private async Task CheckResponseCertSignAsync<T>(IAlipayRequest<T> request, string responseBody, bool isError, IAlipayParser<T> parser, AlipayOptions options) where T : AlipayResponse
         {
-            if (request is AlipayOpenAppAlipaycertDownloadRequest)
-            {
-                return;
-            }
-
             var certItem = parser.GetCertItem(request, responseBody);
             if (certItem == null)
             {
-                throw new AlipayException("sign check fail: Body is Empty!");
+                throw new AlipayException("cert check fail: Body is Empty!");
             }
 
-            if (!isError || isError && !string.IsNullOrEmpty(certItem.Sign))
+            if (!string.IsNullOrEmpty(certItem.CertSN))
             {
-                var currentAlipayPublicKey = await LoadAlipayPublicKeyAsync(certItem, options);
-                var rsaCheckContent = AlipaySignature.RSACheckContent(certItem.SignSourceDate, certItem.Sign, currentAlipayPublicKey, options.Charset, options.SignType);
-                if (!rsaCheckContent)
+                // 为空时添加本地支付宝公钥证书密钥
+                if (_alipayPublicKeyManager.IsEmpty)
                 {
-                    if (!string.IsNullOrEmpty(certItem.SignSourceDate) && certItem.SignSourceDate.Contains("\\/"))
+                    _alipayPublicKeyManager.TryAdd(options.AlipayPublicCertSN, options.AlipayPublicKey);
+                }
+
+                // 如果返回的支付宝公钥证书序列号与本地支付宝公钥证书序列号不匹配，通过返回的支付宝公钥证书序列号去网关拉取新的支付宝公钥证书
+                if (!_alipayPublicKeyManager.ContainsKey(certItem.CertSN))
+                {
+                    var model = new AlipayOpenAppAlipaycertDownloadModel
                     {
-                        var srouceData = certItem.SignSourceDate.Replace("\\/", "/");
-                        var jsonCheck = AlipaySignature.RSACheckContent(srouceData, certItem.Sign, currentAlipayPublicKey, options.Charset, options.SignType);
-                        if (!jsonCheck)
+                        AlipayCertSn = certItem.CertSN
+                    };
+
+                    var req = new AlipayOpenAppAlipaycertDownloadRequest();
+                    req.SetBizModel(model);
+
+                    var response = await CertificateExecuteAsync(req, options);
+                    if (response.IsError)
+                    {
+                        throw new AlipayException("支付宝公钥证书校验失败，请确认是否为支付宝签发的有效公钥证书");
+                    }
+
+                    if (!AntCertificationUtil.IsTrusted(response.AlipayCertContent, options.RootCert))
+                    {
+                        throw new AlipayException("支付宝公钥证书校验失败，请确认是否为支付宝签发的有效公钥证书");
+                    }
+
+                    var alipayCert = AntCertificationUtil.ParseCert(response.AlipayCertContent);
+                    var alipayCertSN = AntCertificationUtil.GetCertSN(alipayCert);
+                    var alipayCertPublicKey = AntCertificationUtil.ExtractPemPublicKeyFromCert(alipayCert);
+
+                    _alipayPublicKeyManager.TryAdd(alipayCertSN, alipayCertPublicKey);
+                }
+
+                // 针对成功结果且有支付宝公钥的进行验签
+                if (_alipayPublicKeyManager.TryGetValue(certItem.CertSN, out var alipayPublicKey))
+                {
+                    if (!isError || isError && !string.IsNullOrEmpty(certItem.Sign))
+                    {
+                        var rsaCheckContent = AlipaySignature.RSACheckContent(certItem.SignSourceDate, certItem.Sign, alipayPublicKey, options.Charset, options.SignType);
+                        if (!rsaCheckContent)
                         {
-                            throw new AlipayException("sign check fail: check Sign and Data Fail JSON also");
+                            // 针对JSON \/问题，替换/后再尝试做一次验证
+                            if (!string.IsNullOrEmpty(certItem.SignSourceDate) && certItem.SignSourceDate.Contains("\\/"))
+                            {
+                                var srouceData = certItem.SignSourceDate.Replace("\\/", "/");
+                                var jsonCheck = AlipaySignature.RSACheckContent(srouceData, certItem.Sign, alipayPublicKey, options.Charset, options.SignType);
+                                if (!jsonCheck)
+                                {
+                                    throw new AlipayException("cert check fail: check Cert and Data Fail JSON also");
+                                }
+                            }
+                            else
+                            {
+                                throw new AlipayException("cert check fail: check Cert and Data Fail!");
+                            }
                         }
                     }
-                    else
-                    {
-                        throw new AlipayException("sign check fail: check Sign and Data Fail!");
-                    }
+                }
+                else
+                {
+                    throw new AlipayException("cert check fail: check Cert and Data Fail! CertSN non-existent");
                 }
             }
-        }
-
-        private async Task<string> LoadAlipayPublicKeyAsync(CertItem certItem, AlipayOptions options)
-        {
-            //为空时添加默认支付宝公钥证书密钥
-            if (_certificateManager.IsEmpty)
-            {
-                _certificateManager.TryAdd(options.AlipayPublicCertSN, options.AlipayPublicKey);
-            }
-
-            //如果响应的支付宝公钥证书序号已经缓存过，则直接使用缓存的公钥
-            if (_certificateManager.TryGet(certItem.CertSN, out var publicKey))
-            {
-                return publicKey;
-            }
-
-            //否则重新下载新的支付宝公钥证书并更新缓存
-            var model = new AlipayOpenAppAlipaycertDownloadModel
-            {
-                AlipayCertSn = certItem.CertSN
-            };
-
-            //下载应用支付宝公钥证书
-            var request = new AlipayOpenAppAlipaycertDownloadRequest();
-            request.SetBizModel(model);
-
-            var response = await CertificateExecuteAsync(request, options);
-            if (response.IsError)
-            {
-                throw new AlipayException("支付宝公钥证书校验失败，请确认是否为支付宝签发的有效公钥证书");
-            }
-
-            if (!AntCertificationUtil.IsTrusted(response.AlipayCertContent, options.RootCert))
-            {
-                throw new AlipayException("支付宝公钥证书校验失败，请确认是否为支付宝签发的有效公钥证书");
-            }
-
-            var alipayCert = AntCertificationUtil.ParseCert(response.AlipayCertContent);
-            var alipayCertSN = AntCertificationUtil.GetCertSN(alipayCert);
-            var newAlipayPublicKey = AntCertificationUtil.ExtractPemPublicKeyFromCert(alipayCert);
-            _certificateManager.TryAdd(alipayCertSN, newAlipayPublicKey);
-
-            return newAlipayPublicKey;
         }
 
         #endregion
