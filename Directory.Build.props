@@ -4,7 +4,7 @@
     <Version>3.1.1</Version>
     <NoWarn>$(NoWarn);CS1570;CS1591;CA1031;IDE0063</NoWarn>
     <Description>Essensoft.AspNetCore.Payment</Description>
-    <Copyright>© Essensoft 2019</Copyright>
+    <Copyright>© Essensoft 2020</Copyright>
     <PackageIconUrl>https://raw.githubusercontent.com/essensoft/media/master/images/nuget/payment.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/essensoft/payment</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
