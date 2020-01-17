@@ -26,6 +26,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string AlipayUserId { get; set; }
 
         /// <summary>
+        /// 授信模式，取值：DEDUCT_HUAZHI-花芝GO。
+        /// </summary>
+        [JsonPropertyName("credit_auth_mode")]
+        public string CreditAuthMode { get; set; }
+
+        /// <summary>
         /// 代扣协议中标示用户的唯一签约号（确保在商户系统中唯一）。
         /// </summary>
         [JsonPropertyName("external_agreement_no")]

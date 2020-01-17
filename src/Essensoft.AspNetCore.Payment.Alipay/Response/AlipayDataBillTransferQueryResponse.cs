@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -12,7 +13,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 充值、提现、转账明细记录
         /// </summary>
         [JsonPropertyName("detail_list")]
-        public TransferDetailResult DetailList { get; set; }
+        public List<TransferDetailResult> DetailList { get; set; }
 
         /// <summary>
         /// 分页号，从1开始

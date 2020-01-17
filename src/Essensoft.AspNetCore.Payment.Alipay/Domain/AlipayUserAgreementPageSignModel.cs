@@ -20,6 +20,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AgreementEffectType { get; set; }
 
         /// <summary>
+        /// 是否允许花芝GO降级成原代扣（即销售方案指定的代扣产品），在花芝GO场景下才会使用该值。取值：true-允许降级，false-不允许降级。默认为false。
+        /// </summary>
+        [JsonPropertyName("allow_huazhi_degrade")]
+        public string AllowHuazhiDegrade { get; set; }
+
+        /// <summary>
         /// 设备信息参数，在使用设备维度签约代扣协议时，可以传这些信息
         /// </summary>
         [JsonPropertyName("device_params")]

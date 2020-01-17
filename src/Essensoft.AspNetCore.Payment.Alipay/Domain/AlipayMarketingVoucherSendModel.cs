@@ -14,6 +14,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Amount { get; set; }
 
         /// <summary>
+        /// 扩展参数，当前仅允许传入的key值为"alipayMiniAppToken"
+        /// </summary>
+        [JsonPropertyName("extend_info")]
+        public string ExtendInfo { get; set; }
+
+        /// <summary>
         /// 支付宝登录ID，手机或邮箱 。user_id, login_id, taobao_nick不能同时为空，优先级依次降低
         /// </summary>
         [JsonPropertyName("login_id")]

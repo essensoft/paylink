@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ExtendFields { get; set; }
 
         /// <summary>
-        /// 商户门店入驻的产品码,STANDARD_INVOICE:扫码开票，INVOICE_RETURN:企业自建-发票回传，INVOICE_EXPENSE:发票报销，PAYMENT_OPEN:支付即开票。
+        /// 商户门店入驻的产品码,STANDARD_INVOICE:扫码开票，INVOICE_RETURN:企业自建-发票回传，INVOICE_EXPENSE:发票报销，PAYMENT_OPEN:支付即开票，PAY_FEE_OPEN:缴费后开票。
         /// </summary>
         [JsonPropertyName("product_code")]
         public string ProductCode { get; set; }

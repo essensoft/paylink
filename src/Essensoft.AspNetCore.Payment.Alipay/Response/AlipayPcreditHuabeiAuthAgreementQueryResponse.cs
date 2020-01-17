@@ -56,6 +56,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string GmtUnsign { get; set; }
 
         /// <summary>
+        /// 外部业务类型，用于区分本次业务交互在商户侧具体的业务类别，提供给商家进行特定逻辑的处理
+        /// </summary>
+        [JsonPropertyName("out_biz_type")]
+        public string OutBizType { get; set; }
+
+        /// <summary>
         /// 外部签约号，由商户提供，花芝轻会员协议中标识用户的唯一签约号（确保在商户系统中唯一）。由商户签约时传入，最终返回给商户。
         /// </summary>
         [JsonPropertyName("out_sign_no")]

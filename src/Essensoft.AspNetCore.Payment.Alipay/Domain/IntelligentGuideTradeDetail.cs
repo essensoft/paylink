@@ -14,6 +14,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string CardType { get; set; }
 
         /// <summary>
+        /// 线下到点客户来源类型，非必填项，商户可自填
+        /// </summary>
+        [JsonPropertyName("customer_source")]
+        public string CustomerSource { get; set; }
+
+        /// <summary>
         /// 客户类型，支持枚举值：轮牌 - LP、指牌 - ZP。非必填
         /// </summary>
         [JsonPropertyName("customer_type")]

@@ -51,6 +51,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string EndEnable { get; set; }
 
         /// <summary>
+        /// 业务拓展字段 目前支持下面字段 已签约分账产品用户 royalty_amount 分账金额，分账收入户PID trans_in_pid
+        /// </summary>
+        [JsonPropertyName("ext_info")]
+        public BillSendExtInfo ExtInfo { get; set; }
+
+        /// <summary>
         /// 缴费截止时间，格式"yyyy-MM-dd HH:mm:ss"，日期要大于当前时间。请注意，过期时间不宜设置过短。
         /// </summary>
         [JsonPropertyName("gmt_end")]
@@ -81,7 +87,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string SchoolNo { get; set; }
 
         /// <summary>
-        /// 学校支付宝pid
+        /// 学校支付宝pid,直付通填写smid
         /// </summary>
         [JsonPropertyName("school_pid")]
         public string SchoolPid { get; set; }

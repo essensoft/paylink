@@ -34,13 +34,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string BusinessScope { get; set; }
 
         /// <summary>
-        /// 【注意】只有is_certified为T的时候才有意义，否则不保证准确性.  证件号码，结合证件类型使用.
+        /// 【证件号码】结合证件类型使用. 【注意】只有is_certified为T的时候才有意义，否则不保证准确性.
         /// </summary>
         [JsonPropertyName("cert_no")]
         public string CertNo { get; set; }
 
         /// <summary>
-        /// 【注意】只有is_certified为T的时候才有意义，否则不保证准确性.  0:身份证  1:护照  2:军官证  3:士兵证  4:回乡证  5:临时身份证  6:户口簿  7:警官证  8:台胞证  9:营业执照  10:其它证件  11:港澳居民来往内地通行证  12:台湾居民来往大陆通行证
+        /// 【证件类型】 0:身份证 1:护照 2:军官证 3:士兵证 4:回乡证 5:临时身份证 6:户口簿 7:警官证 8:台胞证 9:营业执照 10:其它证件 11:港澳居民来往内地通行证 12:台湾居民来往大陆通行证 【注意】只有is_certified为T的时候才有意义，否则不保证准确性.
         /// </summary>
         [JsonPropertyName("cert_type")]
         public string CertType { get; set; }
@@ -76,7 +76,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public List<AlipayUserDeliverAddress> DeliverAddresses { get; set; }
 
         /// <summary>
-        /// 用户支付宝邮箱登录名
+        /// 优先获取email登录名，如果不存在，则返回mobile登录名
         /// </summary>
         [JsonPropertyName("email")]
         public string Email { get; set; }
@@ -226,6 +226,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string PersonBirthday { get; set; }
 
         /// <summary>
+        /// 生日。不包含具体年份，格式MMdd
+        /// </summary>
+        [JsonPropertyName("person_birthday_without_year")]
+        public string PersonBirthdayWithoutYear { get; set; }
+
+        /// <summary>
         /// 证件有效期（用户类型是个人的时候才有此字段）。
         /// </summary>
         [JsonPropertyName("person_cert_expiry_date")]
@@ -268,7 +274,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string UserId { get; set; }
 
         /// <summary>
-        /// 【注意】只有is_certified为T的时候才有意义，否则不保证准确性.  若用户是个人用户，则是用户的真实姓名；若是企业用户，则是企业名称。
+        /// 若用户是个人用户，则是用户的真实姓名；若是企业用户，则是企业名称。 【注意】只有is_certified为T的时候才有意义，否则不保证准确性.
         /// </summary>
         [JsonPropertyName("user_name")]
         public string UserName { get; set; }

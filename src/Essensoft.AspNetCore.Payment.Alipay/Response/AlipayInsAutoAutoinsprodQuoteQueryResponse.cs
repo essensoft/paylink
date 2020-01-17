@@ -130,6 +130,30 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public List<string> LogisticsModels { get; set; }
 
         /// <summary>
+        /// 允许调整的最大渠道系数，精确到小数点后十位
+        /// </summary>
+        [JsonPropertyName("max_self_channel_ratio")]
+        public string MaxSelfChannelRatio { get; set; }
+
+        /// <summary>
+        /// 允许调整的最大核保系数，精确到小数点后十位
+        /// </summary>
+        [JsonPropertyName("max_self_underwrite_ratio")]
+        public string MaxSelfUnderwriteRatio { get; set; }
+
+        /// <summary>
+        /// 允许调整的最小渠道系数，精确到小数点后十位
+        /// </summary>
+        [JsonPropertyName("min_self_channel_ratio")]
+        public string MinSelfChannelRatio { get; set; }
+
+        /// <summary>
+        /// 允许调整的最小核保系数，精确到小数点后十位
+        /// </summary>
+        [JsonPropertyName("min_self_underwrite_ratio")]
+        public string MinSelfUnderwriteRatio { get; set; }
+
+        /// <summary>
         /// 平台NCD系数，精确到小数点后两位
         /// </summary>
         [JsonPropertyName("no_claim_adjust_ratio")]

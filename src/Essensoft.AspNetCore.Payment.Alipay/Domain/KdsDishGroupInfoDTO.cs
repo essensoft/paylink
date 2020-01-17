@@ -98,7 +98,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string PracticeId { get; set; }
 
         /// <summary>
-        /// 菜品数量
+        /// 菜品数量（注意，此处的数量是指一份套餐下，子菜的数量，不需要乘以套餐的份数，单品加料同理）
         /// </summary>
         [JsonPropertyName("quantity")]
         public long Quantity { get; set; }
