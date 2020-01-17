@@ -32,7 +32,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutRequestNo { get; set; }
 
         /// <summary>
-        /// 商户对本次撤销操作的附言描述，长度不超过100个字母或50个汉字
+        /// 商户对本次撤销操作的附言描述
         /// </summary>
         [JsonPropertyName("remark")]
         public string Remark { get; set; }

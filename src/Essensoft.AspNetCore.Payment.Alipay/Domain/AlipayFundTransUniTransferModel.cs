@@ -8,13 +8,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayFundTransUniTransferModel : AlipayObject
     {
         /// <summary>
-        /// 描述特定的业务场景，可传的参数如下：  PERSONAL_COLLECTION：C2C现金红包-领红包；  DIRECT_TRANSFER：B2C现金红包、单笔无密转账
+        /// 描述特定的业务场景，可传的参数如下： PERSONAL_COLLECTION：C2C现金红包-领红包； DIRECT_TRANSFER：B2C现金红包、单笔无密转账到支付宝/银行卡
         /// </summary>
         [JsonPropertyName("biz_scene")]
         public string BizScene { get; set; }
 
         /// <summary>
-        /// 转账业务请求的扩展参数，支持传入的扩展参数如下：  1、sub_biz_scene 子业务场景，红包必传，取值REDPACKET，c2c现金红包、b2c现金红包均需传入
+        /// 转账业务请求的扩展参数，支持传入的扩展参数如下： 1、sub_biz_scene 子业务场景，红包业务必传，取值REDPACKET，C2C现金红包、B2C现金红包均需传入；  2、withdraw_timeliness为转账到银行卡的预期到账时间，可选（不传入则默认为T1），T0表示预期T+0到账，T1表示预期T+1到账，到账时效受银行机构处理影响，支付宝无法保证一定是T0或者T1到账；
         /// </summary>
         [JsonPropertyName("business_params")]
         public string BusinessParams { get; set; }
@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OrderTitle { get; set; }
 
         /// <summary>
-        /// 原支付宝业务单号。C2C现金红包-红包领取时，传红包支付时返回的支付宝单号；B2C现金红包、单笔无密转账不需要该参数。
+        /// 原支付宝业务单号。C2C现金红包-红包领取时，传红包支付时返回的支付宝单号；B2C现金红包、单笔无密转账到支付宝/银行卡不需要该参数。
         /// </summary>
         [JsonPropertyName("original_order_id")]
         public string OriginalOrderId { get; set; }
@@ -56,7 +56,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public Participant PayerInfo { get; set; }
 
         /// <summary>
-        /// 业务产品码，  收发现金红包固定为：STD_RED_PACKET；  单笔无密转账固定为：TRANS_ACCOUNT_NO_PWD；
+        /// 业务产品码， 收发现金红包固定为：STD_RED_PACKET； 单笔无密转账到支付宝账户固定为：TRANS_ACCOUNT_NO_PWD； 单笔无密转账到银行卡固定为：TRANS_BANKCARD_NO_PWD
         /// </summary>
         [JsonPropertyName("product_code")]
         public string ProductCode { get; set; }
@@ -68,7 +68,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Remark { get; set; }
 
         /// <summary>
-        /// 订单总金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]
+        /// 订单总金额，单位为元，精确到小数点后两位，STD_RED_PACKET产品取值范围[0.01,100000000]； TRANS_ACCOUNT_NO_PWD产品取值范围[0.1,100000000]
         /// </summary>
         [JsonPropertyName("trans_amount")]
         public string TransAmount { get; set; }

@@ -20,6 +20,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string AlipayLogonId { get; set; }
 
         /// <summary>
+        /// 授信模式，取值：DEDUCT_HUAZHI-花芝GO。目前只在花芝代扣（即花芝go）协议时才会返回
+        /// </summary>
+        [JsonPropertyName("credit_auth_mode")]
+        public string CreditAuthMode { get; set; }
+
+        /// <summary>
         /// 设备Id
         /// </summary>
         [JsonPropertyName("device_id")]

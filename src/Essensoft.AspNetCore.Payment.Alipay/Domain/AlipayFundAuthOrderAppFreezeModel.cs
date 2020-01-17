@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string EnablePayChannels { get; set; }
 
         /// <summary>
-        /// 业务扩展参数，用于商户的特定业务信息的传递，json格式。 1.授权业务对应的类目，key为category，value由支付宝分配，比如充电桩业务传 "CHARGE_PILE_CAR"； 2. 外部商户的门店编号，key为outStoreCode，可选； 3. 外部商户的门店简称，key为outStoreAlias，可选。
+        /// 业务扩展参数，用于商户的特定业务信息的传递，json格式。 1.授权业务对应的类目，key为category，value由支付宝分配，比如充电桩业务传 "CHARGE_PILE_CAR"若使用信用预授权，则该值必传； 2. 外部商户的门店编号，key为outStoreCode，可选； 3. 外部商户的门店简称，key为outStoreAlias，可选; 4. 外部商户的门店简称，key为outStoreAlias，可选; 5.间联模式必须传入二级商户所属机构id，key为requestOrgId；6.信用服务Id，key为serviceId，信用场景下必传，具体值需要联系芝麻客服。
         /// </summary>
         [JsonPropertyName("extra_param")]
         public string ExtraParam { get; set; }
@@ -32,7 +32,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string IdentityParams { get; set; }
 
         /// <summary>
-        /// 业务订单的简单描述，如商品名称等  长度不超过100个字母或50个汉字
+        /// 业务订单的简单描述，如商品名称等
         /// </summary>
         [JsonPropertyName("order_title")]
         public string OrderTitle { get; set; }

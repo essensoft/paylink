@@ -14,6 +14,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public AccessParams AccessParams { get; set; }
 
         /// <summary>
+        /// 是否允许花芝GO降级成原代扣（即销售方案指定的代扣产品），在花芝GO场景下才会使用该值。取值：true-允许降级，false-不允许降级。默认为false。
+        /// </summary>
+        [JsonPropertyName("allow_huazhi_degrade")]
+        public bool AllowHuazhiDegrade { get; set; }
+
+        /// <summary>
         /// 商户签约号，代扣协议中标示用户的唯一签约号（确保在商户系统中唯一）。 格式规则：支持大写小写字母和数字，最长32位。 商户系统按需传入，如果同一用户在同一产品码、同一签约场景下，签订了多份代扣协议，那么需要指定并传入该值。
         /// </summary>
         [JsonPropertyName("external_agreement_no")]
@@ -36,6 +42,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("personal_product_code")]
         public string PersonalProductCode { get; set; }
+
+        /// <summary>
+        /// 签约成功后商户用于接收异步通知的地址。如果不传入，签约与支付的异步通知都会发到外层notify_url参数传入的地址；如果外层也未传入，签约与支付的异步通知都会发到商户appid配置的网关地址。
+        /// </summary>
+        [JsonPropertyName("sign_notify_url")]
+        public string SignNotifyUrl { get; set; }
 
         /// <summary>
         /// 协议签约场景，商户和支付宝签约时确定，商户可咨询技术支持。

@@ -20,6 +20,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string LicenseNo { get; set; }
 
         /// <summary>
+        /// 车辆类型
+        /// </summary>
+        [JsonPropertyName("vehicle_type")]
+        public string VehicleType { get; set; }
+
+        /// <summary>
         /// 车辆识别号码
         /// </summary>
         [JsonPropertyName("vin")]

@@ -75,6 +75,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutApplyId { get; set; }
 
         /// <summary>
+        /// 为外部系统提供的扩展信息透传字段，可在开票申请中传入，开票成功后从发票信息中取回。 格式：key1=value2|key2=value2
+        /// </summary>
+        [JsonPropertyName("out_extends")]
+        public string OutExtends { get; set; }
+
+        /// <summary>
         /// 申请开票对应的商户交易流水号，该流水号必须保证在同商户范围内全局唯一。
         /// </summary>
         [JsonPropertyName("out_trade_no")]

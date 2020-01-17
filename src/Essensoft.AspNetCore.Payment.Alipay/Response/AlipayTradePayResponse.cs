@@ -16,7 +16,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string AdvanceAmount { get; set; }
 
         /// <summary>
-        /// 异步支付模式，先享后付业务会返回该参数，目前有三种值：  ASYNC_DELAY_PAY(异步延时付款);  ASYNC_REALTIME_PAY(异步准实时付款);  SYNC_DIRECT_PAY(同步直接扣款);
+        /// 异步支付模式，目前有五种值： ASYNC_DELAY_PAY(异步延时付款); ASYNC_REALTIME_PAY(异步准实时付款); SYNC_DIRECT_PAY(同步直接扣款); NORMAL_ASYNC_PAY(纯异步付款); QUOTA_OCCUPYIED_ASYNC_PAY(异步支付并且预占了先享后付额度);
         /// </summary>
         [JsonPropertyName("async_payment_mode")]
         public string AsyncPaymentMode { get; set; }

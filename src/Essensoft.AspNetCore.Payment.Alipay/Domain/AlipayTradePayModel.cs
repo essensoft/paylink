@@ -57,7 +57,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public BusinessParams BusinessParams { get; set; }
 
         /// <summary>
-        /// 买家的支付宝用户id，如果为空，会从传入了码值信息中获取买家ID
+        /// 买家的支付宝用户 id，如果为空，会从传入的码值信息中获取买家 ID
         /// </summary>
         [JsonPropertyName("buyer_id")]
         public string BuyerId { get; set; }
@@ -91,6 +91,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("goods_detail")]
         public List<GoodsDetail> GoodsDetail { get; set; }
+
+        /// <summary>
+        /// 是否异步支付，传入true时，表明本次期望走异步支付，会先将支付请求受理下来，再异步推进。商户可以通过交易的异步通知或者轮询交易的状态来确定最终的交易结果
+        /// </summary>
+        [JsonPropertyName("is_async_pay")]
+        public bool IsAsyncPay { get; set; }
 
         /// <summary>
         /// 商户的原始订单号

@@ -37,5 +37,17 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("send_token")]
         public string SendToken { get; set; }
+
+        /// <summary>
+        /// 券过期时间,默认为口碑商品配置失效时间
+        /// </summary>
+        [JsonPropertyName("valid_end")]
+        public string ValidEnd { get; set; }
+
+        /// <summary>
+        /// 券生效时间,默认为口碑商品配置生效时间
+        /// </summary>
+        [JsonPropertyName("valid_start")]
+        public string ValidStart { get; set; }
     }
 }

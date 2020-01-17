@@ -50,6 +50,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public ExchangeRate ExchangeRate { get; set; }
 
         /// <summary>
+        /// 创建时间
+        /// </summary>
+        [JsonPropertyName("gmt_create")]
+        public string GmtCreate { get; set; }
+
+        /// <summary>
+        /// 完成时间
+        /// </summary>
+        [JsonPropertyName("gmt_finish")]
+        public string GmtFinish { get; set; }
+
+        /// <summary>
         /// 是否需要通过alipay_order_no原单据重试.  T: 需要;  F或为空: 不需要.
         /// </summary>
         [JsonPropertyName("need_retry")]
@@ -102,6 +114,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; }
+
+        /// <summary>
+        /// 子状态
+        /// </summary>
+        [JsonPropertyName("sub_status")]
+        public string SubStatus { get; set; }
 
         /// <summary>
         /// 转账金额。代发请求中指定的trans_amount.

@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayOpenMiniVersionUploadModel : AlipayObject
     {
         /// <summary>
-        /// 小程序版本号，版本号必须满足 x.y.z, 且均为数字
+        /// 小程序版本号，版本号必须满足 x.y.z, 且均为数字。要求版本号比商户之前最新的版本号高。
         /// </summary>
         [JsonPropertyName("app_version")]
         public string AppVersion { get; set; }
@@ -32,7 +32,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string TemplateId { get; set; }
 
         /// <summary>
-        /// 模板版本号，版本号必须满足 x.y.z, 且均为数字
+        /// 模板版本号，版本号必须满足 x.y.z, 且均为数字。不传默认使用最新在架模板版本。
         /// </summary>
         [JsonPropertyName("template_version")]
         public string TemplateVersion { get; set; }

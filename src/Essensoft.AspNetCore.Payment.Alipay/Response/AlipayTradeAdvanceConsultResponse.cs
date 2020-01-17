@@ -28,6 +28,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string ResultMessage { get; set; }
 
         /// <summary>
+        /// 订单风险评估等级，在单笔订单风险预评估时返回。当基础风险校验通过时，可通过该值获取业务风险评估等级。取值：2-高风险；1-低风险。
+        /// </summary>
+        [JsonPropertyName("risk_level")]
+        public string RiskLevel { get; set; }
+
+        /// <summary>
         /// 用户剩余的总待还金额，无论当前用户是否允许垫资，都会返回改属性
         /// </summary>
         [JsonPropertyName("wait_repayment_amount")]

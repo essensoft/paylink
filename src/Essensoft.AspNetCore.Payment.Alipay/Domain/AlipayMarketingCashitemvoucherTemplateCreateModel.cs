@@ -110,7 +110,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string RedirectUri { get; set; }
 
         /// <summary>
-        /// 规则配置，JSON字符串，{"PID": "2088512417841101,2088512417841102", "STORE": "123456,678901"}，其中PID表示可以核销该券的pid列表，多个值用英文逗号隔开，PID为必传且需与接口调用PID或授权PID同属一个商家，必须签约当面付，STORE表示可以核销该券的内部门店ID，多个值用英文逗号隔开 。仅支持PID和STOREID核销规则，PID列表和门店ID列表均不能含有重复ID，并且门店ID数量最多支持3000个。
+        /// 规则配置，JSON字符串，{"PID": "2088512417841101,2088512417841102", "STORE": "123456,678901"}，其中PID表示可以核销该券的pid列表，多个值用英文逗号隔开，PID为必传且必须签约当面付，STORE表示可以核销该券的内部门店ID，多个值用英文逗号隔开 。仅支持PID和STOREID核销规则，PID列表和门店ID列表均不能含有重复ID，并且门店ID数量最多支持3000个。
         /// </summary>
         [JsonPropertyName("rule_conf")]
         public string RuleConf { get; set; }

@@ -20,10 +20,22 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AlipayUserId { get; set; }
 
         /// <summary>
+        /// 商户业务信息确认时带入的业务信息
+        /// </summary>
+        [JsonPropertyName("biz_params")]
+        public BizExtParams BizParams { get; set; }
+
+        /// <summary>
         /// 用于描述商户需要回执的业务类型。如签约：SIGN
         /// </summary>
         [JsonPropertyName("biz_type")]
         public string BizType { get; set; }
+
+        /// <summary>
+        /// 商户业务确认说明描述
+        /// </summary>
+        [JsonPropertyName("memo")]
+        public string Memo { get; set; }
 
         /// <summary>
         /// 商户本次操作的请求流水号，用于标示请求流水的唯一性，不能包含除英文、数字以外的字符，需要保证在商户端不重复。

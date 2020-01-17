@@ -52,10 +52,34 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string ErrorCode { get; set; }
 
         /// <summary>
+        /// 失败金额
+        /// </summary>
+        [JsonPropertyName("fail_amount")]
+        public string FailAmount { get; set; }
+
+        /// <summary>
+        /// 失败笔数
+        /// </summary>
+        [JsonPropertyName("fail_count")]
+        public long FailCount { get; set; }
+
+        /// <summary>
         /// 批次失败错误原因
         /// </summary>
         [JsonPropertyName("fail_reason")]
         public string FailReason { get; set; }
+
+        /// <summary>
+        /// 批次处理完成时间
+        /// </summary>
+        [JsonPropertyName("gmt_finish")]
+        public string GmtFinish { get; set; }
+
+        /// <summary>
+        /// 批次支付完成时间
+        /// </summary>
+        [JsonPropertyName("gmt_pay_finish")]
+        public string GmtPayFinish { get; set; }
 
         /// <summary>
         /// 商户的批次号
@@ -74,6 +98,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonPropertyName("page_size")]
         public long PageSize { get; set; }
+
+        /// <summary>
+        /// 付款方身份标识
+        /// </summary>
+        [JsonPropertyName("payer_id")]
+        public string PayerId { get; set; }
 
         /// <summary>
         /// 付款方需要支付的金额，受理成功（status为APPLIED）之后才会有值，受理成功之前是0。
@@ -98,6 +128,24 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonPropertyName("sign_principal")]
         public string SignPrincipal { get; set; }
+
+        /// <summary>
+        /// 成功金额
+        /// </summary>
+        [JsonPropertyName("success_amount")]
+        public string SuccessAmount { get; set; }
+
+        /// <summary>
+        /// 成功笔数
+        /// </summary>
+        [JsonPropertyName("success_count")]
+        public long SuccessCount { get; set; }
+
+        /// <summary>
+        /// 批次总金额
+        /// </summary>
+        [JsonPropertyName("total_amount")]
+        public string TotalAmount { get; set; }
 
         /// <summary>
         /// 总记录数
