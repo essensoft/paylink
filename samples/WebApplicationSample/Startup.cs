@@ -24,7 +24,7 @@ namespace WebApplicationSample
             services.AddAlipay();
             services.AddWeChatPay();
 
-            // 在 appsettings.json 中 配置选项
+            // 在 appsettings.json(开发环境：appsettings.Development.json) 中 配置选项
             services.Configure<AlipayOptions>(Configuration.GetSection("Alipay"));
             services.Configure<WeChatPayOptions>(Configuration.GetSection("WeChatPay"));
 
