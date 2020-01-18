@@ -311,17 +311,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         {
             using (var cert = new System.Security.Cryptography.X509Certificates.X509Certificate2(input.GetEncoded()))
             {
-                byte[] algOid;
-
-                switch (cert.GetKeyAlgorithm())
+                var algOid = (cert.GetKeyAlgorithm()) switch
                 {
-                    case "1.2.840.113549.1.1.1":
-                        algOid = new byte[] { 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01 };
-                        break;
-                    default:
-                        throw new ArgumentOutOfRangeException("Need an OID lookup for " + cert.GetKeyAlgorithm());
-                }
-
+                    "1.2.840.113549.1.1.1" => new byte[] { 0x06, 0x09, 0x2A, 0x86, 0x48, 0x86, 0xF7, 0x0D, 0x01, 0x01, 0x01 },
+                    _ => throw new ArgumentOutOfRangeException("Need an OID lookup for " + cert.GetKeyAlgorithm()),
+                };
                 var algParams = cert.GetKeyAlgorithmParameters();
                 var publicKey = WrapAsBitString(cert.GetPublicKey());
 

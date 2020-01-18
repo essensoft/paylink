@@ -31,28 +31,22 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
 
         public static string RSASignContent(string data, string privateKey, string charset, string signType)
         {
-            switch (signType)
+            return signType switch
             {
-                case "RSA1":
-                    return SHA1WithRSA.Sign(data, privateKey, charset);
-                case "RSA2":
-                    return SHA256WithRSA.Sign(data, privateKey, charset);
-                default:
-                    return SHA1WithRSA.Sign(data, privateKey, charset);
-            }
+                "RSA1" => SHA1WithRSA.Sign(data, privateKey, charset),
+                "RSA2" => SHA256WithRSA.Sign(data, privateKey, charset),
+                _ => SHA1WithRSA.Sign(data, privateKey, charset),
+            };
         }
 
         public static bool RSACheckContent(string data, string sign, string publicKey, string charset, string signType)
         {
-            switch (signType)
+            return signType switch
             {
-                case "RSA1":
-                    return SHA1WithRSA.Verify(data, sign, publicKey, charset);
-                case "RSA2":
-                    return SHA256WithRSA.Verify(data, sign, publicKey, charset);
-                default:
-                    return SHA1WithRSA.Verify(data, sign, publicKey, charset);
-            }
+                "RSA1" => SHA1WithRSA.Verify(data, sign, publicKey, charset),
+                "RSA2" => SHA256WithRSA.Verify(data, sign, publicKey, charset),
+                _ => SHA1WithRSA.Verify(data, sign, publicKey, charset),
+            };
         }
 
         public static string AESEncrypt(string data, string encyptKey)
