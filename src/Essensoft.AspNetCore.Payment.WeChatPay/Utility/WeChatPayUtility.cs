@@ -57,6 +57,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
         {
             return Guid.NewGuid().ToString("N");
         }
+
         public static string RemovePreFix(this string str, params string[] preFixes)
         {
             if (str == null)
