@@ -13,9 +13,13 @@ Essensoft.AspNetCore.Payment.Alipay         | [![NuGet](https://img.shields.io/n
 Essensoft.AspNetCore.Payment.WeChatPay      | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.WeChatPay.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.WeChatPay)
 Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Security.svg)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Security)
 
-## QQ群(付费群:10元)
-* [Payment 交流①群: 522457525](https://shang.qq.com/wpa/qunwpa?idkey=aac56c8f02f54893267d3ac90787c1794a7687f3c31a923812a36b67c4ee6271)
-* [Payment 交流②群: 204076462](https://shang.qq.com/wpa/qunwpa?idkey=a77c990f2a8fca61f7eaf87ad34eae1a4ac4ebb98968a2602514dfba0c23c108)
+## QQ群
+
+1. 付费群(10元)
+- [Payment 交流①群: 522457525](https://shang.qq.com/wpa/qunwpa?idkey=aac56c8f02f54893267d3ac90787c1794a7687f3c31a923812a36b67c4ee6271)
+- [Payment 交流②群: 204076462](https://shang.qq.com/wpa/qunwpa?idkey=a77c990f2a8fca61f7eaf87ad34eae1a4ac4ebb98968a2602514dfba0c23c108)
+2. 免费群
+- [Payment 交流群: 755039581](https://shang.qq.com/wpa/qunwpa?idkey=ef1dcf99efe9fe2cbb596ec743daa748f9296c1206bd19c64090ffe35a5e0ff9)
 
 ## 支持渠道
 
@@ -34,7 +38,7 @@ Essensoft.AspNetCore.Payment.Security       | [![NuGet](https://img.shields.io/n
 
 * [查看示例项目](samples/WebApplicationSample)
 
-----
+---
 
 ## 打赏
 
