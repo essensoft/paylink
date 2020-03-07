@@ -21,10 +21,16 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public FinanceMemberInfo CoreBusinessInfo { get; set; }
 
         /// <summary>
-        /// 向核心企业授信的配置id
+        /// 向核心企业授信的配置id(已弃用)，请参考credit_idxs
         /// </summary>
         [JsonPropertyName("credit_ids")]
         public List<string> CreditIds { get; set; }
+
+        /// <summary>
+        /// 授信列表
+        /// </summary>
+        [JsonPropertyName("credit_idxs")]
+        public List<FinanceCreditItem> CreditIdxs { get; set; }
 
         /// <summary>
         /// 币种

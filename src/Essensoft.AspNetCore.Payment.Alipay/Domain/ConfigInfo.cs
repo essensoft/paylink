@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -20,6 +21,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public bool CollectAttachement { get; set; }
 
         /// <summary>
+        /// 收集证件类型列表
+        /// </summary>
+        [JsonPropertyName("collect_cert_types")]
+        public List<string> CollectCertTypes { get; set; }
+
+        /// <summary>
         /// 公司编号-SF
         /// </summary>
         [JsonPropertyName("company_no")]
@@ -38,6 +45,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string JumpUrl { get; set; }
 
         /// <summary>
+        /// 商户小程序签署地址（signModel字段值为1时 必填）
+        /// </summary>
+        [JsonPropertyName("merchant_mini_sign_url")]
+        public string MerchantMiniSignUrl { get; set; }
+
+        /// <summary>
         /// 回调地址，签署的过程和签署完成都会回调。
         /// </summary>
         [JsonPropertyName("notice_developer_url")]
@@ -54,5 +67,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("serial_no")]
         public string SerialNo { get; set; }
+
+        /// <summary>
+        /// 签署方式  0-e签宝小程序签署 1-商户小程序签署  默认0
+        /// </summary>
+        [JsonPropertyName("sign_model")]
+        public long SignModel { get; set; }
     }
 }

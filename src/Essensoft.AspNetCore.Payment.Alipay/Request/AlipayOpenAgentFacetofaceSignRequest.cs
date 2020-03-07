@@ -46,7 +46,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string MccCode { get; set; }
 
         /// <summary>
-        /// 服务费率（%），0.38~3之间，精确到0.01。 当签约且授权sign_and_auth=true时，必填。
+        /// 服务费率（%），0.38~3之间， 特殊行业除外。当签约且授权标识sign_and_auth=true时，该费率信息必填。
         /// </summary>
         public string Rate { get; set; }
 
@@ -61,7 +61,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public FileItem ShopSignBoardPic { get; set; }
 
         /// <summary>
-        /// 签约且授权标识，默认为false
+        /// 签约且授权标识，默认为false，只进行签约操作； 如果设置为true，则表示签约成功后，会自动进行应用授权操作。
         /// </summary>
         public Nullable<bool> SignAndAuth { get; set; }
 

@@ -21,7 +21,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutTradeNo { get; set; }
 
         /// <summary>
-        /// 查询选项，商户通过上送该字段来定制查询返回信息
+        /// 查询选项，商户通过上送该参数来定制同步需要额外返回的信息字段，数组格式。如：["trade_settle_info","fund_bill_list","voucher_detail_list","discount_goods_detail"]
         /// </summary>
         [JsonPropertyName("query_options")]
         public List<string> QueryOptions { get; set; }

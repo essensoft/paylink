@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,5 +13,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonPropertyName("user_id")]
         public string UserId { get; set; }
+
+        /// <summary>
+        /// 从码值解析出来的用户身份信息
+        /// </summary>
+        [JsonPropertyName("user_identity_info")]
+        public UserIdentityInfo UserIdentityInfo { get; set; }
     }
 }

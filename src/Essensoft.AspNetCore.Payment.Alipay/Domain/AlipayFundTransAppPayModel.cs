@@ -14,10 +14,16 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BizScene { get; set; }
 
         /// <summary>
-        /// JSON格式，传递业务扩展参数.  业务扩展字段，JSON格式。支持如下属性：  sub_biz_scene 子场景，必填，传REDPACKET  payer_binded_alipay_id 创建红包的商户会员绑定的支付宝userId，必填
+        /// JSON格式，传递业务扩展参数. 业务扩展字段，JSON格式。支持如下属性： sub_biz_scene 子场景，必填，传REDPACKET payer_binded_alipay_uid 创建红包的商户会员绑定的支付宝userId，必填
         /// </summary>
         [JsonPropertyName("business_params")]
         public string BusinessParams { get; set; }
+
+        /// <summary>
+        /// 支付宝订单号
+        /// </summary>
+        [JsonPropertyName("order_id")]
+        public string OrderId { get; set; }
 
         /// <summary>
         /// 支付订单的标题，用于在收银台和消费记录展示

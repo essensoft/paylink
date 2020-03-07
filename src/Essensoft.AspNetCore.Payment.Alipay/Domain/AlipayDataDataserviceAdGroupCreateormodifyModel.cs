@@ -15,6 +15,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BizToken { get; set; }
 
         /// <summary>
+        /// 转化事件编号。若此字段不为空，则要求conversion_type也不为空，且此转化事件与转化事件类型conversion_type匹配
+        /// </summary>
+        [JsonPropertyName("conversion_id")]
+        public string ConversionId { get; set; }
+
+        /// <summary>
+        /// 转化事件类型： CPA_TAO_XI：淘系店铺关注 CPA_TMALL_MEMBER_JOIN：淘系店铺入会
+        /// </summary>
+        [JsonPropertyName("conversion_type")]
+        public string ConversionType { get; set; }
+
+        /// <summary>
         /// 业务扩展参数字段，根据第三方需要使用，投放端只做存储并向检索端透传
         /// </summary>
         [JsonPropertyName("extend_info")]
