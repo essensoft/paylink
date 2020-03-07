@@ -18,14 +18,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay
     public class AlipayClient : IAlipayClient
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly AlipayPublicKeyManager _alipayPublicKeyManager;
+        private readonly AlipayPublicKeyManager _publicKeyManager;
 
         #region AlipayClient Constructors
 
-        public AlipayClient(IHttpClientFactory httpClientFactory, AlipayPublicKeyManager certificateManager)
+        public AlipayClient(IHttpClientFactory httpClientFactory, AlipayPublicKeyManager publicKeyManager)
         {
             _httpClientFactory = httpClientFactory;
-            _alipayPublicKeyManager = certificateManager;
+            _publicKeyManager = publicKeyManager;
         }
 
         #endregion
@@ -442,13 +442,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             if (!string.IsNullOrEmpty(certItem.CertSN))
             {
                 // 为空时添加本地支付宝公钥证书密钥
-                if (_alipayPublicKeyManager.IsEmpty)
+                if (_publicKeyManager.IsEmpty)
                 {
-                    _alipayPublicKeyManager.TryAdd(options.AlipayPublicCertSN, options.AlipayPublicKey);
+                    _publicKeyManager.TryAdd(options.AlipayPublicCertSN, options.AlipayPublicKey);
                 }
 
                 // 如果返回的支付宝公钥证书序列号与本地支付宝公钥证书序列号不匹配，通过返回的支付宝公钥证书序列号去网关拉取新的支付宝公钥证书
-                if (!_alipayPublicKeyManager.ContainsKey(certItem.CertSN))
+                if (!_publicKeyManager.ContainsKey(certItem.CertSN))
                 {
                     var model = new AlipayOpenAppAlipaycertDownloadModel
                     {
@@ -473,11 +473,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                     var alipayCertSN = AntCertificationUtil.GetCertSN(alipayCert);
                     var alipayCertPublicKey = AntCertificationUtil.ExtractPemPublicKeyFromCert(alipayCert);
 
-                    _alipayPublicKeyManager.TryAdd(alipayCertSN, alipayCertPublicKey);
+                    _publicKeyManager.TryAdd(alipayCertSN, alipayCertPublicKey);
                 }
 
                 // 针对成功结果且有支付宝公钥的进行验签
-                if (_alipayPublicKeyManager.TryGetValue(certItem.CertSN, out var alipayPublicKey))
+                if (_publicKeyManager.TryGetValue(certItem.CertSN, out var alipayPublicKey))
                 {
                     if (!isError || isError && !string.IsNullOrEmpty(certItem.Sign))
                     {
