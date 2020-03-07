@@ -1,4 +1,4 @@
-![Payment](https://raw.githubusercontent.com/essensoft/media/master/images/github/payment.png)
+﻿![Payment](https://raw.githubusercontent.com/essensoft/media/master/images/github/payment.png)
 
 ## 简介
 
