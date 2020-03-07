@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -24,6 +25,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("out_trade_no")]
         public string OutTradeNo { get; set; }
+
+        /// <summary>
+        /// 查询选项，商户通过上送该参数来定制同步需要额外返回的信息字段，数组格式。如：["refund_detail_item_list"]
+        /// </summary>
+        [JsonPropertyName("query_options")]
+        public List<string> QueryOptions { get; set; }
 
         /// <summary>
         /// 支付宝交易号，和商户订单号不能同时为空

@@ -129,6 +129,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public PromoParam PromoParams { get; set; }
 
         /// <summary>
+        /// 返回查询选项，商户通过上送该参数来定制同步需要额外返回的信息字段，数组格式。如：["fund_bill_list","voucher_detail_list","discount_goods_detail"]
+        /// </summary>
+        [JsonPropertyName("query_options")]
+        public List<string> QueryOptions { get; set; }
+
+        /// <summary>
         /// 描述分账信息，json格式，其它说明详见分账说明
         /// </summary>
         [JsonPropertyName("royalty_info")]

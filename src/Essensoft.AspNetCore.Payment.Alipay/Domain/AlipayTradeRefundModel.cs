@@ -39,6 +39,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutTradeNo { get; set; }
 
         /// <summary>
+        /// 查询选项，商户通过上送该参数来定制同步需要额外返回的信息字段，数组格式。如：["refund_detail_item_list"]
+        /// </summary>
+        [JsonPropertyName("query_options")]
+        public List<string> QueryOptions { get; set; }
+
+        /// <summary>
         /// 需要退款的金额，该金额不能大于订单金额,单位为元，支持两位小数
         /// </summary>
         [JsonPropertyName("refund_amount")]

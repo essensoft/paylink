@@ -88,13 +88,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string DiscountAmount { get; set; }
 
         /// <summary>
-        /// 本次交易支付所使用的单品券优惠的商品优惠信息
+        /// 本次交易支付所使用的单品券优惠的商品优惠信息。 只有在query_options中指定时才返回该字段信息。
         /// </summary>
         [JsonPropertyName("discount_goods_detail")]
         public string DiscountGoodsDetail { get; set; }
 
         /// <summary>
-        /// 交易支付使用的资金渠道
+        /// 交易支付使用的资金渠道。 只有在签约中指定需要返回资金明细，或者入参的query_options中指定时才返回该字段信息。
         /// </summary>
         [JsonPropertyName("fund_bill_list")]
         public List<TradeFundBill> FundBillList { get; set; }
@@ -208,7 +208,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string TransPayRate { get; set; }
 
         /// <summary>
-        /// 本交易支付时使用的所有优惠券信息
+        /// 本交易支付时使用的所有优惠券信息。 只有在query_options中指定时才返回该字段信息。
         /// </summary>
         [JsonPropertyName("voucher_detail_list")]
         public List<VoucherDetail> VoucherDetailList { get; set; }

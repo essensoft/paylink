@@ -76,7 +76,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string RefundCurrency { get; set; }
 
         /// <summary>
-        /// 退款使用的资金渠道
+        /// 退款使用的资金渠道。 只有在签约中指定需要返回资金明细，或者入参的query_options中指定时才返回该字段信息。
         /// </summary>
         [JsonPropertyName("refund_detail_item_list")]
         public List<TradeFundBill> RefundDetailItemList { get; set; }

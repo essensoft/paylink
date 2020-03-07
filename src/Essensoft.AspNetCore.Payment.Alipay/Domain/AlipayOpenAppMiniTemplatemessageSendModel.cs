@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Data { get; set; }
 
         /// <summary>
-        /// 用户发生的交易行为的交易号，或者用户在小程序产生表单提交的表单号，用于信息发送的校验
+        /// 用户发生的交易行为的交易号，或者用户在小程序产生表单提交的表单号，或者在IOT刷脸后得到的ftoken等，用于信息发送的校验
         /// </summary>
         [JsonPropertyName("form_id")]
         public string FormId { get; set; }

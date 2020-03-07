@@ -14,6 +14,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ExtendFields { get; set; }
 
         /// <summary>
+        /// base64化的字符串
+        /// </summary>
+        [JsonPropertyName("file_base")]
+        public string FileBase { get; set; }
+
+        /// <summary>
         /// PDF类型文件填写PDF，  JPG类型文件填写JPG(JPG文件请先询问对接人当前是否支持)
         /// </summary>
         [JsonPropertyName("file_download_type")]
@@ -36,5 +42,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("user_id")]
         public string UserId { get; set; }
+
+        /// <summary>
+        /// 压缩方式
+        /// </summary>
+        [JsonPropertyName("zip")]
+        public string Zip { get; set; }
     }
 }

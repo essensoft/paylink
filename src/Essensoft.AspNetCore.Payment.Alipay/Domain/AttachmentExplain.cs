@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AttachmentExplain : AlipayObject
     {
         /// <summary>
-        /// 是否允许上传更多附件 （collect_attachement值为true时必填）
+        /// 允许上传更多附件。开启后，除了“附件列表”中指定的内容，签署人可自由上传之多10张图片。默认值为false
         /// </summary>
         [JsonPropertyName("allow_more_uploads")]
         public bool AllowMoreUploads { get; set; }
