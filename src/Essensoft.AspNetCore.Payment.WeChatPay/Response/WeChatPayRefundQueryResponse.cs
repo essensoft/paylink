@@ -133,7 +133,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// </summary>
         internal override void Execute()
         {
-            RefundInfos = WeChatPayListPropertyParser.Parse<RefundInfo, CouponRefundInfo>(ResponseParameters);
+            RefundInfos = WeChatPayListPropertyParser.Parse<RefundInfo, CouponRefundInfo>(Parameters);
         }
     }
 }
