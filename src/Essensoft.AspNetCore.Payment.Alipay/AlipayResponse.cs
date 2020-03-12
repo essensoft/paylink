@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         /// 响应原始内容
         /// </summary>
         [JsonIgnore]
-        public virtual string ResponseBody { get; set; }
+        public virtual string Body { get; set; }
 
         /// <summary>
         /// 响应结果是否错误

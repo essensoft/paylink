@@ -169,41 +169,41 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
             if (rsp != null)
             {
-                rsp.ResponseBody = body;
+                rsp.Body = body;
             }
 
             return rsp;
         }
 
-        public SignItem GetSignItem(IAlipayRequest<T> request, string responseBody)
+        public SignItem GetSignItem(IAlipayRequest<T> request, string body)
         {
-            if (string.IsNullOrEmpty(responseBody))
+            if (string.IsNullOrEmpty(body))
             {
                 return null;
             }
 
             var signItem = new SignItem
             {
-                Sign = GetSign(responseBody),
-                SignSourceDate = GetSignSourceData(request, responseBody)
+                Sign = GetSign(body),
+                SignSourceDate = GetSignSourceData(request, body)
             };
 
             return signItem;
         }
 
-        public CertItem GetCertItem(IAlipayRequest<T> request, string responseBody)
+        public CertItem GetCertItem(IAlipayRequest<T> request, string body)
         {
-            if (string.IsNullOrEmpty(responseBody))
+            if (string.IsNullOrEmpty(body))
             {
                 return null;
             }
 
-            var json = JsonSerializer.Deserialize<IDictionary>(responseBody, jsonSerializerOptions);
+            var json = JsonSerializer.Deserialize<IDictionary>(body, jsonSerializerOptions);
             var certItem = new CertItem()
             {
                 Sign = json[AlipayConstants.SIGN]?.ToString(),
                 CertSN = json[AlipayConstants.ALIPAY_CERT_SN]?.ToString(),
-                SignSourceDate = GetSignSourceData(request, responseBody)
+                SignSourceDate = GetSignSourceData(request, body)
             };
 
             return certItem;
