@@ -34,8 +34,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
                 result = Activator.CreateInstance<T>();
             }
 
-            result.ResponseBody = body;
-            result.ResponseParameters = parameters;
+            result.Body = body;
+            result.Parameters = parameters;
             result.Execute();
             return result;
         }
@@ -77,8 +77,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
                 result = Activator.CreateInstance<T>();
             }
 
-            result.ResponseBody = newBody;
-            result.ResponseParameters = parameters;
+            result.Body = newBody;
+            result.Parameters = parameters;
             result.Execute();
 
             return result;
