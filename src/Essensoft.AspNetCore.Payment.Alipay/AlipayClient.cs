@@ -261,9 +261,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             return rsp;
         }
 
-        private void CheckResponseSign<T>(IAlipayRequest<T> request, string responseBody, bool isError, IAlipayParser<T> parser, AlipayOptions options) where T : AlipayResponse
+        private void CheckResponseSign<T>(IAlipayRequest<T> request, string body, bool isError, IAlipayParser<T> parser, AlipayOptions options) where T : AlipayResponse
         {
-            var signItem = parser.GetSignItem(request, responseBody);
+            var signItem = parser.GetSignItem(request, body);
             if (signItem == null)
             {
                 throw new AlipayException("sign check fail: Body is Empty!");
@@ -431,9 +431,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             return rsp;
         }
 
-        private async Task CheckResponseCertSignAsync<T>(IAlipayRequest<T> request, string responseBody, bool isError, IAlipayParser<T> parser, AlipayOptions options) where T : AlipayResponse
+        private async Task CheckResponseCertSignAsync<T>(IAlipayRequest<T> request, string body, bool isError, IAlipayParser<T> parser, AlipayOptions options) where T : AlipayResponse
         {
-            var certItem = parser.GetCertItem(request, responseBody);
+            var certItem = parser.GetCertItem(request, body);
             if (certItem == null)
             {
                 throw new AlipayException("cert check fail: Body is Empty!");
@@ -648,7 +648,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             // 构造结果
             var rsp = Activator.CreateInstance<T>();
-            rsp.ResponseBody = signedResult;
+            rsp.Body = signedResult;
             return Task.FromResult(rsp);
         }
 
