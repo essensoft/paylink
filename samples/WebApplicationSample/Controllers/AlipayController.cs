@@ -219,7 +219,7 @@ namespace WebApplicationSample.Controllers
             req.SetBizModel(model);
 
             var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
-            ViewData["response"] = response.Body;
+            ViewData["response"] = ((AlipayResponse)response).Body;
             return View();
         }
 
