@@ -17,15 +17,15 @@
         /// 解析签名内容
         /// </summary>
         /// <param name="request"></param>
-        /// <param name="responseBody"></param>
-        SignItem GetSignItem(IAlipayRequest<T> request, string responseBody);
+        /// <param name="body"></param>
+        SignItem GetSignItem(IAlipayRequest<T> request, string body);
 
         /// <summary>
         /// 解析证书以及签名内容
         /// </summary>
         /// <param name="request"></param>
-        /// <param name="responseBody"></param>
-        CertItem GetCertItem(IAlipayRequest<T> request, string responseBody);
+        /// <param name="body"></param>
+        CertItem GetCertItem(IAlipayRequest<T> request, string body);
 
         /// <summary>
         /// 将响应串解密
