@@ -211,7 +211,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// </summary>
         internal override void Execute()
         {
-            CouponInfos = WeChatPayListPropertyParser.Parse<CouponInfo>(ResponseParameters);
+            CouponInfos = WeChatPayListPropertyParser.Parse<CouponInfo>(Parameters);
         }
     }
 }

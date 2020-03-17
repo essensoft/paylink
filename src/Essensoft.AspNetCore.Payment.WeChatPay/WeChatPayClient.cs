@@ -109,7 +109,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             }
 
             var rsp = Activator.CreateInstance<T>();
-            rsp.ResponseBody = url;
+            rsp.Body = url;
             return Task.FromResult(rsp);
         }
 
@@ -210,24 +210,24 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         private void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options, WeChatPaySignType signType)
         {
-            if (string.IsNullOrEmpty(response.ResponseBody))
+            if (string.IsNullOrEmpty(response.Body))
             {
                 throw new WeChatPayException("sign check fail: Body is Empty!");
             }
 
-            if (response.ResponseParameters.Count == 0)
+            if (response.Parameters.Count == 0)
             {
                 throw new WeChatPayException("sign check fail: Parameters is Empty!");
             }
 
-            if (response.ResponseParameters["return_code"] == "SUCCESS")
+            if (response.Parameters["return_code"] == "SUCCESS")
             {
-                if (!response.ResponseParameters.TryGetValue("sign", out var sign))
+                if (!response.Parameters.TryGetValue("sign", out var sign))
                 {
                     throw new WeChatPayException("sign check fail: sign is Empty!");
                 }
 
-                var cal_sign = WeChatPaySignature.SignWithKey(response.ResponseParameters, options.Key, signType);
+                var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key, signType);
                 if (cal_sign != sign)
                 {
                     throw new WeChatPayException("sign check fail: check Sign and Data Fail!");

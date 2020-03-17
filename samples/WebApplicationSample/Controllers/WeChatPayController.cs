@@ -52,7 +52,7 @@ namespace WebApplicationSample.Controllers
                 AuthCode = viewModel.AuthCode
             };
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -95,11 +95,11 @@ namespace WebApplicationSample.Controllers
 
                 // 将参数(parameter)给 公众号前端 让他在微信内H5调起支付(https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6)
                 ViewData["parameter"] = JsonSerializer.Serialize(parameter);
-                ViewData["response"] = response.ResponseBody;
+                ViewData["response"] = response.Body;
                 return View();
             }
 
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -133,7 +133,7 @@ namespace WebApplicationSample.Controllers
 
             // response.CodeUrl 给前端生成二维码
             ViewData["qrcode"] = response.CodeUrl;
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -175,11 +175,11 @@ namespace WebApplicationSample.Controllers
 
                 // 将参数(parameter)给 ios/android端 让他调起微信APP(https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5)
                 ViewData["parameter"] = JsonSerializer.Serialize(parameter);
-                ViewData["response"] = response.ResponseBody;
+                ViewData["response"] = response.Body;
                 return View();
             }
 
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -254,11 +254,11 @@ namespace WebApplicationSample.Controllers
 
                 // 将参数(parameter)给 小程序前端 让他调起支付API(https://pay.weixin.qq.com/wiki/doc/api/wxa/wxa_api.php?chapter=7_7&index=5)
                 ViewData["parameter"] = JsonSerializer.Serialize(parameter);
-                ViewData["response"] = response.ResponseBody;
+                ViewData["response"] = response.Body;
                 return View();
             }
 
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -284,7 +284,7 @@ namespace WebApplicationSample.Controllers
                 OutTradeNo = viewModel.OutTradeNo
             };
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -310,7 +310,7 @@ namespace WebApplicationSample.Controllers
                 OutTradeNo = viewModel.OutTradeNo
             };
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -335,7 +335,7 @@ namespace WebApplicationSample.Controllers
                 OutTradeNo = viewModel.OutTradeNo
             };
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -366,7 +366,7 @@ namespace WebApplicationSample.Controllers
                 NotifyUrl = viewModel.NotifyUrl
             };
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -394,7 +394,7 @@ namespace WebApplicationSample.Controllers
                 OutTradeNo = viewModel.OutTradeNo
             };
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -421,7 +421,7 @@ namespace WebApplicationSample.Controllers
                 TarType = viewModel.TarType
             };
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -448,7 +448,7 @@ namespace WebApplicationSample.Controllers
                 TarType = viewModel.TarType
             };
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -479,7 +479,7 @@ namespace WebApplicationSample.Controllers
                 SpBillCreateIp = viewModel.SpBillCreateIp
             };
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -504,7 +504,7 @@ namespace WebApplicationSample.Controllers
                 PartnerTradeNo = viewModel.PartnerTradeNo
             };
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -534,7 +534,7 @@ namespace WebApplicationSample.Controllers
                 Desc = viewModel.Desc
             };
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -559,7 +559,7 @@ namespace WebApplicationSample.Controllers
                 PartnerTradeNo = viewModel.PartnerTradeNo
             };
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-            ViewData["response"] = response.ResponseBody;
+            ViewData["response"] = response.Body;
             return View();
         }
 
@@ -574,7 +574,7 @@ namespace WebApplicationSample.Controllers
             {
                 var request = new WeChatPayRiskGetPublicKeyRequest();
                 var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-                ViewData["response"] = response.ResponseBody;
+                ViewData["response"] = response.Body;
                 return View();
             }
 

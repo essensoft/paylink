@@ -8,13 +8,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// 原始内容
         /// </summary>
         [XmlIgnore]
-        public string ResponseBody { get; set; }
+        public string Body { get; set; }
 
         /// <summary>
         /// 原始参数
         /// </summary>
         [XmlIgnore]
-        public WeChatPayDictionary ResponseParameters { get; internal set; }
+        public WeChatPayDictionary Parameters { get; internal set; }
 
         /// <summary>
         /// 处理 _$n / _$n_$m
