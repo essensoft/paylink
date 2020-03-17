@@ -10,10 +10,11 @@ namespace WebApplicationSample
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IWebHostEnvironment env)
         {
-            Configuration = configuration;
+            Configuration = env.GetAppConfiguration();
         }
+
 
         public IConfiguration Configuration { get; }
 
