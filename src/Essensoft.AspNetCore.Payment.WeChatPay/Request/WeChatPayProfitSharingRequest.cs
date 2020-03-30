@@ -52,6 +52,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(WeChatPayConsts.appid, options.AppId);
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
+            sortedTxtParams.Add(WeChatPayConsts.sub_mch_id, options.SubMchId);
 
             if (signType == WeChatPaySignType.HMAC_SHA256)
             {
