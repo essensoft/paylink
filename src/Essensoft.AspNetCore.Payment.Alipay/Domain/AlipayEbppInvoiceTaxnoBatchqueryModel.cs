@@ -9,6 +9,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayEbppInvoiceTaxnoBatchqueryModel : AlipayObject
     {
         /// <summary>
+        /// 默认值为false。true为输出交易信息，false为不输出交易信息。
+        /// </summary>
+        [JsonPropertyName("enable_trade_out")]
+        public string EnableTradeOut { get; set; }
+
+        /// <summary>
         /// 查询结束时间，精确到天（按开票日期查询）  start_invoice_date和end_invoice_date传值要求  1.同时为空时，返回最近半年200条数据  2.其中一个值不能为空  3.结束日期不能大于当前日期  4.开始时间和结束时间跨度不能超过6个月
         /// </summary>
         [JsonPropertyName("end_invoice_date")]

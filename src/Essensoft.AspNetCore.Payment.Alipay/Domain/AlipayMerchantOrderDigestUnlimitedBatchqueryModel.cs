@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BuyerId { get; set; }
 
         /// <summary>
-        /// 结束时间，格式为：yyyy-MM-dd hh:mm:ss    查询返回的订单支付时间在end_time之前，不包括end_time    注：为了避免数据重复，可在start_time不变的情况下利用上一次返回列表中最后一条数据的支付时间作为下一次end_time的入参，实现分页查询
+        /// 结束时间，格式为：yyyy-MM-dd hh:mm:ss 查询返回的订单支付时间在end_time之前，不包括end_time 注：为了避免数据重复，可在start_time不变的情况下利用上一次返回中的next_end_time作为下一次end_time的入参，实现分页查询
         /// </summary>
         [JsonPropertyName("end_time")]
         public string EndTime { get; set; }

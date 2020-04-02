@@ -31,7 +31,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 订单描述;  只在间连场景下返回；
         /// </summary>
         [JsonPropertyName("body")]
-        public new string Body { get; set; }
+        public string Body { get; set; }
 
         /// <summary>
         /// 买家支付宝账号

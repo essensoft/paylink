@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -12,6 +13,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("compress")]
         public bool Compress { get; set; }
+
+        /// <summary>
+        /// 批量json的键值对
+        /// </summary>
+        [JsonPropertyName("json")]
+        public List<string> Json { get; set; }
 
         /// <summary>
         /// bizType_gridId

@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public long PageNo { get; set; }
 
         /// <summary>
-        /// 分页数量
+        /// 分页数量, 最大50
         /// </summary>
         [JsonPropertyName("page_size")]
         public long PageSize { get; set; }

@@ -32,13 +32,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string SummaryDimension { get; set; }
 
         /// <summary>
-        /// 结算收款方。当结算收款方类型是cardAliasNo时，本参数为用户在支付宝绑定的卡编号；结算收款方类型是userId时，本参数为用户的支付宝账号对应的支付宝唯一用户号，以2088开头的纯16位数字；当结算收款方类型是loginName时，本参数为用户的支付宝登录号
+        /// 结算收款方。当结算收款方类型是cardAliasNo时，本参数为用户在支付宝绑定的卡编号；结算收款方类型是userId时，本参数为用户的支付宝账号对应的支付宝唯一用户号，以2088开头的纯16位数字；当结算收款方类型是loginName时，本参数为用户的支付宝登录号；当结算收款方类型是defaultSettle时，本参数不能传值，保持为空。
         /// </summary>
         [JsonPropertyName("trans_in")]
         public string TransIn { get; set; }
 
         /// <summary>
-        /// 结算收款方的账户类型。  cardAliasNo：结算收款方的银行卡编号; userId：表示是支付宝账号对应的支付宝唯一用户号; loginName：表示是支付宝登录号；
+        /// 结算收款方的账户类型。  cardAliasNo：结算收款方的银行卡编号; userId：表示是支付宝账号对应的支付宝唯一用户号; loginName：表示是支付宝登录号； defaultSettle：表示结算到商户进件时设置的默认结算账号，结算主体为门店时不支持传defaultSettle；
         /// </summary>
         [JsonPropertyName("trans_in_type")]
         public string TransInType { get; set; }

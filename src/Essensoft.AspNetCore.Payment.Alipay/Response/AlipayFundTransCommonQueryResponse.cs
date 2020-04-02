@@ -68,7 +68,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string PayFundOrderId { get; set; }
 
         /// <summary>
-        /// 转账单据状态。可能出现的状态如下：  SUCCESS：转账成功；  WAIT_PAY：等待支付；         CLOSED：订单超时关闭  alipay.fund.trans.app.pay涉及的状态： WAIT_PAY、SUCCESS、CLOSED alipay.fund.trans.uni.transfer、alipay.fund.trans.refund涉及的状态：SUCCESS
+        /// 转账单据状态。可能出现的状态如下：  SUCCESS：转账成功；  WAIT_PAY：等待支付；      CLOSED：订单超时关闭；      FAIL：失败（适用于"单笔转账到银行卡"）；      DEALING：处理中（适用于"单笔转账到银行卡"）；      REFUND：退票（适用于"单笔转账到银行卡"）；  alipay.fund.trans.app.pay涉及的状态： WAIT_PAY、SUCCESS、CLOSED alipay.fund.trans.refund涉及的状态：SUCCESS alipay.fund.trans.uni.transfer涉及的状态：SUCCESS、FAIL、DEALING、REFUND
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; }

@@ -75,6 +75,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<ContactInfo> ContactInfos { get; set; }
 
         /// <summary>
+        /// 默认结算规则。在收单时不做特别指定规则时，将使用本对象设置的结算规则进行结算。其详细描述及收单接口传参示例参考功能包文档
+        /// </summary>
+        [JsonPropertyName("default_settle_rule")]
+        public DefaultSettleRule DefaultSettleRule { get; set; }
+
+        /// <summary>
         /// 商户编号，由机构定义，需要保证在机构下唯一
         /// </summary>
         [JsonPropertyName("external_id")]
@@ -141,7 +147,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Name { get; set; }
 
         /// <summary>
-        /// 外部业务号。比如某种业务标准外部订单号,比如交易外部订单号，代表服务商端自己订单号。用于做并发控制，防止一笔外部订单发起两次进件。非必要场景禁止传入本字段，如要使用务必理清场景及字段生成规则，与蚂蚁金服对接人咨询。
+        /// 外部业务号。目前已废弃。新接入场景禁止传入本字段，否则可能会产生无法新进件的情况
         /// </summary>
         [JsonPropertyName("out_biz_no")]
         public string OutBizNo { get; set; }

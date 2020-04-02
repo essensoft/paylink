@@ -75,7 +75,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string TemplateId { get; set; }
 
         /// <summary>
-        /// 当前有三种类型：  ALIPAY_FIX_VOUCHER - 全场代金券  ALIPAY_DISCOUNT_VOUCHER - 折扣券  ALIPAY_ITEM_VOUCHER - 单品优惠  注：不排除将来新增其他类型的可能，商家接入时注意兼容性避免硬编码
+        /// 券类型，如： ALIPAY_FIX_VOUCHER - 全场代金券 ALIPAY_DISCOUNT_VOUCHER - 折扣券 ALIPAY_ITEM_VOUCHER - 单品优惠券 ALIPAY_CASH_VOUCHER - 现金抵价券 ALIPAY_BIZ_VOUCHER - 商家全场券 注：不排除将来新增其他类型的可能，商家接入时注意兼容性避免硬编码
         /// </summary>
         [JsonPropertyName("type")]
         public string Type { get; set; }
