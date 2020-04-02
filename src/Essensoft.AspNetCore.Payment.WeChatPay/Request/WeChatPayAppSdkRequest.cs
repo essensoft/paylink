@@ -34,8 +34,17 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             sortedTxtParams.Add(WeChatPayConsts.noncestr, WeChatPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(WeChatPayConsts.timestamp, WeChatPayUtility.GetTimeStamp());
-            sortedTxtParams.Add(WeChatPayConsts.appid, options.AppId);
-            sortedTxtParams.Add(WeChatPayConsts.partnerid, options.MchId);
+
+            if (!string.IsNullOrEmpty(options.SubAppId) && !string.IsNullOrEmpty(options.SubMchId))
+            {
+                sortedTxtParams.Add(WeChatPayConsts.appid, options.SubAppId);
+                sortedTxtParams.Add(WeChatPayConsts.partnerid, options.SubMchId);
+            }
+            else
+            {
+                sortedTxtParams.Add(WeChatPayConsts.appid, options.AppId);
+                sortedTxtParams.Add(WeChatPayConsts.partnerid, options.MchId);
+            }
 
             sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, WeChatPaySignType.MD5));
         }
