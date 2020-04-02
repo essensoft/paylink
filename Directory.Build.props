@@ -2,7 +2,7 @@
   
   <PropertyGroup>
     <Authors>Essensoft</Authors>
-    <Version>3.1.5-beta.1</Version>
+    <Version>3.1.5</Version>
     <NoWarn>$(NoWarn);CS1570;CS1591;CA1031;IDE0063</NoWarn>
     <Description>Essensoft.AspNetCore.Payment</Description>
     <Copyright>© Essensoft 2020</Copyright>
