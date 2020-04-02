@@ -58,6 +58,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string PlateNo { get; set; }
 
         /// <summary>
+        /// 退款总金额， 单位为元
+        /// </summary>
+        [JsonPropertyName("refund_amount")]
+        public string RefundAmount { get; set; }
+
+        /// <summary>
         /// 打款给卖家的时间（收单为支付宝必返回）
         /// </summary>
         [JsonPropertyName("send_pay_date")]

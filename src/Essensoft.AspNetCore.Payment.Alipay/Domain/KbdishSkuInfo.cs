@@ -51,7 +51,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string SellPrice { get; set; }
 
         /// <summary>
-        /// sku的扩展字典,json字符串
+        /// sku的扩展字典,json字符串,注意： 如果是字符串拼接的方式，转移符\要替换为\\\ 。星巴克定制设置成{\"default\":\"true\"}, 一个菜下的sku只允许一个默认设置
         /// </summary>
         [JsonPropertyName("sku_ext_content")]
         public string SkuExtContent { get; set; }

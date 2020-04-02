@@ -57,6 +57,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<ContactInfo> ContactInfos { get; set; }
 
         /// <summary>
+        /// 默认结算规则。在收单时不做特别指定规则时，将使用本对象设置的结算规则进行结算。其详细描述及收单接口传参示例参考功能包文档
+        /// </summary>
+        [JsonPropertyName("default_settle_rule")]
+        public DefaultSettleRule DefaultSettleRule { get; set; }
+
+        /// <summary>
         /// 商户编号，由机构定义，需要保证在机构下唯一。与smid二选一必填
         /// </summary>
         [JsonPropertyName("external_id")]

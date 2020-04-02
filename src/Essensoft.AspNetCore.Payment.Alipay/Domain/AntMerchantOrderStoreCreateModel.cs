@@ -21,7 +21,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ContactPhone { get; set; }
 
         /// <summary>
-        /// 扩展参数: Ext_ArrivedTime : 到店时间
+        /// 扩展参数: CONSUMER_COUNT ：到店人数, 样例：3 SERVICE_ITEM：服务项目，样例: ["洗头","美发"] SERVICE_TIME: 到店时间，样例: 2020-03-10 09:00:00
         /// </summary>
         [JsonPropertyName("ext")]
         public List<OrderExt> Ext { get; set; }

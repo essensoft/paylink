@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -128,6 +129,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutDetailNo { get; set; }
 
         /// <summary>
+        /// 当前菜为单品菜时,为对应的sku外部ID 当前菜为加料时,为对应的加料的外部ID
+        /// </summary>
+        [JsonPropertyName("outer_id")]
+        public string OuterId { get; set; }
+
+        /// <summary>
         /// 做法信息，格式按照：做法1,做法2，对于有一般销售属性的菜会拼接一般销售属性信息，格式为：做法1,做法2,销售属性1,销售属性2
         /// </summary>
         [JsonPropertyName("practice_info")]
@@ -164,6 +171,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string SalesProperties { get; set; }
 
         /// <summary>
+        /// 销售属性的扩展
+        /// </summary>
+        [JsonPropertyName("sales_properties_ext")]
+        public List<NameOuterIdPair> SalesPropertiesExt { get; set; }
+
+        /// <summary>
         /// 售价（单价），以元为单位，精度到分
         /// </summary>
         [JsonPropertyName("sell_price")]
@@ -186,6 +199,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("spec_name")]
         public string SpecName { get; set; }
+
+        /// <summary>
+        /// 规格名称扩展信息
+        /// </summary>
+        [JsonPropertyName("spec_name_ext")]
+        public List<NameOuterIdPair> SpecNameExt { get; set; }
 
         /// <summary>
         /// 菜明细类型，SINGLE(单品)/SIDE(加料)/COMBO(套餐)/COMBO(套餐内单品)

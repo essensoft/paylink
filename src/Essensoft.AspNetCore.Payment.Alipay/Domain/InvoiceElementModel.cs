@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -120,5 +121,17 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("pdf_url")]
         public string PdfUrl { get; set; }
+
+        /// <summary>
+        /// 该发票对应的交易
+        /// </summary>
+        [JsonPropertyName("trade_list")]
+        public List<EinvTrade> TradeList { get; set; }
+
+        /// <summary>
+        /// 交易匹配结果 match-匹配到 noMatched-未匹配到 notMatch-未做匹配
+        /// </summary>
+        [JsonPropertyName("trade_match_result")]
+        public string TradeMatchResult { get; set; }
     }
 }

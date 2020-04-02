@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -18,6 +19,24 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("order_entry_status")]
         public string OrderEntryStatus { get; set; }
+
+        /// <summary>
+        /// 点餐一般营业营业时间配置
+        /// </summary>
+        [JsonPropertyName("order_normal_business_time")]
+        public List<NormalBusinessTimeRule> OrderNormalBusinessTime { get; set; }
+
+        /// <summary>
+        /// 点餐特殊营业时间规则配置
+        /// </summary>
+        [JsonPropertyName("order_special_business_time")]
+        public List<SpecialBusinessTimeRule> OrderSpecialBusinessTime { get; set; }
+
+        /// <summary>
+        /// OPEN表示打开点餐服务 CLOSED表示关闭点餐服务
+        /// </summary>
+        [JsonPropertyName("order_status")]
+        public string OrderStatus { get; set; }
 
         /// <summary>
         /// 口碑门店ID

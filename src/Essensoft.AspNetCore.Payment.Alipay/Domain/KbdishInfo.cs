@@ -51,6 +51,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string DishCuisine { get; set; }
 
         /// <summary>
+        /// 菜品详情页图片id，展示在菜品详情页中；最多支持10张图片
+        /// </summary>
+        [JsonPropertyName("dish_detail_img_list")]
+        public List<string> DishDetailImgList { get; set; }
+
+        /// <summary>
         /// 口碑的菜品id, 新增操作可以为空,修改的时候必传
         /// </summary>
         [JsonPropertyName("dish_id")]
