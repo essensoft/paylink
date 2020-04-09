@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -181,6 +180,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonPropertyName("mid")]
         public string Mid { get; set; }
+
+        /// <summary>
+        /// 税损扣除后月账单可关联发票金额
+        /// </summary>
+        [JsonPropertyName("new_can_invoice_amt")]
+        public MultiCurrencyMoneyOpenApi NewCanInvoiceAmt { get; set; }
 
         /// <summary>
         /// 已付金额

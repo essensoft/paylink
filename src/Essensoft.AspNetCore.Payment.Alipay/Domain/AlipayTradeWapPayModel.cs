@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -48,6 +49,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("extend_params")]
         public ExtendParams ExtendParams { get; set; }
+
+        /// <summary>
+        /// 订单包含的商品列表信息，json格式，其它说明详见商品明细说明
+        /// </summary>
+        [JsonPropertyName("goods_detail")]
+        public List<GoodsDetail> GoodsDetail { get; set; }
 
         /// <summary>
         /// 商品主类型 :0-虚拟类商品,1-实物类商品
