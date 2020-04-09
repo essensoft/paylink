@@ -1,5 +1,4 @@
 ﻿using System.Text.Json.Serialization;
-using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -8,6 +7,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     /// </summary>
     public class AlipayUserApplepayProvisioningbundleQueryResponse : AlipayResponse
     {
+        /// <summary>
+        /// 卡状态
+        /// </summary>
+        [JsonPropertyName("pass_state")]
+        public string PassState { get; set; }
+
         /// <summary>
         /// 卡模型
         /// </summary>
