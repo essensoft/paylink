@@ -1,4 +1,4 @@
-![Payment](https://gitee.com/essensoft/media/raw/master/images/github/payment.png)
+# Payment
 
 ## 简介
 
@@ -36,13 +36,13 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 
 * [查看示例项目](samples/WebApplicationSample)
 
----
-
 ## 捐赠
 
-![QrCode](https://gitee.com/essensoft/media/raw/master/images/github/qrcode.png)
+![QrCode](img/payment-qrcode.png)
 
----
+## 开源协议
+
+[MIT](LICENSE).
 
 ## 致谢
 
