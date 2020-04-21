@@ -1,7 +1,7 @@
 <Project>
   
   <PropertyGroup>
-    <Version>2.4.5</Version>
+    <Version>2.4.6</Version>
     <NoWarn>$(NoWarn);CS1570;CS1591</NoWarn>
     <Description>Essensoft.AspNetCore.Payment</Description>
     <Copyright>© Essensoft 2019</Copyright>
