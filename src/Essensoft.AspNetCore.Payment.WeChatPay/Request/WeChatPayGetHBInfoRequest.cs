@@ -52,7 +52,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         public bool GetNeedCheckSign()
         {
-            return true;
+            return false;
         }
 
         #endregion
