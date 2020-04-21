@@ -1,4 +1,6 @@
-﻿namespace Essensoft.AspNetCore.Payment.Alipay
+﻿#if NETCOREAPP3_1
+
+namespace Essensoft.AspNetCore.Payment.Alipay
 {
     /// <summary>
     /// Alipay 通知
@@ -7,3 +9,5 @@
     {
     }
 }
+
+#endif

@@ -1,84 +1,82 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayBossCsChannelQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayBossCsChannelQueryModel : AlipayObject
     {
         /// <summary>
         /// 平均通话时长的qualifier
         /// </summary>
-        [JsonProperty("att")]
+        [JsonPropertyName("att")]
         public string Att { get; set; }
 
         /// <summary>
         /// 总接通率的qualifier
         /// </summary>
-        [JsonProperty("connectionrate")]
+        [JsonPropertyName("connectionrate")]
         public string Connectionrate { get; set; }
 
         /// <summary>
         /// 在线小二人数的qualifier
         /// </summary>
-        [JsonProperty("curragentsloggedin")]
+        [JsonPropertyName("curragentsloggedin")]
         public string Curragentsloggedin { get; set; }
 
         /// <summary>
         /// 通话中人数的qualifier
         /// </summary>
-        [JsonProperty("curragenttalking")]
+        [JsonPropertyName("curragenttalking")]
         public string Curragenttalking { get; set; }
 
         /// <summary>
         /// 小休人数的qualifier
         /// </summary>
-        [JsonProperty("currentnotreadyagents")]
+        [JsonPropertyName("currentnotreadyagents")]
         public string Currentnotreadyagents { get; set; }
 
         /// <summary>
         /// 等待人数的qualifier
         /// </summary>
-        [JsonProperty("currentreadyagents")]
+        [JsonPropertyName("currentreadyagents")]
         public string Currentreadyagents { get; set; }
 
         /// <summary>
         /// 总排队数的Qualifier
         /// </summary>
-        [JsonProperty("currnumberwaitingcalls")]
+        [JsonPropertyName("currnumberwaitingcalls")]
         public string Currnumberwaitingcalls { get; set; }
 
         /// <summary>
         /// 查询hbase的rowkey
         /// </summary>
-        [JsonProperty("endkey")]
+        [JsonPropertyName("endkey")]
         public string Endkey { get; set; }
 
         /// <summary>
         /// 查询hbase的rowkey
         /// </summary>
-        [JsonProperty("startkey")]
+        [JsonPropertyName("startkey")]
         public string Startkey { get; set; }
 
         /// <summary>
         /// 总流入量的qualifier
         /// </summary>
-        [JsonProperty("visitorinflow")]
+        [JsonPropertyName("visitorinflow")]
         public string Visitorinflow { get; set; }
 
         /// <summary>
         /// 总应答量的qualifier
         /// </summary>
-        [JsonProperty("visitorresponse")]
+        [JsonPropertyName("visitorresponse")]
         public string Visitorresponse { get; set; }
 
         /// <summary>
         /// 应答量[转接] 的qualifier
         /// </summary>
-        [JsonProperty("visitorresponsetransfer")]
+        [JsonPropertyName("visitorresponsetransfer")]
         public string Visitorresponsetransfer { get; set; }
     }
 }

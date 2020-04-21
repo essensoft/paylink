@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayOpenServicemarketOrderAcceptModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayOpenServicemarketOrderAcceptModel : AlipayObject
     {
         /// <summary>
         /// 服务商品订单ID
         /// </summary>
-        [JsonProperty("commodity_order_id")]
+        [JsonPropertyName("commodity_order_id")]
         public string CommodityOrderId { get; set; }
     }
 }

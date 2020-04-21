@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayUserElectronicidUserQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayUserElectronicidUserQueryModel : AlipayObject
     {
         /// <summary>
         /// 用户码码串
         /// </summary>
-        [JsonProperty("barcode")]
+        [JsonPropertyName("barcode")]
         public string Barcode { get; set; }
     }
 }

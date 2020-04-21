@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 申请撤销成功接口同步返回的支付宝申请流水号。
         /// </summary>
-        [JsonProperty("apply_id")]
+        [JsonPropertyName("apply_id")]
         public string ApplyId { get; set; }
     }
 }

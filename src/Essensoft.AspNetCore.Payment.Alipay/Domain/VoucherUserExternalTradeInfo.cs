@@ -1,36 +1,34 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// VoucherUserExternalTradeInfo Data Structure.
     /// </summary>
-    [Serializable]
     public class VoucherUserExternalTradeInfo : AlipayObject
     {
         /// <summary>
         /// 核销金额
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public string Amount { get; set; }
 
         /// <summary>
         /// 核销时间
         /// </summary>
-        [JsonProperty("consume_date")]
+        [JsonPropertyName("consume_date")]
         public string ConsumeDate { get; set; }
 
         /// <summary>
         /// 券核销的门店id
         /// </summary>
-        [JsonProperty("consume_shop_id")]
+        [JsonPropertyName("consume_shop_id")]
         public string ConsumeShopId { get; set; }
 
         /// <summary>
         /// 外部交易号
         /// </summary>
-        [JsonProperty("external_trade_no")]
+        [JsonPropertyName("external_trade_no")]
         public string ExternalTradeNo { get; set; }
     }
 }

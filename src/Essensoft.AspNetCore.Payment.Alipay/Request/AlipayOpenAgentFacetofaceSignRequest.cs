@@ -46,6 +46,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string MccCode { get; set; }
 
         /// <summary>
+        /// 服务费率（%），0.38~3之间， 特殊行业除外。当签约且授权标识sign_and_auth=true时，该费率信息必填。
+        /// </summary>
+        public string Rate { get; set; }
+
+        /// <summary>
         /// 店铺内景图片，最小5KB，图片格式必须为：png、bmp、gif、jpg、jpeg
         /// </summary>
         public FileItem ShopScenePic { get; set; }
@@ -54,6 +59,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// 店铺门头照图片，最小5KB，图片格式必须为：png、bmp、gif、jpg、jpeg
         /// </summary>
         public FileItem ShopSignBoardPic { get; set; }
+
+        /// <summary>
+        /// 签约且授权标识，默认为false，只进行签约操作； 如果设置为true，则表示签约成功后，会自动进行应用授权操作。
+        /// </summary>
+        public Nullable<bool> SignAndAuth { get; set; }
 
         /// <summary>
         /// 企业特殊资质图片，可参考  <a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.59bgD2&treeId=222&articleId=105364&docType=1#s1  ">商家经营类目</a> 中的“需要的特殊资质证书”，最小5KB，图片格式必须为：png、bmp、gif、jpg、jpeg
@@ -154,7 +164,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
                 { "business_license_no", BusinessLicenseNo },
                 { "date_limitation", DateLimitation },
                 { "long_term", LongTerm },
-                { "mcc_code", MccCode }
+                { "mcc_code", MccCode },
+                { "rate", Rate },
+                { "sign_and_auth", SignAndAuth }
             };
             return parameters;
         }

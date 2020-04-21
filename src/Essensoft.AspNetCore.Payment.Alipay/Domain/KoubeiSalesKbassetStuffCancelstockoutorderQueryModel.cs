@@ -1,30 +1,28 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KoubeiSalesKbassetStuffCancelstockoutorderQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class KoubeiSalesKbassetStuffCancelstockoutorderQueryModel : AlipayObject
     {
         /// <summary>
         /// 扩展字段，备用
         /// </summary>
-        [JsonProperty("ext_info")]
+        [JsonPropertyName("ext_info")]
         public string ExtInfo { get; set; }
 
         /// <summary>
         /// 分页查询当前查询页码
         /// </summary>
-        [JsonProperty("page_no")]
+        [JsonPropertyName("page_no")]
         public long PageNo { get; set; }
 
         /// <summary>
         /// 分页查询每页数据量
         /// </summary>
-        [JsonProperty("page_size")]
+        [JsonPropertyName("page_size")]
         public long PageSize { get; set; }
     }
 }

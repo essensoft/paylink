@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 查询到的标签值, JSON字符串
         /// </summary>
-        [JsonProperty("tag_values")]
+        [JsonPropertyName("tag_values")]
         public string TagValues { get; set; }
     }
 }

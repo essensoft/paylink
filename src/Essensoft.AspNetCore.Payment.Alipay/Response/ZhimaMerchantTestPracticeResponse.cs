@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,13 +11,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// xxxx
         /// </summary>
-        [JsonProperty("dddd")]
+        [JsonPropertyName("dddd")]
         public XXXXsdasdasd Dddd { get; set; }
 
         /// <summary>
         /// ccc
         /// </summary>
-        [JsonProperty("sss")]
+        [JsonPropertyName("sss")]
         public string Sss { get; set; }
     }
 }

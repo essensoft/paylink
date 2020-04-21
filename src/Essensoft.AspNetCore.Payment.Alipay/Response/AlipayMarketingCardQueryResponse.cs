@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,19 +11,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 商户卡信息
         /// </summary>
-        [JsonProperty("card_info")]
+        [JsonPropertyName("card_info")]
         public MerchantCard CardInfo { get; set; }
 
         /// <summary>
         /// 商户会员卡页面跳转到支付宝卡券详情页的pass_id，对应schema地址中的参数p，  主要用于小程序跳往会员卡详情的链接拼接
         /// </summary>
-        [JsonProperty("pass_id")]
+        [JsonPropertyName("pass_id")]
         public string PassId { get; set; }
 
         /// <summary>
         /// 商户会员卡页面跳转到支付宝卡券详情页面的schema地址
         /// </summary>
-        [JsonProperty("schema_url")]
+        [JsonPropertyName("schema_url")]
         public string SchemaUrl { get; set; }
     }
 }

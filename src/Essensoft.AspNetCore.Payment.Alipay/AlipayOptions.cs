@@ -1,10 +1,20 @@
-﻿namespace Essensoft.AspNetCore.Payment.Alipay
+﻿using Essensoft.AspNetCore.Payment.Alipay.Utility;
+
+namespace Essensoft.AspNetCore.Payment.Alipay
 {
     /// <summary>
     /// Alipay 选项。
     /// </summary>
     public class AlipayOptions
     {
+        private string appCert;
+        private string alipayPublicCert;
+        private string rootCert;
+
+        internal string AppCertSN;
+        internal string AlipayPublicCertSN;
+        internal string RootCertSN;
+
         /// <summary>
         /// 蚂蚁金服开放平台 应用ID
         /// </summary>
@@ -12,11 +22,13 @@
 
         /// <summary>
         /// RSA 支付宝公钥
+        /// 加签方式为公钥证书时，留空
         /// </summary>
         public string AlipayPublicKey { get; set; }
 
         /// <summary>
         /// RSA 应用私钥
+        /// 加签方式为公钥证书时，为证书对应的私钥
         /// </summary>
         public string AppPrivateKey { get; set; }
 
@@ -60,5 +72,56 @@
         /// 加密秘钥
         /// </summary>
         public string EncyptKey { get; set; }
+
+        /// <summary>
+        /// 商户证书
+        /// </summary>
+        public string AppCert
+        {
+            get => appCert;
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    appCert = value;
+                    var appCertificate = AntCertificationUtil.ParseCert(value);
+                    AppCertSN = AntCertificationUtil.GetCertSN(appCertificate);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 支付宝公钥证书
+        /// </summary>
+        public string AlipayPublicCert
+        {
+            get => alipayPublicCert;
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    alipayPublicCert = value;
+                    var alipayPublicCertificate = AntCertificationUtil.ParseCert(value);
+                    AlipayPublicCertSN = AntCertificationUtil.GetCertSN(alipayPublicCertificate);
+                    AlipayPublicKey = AntCertificationUtil.ExtractPemPublicKeyFromCert(alipayPublicCertificate);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 根证书
+        /// </summary>
+        public string RootCert
+        {
+            get => rootCert;
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    rootCert = value;
+                    RootCertSN = AntCertificationUtil.GetRootCertSN(value);
+                }
+            }
+        }
     }
 }

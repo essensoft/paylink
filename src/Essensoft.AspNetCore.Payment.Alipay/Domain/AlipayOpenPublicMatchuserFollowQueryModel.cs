@@ -1,30 +1,28 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayOpenPublicMatchuserFollowQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayOpenPublicMatchuserFollowQueryModel : AlipayObject
     {
         /// <summary>
         /// 身份证号码
         /// </summary>
-        [JsonProperty("identity_card")]
+        [JsonPropertyName("identity_card")]
         public string IdentityCard { get; set; }
 
         /// <summary>
         /// 手机号码
         /// </summary>
-        [JsonProperty("mobile_no")]
+        [JsonPropertyName("mobile_no")]
         public string MobileNo { get; set; }
 
         /// <summary>
         /// 支付宝用户id，2088开头的16位长度字符串
         /// </summary>
-        [JsonProperty("user_id")]
+        [JsonPropertyName("user_id")]
         public string UserId { get; set; }
     }
 }

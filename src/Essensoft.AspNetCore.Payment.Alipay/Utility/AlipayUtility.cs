@@ -94,17 +94,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         public static string GetMimeType(byte[] fileData)
         {
             var suffix = GetFileSuffix(fileData);
-            string mimeType;
-
-            switch (suffix)
+            var mimeType = suffix switch
             {
-                case "JPG": mimeType = "image/jpeg"; break;
-                case "GIF": mimeType = "image/gif"; break;
-                case "PNG": mimeType = "image/png"; break;
-                case "BMP": mimeType = "image/bmp"; break;
-                default: mimeType = "application/octet-stream"; break;
-            }
-
+                "JPG" => "image/jpeg",
+                "GIF" => "image/gif",
+                "PNG" => "image/png",
+                "BMP" => "image/bmp",
+                _ => "application/octet-stream",
+            };
             return mimeType;
         }
 
@@ -116,7 +113,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         public static string GetMimeType(string fileName)
         {
             string mimeType;
-            fileName = fileName.ToLower();
+            fileName = fileName.ToLowerInvariant();
 
             if (fileName.EndsWith(".bmp", StringComparison.CurrentCulture))
             {
@@ -146,7 +143,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// 根据API名称获取响应根节点名称。
         /// </summary>
         /// <param name="api">API名称</param>
-        /// <returns></returns>
         public static string GetRootElement(string api)
         {
             var pos = api.IndexOf(".");

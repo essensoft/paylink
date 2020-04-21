@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KoubeiMallScanpurchaseUserverifyVerifyModel Data Structure.
     /// </summary>
-    [Serializable]
     public class KoubeiMallScanpurchaseUserverifyVerifyModel : AlipayObject
     {
         /// <summary>
         /// 口碑店铺ID
         /// </summary>
-        [JsonProperty("shop_id")]
+        [JsonPropertyName("shop_id")]
         public string ShopId { get; set; }
 
         /// <summary>
         /// 核销码
         /// </summary>
-        [JsonProperty("verify_code")]
+        [JsonPropertyName("verify_code")]
         public string VerifyCode { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 是否是小程序开发者
         /// </summary>
-        [JsonProperty("exist_mini")]
+        [JsonPropertyName("exist_mini")]
         public string ExistMini { get; set; }
     }
 }

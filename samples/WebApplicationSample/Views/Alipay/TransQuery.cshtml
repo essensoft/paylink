@@ -1,6 +1,6 @@
 ﻿@model AlipayTransQueryViewModel
 @{
-    ViewData["Title"] = "查询转账订单";
+    ViewData["Title"] = "查询统一转账订单";
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
@@ -14,12 +14,24 @@
         <form asp-controller="Alipay" asp-action="TransQuery">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
+                <label asp-for="ProductCode"></label>
+                <input type="text" class="form-control" asp-for="ProductCode" />
+            </div>
+            <div class="form-group">
                 <label asp-for="OutBizNo"></label>
                 <input type="text" class="form-control" asp-for="OutBizNo" />
             </div>
             <div class="form-group">
+                <label asp-for="BizScene"></label>
+                <input type="text" class="form-control" asp-for="BizScene" />
+            </div>
+            <div class="form-group">
                 <label asp-for="OrderId"></label>
                 <input type="text" class="form-control" asp-for="OrderId" />
+            </div>
+            <div class="form-group">
+                <label asp-for="PayFundOrderId"></label>
+                <input type="text" class="form-control" asp-for="PayFundOrderId" />
             </div>
             <button type="submit" class="btn btn-primary">提交请求</button>
         </form>

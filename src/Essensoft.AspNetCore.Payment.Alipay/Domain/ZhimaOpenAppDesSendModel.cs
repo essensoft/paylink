@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// ZhimaOpenAppDesSendModel Data Structure.
     /// </summary>
-    [Serializable]
     public class ZhimaOpenAppDesSendModel : AlipayObject
     {
         /// <summary>
         /// 21
         /// </summary>
-        [JsonProperty("com")]
+        [JsonPropertyName("com")]
         public GavintestNewLeveaOne Com { get; set; }
 
         /// <summary>
         /// 1
         /// </summary>
-        [JsonProperty("test")]
+        [JsonPropertyName("test")]
         public string Test { get; set; }
     }
 }

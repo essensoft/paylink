@@ -1,36 +1,34 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// RiskRankInfoCode Data Structure.
     /// </summary>
-    [Serializable]
     public class RiskRankInfoCode : AlipayObject
     {
         /// <summary>
         /// infocode
         /// </summary>
-        [JsonProperty("code")]
+        [JsonPropertyName("code")]
         public string Code { get; set; }
 
         /// <summary>
         /// 此infocode在总的得分中的贡献度
         /// </summary>
-        [JsonProperty("contribution_degree")]
+        [JsonPropertyName("contribution_degree")]
         public long ContributionDegree { get; set; }
 
         /// <summary>
         /// 风险描述
         /// </summary>
-        [JsonProperty("desc")]
+        [JsonPropertyName("desc")]
         public string Desc { get; set; }
 
         /// <summary>
         /// 模型名称
         /// </summary>
-        [JsonProperty("model_name")]
+        [JsonPropertyName("model_name")]
         public string ModelName { get; set; }
     }
 }

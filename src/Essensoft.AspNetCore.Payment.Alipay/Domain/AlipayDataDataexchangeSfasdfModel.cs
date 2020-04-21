@@ -1,49 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayDataDataexchangeSfasdfModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayDataDataexchangeSfasdfModel : AlipayObject
     {
         /// <summary>
         /// sdafsdfsaf
         /// </summary>
-        [JsonProperty("adsfghjf")]
+        [JsonPropertyName("adsfghjf")]
         public AlipayItemVoucherTemplete Adsfghjf { get; set; }
 
         /// <summary>
         /// ghjffdssfghj
         /// </summary>
-        [JsonProperty("easadasfd")]
+        [JsonPropertyName("easadasfd")]
         public List<string> Easadasfd { get; set; }
 
         /// <summary>
         /// dsfghdsagfhd
         /// </summary>
-        [JsonProperty("gdfsa")]
+        [JsonPropertyName("gdfsa")]
         public List<string> Gdfsa { get; set; }
 
         /// <summary>
         /// ghjkhg
         /// </summary>
-        [JsonProperty("hjgdfs")]
+        [JsonPropertyName("hjgdfs")]
         public string Hjgdfs { get; set; }
 
         /// <summary>
         /// sdgfjhkg
         /// </summary>
-        [JsonProperty("sdfgsdfg")]
+        [JsonPropertyName("sdfgsdfg")]
         public List<string> Sdfgsdfg { get; set; }
 
         /// <summary>
         /// ASGFDGASaaf
         /// </summary>
-        [JsonProperty("wehtegf")]
+        [JsonPropertyName("wehtegf")]
         public List<string> Wehtegf { get; set; }
     }
 }

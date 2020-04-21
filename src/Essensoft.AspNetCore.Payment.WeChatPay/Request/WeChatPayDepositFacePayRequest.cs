@@ -5,7 +5,7 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 酒店押金 - 支付押金（人脸支付）
+    /// 酒店押金 - 支付押金 - 人脸支付 (服务商)
     /// </summary>
     public class WeChatPayDepositFacePayRequest : IWeChatPayRequest<WeChatPayDepositFacePayResponse>
     {
@@ -13,17 +13,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// 是否押金支付
         /// </summary>
         public string Deposit { get; set; }
-
-        /// <summary>
-        /// 子商户应用号
-        /// </summary>
-        public string SubAppId { get; set; }
-
-        /// <summary>
-        /// 子商户号
-        /// </summary>
-        public string SubMchId { get; set; }
-
         /// <summary>
         /// 设备号
         /// </summary>
@@ -106,8 +95,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             var parameters = new WeChatPayDictionary
             {
                 { "deposit", Deposit },
-                { "sub_appid", SubAppId },
-                { "sub_mch_id", SubMchId },
                 { "device_info", DeviceInfo },
                 { "body", Body },
                 { "detail", Detail },
@@ -135,7 +122,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(WeChatPayConsts.appid, options.AppId);
+            sortedTxtParams.Add(WeChatPayConsts.sub_appid, options.SubAppId);
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
+            sortedTxtParams.Add(WeChatPayConsts.sub_mch_id, options.SubMchId);
 
             if (signType == WeChatPaySignType.HMAC_SHA256)
             {
@@ -143,11 +132,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             }
 
             sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
-        }
-
-        public bool GetNeedCheckSign()
-        {
-            return true;
         }
 
         #endregion

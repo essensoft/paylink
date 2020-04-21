@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 还可以发放的集分宝个数
         /// </summary>
-        [JsonProperty("budget_amount")]
+        [JsonPropertyName("budget_amount")]
         public long BudgetAmount { get; set; }
     }
 }

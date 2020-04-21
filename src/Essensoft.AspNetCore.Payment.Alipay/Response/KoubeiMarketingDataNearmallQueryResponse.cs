@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,7 +12,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 商圈信息
         /// </summary>
-        [JsonProperty("near_mall_bos")]
+        [JsonPropertyName("near_mall_bos")]
         public List<NearMallBo> NearMallBos { get; set; }
     }
 }

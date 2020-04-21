@@ -1,37 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// GavintestNewLeveaOne Data Structure.
     /// </summary>
-    [Serializable]
     public class GavintestNewLeveaOne : AlipayObject
     {
         /// <summary>
         /// 2
         /// </summary>
-        [JsonProperty("boolen")]
+        [JsonPropertyName("boolen")]
         public bool Boolen { get; set; }
 
         /// <summary>
         /// 21
         /// </summary>
-        [JsonProperty("ces")]
+        [JsonPropertyName("ces")]
         public List<long> Ces { get; set; }
 
         /// <summary>
         /// 12
         /// </summary>
-        [JsonProperty("des")]
+        [JsonPropertyName("des")]
         public string Des { get; set; }
 
         /// <summary>
         /// 1
         /// </summary>
-        [JsonProperty("str")]
+        [JsonPropertyName("str")]
         public List<string> Str { get; set; }
     }
 }

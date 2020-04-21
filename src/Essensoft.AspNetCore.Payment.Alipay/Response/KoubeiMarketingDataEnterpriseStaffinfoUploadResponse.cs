@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 人群ID
         /// </summary>
-        [JsonProperty("crowd_id")]
+        [JsonPropertyName("crowd_id")]
         public string CrowdId { get; set; }
     }
 }

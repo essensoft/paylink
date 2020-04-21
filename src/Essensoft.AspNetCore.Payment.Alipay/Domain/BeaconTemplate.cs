@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// BeaconTemplate Data Structure.
     /// </summary>
-    [Serializable]
     public class BeaconTemplate : AlipayObject
     {
         /// <summary>
         /// 模板参数信息
         /// </summary>
-        [JsonProperty("context")]
+        [JsonPropertyName("context")]
         public string Context { get; set; }
 
         /// <summary>
         /// 模板ID
         /// </summary>
-        [JsonProperty("templateid")]
+        [JsonPropertyName("templateid")]
         public string Templateid { get; set; }
     }
 }

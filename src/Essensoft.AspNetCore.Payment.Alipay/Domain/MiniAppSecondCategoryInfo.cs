@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// MiniAppSecondCategoryInfo Data Structure.
     /// </summary>
-    [Serializable]
     public class MiniAppSecondCategoryInfo : AlipayObject
     {
         /// <summary>
         /// 小程序类目Id
         /// </summary>
-        [JsonProperty("category_id")]
+        [JsonPropertyName("category_id")]
         public string CategoryId { get; set; }
 
         /// <summary>
         /// 度假用别墅服务
         /// </summary>
-        [JsonProperty("category_name")]
+        [JsonPropertyName("category_name")]
         public string CategoryName { get; set; }
     }
 }

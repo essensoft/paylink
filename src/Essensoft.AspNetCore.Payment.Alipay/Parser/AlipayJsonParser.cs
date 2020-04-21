@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Security.Cryptography;
+using System.Text.Encodings.Web;
+using System.Text.Json;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
 using Essensoft.AspNetCore.Payment.Security;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 {
@@ -12,6 +13,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
     /// </summary>
     public class AlipayJsonParser<T> : IAlipayParser<T> where T : AlipayResponse
     {
+        private static readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
+
         public string EncryptSourceData(IAlipayRequest<T> request, string body, string encryptType, string encryptKey)
         {
             if (!"AES".Equals(encryptType))
@@ -29,8 +32,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
         private static string GetSign(string body)
         {
-            var json = JsonConvert.DeserializeObject<IDictionary>(body);
-            return (string)json[AlipayConstants.SIGN];
+            var json = JsonSerializer.Deserialize<IDictionary>(body, jsonSerializerOptions);
+            return json[AlipayConstants.SIGN]?.ToString();
         }
 
         private static string GetSignSourceData(IAlipayRequest<T> request, string body)
@@ -38,8 +41,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
             var rootNode = AlipayUtility.GetRootElement(request.GetApiName());
             var errorRootNode = AlipayConstants.ERROR_RESPONSE;
 
-            var indexOfRootNode = body.IndexOf(rootNode);
-            var indexOfErrorRoot = body.IndexOf(errorRootNode);
+            var indexOfRootNode = body.IndexOf(rootNode, StringComparison.Ordinal);
+            var indexOfErrorRoot = body.IndexOf(errorRootNode, StringComparison.Ordinal);
 
             string result = null;
             if (indexOfRootNode > 0)
@@ -57,16 +60,21 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
         private static string ParseSignSourceData(string body, string rootNode, int indexOfRootNode)
         {
             var signDataStartIndex = indexOfRootNode + rootNode.Length + 2;
-            var indexOfSign = body.IndexOf("\"" + AlipayConstants.SIGN + "\"");
+            var indexOfSign = body.IndexOf("\"" + AlipayConstants.SIGN + "\"", StringComparison.Ordinal);
             if (indexOfSign < 0)
             {
                 return null;
             }
 
-            var signDataEndIndex = indexOfSign - 1;
-            var length = signDataEndIndex - signDataStartIndex;
+            var signSourceData = AlipaySignature.ExtractSignContent(body, signDataStartIndex);
 
-            return body.Substring(signDataStartIndex, length);
+            //如果提取的待验签原始内容后还有rootNode
+            if (body.LastIndexOf(rootNode, StringComparison.Ordinal) > signSourceData.EndIndex)
+            {
+                throw new AlipayException("检测到响应报文中有重复的" + rootNode + "，验签失败。");
+            }
+
+            return signSourceData.SourceData;
         }
 
         /// <summary>
@@ -74,14 +82,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
         /// </summary>
         /// <param name="request"></param>
         /// <param name="body"></param>
-        /// <returns></returns>
         private static EncryptParseItem ParseEncryptData(IAlipayRequest<T> request, string body)
         {
             var rootNode = request.GetApiName().Replace(".", "_") + AlipayConstants.RESPONSE_SUFFIX;
             var errorRootNode = AlipayConstants.ERROR_RESPONSE;
 
-            var indexOfRootNode = body.IndexOf(rootNode);
-            var indexOfErrorRoot = body.IndexOf(errorRootNode);
+            var indexOfRootNode = body.IndexOf(rootNode, StringComparison.Ordinal);
+            var indexOfErrorRoot = body.IndexOf(errorRootNode, StringComparison.Ordinal);
 
             EncryptParseItem result = null;
             if (indexOfRootNode > 0)
@@ -99,7 +106,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
         private static EncryptParseItem ParseEncryptItem(string body, string rootNode, int indexOfRootNode)
         {
             var signDataStartIndex = indexOfRootNode + rootNode.Length + 2;
-            var indexOfSign = body.IndexOf("\"" + AlipayConstants.SIGN + "\"");
+            var indexOfSign = body.IndexOf("\"" + AlipayConstants.SIGN + "\"", StringComparison.Ordinal);
 
             var signDataEndIndex = indexOfSign - 1;
 
@@ -137,7 +144,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
             {
                 if (body.StartsWith("{") && body.EndsWith("}"))
                 {
-                    json = JsonConvert.DeserializeObject<IDictionary>(body);
+                    json = JsonSerializer.Deserialize<IDictionary>(body, jsonSerializerOptions);
                 }
 
                 if (json != null)
@@ -145,7 +152,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
                     // 忽略根节点的名称
                     foreach (var key in json.Keys)
                     {
-                        rsp = JsonConvert.DeserializeObject<T>(json[key].ToString());
+                        rsp = JsonSerializer.Deserialize<T>(json[key].ToString(), jsonSerializerOptions);
                         if (rsp != null)
                         {
                             break;
@@ -162,25 +169,44 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
             if (rsp != null)
             {
-                rsp.ResponseBody = body;
+                rsp.Body = body;
             }
 
             return rsp;
         }
 
-        public SignItem GetSignItem(IAlipayRequest<T> request, string responseBody)
+        public SignItem GetSignItem(IAlipayRequest<T> request, string body)
         {
-            if (string.IsNullOrEmpty(responseBody))
+            if (string.IsNullOrEmpty(body))
             {
                 return null;
             }
 
             var signItem = new SignItem
             {
-                Sign = GetSign(responseBody),
-                SignSourceDate = GetSignSourceData(request, responseBody)
+                Sign = GetSign(body),
+                SignSourceDate = GetSignSourceData(request, body)
             };
+
             return signItem;
+        }
+
+        public CertItem GetCertItem(IAlipayRequest<T> request, string body)
+        {
+            if (string.IsNullOrEmpty(body))
+            {
+                return null;
+            }
+
+            var json = JsonSerializer.Deserialize<IDictionary>(body, jsonSerializerOptions);
+            var certItem = new CertItem()
+            {
+                Sign = json[AlipayConstants.SIGN]?.ToString(),
+                CertSN = json[AlipayConstants.ALIPAY_CERT_SN]?.ToString(),
+                SignSourceDate = GetSignSourceData(request, body)
+            };
+
+            return certItem;
         }
 
         #endregion

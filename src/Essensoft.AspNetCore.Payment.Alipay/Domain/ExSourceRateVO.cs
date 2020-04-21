@@ -1,294 +1,292 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// ExSourceRateVO Data Structure.
     /// </summary>
-    [Serializable]
     public class ExSourceRateVO : AlipayObject
     {
         /// <summary>
         /// 买入价
         /// </summary>
-        [JsonProperty("bid")]
+        [JsonPropertyName("bid")]
         public string Bid { get; set; }
 
         /// <summary>
         /// 报价币种对
         /// </summary>
-        [JsonProperty("currency_pair")]
+        [JsonPropertyName("currency_pair")]
         public string CurrencyPair { get; set; }
 
         /// <summary>
         /// 报价单位
         /// </summary>
-        [JsonProperty("currency_unit")]
+        [JsonPropertyName("currency_unit")]
         public long CurrencyUnit { get; set; }
 
         /// <summary>
         /// 价格失效时间
         /// </summary>
-        [JsonProperty("expiry_time")]
+        [JsonPropertyName("expiry_time")]
         public string ExpiryTime { get; set; }
 
         /// <summary>
         /// 扩展字段
         /// </summary>
-        [JsonProperty("extended_params")]
+        [JsonPropertyName("extended_params")]
         public string ExtendedParams { get; set; }
 
         /// <summary>
         /// 报价生成日期
         /// </summary>
-        [JsonProperty("generate_date")]
+        [JsonPropertyName("generate_date")]
         public string GenerateDate { get; set; }
 
         /// <summary>
         /// 报价生成时间
         /// </summary>
-        [JsonProperty("generate_time")]
+        [JsonPropertyName("generate_time")]
         public string GenerateTime { get; set; }
 
         /// <summary>
         /// 创建日期
         /// </summary>
-        [JsonProperty("gmt_create")]
+        [JsonPropertyName("gmt_create")]
         public string GmtCreate { get; set; }
 
         /// <summary>
         /// 修改时间
         /// </summary>
-        [JsonProperty("gmt_modified")]
+        [JsonPropertyName("gmt_modified")]
         public string GmtModified { get; set; }
 
         /// <summary>
         /// 报价是否可成交
         /// </summary>
-        [JsonProperty("guaranteed")]
+        [JsonPropertyName("guaranteed")]
         public string Guaranteed { get; set; }
 
         /// <summary>
         /// 主键id
         /// </summary>
-        [JsonProperty("id")]
+        [JsonPropertyName("id")]
         public string Id { get; set; }
 
         /// <summary>
         /// 源汇率机构
         /// </summary>
-        [JsonProperty("inst")]
+        [JsonPropertyName("inst")]
         public string Inst { get; set; }
 
         /// <summary>
         /// 报价源报价ID
         /// </summary>
-        [JsonProperty("inst_rate_reference_id")]
+        [JsonPropertyName("inst_rate_reference_id")]
         public string InstRateReferenceId { get; set; }
 
         /// <summary>
         /// 是否异常源汇率，Y或者N
         /// </summary>
-        [JsonProperty("is_exception")]
+        [JsonPropertyName("is_exception")]
         public string IsException { get; set; }
 
         /// <summary>
         /// 是否平盘价
         /// </summary>
-        [JsonProperty("is_flat")]
+        [JsonPropertyName("is_flat")]
         public string IsFlat { get; set; }
 
         /// <summary>
         /// 是否需要格式化，Y或者N
         /// </summary>
-        [JsonProperty("is_formatted")]
+        [JsonPropertyName("is_formatted")]
         public string IsFormatted { get; set; }
 
         /// <summary>
         /// 汇率是否有效
         /// </summary>
-        [JsonProperty("is_valid")]
+        [JsonPropertyName("is_valid")]
         public string IsValid { get; set; }
 
         /// <summary>
         /// 远期或掉期点价格到期日
         /// </summary>
-        [JsonProperty("maturity_date")]
+        [JsonPropertyName("maturity_date")]
         public string MaturityDate { get; set; }
 
         /// <summary>
         /// 该价格的最大买入量
         /// </summary>
-        [JsonProperty("maximum_bid_amount")]
+        [JsonPropertyName("maximum_bid_amount")]
         public long MaximumBidAmount { get; set; }
 
         /// <summary>
         /// 该价格的最大卖出量
         /// </summary>
-        [JsonProperty("maximum_offer_amount")]
+        [JsonPropertyName("maximum_offer_amount")]
         public long MaximumOfferAmount { get; set; }
 
         /// <summary>
         /// 备注
         /// </summary>
-        [JsonProperty("memo")]
+        [JsonPropertyName("memo")]
         public string Memo { get; set; }
 
         /// <summary>
         /// 中间价
         /// </summary>
-        [JsonProperty("mid")]
+        [JsonPropertyName("mid")]
         public string Mid { get; set; }
 
         /// <summary>
         /// 该价格的最小买入量
         /// </summary>
-        [JsonProperty("minimum_bid_amount")]
+        [JsonPropertyName("minimum_bid_amount")]
         public long MinimumBidAmount { get; set; }
 
         /// <summary>
         /// 该价格的最小卖出量
         /// </summary>
-        [JsonProperty("minimum_offer_amount")]
+        [JsonPropertyName("minimum_offer_amount")]
         public long MinimumOfferAmount { get; set; }
 
         /// <summary>
         /// 卖出价
         /// </summary>
-        [JsonProperty("offer")]
+        [JsonPropertyName("offer")]
         public string Offer { get; set; }
 
         /// <summary>
         /// 在岸/离岸标识:ON/OFF
         /// </summary>
-        [JsonProperty("on_off_shore")]
+        [JsonPropertyName("on_off_shore")]
         public string OnOffShore { get; set; }
 
         /// <summary>
         /// 期限(TODAY,TOM,SPOT)
         /// </summary>
-        [JsonProperty("period")]
+        [JsonPropertyName("period")]
         public string Period { get; set; }
 
         /// <summary>
         /// 业务自定义字段
         /// </summary>
-        [JsonProperty("profile")]
+        [JsonPropertyName("profile")]
         public string Profile { get; set; }
 
         /// <summary>
         /// 价格类型 WHL/RTL
         /// </summary>
-        [JsonProperty("quote_type")]
+        [JsonPropertyName("quote_type")]
         public string QuoteType { get; set; }
 
         /// <summary>
         /// 报价生成方式，用来区分人工指定报价或者渠道原始报价
         /// </summary>
-        [JsonProperty("rate_method")]
+        [JsonPropertyName("rate_method")]
         public string RateMethod { get; set; }
 
         /// <summary>
         /// 源汇率编码
         /// </summary>
-        [JsonProperty("rate_source_code")]
+        [JsonPropertyName("rate_source_code")]
         public string RateSourceCode { get; set; }
 
         /// <summary>
         /// 产品类型：即期，远期，掉期
         /// </summary>
-        [JsonProperty("rate_type")]
+        [JsonPropertyName("rate_type")]
         public string RateType { get; set; }
 
         /// <summary>
         /// 端标识号
         /// </summary>
-        [JsonProperty("segment_id")]
+        [JsonPropertyName("segment_id")]
         public string SegmentId { get; set; }
 
         /// <summary>
         /// 即期买入价
         /// </summary>
-        [JsonProperty("sp_bid")]
+        [JsonPropertyName("sp_bid")]
         public string SpBid { get; set; }
 
         /// <summary>
         /// 即期中间价
         /// </summary>
-        [JsonProperty("sp_mid")]
+        [JsonPropertyName("sp_mid")]
         public string SpMid { get; set; }
 
         /// <summary>
         /// 即期卖出价
         /// </summary>
-        [JsonProperty("sp_offer")]
+        [JsonPropertyName("sp_offer")]
         public string SpOffer { get; set; }
 
         /// <summary>
         /// 价格生效时间
         /// </summary>
-        [JsonProperty("start_time")]
+        [JsonPropertyName("start_time")]
         public string StartTime { get; set; }
 
         /// <summary>
         /// 子机构
         /// </summary>
-        [JsonProperty("sub_inst")]
+        [JsonPropertyName("sub_inst")]
         public string SubInst { get; set; }
 
         /// <summary>
         /// 报价缓冲时间
         /// </summary>
-        [JsonProperty("threshold_time")]
+        [JsonPropertyName("threshold_time")]
         public string ThresholdTime { get; set; }
 
         /// <summary>
         /// 最晚用此报价发送交易时间
         /// </summary>
-        [JsonProperty("valid_time")]
+        [JsonPropertyName("valid_time")]
         public string ValidTime { get; set; }
 
         /// <summary>
         /// 价格失效时间(带时区)
         /// </summary>
-        [JsonProperty("zone_expiry_time")]
+        [JsonPropertyName("zone_expiry_time")]
         public string ZoneExpiryTime { get; set; }
 
         /// <summary>
         /// 报价生成时间(带时区)
         /// </summary>
-        [JsonProperty("zone_generate_time")]
+        [JsonPropertyName("zone_generate_time")]
         public string ZoneGenerateTime { get; set; }
 
         /// <summary>
         /// 创建日期(带时区)
         /// </summary>
-        [JsonProperty("zone_gmt_create")]
+        [JsonPropertyName("zone_gmt_create")]
         public string ZoneGmtCreate { get; set; }
 
         /// <summary>
         /// 修改时间(带时区)
         /// </summary>
-        [JsonProperty("zone_gmt_modified")]
+        [JsonPropertyName("zone_gmt_modified")]
         public string ZoneGmtModified { get; set; }
 
         /// <summary>
         /// 价格生效时间(带时区)
         /// </summary>
-        [JsonProperty("zone_start_time")]
+        [JsonPropertyName("zone_start_time")]
         public string ZoneStartTime { get; set; }
 
         /// <summary>
         /// 报价缓冲时间(带时区)
         /// </summary>
-        [JsonProperty("zone_threshold_time")]
+        [JsonPropertyName("zone_threshold_time")]
         public string ZoneThresholdTime { get; set; }
 
         /// <summary>
         /// 最晚用此报价发送交易时间(带时区)
         /// </summary>
-        [JsonProperty("zone_valid_time")]
+        [JsonPropertyName("zone_valid_time")]
         public string ZoneValidTime { get; set; }
     }
 }

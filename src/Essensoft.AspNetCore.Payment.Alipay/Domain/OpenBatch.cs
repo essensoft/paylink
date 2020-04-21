@@ -1,30 +1,28 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// OpenBatch Data Structure.
     /// </summary>
-    [Serializable]
     public class OpenBatch : AlipayObject
     {
         /// <summary>
         /// 批次id
         /// </summary>
-        [JsonProperty("batch_id")]
+        [JsonPropertyName("batch_id")]
         public string BatchId { get; set; }
 
         /// <summary>
         /// 批次状态  0，未检测  1，检测中  2，未通过  3，已通过
         /// </summary>
-        [JsonProperty("batch_status")]
+        [JsonPropertyName("batch_status")]
         public string BatchStatus { get; set; }
 
         /// <summary>
         /// 单品数
         /// </summary>
-        [JsonProperty("item_num")]
+        [JsonPropertyName("item_num")]
         public string ItemNum { get; set; }
     }
 }

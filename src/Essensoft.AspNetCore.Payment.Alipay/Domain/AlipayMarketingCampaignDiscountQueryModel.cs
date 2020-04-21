@@ -1,18 +1,16 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayMarketingCampaignDiscountQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayMarketingCampaignDiscountQueryModel : AlipayObject
     {
         /// <summary>
         /// 活动id
         /// </summary>
-        [JsonProperty("camp_id")]
+        [JsonPropertyName("camp_id")]
         public string CampId { get; set; }
     }
 }

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 该套个性化菜单key
         /// </summary>
-        [JsonProperty("menu_key")]
+        [JsonPropertyName("menu_key")]
         public string MenuKey { get; set; }
     }
 }

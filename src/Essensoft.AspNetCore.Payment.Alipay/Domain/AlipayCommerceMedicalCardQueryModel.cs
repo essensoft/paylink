@@ -1,48 +1,58 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayCommerceMedicalCardQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayCommerceMedicalCardQueryModel : AlipayObject
     {
         /// <summary>
         /// 支付授权码
         /// </summary>
-        [JsonProperty("auth_code")]
+        [JsonPropertyName("auth_code")]
         public string AuthCode { get; set; }
 
         /// <summary>
         /// 买家支付宝账号对应的支付宝唯一用户号。  以2088开头的纯16位数字。
         /// </summary>
-        [JsonProperty("buyer_id")]
+        [JsonPropertyName("buyer_id")]
         public string BuyerId { get; set; }
 
         /// <summary>
         /// 卡颁发机构编号
         /// </summary>
-        [JsonProperty("card_org_no")]
+        [JsonPropertyName("card_org_no")]
         public string CardOrgNo { get; set; }
 
         /// <summary>
         /// 业务扩展参数
         /// </summary>
-        [JsonProperty("extend_params")]
+        [JsonPropertyName("extend_params")]
         public string ExtendParams { get; set; }
+
+        /// <summary>
+        /// 机构类型：医保(YB),人社(RS) 默认为RS
+        /// </summary>
+        [JsonPropertyName("ins_type")]
+        public string InsType { get; set; }
 
         /// <summary>
         /// 跳回的地址
         /// </summary>
-        [JsonProperty("return_url")]
+        [JsonPropertyName("return_url")]
         public string ReturnUrl { get; set; }
 
         /// <summary>
         /// 支付场景  条码支付，取值：bar_code  声波支付，取值：wave_code  人脸支付，取值：face_code
         /// </summary>
-        [JsonProperty("scene")]
+        [JsonPropertyName("scene")]
         public string Scene { get; set; }
+
+        /// <summary>
+        /// 版本号
+        /// </summary>
+        [JsonPropertyName("version_no")]
+        public string VersionNo { get; set; }
     }
 }

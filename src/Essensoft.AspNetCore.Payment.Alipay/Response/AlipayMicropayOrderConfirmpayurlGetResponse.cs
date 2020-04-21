@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// SinglePayDetail信息
         /// </summary>
-        [JsonProperty("single_pay_detail")]
+        [JsonPropertyName("single_pay_detail")]
         public SinglePayDetail SinglePayDetail { get; set; }
     }
 }

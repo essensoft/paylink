@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KoubeiAdvertCommissionChannelCreateModel Data Structure.
     /// </summary>
-    [Serializable]
     public class KoubeiAdvertCommissionChannelCreateModel : AlipayObject
     {
         /// <summary>
         /// 新增渠道列表
         /// </summary>
-        [JsonProperty("channels")]
+        [JsonPropertyName("channels")]
         public List<KbAdvertAddChannelRequest> Channels { get; set; }
     }
 }

@@ -1,9 +1,11 @@
-﻿using System.Xml.Serialization;
+﻿#if NETCOREAPP3_1
+
+using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
 {
     /// <summary>
-    /// 申请退款 - 退款结果通知
+    /// 申请退款 - 退款结果通知 (普通商户 / 服务商)
     /// </summary>
     [XmlRoot("xml")]
     public class WeChatPayRefundNotify : WeChatPayNotify
@@ -137,3 +139,5 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
         public string RefundRequestSource { get; set; }
     }
 }
+
+#endif

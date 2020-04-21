@@ -5,7 +5,7 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 企业支付 - 向员工付款
+    /// 企业支付 - 向员工付款 (普通商户)
     /// </summary>
     public class WeChatPayPromotionPayWwSpTrans2PockeRequest : IWeChatPayCertRequest<WeChatPayPromotionPayWwSpTrans2PockeResponse>
     {
@@ -100,11 +100,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { "agentid", AgentId },
             };
             return parameters;
-        }
-
-        public WeChatPaySignType GetSignType()
-        {
-            return WeChatPaySignType.MD5;
         }
 
         public void PrimaryHandler(WeChatPayOptions options, WeChatPaySignType signType, WeChatPayDictionary sortedTxtParams)

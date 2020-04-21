@@ -1,54 +1,52 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// KoubeiQualityTestCloudacptCheckresultSubmitModel Data Structure.
     /// </summary>
-    [Serializable]
     public class KoubeiQualityTestCloudacptCheckresultSubmitModel : AlipayObject
     {
         /// <summary>
         /// 活动id
         /// </summary>
-        [JsonProperty("activity_id")]
+        [JsonPropertyName("activity_id")]
         public string ActivityId { get; set; }
 
         /// <summary>
         /// 付款码
         /// </summary>
-        [JsonProperty("auth_code")]
+        [JsonPropertyName("auth_code")]
         public string AuthCode { get; set; }
 
         /// <summary>
         /// 批次ID
         /// </summary>
-        [JsonProperty("batch_id")]
+        [JsonPropertyName("batch_id")]
         public string BatchId { get; set; }
 
         /// <summary>
         /// 结束时间
         /// </summary>
-        [JsonProperty("end_time")]
+        [JsonPropertyName("end_time")]
         public string EndTime { get; set; }
 
         /// <summary>
         /// partenter id
         /// </summary>
-        [JsonProperty("pid")]
+        [JsonPropertyName("pid")]
         public string Pid { get; set; }
 
         /// <summary>
         /// 开始时间
         /// </summary>
-        [JsonProperty("start_time")]
+        [JsonPropertyName("start_time")]
         public string StartTime { get; set; }
 
         /// <summary>
         /// user id
         /// </summary>
-        [JsonProperty("uid")]
+        [JsonPropertyName("uid")]
         public string Uid { get; set; }
     }
 }

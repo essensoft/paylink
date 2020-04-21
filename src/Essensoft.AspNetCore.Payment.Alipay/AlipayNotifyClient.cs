@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if NETCOREAPP3_1
+
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
@@ -33,23 +35,31 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 throw new ArgumentNullException(nameof(options.SignType));
             }
 
-            if (string.IsNullOrEmpty(options.AppPrivateKey))
+            if (string.IsNullOrEmpty(options.AlipayPublicKey))
             {
-                throw new ArgumentNullException(nameof(options.AppPrivateKey));
+                throw new ArgumentNullException(nameof(options.AlipayPublicKey));
             }
 
             var parameters = GetParameters(request);
-            var parser = new AlipayDictionaryParser<T>();
-            var rsp = parser.Parse(parameters);
+            var rsp = AlipayDictionaryParser.Parse<T>(parameters);
             CheckNotifySign(parameters, options);
             return Task.FromResult(rsp);
         }
 
         #endregion
 
-        #region Common Method
+        #region IAlipayNotifyClient Members
 
-        private Dictionary<string, string> GetParameters(HttpRequest request)
+        public Task<T> CertificateExecuteAsync<T>(HttpRequest request, AlipayOptions options) where T : AlipayNotify
+        {
+            return ExecuteAsync<T>(request, options);
+        }
+
+        #endregion
+
+        #region IAlipayNotifyClient Members
+
+        public IDictionary<string, string> GetParameters(HttpRequest request)
         {
             var parameters = new Dictionary<string, string>();
             if (request.Method == "POST")
@@ -69,6 +79,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             return parameters;
         }
 
+        #endregion
+
+        #region Common Method
+
         private void CheckNotifySign(IDictionary<string, string> dictionary, AlipayOptions options)
         {
             if (dictionary == null || dictionary.Count == 0)
@@ -76,37 +90,22 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 throw new AlipayException("sign check fail: dictionary is Empty!");
             }
 
-            if (!dictionary.TryGetValue("sign", out var sign))
+            if (!dictionary.TryGetValue(AlipayConstants.SIGN, out var sign))
             {
                 throw new AlipayException("sign check fail: sign is Empty!");
             }
 
-            var prestr = GetSignContent(dictionary);
-            if (!AlipaySignature.RSACheckContent(prestr, sign, options.AlipayPublicKey, options.SignType))
+            dictionary.Remove(AlipayConstants.SIGN);
+            dictionary.Remove(AlipayConstants.SIGN_TYPE);
+            var prestr = AlipaySignature.GetSignContent(dictionary);
+            if (!AlipaySignature.RSACheckContent(prestr, sign, options.AlipayPublicKey, options.Charset, options.SignType))
             {
                 throw new AlipayException("sign check fail: check Sign Data Fail!");
             }
         }
 
-        private string GetSignContent(IDictionary<string, string> dictionary)
-        {
-            if (dictionary == null || dictionary.Count == 0)
-            {
-                throw new ArgumentNullException(nameof(dictionary));
-            }
-
-            var sortPara = new SortedDictionary<string, string>(dictionary);
-            var sb = new StringBuilder();
-            foreach (var iter in sortPara)
-            {
-                if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign" && iter.Key != "sign_type")
-                {
-                    sb.Append(iter.Key).Append("=").Append(iter.Value).Append("&");
-                }
-            }
-            return sb.Remove(sb.Length - 1, 1).ToString();
-        }
-
         #endregion
     }
 }
+
+#endif

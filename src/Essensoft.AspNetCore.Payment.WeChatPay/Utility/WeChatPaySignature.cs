@@ -4,7 +4,7 @@ using Essensoft.AspNetCore.Payment.Security;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
 {
-    public class WeChatPaySignature
+    public static class WeChatPaySignature
     {
         public static string SignWithKey(WeChatPayDictionary dictionary, string key, WeChatPaySignType signType)
         {
@@ -19,15 +19,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
 
             var signContent = sb.Append("key=").Append(key).ToString();
 
-            switch (signType)
+            return signType switch
             {
-                case WeChatPaySignType.MD5:
-                    return MD5.Compute(signContent).ToUpperInvariant();
-                case WeChatPaySignType.HMAC_SHA256:
-                    return HMACSHA256.Compute(signContent, key).ToUpperInvariant();
-                default:
-                    throw new WeChatPayException("Unknown sign type!");
-            }
+                WeChatPaySignType.MD5 => MD5.Compute(signContent).ToUpperInvariant(),
+                WeChatPaySignType.HMAC_SHA256 => HMACSHA256.Compute(signContent, key).ToUpperInvariant(),
+                _ => throw new WeChatPayException("Unknown sign type!"),
+            };
         }
 
         public static string SignWithSecret(WeChatPayDictionary dictionary, string secret, List<string> include)

@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayMarketingDataDashboardCancelModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayMarketingDataDashboardCancelModel : AlipayObject
     {
         /// <summary>
         /// 批量取消仪表盘授权
         /// </summary>
-        [JsonProperty("dashboard_ids")]
+        [JsonPropertyName("dashboard_ids")]
         public List<string> DashboardIds { get; set; }
     }
 }

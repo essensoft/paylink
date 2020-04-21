@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,13 +10,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 返回二维码链接地址
         /// </summary>
-        [JsonProperty("qrcode_url")]
+        [JsonPropertyName("qrcode_url")]
         public string QrcodeUrl { get; set; }
 
         /// <summary>
         /// 返回状态：1为成功，0为失败
         /// </summary>
-        [JsonProperty("status")]
+        [JsonPropertyName("status")]
         public string Status { get; set; }
     }
 }

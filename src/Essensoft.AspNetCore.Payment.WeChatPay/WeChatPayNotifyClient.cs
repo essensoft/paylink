@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if NETCOREAPP3_1
+
+using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -64,22 +66,22 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         private void CheckNotifySign(WeChatPayNotify notify, WeChatPayOptions options)
         {
-            if (string.IsNullOrEmpty(notify.ResponseBody))
+            if (string.IsNullOrEmpty(notify.Body))
             {
                 throw new WeChatPayException("sign check fail: Body is Empty!");
             }
 
-            if (notify.ResponseParameters.Count == 0)
+            if (notify.Parameters.Count == 0)
             {
                 throw new WeChatPayException("sign check fail: Parameters is Empty!");
             }
 
-            if (!notify.ResponseParameters.TryGetValue("sign", out var sign))
+            if (!notify.Parameters.TryGetValue("sign", out var sign))
             {
                 throw new WeChatPayException("sign check fail: sign is Empty!");
             }
 
-            var cal_sign = WeChatPaySignature.SignWithKey(notify.ResponseParameters, options.Key, WeChatPaySignType.MD5);
+            var cal_sign = WeChatPaySignature.SignWithKey(notify.Parameters, options.Key, WeChatPaySignType.MD5);
             if (cal_sign != sign)
             {
                 throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
@@ -89,3 +91,5 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         #endregion
     }
 }
+
+#endif

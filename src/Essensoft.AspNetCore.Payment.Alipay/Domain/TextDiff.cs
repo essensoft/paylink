@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// TextDiff Data Structure.
     /// </summary>
-    [Serializable]
     public class TextDiff : AlipayObject
     {
         /// <summary>
         /// 操作类型
         /// </summary>
-        [JsonProperty("operation")]
+        [JsonPropertyName("operation")]
         public string Operation { get; set; }
 
         /// <summary>
         /// 文本内容
         /// </summary>
-        [JsonProperty("text")]
+        [JsonPropertyName("text")]
         public string Text { get; set; }
     }
 }

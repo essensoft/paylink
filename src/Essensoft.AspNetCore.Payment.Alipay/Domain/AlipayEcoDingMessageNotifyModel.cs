@@ -1,30 +1,28 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayEcoDingMessageNotifyModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayEcoDingMessageNotifyModel : AlipayObject
     {
         /// <summary>
         /// 钉钉通知@人列表
         /// </summary>
-        [JsonProperty("at_mobiles")]
+        [JsonPropertyName("at_mobiles")]
         public string AtMobiles { get; set; }
 
         /// <summary>
         /// 钉钉通知内容
         /// </summary>
-        [JsonProperty("content")]
+        [JsonPropertyName("content")]
         public string Content { get; set; }
 
         /// <summary>
         /// 钉钉群token
         /// </summary>
-        [JsonProperty("ding_token")]
+        [JsonPropertyName("ding_token")]
         public string DingToken { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,19 +12,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 车辆的品牌型号列表
         /// </summary>
-        [JsonProperty("car_model")]
+        [JsonPropertyName("car_model")]
         public List<CarModel> CarModel { get; set; }
 
         /// <summary>
         /// 车险询价申请号
         /// </summary>
-        [JsonProperty("enquiry_biz_id")]
+        [JsonPropertyName("enquiry_biz_id")]
         public string EnquiryBizId { get; set; }
 
         /// <summary>
         /// 外部询价申请业务单号（幂等字段）
         /// </summary>
-        [JsonProperty("out_biz_no")]
+        [JsonPropertyName("out_biz_no")]
         public string OutBizNo { get; set; }
     }
 }

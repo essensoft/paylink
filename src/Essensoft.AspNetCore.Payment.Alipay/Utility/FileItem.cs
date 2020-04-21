@@ -48,12 +48,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         {
             if (string.IsNullOrEmpty(fileName))
             {
-                throw new ArgumentNullException("fileName");
+                throw new ArgumentNullException(nameof(fileName));
             }
 
             if (content == null || content.Length == 0)
             {
-                throw new ArgumentNullException("content");
+                throw new ArgumentNullException(nameof(content));
             }
 
             this.fileName = fileName;
@@ -71,7 +71,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         {
             if (string.IsNullOrEmpty(mimeType))
             {
-                throw new ArgumentNullException("mimeType");
+                throw new ArgumentNullException(nameof(mimeType));
             }
 
             this.mimeType = mimeType;

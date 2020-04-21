@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -12,13 +12,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 彩票系统支持的可用于赠送的彩种类型列表
         /// </summary>
-        [JsonProperty("results")]
+        [JsonPropertyName("results")]
         public List<LotteryType> Results { get; set; }
 
         /// <summary>
         /// 彩票系统支持的可用于赠送的彩种个数
         /// </summary>
-        [JsonProperty("total_result")]
+        [JsonPropertyName("total_result")]
         public long TotalResult { get; set; }
     }
 }

@@ -1,11 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿#if NETCOREAPP3_1
+
+using Microsoft.AspNetCore.Mvc;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
     /// <summary>
     /// Alipay 通知响应
     /// </summary>
-    public class AlipayNotifyResult
+    public static class AlipayNotifyResult
     {
         private static readonly ContentResult _success = new ContentResult { Content = "success", ContentType = "text/plain", StatusCode = 200 };
         private static readonly ContentResult _failure = new ContentResult { Content = "failure", ContentType = "text/plain", StatusCode = 200 };
@@ -21,3 +23,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         public static IActionResult Failure => _failure;
     }
 }
+
+#endif

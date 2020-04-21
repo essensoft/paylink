@@ -1,66 +1,64 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// UserMailInfoOrder Data Structure.
     /// </summary>
-    [Serializable]
     public class UserMailInfoOrder : AlipayObject
     {
         /// <summary>
         /// 联系所在城市
         /// </summary>
-        [JsonProperty("city")]
+        [JsonPropertyName("city")]
         public string City { get; set; }
 
         /// <summary>
         /// 联系人国家
         /// </summary>
-        [JsonProperty("country")]
+        [JsonPropertyName("country")]
         public string Country { get; set; }
 
         /// <summary>
         /// 联系人所在县/区
         /// </summary>
-        [JsonProperty("county_district")]
+        [JsonPropertyName("county_district")]
         public string CountyDistrict { get; set; }
 
         /// <summary>
         /// 联系所在详细地址
         /// </summary>
-        [JsonProperty("detail_address")]
+        [JsonPropertyName("detail_address")]
         public string DetailAddress { get; set; }
 
         /// <summary>
         /// 商户ipRole(pid)
         /// </summary>
-        [JsonProperty("ip_role_id")]
+        [JsonPropertyName("ip_role_id")]
         public string IpRoleId { get; set; }
 
         /// <summary>
         /// 联系人名字
         /// </summary>
-        [JsonProperty("name")]
+        [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
         /// 联系人省份
         /// </summary>
-        [JsonProperty("province")]
+        [JsonPropertyName("province")]
         public string Province { get; set; }
 
         /// <summary>
         /// 联系人所在街道
         /// </summary>
-        [JsonProperty("street")]
+        [JsonPropertyName("street")]
         public string Street { get; set; }
 
         /// <summary>
         /// 联系人电话
         /// </summary>
-        [JsonProperty("telephone")]
+        [JsonPropertyName("telephone")]
         public string Telephone { get; set; }
     }
 }

@@ -1,36 +1,34 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// ProdLORelationVO Data Structure.
     /// </summary>
-    [Serializable]
     public class ProdLORelationVO : AlipayObject
     {
         /// <summary>
         /// 区域编码
         /// </summary>
-        [JsonProperty("lo_code")]
+        [JsonPropertyName("lo_code")]
         public string LoCode { get; set; }
 
         /// <summary>
         /// 区域类型
         /// </summary>
-        [JsonProperty("lo_type")]
+        [JsonPropertyName("lo_type")]
         public string LoType { get; set; }
 
         /// <summary>
         /// 产品码
         /// </summary>
-        [JsonProperty("prod_code")]
+        [JsonPropertyName("prod_code")]
         public string ProdCode { get; set; }
 
         /// <summary>
         /// 产品版本
         /// </summary>
-        [JsonProperty("prod_version")]
+        [JsonPropertyName("prod_version")]
         public string ProdVersion { get; set; }
     }
 }

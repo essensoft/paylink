@@ -1,30 +1,28 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// VehicleDashboardResult Data Structure.
     /// </summary>
-    [Serializable]
     public class VehicleDashboardResult : AlipayObject
     {
         /// <summary>
         /// label每个元素对应的含义
         /// </summary>
-        [JsonProperty("class_name")]
+        [JsonPropertyName("class_name")]
         public string ClassName { get; set; }
 
         /// <summary>
         /// 识别的labels
         /// </summary>
-        [JsonProperty("label")]
+        [JsonPropertyName("label")]
         public long Label { get; set; }
 
         /// <summary>
         /// label每个元素对应的概率
         /// </summary>
-        [JsonProperty("score")]
+        [JsonPropertyName("score")]
         public long Score { get; set; }
     }
 }

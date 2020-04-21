@@ -17,9 +17,15 @@
         /// 解析签名内容
         /// </summary>
         /// <param name="request"></param>
-        /// <param name="responseBody"></param>
-        /// <returns></returns>
-        SignItem GetSignItem(IAlipayRequest<T> request, string responseBody);
+        /// <param name="body"></param>
+        SignItem GetSignItem(IAlipayRequest<T> request, string body);
+
+        /// <summary>
+        /// 解析证书以及签名内容
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="body"></param>
+        CertItem GetCertItem(IAlipayRequest<T> request, string body);
 
         /// <summary>
         /// 将响应串解密
@@ -28,7 +34,6 @@
         /// <param name="body"></param>
         /// <param name="encryptType"></param>
         /// <param name="encryptKey"></param>
-        /// <returns></returns>
         string EncryptSourceData(IAlipayRequest<T> request, string body, string encryptType, string encryptKey);
     }
 }

@@ -5,7 +5,7 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 企业支付 - 查询红包记录
+    /// 企业支付 - 查询红包记录 (普通商户)
     /// </summary>
     public class WeChatPayQueryWorkWxRedPackRequest : IWeChatPayCertRequest<WeChatPayQueryWorkWxRedPackResponse>
     {
@@ -30,11 +30,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             return parameters;
         }
 
-        public WeChatPaySignType GetSignType()
-        {
-            return WeChatPaySignType.MD5;
-        }
-
         public void PrimaryHandler(WeChatPayOptions options, WeChatPaySignType signType, WeChatPayDictionary sortedTxtParams)
         {
             sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
@@ -42,11 +37,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
 
             sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
-        }
-
-        public bool GetNeedCheckSign()
-        {
-            return true;
         }
 
         #endregion

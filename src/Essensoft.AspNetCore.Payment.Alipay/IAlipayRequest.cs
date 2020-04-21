@@ -107,7 +107,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         /// <summary>
         /// 获取BizModel
         /// </summary>
-        /// <returns></returns>
         AlipayObject GetBizModel();
 
         /// <summary>

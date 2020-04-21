@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayOfflineProviderMonitorLogSyncModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayOfflineProviderMonitorLogSyncModel : AlipayObject
     {
         /// <summary>
         /// 数据回流日志
         /// </summary>
-        [JsonProperty("logs")]
+        [JsonPropertyName("logs")]
         public List<ISVLogSync> Logs { get; set; }
     }
 }

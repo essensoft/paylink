@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 集点变更流水号
         /// </summary>
-        [JsonProperty("point_log_no")]
+        [JsonPropertyName("point_log_no")]
         public string PointLogNo { get; set; }
     }
 }

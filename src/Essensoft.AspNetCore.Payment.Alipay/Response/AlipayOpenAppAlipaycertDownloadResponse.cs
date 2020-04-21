@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 公钥证书Base64后的字符串
         /// </summary>
-        [JsonProperty("alipay_cert_content")]
+        [JsonPropertyName("alipay_cert_content")]
         public string AlipayCertContent { get; set; }
     }
 }

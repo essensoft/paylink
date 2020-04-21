@@ -1,5 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 云凤蝶空间列表查询接口返回值，包含分页信息，空间信息的列表。
         /// </summary>
-        [JsonProperty("data")]
+        [JsonPropertyName("data")]
         public FengdieSpaceListRespModel Data { get; set; }
     }
 }

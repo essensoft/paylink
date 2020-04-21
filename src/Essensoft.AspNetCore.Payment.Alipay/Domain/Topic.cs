@@ -1,49 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using Newtonsoft.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// Topic Data Structure.
     /// </summary>
-    [Serializable]
     public class Topic : AlipayObject
     {
         /// <summary>
         /// 营销位图片url
         /// </summary>
-        [JsonProperty("img_url")]
+        [JsonPropertyName("img_url")]
         public string ImgUrl { get; set; }
 
         /// <summary>
         /// 营销位跳转地址，点击营销位头图跳到的链接url。
         /// </summary>
-        [JsonProperty("link_url")]
+        [JsonPropertyName("link_url")]
         public string LinkUrl { get; set; }
 
         /// <summary>
         /// 营销位描述
         /// </summary>
-        [JsonProperty("sub_title")]
+        [JsonPropertyName("sub_title")]
         public string SubTitle { get; set; }
 
         /// <summary>
         /// 营销位名称
         /// </summary>
-        [JsonProperty("title")]
+        [JsonPropertyName("title")]
         public string Title { get; set; }
 
         /// <summary>
         /// 营销位id
         /// </summary>
-        [JsonProperty("topic_id")]
+        [JsonPropertyName("topic_id")]
         public string TopicId { get; set; }
 
         /// <summary>
         /// 营销位内容列表
         /// </summary>
-        [JsonProperty("topic_items")]
+        [JsonPropertyName("topic_items")]
         public List<TopicItem> TopicItems { get; set; }
     }
 }

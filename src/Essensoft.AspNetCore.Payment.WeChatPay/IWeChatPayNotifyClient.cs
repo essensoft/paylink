@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿#if NETCOREAPP3_1
+
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
@@ -15,3 +17,5 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         Task<T> ExecuteAsync<T>(HttpRequest request, WeChatPayOptions options) where T : WeChatPayNotify;
     }
 }
+
+#endif

@@ -1,4 +1,4 @@
-﻿using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// <summary>
         /// 分组圈出的人群数量
         /// </summary>
-        [JsonProperty("count")]
+        [JsonPropertyName("count")]
         public string Count { get; set; }
     }
 }

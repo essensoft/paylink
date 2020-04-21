@@ -17,8 +17,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         {
             services.AddHttpClient(nameof(AlipayClient));
 
+            services.AddSingleton<AlipayPublicKeyManager>();
             services.AddSingleton<IAlipayClient, AlipayClient>();
+
+#if NETCOREAPP3_1
             services.AddSingleton<IAlipayNotifyClient, AlipayNotifyClient>();
+#endif
 
             if (setupAction != null)
             {

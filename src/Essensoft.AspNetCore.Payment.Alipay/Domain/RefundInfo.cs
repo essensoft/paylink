@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// RefundInfo Data Structure.
     /// </summary>
-    [Serializable]
     public class RefundInfo : AlipayObject
     {
         /// <summary>
         /// 退款金额
         /// </summary>
-        [JsonProperty("amount")]
+        [JsonPropertyName("amount")]
         public string Amount { get; set; }
 
         /// <summary>
         /// 商品单ID
         /// </summary>
-        [JsonProperty("item_order_no")]
+        [JsonPropertyName("item_order_no")]
         public string ItemOrderNo { get; set; }
     }
 }

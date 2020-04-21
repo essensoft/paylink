@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
     public class AlipayOpenMiniVersionAuditApplyRequest : IAlipayUploadRequest<AlipayOpenMiniVersionAuditApplyResponse>
     {
         /// <summary>
-        /// 小程序类目，格式为 第一个一级类目_第一个二级类目;第二个一级类目_第二个二级类目，详细类目可以参考https://docs.alipay.com/isv/10325，如果不填默认采用当前小程序应用类目。使用默认应用类目后不需要再次上传营业执照号、营业执照名、营业执照截图、营业执照有效期。
+        /// 小程序类目，格式为 第一个一级类目_第一个二级类目;第二个一级类目_第二个二级类目，详细类目可以通过  https://docs.open.alipay.com/api_49/alipay.open.mini.category.query接口查询，如果不填默认采用当前小程序应用类目。使用默认应用类目后不需要再次上传营业执照号、营业执照名、营业执照截图、营业执照有效期。
         /// </summary>
         public string AppCategoryIds { get; set; }
 
@@ -21,17 +21,17 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string AppDesc { get; set; }
 
         /// <summary>
-        /// 小程序应用英文名称，如果不填默认采用当前小程序应用英文名称，3～30个字符
+        /// 小程序应用英文名称，如果不填默认采用当前小程序应用英文名称，3～30个字符；小程序英文名称只允许英文和数字
         /// </summary>
         public string AppEnglishName { get; set; }
 
         /// <summary>
-        /// 小程序logo图标，图片格式必须为：png、jpeg、jpg，建议上传像素为180*180，如果不填默认采用当前小程序应用logo图标
+        /// 小程序logo图标，图片格式必须为：png、jpeg、jpg，建议上传像素为180*180，如果不填默认采用当前小程序应用logo图标;logo图片最大256KB
         /// </summary>
         public FileItem AppLogo { get; set; }
 
         /// <summary>
-        /// 小程序应用名称，如果不填默认采用当前小程序应用名称
+        /// 小程序应用名称，如果不填默认采用当前小程序应用名称 小程序中文名称限制为3-20个字符 小程序中文名称只能包含中文、数字、英文及下划线
         /// </summary>
         public string AppName { get; set; }
 
@@ -41,72 +41,72 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string AppSlogan { get; set; }
 
         /// <summary>
-        /// 小程序版本号
+        /// 小程序版本号;请在开发版上执行提交审核操作
         /// </summary>
         public string AppVersion { get; set; }
 
         /// <summary>
-        /// 端参数
+        /// 小程序投放的端参数，例如投放到支付宝钱包是支付宝端。该参数可选，默认支付宝端 com.alipay.alipaywallet:支付宝端
         /// </summary>
         public string BundleId { get; set; }
 
         /// <summary>
-        /// 第五张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序第五张营业执照照片
+        /// 第五张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material中是否需要营业执照信息，如果不填默认采用当前小程序第五张营业执照照片;最大宽度2160，最大高度3840
         /// </summary>
         public FileItem FifthLicensePic { get; set; }
 
         /// <summary>
-        /// 小程序第五张应用截图，不能超过4MB，图片格式只支持jpg，png
+        /// 小程序第五张应用截图，不能超过4MB，图片格式只支持jpg，png;小程序截图数量最小为2，最大为5 最大宽度2160，最大高度3840
         /// </summary>
         public FileItem FifthScreenShot { get; set; }
 
         /// <summary>
-        /// 第一张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序第一张营业执照照片
+        /// 第一张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material中是否需要营业执照信息，如果不填默认采用当前小程序第一张营业执照照片;最大宽度2160，最大高度3840
         /// </summary>
         public FileItem FirstLicensePic { get; set; }
 
         /// <summary>
-        /// 实例化的小程序可以不用传第一张应用截图，小程序第一张应用截图，不能超过4MB，图片格式只支持jpg，png
+        /// 实例化的小程序可以不用传第一张应用截图，小程序第一张应用截图，不能超过4MB，图片格式只支持jpg，png;小程序截图数量最小为2，最大为5 最大宽度2160，最大高度3840
         /// </summary>
         public FileItem FirstScreenShot { get; set; }
 
         /// <summary>
-        /// 第一张特殊资质图片，不能超过4MB，图片格式只支持jpg、png、jepg，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325 中是否需要特殊资质，如果不填默认采用当前小程序第一张特殊资质
+        /// 第一张特殊资质图片，不能超过4MB，图片格式只支持jpg、png、jepg，部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 中是否需要特殊资质，如果不填默认采用当前小程序第一张特殊资质
         /// </summary>
         public FileItem FirstSpecialLicensePic { get; set; }
 
         /// <summary>
-        /// 第四张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序第四张营业执照照片
+        /// 第四张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material中是否需要营业执照信息，如果不填默认采用当前小程序第四张营业执照照片;最大宽度2160，最大高度3840
         /// </summary>
         public FileItem FourthLicensePic { get; set; }
 
         /// <summary>
-        /// 小程序第四张应用截图，不能超过4MB，图片格式只支持jpg，png
+        /// 小程序第四张应用截图，不能超过4MB，图片格式只支持jpg，png;小程序截图数量最小为2，最大为5 最大宽度2160，最大高度3840
         /// </summary>
         public FileItem FourthScreenShot { get; set; }
 
         /// <summary>
-        /// 营业执照名称，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填类目采用当前小程序应用营业执照名称。
+        /// 营业执照名称，部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material中是否需要营业执照信息，如果不填类目采用当前小程序应用营业执照名称。
         /// </summary>
         public string LicenseName { get; set; }
 
         /// <summary>
-        /// 营业执照号，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序应用营业执照号。
+        /// 营业执照号，部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material中是否需要营业执照信息，如果不填默认采用当前小程序应用营业执照号。
         /// </summary>
         public string LicenseNo { get; set; }
 
         /// <summary>
-        /// 营业执照有效期，格式为yyyy-MM-dd，9999-12-31表示长期，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序营业执照有效期
+        /// 营业执照有效期，格式为yyyy-MM-dd，9999-12-31表示长期，部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material中是否需要营业执照信息，如果不填默认采用当前小程序营业执照有效期
         /// </summary>
         public string LicenseValidDate { get; set; }
 
         /// <summary>
-        /// 小程序备注
+        /// 小程序备注;小程序备注最多500字符
         /// </summary>
         public string Memo { get; set; }
 
         /// <summary>
-        /// 门头照图片，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序门头照图片
+        /// 门头照图片，部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material中是否需要营业执照信息，如果不填默认采用当前小程序门头照图片;门头照支持扩展名为jpg, png;门头照最大4MB，宽度2160，高度3840
         /// </summary>
         public FileItem OutDoorPic { get; set; }
 
@@ -116,32 +116,32 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string RegionType { get; set; }
 
         /// <summary>
-        /// 第二张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序第二张营业执照照片
+        /// 第二张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material中是否需要营业执照信息，如果不填默认采用当前小程序第二张营业执照照片;最大宽度2160，最大高度3840
         /// </summary>
         public FileItem SecondLicensePic { get; set; }
 
         /// <summary>
-        /// 实例化的小程序可以不用传第二张应用截图，小程序第二张应用截图，不能超过4MB，图片格式只支持jpg，png
+        /// 实例化的小程序可以不用传第二张应用截图，小程序第二张应用截图，不能超过4MB，图片格式只支持jpg，png;小程序截图数量最小为2，最大为5 最大宽度2160，最大高度3840
         /// </summary>
         public FileItem SecondScreenShot { get; set; }
 
         /// <summary>
-        /// 第二张特殊资质图片文件，不能超过4MB，图片格式只支持jpg、png、jepg，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325 中是否需要特殊资质，如果不填默认采用当前小程序第二张特殊资质图片
+        /// 第二张特殊资质图片文件，不能超过4MB，图片格式只支持jpg、png、jepg，部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 中是否需要特殊资质，如果不填默认采用当前小程序第二张特殊资质图片
         /// </summary>
         public FileItem SecondSpecialLicensePic { get; set; }
 
         /// <summary>
-        /// 小程序客服邮箱，如果不填默认采用当前小程序的应用客服邮箱
+        /// 小程序客服邮箱，如果不填默认采用当前小程序的应用客服邮箱;小程序客服电话和邮箱至少输入一个
         /// </summary>
         public string ServiceEmail { get; set; }
 
         /// <summary>
-        /// 小程序客服电话，如果不填默认采用当前小程序的应用客服电话
+        /// 小程序客服电话，如果不填默认采用当前小程序的应用客服电话;小程序客服电话和邮箱至少输入一个 只允许包含数字和-，5-30个字符
         /// </summary>
         public string ServicePhone { get; set; }
 
         /// <summary>
-        /// 省市区信息，当区域类型为LOCATION时，不能为空，province_code不能为空，当填写city_code时，province_code不能为空，当填写area_code时，province_code和city_code不能为空。只填province_code时，该省全部选择；province_code和city_code都填时，该市全部选择。province_code，city_code和area_code都填时，该县全部选择。具体code可以参考https://docs.alipay.com/isv/10327
+        /// 省市区信息，当区域类型为LOCATION时，不能为空，province_code不能为空，当填写city_code时，province_code不能为空，当填写area_code时，province_code和city_code不能为空。只填province_code时，该省全部选择；province_code和city_code都填时，该市全部选择。province_code，city_code和area_code都填时，该县全部选择。
         /// </summary>
         public List<RegionInfo> ServiceRegionInfo { get; set; }
 
@@ -161,17 +161,17 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string TestPassword { get; set; }
 
         /// <summary>
-        /// 第三张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要营业执照信息，如果不填默认采用当前小程序第三张营业执照照片
+        /// 第三张营业执照照片，不能超过4MB，图片格式只支持jpg，png，部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material中是否需要营业执照信息，如果不填默认采用当前小程序第三张营业执照照片;最大宽度2160，最大高度3840
         /// </summary>
         public FileItem ThirdLicensePic { get; set; }
 
         /// <summary>
-        /// 小程序第三张应用截图，不能超过4MB，图片格式只支持jpg，png
+        /// 小程序第三张应用截图，不能超过4MB，图片格式只支持jpg，png;小程序截图数量最小为2，最大为5 最大宽度2160，最大高度3840
         /// </summary>
         public FileItem ThirdScreenShot { get; set; }
 
         /// <summary>
-        /// 第三张特殊资质图片文件，不能超过4MB，图片格式只支持jpg、png、jepg，部分小程序类目需要提交，参照https://docs.alipay.com/isv/10325中是否需要特殊资质，如果不填默认采用当前小程序第三张特殊资质
+        /// 第三张特殊资质图片文件，不能超过4MB，图片格式只支持jpg、png、jepg，部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material中是否需要特殊资质，如果不填默认采用当前小程序第三张特殊资质
         /// </summary>
         public FileItem ThirdSpecialLicensePic { get; set; }
 

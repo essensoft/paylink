@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#if NETCOREAPP3_1
+
+using System.Collections.Generic;
 using System.Xml.Serialization;
 using Essensoft.AspNetCore.Payment.WeChatPay.Domain;
 using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
@@ -6,7 +8,7 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
 {
     /// <summary>
-    /// 统一下单 - 支付结果通知
+    /// 统一下单 - 支付结果通知 (普通商户 / 服务商)
     /// </summary>
     [XmlRoot("xml")]
     public class WeChatPayUnifiedOrderNotify : WeChatPayNotify
@@ -196,8 +198,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
         /// </summary>
         internal override void Execute()
         {
-            var parser = new WeChatPayListPropertyParser();
-            CouponInfos = parser.Parse<CouponInfo>(ResponseParameters);
+            CouponInfos = WeChatPayListPropertyParser.Parse<CouponInfo>(Parameters);
         }
     }
 }
+
+#endif

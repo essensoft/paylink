@@ -1,24 +1,22 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
     /// <summary>
     /// AlipayFundCouponWufuCardQueryModel Data Structure.
     /// </summary>
-    [Serializable]
     public class AlipayFundCouponWufuCardQueryModel : AlipayObject
     {
         /// <summary>
         /// 业务场景码
         /// </summary>
-        [JsonProperty("scene")]
+        [JsonPropertyName("scene")]
         public string Scene { get; set; }
 
         /// <summary>
         /// 蚂蚁统一会员ID
         /// </summary>
-        [JsonProperty("user_id")]
+        [JsonPropertyName("user_id")]
         public string UserId { get; set; }
     }
 }

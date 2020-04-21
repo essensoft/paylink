@@ -5,15 +5,10 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 查询分账结果
+    /// 分账 - 查询分账结果 (普通商户 / 服务商)
     /// </summary>
     public class WeChatPayProfitSharingQueryRequest : IWeChatPayRequest<WeChatPayProfitSharingQueryResponse>
     {
-        /// <summary>
-        /// 子商户号
-        /// </summary>
-        public string SubMchId { get; set; }
-
         /// <summary>
         /// 微信订单号
         /// </summary>
@@ -35,7 +30,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             var parameters = new WeChatPayDictionary
             {
-                { "sub_mch_id", SubMchId },
                 { "transaction_id", TransactionId },
                 { "out_trade_no", OutTradeNo }
             };
@@ -51,6 +45,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
+            sortedTxtParams.Add(WeChatPayConsts.sub_mch_id, options.SubMchId);
 
             if (signType == WeChatPaySignType.HMAC_SHA256)
             {
@@ -58,11 +53,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             }
 
             sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
-        }
-
-        public bool GetNeedCheckSign()
-        {
-            return true;
         }
 
         #endregion
