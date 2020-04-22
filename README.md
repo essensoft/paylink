@@ -38,6 +38,10 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 
 ## 捐赠
 
+[捐赠名单](FUNDING.md)
+
+---
+
 ![QrCode](img/payment-qrcode.png)
 
 ## 开源协议
