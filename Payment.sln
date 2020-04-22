@@ -6,8 +6,9 @@ MinimumVisualStudioVersion = 15.0.26124.0
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0-solution-items", "0-solution-items", "{E2D9A588-E676-446B-BE7B-B3AAAD9FC9B6}"
 	ProjectSection(SolutionItems) = preProject
 		Directory.Build.props = Directory.Build.props
+		FUNDING.md = FUNDING.md
 		LICENSE = LICENSE
-		README.MD = README.MD
+		README.md = README.md
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1-src", "1-src", "{D3871E61-CA47-4BD0-8BF9-B64A42B2200D}"

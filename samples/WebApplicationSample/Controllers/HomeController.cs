@@ -18,14 +18,6 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// 打赏
-        /// </summary>
-        public IActionResult Gratuity()
-        {
-            return View();
-        }
-
-        /// <summary>
         /// 生成二维码SVG
         /// </summary>
         /// <param name="data"></param>
