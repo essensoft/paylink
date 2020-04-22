@@ -18,6 +18,7 @@
         public const string ENCRYPT_TYPE = "encrypt_type";
         public const string BIZ_CONTENT = "biz_content";
         public const string APP_AUTH_TOKEN = "app_auth_token";
+        public const string TARGET_APP_ID = "target_app_id";
         public const string RETURN_URL = "return_url";
         public const string APP_CERT_SN = "app_cert_sn";
         public const string ALIPAY_CERT_SN = "alipay_cert_sn";
