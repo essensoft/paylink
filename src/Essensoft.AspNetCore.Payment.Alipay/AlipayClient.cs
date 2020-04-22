@@ -39,6 +39,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         public async Task<T> PageExecuteAsync<T>(IAlipayRequest<T> request, AlipayOptions options, string accessToken, string reqMethod) where T : AlipayResponse
         {
+            return await PageExecuteAsync(request, options, accessToken, null, reqMethod);
+        }
+
+        public async Task<T> PageExecuteAsync<T>(IAlipayRequest<T> request, AlipayOptions options, string accessToken, string appAuthToken, string reqMethod) where T : AlipayResponse
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -75,6 +80,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 { AlipayConstants.FORMAT, options.Format },
                 { AlipayConstants.TIMESTAMP, DateTime.Now },
                 { AlipayConstants.ACCESS_TOKEN, accessToken },
+                { AlipayConstants.APP_AUTH_TOKEN, appAuthToken },
                 { AlipayConstants.SIGN_TYPE, options.SignType },
                 { AlipayConstants.TERMINAL_TYPE, request.GetTerminalType() },
                 { AlipayConstants.TERMINAL_INFO, request.GetTerminalInfo() },
@@ -149,6 +155,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         public async Task<T> ExecuteAsync<T>(IAlipayRequest<T> request, AlipayOptions options, string accessToken, string appAuthToken) where T : AlipayResponse
         {
+            return await ExecuteAsync(request, options, accessToken, appAuthToken, null);
+        }
+
+        public async Task<T> ExecuteAsync<T>(IAlipayRequest<T> request, AlipayOptions options, string accessToken, string appAuthToken, string targetAppId) where T : AlipayResponse
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -208,6 +219,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             if (!string.IsNullOrEmpty(appAuthToken))
             {
                 txtParams.Add(AlipayConstants.APP_AUTH_TOKEN, appAuthToken);
+            }
+
+            if (!string.IsNullOrEmpty(targetAppId))
+            {
+                txtParams.Add(AlipayConstants.TARGET_APP_ID, targetAppId);
             }
 
             if (request.GetNeedEncrypt())
@@ -307,6 +323,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         public async Task<T> CertificateExecuteAsync<T>(IAlipayRequest<T> request, AlipayOptions options, string accessToken, string appAuthToken) where T : AlipayResponse
         {
+            return await CertificateExecuteAsync(request, options, accessToken, appAuthToken, null);
+        }
+
+        public async Task<T> CertificateExecuteAsync<T>(IAlipayRequest<T> request, AlipayOptions options, string accessToken, string appAuthToken, string targetAppId) where T : AlipayResponse
+        {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
@@ -378,6 +399,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             if (!string.IsNullOrEmpty(appAuthToken))
             {
                 txtParams.Add(AlipayConstants.APP_AUTH_TOKEN, appAuthToken);
+            }
+
+            if (!string.IsNullOrEmpty(appAuthToken))
+            {
+                txtParams.Add(AlipayConstants.TARGET_APP_ID, targetAppId);
             }
 
             if (request.GetNeedEncrypt())
@@ -602,7 +628,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         #region SDK Execute
 
-        public Task<T> SdkExecuteAsync<T>(IAlipayRequest<T> request, AlipayOptions options) where T : AlipayResponse
+        public async Task<T> SdkExecuteAsync<T>(IAlipayRequest<T> request, AlipayOptions options) where T : AlipayResponse
+        {
+            return await SdkExecuteAsync(request, options, null);
+        }
+
+        public Task<T> SdkExecuteAsync<T>(IAlipayRequest<T> request, AlipayOptions options, string appAuthToken) where T : AlipayResponse
         {
             if (options == null)
             {
@@ -630,7 +661,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             }
 
             // 构造请求参数
-            var requestParams = BuildRequestParams(request, null, null, options);
+            var requestParams = BuildRequestParams(request, null, appAuthToken, options);
 
             // 字典排序
             var sortedParams = new SortedDictionary<string, string>(requestParams);
