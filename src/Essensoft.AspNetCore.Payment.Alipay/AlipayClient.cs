@@ -401,7 +401,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 txtParams.Add(AlipayConstants.APP_AUTH_TOKEN, appAuthToken);
             }
 
-            if (!string.IsNullOrEmpty(appAuthToken))
+            if (!string.IsNullOrEmpty(targetAppId))
             {
                 txtParams.Add(AlipayConstants.TARGET_APP_ID, targetAppId);
             }
