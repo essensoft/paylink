@@ -2,11 +2,11 @@
   
   <PropertyGroup>
     <Authors>Essensoft</Authors>
-    <Version>3.1.7</Version>
+    <Version>3.1.8</Version>
     <NoWarn>$(NoWarn);CS1570;CS1591;CA1031;IDE0063</NoWarn>
     <Description>Essensoft.AspNetCore.Payment</Description>
     <Copyright>© Essensoft 2020</Copyright>
-    <PackageIconUrl>https://raw.githubusercontent.com/essensoft/payment/master/img/nuget-payment-logo.png</PackageIconUrl>
+    <PackageIconUrl>https://raw.githubusercontent.com/essensoft/payment/master/img/payment-logo-nuget.png</PackageIconUrl>
     <PackageProjectUrl>https://github.com/essensoft/payment</PackageProjectUrl>
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/essensoft/payment</RepositoryUrl>
