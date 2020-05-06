@@ -96,6 +96,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         public string SubOpenId { get; set; }
 
         /// <summary>
+        /// 电子发票入口开放标识
+        /// </summary>
+        public string Receipt { get; set; }
+
+        /// <summary>
         /// 场景信息
         /// </summary>
         public string SceneInfo { get; set; }
@@ -133,6 +138,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { "limit_pay", LimitPay },
                 { "openid", OpenId },
                 { "sub_openid", SubOpenId },
+                { "receipt", Receipt },
                 { "scene_info", SceneInfo },
                 { "profit_sharing", ProfitSharing }
             };
