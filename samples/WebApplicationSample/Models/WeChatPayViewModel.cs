@@ -307,12 +307,12 @@ namespace WebApplicationSample.Models
         public string PartnerTradeNo { get; set; }
 
         [Required]
-        [Display(Name = "enc_bank_no")]
-        public string EncBankNo { get; set; }
+        [Display(Name = "bank_no")]
+        public string BankNo { get; set; }
 
         [Required]
-        [Display(Name = "enc_true_name")]
-        public string EncTrueName { get; set; }
+        [Display(Name = "true_name")]
+        public string TrueName { get; set; }
 
         [Required]
         [Display(Name = "bank_code")]
