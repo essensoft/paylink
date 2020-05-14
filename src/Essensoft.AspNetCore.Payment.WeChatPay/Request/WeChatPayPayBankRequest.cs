@@ -18,12 +18,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         /// <summary>
         /// 收款方银行卡号
         /// </summary>
-        public string EncBankNo { get; set; }
+        public string BankNo { get; set; }
 
         /// <summary>
         /// 收款方用户名
         /// </summary>
-        public string EncTrueName { get; set; }
+        public string TrueName { get; set; }
 
         /// <summary>
         /// 收款方开户行
@@ -52,8 +52,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             var parameters = new WeChatPayDictionary
             {
                 { "partner_trade_no", PartnerTradeNo},
-                { "enc_bank_no", EncBankNo },
-                { "enc_true_name", EncTrueName },
                 { "bank_code", BankCode },
                 { "amount", Amount },
                 { "desc", Desc}
@@ -65,17 +63,14 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         {
             if (string.IsNullOrEmpty(options.RsaPublicKey))
             {
-                throw new WeChatPayException("WeChatPayPayBankRequest: RsaPublicKey is null!");
+                throw new WeChatPayException($"{nameof(WeChatPayPayBankRequest)}.{nameof(PrimaryHandler)}: {nameof(options.RsaPublicKey)} is null or empty!");
             }
 
             sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
 
-            var no = OaepSHA1WithRSA.Encrypt(sortedTxtParams.GetValue(WeChatPayConsts.enc_bank_no), options.RsaPublicKey);
-            sortedTxtParams.SetValue(WeChatPayConsts.enc_bank_no, no);
-
-            var name = OaepSHA1WithRSA.Encrypt(sortedTxtParams.GetValue(WeChatPayConsts.enc_true_name), options.RsaPublicKey);
-            sortedTxtParams.SetValue(WeChatPayConsts.enc_true_name, name);
+            sortedTxtParams.Add(WeChatPayConsts.enc_bank_no, OaepSHA1WithRSA.Encrypt(BankNo, options.RsaPublicKey));
+            sortedTxtParams.Add(WeChatPayConsts.enc_true_name, OaepSHA1WithRSA.Encrypt(TrueName, options.RsaPublicKey));
 
             sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
         }

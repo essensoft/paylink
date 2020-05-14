@@ -527,8 +527,8 @@ namespace WebApplicationSample.Controllers
             var request = new WeChatPayPayBankRequest
             {
                 PartnerTradeNo = viewModel.PartnerTradeNo,
-                EncBankNo = viewModel.EncBankNo,
-                EncTrueName = viewModel.EncTrueName,
+                BankNo = viewModel.BankNo,
+                TrueName = viewModel.TrueName,
                 BankCode = viewModel.BankCode,
                 Amount = viewModel.Amount,
                 Desc = viewModel.Desc
