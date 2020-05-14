@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
     /// <summary>
-    /// Alipay 选项。
+    /// Alipay 配置选项
     /// </summary>
     public class AlipayOptions
     {
@@ -16,55 +16,55 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         internal string RootCertSN;
 
         /// <summary>
-        /// 蚂蚁金服开放平台 应用ID
+        /// 应用Id
         /// </summary>
         public string AppId { get; set; }
 
         /// <summary>
         /// RSA 支付宝公钥
-        /// 加签方式为公钥证书时，留空
+        /// “公钥证书”方式时，留空
+        /// “普通公钥”方式时，必填
         /// </summary>
         public string AlipayPublicKey { get; set; }
 
         /// <summary>
         /// RSA 应用私钥
-        /// 加签方式为公钥证书时，为证书对应的私钥
         /// </summary>
         public string AppPrivateKey { get; set; }
 
         /// <summary>
-        /// 服务地址
-        /// "https://openapi.alipay.com/gateway.do"
+        /// 服务网关地址
+        /// 默认为："https://openapi.alipay.com/gateway.do"
         /// </summary>
         public string ServerUrl { get; set; } = "https://openapi.alipay.com/gateway.do";
 
         /// <summary>
         /// 数据格式
-        /// "json"
+        /// 默认为："json"
         /// </summary>
         public string Format { get; } = "json";
 
         /// <summary>
         /// 接口版本
-        /// "1.0"
+        /// 默认为："1.0"
         /// </summary>
         public string Version { get; set; } = "1.0";
 
         /// <summary>
         /// 签名方式
-        /// "RSA2"
+        /// 默认为："RSA2"
         /// </summary>
         public string SignType { get; set; } = "RSA2";
 
         /// <summary>
         /// 编码格式
-        /// "utf-8"
+        /// 默认为："utf-8"
         /// </summary>
         public string Charset { get; } = "utf-8";
 
         /// <summary>
         /// 加密方式
-        /// "AES"
+        /// 默认为："AES"
         /// </summary>
         public string EncyptType { get; } = "AES";
 
@@ -74,7 +74,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         public string EncyptKey { get; set; }
 
         /// <summary>
-        /// 商户证书
+        /// 应用公钥证书
+        /// 可为文件路径 / 文件的base64字符串
+        /// “公钥证书”方式时，必填
+        /// “普通公钥”方式时，留空
         /// </summary>
         public string AppCert
         {
@@ -92,6 +95,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         /// <summary>
         /// 支付宝公钥证书
+        /// 可为文件路径 / 文件的base64字符串
+        /// “公钥证书”方式时，必填
+        /// “普通公钥”方式时，留空
         /// </summary>
         public string AlipayPublicCert
         {
@@ -109,7 +115,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         }
 
         /// <summary>
-        /// 根证书
+        /// 支付宝根证书
+        /// 可为文件路径 / 文件的base64字符串
+        /// “公钥证书”方式时，必填
+        /// “普通公钥”方式时，留空
         /// </summary>
         public string RootCert
         {
