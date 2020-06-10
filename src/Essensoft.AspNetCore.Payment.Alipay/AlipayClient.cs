@@ -501,13 +501,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 _publicKeyManager.TryAdd(options.AlipayPublicCertSN, options.AlipayPublicKey);
             }
 
-            //如果响应的支付宝公钥证书序号已经缓存过，则直接使用缓存的公钥
+            // 如果响应的支付宝公钥证书序号已经缓存过，则直接使用缓存的公钥
             if (_publicKeyManager.TryGetValue(certItem.CertSN, out var publicKey))
             {
                 return publicKey;
             }
 
-            //否则重新下载新的支付宝公钥证书并更新缓存
+            // 否则重新下载新的支付宝公钥证书并更新缓存
             var model = new AlipayOpenAppAlipaycertDownloadModel
             {
                 AlipayCertSn = certItem.CertSN
