@@ -9,12 +9,12 @@ namespace Essensoft.AspNetCore.Payment.Security
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
         }
 
-        internal static Encoding GetEncoding(string name)
+        public static Encoding GetEncoding(string name)
         {
             return Encoding.GetEncoding(name);
         }
 
-        internal static Encoding GetEncoding(int codepage)
+        public static Encoding GetEncoding(int codepage)
         {
             return Encoding.GetEncoding(codepage);
         }
