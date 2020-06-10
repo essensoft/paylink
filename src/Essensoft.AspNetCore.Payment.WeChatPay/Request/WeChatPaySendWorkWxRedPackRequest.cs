@@ -101,7 +101,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 "wxappid",
             };
 
-            sortedTxtParams.Add(WeChatPayConsts.workwx_sign, WeChatPaySignature.SignWithSecret(sortedTxtParams, options.Secret, signList));
+            sortedTxtParams.Add(WeChatPayConsts.workwx_sign, WeChatPaySignature.SignWithSecret(sortedTxtParams, options.AppSecret, signList));
             sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
         }
 

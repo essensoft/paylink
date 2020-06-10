@@ -14,9 +14,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         /// <summary>
         /// 应用密钥
-        /// 如：目前仅调用"企业红包API"时，使用企业微信的Secret。
+        /// 如：目前仅调用"企业红包API"时，使用企业微信的AppSecret。
         /// </summary>
-        public string Secret { get; set; }
+        public string AppSecret { get; set; }
 
         /// <summary>
         /// 应用号
