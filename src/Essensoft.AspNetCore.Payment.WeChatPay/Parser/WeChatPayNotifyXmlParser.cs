@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if NETCOREAPP3_1
+
+using System;
 using System.IO;
 using System.Text;
 using System.Xml.Linq;
@@ -6,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
 {
-    public class WeChatPayXmlParser<T> : IWeChatPayParser<T> where T : WeChatPayObject
+    public class WeChatPayNotifyXmlParser<T> : IWeChatPayNotifyParser<T> where T : WeChatPayNotify
     {
         public T Parse(string body)
         {
@@ -85,3 +87,5 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
         }
     }
 }
+
+#endif

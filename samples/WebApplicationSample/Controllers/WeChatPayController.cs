@@ -1,6 +1,8 @@
-﻿using System.Text.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.WeChatPay;
+using Essensoft.AspNetCore.Payment.WeChatPay.Domain;
 using Essensoft.AspNetCore.Payment.WeChatPay.Request;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -578,6 +580,61 @@ namespace WebApplicationSample.Controllers
                 return View();
             }
 
+            return View();
+        }
+
+        /// <summary>
+        /// 获取平台证书列表
+        /// </summary>
+        [HttpGet]
+        [HttpPost]
+        public async Task<IActionResult> GetCertificates()
+        {
+            if (Request.Method == "POST")
+            {
+                var request = new WeChatPayCertificatesRequest();
+                var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+                ViewData["response"] = response.Body;
+                return View();
+            }
+
+            return View();
+        }
+
+        /// <summary>
+        /// 扫码支付-Native下单API
+        /// </summary>
+        [HttpGet]
+        public IActionResult QrCodePayV3()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 扫码支付-Native下单API
+        /// </summary>
+        /// <param name="viewModel"></param>
+        [HttpPost]
+        public async Task<IActionResult> QrCodePayV3(WeChatPayQrCodePayV3ViewModel viewModel)
+        {
+            var model = new WeChatPayTransactionsNativeModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                MchId = _optionsAccessor.Value.MchId,
+                Amount = new Amount { Total = viewModel.Total, Currency = "CNY" },
+                Description = viewModel.Description,
+                NotifyUrl = viewModel.NotifyUrl,
+                OutTradeNo = viewModel.OutTradeNo,
+            };
+
+            var request = new WeChatPayTransactionsNativeRequest();
+            request.SetBizModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+
+            // response.CodeUrl 给前端生成二维码
+            ViewData["qrcode"] = response.CodeUrl;
+            ViewData["response"] = response.Body;
             return View();
         }
     }

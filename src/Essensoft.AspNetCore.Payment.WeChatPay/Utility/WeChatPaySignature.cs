@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
             var sb = new StringBuilder();
             foreach (var iter in dictionary)
             {
-                if (!string.IsNullOrEmpty(iter.Value) && iter.Key != "sign")
+                if (!string.IsNullOrEmpty(iter.Value) && iter.Key != WeChatPayConsts.sign)
                 {
                     sb.Append(iter.Key).Append('=').Append(iter.Value).Append("&");
                 }

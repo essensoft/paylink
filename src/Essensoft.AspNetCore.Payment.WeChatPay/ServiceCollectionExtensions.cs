@@ -12,7 +12,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.TryAddEnumerable(ServiceDescriptor.Singleton<IHttpMessageHandlerBuilderFilter, WeChatPayHandlerBuilderFilter>());
 
-            services.AddSingleton<WeChatPayCertificateManager>();
+            services.AddSingleton<WeChatPayClientCertificateManager>();
+            services.AddSingleton<WeChatPayPlatformCertificateManager>();
             services.AddSingleton<IWeChatPayClient, WeChatPayClient>();
 
 #if NETCOREAPP3_1

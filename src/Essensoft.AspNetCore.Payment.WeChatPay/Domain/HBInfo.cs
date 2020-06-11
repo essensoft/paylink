@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Domain
     /// <summary>
     /// 红包信息
     /// </summary>
-    public class HbInfo
+    public class HbInfo : WeChatPayObject
     {
         /// <summary>
         /// 领取红包的OpenId

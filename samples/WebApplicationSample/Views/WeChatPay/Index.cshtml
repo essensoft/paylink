@@ -126,5 +126,17 @@
             <td><a href="https://pay.weixin.qq.com/wiki/doc/api/tools/mch_pay.php?chapter=24_7&index=4" target="_blank">https://fraud.mch.weixin.qq.com/risk/getpublickey</a></td>
             <td><a asp-controller="WeChatPay" asp-action="GetPublicKey">立即测试</a></td>
         </tr>
+        <tr>
+            <th scope="row">19</th>
+            <td>获取平台证书列表</td>
+            <td><a href="https://wechatpay-api.gitbook.io/wechatpay-api-v3/jie-kou-wen-dang/ping-tai-zheng-shu" target="_blank">https://api.mch.weixin.qq.com/v3/certificates</a></td>
+            <td><a asp-controller="WeChatPay" asp-action="GetCertificates">立即测试</a></td>
+        </tr>
+        <tr>
+            <th scope="row">20</th>
+            <td>扫码支付-Native下单</td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_3.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/pay/transactions/native</a></td>
+            <td><a asp-controller="WeChatPay" asp-action="QrCodePayV3">立即测试</a></td>
+        </tr>
     </tbody>
 </table>

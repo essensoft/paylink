@@ -1,9 +1,12 @@
 ﻿using System;
-using System.IO;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.Security;
 using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
+using Essensoft.AspNetCore.Payment.WeChatPay.Request;
+using Essensoft.AspNetCore.Payment.WeChatPay.Response;
 using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
@@ -13,14 +16,16 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         public const string Prefix = nameof(WeChatPayClient) + ".";
 
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly WeChatPayCertificateManager _certificateManager;
+        private readonly WeChatPayClientCertificateManager _clientCertificateManager;
+        private readonly WeChatPayPlatformCertificateManager _platformCertificateManager;
 
         #region WeChatPayClient Constructors
 
-        public WeChatPayClient(IHttpClientFactory httpClientFactory, WeChatPayCertificateManager certificateManager)
+        public WeChatPayClient(IHttpClientFactory httpClientFactory, WeChatPayClientCertificateManager clientCertificateManager, WeChatPayPlatformCertificateManager platformCertificateManager)
         {
             _httpClientFactory = httpClientFactory;
-            _certificateManager = certificateManager;
+            _clientCertificateManager = clientCertificateManager;
+            _platformCertificateManager = platformCertificateManager;
         }
 
         #endregion
@@ -55,8 +60,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             request.PrimaryHandler(options, signType, sortedTxtParams);
 
             var client = _httpClientFactory.CreateClient(nameof(WeChatPayClient));
-            var body = await client.PostAsync(request.GetRequestUrl(), sortedTxtParams);
-            var parser = new WeChatPayXmlParser<T>();
+            var body = await client.PostAsync(request, sortedTxtParams);
+            var parser = new WeChatPayResponseXmlParser<T>();
             var response = parser.Parse(body);
 
             if (request.GetNeedCheckSign())
@@ -149,18 +154,14 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
             request.PrimaryHandler(options, signType, sortedTxtParams);
 
-            if (!_certificateManager.ContainsKey(options.CertificateHash))
+            if (!_clientCertificateManager.ContainsKey(options.CertificateSerialNo))
             {
-                var certificate = File.Exists(options.Certificate) ?
-                    new X509Certificate2(options.Certificate, options.CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet) :
-                    new X509Certificate2(Convert.FromBase64String(options.Certificate), options.CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet);
-
-                _certificateManager.TryAdd(options.CertificateHash, certificate);
+                _clientCertificateManager.TryAdd(options.CertificateSerialNo, options.X509Certificate2);
             }
 
-            var client = _httpClientFactory.CreateClient(Prefix + options.CertificateHash);
-            var body = await client.PostAsync(request.GetRequestUrl(), sortedTxtParams);
-            var parser = new WeChatPayXmlParser<T>();
+            var client = _httpClientFactory.CreateClient(Prefix + options.CertificateSerialNo);
+            var body = await client.PostAsync(request, sortedTxtParams);
+            var parser = new WeChatPayResponseXmlParser<T>();
             var response = parser.Parse(body);
 
             if (request.GetNeedCheckSign())
@@ -206,7 +207,84 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         #endregion
 
-        #region Common Method
+        #region IWeChatPayClient Members
+
+        public async Task<T> ExecuteAsync<T>(IWeChatPayV3GetRequest<T> request, WeChatPayOptions options) where T : WeChatPayV3Response
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            if (string.IsNullOrEmpty(options.MchId))
+            {
+                throw new ArgumentNullException(nameof(options.MchId));
+            }
+
+            if (string.IsNullOrEmpty(options.Certificate))
+            {
+                throw new ArgumentNullException(nameof(options.Certificate));
+            }
+
+            var client = _httpClientFactory.CreateClient(nameof(WeChatPayClient));
+            var (serial, timestamp, nonce, signature, body) = await client.GetAsync(request, options);
+            var parser = new WeChatPayV3ResponseJsonParser<T>();
+            var response = parser.Parse(body);
+
+            // 为下载微信支付平台证书证书响应时，
+            if (response is WeChatPayCertificatesResponse resp)
+            {
+                foreach (var certificate in resp.Certificates)
+                {
+                    // 若证书序列号未被缓存，将解密证书并加入缓存
+                    if (!_platformCertificateManager.ContainsKey(certificate.SerialNo))
+                    {
+                        var certStr = AEAD_AES_256_GCM.Decrypt(certificate.EncryptCertificate.Nonce, certificate.EncryptCertificate.Ciphertext, certificate.EncryptCertificate.AssociatedData, options.V3Key);
+                        var cert = new X509Certificate2(Encoding.UTF8.GetBytes(certStr));
+                        _platformCertificateManager.TryAdd(certificate.SerialNo, cert);
+                    }
+                }
+            }
+
+            await CheckV3ResponseSignAsync(options, serial, timestamp, nonce, signature, body);
+
+            return response;
+        }
+
+        #endregion
+
+        #region IWeChatPayClient Members
+
+        public async Task<T> ExecuteAsync<T>(IWeChatPayV3PostRequest<T> request, WeChatPayOptions options) where T : WeChatPayV3Response
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            if (string.IsNullOrEmpty(options.MchId))
+            {
+                throw new ArgumentNullException(nameof(options.MchId));
+            }
+
+            if (string.IsNullOrEmpty(options.Certificate))
+            {
+                throw new ArgumentNullException(nameof(options.Certificate));
+            }
+
+            var client = _httpClientFactory.CreateClient(nameof(WeChatPayClient));
+            var (serial, timestamp, nonce, signature, body) = await client.PostAsync(request, options);
+            var parser = new WeChatPayV3ResponseJsonParser<T>();
+            var response = parser.Parse(body);
+
+            await CheckV3ResponseSignAsync(options, serial, timestamp, nonce, signature, body);
+
+            return response;
+        }
+
+        #endregion
+
+        #region Check Response Method
 
         private void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options, WeChatPaySignType signType)
         {
@@ -220,9 +298,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 throw new WeChatPayException("sign check fail: Parameters is Empty!");
             }
 
-            if (response.Parameters["return_code"] == "SUCCESS")
+            if (response.Parameters["return_code"] == WeChatPayCode.Success)
             {
-                if (!response.Parameters.TryGetValue("sign", out var sign))
+                if (!response.Parameters.TryGetValue(WeChatPayConsts.sign, out var sign))
                 {
                     throw new WeChatPayException("sign check fail: sign is Empty!");
                 }
@@ -232,6 +310,53 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 {
                     throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
                 }
+            }
+        }
+
+        private async Task CheckV3ResponseSignAsync(WeChatPayOptions options, string serial, string timestamp, string nonce, string signature, string body)
+        {
+            if (string.IsNullOrEmpty(serial))
+            {
+                throw new WeChatPayException($"sign check fail: {nameof(serial)} is empty!");
+            }
+
+            if (string.IsNullOrEmpty(signature))
+            {
+                throw new WeChatPayException($"sign check fail: {nameof(signature)} is empty!");
+            }
+
+            var cert = await LoadPlatformCertificateAsync(serial, options);
+            var signatureSourceDate = BuildSignatureSourceDate(timestamp, nonce, body);
+
+            if (!cert.GetRSAPublicKey().Verify(signatureSourceDate, signature))
+            {
+                throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
+            }
+        }
+
+        private string BuildSignatureSourceDate(string timestamp, string nonce, string body)
+        {
+            return $"{timestamp}\n{nonce}\n{body}\n";
+        }
+
+        private async Task<X509Certificate2> LoadPlatformCertificateAsync(string serial, WeChatPayOptions options)
+        {
+            // 如果证书序列号已缓存，则直接使用缓存的
+            if (_platformCertificateManager.TryGetValue(serial, out var certificate2))
+            {
+                return certificate2;
+            }
+
+            // 否则重新下载新的平台证书
+            var request = new WeChatPayCertificatesRequest();
+            var response = await ExecuteAsync(request, options);
+            if (response.Certificates.Count > 0 && _platformCertificateManager.TryGetValue(serial, out certificate2))
+            {
+                return certificate2;
+            }
+            else
+            {
+                throw new WeChatPayException("Download certificates failed!");
             }
         }
 
