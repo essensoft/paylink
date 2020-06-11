@@ -4,14 +4,14 @@
 }
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a asp-controller="WeChatPay" asp-action="Index">微信支付</a></li>
+        <li class="breadcrumb-item"><a asp-controller="WeChatPayV3" asp-action="Index">微信支付V3</a></li>
         <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
     </ol>
 </nav>
 <br />
 <div class="card">
     <div class="card-body">
-        <form asp-controller="WeChatPay" asp-action="PubPayV3">
+        <form asp-controller="WeChatPayV3" asp-action="PubPay">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="OutTradeNo"></label>

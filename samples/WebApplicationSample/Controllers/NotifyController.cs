@@ -270,13 +270,11 @@ namespace WebApplicationSample.Controllers
     public class WeChatPayNotifyController : Controller
     {
         private readonly IWeChatPayNotifyClient _client;
-        private readonly IWeChatPayV3NotifyClient _clientV3;
         private readonly IOptions<WeChatPayOptions> _optionsAccessor;
 
-        public WeChatPayNotifyController(IWeChatPayNotifyClient client, IWeChatPayV3NotifyClient clientV3, IOptions<WeChatPayOptions> optionsAccessor)
+        public WeChatPayNotifyController(IWeChatPayNotifyClient client, IOptions<WeChatPayOptions> optionsAccessor)
         {
             _client = client;
-            _clientV3 = clientV3;
             _optionsAccessor = optionsAccessor;
         }
 
@@ -332,17 +330,34 @@ namespace WebApplicationSample.Controllers
                 return NoContent();
             }
         }
+    }
+
+    #endregion
+
+    #region 微信支付V3异步通知
+
+    [Route("notify/wechatpay/v3")]
+    public class WeChatPayV3NotifyController : Controller
+    {
+        private readonly IWeChatPayV3NotifyClient _client;
+        private readonly IOptions<WeChatPayOptions> _optionsAccessor;
+
+        public WeChatPayV3NotifyController(IWeChatPayV3NotifyClient client, IOptions<WeChatPayOptions> optionsAccessor)
+        {
+            _client = client;
+            _optionsAccessor = optionsAccessor;
+        }
 
         /// <summary>
-        /// 支付结果通知v3
+        /// 支付结果通知
         /// </summary>
-        [Route("v3/transactions")]
+        [Route("transactions")]
         [HttpPost]
         public async Task<IActionResult> Transactions()
         {
             try
             {
-                var notify = await _clientV3.ExecuteAsync<WeChatPayTransactionsNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.ExecuteAsync<WeChatPayTransactionsNotify>(Request, _optionsAccessor.Value);
                 if (notify.StatusCode == 200)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);

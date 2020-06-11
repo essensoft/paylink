@@ -15,6 +15,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<WeChatPayClientCertificateManager>();
             services.AddSingleton<WeChatPayPlatformCertificateManager>();
             services.AddSingleton<IWeChatPayClient, WeChatPayClient>();
+            services.AddSingleton<IWeChatPayV3Client, WeChatPayV3Client>();
 
 #if NETCOREAPP3_1
             services.AddSingleton<IWeChatPayNotifyClient, WeChatPayNotifyClient>();
