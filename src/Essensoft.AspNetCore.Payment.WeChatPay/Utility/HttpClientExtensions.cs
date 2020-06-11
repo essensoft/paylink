@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
             }
         }
 
-        public static async Task<(string serial, string timestamp, string nonce, string signature, string body)> GetAsync<T>(this HttpClient client, IWeChatPayV3GetRequest<T> request, WeChatPayOptions options) where T : WeChatPayV3Response
+        public static async Task<(string serial, string timestamp, string nonce, string signature, string body, int statusCode)> GetAsync<T>(this HttpClient client, IWeChatPayV3GetRequest<T> request, WeChatPayOptions options) where T : WeChatPayV3Response
         {
             var url = request.GetRequestUrl();
             var authorization = BuildAuthorizationString(url, "GET", null, options);
@@ -57,12 +57,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
                 var nonce = resp.Headers.GetValues(WeChatPayConsts.Wechatpay_Nonce).First();
                 var signature = resp.Headers.GetValues(WeChatPayConsts.Wechatpay_Signature).First();
                 var body = await respContent.ReadAsStringAsync();
+                var statusCode = (int)resp.StatusCode;
 
-                return (serial, timestamp, nonce, signature, body);
+                return (serial, timestamp, nonce, signature, body, statusCode);
             }
         }
 
-        public static async Task<(string serial, string timestamp, string nonce, string signature, string body)> PostAsync<T>(this HttpClient client, IWeChatPayV3PostRequest<T> request, WeChatPayOptions options) where T : WeChatPayV3Response
+        public static async Task<(string serial, string timestamp, string nonce, string signature, string body, int statusCode)> PostAsync<T>(this HttpClient client, IWeChatPayV3PostRequest<T> request, WeChatPayOptions options) where T : WeChatPayV3Response
         {
             var url = request.GetRequestUrl();
             var content = SerializeBizModel(request);
@@ -81,8 +82,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
                 var nonce = resp.Headers.GetValues(WeChatPayConsts.Wechatpay_Nonce).First();
                 var signature = resp.Headers.GetValues(WeChatPayConsts.Wechatpay_Signature).First();
                 var body = await respContent.ReadAsStringAsync();
+                var statusCode = (int)resp.StatusCode;
 
-                return (serial, timestamp, nonce, signature, body);
+                return (serial, timestamp, nonce, signature, body, statusCode);
             }
         }
 

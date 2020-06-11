@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
     {
         private static readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 
-        public T Parse(string body)
+        public T Parse(string body, int statusCode)
         {
             T result = null;
 
@@ -27,6 +27,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
             }
 
             result.Body = body;
+            result.StatusCode = statusCode;
             return result;
         }
     }
