@@ -639,7 +639,7 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// APP支付V3
+        /// APP支付-App下单API
         /// </summary>
         [HttpGet]
         public IActionResult AppPayV3()
@@ -648,7 +648,7 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// APP支付V3
+        /// APP支付-App下单API
         /// </summary>
         /// <param name="viewModel"></param>
         [HttpPost]
