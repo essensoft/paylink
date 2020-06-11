@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Domain
 {
     /// <summary>
-    /// 订单金额
+    /// 订单金额信息
     /// </summary>    
     public class Amount : WeChatPayObject
     {

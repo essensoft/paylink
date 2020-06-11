@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Domain
 {
     /// <summary>
-    /// 场景信息
+    /// 支付场景描述
     /// </summary>       
     public class SceneInfo : WeChatPayObject
     {
