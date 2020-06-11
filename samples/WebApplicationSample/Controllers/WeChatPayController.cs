@@ -669,7 +669,7 @@ namespace WebApplicationSample.Controllers
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
-            if (!string.IsNullOrEmpty(response.PrepayId))
+            if (response.StatusCode == 200)
             {
                 var req = new WeChatPayAppSdkRequest
                 {

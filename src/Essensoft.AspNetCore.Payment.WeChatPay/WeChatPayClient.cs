@@ -227,9 +227,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             }
 
             var client = _httpClientFactory.CreateClient(nameof(WeChatPayClient));
-            var (serial, timestamp, nonce, signature, body) = await client.GetAsync(request, options);
+            var (serial, timestamp, nonce, signature, body, statusCode) = await client.GetAsync(request, options);
             var parser = new WeChatPayV3ResponseJsonParser<T>();
-            var response = parser.Parse(body);
+            var response = parser.Parse(body, statusCode);
 
             // 为下载微信支付平台证书证书响应时，
             if (response is WeChatPayCertificatesResponse resp)
@@ -282,9 +282,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             }
 
             var client = _httpClientFactory.CreateClient(nameof(WeChatPayClient));
-            var (serial, timestamp, nonce, signature, body) = await client.PostAsync(request, options);
+            var (serial, timestamp, nonce, signature, body, statusCode) = await client.PostAsync(request, options);
             var parser = new WeChatPayV3ResponseJsonParser<T>();
-            var response = parser.Parse(body);
+            var response = parser.Parse(body, statusCode);
 
             await CheckV3ResponseSignAsync(options, serial, timestamp, nonce, signature, body);
 
