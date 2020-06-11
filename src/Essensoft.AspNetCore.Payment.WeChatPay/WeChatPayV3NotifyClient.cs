@@ -19,9 +19,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         #region WeChatPayV3NotifyClient Constructors
 
         private readonly WeChatPayPlatformCertificateManager _platformCertificateManager;
-        private readonly IWeChatPayClient _client;
+        private readonly IWeChatPayV3Client _client;
 
-        public WeChatPayV3NotifyClient(WeChatPayPlatformCertificateManager platformCertificateManager, IWeChatPayClient client)
+        public WeChatPayV3NotifyClient(WeChatPayPlatformCertificateManager platformCertificateManager, IWeChatPayV3Client client)
         {
             _platformCertificateManager = platformCertificateManager;
             _client = client;
