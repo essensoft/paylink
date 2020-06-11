@@ -18,6 +18,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
 #if NETCOREAPP3_1
             services.AddSingleton<IWeChatPayNotifyClient, WeChatPayNotifyClient>();
+            services.AddSingleton<IWeChatPayV3NotifyClient, WeChatPayV3NotifyClient>();
 #endif
         }
     }
