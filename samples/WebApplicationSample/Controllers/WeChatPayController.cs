@@ -602,43 +602,6 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// 扫码支付-Native下单API
-        /// </summary>
-        [HttpGet]
-        public IActionResult QrCodePayV3()
-        {
-            return View();
-        }
-
-        /// <summary>
-        /// 扫码支付-Native下单API
-        /// </summary>
-        /// <param name="viewModel"></param>
-        [HttpPost]
-        public async Task<IActionResult> QrCodePayV3(WeChatPayQrCodePayV3ViewModel viewModel)
-        {
-            var model = new WeChatPayTransactionsNativeModel
-            {
-                AppId = _optionsAccessor.Value.AppId,
-                MchId = _optionsAccessor.Value.MchId,
-                Amount = new Amount { Total = viewModel.Total, Currency = "CNY" },
-                Description = viewModel.Description,
-                NotifyUrl = viewModel.NotifyUrl,
-                OutTradeNo = viewModel.OutTradeNo,
-            };
-
-            var request = new WeChatPayTransactionsNativeRequest();
-            request.SetBizModel(model);
-
-            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-
-            // response.CodeUrl 给前端生成二维码
-            ViewData["qrcode"] = response.CodeUrl;
-            ViewData["response"] = response.Body;
-            return View();
-        }
-
-        /// <summary>
         /// APP支付-App下单API
         /// </summary>
         [HttpGet]
@@ -684,6 +647,94 @@ namespace WebApplicationSample.Controllers
                 return View();
             }
 
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 公众号支付-JSAPI下单
+        /// </summary>
+        [HttpGet]
+        public IActionResult PubPayV3()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 公众号支付-JSAPI下单
+        /// </summary>
+        /// <param name="viewModel"></param>
+        [HttpPost]
+        public async Task<IActionResult> PubPayV3(WeChatPayPubPayV3ViewModel viewModel)
+        {
+            var model = new WeChatPayTransactionsJsApiModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                MchId = _optionsAccessor.Value.MchId,
+                Amount = new Amount { Total = viewModel.Total, Currency = "CNY" },
+                Description = viewModel.Description,
+                NotifyUrl = viewModel.NotifyUrl,
+                OutTradeNo = viewModel.OutTradeNo,
+                Payer = new Payer { OpenId = viewModel.OpenId }
+            };
+
+            var request = new WeChatPayTransactionsJsApiRequest();
+            request.SetBizModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+
+            if (response.StatusCode == 200)
+            {
+                var req = new WeChatPayJsApiSdkRequest
+                {
+                    Package = "prepay_id=" + response.PrepayId
+                };
+
+                var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
+
+                // 将参数(parameter)给 公众号前端 让他在微信内H5调起支付(https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6)
+                ViewData["parameter"] = JsonSerializer.Serialize(parameter);
+                ViewData["response"] = response.Body;
+                return View();
+            }
+
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 扫码支付-Native下单API
+        /// </summary>
+        [HttpGet]
+        public IActionResult QrCodePayV3()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 扫码支付-Native下单API
+        /// </summary>
+        /// <param name="viewModel"></param>
+        [HttpPost]
+        public async Task<IActionResult> QrCodePayV3(WeChatPayQrCodePayV3ViewModel viewModel)
+        {
+            var model = new WeChatPayTransactionsNativeModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                MchId = _optionsAccessor.Value.MchId,
+                Amount = new Amount { Total = viewModel.Total, Currency = "CNY" },
+                Description = viewModel.Description,
+                NotifyUrl = viewModel.NotifyUrl,
+                OutTradeNo = viewModel.OutTradeNo,
+            };
+
+            var request = new WeChatPayTransactionsNativeRequest();
+            request.SetBizModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+
+            // response.CodeUrl 给前端生成二维码
+            ViewData["qrcode"] = response.CodeUrl;
             ViewData["response"] = response.Body;
             return View();
         }
