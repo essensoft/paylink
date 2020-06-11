@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
     public class WeChatPayTransactionsAppResponse : WeChatPayV3Response
     {
         /// <summary>
-        /// 预支付交易会话标识	prepay_id
+        /// 预支付交易会话标识
         /// 预支付交易会话标识。
         /// 示例值：wx201410272009395522657a690389285100
         /// </summary>
