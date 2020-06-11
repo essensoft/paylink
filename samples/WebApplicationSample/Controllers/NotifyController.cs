@@ -270,11 +270,13 @@ namespace WebApplicationSample.Controllers
     public class WeChatPayNotifyController : Controller
     {
         private readonly IWeChatPayNotifyClient _client;
+        private readonly IWeChatPayV3NotifyClient _clientV3;
         private readonly IOptions<WeChatPayOptions> _optionsAccessor;
 
-        public WeChatPayNotifyController(IWeChatPayNotifyClient client, IOptions<WeChatPayOptions> optionsAccessor)
+        public WeChatPayNotifyController(IWeChatPayNotifyClient client, IWeChatPayV3NotifyClient clientV3, IOptions<WeChatPayOptions> optionsAccessor)
         {
             _client = client;
+            _clientV3 = clientV3;
             _optionsAccessor = optionsAccessor;
         }
 
@@ -332,7 +334,7 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// 统一下单V3支付结果通知
+        /// 支付结果通知v3
         /// </summary>
         [Route("v3/transactions")]
         [HttpPost]
@@ -340,6 +342,12 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
+                var notify = await _clientV3.ExecuteAsync<WeChatPayTransactionsNotify>(Request, _optionsAccessor.Value);
+                if (notify.StatusCode == 200)
+                {
+                    Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
+                    return WeChatPayV3NotifyResult.Success;
+                }
                 return NoContent();
             }
             catch
