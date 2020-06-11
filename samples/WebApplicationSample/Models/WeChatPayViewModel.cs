@@ -332,4 +332,23 @@ namespace WebApplicationSample.Models
         [Display(Name = "partner_trade_no")]
         public string PartnerTradeNo { get; set; }
     }
+
+    public class WeChatPayQrCodePayV3ViewModel
+    {
+        [Required]
+        [Display(Name = "out_trade_no")]
+        public string OutTradeNo { get; set; }
+
+        [Required]
+        [Display(Name = "description")]
+        public string Description { get; set; }
+
+        [Required]
+        [Display(Name = "total")]
+        public int Total { get; set; }
+
+        [Required]
+        [Display(Name = "notify_url")]
+        public string NotifyUrl { get; set; }
+    }
 }

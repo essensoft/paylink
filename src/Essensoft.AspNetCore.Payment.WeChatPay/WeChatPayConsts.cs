@@ -30,5 +30,10 @@
 
         public const string MD5 = "MD5";
         public const string HMAC_SHA256 = "HMAC-SHA256";
+
+        public const string Wechatpay_Serial = "Wechatpay-Serial";
+        public const string Wechatpay_Timestamp = "Wechatpay-Timestamp";
+        public const string Wechatpay_Nonce = "Wechatpay-Nonce";
+        public const string Wechatpay_Signature = "Wechatpay-Signature";
     }
 }

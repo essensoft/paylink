@@ -330,6 +330,23 @@ namespace WebApplicationSample.Controllers
                 return NoContent();
             }
         }
+
+        /// <summary>
+        /// 统一下单V3支付结果通知
+        /// </summary>
+        [Route("v3/transactions")]
+        [HttpPost]
+        public async Task<IActionResult> Transactions()
+        {
+            try
+            {
+                return NoContent();
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
     }
 
     #endregion

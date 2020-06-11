@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Domain
     /// <summary>
     /// 代金券或立减优惠信息
     /// </summary>
-    public class CouponInfo
+    public class CouponInfo : WeChatPayObject
     {
         /// <summary>
         /// 代金券类型
