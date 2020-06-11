@@ -214,7 +214,8 @@ namespace WebApplicationSample.Controllers
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
             // mweb_url为拉起微信支付收银台的中间页面，可通过访问该url来拉起微信客户端，完成支付,mweb_url的有效期为5分钟。
-            return Redirect(response.MwebUrl);
+            ViewData["response"] = response.Body;
+            return View();
         }
 
         /// <summary>
@@ -735,6 +736,43 @@ namespace WebApplicationSample.Controllers
 
             // response.CodeUrl 给前端生成二维码
             ViewData["qrcode"] = response.CodeUrl;
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// H5支付-H5下单API
+        /// </summary>
+        [HttpGet]
+        public IActionResult H5PayV3()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// H5支付-H5下单API
+        /// </summary>
+        /// <param name="viewModel"></param>
+        [HttpPost]
+        public async Task<IActionResult> H5PayV3(WeChatPayH5PayV3ViewModel viewModel)
+        {
+            var model = new WeChatPayTransactionsH5Model
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                MchId = _optionsAccessor.Value.MchId,
+                Amount = new Amount { Total = viewModel.Total, Currency = "CNY" },
+                Description = viewModel.Description,
+                NotifyUrl = viewModel.NotifyUrl,
+                OutTradeNo = viewModel.OutTradeNo,
+                SceneInfo = new SceneInfo { PayerClientIp = "127.0.0.1" }
+            };
+
+            var request = new WeChatPayTransactionsH5Request();
+            request.SetBizModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+
+            // h5_url为拉起微信支付收银台的中间页面，可通过访问该url来拉起微信客户端，完成支付,h5_url的有效期为5分钟。
             ViewData["response"] = response.Body;
             return View();
         }
