@@ -637,5 +637,55 @@ namespace WebApplicationSample.Controllers
             ViewData["response"] = response.Body;
             return View();
         }
+
+        /// <summary>
+        /// APP支付V3
+        /// </summary>
+        [HttpGet]
+        public IActionResult AppPayV3()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// APP支付V3
+        /// </summary>
+        /// <param name="viewModel"></param>
+        [HttpPost]
+        public async Task<IActionResult> AppPayV3(WeChatPayAppPayV3ViewModel viewModel)
+        {
+            var model = new WeChatPayTransactionsAppModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                MchId = _optionsAccessor.Value.MchId,
+                Amount = new Amount { Total = viewModel.Total, Currency = "CNY" },
+                Description = viewModel.Description,
+                NotifyUrl = viewModel.NotifyUrl,
+                OutTradeNo = viewModel.OutTradeNo,
+            };
+
+            var request = new WeChatPayTransactionsAppRequest();
+            request.SetBizModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+
+            if (!string.IsNullOrEmpty(response.PrepayId))
+            {
+                var req = new WeChatPayAppSdkRequest
+                {
+                    PrepayId = response.PrepayId
+                };
+
+                var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
+
+                // 将参数(parameter)给 ios/android端 让他调起微信APP(https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5)
+                ViewData["parameter"] = JsonSerializer.Serialize(parameter);
+                ViewData["response"] = response.Body;
+                return View();
+            }
+
+            ViewData["response"] = response.Body;
+            return View();
+        }
     }
 }
