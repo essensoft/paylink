@@ -34,10 +34,10 @@ namespace Essensoft.AspNetCore.Payment.Security
                 var ciphertextWithTagBytes = Convert.FromBase64String(ciphertext); // ciphertext 实际包含了 tag，即尾部16字节
                 var ciphertextBytes = ciphertextWithTagBytes[0..^16]; // 排除尾部16字节
                 var tagBytes = ciphertextWithTagBytes[^16..]; // 获取尾部16字节
-                var paintextBytes = new byte[ciphertextBytes.Length];
+                var plaintextBytes = new byte[ciphertextBytes.Length];
                 var associatedDataBytes = Encoding.UTF8.GetBytes(associatedData);
-                aesGcm.Decrypt(nonceBytes, ciphertextBytes, tagBytes, paintextBytes, associatedDataBytes);
-                return Encoding.UTF8.GetString(paintextBytes);
+                aesGcm.Decrypt(nonceBytes, ciphertextBytes, tagBytes, plaintextBytes, associatedDataBytes);
+                return Encoding.UTF8.GetString(plaintextBytes);
             }
         }
     }
