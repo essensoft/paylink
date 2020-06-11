@@ -236,12 +236,21 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             {
                 foreach (var certificate in resp.Certificates)
                 {
-                    // 若证书序列号未被缓存，将解密证书并加入缓存
+                    // 若证书序列号未被缓存，解密证书并加入缓存
                     if (!_platformCertificateManager.ContainsKey(certificate.SerialNo))
                     {
-                        var certStr = AEAD_AES_256_GCM.Decrypt(certificate.EncryptCertificate.Nonce, certificate.EncryptCertificate.Ciphertext, certificate.EncryptCertificate.AssociatedData, options.V3Key);
-                        var cert = new X509Certificate2(Encoding.UTF8.GetBytes(certStr));
-                        _platformCertificateManager.TryAdd(certificate.SerialNo, cert);
+                        switch (certificate.EncryptCertificate.Algorithm)
+                        {
+                            case nameof(AEAD_AES_256_GCM):
+                                {
+                                    var certStr = AEAD_AES_256_GCM.Decrypt(certificate.EncryptCertificate.Nonce, certificate.EncryptCertificate.Ciphertext, certificate.EncryptCertificate.AssociatedData, options.V3Key);
+                                    var cert = new X509Certificate2(Encoding.UTF8.GetBytes(certStr));
+                                    _platformCertificateManager.TryAdd(certificate.SerialNo, cert);
+                                }
+                                break;
+                            default:
+                                throw new WeChatPayException("Unknown algorithm!");
+                        }
                     }
                 }
             }
