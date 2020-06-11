@@ -42,10 +42,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
         public static async Task<(string serial, string timestamp, string nonce, string signature, string body, int statusCode)> GetAsync<T>(this HttpClient client, IWeChatPayV3GetRequest<T> request, WeChatPayOptions options) where T : WeChatPayV3Response
         {
             var url = request.GetRequestUrl();
-            var authorization = BuildAuthorizationString(url, "GET", null, options);
+            var token = BuildToken(url, "GET", null, options);
 
             client.DefaultRequestHeaders.Add(WeChatPayConsts.Wechatpay_Serial, options.CertificateSerialNo);
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("WECHATPAY2-SHA256-RSA2048", authorization);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("WECHATPAY2-SHA256-RSA2048", token);
             client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(new ProductHeaderValue("Unknown")));
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -67,9 +67,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
         {
             var url = request.GetRequestUrl();
             var content = SerializeBizModel(request);
-            var authorization = BuildAuthorizationString(url, "POST", content, options);
+            var token = BuildToken(url, "POST", content, options);
             client.DefaultRequestHeaders.Add(WeChatPayConsts.Wechatpay_Serial, options.CertificateSerialNo);
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("WECHATPAY2-SHA256-RSA2048", authorization);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("WECHATPAY2-SHA256-RSA2048", token);
             client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(new ProductHeaderValue("Unknown")));
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
@@ -99,21 +99,20 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
             throw new WeChatPayException("BizModel is null!");
         }
 
-        private static string BuildAuthorizationString(string url, string method, string content, WeChatPayOptions options)
+        private static string BuildToken(string url, string method, string body, WeChatPayOptions options)
         {
-            var body = string.Empty;
-            if (method == "POST" || method == "PUT" || method == "PATCH")
-            {
-                body = content;
-            }
-
             var uri = new Uri(url).PathAndQuery;
             var timestamp = WeChatPayUtility.GetTimeStamp();
             var nonce = WeChatPayUtility.GenerateNonceStr();
-            var message = $"{method}\n{uri}\n{timestamp}\n{nonce}\n{body}\n";
+            var message = BuildMessage(method, uri, timestamp, nonce, body);
             var signature = options.CertificateRSAPrivateKey.Sign(message);
 
             return $"mchid=\"{options.MchId}\",nonce_str=\"{nonce}\",timestamp=\"{timestamp}\",serial_no=\"{options.CertificateSerialNo}\",signature=\"{signature}\"";
+        }
+
+        private static string BuildMessage(string method, string uri, string timestamp, string nonce, string body)
+        {
+            return $"{method}\n{uri}\n{timestamp}\n{nonce}\n{body}\n";
         }
     }
 }
