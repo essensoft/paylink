@@ -222,5 +222,61 @@ namespace WebApplicationSample.Controllers
             ViewData["response"] = response.Body;
             return View();
         }
+
+        /// <summary>
+        /// 微信支付订单号查询
+        /// </summary>
+        [HttpGet]
+        public IActionResult QueryByTransactionId()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 微信支付订单号查询
+        /// </summary>
+        /// <param name="viewModel"></param>
+        [HttpPost]
+        public async Task<IActionResult> QueryByTransactionId(WeChatPayQueryByTransactionIdViewModel viewModel)
+        {
+            var request = new WeChatPayTransactionsIdRequest
+            { 
+                TransactionId = viewModel.TransactionId,
+                MchId = _optionsAccessor.Value.MchId,
+            };
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 商户订单号查询
+        /// </summary>
+        [HttpGet]
+        public IActionResult QueryByOutTradeNo()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 商户订单号查询
+        /// </summary>
+        /// <param name="viewModel"></param>
+        [HttpPost]
+        public async Task<IActionResult> QueryByOutTradeNo(WeChatPayQueryByOutTradeNoViewModel viewModel)
+        {
+            var request = new WeChatPayTransactionsOutTradeNoRequest
+            {
+                OutTradeNo = viewModel.OutTradeNo,
+                MchId = _optionsAccessor.Value.MchId,
+            };
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+
+            ViewData["response"] = response.Body;
+            return View();
+        }
     }
 }

@@ -48,5 +48,17 @@
             <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_4.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/pay/transactions/h5</a></td>
             <td><a asp-controller="WeChatPayV3" asp-action="H5Pay">立即测试</a></td>
         </tr>
+        <tr>
+            <th scope="row">6</th>
+            <td>查询订单-微信支付订单号查询</td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_5.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/pay/transactions/id/{transaction_id}</a></td>
+            <td><a asp-controller="WeChatPayV3" asp-action="QueryByTransactionId">立即测试</a></td>
+        </tr>
+        <tr>
+            <th scope="row">7</th>
+            <td>查询订单-商户订单号查询</td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_5.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/pay/transactions/out-trade-no/{out_trade_no}</a></td>
+            <td><a asp-controller="WeChatPayV3" asp-action="QueryByOutTradeNo">立即测试</a></td>
+        </tr>
     </tbody>
 </table>
