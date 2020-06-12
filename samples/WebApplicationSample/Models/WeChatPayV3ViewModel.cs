@@ -95,4 +95,11 @@ namespace WebApplicationSample.Models
         [Display(Name = "out_trade_no")]
         public string OutTradeNo { get; set; }
     }
+
+    public class WeChatPayOutTradeNoCloseViewModel
+    {
+        [Required]
+        [Display(Name = "out_trade_no")]
+        public string OutTradeNo { get; set; }
+    }
 }
