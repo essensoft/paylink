@@ -79,14 +79,15 @@ namespace WebApplicationSample.Controllers
 
             if (response.StatusCode == 200)
             {
-                var req = new WeChatPayAppSdkRequest
+                var req = new WeChatPayV3AppSdkRequest
                 {
                     PrepayId = response.PrepayId
                 };
 
                 var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
 
-                // 将参数(parameter)给 ios/android端 让他调起微信APP(https://pay.weixin.qq.com/wiki/doc/api/app/app.php?chapter=8_5)
+                // 将参数(parameter)给 ios/android端 
+                // https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_7.shtml
                 ViewData["parameter"] = JsonSerializer.Serialize(parameter);
                 ViewData["response"] = response.Body;
                 return View();
@@ -130,14 +131,15 @@ namespace WebApplicationSample.Controllers
 
             if (response.StatusCode == 200)
             {
-                var req = new WeChatPayJsApiSdkRequest
+                var req = new WeChatPayV3JsApiSdkRequest
                 {
                     Package = "prepay_id=" + response.PrepayId
                 };
 
                 var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
 
-                // 将参数(parameter)给 公众号前端 让他在微信内H5调起支付(https://pay.weixin.qq.com/wiki/doc/api/jsapi.php?chapter=7_7&index=6)
+                // 将参数(parameter)给 公众号前端
+                // https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_8.shtml
                 ViewData["parameter"] = JsonSerializer.Serialize(parameter);
                 ViewData["response"] = response.Body;
                 return View();
