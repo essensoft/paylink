@@ -32,20 +32,18 @@
             <div class="form-group">
                 <label asp-for="OpenId"></label>
                 <input type="text" class="form-control" asp-for="OpenId">
-            </div>           <button type="submit" class="btn btn-primary">提交请求</button>
+            </div>
+            <button type="submit" class="btn btn-primary">提交请求</button>
         </form>
         <hr />
         <form class="form-horizontal">
             <div class="form-group">
-                <label>QrCode:</label>
-                @if (!string.IsNullOrEmpty(ViewData["qrcode"] as string))
-                {
-                    <embed src="../Home/QrCode?size=168&data=@ViewData["qrcode"]" width="168" height="168" type="image/svg+xml" />
-                }
-            </div>
-            <div class="form-group">
                 <label>Response:</label>
                 <textarea class="form-control" rows="10">@ViewData["response"]</textarea>
+            </div>
+            <div class="form-group">
+                <label>Parameter:</label>
+                <textarea class="form-control" rows="3">@ViewData["parameter"]</textarea>
             </div>
         </form>
     </div>

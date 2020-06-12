@@ -28,7 +28,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         #region IWeChatPayClient Members
 
-        public Task<WeChatPayDictionary> ExecuteAsync(IWeChatPaySdkRequest request, WeChatPayOptions options)
+        public Task<WeChatPayDictionary> ExecuteAsync(IWeChatPayV3SdkRequest request, WeChatPayOptions options)
         {
             if (options == null)
             {
