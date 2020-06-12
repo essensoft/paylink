@@ -119,7 +119,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
         /// 订单金额信息
         /// </summary>
         [JsonPropertyName("amount")]
-        public Amount Amount { get; set; }
+        public QueryAmount Amount { get; set; }
 
         /// <summary>
         /// 场景信息
