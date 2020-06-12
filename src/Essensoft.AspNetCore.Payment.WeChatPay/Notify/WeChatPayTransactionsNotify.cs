@@ -1,5 +1,6 @@
 ﻿#if NETCOREAPP3_1
 
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.WeChatPay.Domain;
 
@@ -132,7 +133,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
         /// 优惠功能，享受优惠时返回该字段。
         /// </summary>
         [JsonPropertyName("promotion_detail")]
-        public PromotionDetail PromotionDetail { get; set; }
+        public List<PromotionDetail> PromotionDetail { get; set; }
     }
 }
 
