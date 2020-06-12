@@ -8,14 +8,14 @@
         string GetRequestUrl();
 
         /// <summary>
-        /// 获取BodyModel
+        /// 获取QueryModel
         /// </summary>
-        WeChatPayObject GetBodyModel();
+        WeChatPayObject GetQueryModel();
 
         /// <summary>
-        /// 设置BodyModel
+        /// 设置QueryModel
         /// </summary>
-        /// <param name="bodyModel"></param>
-        void SetBodyModel(WeChatPayObject bodyModel);
+        /// <param name="queryModel"></param>
+        void SetQueryModel(WeChatPayObject queryModel);
     }
 }
