@@ -278,5 +278,39 @@ namespace WebApplicationSample.Controllers
             ViewData["response"] = response.Body;
             return View();
         }
+
+        /// <summary>
+        /// 关闭订单
+        /// </summary>
+        [HttpGet]
+        public IActionResult OutTradeNoClose()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 关闭订单
+        /// </summary>
+        /// <param name="viewModel"></param>
+        [HttpPost]
+        public async Task<IActionResult> OutTradeNoClose(WeChatPayOutTradeNoCloseViewModel viewModel)
+        {
+            var model = new WeChatPayTransactionsOutTradeNoCloseModel
+            {
+                MchId = _optionsAccessor.Value.MchId,
+            };
+
+            var request = new WeChatPayTransactionsOutTradeNoCloseRequest
+            {
+                OutTradeNo = viewModel.OutTradeNo,
+            };
+
+            request.SetBodyModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+
+            ViewData["response"] = response.Body;
+            return View();
+        }
     }
 }
