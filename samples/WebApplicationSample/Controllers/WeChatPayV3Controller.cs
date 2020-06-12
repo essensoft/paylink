@@ -73,7 +73,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var request = new WeChatPayTransactionsAppRequest();
-            request.SetBizModel(model);
+            request.SetBodyModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -125,7 +125,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var request = new WeChatPayTransactionsJsApiRequest();
-            request.SetBizModel(model);
+            request.SetBodyModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -176,7 +176,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var request = new WeChatPayTransactionsNativeRequest();
-            request.SetBizModel(model);
+            request.SetBodyModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -214,7 +214,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var request = new WeChatPayTransactionsH5Request();
-            request.SetBizModel(model);
+            request.SetBodyModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 

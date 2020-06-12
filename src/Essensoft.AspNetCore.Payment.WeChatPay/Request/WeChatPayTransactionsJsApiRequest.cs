@@ -9,21 +9,21 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
     /// </summary>
     public class WeChatPayTransactionsJsApiRequest : IWeChatPayV3PostRequest<WeChatPayTransactionsJsApiResponse>
     {
-        private WeChatPayObject bizModel;
+        private WeChatPayObject bodyModel;
 
         public string GetRequestUrl()
         {
             return "https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi";
         }
 
-        public WeChatPayObject GetBizModel()
+        public WeChatPayObject GetBodyModel()
         {
-            return bizModel;
+            return bodyModel;
         }
 
-        public void SetBizModel(WeChatPayObject bizModel)
+        public void SetBodyModel(WeChatPayObject bodyModel)
         {
-            this.bizModel = bizModel;
+            this.bodyModel = bodyModel;
         }
     }
 }
