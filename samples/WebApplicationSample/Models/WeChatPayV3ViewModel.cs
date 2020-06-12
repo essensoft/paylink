@@ -81,4 +81,18 @@ namespace WebApplicationSample.Models
         [Display(Name = "notify_url")]
         public string NotifyUrl { get; set; }
     }
+
+    public class WeChatPayQueryByTransactionIdViewModel
+    {
+        [Required]
+        [Display(Name = "transaction_id")]
+        public string TransactionId { get; set; }
+    }
+
+    public class WeChatPayQueryByOutTradeNoViewModel
+    {
+        [Required]
+        [Display(Name = "out_trade_no")]
+        public string OutTradeNo { get; set; }
+    }
 }
