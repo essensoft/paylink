@@ -3,11 +3,9 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Domain
 {
     /// <summary>
-    /// 支付通知报文
-    /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_11.shtml
+    /// 通知报文
     /// </summary>
-    public class WeChatPayV3NotifyCiphertext : WeChatPayObject
+    public class NotifyCiphertext : WeChatPayObject
     {
         /// <summary>
         /// 通知ID
