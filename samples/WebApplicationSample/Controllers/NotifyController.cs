@@ -358,7 +358,7 @@ namespace WebApplicationSample.Controllers
             try
             {
                 var notify = await _client.ExecuteAsync<WeChatPayTransactionsNotify>(Request, _optionsAccessor.Value);
-                if (notify.StatusCode == 200)
+                if (notify.TradeState == WeChatPayTradeState.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
                     return WeChatPayV3NotifyResult.Success;

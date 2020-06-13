@@ -24,12 +24,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// </summary>
         [JsonIgnore]
         public string ResourcePlaintext { get; set; }
-
-        /// <summary>
-        /// HTTP状态码
-        /// </summary>
-        [JsonIgnore]
-        public int StatusCode { get; set; }
     }
 }
 
