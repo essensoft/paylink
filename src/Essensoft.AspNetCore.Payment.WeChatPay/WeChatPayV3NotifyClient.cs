@@ -47,7 +47,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             await CheckNotifySignAsync(request, body, options);
 
             var parser = new WeChatPayV3NotifyJsonParser<T>();
-            var notify = parser.Parse(body, options.V3Key, request.HttpContext.Response.StatusCode);
+            var notify = parser.Parse(body, options.V3Key);
 
             return notify;
         }
