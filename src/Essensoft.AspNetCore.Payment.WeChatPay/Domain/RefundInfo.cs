@@ -6,7 +6,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Domain
     /// <summary>
     /// 退款信息
     /// </summary>
-    public class RefundInfo
+    public class RefundInfo : WeChatPayObject
     {
         /// <summary>
         /// 商户退款单号

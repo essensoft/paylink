@@ -1,4 +1,7 @@
-﻿using Essensoft.AspNetCore.Payment.Security;
+﻿using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
@@ -7,7 +10,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
     /// </summary>
     public class WeChatPayOptions
     {
-        internal string CertificateHash;
+        internal X509Certificate2 X509Certificate2;
+        internal RSA CertificateRSAPrivateKey;
+        internal string CertificateSerialNo;
 
         private string certificate;
         private string certificatePassword;
@@ -31,23 +36,19 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         /// <summary>
         /// 子商户应用号
-        /// 仅服务商时使用
+        /// 仅服务商使用
         /// </summary>
         public string SubAppId { get; set; }
 
         /// <summary>
         /// 子商户号
-        /// 仅服务商时使用
+        /// 仅服务商使用
         /// </summary>
         public string SubMchId { get; set; }
 
         /// <summary>
-        /// API密钥
-        /// </summary>
-        public string Key { get; set; }
-
-        /// <summary>
-        /// API证书(文件名/文件的Base64编码)
+        /// API证书
+        /// 证书文件路径/证书文件的base64字符串
         /// </summary>
         public string Certificate
         {
@@ -57,7 +58,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 if (!string.IsNullOrEmpty(value))
                 {
                     certificate = value;
-                    CertificateHash = MD5.Compute(certificate);
+
+                    X509Certificate2 = File.Exists(certificate) ?
+                        new X509Certificate2(certificate, CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet) :
+                        new X509Certificate2(Convert.FromBase64String(certificate), CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet);
+
+                    CertificateRSAPrivateKey = X509Certificate2.GetRSAPrivateKey();
+                    CertificateSerialNo = X509Certificate2.GetSerialNumberString();
                 }
             }
         }
@@ -71,6 +78,16 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             get => string.IsNullOrEmpty(certificatePassword) ? MchId : certificatePassword;
             set => certificatePassword = value;
         }
+
+        /// <summary>
+        /// API密钥
+        /// </summary>
+        public string Key { get; set; }
+
+        /// <summary>
+        /// APIv3密钥
+        /// </summary>
+        public string V3Key { get; set; }
 
         /// <summary>
         /// RSA公钥

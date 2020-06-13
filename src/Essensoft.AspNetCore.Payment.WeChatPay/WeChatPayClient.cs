@@ -1,9 +1,12 @@
 ﻿using System;
-using System.IO;
 using System.Net.Http;
 using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.Security;
 using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
+using Essensoft.AspNetCore.Payment.WeChatPay.Request;
+using Essensoft.AspNetCore.Payment.WeChatPay.Response;
 using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
@@ -13,14 +16,14 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         public const string Prefix = nameof(WeChatPayClient) + ".";
 
         private readonly IHttpClientFactory _httpClientFactory;
-        private readonly WeChatPayCertificateManager _certificateManager;
+        private readonly WeChatPayClientCertificateManager _clientCertificateManager;
 
         #region WeChatPayClient Constructors
 
-        public WeChatPayClient(IHttpClientFactory httpClientFactory, WeChatPayCertificateManager certificateManager)
+        public WeChatPayClient(IHttpClientFactory httpClientFactory, WeChatPayClientCertificateManager clientCertificateManager)
         {
             _httpClientFactory = httpClientFactory;
-            _certificateManager = certificateManager;
+            _clientCertificateManager = clientCertificateManager;
         }
 
         #endregion
@@ -55,8 +58,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             request.PrimaryHandler(options, signType, sortedTxtParams);
 
             var client = _httpClientFactory.CreateClient(nameof(WeChatPayClient));
-            var body = await client.PostAsync(request.GetRequestUrl(), sortedTxtParams);
-            var parser = new WeChatPayXmlParser<T>();
+            var body = await client.PostAsync(request, sortedTxtParams);
+            var parser = new WeChatPayResponseXmlParser<T>();
             var response = parser.Parse(body);
 
             if (request.GetNeedCheckSign())
@@ -149,18 +152,14 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
             request.PrimaryHandler(options, signType, sortedTxtParams);
 
-            if (!_certificateManager.ContainsKey(options.CertificateHash))
+            if (!_clientCertificateManager.ContainsKey(options.CertificateSerialNo))
             {
-                var certificate = File.Exists(options.Certificate) ?
-                    new X509Certificate2(options.Certificate, options.CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet) :
-                    new X509Certificate2(Convert.FromBase64String(options.Certificate), options.CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet);
-
-                _certificateManager.TryAdd(options.CertificateHash, certificate);
+                _clientCertificateManager.TryAdd(options.CertificateSerialNo, options.X509Certificate2);
             }
 
-            var client = _httpClientFactory.CreateClient(Prefix + options.CertificateHash);
-            var body = await client.PostAsync(request.GetRequestUrl(), sortedTxtParams);
-            var parser = new WeChatPayXmlParser<T>();
+            var client = _httpClientFactory.CreateClient(Prefix + options.CertificateSerialNo);
+            var body = await client.PostAsync(request, sortedTxtParams);
+            var parser = new WeChatPayResponseXmlParser<T>();
             var response = parser.Parse(body);
 
             if (request.GetNeedCheckSign())
@@ -206,7 +205,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         #endregion
 
-        #region Common Method
+        #region Check Response Method
 
         private void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options, WeChatPaySignType signType)
         {
@@ -220,9 +219,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 throw new WeChatPayException("sign check fail: Parameters is Empty!");
             }
 
-            if (response.Parameters["return_code"] == "SUCCESS")
+            if (response.Parameters["return_code"] == WeChatPayCode.Success)
             {
-                if (!response.Parameters.TryGetValue("sign", out var sign))
+                if (!response.Parameters.TryGetValue(WeChatPayConsts.sign, out var sign))
                 {
                     throw new WeChatPayException("sign check fail: sign is Empty!");
                 }

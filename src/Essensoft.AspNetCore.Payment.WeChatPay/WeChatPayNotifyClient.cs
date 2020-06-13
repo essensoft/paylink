@@ -44,7 +44,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             }
 
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
-            var parser = new WeChatPayXmlParser<T>();
+            var parser = new WeChatPayNotifyXmlParser<T>();
             var notify = parser.Parse(body);
             if (notify is WeChatPayRefundNotify)
             {
