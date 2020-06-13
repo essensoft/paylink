@@ -3,14 +3,13 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Security;
 using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
-using Microsoft.AspNetCore.Http;
-using System.Security.Cryptography.X509Certificates;
 using Essensoft.AspNetCore.Payment.WeChatPay.Request;
-using Essensoft.AspNetCore.Payment.WeChatPay.Domain;
+using Microsoft.AspNetCore.Http;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
@@ -33,34 +32,24 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         public async Task<T> ExecuteAsync<T>(HttpRequest request, WeChatPayOptions options) where T : WeChatPayV3Notify
         {
-            if (request == null)
-            {
-                throw new ArgumentNullException(nameof(request));
-            }
-
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
+            }
+
+            if (string.IsNullOrEmpty(options.V3Key))
+            {
+                throw new ArgumentNullException(nameof(options.V3Key));
             }
 
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
 
             await CheckNotifySignAsync(request, body, options);
 
-            var ciphertextParser = new WeChatPayObjectJsonParser<WeChatPayV3NotifyCiphertext>();
-            var ciphertext = ciphertextParser.Parse(body);
-            switch (ciphertext.Resource.Algorithm)
-            {
-                case nameof(AEAD_AES_256_GCM):
-                    {
-                        var plaintext = AEAD_AES_256_GCM.Decrypt(ciphertext.Resource.Nonce, ciphertext.Resource.Ciphertext, ciphertext.Resource.AssociatedData, options.V3Key);
-                        var parser = new WeChatPayV3NotifyJsonParser<T>();
-                        var notify = parser.Parse(plaintext, request.HttpContext.Response.StatusCode); 
-                        return notify;
-                    }
-                default:
-                    throw new WeChatPayException("Unknown algorithm!");
-            }
+            var parser = new WeChatPayV3NotifyJsonParser<T>();
+            var notify = parser.Parse(body, options.V3Key, request.HttpContext.Response.StatusCode);
+
+            return notify;
         }
 
         #endregion
@@ -77,15 +66,22 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Serial, out var serialValues);
             request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Timestamp, out var timestampValues);
             request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Nonce, out var nonceValues);
-            if (!request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Signature, out var signatureValues))
-            {
-                throw new WeChatPayException("sign check fail: sign is empty!");
-            }
+            request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Signature, out var signatureValues);
 
             var serial = serialValues.First();
             var timestamp = timestampValues.First();
             var nonce = nonceValues.First();
             var signature = signatureValues.First();
+
+            if (string.IsNullOrEmpty(serial))
+            {
+                throw new WeChatPayException($"sign check fail: {nameof(serial)} is empty!");
+            }
+
+            if (string.IsNullOrEmpty(signature))
+            {
+                throw new WeChatPayException($"sign check fail: {nameof(signature)} is empty!");
+            }
 
             var cert = await LoadPlatformCertificateAsync(serial, options);
             var signatureSourceDate = BuildSignatureSourceDate(timestamp, nonce, body);
