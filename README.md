@@ -22,14 +22,16 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 ## 支持渠道
 
 ### 支付宝 [文档中心](https://docs.open.alipay.com/catalog)
-* 当面付、APP支付、手机网站支付、电脑网站支付、单笔转账到支付宝账户...
+
+* 同步 [alipay-sdk-net-all](https://github.com/alipay/alipay-sdk-net-all) 所有API.
 
 ### 微信支付 [开发文档](https://pay.weixin.qq.com/wiki/doc/api/index.html)
+
 * 付款码支付(刷卡)、JSAPI支付(公众号)、Native支付(扫码)、APP支付、H5支付、小程序支付、企业付款(零钱/银行卡)、现金红包、酒店押金、人脸支付、委托扣款、分账
 
 ## 开发环境
 * Windows 10
-* VS 2019 16.4.0
+* VS 2019 16.6.x
 * .NET Core 3.1
 
 ## 使用方式
@@ -44,6 +46,11 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 
 ![QrCode](img/payment-qrcode.png)
 
+## 项目地址
+
+- [GitHub](https://github.com/essensoft/payment)
+- [Gitee镜像](https://gitee.com/essensoft/payment)
+
 ## 开源协议
 
 [MIT](LICENSE).
@@ -51,4 +58,4 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 ## 致谢
 
 [Varorbc](https://github.com/Varorbc)
-[Alipay](https://github.com/alipay/alipay-sdk-net-all)
+[Alipay](https://github.com/alipay)
