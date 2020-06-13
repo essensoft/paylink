@@ -121,7 +121,7 @@ namespace WebApplicationSample.Controllers
                 Description = viewModel.Description,
                 NotifyUrl = viewModel.NotifyUrl,
                 OutTradeNo = viewModel.OutTradeNo,
-                Payer = new Payer { OpenId = viewModel.OpenId }
+                Payer = new PayerInfo { OpenId = viewModel.OpenId }
             };
 
             var request = new WeChatPayTransactionsJsApiRequest();
