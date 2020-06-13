@@ -137,7 +137,7 @@ namespace WebApplicationSample.Models
         public string TradeType { get; set; }
     }
 
-    public class WeChatPayLiteAppPayViewModel
+    public class WeChatPayMiniProgramPayViewModel
     {
         [Required]
         [Display(Name = "out_trade_no")]

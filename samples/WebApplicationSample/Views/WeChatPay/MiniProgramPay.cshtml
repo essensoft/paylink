@@ -1,4 +1,4 @@
-﻿@model WeChatPayLiteAppPayViewModel
+﻿@model WeChatPayMiniProgramPayViewModel
 @{
     ViewData["Title"] = "小程序支付-统一下单";
 }
@@ -11,7 +11,7 @@
 <br />
 <div class="card">
     <div class="card-body">
-        <form asp-controller="WeChatPay" asp-action="LiteAppPay">
+        <form asp-controller="WeChatPay" asp-action="MiniProgramPay">
             <div asp-validation-summary="All" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="OutTradeNo"></label>

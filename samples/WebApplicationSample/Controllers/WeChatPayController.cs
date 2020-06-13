@@ -220,7 +220,7 @@ namespace WebApplicationSample.Controllers
         /// 小程序支付
         /// </summary>
         [HttpGet]
-        public IActionResult LiteAppPay()
+        public IActionResult MiniProgramPay()
         {
             return View();
         }
@@ -230,7 +230,7 @@ namespace WebApplicationSample.Controllers
         /// </summary>
         /// <param name="viewModel"></param>
         [HttpPost]
-        public async Task<IActionResult> LiteAppPay(WeChatPayLiteAppPayViewModel viewModel)
+        public async Task<IActionResult> MiniProgramPay(WeChatPayMiniProgramPayViewModel viewModel)
         {
             var request = new WeChatPayUnifiedOrderRequest
             {
@@ -246,7 +246,7 @@ namespace WebApplicationSample.Controllers
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
             if (response.ReturnCode == WeChatPayCode.Success && response.ResultCode == WeChatPayCode.Success)
             {
-                var req = new WeChatPayLiteAppSdkRequest
+                var req = new WeChatPayMiniProgramSdkRequest
                 {
                     Package = "prepay_id=" + response.PrepayId
                 };
