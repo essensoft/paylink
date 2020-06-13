@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         #endregion
 
-        #region IWeChatPayClient Members
+        #region IWeChatPayV3Client Members
 
         public Task<WeChatPayDictionary> ExecuteAsync(IWeChatPayV3SdkRequest request, WeChatPayOptions options)
         {
@@ -59,7 +59,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         #endregion
 
-        #region IWeChatPayClient Members
+        #region IWeChatPayV3Client Members
 
         public async Task<T> ExecuteAsync<T>(IWeChatPayV3GetRequest<T> request, WeChatPayOptions options) where T : WeChatPayV3Response
         {
@@ -114,7 +114,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         #endregion
 
-        #region IWeChatPayClient Members
+        #region IWeChatPayV3Client Members
 
         public async Task<T> ExecuteAsync<T>(IWeChatPayV3PostRequest<T> request, WeChatPayOptions options) where T : WeChatPayV3Response
         {
