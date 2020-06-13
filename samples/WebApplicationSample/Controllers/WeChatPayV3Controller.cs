@@ -73,7 +73,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var request = new WeChatPayTransactionsAppRequest();
-            request.SetBodyModel(model);
+            request.SetQueryModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -125,7 +125,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var request = new WeChatPayTransactionsJsApiRequest();
-            request.SetBodyModel(model);
+            request.SetQueryModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -176,7 +176,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var request = new WeChatPayTransactionsNativeRequest();
-            request.SetBodyModel(model);
+            request.SetQueryModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -214,7 +214,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var request = new WeChatPayTransactionsH5Request();
-            request.SetBodyModel(model);
+            request.SetQueryModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -305,7 +305,7 @@ namespace WebApplicationSample.Controllers
                 OutTradeNo = viewModel.OutTradeNo,
             };
 
-            request.SetBodyModel(model);
+            request.SetQueryModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
