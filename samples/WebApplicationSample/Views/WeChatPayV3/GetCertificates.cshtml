@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "获取平台证书列表";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="WeChatPayV3" asp-action="Index">微信支付V3</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+    </ol>
+</nav>
+<br />
+<div class="card">
+    <div class="card-body">
+        <form asp-controller="WeChatPayV3" asp-action="GetCertificates">
+            <button type="submit" class="btn btn-primary">提交请求</button>
+        </form>
+        <hr />
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label>Response:</label>
+                <textarea class="form-control" rows="10">@ViewData["response"]</textarea>
+            </div>
+        </form>
+    </div>
+</div>

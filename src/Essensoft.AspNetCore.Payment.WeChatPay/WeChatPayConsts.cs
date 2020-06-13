@@ -15,6 +15,8 @@
         public const string enc_bank_no = "enc_bank_no";
         public const string enc_true_name = "enc_true_name";
         public const string partnerid = "partnerid";
+        public const string prepayid = "prepayid";
+        public const string package = "package";
 
         public const string mch_appid = "mch_appid";
         public const string mchid = "mchid";
@@ -30,5 +32,11 @@
 
         public const string MD5 = "MD5";
         public const string HMAC_SHA256 = "HMAC-SHA256";
+        public const string RSA = "RSA";
+
+        public const string Wechatpay_Serial = "Wechatpay-Serial";
+        public const string Wechatpay_Timestamp = "Wechatpay-Timestamp";
+        public const string Wechatpay_Nonce = "Wechatpay-Nonce";
+        public const string Wechatpay_Signature = "Wechatpay-Signature";
     }
 }

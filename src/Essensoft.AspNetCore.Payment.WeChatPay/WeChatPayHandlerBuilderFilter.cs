@@ -7,11 +7,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
     public class WeChatPayHandlerBuilderFilter : IHttpMessageHandlerBuilderFilter
     {
-        private readonly WeChatPayCertificateManager _certificateManager;
+        private readonly WeChatPayClientCertificateManager _clientCertificateManager;
 
-        public WeChatPayHandlerBuilderFilter(WeChatPayCertificateManager certificateManager)
+        public WeChatPayHandlerBuilderFilter(WeChatPayClientCertificateManager clientCertificateManager)
         {
-            _certificateManager = certificateManager;
+            _clientCertificateManager = clientCertificateManager;
         }
 
         public Action<HttpMessageHandlerBuilder> Configure(Action<HttpMessageHandlerBuilder> next)
@@ -30,9 +30,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                     if (builder.Name.Contains(WeChatPayClient.Prefix))
                     {
                         var hash = builder.Name.RemovePreFix(WeChatPayClient.Prefix);
-                        if (_certificateManager.TryGetValue(hash, out var certificate))
+                        if (_clientCertificateManager.TryGetValue(hash, out var clientCertificate))
                         {
-                            handler.ClientCertificates.Add(certificate);
+                            handler.ClientCertificates.Add(clientCertificate);
                         }
                     }
                 }

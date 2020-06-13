@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "微信支付V3";
+}
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">首页</a></li>
+        <li class="breadcrumb-item active" aria-current="page">@ViewData["Title"]</li>
+    </ol>
+</nav>
+<br />
+<table class="table table-bordered table-hover">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">产品</th>
+            <th scope="col">接口</th>
+            <th scope="col">#</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row">1</th>
+            <td>获取平台证书列表</td>
+            <td><a href="https://wechatpay-api.gitbook.io/wechatpay-api-v3/jie-kou-wen-dang/ping-tai-zheng-shu" target="_blank">https://api.mch.weixin.qq.com/v3/certificates</a></td>
+            <td><a asp-controller="WeChatPayV3" asp-action="GetCertificates">立即测试</a></td>
+        </tr>
+        <tr>
+            <th scope="row">2</th>
+            <td>APP支付-App下单</td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_1.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/pay/transactions/app</a></td>
+            <td><a asp-controller="WeChatPayV3" asp-action="AppPay">立即测试</a></td>
+        </tr>
+        <tr>
+            <th scope="row">3</th>
+            <td>公众号支付-JSAPI下单</td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_2.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/pay/transactions/jsapi</a></td>
+            <td><a asp-controller="WeChatPayV3" asp-action="PubPay">立即测试</a></td>
+        </tr>
+        <tr>
+            <th scope="row">4</th>
+            <td>扫码支付-Native下单</td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_3.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/pay/transactions/native</a></td>
+            <td><a asp-controller="WeChatPayV3" asp-action="QrCodePay">立即测试</a></td>
+        </tr>
+        <tr>
+            <th scope="row">5</th>
+            <td>H5支付-H5下单</td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_4.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/pay/transactions/h5</a></td>
+            <td><a asp-controller="WeChatPayV3" asp-action="H5Pay">立即测试</a></td>
+        </tr>
+        <tr>
+            <th scope="row">6</th>
+            <td>查询订单-微信支付订单号查询</td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_5.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/pay/transactions/id/{transaction_id}</a></td>
+            <td><a asp-controller="WeChatPayV3" asp-action="QueryByTransactionId">立即测试</a></td>
+        </tr>
+        <tr>
+            <th scope="row">7</th>
+            <td>查询订单-商户订单号查询</td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_5.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/pay/transactions/out-trade-no/{out_trade_no}</a></td>
+            <td><a asp-controller="WeChatPayV3" asp-action="QueryByOutTradeNo">立即测试</a></td>
+        </tr>
+        <tr>
+            <th scope="row">8</th>
+            <td>关闭订单</td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_6.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/pay/transactions/out-trade-no/{out_trade_no}/close</a></td>
+            <td><a asp-controller="WeChatPayV3" asp-action="OutTradeNoClose">立即测试</a></td>
+        </tr>
+    </tbody>
+</table>
