@@ -6,17 +6,24 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Domain;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
 {
     /// <summary>
-    /// 分账动账通知 (普通商户)
-    /// https://pay.weixin.qq.com/wiki/doc/api/allocation.php?chapter=27_9&index=9
+    /// 分账动账通知 (服务商)
+    /// https://pay.weixin.qq.com/wiki/doc/api/allocation_sl.php?chapter=25_9&index=9
     /// </summary>
-    public class WeChatPayProfitSharingNotify : WeChatPayV3Notify
+    public class WeChatPayPartnerProfitSharingNotify : WeChatPayV3Notify
     {
         /// <summary>
-        /// 直连商户号
-        /// 直连模式分账发起和出资商户
+        /// 服务商商户号
+        /// 服务商模式分账发起商户
         /// </summary>
-        [JsonPropertyName("mchid")]
-        public string MchId { get; set; }
+        [JsonPropertyName("sp_mchid")]
+        public string SpMchId { get; set; }
+
+        /// <summary>
+        /// 子商户号
+        /// 服务商模式分账出资商户
+        /// </summary>
+        [JsonPropertyName("sub_mchid")]
+        public string SubMchid { get; set; }
 
         /// <summary>
         /// 微信订单号
