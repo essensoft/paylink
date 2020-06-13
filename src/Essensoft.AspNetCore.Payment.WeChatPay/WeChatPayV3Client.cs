@@ -45,9 +45,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 throw new ArgumentNullException(nameof(options.MchId));
             }
 
-            if (string.IsNullOrEmpty(options.Key))
+            if (string.IsNullOrEmpty(options.V3Key))
             {
-                throw new ArgumentNullException(nameof(options.Key));
+                throw new ArgumentNullException(nameof(options.V3Key));
             }
 
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
@@ -76,6 +76,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             if (string.IsNullOrEmpty(options.Certificate))
             {
                 throw new ArgumentNullException(nameof(options.Certificate));
+            }
+
+            if (string.IsNullOrEmpty(options.V3Key))
+            {
+                throw new ArgumentNullException(nameof(options.V3Key));
             }
 
             var client = _httpClientFactory.CreateClient(nameof(WeChatPayClient));
