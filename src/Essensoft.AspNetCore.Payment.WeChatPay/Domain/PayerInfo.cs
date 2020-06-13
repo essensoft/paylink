@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Domain
     /// <summary>
     /// 支付者信息
     /// </summary>
-    public class Payer : WeChatPayObject
+    public class PayerInfo : WeChatPayObject
     {
         /// <summary>
         /// 用户标识

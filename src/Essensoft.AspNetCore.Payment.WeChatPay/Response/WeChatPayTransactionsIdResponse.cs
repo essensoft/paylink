@@ -110,7 +110,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Response
         /// 示例值：见请求示例
         /// </summary>
         [JsonPropertyName("combine_payer_info")]
-        public Payer CombinePayerInfo { get; set; }
+        public PayerInfo CombinePayerInfo { get; set; }
 
         /// <summary>
         /// 订单金额
