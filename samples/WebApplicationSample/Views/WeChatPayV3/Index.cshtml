@@ -66,5 +66,23 @@
             <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_6.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/pay/transactions/out-trade-no/{out_trade_no}/close</a></td>
             <td><a asp-controller="WeChatPayV3" asp-action="OutTradeNoClose">立即测试</a></td>
         </tr>
+        <tr>
+            <th scope="row">9</th>
+            <td>申请交易账单</td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/bill/chapter3_1.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/bill/tradebill</a></td>
+            <td><a asp-controller="WeChatPayV3" asp-action="TradeBill">立即测试</a></td>
+        </tr>
+        <tr>
+            <th scope="row">10</th>
+            <td>申请资金账单</td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/bill/chapter3_2.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/bill/fundflowbill</a></td>
+            <td><a asp-controller="WeChatPayV3" asp-action="FundflowBill">立即测试</a></td>
+        </tr>
+        <tr>
+            <th scope="row">11</th>
+            <td>下载账单</td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/bill/chapter3_3.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/billdownload/file?token=xxx</a></td>
+            <td><a asp-controller="WeChatPayV3" asp-action="BillDownload">立即测试</a></td>
+        </tr>
     </tbody>
 </table>

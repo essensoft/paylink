@@ -102,4 +102,25 @@ namespace WebApplicationSample.Models
         [Display(Name = "out_trade_no")]
         public string OutTradeNo { get; set; }
     }
+
+    public class WeChatPayTradeBillViewModel
+    {
+        [Required]
+        [Display(Name = "bill_date")]
+        public string BillDate { get; set; }
+    }
+
+    public class WeChatPayFundflowBillViewModel
+    {
+        [Required]
+        [Display(Name = "bill_date")]
+        public string BillDate { get; set; }
+    }
+
+    public class WeChatPayBillDownloadViewModel
+    {
+        [Required]
+        [Display(Name = "download_url")]
+        public string DownloadUrl { get; set; }
+    }
 }
