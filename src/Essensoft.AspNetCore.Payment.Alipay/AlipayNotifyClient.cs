@@ -1,12 +1,8 @@
-﻿#if NETCOREAPP3_1
-
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Alipay.Parser;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
-using Microsoft.AspNetCore.Http;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
@@ -23,7 +19,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         #region IAlipayNotifyClient Members
 
-        public Task<T> ExecuteAsync<T>(HttpRequest request, AlipayOptions options) where T : AlipayNotify
+#if NETCOREAPP3_1
+        public Task<T> ExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, AlipayOptions options) where T : AlipayNotify
         {
             if (options == null)
             {
@@ -41,25 +38,27 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             }
 
             var parameters = GetParameters(request);
-            var rsp = AlipayDictionaryParser.Parse<T>(parameters);
-            CheckNotifySign(parameters, options);
-            return Task.FromResult(rsp);
+            return ExecuteAsync<T>(parameters, options);
         }
+#endif
 
         #endregion
 
         #region IAlipayNotifyClient Members
 
-        public Task<T> CertificateExecuteAsync<T>(HttpRequest request, AlipayOptions options) where T : AlipayNotify
+#if NETCOREAPP3_1
+        public Task<T> CertificateExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, AlipayOptions options) where T : AlipayNotify
         {
             return ExecuteAsync<T>(request, options);
         }
+#endif
 
         #endregion
 
         #region IAlipayNotifyClient Members
 
-        public IDictionary<string, string> GetParameters(HttpRequest request)
+#if NETCOREAPP3_1
+        public IDictionary<string, string> GetParameters(Microsoft.AspNetCore.Http.HttpRequest request)
         {
             var parameters = new Dictionary<string, string>();
             if (request.Method == "POST")
@@ -78,8 +77,45 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             }
             return parameters;
         }
+#endif
 
         #endregion
+
+        #region IAlipayNotifyClient Members
+
+        public Task<T> ExecuteAsync<T>(IDictionary<string, string> parameters, AlipayOptions options) where T : AlipayNotify
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            if (string.IsNullOrEmpty(options.SignType))
+            {
+                throw new ArgumentNullException(nameof(options.SignType));
+            }
+
+            if (string.IsNullOrEmpty(options.AlipayPublicKey))
+            {
+                throw new ArgumentNullException(nameof(options.AlipayPublicKey));
+            }
+
+            var rsp = AlipayDictionaryParser.Parse<T>(parameters);
+            CheckNotifySign(parameters, options);
+            return Task.FromResult(rsp);
+        }
+
+        #endregion
+
+        #region IAlipayNotifyClient Members
+
+        public Task<T> CertificateExecuteAsync<T>(IDictionary<string, string> parameters, AlipayOptions options) where T : AlipayNotify
+        {
+            return ExecuteAsync<T>(parameters, options);
+        }
+
+        #endregion
+
 
         #region Common Method
 
@@ -107,5 +143,3 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         #endregion
     }
 }
-
-#endif

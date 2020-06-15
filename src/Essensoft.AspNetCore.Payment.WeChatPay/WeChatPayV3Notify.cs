@@ -1,6 +1,4 @@
-﻿#if NETCOREAPP3_1
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.WeChatPay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
@@ -26,5 +24,3 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         public string ResourcePlaintext { get; set; }
     }
 }
-
-#endif

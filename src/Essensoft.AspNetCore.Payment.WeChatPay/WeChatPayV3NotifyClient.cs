@@ -1,6 +1,4 @@
-﻿#if NETCOREAPP3_1
-
-using System;
+﻿using System;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
@@ -9,7 +7,6 @@ using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Security;
 using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
 using Essensoft.AspNetCore.Payment.WeChatPay.Request;
-using Microsoft.AspNetCore.Http;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
@@ -30,38 +27,15 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         #region IWeChatPayV3NotifyClient Members
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request, WeChatPayOptions options) where T : WeChatPayV3Notify
+#if NETCOREAPP3_1
+        public async Task<T> ExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, WeChatPayOptions options) where T : WeChatPayV3Notify
         {
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
             }
 
-            if (string.IsNullOrEmpty(options.V3Key))
-            {
-                throw new ArgumentNullException(nameof(options.V3Key));
-            }
-
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
-
-            await CheckNotifySignAsync(request, body, options);
-
-            var parser = new WeChatPayV3NotifyJsonParser<T>();
-            var notify = parser.Parse(body, options.V3Key);
-
-            return notify;
-        }
-
-        #endregion
-
-        #region Check Notify Method
-
-        private async Task CheckNotifySignAsync(HttpRequest request, string body, WeChatPayOptions options)
-        {
-            if (string.IsNullOrEmpty(body))
-            {
-                throw new WeChatPayException("sign check fail: body is empty!");
-            }
 
             var serial = string.Empty;
             var timestamp = string.Empty;
@@ -86,6 +60,45 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Signature, out var signatureValues) && signatureValues.Count() == 1)
             {
                 signature = signatureValues.ElementAt(0);
+            }
+
+            return await ExecuteAsync<T>(body, serial, timestamp, nonce, signature, options);
+        }
+#endif
+
+        #endregion
+
+        #region IWeChatPayV3NotifyClient Members
+
+        public async Task<T> ExecuteAsync<T>(string body, string serial, string timestamp, string nonce, string signature, WeChatPayOptions options) where T : WeChatPayV3Notify
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            if (string.IsNullOrEmpty(options.V3Key))
+            {
+                throw new ArgumentNullException(nameof(options.V3Key));
+            }
+
+            await CheckNotifySignAsync(body, serial, timestamp, nonce, signature, options);
+
+            var parser = new WeChatPayV3NotifyJsonParser<T>();
+            var notify = parser.Parse(body, options.V3Key);
+
+            return notify;
+        }
+
+        #endregion
+
+        #region Check Notify Method
+
+        private async Task CheckNotifySignAsync(string body, string serial, string timestamp, string nonce, string signature, WeChatPayOptions options)
+        {
+            if (string.IsNullOrEmpty(body))
+            {
+                throw new WeChatPayException("sign check fail: body is empty!");
             }
 
             if (string.IsNullOrEmpty(serial))
@@ -136,5 +149,3 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         #endregion
     }
 }
-
-#endif

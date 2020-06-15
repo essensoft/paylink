@@ -1,8 +1,5 @@
-﻿#if NETCOREAPP3_1
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
@@ -11,6 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
     /// </summary>
     public interface IAlipayNotifyClient
     {
+#if NETCOREAPP3_1
         /// <summary>
         /// 执行 Alipay 通知请求解析。
         /// </summary>
@@ -18,7 +16,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         /// <param name="request">控制器的请求</param>
         /// <param name="options">配置选项</param>
         /// <returns>领域对象</returns>
-        Task<T> ExecuteAsync<T>(HttpRequest request, AlipayOptions options) where T : AlipayNotify;
+        Task<T> ExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, AlipayOptions options) where T : AlipayNotify;
 
         /// <summary>
         /// 执行 Alipay 通知请求解析。
@@ -27,14 +25,31 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         /// <param name="request">控制器的请求</param>
         /// <param name="options">配置选项</param>
         /// <returns>领域对象</returns>
-        Task<T> CertificateExecuteAsync<T>(HttpRequest request, AlipayOptions options) where T : AlipayNotify;
+        Task<T> CertificateExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, AlipayOptions options) where T : AlipayNotify;
 
         /// <summary>
         /// 获取通知参数
         /// </summary>
         /// <param name="request"></param>
-        IDictionary<string, string> GetParameters(HttpRequest request);
+        IDictionary<string, string> GetParameters(Microsoft.AspNetCore.Http.HttpRequest request);
+#endif
+
+        /// <summary>
+        /// 执行 Alipay 通知请求解析。
+        /// </summary>
+        /// <typeparam name="T">领域对象</typeparam>
+        /// <param name="parameters">通知参数</param>
+        /// <param name="options">配置选项</param>
+        /// <returns>领域对象</returns>
+        Task<T> ExecuteAsync<T>(IDictionary<string, string> parameters, AlipayOptions options) where T : AlipayNotify;
+
+        /// <summary>
+        /// 执行 Alipay 通知请求解析。
+        /// </summary>
+        /// <typeparam name="T">领域对象</typeparam>
+        /// <param name="parameters">通知参数</param>
+        /// <param name="options">配置选项</param>
+        /// <returns>领域对象</returns>
+        Task<T> CertificateExecuteAsync<T>(IDictionary<string, string> parameters, AlipayOptions options) where T : AlipayNotify;
     }
 }
-
-#endif

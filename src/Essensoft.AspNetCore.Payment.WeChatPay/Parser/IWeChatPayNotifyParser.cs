@@ -1,6 +1,4 @@
-﻿#if NETCOREAPP3_1
-
-namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
+﻿namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
 {
     public interface IWeChatPayNotifyParser<T> where T : WeChatPayNotify
     {
@@ -9,5 +7,3 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
         T Parse(string body, string data);
     }
 }
-
-#endif

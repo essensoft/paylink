@@ -1,6 +1,4 @@
-﻿#if NETCOREAPP3_1
-
-namespace Essensoft.AspNetCore.Payment.Alipay.Notify
+﻿namespace Essensoft.AspNetCore.Payment.Alipay.Notify
 {
     /// <summary>
     /// 第三方应用授权取消消息
@@ -10,5 +8,3 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
     {
     }
 }
-
-#endif
