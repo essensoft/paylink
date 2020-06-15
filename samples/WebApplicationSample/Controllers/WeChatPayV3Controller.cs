@@ -312,5 +312,86 @@ namespace WebApplicationSample.Controllers
             ViewData["response"] = response.Body;
             return View();
         }
+
+        /// <summary>
+        /// 申请交易账单
+        /// </summary>
+        [HttpGet]
+        public IActionResult TradeBill()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 申请交易账单
+        /// </summary>
+        /// <param name="viewModel"></param>
+        [HttpPost]
+        public async Task<IActionResult> TradeBill(WeChatPayTradeBillViewModel viewModel)
+        {
+            var request = new WeChatPayBillTradeBillRequest
+            {
+                BillDate = viewModel.BillDate
+            };
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 申请资金账单
+        /// </summary>
+        [HttpGet]
+        public IActionResult FundflowBill()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 申请资金账单
+        /// </summary>
+        /// <param name="viewModel"></param>
+        [HttpPost]
+        public async Task<IActionResult> FundflowBill(WeChatPayFundflowBillViewModel viewModel)
+        {
+            var request = new WeChatPayBillFundflowBillRequest
+            {
+                BillDate = viewModel.BillDate
+            };
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+
+            ViewData["response"] = response.Body;
+            return View();
+        }
+        
+        /// <summary>
+        /// 下载账单
+        /// </summary>
+        [HttpGet]
+        public IActionResult BillDownload()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 下载账单
+        /// </summary>
+        /// <param name="viewModel"></param>
+        [HttpPost]
+        public async Task<IActionResult> BillDownload(WeChatPayBillDownloadViewModel viewModel)
+        {
+            var request = new WeChatPayBillDownloadRequest
+            {
+                DownloadUrl = viewModel.DownloadUrl
+            };
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+
+            ViewData["response"] = response.Body;
+            return View();
+        }
     }
 }
