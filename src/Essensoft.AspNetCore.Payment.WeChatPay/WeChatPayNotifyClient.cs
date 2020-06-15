@@ -1,6 +1,4 @@
-﻿#if NETCOREAPP3_1
-
-using System;
+﻿using System;
 using System.IO;
 using System.Security.Cryptography;
 using System.Text;
@@ -9,7 +7,6 @@ using Essensoft.AspNetCore.Payment.Security;
 using Essensoft.AspNetCore.Payment.WeChatPay.Notify;
 using Essensoft.AspNetCore.Payment.WeChatPay.Parser;
 using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
-using Microsoft.AspNetCore.Http;
 using MD5 = Essensoft.AspNetCore.Payment.Security.MD5;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
@@ -26,11 +23,28 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         #region IWeChatPayNotifyClient Members
 
-        public async Task<T> ExecuteAsync<T>(HttpRequest request, WeChatPayOptions options) where T : WeChatPayNotify
+#if NETCOREAPP3_1
+        public async Task<T> ExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, WeChatPayOptions options) where T : WeChatPayNotify
         {
             if (request == null)
             {
                 throw new ArgumentNullException(nameof(request));
+            }
+
+            var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
+            return await ExecuteAsync<T>(body, options);
+        }
+#endif
+
+        #endregion
+
+        #region IWeChatPayNotifyClient Members
+
+        public Task<T> ExecuteAsync<T>(string body, WeChatPayOptions options) where T : WeChatPayNotify
+        {
+            if (string.IsNullOrEmpty(body))
+            {
+                throw new ArgumentNullException(nameof(body));
             }
 
             if (options == null)
@@ -43,7 +57,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 throw new ArgumentNullException(nameof(options.Key));
             }
 
-            var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
             var parser = new WeChatPayNotifyXmlParser<T>();
             var notify = parser.Parse(body);
             if (notify is WeChatPayRefundNotify)
@@ -57,7 +70,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 CheckNotifySign(notify, options);
             }
 
-            return notify;
+            return Task.FromResult(notify);
         }
 
         #endregion
@@ -91,5 +104,3 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         #endregion
     }
 }
-
-#endif

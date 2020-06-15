@@ -1,6 +1,4 @@
-﻿#if NETCOREAPP3_1
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Notify
 {
@@ -180,5 +178,3 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Notify
         public string FundBillList { get; set; }
     }
 }
-
-#endif

@@ -1,6 +1,4 @@
-﻿#if NETCOREAPP3_1
-
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
 {
@@ -107,5 +105,3 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
         public string RequestSerial { get; set; }
     }
 }
-
-#endif

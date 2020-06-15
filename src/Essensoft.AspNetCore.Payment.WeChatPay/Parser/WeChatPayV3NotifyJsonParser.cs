@@ -1,6 +1,4 @@
-﻿#if NETCOREAPP3_1
-
-using System;
+﻿using System;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using Essensoft.AspNetCore.Payment.Security;
@@ -56,5 +54,3 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Parser
         }
     }
 }
-
-#endif

@@ -1,6 +1,4 @@
-﻿#if NETCOREAPP3_1
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.WeChatPay.Domain;
 
@@ -58,5 +56,3 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
         public PayerInfo CombinePayerInfo { get; set; }
     }
 }
-
-#endif

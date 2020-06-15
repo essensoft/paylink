@@ -1,6 +1,4 @@
-﻿#if NETCOREAPP3_1
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
@@ -106,5 +104,3 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         public string AuthAppId { get; set; }
     }
 }
-
-#endif

@@ -1,6 +1,4 @@
-﻿#if NETCOREAPP3_1
-
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 using Essensoft.AspNetCore.Payment.WeChatPay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
@@ -54,5 +52,3 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
         public string SuccessTime { get; set; }
     }
 }
-
-#endif
