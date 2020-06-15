@@ -52,10 +52,31 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
             using (var resp = await client.GetAsync(url))
             using (var respContent = resp.Content)
             {
-                var serial = resp.Headers.GetValues(WeChatPayConsts.Wechatpay_Serial).First();
-                var timestamp = resp.Headers.GetValues(WeChatPayConsts.Wechatpay_Timestamp).First();
-                var nonce = resp.Headers.GetValues(WeChatPayConsts.Wechatpay_Nonce).First();
-                var signature = resp.Headers.GetValues(WeChatPayConsts.Wechatpay_Signature).First();
+                var serial = string.Empty;
+                var timestamp = string.Empty;
+                var nonce = string.Empty;
+                var signature = string.Empty;
+
+                if (resp.Headers.TryGetValues(WeChatPayConsts.Wechatpay_Serial, out var serialValues) && serialValues.Count() == 1)
+                {
+                    serial = serialValues.ElementAt(0);
+                }
+
+                if (resp.Headers.TryGetValues(WeChatPayConsts.Wechatpay_Timestamp, out var timestampValues) && timestampValues.Count() == 1)
+                {
+                    timestamp = timestampValues.ElementAt(0);
+                }
+
+                if (resp.Headers.TryGetValues(WeChatPayConsts.Wechatpay_Nonce, out var nonceValues) && nonceValues.Count() == 1)
+                {
+                    nonce = nonceValues.ElementAt(0);
+                }
+
+                if (resp.Headers.TryGetValues(WeChatPayConsts.Wechatpay_Signature, out var signatureValues) && signatureValues.Count() == 1)
+                {
+                    signature = signatureValues.ElementAt(0);
+                }
+
                 var body = await respContent.ReadAsStringAsync();
                 var statusCode = (int)resp.StatusCode;
 
@@ -77,10 +98,31 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Utility
             using (var resp = await client.PostAsync(url, reqContent))
             using (var respContent = resp.Content)
             {
-                var serial = resp.Headers.GetValues(WeChatPayConsts.Wechatpay_Serial).First();
-                var timestamp = resp.Headers.GetValues(WeChatPayConsts.Wechatpay_Timestamp).First();
-                var nonce = resp.Headers.GetValues(WeChatPayConsts.Wechatpay_Nonce).First();
-                var signature = resp.Headers.GetValues(WeChatPayConsts.Wechatpay_Signature).First();
+                var serial = string.Empty;
+                var timestamp = string.Empty;
+                var nonce = string.Empty;
+                var signature = string.Empty;
+
+                if (resp.Headers.TryGetValues(WeChatPayConsts.Wechatpay_Serial, out var serialValues) && serialValues.Count() == 1)
+                {
+                    serial = serialValues.ElementAt(0);
+                }
+
+                if (resp.Headers.TryGetValues(WeChatPayConsts.Wechatpay_Timestamp, out var timestampValues) && timestampValues.Count() == 1)
+                {
+                    timestamp = timestampValues.ElementAt(0);
+                }
+
+                if (resp.Headers.TryGetValues(WeChatPayConsts.Wechatpay_Nonce, out var nonceValues) && nonceValues.Count() == 1)
+                {
+                    nonce = nonceValues.ElementAt(0);
+                }
+
+                if (resp.Headers.TryGetValues(WeChatPayConsts.Wechatpay_Signature, out var signatureValues) && signatureValues.Count() == 1)
+                {
+                    signature = signatureValues.ElementAt(0);
+                }
+
                 var body = await respContent.ReadAsStringAsync();
                 var statusCode = (int)resp.StatusCode;
 

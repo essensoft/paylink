@@ -63,15 +63,30 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 throw new WeChatPayException("sign check fail: body is empty!");
             }
 
-            request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Serial, out var serialValues);
-            request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Timestamp, out var timestampValues);
-            request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Nonce, out var nonceValues);
-            request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Signature, out var signatureValues);
+            var serial = string.Empty;
+            var timestamp = string.Empty;
+            var nonce = string.Empty;
+            var signature = string.Empty;
 
-            var serial = serialValues.First();
-            var timestamp = timestampValues.First();
-            var nonce = nonceValues.First();
-            var signature = signatureValues.First();
+            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Serial, out var serialValues) && serialValues.Count() == 1)
+            {
+                serial = serialValues.ElementAt(0);
+            }
+
+            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Timestamp, out var timestampValues) && timestampValues.Count() == 1)
+            {
+                timestamp = timestampValues.ElementAt(0);
+            }
+
+            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Nonce, out var nonceValues) && nonceValues.Count() == 1)
+            {
+                nonce = nonceValues.ElementAt(0);
+            }
+
+            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Signature, out var signatureValues) && signatureValues.Count() == 1)
+            {
+                signature = signatureValues.ElementAt(0);
+            }
 
             if (string.IsNullOrEmpty(serial))
             {
