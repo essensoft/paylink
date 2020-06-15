@@ -112,7 +112,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 }
             }
 
-            await CheckV3ResponseSignAsync(options, serial, timestamp, nonce, signature, body);
+            // 下载账单不需要验签
+            if (!(response is WeChatPayBillDownloadResponse))
+            {
+                await CheckV3ResponseSignAsync(options, serial, timestamp, nonce, signature, body);
+            }
 
             return response;
         }
