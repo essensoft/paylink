@@ -4,16 +4,12 @@ using System.Xml;
 using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.Alipay.Notify;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
-using Essensoft.AspNetCore.Payment.WeChatPay;
-using Essensoft.AspNetCore.Payment.WeChatPay.Notify;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
 namespace WebApplicationSample.Controllers
 {
-    #region 支付宝异步通知
-
-    [Route("notify/alipay")]
+    [Route("alipay/notify")]
     public class AlipayNotifyController : Controller
     {
         private readonly IAlipayNotifyClient _client;
@@ -261,116 +257,4 @@ namespace WebApplicationSample.Controllers
             return xmlDoc.InnerXml;
         }
     }
-
-    #endregion
-
-    #region 微信支付异步通知
-
-    [Route("notify/wechatpay")]
-    public class WeChatPayNotifyController : Controller
-    {
-        private readonly IWeChatPayNotifyClient _client;
-        private readonly IOptions<WeChatPayOptions> _optionsAccessor;
-
-        public WeChatPayNotifyController(IWeChatPayNotifyClient client, IOptions<WeChatPayOptions> optionsAccessor)
-        {
-            _client = client;
-            _optionsAccessor = optionsAccessor;
-        }
-
-        /// <summary>
-        /// 统一下单支付结果通知
-        /// </summary>
-        [Route("unifiedorder")]
-        [HttpPost]
-        public async Task<IActionResult> Unifiedorder()
-        {
-            try
-            {
-                var notify = await _client.ExecuteAsync<WeChatPayUnifiedOrderNotify>(Request, _optionsAccessor.Value);
-                if (notify.ReturnCode == WeChatPayCode.Success)
-                {
-                    if (notify.ResultCode == WeChatPayCode.Success)
-                    {
-                        Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
-
-                        return WeChatPayNotifyResult.Success;
-                    }
-                }
-                return NoContent();
-            }
-            catch
-            {
-                return NoContent();
-            }
-        }
-
-        /// <summary>
-        /// 退款结果通知
-        /// </summary>
-        [Route("refund")]
-        [HttpPost]
-        public async Task<IActionResult> Refund()
-        {
-            try
-            {
-                var notify = await _client.ExecuteAsync<WeChatPayRefundNotify>(Request, _optionsAccessor.Value);
-                if (notify.ReturnCode == WeChatPayCode.Success)
-                {
-                    if (notify.RefundStatus == WeChatPayCode.Success)
-                    {
-                        Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
-                        return WeChatPayNotifyResult.Success;
-                    }
-                }
-                return NoContent();
-            }
-            catch
-            {
-                return NoContent();
-            }
-        }
-    }
-
-    #endregion
-
-    #region 微信支付V3异步通知
-
-    [Route("notify/wechatpay/v3")]
-    public class WeChatPayV3NotifyController : Controller
-    {
-        private readonly IWeChatPayV3NotifyClient _client;
-        private readonly IOptions<WeChatPayOptions> _optionsAccessor;
-
-        public WeChatPayV3NotifyController(IWeChatPayV3NotifyClient client, IOptions<WeChatPayOptions> optionsAccessor)
-        {
-            _client = client;
-            _optionsAccessor = optionsAccessor;
-        }
-
-        /// <summary>
-        /// 支付结果通知
-        /// </summary>
-        [Route("transactions")]
-        [HttpPost]
-        public async Task<IActionResult> Transactions()
-        {
-            try
-            {
-                var notify = await _client.ExecuteAsync<WeChatPayTransactionsNotify>(Request, _optionsAccessor.Value);
-                if (notify.TradeState == WeChatPayTradeState.Success)
-                {
-                    Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
-                    return WeChatPayV3NotifyResult.Success;
-                }
-                return NoContent();
-            }
-            catch
-            {
-                return NoContent();
-            }
-        }
-    }
-
-    #endregion
 }

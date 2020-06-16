@@ -2,7 +2,6 @@
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Essensoft.AspNetCore.Payment.Alipay.Notify;
 using Essensoft.AspNetCore.Payment.Alipay.Request;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
@@ -13,13 +12,11 @@ namespace WebApplicationSample.Controllers
     public class AlipayController : Controller
     {
         private readonly IAlipayClient _client;
-        private readonly IAlipayNotifyClient _notifyClient;
         private readonly IOptions<AlipayOptions> _optionsAccessor;
 
-        public AlipayController(IAlipayClient client, IAlipayNotifyClient notifyClient, IOptions<AlipayOptions> optionsAccessor)
+        public AlipayController(IAlipayClient client, IOptions<AlipayOptions> optionsAccessor)
         {
             _client = client;
-            _notifyClient = notifyClient;
             _optionsAccessor = optionsAccessor;
         }
 
@@ -370,44 +367,6 @@ namespace WebApplicationSample.Controllers
             var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
             ViewData["response"] = response.Body;
             return View();
-        }
-
-        /// <summary>
-        /// 电脑网站支付 - 同步跳转
-        /// </summary>
-        [HttpGet]
-        public async Task<IActionResult> PagePayReturn()
-        {
-            try
-            {
-                var notify = await _notifyClient.ExecuteAsync<AlipayTradePagePayReturn>(Request, _optionsAccessor.Value);
-                ViewData["response"] = "支付成功";
-                return View();
-            }
-            catch
-            {
-                ViewData["response"] = "出现错误";
-                return View();
-            }
-        }
-
-        /// <summary>
-        /// 手机网站支付 - 同步跳转
-        /// </summary>
-        [HttpGet]
-        public async Task<IActionResult> WapPayReturn()
-        {
-            try
-            {
-                var notify = await _notifyClient.ExecuteAsync<AlipayTradeWapPayReturn>(Request, _optionsAccessor.Value);
-                ViewData["response"] = "支付成功";
-                return View();
-            }
-            catch
-            {
-                ViewData["response"] = "出现错误";
-                return View();
-            }
         }
     }
 }
