@@ -240,7 +240,7 @@ namespace WebApplicationSample.Controllers
         public async Task<IActionResult> QueryByTransactionId(WeChatPayQueryByTransactionIdViewModel viewModel)
         {
             var request = new WeChatPayTransactionsIdRequest
-            { 
+            {
                 TransactionId = viewModel.TransactionId,
                 MchId = _optionsAccessor.Value.MchId,
             };
@@ -366,7 +366,7 @@ namespace WebApplicationSample.Controllers
             ViewData["response"] = response.Body;
             return View();
         }
-        
+
         /// <summary>
         /// 下载账单
         /// </summary>
