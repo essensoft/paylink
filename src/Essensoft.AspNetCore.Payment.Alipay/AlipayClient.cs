@@ -287,12 +287,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             if (!isError || isError && !string.IsNullOrEmpty(signItem.Sign))
             {
-                var rsaCheckContent = AlipaySignature.RSACheckContent(signItem.SignSourceDate, signItem.Sign, options.AlipayPublicKey, options.Charset, options.SignType);
+                var rsaCheckContent = AlipaySignature.RSACheckContent(signItem.SignSourceData, signItem.Sign, options.AlipayPublicKey, options.Charset, options.SignType);
                 if (!rsaCheckContent)
                 {
-                    if (!string.IsNullOrEmpty(signItem.SignSourceDate) && signItem.SignSourceDate.Contains("\\/"))
+                    if (!string.IsNullOrEmpty(signItem.SignSourceData) && signItem.SignSourceData.Contains("\\/"))
                     {
-                        var srouceData = signItem.SignSourceDate.Replace("\\/", "/");
+                        var srouceData = signItem.SignSourceData.Replace("\\/", "/");
                         var jsonCheck = AlipaySignature.RSACheckContent(srouceData, signItem.Sign, options.AlipayPublicKey, options.Charset, options.SignType);
                         if (!jsonCheck)
                         {
@@ -473,12 +473,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             if (!isError || isError && !string.IsNullOrEmpty(certItem.Sign))
             {
                 var currentAlipayPublicKey = await LoadAlipayPublicKeyAsync(certItem, options);
-                var rsaCheckContent = AlipaySignature.RSACheckContent(certItem.SignSourceDate, certItem.Sign, currentAlipayPublicKey, options.Charset, options.SignType);
+                var rsaCheckContent = AlipaySignature.RSACheckContent(certItem.SignSourceData, certItem.Sign, currentAlipayPublicKey, options.Charset, options.SignType);
                 if (!rsaCheckContent)
                 {
-                    if (!string.IsNullOrEmpty(certItem.SignSourceDate) && certItem.SignSourceDate.Contains("\\/"))
+                    if (!string.IsNullOrEmpty(certItem.SignSourceData) && certItem.SignSourceData.Contains("\\/"))
                     {
-                        var srouceData = certItem.SignSourceDate.Replace("\\/", "/");
+                        var srouceData = certItem.SignSourceData.Replace("\\/", "/");
                         var jsonCheck = AlipaySignature.RSACheckContent(srouceData, certItem.Sign, currentAlipayPublicKey, options.Charset, options.SignType);
                         if (!jsonCheck)
                         {

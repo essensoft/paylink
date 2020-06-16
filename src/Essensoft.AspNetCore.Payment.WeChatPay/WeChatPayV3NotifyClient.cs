@@ -112,15 +112,15 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             }
 
             var cert = await LoadPlatformCertificateAsync(serial, options);
-            var signatureSourceDate = BuildSignatureSourceDate(timestamp, nonce, body);
+            var signatureSourceData = BuildSignatureSourceData(timestamp, nonce, body);
 
-            if (!cert.GetRSAPublicKey().Verify(signatureSourceDate, signature))
+            if (!cert.GetRSAPublicKey().Verify(signatureSourceData, signature))
             {
                 throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
             }
         }
 
-        private string BuildSignatureSourceDate(string timestamp, string nonce, string body)
+        private string BuildSignatureSourceData(string timestamp, string nonce, string body)
         {
             return $"{timestamp}\n{nonce}\n{body}\n";
         }

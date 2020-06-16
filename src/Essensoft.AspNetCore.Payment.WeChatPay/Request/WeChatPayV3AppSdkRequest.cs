@@ -53,11 +53,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             sortedTxtParams.Add(WeChatPayConsts.noncestr, WeChatPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(WeChatPayConsts.timestamp, WeChatPayUtility.GetTimeStamp());
 
-            var signatureSourceDate = BuildSignatureSourceDate(sortedTxtParams);
-            sortedTxtParams.Add(WeChatPayConsts.sign, options.CertificateRSAPrivateKey.Sign(signatureSourceDate));
+            var signatureSourceData = BuildSignatureSourceData(sortedTxtParams);
+            sortedTxtParams.Add(WeChatPayConsts.sign, options.CertificateRSAPrivateKey.Sign(signatureSourceData));
         }
 
-        private static string BuildSignatureSourceDate(WeChatPayDictionary sortedTxtParams)
+        private static string BuildSignatureSourceData(WeChatPayDictionary sortedTxtParams)
         {
             return $"{sortedTxtParams.GetValue(WeChatPayConsts.appid)}\n{sortedTxtParams.GetValue(WeChatPayConsts.timestamp)}\n{sortedTxtParams.GetValue(WeChatPayConsts.noncestr)}\n{sortedTxtParams.GetValue(WeChatPayConsts.prepayid)}\n";
         }

@@ -2,7 +2,7 @@
 {
     public class CertItem
     {
-        public string SignSourceDate { get; set; }
+        public string SignSourceData { get; set; }
 
         public string Sign { get; set; }
 
