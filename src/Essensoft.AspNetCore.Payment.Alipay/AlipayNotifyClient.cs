@@ -100,9 +100,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 throw new ArgumentNullException(nameof(options.AlipayPublicKey));
             }
 
-            var rsp = AlipayDictionaryParser.Parse<T>(parameters);
+            var notify = AlipayDictionaryParser.Parse<T>(parameters);
             CheckNotifySign(parameters, options);
-            return Task.FromResult(rsp);
+            return Task.FromResult(notify);
         }
 
         #endregion
