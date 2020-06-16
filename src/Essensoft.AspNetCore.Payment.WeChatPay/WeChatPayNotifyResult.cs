@@ -9,18 +9,18 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
     /// </summary>
     public static class WeChatPayNotifyResult
     {
-        private static readonly ContentResult _success = new ContentResult { Content = "<xml><return_code><![CDATA[SUCCESS]]></return_code></xml>", ContentType = "text/xml", StatusCode = 200 };
-        private static readonly ContentResult _failure = new ContentResult { Content = "<xml><return_code><![CDATA[FAIL]]></return_code></xml>", ContentType = "text/xml", StatusCode = 200 };
+        private static readonly ContentResult success = new ContentResult { Content = "<xml><return_code><![CDATA[SUCCESS]]></return_code></xml>", ContentType = "text/xml", StatusCode = 200 };
+        private static readonly ContentResult failure = new ContentResult { Content = "<xml><return_code><![CDATA[FAIL]]></return_code></xml>", ContentType = "text/xml", StatusCode = 200 };
 
         /// <summary>
         /// 成功
         /// </summary>
-        public static IActionResult Success => _success;
+        public static IActionResult Success => success;
 
         /// <summary>
         /// 失败
         /// </summary>
-        public static IActionResult Failure => _failure;
+        public static IActionResult Failure => failure;
     }
 }
 
