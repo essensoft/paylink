@@ -59,3 +59,7 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 
 [Varorbc](https://github.com/Varorbc)
 [Alipay](https://github.com/alipay)
+
+## JetBrains
+
+[![JetBrains](img/jetbrains.png)](https://www.jetbrains.com/?from=payment)
