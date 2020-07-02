@@ -16,7 +16,7 @@
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Payment.pfx</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>..\..\Payment.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup>
