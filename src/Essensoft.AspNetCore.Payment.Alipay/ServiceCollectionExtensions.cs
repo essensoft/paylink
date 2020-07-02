@@ -1,6 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Essensoft.AspNetCore.Payment.Alipay;
 
-namespace Essensoft.AspNetCore.Payment.Alipay
+namespace Microsoft.Extensions.DependencyInjection
 {
     public static class ServiceCollectionExtensions
     {
