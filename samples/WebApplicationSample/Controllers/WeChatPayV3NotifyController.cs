@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.WeChatPay;
 using Essensoft.AspNetCore.Payment.WeChatPay.Notify;
@@ -11,9 +12,9 @@ namespace WebApplicationSample.Controllers
     public class WeChatPayV3NotifyController : Controller
     {
         private readonly IWeChatPayV3NotifyClient _client;
-        private readonly IOptions<WeChatPayOptions> _optionsAccessor;
+        private readonly IOptions<List<WeChatPayOptions>> _optionsAccessor;
 
-        public WeChatPayV3NotifyController(IWeChatPayV3NotifyClient client, IOptions<WeChatPayOptions> optionsAccessor)
+        public WeChatPayV3NotifyController(IWeChatPayV3NotifyClient client, IOptions<List<WeChatPayOptions>> optionsAccessor)
         {
             _client = client;
             _optionsAccessor = optionsAccessor;
@@ -28,7 +29,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<WeChatPayTransactionsNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.ExecuteAsync<WeChatPayTransactionsNotify>(Request, _optionsAccessor.Value[0]);
                 if (notify.TradeState == WeChatPayTradeState.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
