@@ -88,7 +88,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             var parser = new WeChatPayV3ResponseJsonParser<T>();
             var response = parser.Parse(body, statusCode);
 
-            // 为下载微信支付平台证书证书响应时，
+            // 为下载微信支付平台证书响应时，
             if (response is WeChatPayCertificatesResponse resp)
             {
                 foreach (var certificate in resp.Certificates)
