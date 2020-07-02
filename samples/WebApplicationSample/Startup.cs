@@ -1,4 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.Alipay;
+﻿using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.WeChatPay;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,8 +26,8 @@ namespace WebApplicationSample
             services.AddWeChatPay();
 
             // 在 appsettings.json(开发环境：appsettings.Development.json) 中 配置选项
-            services.Configure<AlipayOptions>(Configuration.GetSection("Alipay"));
-            services.Configure<WeChatPayOptions>(Configuration.GetSection("WeChatPay"));
+            services.Configure<List<AlipayOptions>>(Configuration.GetSection("Alipay"));
+            services.Configure<List<WeChatPayOptions>>(Configuration.GetSection("WeChatPay"));
 
             services.AddControllersWithViews();
         }

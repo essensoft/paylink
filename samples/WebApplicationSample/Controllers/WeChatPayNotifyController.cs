@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.WeChatPay;
 using Essensoft.AspNetCore.Payment.WeChatPay.Notify;
@@ -11,9 +12,9 @@ namespace WebApplicationSample.Controllers
     public class WeChatPayNotifyController : Controller
     {
         private readonly IWeChatPayNotifyClient _client;
-        private readonly IOptions<WeChatPayOptions> _optionsAccessor;
+        private readonly IOptions<List<WeChatPayOptions>> _optionsAccessor;
 
-        public WeChatPayNotifyController(IWeChatPayNotifyClient client, IOptions<WeChatPayOptions> optionsAccessor)
+        public WeChatPayNotifyController(IWeChatPayNotifyClient client, IOptions<List<WeChatPayOptions>> optionsAccessor)
         {
             _client = client;
             _optionsAccessor = optionsAccessor;
@@ -28,7 +29,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<WeChatPayUnifiedOrderNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.ExecuteAsync<WeChatPayUnifiedOrderNotify>(Request, _optionsAccessor.Value[0]);
                 if (notify.ReturnCode == WeChatPayCode.Success)
                 {
                     if (notify.ResultCode == WeChatPayCode.Success)
@@ -55,7 +56,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<WeChatPayRefundNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.ExecuteAsync<WeChatPayRefundNotify>(Request, _optionsAccessor.Value[0]);
                 if (notify.ReturnCode == WeChatPayCode.Success)
                 {
                     if (notify.RefundStatus == WeChatPayCode.Success)
