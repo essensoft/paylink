@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Domain
         /// 标价金额
         /// 子单金额，单位为分
         /// 境外场景下，标价金额要超过商户结算币种的最小单位金额，例如结算币种为美元，则标价金额必须大于1美分
-        // 示例值：100
+        /// 示例值：100
         /// </summary>
         [JsonPropertyName("total_amount")]
         public int TotalAmount { get; set; }
