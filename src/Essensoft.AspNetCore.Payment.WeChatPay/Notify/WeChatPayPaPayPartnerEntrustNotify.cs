@@ -6,7 +6,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Notify
     /// 微信代扣 - 签约、解约结果通知 (服务商)
     /// </summary>
     [XmlRoot("xml")]
-    public class WeChatPayPAPayPartnerEntrustNotify : WeChatPayNotify
+    public class WeChatPayPaPayPartnerEntrustNotify : WeChatPayNotify
     {
         /// <summary>
         /// 返回状态码

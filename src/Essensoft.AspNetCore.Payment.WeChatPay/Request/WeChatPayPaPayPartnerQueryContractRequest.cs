@@ -5,10 +5,15 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 微信代扣 - 公众号签约 (服务商)
+    /// 微信代扣 - 查询签约关系 (服务商)
     /// </summary>
-    public class WeChatPayPAPayPartnerEntrustWebRequest : IWeChatPayRequest<WeChatPayPAPayPartnerEntrustWebResponse>
+    public class WeChatPayPaPayPartnerQueryContractRequest : IWeChatPayRequest<WeChatPayPaPayPartnerQueryContractResponse>
     {
+        /// <summary>
+        /// 委托代扣协议id
+        /// </summary>
+        public string ContractId { get; set; }
+
         /// <summary>
         /// 模板id
         /// </summary>
@@ -20,48 +25,25 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         public string ContractCode { get; set; }
 
         /// <summary>
-        /// 请求序列号
-        /// </summary>
-        public string RequestSerial { get; set; }
-
-        /// <summary>
-        /// 用户账户展示名称
-        /// </summary>
-        public string ContractDisplayAccount { get; set; }
-
-        /// <summary>
-        /// 回调通知url
-        /// </summary>
-        public string NotifyUrl { get; set; }
-
-        /// <summary>
         /// 版本号
         /// </summary>
         public string Version { get; set; }
-
-        /// <summary>
-        /// 返回web
-        /// </summary>
-        public string ReturnWeb { get; set; }
 
         #region IWeChatPayRequest Members
 
         public string GetRequestUrl()
         {
-            return "https://api.mch.weixin.qq.com/papay/partner/entrustweb";
+            return "https://api.mch.weixin.qq.com/papay/partner/querycontract";
         }
 
         public IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
             {
+                { "contract_id", ContractId },
                 { "plan_id", PlanId },
                 { "contract_code", ContractCode },
-                { "request_serial", RequestSerial },
-                { "contract_display_account", ContractDisplayAccount },
-                { "notify_url", NotifyUrl },
                 { "version", Version },
-                { "return_web", ReturnWeb },
             };
             return parameters;
         }

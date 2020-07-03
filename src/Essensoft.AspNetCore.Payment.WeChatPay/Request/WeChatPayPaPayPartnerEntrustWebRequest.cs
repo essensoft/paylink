@@ -4,10 +4,10 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
-    // <summary>
-    /// 微信代扣 - H5签约 (服务商)
+    /// <summary>
+    /// 微信代扣 - 公众号签约 (服务商)
     /// </summary>
-    public class WeChatPayPAPayPartnerH5EntrustWebRequest : IWeChatPayRequest<WeChatPayPAPayPartnerH5EntrustWebResponse>
+    public class WeChatPayPaPayPartnerEntrustWebRequest : IWeChatPayRequest<WeChatPayPaPayPartnerEntrustWebResponse>
     {
         /// <summary>
         /// 模板id
@@ -40,49 +40,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         public string Version { get; set; }
 
         /// <summary>
-        /// 客户端 IP
+        /// 返回web
         /// </summary>
-        public string ClientIp { get; set; }
-
-        /// <summary>
-        /// 设备ID
-        /// </summary>
-        public string Deviceid { get; set; }
-
-        /// <summary>
-        /// 手机号
-        /// </summary>
-        public string Mobile { get; set; }
-
-        /// <summary>
-        /// 邮箱地址
-        /// </summary>
-        public string Email { get; set; }
-
-        /// <summary>
-        /// QQ号
-        /// </summary>
-        public string QQ { get; set; }
-
-        /// <summary>
-        /// 微信OpenId
-        /// </summary>
-        public string OpenId { get; set; }
-
-        /// <summary>
-        /// 身份证号
-        /// </summary>
-        public string CreId { get; set; }
-
-        /// <summary>
-        /// 商户侧用户标识
-        /// </summary>
-        public string OuterId { get; set; }
-
-        /// <summary>
-        /// 回调应用
-        /// </summary>
-        public string ReturnAppId { get; set; }
+        public string ReturnWeb { get; set; }
 
         #region IWeChatPayRequest Members
 
@@ -101,21 +61,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
                 { "contract_display_account", ContractDisplayAccount },
                 { "notify_url", NotifyUrl },
                 { "version", Version },
-                { "clientip", ClientIp },
-                { "deviceid", Deviceid },
-                { "mobile", Mobile },
-                { "email", Email },
-                { "qq", QQ },
-                { "creid", CreId },
-                { "outerid", OuterId },
-                { "return_appid", ReturnAppId },
+                { "return_web", ReturnWeb },
             };
             return parameters;
-        }
-
-        public WeChatPaySignType GetSignType()
-        {
-            return WeChatPaySignType.HMAC_SHA256;
         }
 
         public void PrimaryHandler(WeChatPayOptions options, WeChatPaySignType signType, WeChatPayDictionary sortedTxtParams)
@@ -126,11 +74,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
             sortedTxtParams.Add(WeChatPayConsts.sub_mch_id, options.SubMchId);
             sortedTxtParams.Add(WeChatPayConsts.timestamp, WeChatPayUtility.GetTimeStamp());
-
-            if (signType == WeChatPaySignType.HMAC_SHA256)
-            {
-                sortedTxtParams.Add(WeChatPayConsts.sign_type, WeChatPayConsts.HMAC_SHA256);
-            }
 
             sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
         }
