@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Domain
 {
@@ -64,7 +65,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Domain
         /// 示例值：2018-06-08T10:34:56+08:00
         /// </summary>
         [JsonPropertyName("time_expire")]
-        public string TimeExpire { get; set; }
+        public DateTimeOffset TimeExpire { get; set; }
 
         /// <summary>
         /// 附加数据
