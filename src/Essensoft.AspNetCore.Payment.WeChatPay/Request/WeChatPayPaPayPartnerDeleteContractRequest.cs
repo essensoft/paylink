@@ -5,15 +5,10 @@ using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 {
     /// <summary>
-    /// 微信代扣 - 查询签约关系 (服务商)
+    /// 微信代扣 - 申请解约 (服务商)
     /// </summary>
-    public class WeChatPayPAPayPartnerQueryContractRequest : IWeChatPayRequest<WeChatPayPAPayPartnerQueryContractResponse>
+    public class WeChatPayPaPayPartnerDeleteContractRequest : IWeChatPayRequest<WeChatPayPaPayPartnerDeleteContractResponse>
     {
-        /// <summary>
-        /// 委托代扣协议id
-        /// </summary>
-        public string ContractId { get; set; }
-
         /// <summary>
         /// 模板id
         /// </summary>
@@ -25,6 +20,16 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
         public string ContractCode { get; set; }
 
         /// <summary>
+        /// 委托代扣协议id
+        /// </summary>
+        public string ContractId { get; set; }
+
+        /// <summary>
+        /// 解约备注
+        /// </summary>
+        public string ContractTerminationRemark { get; set; }
+
+        /// <summary>
         /// 版本号
         /// </summary>
         public string Version { get; set; }
@@ -33,16 +38,17 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
 
         public string GetRequestUrl()
         {
-            return "https://api.mch.weixin.qq.com/papay/partner/querycontract";
+            return "https://api.mch.weixin.qq.com/papay/partner/deletecontract";
         }
 
         public IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
             {
-                { "contract_id", ContractId },
                 { "plan_id", PlanId },
                 { "contract_code", ContractCode },
+                { "contract_id", ContractId },
+                { "contract_termination_remark", ContractTerminationRemark },
                 { "version", Version },
             };
             return parameters;
@@ -55,14 +61,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Request
             sortedTxtParams.Add(WeChatPayConsts.sub_appid, options.SubAppId);
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
             sortedTxtParams.Add(WeChatPayConsts.sub_mch_id, options.SubMchId);
-            sortedTxtParams.Add(WeChatPayConsts.timestamp, WeChatPayUtility.GetTimeStamp());
 
             sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
-        }
-
-        public bool GetNeedCheckSign()
-        {
-            return false;
         }
 
         #endregion
