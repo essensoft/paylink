@@ -175,6 +175,9 @@ namespace WebApplicationSample.Models
 
         [Display(Name = "trade_no")]
         public string TradeNo { get; set; }
+
+        [Display(Name = "notify_url")]
+        public string NotifyUrl { get; set; }
     }
 
     public class AlipayTransferViewModel

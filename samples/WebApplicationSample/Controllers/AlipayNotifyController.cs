@@ -213,6 +213,30 @@ namespace WebApplicationSample.Controllers
             }
         }
 
+        /// <summary>
+        /// 交易关闭异步通知
+        /// </summary>
+        [Route("close")]
+        [HttpPost]
+        public async Task<IActionResult> Close()
+        {
+            try
+            {
+                var notify = await _client.CertificateExecuteAsync<AlipayTradeCloseNotify>(Request, _optionsAccessor.Value);
+                if (notify.TradeStatus == AlipayTradeStatus.Wait)
+                {
+                    Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
+
+                    return AlipayNotifyResult.Success;
+                }
+                return NoContent();
+            }
+            catch
+            {
+                return NoContent();
+            }
+        }
+
         private string MakeVerifyGWResponse(bool isSuccess, string certPublicKey, string appPrivateKey, string charset, string signType)
         {
             var xmlDoc = new XmlDocument(); //创建实例

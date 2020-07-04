@@ -306,6 +306,7 @@ namespace WebApplicationSample.Controllers
 
             var req = new AlipayTradeCloseRequest();
             req.SetBizModel(model);
+            req.SetNotifyUrl(viewMode.NotifyUrl);
 
             var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
             ViewData["response"] = response.Body;
