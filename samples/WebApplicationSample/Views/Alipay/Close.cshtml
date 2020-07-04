@@ -20,6 +20,10 @@
             <div class="form-group">
                 <label asp-for="TradeNo"></label>
                 <input type="text" class="form-control" asp-for="TradeNo" />
+            </div>           
+            <div class="form-group">
+                <label asp-for="NotifyUrl"></label>
+                <input type="text" class="form-control" asp-for="NotifyUrl" value="http://*/alipay/notify/close" />
             </div>
             <button type="submit" class="btn btn-primary">提交请求</button>
         </form>
