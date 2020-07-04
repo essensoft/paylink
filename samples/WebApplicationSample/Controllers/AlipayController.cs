@@ -282,6 +282,36 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
+
+        /// <summary>
+        /// 交易关闭
+        /// </summary>
+        [HttpGet]
+        public IActionResult Close()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 交易关闭
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> Close(AlipayTradeCloseViewModel viewMode)
+        {
+            var model = new AlipayTradeCloseModel
+            {
+                OutTradeNo = viewMode.OutTradeNo,
+                TradeNo = viewMode.TradeNo,
+            };
+
+            var req = new AlipayTradeCloseRequest();
+            req.SetBizModel(model);
+
+            var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
         /// <summary>
         /// 统一转账
         /// </summary>
