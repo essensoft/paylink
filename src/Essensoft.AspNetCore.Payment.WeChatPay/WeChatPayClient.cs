@@ -214,22 +214,20 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 throw new WeChatPayException("sign check fail: Body is Empty!");
             }
 
-            if (response.Parameters.Count == 0)
+            if (response.Parameters.TryGetValue(WeChatPayConsts.return_code, out var return_code))
             {
-                throw new WeChatPayException("sign check fail: Parameters is Empty!");
-            }
-
-            if (response.Parameters["return_code"] == WeChatPayCode.Success)
-            {
-                if (!response.Parameters.TryGetValue(WeChatPayConsts.sign, out var sign))
+                if (return_code == WeChatPayCode.Success)
                 {
-                    throw new WeChatPayException("sign check fail: sign is Empty!");
-                }
+                    if (!response.Parameters.TryGetValue(WeChatPayConsts.sign, out var sign))
+                    {
+                        throw new WeChatPayException("sign check fail: sign is Empty!");
+                    }
 
-                var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key, signType);
-                if (cal_sign != sign)
-                {
-                    throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
+                    var cal_sign = WeChatPaySignature.SignWithKey(response.Parameters, options.Key, signType);
+                    if (cal_sign != sign)
+                    {
+                        throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
+                    }
                 }
             }
         }

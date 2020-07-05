@@ -12,6 +12,8 @@
         public const string noncestr = "noncestr";
         public const string timestamp = "timestamp";
 
+        public const string return_code = "return_code";
+
         public const string enc_bank_no = "enc_bank_no";
         public const string enc_true_name = "enc_true_name";
         public const string partnerid = "partnerid";
