@@ -18,7 +18,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// 执行 WeChatPay V3通知请求解析
         /// </summary>
         /// <typeparam name="T">领域对象</typeparam>
-        /// <param name="body">内容</param>
+        /// <param name="body">通知内容</param>
         /// <param name="serial">Wechatpay_Serial</param>
         /// <param name="timestamp">Wechatpay_Timestamp</param>
         /// <param name="nonce">Wechatpay_Nonce</param>
