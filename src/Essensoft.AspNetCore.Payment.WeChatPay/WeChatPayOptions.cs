@@ -47,7 +47,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         public string SubMchId { get; set; }
 
         /// <summary>
-        /// API证书
+        /// API证书(.p12)
         /// 证书文件路径/证书文件的base64字符串
         /// </summary>
         public string Certificate
