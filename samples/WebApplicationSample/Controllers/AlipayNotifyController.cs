@@ -223,7 +223,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.CertificateExecuteAsync<AlipayTradeCloseNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.CertificateExecuteAsync<AlipayTradeCloseNotify>(Request, _optionsAccessor.Value[0]);
                 if (notify.TradeStatus == AlipayTradeStatus.Wait)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);

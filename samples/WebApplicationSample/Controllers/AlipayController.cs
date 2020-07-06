@@ -309,7 +309,7 @@ namespace WebApplicationSample.Controllers
             req.SetBizModel(model);
             req.SetNotifyUrl(viewMode.NotifyUrl);
 
-            var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
+            var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value[0]);
             ViewData["response"] = response.Body;
             return View();
         }
