@@ -9,11 +9,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
     {
         private string appCert;
         private string alipayPublicCert;
-        private string rootCert;
+        private string alipayRootCert;
 
         internal string AppCertSN;
         internal string AlipayPublicCertSN;
-        internal string RootCertSN;
+        internal string AlipayRootCertSN;
 
         /// <summary>
         /// 应用Id
@@ -87,8 +87,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 if (!string.IsNullOrEmpty(value))
                 {
                     appCert = value;
-                    var appCertificate = AntCertificationUtil.ParseCert(value);
-                    AppCertSN = AntCertificationUtil.GetCertSN(appCertificate);
+                    var appCertificate = AlipayCertUtil.Parse(appCert);
+                    AppCertSN = AlipayCertUtil.GetCertSN(appCertificate);
                 }
             }
         }
@@ -107,9 +107,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 if (!string.IsNullOrEmpty(value))
                 {
                     alipayPublicCert = value;
-                    var alipayPublicCertificate = AntCertificationUtil.ParseCert(value);
-                    AlipayPublicCertSN = AntCertificationUtil.GetCertSN(alipayPublicCertificate);
-                    AlipayPublicKey = AntCertificationUtil.ExtractPemPublicKeyFromCert(alipayPublicCertificate);
+                    var alipayPublicCertificate = AlipayCertUtil.Parse(alipayPublicCert);
+                    AlipayPublicCertSN = AlipayCertUtil.GetCertSN(alipayPublicCertificate);
+                    AlipayPublicKey = AlipayCertUtil.GetCertPublicKey(alipayPublicCertificate);
                 }
             }
         }
@@ -120,15 +120,15 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         /// “公钥证书”方式时，必填
         /// “普通公钥”方式时，留空
         /// </summary>
-        public string RootCert
+        public string AlipayRootCert
         {
-            get => rootCert;
+            get => alipayRootCert;
             set
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    rootCert = value;
-                    RootCertSN = AntCertificationUtil.GetRootCertSN(value);
+                    alipayRootCert = value;
+                    AlipayRootCertSN = AlipayCertUtil.GetRootCertSN(alipayRootCert);
                 }
             }
         }
