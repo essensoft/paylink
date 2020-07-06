@@ -1,0 +1,154 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Numerics;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
+using MD5 = Essensoft.AspNetCore.Payment.Security.MD5;
+
+namespace Essensoft.AspNetCore.Payment.Alipay.Utility
+{
+    /// <summary>
+    /// 证书相关工具类
+    /// </summary>
+    public static class AlipayCertUtil
+    {
+        /// <summary>
+        /// 提取根证书序列号
+        /// </summary>
+        /// <param name="rootCertContent">根证书文本</param>
+        public static string GetRootCertSN(string rootCertContent)
+        {
+            var rootCertSN = string.Empty;
+
+            var certs = ReadPemCertChain(rootCertContent);
+            foreach (var cert in certs)
+            {
+                var sigAlgOid = string.Empty;
+
+                try
+                {
+                    sigAlgOid = cert.SignatureAlgorithm.Value;
+                }
+                catch
+                { }
+
+                if (sigAlgOid.StartsWith("1.2.840.113549.1.1", StringComparison.Ordinal))
+                {
+                    var certSN = GetCertSN(cert);
+                    if (string.IsNullOrEmpty(rootCertSN))
+                    {
+                        rootCertSN = certSN;
+                    }
+                    else
+                    {
+                        rootCertSN = rootCertSN + "_" + certSN;
+                    }
+                }
+            }
+
+            return rootCertSN;
+        }
+
+        /// <summary>
+        /// 反序列化证书
+        /// </summary>
+        /// <param name="certificate">证书</param>
+        public static X509Certificate2 Parse(string certificate)
+        {
+            return File.Exists(certificate) ? new X509Certificate2(certificate) : new X509Certificate2(Convert.FromBase64String(certificate));
+        }
+
+        /// <summary>
+        /// 计算指定证书的序列号
+        /// </summary>
+        /// <param name="certificate">证书</param>
+        public static string GetCertSN(X509Certificate2 certificate)
+        {
+            // 删除逗号后面的空格
+            var issuer = certificate.Issuer.ToString().Replace(", ", ",");
+
+            //提取出的证书的issuerDN本身是以CN开头的，则无需逆序，直接返回
+            if (issuer.StartsWith("CN", StringComparison.Ordinal))
+            {
+                return MD5.Compute(issuer + BigInteger.Parse(certificate.SerialNumber, NumberStyles.HexNumber).ToString()).ToLowerInvariant();
+            }
+            else
+            {
+                var attributes = issuer.Split(',').ToList();
+                attributes.Reverse();
+
+                return MD5.Compute(string.Join(",", attributes.ToArray()) + BigInteger.Parse(certificate.SerialNumber, NumberStyles.HexNumber).ToString()).ToLowerInvariant();
+            }
+        }
+
+        /// <summary>
+        /// 从证书中提取公钥
+        /// </summary>
+        /// <param name="certificate">证书</param>
+        public static string GetCertPublicKey(X509Certificate2 certificate)
+        {
+            return Convert.ToBase64String(certificate.GetRSAPublicKey().ExportSubjectPublicKeyInfo());
+        }
+
+        /// <summary>
+        /// 校验证书链是否可信
+        /// </summary>
+        /// <param name="certContent">需要验证的目标证书或者证书链文本</param>
+        /// <param name="rootCertContent">可信根证书列表文本</param>
+        public static bool IsTrusted(string certContent, string rootCertContent)
+        {
+            var rootCertificate = ReadPemCertChain(rootCertContent);
+            var certificate = ReadPemCertChain(certContent);
+
+            foreach (var cert in certificate)
+            {
+                var chain = new X509Chain();
+
+                foreach (var root in rootCertificate)
+                {
+                    chain.ChainPolicy.ExtraStore.Add(root);
+                }
+
+                chain.ChainPolicy.VerificationFlags = X509VerificationFlags.AllowUnknownCertificateAuthority;
+                chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
+
+                if (!chain.Build(cert))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        /// <summary>
+        /// 从证书链文本反序列化证书链集合
+        /// </summary>
+        /// <param name="certificate">证书链文本</param>
+        private static List<X509Certificate2> ReadPemCertChain(string certificate)
+        {
+            var certString = File.Exists(certificate) ? File.ReadAllText(certificate, Encoding.ASCII) : Encoding.ASCII.GetString(Convert.FromBase64String(certificate));
+            var certStringArr = certString.Replace("\r\n-----", "-----")
+                .Replace("-----\r\n", "-----")
+                .Replace("\n-----", "-----")
+                .Replace("-----\n", "-----")
+                .Replace("-----BEGIN CERTIFICATE-----", string.Empty)
+                .Split("-----END CERTIFICATE-----");
+
+            var certs = new List<X509Certificate2>();
+
+            foreach (var certStr in certStringArr)
+            {
+                if (!string.IsNullOrEmpty(certStr))
+                {
+                    certs.Add(new X509Certificate2(Encoding.ASCII.GetBytes(certStr)));
+                }
+            }
+
+            return certs;
+        }
+    }
+}

@@ -181,16 +181,5 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             //如果没有找到配对的闭合括号，说明验签内容片段提取失败，直接尝试选取剩余整个响应字符串进行验签
             return responseString.Length;
         }
-
-        /// <summary>
-        /// 获取公钥证书序列号
-        /// </summary>
-        /// <param name="certContent">公钥证书内容</param>
-        /// <returns>公钥证书序列号</returns>
-        public static string GetCertSN(string certContent)
-        {
-            var cert = AntCertificationUtil.ParseCert(certContent);
-            return AntCertificationUtil.GetCertSN(cert);
-        }
     }
 }

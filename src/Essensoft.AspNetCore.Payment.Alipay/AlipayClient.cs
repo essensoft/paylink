@@ -88,7 +88,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 { AlipayConstants.NOTIFY_URL, request.GetNotifyUrl() },
                 { AlipayConstants.CHARSET, options.Charset },
                 { AlipayConstants.RETURN_URL, request.GetReturnUrl() },
-                { AlipayConstants.ALIPAY_ROOT_CERT_SN, options.RootCertSN },
+                { AlipayConstants.ALIPAY_ROOT_CERT_SN, options.AlipayRootCertSN },
                 { AlipayConstants.APP_CERT_SN, options.AppCertSN }
             };
 
@@ -358,9 +358,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 throw new ArgumentNullException(nameof(options.AlipayPublicCert));
             }
 
-            if (string.IsNullOrEmpty(options.RootCert))
+            if (string.IsNullOrEmpty(options.AlipayRootCert))
             {
-                throw new ArgumentNullException(nameof(options.RootCert));
+                throw new ArgumentNullException(nameof(options.AlipayRootCert));
             }
 
             if (string.IsNullOrEmpty(options.ServerUrl))
@@ -385,7 +385,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 { AlipayConstants.PROD_CODE, request.GetProdCode() },
                 { AlipayConstants.CHARSET, options.Charset },
                 { AlipayConstants.APP_CERT_SN, options.AppCertSN },
-                { AlipayConstants.ALIPAY_ROOT_CERT_SN, options.RootCertSN }
+                { AlipayConstants.ALIPAY_ROOT_CERT_SN, options.AlipayRootCertSN }
             };
 
             // 序列化BizModel
@@ -522,14 +522,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 throw new AlipayException("支付宝公钥证书校验失败，请确认是否为支付宝签发的有效公钥证书");
             }
 
-            if (!AntCertificationUtil.IsTrusted(response.AlipayCertContent, options.RootCert))
+            if (!AlipayCertUtil.IsTrusted(response.AlipayCertContent, options.AlipayRootCert))
             {
                 throw new AlipayException("支付宝公钥证书校验失败，请确认是否为支付宝签发的有效公钥证书");
             }
 
-            var alipayCert = AntCertificationUtil.ParseCert(response.AlipayCertContent);
-            var alipayCertSN = AntCertificationUtil.GetCertSN(alipayCert);
-            var newAlipayPublicKey = AntCertificationUtil.ExtractPemPublicKeyFromCert(alipayCert);
+            var alipayCert = AlipayCertUtil.Parse(response.AlipayCertContent);
+            var alipayCertSN = AlipayCertUtil.GetCertSN(alipayCert);
+            var newAlipayPublicKey = AlipayCertUtil.GetCertPublicKey(alipayCert);
 
             _publicKeyManager.TryAdd(alipayCertSN, newAlipayPublicKey);
 
@@ -593,7 +593,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 { AlipayConstants.CHARSET, options.Charset },
                 { AlipayConstants.RETURN_URL, request.GetReturnUrl() },
                 { AlipayConstants.APP_AUTH_TOKEN, appAuthToken },
-                { AlipayConstants.ALIPAY_ROOT_CERT_SN, options.RootCertSN },
+                { AlipayConstants.ALIPAY_ROOT_CERT_SN, options.AlipayRootCertSN },
                 { AlipayConstants.APP_CERT_SN, options.AppCertSN }
             };
 
