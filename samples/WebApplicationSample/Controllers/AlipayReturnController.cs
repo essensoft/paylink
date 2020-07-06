@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.Alipay.Notify;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,9 @@ namespace WebApplicationSample.Controllers
     public class AlipayReturnController : Controller
     {
         private readonly IAlipayNotifyClient _client;
-        private readonly IOptions<AlipayOptions> _optionsAccessor;
+        private readonly IOptions<List<AlipayOptions>> _optionsAccessor;
 
-        public AlipayReturnController(IAlipayNotifyClient client, IOptions<AlipayOptions> optionsAccessor)
+        public AlipayReturnController(IAlipayNotifyClient client, IOptions<List<AlipayOptions>> optionsAccessor)
         {
             _client = client;
             _optionsAccessor = optionsAccessor;
@@ -27,7 +28,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<AlipayTradePagePayReturn>(Request, _optionsAccessor.Value);
+                var notify = await _client.ExecuteAsync<AlipayTradePagePayReturn>(Request, _optionsAccessor.Value[0]);
                 ViewData["response"] = "支付成功";
                 return View();
             }
@@ -47,7 +48,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<AlipayTradeWapPayReturn>(Request, _optionsAccessor.Value);
+                var notify = await _client.ExecuteAsync<AlipayTradeWapPayReturn>(Request, _optionsAccessor.Value[0]);
                 ViewData["response"] = "支付成功";
                 return View();
             }

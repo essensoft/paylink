@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Xml;
 using Essensoft.AspNetCore.Payment.Alipay;
@@ -13,9 +14,9 @@ namespace WebApplicationSample.Controllers
     public class AlipayNotifyController : Controller
     {
         private readonly IAlipayNotifyClient _client;
-        private readonly IOptions<AlipayOptions> _optionsAccessor;
+        private readonly IOptions<List<AlipayOptions>> _optionsAccessor;
 
-        public AlipayNotifyController(IAlipayNotifyClient client, IOptions<AlipayOptions> optionsAccessor)
+        public AlipayNotifyController(IAlipayNotifyClient client, IOptions<List<AlipayOptions>> optionsAccessor)
         {
             _client = client;
             _optionsAccessor = optionsAccessor;
@@ -36,24 +37,24 @@ namespace WebApplicationSample.Controllers
                 {
                     // 激活开发者模式
                     case "alipay.service.check":
-                        {
-                            var options = _optionsAccessor.Value;
+                    {
+                        var options = _optionsAccessor.Value[0];
 
-                            // 获取参数
-                            var parameters = _client.GetParameters(Request);
-                            var sign = parameters["sign"];
-                            parameters.Remove("sign");
+                        // 获取参数
+                        var parameters = _client.GetParameters(Request);
+                        var sign = parameters["sign"];
+                        parameters.Remove("sign");
 
-                            var signContent = AlipaySignature.GetSignContent(parameters);
+                        var signContent = AlipaySignature.GetSignContent(parameters);
 
-                            // 验签
-                            var isSuccess = AlipaySignature.RSACheckContent(signContent, sign, options.AlipayPublicKey, "GBK", options.SignType);
+                        // 验签
+                        var isSuccess = AlipaySignature.RSACheckContent(signContent, sign, options.AlipayPublicKey, "GBK", options.SignType);
 
-                            // 组XML响应内容
-                            var response = MakeVerifyGWResponse(isSuccess, options.AlipayPublicKey, options.AppPrivateKey, "GBK", options.SignType);
+                        // 组XML响应内容
+                        var response = MakeVerifyGWResponse(isSuccess, options.AlipayPublicKey, options.AppPrivateKey, "GBK", options.SignType);
 
-                            return Content(response, "text/xml");
-                        }
+                        return Content(response, "text/xml");
+                    }
                 }
 
                 var msg_method = Request.Form["msg_method"].ToString();
@@ -61,52 +62,52 @@ namespace WebApplicationSample.Controllers
                 {
                     // 资金单据状态变更通知
                     case "alipay.fund.trans.order.changed":
-                        {
-                            var notify = await _client.CertificateExecuteAsync<AlipayFundTransOrderChangedNotify>(Request, _optionsAccessor.Value);
-                            return AlipayNotifyResult.Success;
-                        }
+                    {
+                        var notify = await _client.CertificateExecuteAsync<AlipayFundTransOrderChangedNotify>(Request, _optionsAccessor.Value[0]);
+                        return AlipayNotifyResult.Success;
+                    }
                     // 第三方应用授权取消消息
                     case "alipay.open.auth.appauth.cancelled":
-                        {
-                            var notify = await _client.CertificateExecuteAsync<AlipayOpenAuthAppauthCancelledNotify>(Request, _optionsAccessor.Value);
-                            return AlipayNotifyResult.Success;
-                        }
+                    {
+                        var notify = await _client.CertificateExecuteAsync<AlipayOpenAuthAppauthCancelledNotify>(Request, _optionsAccessor.Value[0]);
+                        return AlipayNotifyResult.Success;
+                    }
                     // 用户授权取消消息
                     case "alipay.open.auth.userauth.cancelled":
-                        {
-                            var notify = await _client.CertificateExecuteAsync<AlipayOpenAuthUserauthCancelledNotify>(Request, _optionsAccessor.Value);
-                            return AlipayNotifyResult.Success;
-                        }
+                    {
+                        var notify = await _client.CertificateExecuteAsync<AlipayOpenAuthUserauthCancelledNotify>(Request, _optionsAccessor.Value[0]);
+                        return AlipayNotifyResult.Success;
+                    }
                     // 小程序审核通过通知
                     case "alipay.open.mini.version.audit.passed":
-                        {
-                            var notify = await _client.CertificateExecuteAsync<AlipayOpenMiniVersionAuditPassedNotify>(Request, _optionsAccessor.Value);
-                            return AlipayNotifyResult.Success;
-                        }
+                    {
+                        var notify = await _client.CertificateExecuteAsync<AlipayOpenMiniVersionAuditPassedNotify>(Request, _optionsAccessor.Value[0]);
+                        return AlipayNotifyResult.Success;
+                    }
                     // 用户授权取消消息
                     case "alipay.open.mini.version.audit.rejected":
-                        {
-                            var notify = await _client.CertificateExecuteAsync<AlipayOpenMiniVersionAuditRejectedNotify>(Request, _optionsAccessor.Value);
-                            return AlipayNotifyResult.Success;
-                        }
+                    {
+                        var notify = await _client.CertificateExecuteAsync<AlipayOpenMiniVersionAuditRejectedNotify>(Request, _optionsAccessor.Value[0]);
+                        return AlipayNotifyResult.Success;
+                    }
                     // 收单资金结算到银行账户，结算退票的异步通知
                     case "alipay.trade.settle.dishonoured":
-                        {
-                            var notify = await _client.CertificateExecuteAsync<AlipayTradeSettleDishonouredNotify>(Request, _optionsAccessor.Value);
-                            return AlipayNotifyResult.Success;
-                        }
+                    {
+                        var notify = await _client.CertificateExecuteAsync<AlipayTradeSettleDishonouredNotify>(Request, _optionsAccessor.Value[0]);
+                        return AlipayNotifyResult.Success;
+                    }
                     // 收单资金结算到银行账户，结算失败的异步通知
                     case "alipay.trade.settle.fail":
-                        {
-                            var notify = await _client.CertificateExecuteAsync<AlipayTradeSettleFailNotify>(Request, _optionsAccessor.Value);
-                            return AlipayNotifyResult.Success;
-                        }
+                    {
+                        var notify = await _client.CertificateExecuteAsync<AlipayTradeSettleFailNotify>(Request, _optionsAccessor.Value[0]);
+                        return AlipayNotifyResult.Success;
+                    }
                     // 收单资金结算到银行账户，结算成功的异步通知
                     case "alipay.trade.settle.success":
-                        {
-                            var notify = await _client.CertificateExecuteAsync<AlipayTradeSettleSuccessNotify>(Request, _optionsAccessor.Value);
-                            return AlipayNotifyResult.Success;
-                        }
+                    {
+                        var notify = await _client.CertificateExecuteAsync<AlipayTradeSettleSuccessNotify>(Request, _optionsAccessor.Value[0]);
+                        return AlipayNotifyResult.Success;
+                    }
                 }
 
                 return NoContent();
@@ -126,7 +127,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.CertificateExecuteAsync<AlipayTradePrecreateNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.CertificateExecuteAsync<AlipayTradePrecreateNotify>(Request, _optionsAccessor.Value[0]);
                 if (notify.TradeStatus == AlipayTradeStatus.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -150,7 +151,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.CertificateExecuteAsync<AlipayTradeAppPayNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.CertificateExecuteAsync<AlipayTradeAppPayNotify>(Request, _optionsAccessor.Value[0]);
                 if (notify.TradeStatus == AlipayTradeStatus.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -174,7 +175,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.CertificateExecuteAsync<AlipayTradePagePayNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.CertificateExecuteAsync<AlipayTradePagePayNotify>(Request, _optionsAccessor.Value[0]);
                 if (notify.TradeStatus == AlipayTradeStatus.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
@@ -198,7 +199,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.CertificateExecuteAsync<AlipayTradeWapPayNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.CertificateExecuteAsync<AlipayTradeWapPayNotify>(Request, _optionsAccessor.Value[0]);
                 if (notify.TradeStatus == AlipayTradeStatus.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);

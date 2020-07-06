@@ -132,5 +132,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 }
             }
         }
+
+        /// <summary>
+        /// 通知地址
+        /// </summary>
+        public string NotifyUrl { get; set; }
     }
 }
