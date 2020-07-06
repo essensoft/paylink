@@ -47,6 +47,16 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         public string SubMchId { get; set; }
 
         /// <summary>
+        /// API证书密码
+        /// 默认为商户号
+        /// </summary>
+        public string CertificatePassword
+        {
+            get => string.IsNullOrEmpty(certificatePassword) ? MchId : certificatePassword;
+            set => certificatePassword = value;
+        }
+
+        /// <summary>
         /// API证书(.p12)
         /// 证书文件路径/证书文件的base64字符串
         /// </summary>
@@ -67,16 +77,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                     CertificateSerialNo = X509Certificate2.GetSerialNumberString();
                 }
             }
-        }
-
-        /// <summary>
-        /// API证书密码
-        /// 默认为商户号
-        /// </summary>
-        public string CertificatePassword
-        {
-            get => string.IsNullOrEmpty(certificatePassword) ? MchId : certificatePassword;
-            set => certificatePassword = value;
         }
 
         /// <summary>
