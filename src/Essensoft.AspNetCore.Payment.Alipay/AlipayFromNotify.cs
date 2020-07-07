@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
     /// <summary>
     /// 消息服务 - FROM 蚂蚁
     /// </summary>
-    public class AlipayFromNotify :AlipayNotify 
+    public class AlipayFromNotify : AlipayNotify
     {
         /// <summary>
         /// 通知ID
