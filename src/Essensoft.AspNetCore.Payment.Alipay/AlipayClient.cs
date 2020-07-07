@@ -529,11 +529,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             var alipayCert = AlipayCertUtil.Parse(response.AlipayCertContent);
             var alipayCertSN = AlipayCertUtil.GetCertSN(alipayCert);
-            var newAlipayPublicKey = AlipayCertUtil.GetCertPublicKey(alipayCert);
+            var alipayCertPublicKey = AlipayCertUtil.GetCertPublicKey(alipayCert);
 
-            _publicKeyManager.TryAdd(alipayCertSN, newAlipayPublicKey);
+            _publicKeyManager.TryAdd(alipayCertSN, alipayCertPublicKey);
 
-            return newAlipayPublicKey;
+            return alipayCertPublicKey;
         }
 
         #endregion
