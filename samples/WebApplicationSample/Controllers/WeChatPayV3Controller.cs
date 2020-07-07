@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.WeChatPay;
-using Essensoft.AspNetCore.Payment.WeChatPay.Domain;
-using Essensoft.AspNetCore.Payment.WeChatPay.Request;
+using Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain;
+using Essensoft.AspNetCore.Payment.WeChatPay.V3.Request;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using WebApplicationSample.Models;
@@ -11,10 +11,10 @@ namespace WebApplicationSample.Controllers
 {
     public class WeChatPayV3Controller : Controller
     {
-        private readonly IWeChatPayV3Client _client;
+        private readonly IWeChatPayClient _client;
         private readonly IOptions<WeChatPayOptions> _optionsAccessor;
 
-        public WeChatPayV3Controller(IWeChatPayV3Client client, IOptions<WeChatPayOptions> optionsAccessor)
+        public WeChatPayV3Controller(IWeChatPayClient client, IOptions<WeChatPayOptions> optionsAccessor)
         {
             _client = client;
             _optionsAccessor = optionsAccessor;
@@ -79,7 +79,7 @@ namespace WebApplicationSample.Controllers
 
             if (response.StatusCode == 200)
             {
-                var req = new WeChatPayV3AppSdkRequest
+                var req = new WeChatPayAppSdkRequest
                 {
                     PrepayId = response.PrepayId
                 };
@@ -131,7 +131,7 @@ namespace WebApplicationSample.Controllers
 
             if (response.StatusCode == 200)
             {
-                var req = new WeChatPayV3JsApiSdkRequest
+                var req = new WeChatPayJsApiSdkRequest
                 {
                     Package = "prepay_id=" + response.PrepayId
                 };

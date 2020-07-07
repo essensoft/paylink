@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using Essensoft.AspNetCore.Payment.WeChatPay.Utility;
 using Microsoft.Extensions.Http;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay

@@ -18,5 +18,5 @@
   <ItemGroup>
     <ProjectReference Include="..\Essensoft.AspNetCore.Payment.Security\Essensoft.AspNetCore.Payment.Security.csproj" />
   </ItemGroup>
-
+  
 </Project>
