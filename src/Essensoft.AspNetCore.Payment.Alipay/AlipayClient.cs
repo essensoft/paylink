@@ -6,6 +6,7 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
+using Essensoft.AspNetCore.Payment.Alipay.Extensions;
 using Essensoft.AspNetCore.Payment.Alipay.Parser;
 using Essensoft.AspNetCore.Payment.Alipay.Request;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
