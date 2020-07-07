@@ -109,7 +109,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// 支付者
         /// </summary>
         [JsonPropertyName("payer")]
-        public PayerInfo Payer { get; set; }
+        public PartnerPayerInfo Payer { get; set; }
 
         /// <summary>
         /// 优惠功能
