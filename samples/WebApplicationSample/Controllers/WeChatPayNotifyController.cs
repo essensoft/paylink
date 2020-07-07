@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.WeChatPay;
-using Essensoft.AspNetCore.Payment.WeChatPay.Notify;
+using Essensoft.AspNetCore.Payment.WeChatPay.V2.Notify;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -28,14 +28,14 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<WeChatPayUnifiedOrderNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.ExecuteV2Async<WeChatPayUnifiedOrderNotify>(Request, _optionsAccessor.Value);
                 if (notify.ReturnCode == WeChatPayCode.Success)
                 {
                     if (notify.ResultCode == WeChatPayCode.Success)
                     {
                         Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
 
-                        return WeChatPayNotifyResult.Success;
+                        return Essensoft.AspNetCore.Payment.WeChatPay.V2.WeChatPayNotifyResult.Success;
                     }
                 }
                 return NoContent();
@@ -55,13 +55,13 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteAsync<WeChatPayRefundNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.ExecuteV2Async<WeChatPayRefundNotify>(Request, _optionsAccessor.Value);
                 if (notify.ReturnCode == WeChatPayCode.Success)
                 {
                     if (notify.RefundStatus == WeChatPayCode.Success)
                     {
                         Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
-                        return WeChatPayNotifyResult.Success;
+                        return Essensoft.AspNetCore.Payment.WeChatPay.V2.WeChatPayNotifyResult.Success;
                     }
                 }
                 return NoContent();
