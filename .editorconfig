@@ -19,7 +19,7 @@ insert_final_newline = false
 
 # 组织 Using
 dotnet_separate_import_directive_groups = false
-dotnet_sort_system_directives_first = false
+dotnet_sort_system_directives_first = true
 file_header_template = unset
 
 # this. 和 Me. 首选项
