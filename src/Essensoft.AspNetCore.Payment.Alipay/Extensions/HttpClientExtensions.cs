@@ -4,8 +4,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
+using Essensoft.AspNetCore.Payment.Alipay.Utility;
 
-namespace Essensoft.AspNetCore.Payment.Alipay.Utility
+namespace Essensoft.AspNetCore.Payment.Alipay.Extensions
 {
     public static class HttpClientExtensions
     {
