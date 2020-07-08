@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using System.Xml;
 using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.Alipay.Notify;
-using Essensoft.AspNetCore.Payment.Alipay.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -31,31 +29,6 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var service = Request.Form["service"].ToString();
-                switch (service)
-                {
-                    // 激活开发者模式
-                    case "alipay.service.check":
-                        {
-                            var options = _optionsAccessor.Value;
-
-                            // 获取参数
-                            var parameters = _client.GetParameters(Request);
-                            var sign = parameters["sign"];
-                            parameters.Remove("sign");
-
-                            var signContent = AlipaySignature.GetSignContent(parameters);
-
-                            // 验签
-                            var isSuccess = AlipaySignature.RSACheckContent(signContent, sign, options.AlipayPublicKey, "GBK", options.SignType);
-
-                            // 组XML响应内容
-                            var response = MakeVerifyGWResponse(isSuccess, options.AlipayPublicKey, options.AppPrivateKey, "GBK", options.SignType);
-
-                            return Content(response, "text/xml");
-                        }
-                }
-
                 var msg_method = Request.Form["msg_method"].ToString();
                 switch (msg_method)
                 {
@@ -235,50 +208,6 @@ namespace WebApplicationSample.Controllers
             {
                 return NoContent();
             }
-        }
-
-        private string MakeVerifyGWResponse(bool isSuccess, string certPublicKey, string appPrivateKey, string charset, string signType)
-        {
-            var xmlDoc = new XmlDocument(); //创建实例
-            var xmldecl = xmlDoc.CreateXmlDeclaration("1.0", "GBK", null);
-            xmlDoc.AppendChild(xmldecl);
-
-            var xmlElem = xmlDoc.CreateElement("alipay"); //新建元素
-            xmlDoc.AppendChild(xmlElem); //添加元素
-
-            var alipay = xmlDoc.SelectSingleNode("alipay");
-
-            var response = xmlDoc.CreateElement("response");
-            var success = xmlDoc.CreateElement("success");
-            if (isSuccess)
-            {
-                success.InnerText = "true";//设置文本节点 
-                response.AppendChild(success);//添加到<Node>节点中 
-            }
-            else
-            {
-                success.InnerText = "false";//设置文本节点 
-                response.AppendChild(success);//添加到<Node>节点中 
-                var err = xmlDoc.CreateElement("error_code");
-                err.InnerText = "VERIFY_FAILED";
-                response.AppendChild(err);
-            }
-
-            var biz_content = xmlDoc.CreateElement("biz_content");
-            biz_content.InnerText = certPublicKey;
-            response.AppendChild(biz_content);
-
-            alipay.AppendChild(response);
-
-            var sign = xmlDoc.CreateElement("sign");
-            sign.InnerText = AlipaySignature.RSASignContent(response.InnerXml, appPrivateKey, charset, signType);
-            alipay.AppendChild(sign);
-
-            var sign_type = xmlDoc.CreateElement("sign_type");
-            sign_type.InnerText = signType;
-            alipay.AppendChild(sign_type);
-
-            return xmlDoc.InnerXml;
         }
     }
 }

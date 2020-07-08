@@ -53,7 +53,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
             sortedTxtParams.Add(WeChatPayConsts.timestamp, WeChatPayUtility.GetTimeStamp());
 
             var signatureSourceData = BuildSignatureSourceData(sortedTxtParams);
-            sortedTxtParams.Add(WeChatPayConsts.sign, options.CertificateRSAPrivateKey.Sign(signatureSourceData));
+            sortedTxtParams.Add(WeChatPayConsts.sign, SHA256WithRSA.Sign(options.CertificateRSAPrivateKey, signatureSourceData));
         }
 
         private static string BuildSignatureSourceData(WeChatPayDictionary sortedTxtParams)

@@ -132,8 +132,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             dictionary.Remove(AlipayConstants.SIGN);
             dictionary.Remove(AlipayConstants.SIGN_TYPE);
-            var prestr = AlipaySignature.GetSignContent(dictionary);
-            if (!AlipaySignature.RSACheckContent(prestr, sign, options.AlipayPublicKey, options.Charset, options.SignType))
+            var content = AlipaySignature.GetSignContent(dictionary);
+            if (!AlipaySignature.RSACheckContent(content, sign, options.AlipayPublicKey, options.SignType))
             {
                 throw new AlipayException("sign check fail: check Sign Data Fail!");
             }

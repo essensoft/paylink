@@ -29,23 +29,23 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             return sb.Remove(sb.Length - 1, 1).ToString();
         }
 
-        public static string RSASignContent(string data, string privateKey, string charset, string signType)
+        public static string RSASignContent(string data, string privateKey, string signType)
         {
             return signType switch
             {
-                "RSA1" => SHA1WithRSA.Sign(data, privateKey, charset),
-                "RSA2" => SHA256WithRSA.Sign(data, privateKey, charset),
-                _ => SHA1WithRSA.Sign(data, privateKey, charset),
+                "RSA1" => SHA1WithRSA.Sign(data, privateKey),
+                "RSA2" => SHA256WithRSA.Sign(data, privateKey),
+                _ => SHA1WithRSA.Sign(data, privateKey),
             };
         }
 
-        public static bool RSACheckContent(string data, string sign, string publicKey, string charset, string signType)
+        public static bool RSACheckContent(string data, string sign, string publicKey, string signType)
         {
             return signType switch
             {
-                "RSA1" => SHA1WithRSA.Verify(data, sign, publicKey, charset),
-                "RSA2" => SHA256WithRSA.Verify(data, sign, publicKey, charset),
-                _ => SHA1WithRSA.Verify(data, sign, publicKey, charset),
+                "RSA1" => SHA1WithRSA.Verify(data, sign, publicKey),
+                "RSA2" => SHA256WithRSA.Verify(data, sign, publicKey),
+                _ => SHA1WithRSA.Verify(data, sign, publicKey),
             };
         }
 
