@@ -303,32 +303,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             var parser = new WeChatPayResponseJsonParser<T>();
             var response = parser.Parse(body, statusCode);
 
-            // 为下载微信支付平台证书响应时，
-            if (response is V3.Response.WeChatPayCertificatesResponse resp)
-            {
-                foreach (var certificate in resp.Certificates)
-                {
-                    // 若证书序列号未被缓存，解密证书并加入缓存
-                    if (!_platformCertificateManager.ContainsKey(certificate.SerialNo))
-                    {
-                        switch (certificate.EncryptCertificate.Algorithm)
-                        {
-                            case nameof(AEAD_AES_256_GCM):
-                                {
-                                    var certStr = AEAD_AES_256_GCM.Decrypt(certificate.EncryptCertificate.Nonce, certificate.EncryptCertificate.Ciphertext, certificate.EncryptCertificate.AssociatedData, options.V3Key);
-                                    var cert = new X509Certificate2(Encoding.UTF8.GetBytes(certStr));
-                                    _platformCertificateManager.TryAdd(certificate.SerialNo, cert);
-                                }
-                                break;
-                            default:
-                                throw new WeChatPayException("Unknown algorithm!");
-                        }
-                    }
-                }
-            }
-
-            // 下载账单不需要验签
-            if (!(response is V3.Response.WeChatPayBillDownloadResponse))
+            if (request.GetNeedCheckSign())
             {
                 await CheckV3ResponseSignAsync(options, serial, timestamp, nonce, signature, body);
             }
@@ -408,7 +383,28 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             // 否则重新下载新的平台证书
             var request = new V3.Request.WeChatPayCertificatesRequest();
             var response = await ExecuteAsync(request, options);
-            if (response.Certificates.Count > 0 && _platformCertificateManager.TryGetValue(serial, out certificate2))
+            foreach (var certificate in response.Certificates)
+            {
+                // 若证书序列号未被缓存，解密证书并加入缓存
+                if (!_platformCertificateManager.ContainsKey(certificate.SerialNo))
+                {
+                    switch (certificate.EncryptCertificate.Algorithm)
+                    {
+                        case nameof(AEAD_AES_256_GCM):
+                            {
+                                var certStr = AEAD_AES_256_GCM.Decrypt(certificate.EncryptCertificate.Nonce, certificate.EncryptCertificate.Ciphertext, certificate.EncryptCertificate.AssociatedData, options.V3Key);
+                                var cert = new X509Certificate2(Encoding.UTF8.GetBytes(certStr));
+                                _platformCertificateManager.TryAdd(certificate.SerialNo, cert);
+                            }
+                            break;
+                        default:
+                            throw new WeChatPayException($"Unknown algorithm: {certificate.EncryptCertificate.Algorithm}");
+                    }
+                }
+            }
+
+            // 重新从缓存获取
+            if (_platformCertificateManager.TryGetValue(serial, out certificate2))
             {
                 return certificate2;
             }

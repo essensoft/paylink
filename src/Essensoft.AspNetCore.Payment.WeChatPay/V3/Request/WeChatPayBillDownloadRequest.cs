@@ -18,5 +18,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
         {
             return DownloadUrl;
         }
+
+        public bool GetNeedCheckSign()
+        {
+            return false;
+        }
     }
 }

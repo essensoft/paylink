@@ -6,5 +6,13 @@
         /// 请求URL
         /// </summary>
         string GetRequestUrl();
+
+        /// <summary>
+        /// 是否需要检查响应内容签名
+        /// </summary>
+        bool GetNeedCheckSign()
+        {
+            return true;
+        }
     }
 }
