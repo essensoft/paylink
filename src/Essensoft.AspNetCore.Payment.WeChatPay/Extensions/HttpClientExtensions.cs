@@ -154,7 +154,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Extensions
             var timestamp = WeChatPayUtility.GetTimeStamp();
             var nonce = WeChatPayUtility.GenerateNonceStr();
             var message = BuildMessage(method, uri, timestamp, nonce, body);
-            var signature = options.CertificateRSAPrivateKey.Sign(message);
+            var signature = SHA256WithRSA.Sign(options.CertificateRSAPrivateKey, message);
 
             return $"mchid=\"{options.MchId}\",nonce_str=\"{nonce}\",timestamp=\"{timestamp}\",serial_no=\"{options.CertificateSerialNo}\",signature=\"{signature}\"";
         }
