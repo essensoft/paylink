@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Parser
 {
-    public class WeChatPayNotifyXmlParser<T> : IWeChatPayNotifyParser<T> where T : WeChatPayNotify
+    public class WeChatPayNotifyXmlParser<T> where T : WeChatPayNotify
     {
         public T Parse(string body)
         {
@@ -37,6 +37,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Parser
             result.Body = body;
             result.Parameters = parameters;
             result.Execute();
+
             return result;
         }
 

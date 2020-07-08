@@ -3,9 +3,9 @@
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
     /// <summary>
-    /// 消息服务 - FROM 蚂蚁
+    /// Alipay 消息服务通知对象(From蚂蚁)
     /// </summary>
-    public class AlipayFromNotify : AlipayNotify
+    public class AlipayMessageServiceNotify : AlipayNotify
     {
         /// <summary>
         /// 通知ID

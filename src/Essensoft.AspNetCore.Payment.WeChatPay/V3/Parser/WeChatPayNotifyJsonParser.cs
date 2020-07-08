@@ -6,7 +6,7 @@ using Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Parser
 {
-    public class WeChatPayNotifyJsonParser<T> : IWeChatPayNotifyJsonParser<T> where T : WeChatPayNotify
+    public class WeChatPayNotifyJsonParser<T> where T : WeChatPayNotify
     {
         private static readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 
@@ -50,6 +50,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Parser
             result.Body = body;
             result.NotifyCiphertext = notifyCiphertext;
             result.ResourcePlaintext = resourcePlaintext;
+
             return result;
         }
     }

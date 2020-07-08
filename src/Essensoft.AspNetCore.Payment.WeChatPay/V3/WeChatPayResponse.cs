@@ -3,6 +3,9 @@ using Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 {
+    /// <summary>
+    /// WeChatPay V3 响应对象
+    /// </summary>
     public abstract class WeChatPayResponse : WeChatPayObject
     {
         /// <summary>

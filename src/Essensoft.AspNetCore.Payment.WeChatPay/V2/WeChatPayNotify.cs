@@ -2,6 +2,9 @@
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 {
+    /// <summary>
+    /// WeChatPay V2 通知对象
+    /// </summary>
     public abstract class WeChatPayNotify : WeChatPayObject
     {
         /// <summary>

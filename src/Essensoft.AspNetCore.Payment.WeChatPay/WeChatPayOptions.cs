@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
     /// </summary>
     public class WeChatPayOptions
     {
-        internal X509Certificate2 X509Certificate2;
+        internal X509Certificate2 Certificate2;
         internal RSA CertificateRSAPrivateKey;
         internal string CertificateSerialNo;
 
@@ -69,12 +69,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 {
                     certificate = value;
 
-                    X509Certificate2 = File.Exists(certificate) ?
+                    Certificate2 = File.Exists(certificate) ?
                         new X509Certificate2(certificate, CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet) :
                         new X509Certificate2(Convert.FromBase64String(certificate), CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet);
 
-                    CertificateRSAPrivateKey = X509Certificate2.GetRSAPrivateKey();
-                    CertificateSerialNo = X509Certificate2.GetSerialNumberString();
+                    CertificateSerialNo = Certificate2.GetSerialNumberString();
+                    CertificateRSAPrivateKey = Certificate2.GetRSAPrivateKey();
                 }
             }
         }

@@ -11,9 +11,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
     public static class AlipayUtility
     {
         /// <summary>
-        /// 组装普通文本请求参数。
+        /// 组装普通文本请求参数
         /// </summary>
-        /// <param name="dictionary">Key-Value形式请求参数字典</param>
+        /// <param name="dictionary">请求参数字典</param>
         /// <returns>URL编码后的请求数据</returns>
         public static string BuildQuery(IDictionary<string, string> dictionary)
         {
@@ -40,15 +40,15 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <returns>清除后的字典</returns>
         public static IDictionary<string, T> CleanupDictionary<T>(IDictionary<string, T> dictionary)
         {
-            var newDict = new Dictionary<string, T>();
-            foreach (var dem in dictionary)
+            var dic = new Dictionary<string, T>();
+            foreach (var kv in dictionary)
             {
-                if (dem.Value != null)
+                if (kv.Value != null)
                 {
-                    newDict.Add(dem.Key, dem.Value);
+                    dic.Add(kv.Key, kv.Value);
                 }
             }
-            return newDict;
+            return dic;
         }
 
         /// <summary>
@@ -150,6 +150,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             {
                 api = api.Substring(pos + 1).Replace('.', '_');
             }
+
             return api + AlipayConstants.RESPONSE_SUFFIX;
         }
     }

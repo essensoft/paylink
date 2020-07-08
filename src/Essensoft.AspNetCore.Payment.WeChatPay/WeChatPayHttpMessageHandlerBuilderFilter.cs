@@ -4,11 +4,11 @@ using Microsoft.Extensions.Http;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
-    public class WeChatPayHandlerBuilderFilter : IHttpMessageHandlerBuilderFilter
+    public class WeChatPayHttpMessageHandlerBuilderFilter : IHttpMessageHandlerBuilderFilter
     {
         private readonly WeChatPayClientCertificateManager _clientCertificateManager;
 
-        public WeChatPayHandlerBuilderFilter(WeChatPayClientCertificateManager clientCertificateManager)
+        public WeChatPayHttpMessageHandlerBuilderFilter(WeChatPayClientCertificateManager clientCertificateManager)
         {
             _clientCertificateManager = clientCertificateManager;
         }

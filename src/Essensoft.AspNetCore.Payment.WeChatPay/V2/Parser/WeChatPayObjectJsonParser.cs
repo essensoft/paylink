@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Parser
 {
-    public class WeChatPayObjectJsonParser<T> : IWeChatPayObjectJsonParser<T> where T : WeChatPayObject
+    public class WeChatPayObjectJsonParser<T> where T : WeChatPayObject
     {
         private static readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 

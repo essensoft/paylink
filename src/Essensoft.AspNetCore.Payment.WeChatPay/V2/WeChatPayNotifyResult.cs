@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 {
     /// <summary>
-    /// WeChatPay 通知应答。
+    /// WeChatPay V2 通知应答
     /// </summary>
     public static class WeChatPayNotifyResult
     {

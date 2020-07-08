@@ -4,14 +4,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 {
     public class AlipayPublicKeyManager
     {
-        private readonly ConcurrentDictionary<string, string> _SNPublicKeyDictionary = new ConcurrentDictionary<string, string>();
+        private readonly ConcurrentDictionary<string, string> _publicKeyDictionary = new ConcurrentDictionary<string, string>();
 
-        public bool IsEmpty => _SNPublicKeyDictionary.IsEmpty;
+        public bool IsEmpty => _publicKeyDictionary.IsEmpty;
 
-        public bool ContainsKey(string sn) => _SNPublicKeyDictionary.ContainsKey(sn);
+        public bool ContainsKey(string sn) => _publicKeyDictionary.ContainsKey(sn);
 
-        public bool TryAdd(string sn, string publicKey) => _SNPublicKeyDictionary.TryAdd(sn, publicKey);
+        public bool TryAdd(string sn, string publicKey) => _publicKeyDictionary.TryAdd(sn, publicKey);
 
-        public bool TryGetValue(string sn, out string publicKey) => _SNPublicKeyDictionary.TryGetValue(sn, out publicKey);
+        public bool TryGetValue(string sn, out string publicKey) => _publicKeyDictionary.TryGetValue(sn, out publicKey);
     }
 }
