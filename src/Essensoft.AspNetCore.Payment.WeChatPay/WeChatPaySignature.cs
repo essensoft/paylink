@@ -22,7 +22,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             return signType switch
             {
                 WeChatPaySignType.MD5 => MD5.Compute(signContent).ToUpperInvariant(),
-                WeChatPaySignType.HMAC_SHA256 => HMACSHA256.Compute(signContent, key).ToUpperInvariant(),
+                WeChatPaySignType.HMAC_SHA256 => HMAC_SHA256.Compute(signContent, key).ToUpperInvariant(),
                 _ => throw new WeChatPayException("Unknown sign type!"),
             };
         }
