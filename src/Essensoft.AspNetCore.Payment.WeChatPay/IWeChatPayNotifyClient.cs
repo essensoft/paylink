@@ -2,13 +2,16 @@
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
+    /// <summary>
+    /// WeChatPay 通知客户端
+    /// </summary>
     public interface IWeChatPayNotifyClient
     {
         #region V2
 
 #if NETCOREAPP3_1
         /// <summary>
-        /// 执行 WeChatPay 通知请求解析
+        /// 执行 WeChatPay V2 通知请求解析
         /// </summary>
         /// <typeparam name="T">领域对象</typeparam>
         /// <param name="request">控制器的请求</param>
@@ -17,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         Task<T> ExecuteV2Async<T>(Microsoft.AspNetCore.Http.HttpRequest request, WeChatPayOptions options) where T : V2.WeChatPayNotify;
 #endif
         /// <summary>
-        /// 执行 WeChatPay 通知请求解析
+        /// 执行 WeChatPay V2 通知请求解析
         /// </summary>
         /// <typeparam name="T">领域对象</typeparam>
         /// <param name="body">通知内容</param>
@@ -31,7 +34,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
 #if NETCOREAPP3_1
         /// <summary>
-        /// 执行 WeChatPay V3通知请求解析
+        /// 执行 WeChatPay V3 通知请求解析
         /// </summary>
         /// <typeparam name="T">领域对象</typeparam>
         /// <param name="request">控制器的请求</param>
@@ -40,7 +43,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         Task<T> ExecuteV3Async<T>(Microsoft.AspNetCore.Http.HttpRequest request, WeChatPayOptions options) where T : V3.WeChatPayNotify;
 #endif
         /// <summary>
-        /// 执行 WeChatPay V3通知请求解析
+        /// 执行 WeChatPay V3 通知请求解析
         /// </summary>
         /// <typeparam name="T">领域对象</typeparam>
         /// <param name="body">通知内容</param>

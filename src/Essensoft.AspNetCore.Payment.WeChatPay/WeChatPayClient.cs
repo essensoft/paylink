@@ -157,7 +157,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
             if (!_clientCertificateManager.ContainsKey(options.CertificateSerialNo))
             {
-                _clientCertificateManager.TryAdd(options.CertificateSerialNo, options.X509Certificate2);
+                _clientCertificateManager.TryAdd(options.CertificateSerialNo, options.Certificate2);
             }
 
             var client = _httpClientFactory.CreateClient(Prefix + options.CertificateSerialNo);

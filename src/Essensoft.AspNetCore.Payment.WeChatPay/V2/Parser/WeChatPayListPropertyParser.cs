@@ -30,6 +30,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Parser
                 }
                 list.Add(item);
             }
+
             return list;
         }
 
@@ -80,6 +81,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Parser
                 }
                 list.Add(item);
             }
+
             return list;
         }
 

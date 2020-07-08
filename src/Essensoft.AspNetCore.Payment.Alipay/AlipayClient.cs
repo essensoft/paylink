@@ -13,9 +13,6 @@ using Essensoft.AspNetCore.Payment.Alipay.Utility;
 
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
-    /// <summary>
-    /// Alipay 客户端。
-    /// </summary>
     public class AlipayClient : IAlipayClient
     {
         private readonly IHttpClientFactory _httpClientFactory;

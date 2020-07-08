@@ -10,7 +10,7 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             services.AddHttpClient(nameof(WeChatPayClient));
 
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IHttpMessageHandlerBuilderFilter, WeChatPayHandlerBuilderFilter>());
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IHttpMessageHandlerBuilderFilter, WeChatPayHttpMessageHandlerBuilderFilter>());
 
             services.AddSingleton<WeChatPayClientCertificateManager>();
             services.AddSingleton<WeChatPayPlatformCertificateManager>();

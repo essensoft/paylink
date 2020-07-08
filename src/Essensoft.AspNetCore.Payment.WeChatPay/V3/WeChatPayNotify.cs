@@ -3,6 +3,9 @@ using Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 {
+    /// <summary>
+    /// WeChatPay V3 通知对象
+    /// </summary>
     public abstract class WeChatPayNotify : WeChatPayObject
     {
         /// <summary>

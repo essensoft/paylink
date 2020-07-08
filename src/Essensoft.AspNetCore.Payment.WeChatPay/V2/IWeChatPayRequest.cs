@@ -2,26 +2,25 @@
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 {
+    /// <summary>
+    /// WeChatPay V2 请求接口
+    /// </summary>
+    /// <typeparam name="T">请求响应对象</typeparam>
     public interface IWeChatPayRequest<T> where T : WeChatPayResponse
     {
         /// <summary>
-        /// 获取API接口链接
+        /// 获取请求接口地址
         /// </summary>
-        /// <returns>API接口链接</returns>
         string GetRequestUrl();
 
         /// <summary>
-        /// 获取所有的Key-Value形式的文本请求参数字典。其中：
-        /// Key: 请求参数名
-        /// Value: 请求参数文本值
+        /// 获取文本请求参数字典
         /// </summary>
-        /// <returns>文本请求参数字典</returns>
         IDictionary<string, string> GetParameters();
 
         /// <summary>
         /// 获取签名类型
         /// </summary>
-        /// <returns>签名类型</returns>
         WeChatPaySignType GetSignType()
         {
             return WeChatPaySignType.MD5;
@@ -38,7 +37,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
         /// <summary>
         /// 是否需要检查响应内容签名
         /// </summary>
-        /// <returns>是否需要检查</returns>
         bool GetNeedCheckSign()
         {
             return true;

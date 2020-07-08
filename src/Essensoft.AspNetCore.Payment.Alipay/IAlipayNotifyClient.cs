@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace Essensoft.AspNetCore.Payment.Alipay
 {
     /// <summary>
-    /// Alipay 通知解析客户端。
+    /// Alipay 通知客户端
     /// </summary>
     public interface IAlipayNotifyClient
     {

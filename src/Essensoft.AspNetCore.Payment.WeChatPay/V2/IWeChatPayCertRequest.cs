@@ -2,17 +2,19 @@
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 {
+    /// <summary>
+    /// WeChatPay V2 证书请求接口
+    /// </summary>
+    /// <typeparam name="T">请求响应对象</typeparam>
     public interface IWeChatPayCertRequest<T> where T : WeChatPayResponse
     {
         /// <summary>
-        /// 获取API接口链接
+        /// 获取请求接口地址
         /// </summary>
         string GetRequestUrl();
 
         /// <summary>
-        /// 获取所有的Key-Value形式的文本请求参数字典。其中：
-        /// Key: 请求参数名
-        /// Value: 请求参数文本值
+        /// 获取文本请求参数字典
         /// </summary>
         IDictionary<string, string> GetParameters();
 

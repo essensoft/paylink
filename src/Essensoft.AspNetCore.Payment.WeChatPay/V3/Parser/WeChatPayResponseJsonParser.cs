@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Parser
 {
-    public class WeChatPayResponseJsonParser<T> : IWeChatPayResponseJsonParser<T> where T : WeChatPayResponse
+    public class WeChatPayResponseJsonParser<T> where T : WeChatPayResponse
     {
         private static readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 
@@ -28,6 +28,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Parser
 
             result.Body = body;
             result.StatusCode = statusCode;
+
             return result;
         }
     }
