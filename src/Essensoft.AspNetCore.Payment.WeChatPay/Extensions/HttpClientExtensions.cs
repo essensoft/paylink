@@ -50,6 +50,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Extensions
             var url = request.GetRequestUrl();
             var token = BuildToken(url, "GET", null, options);
 
+            client.DefaultRequestHeaders.Add(WeChatPayConsts.Wechatpay_Serial, options.CertificateSerialNo);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("WECHATPAY2-SHA256-RSA2048", token);
             client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(new ProductHeaderValue("Unknown")));
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -94,6 +95,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Extensions
             var url = request.GetRequestUrl();
             var content = SerializeQueryModel(request);
             var token = BuildToken(url, "POST", content, options);
+            client.DefaultRequestHeaders.Add(WeChatPayConsts.Wechatpay_Serial, options.CertificateSerialNo);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("WECHATPAY2-SHA256-RSA2048", token);
             client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(new ProductHeaderValue("Unknown")));
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
