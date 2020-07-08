@@ -12,5 +12,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
         {
             return "https://api.mch.weixin.qq.com/v3/certificates";
         }
+
+        public bool GetNeedCheckSign()
+        {
+            return false;
+        }
     }
 }
