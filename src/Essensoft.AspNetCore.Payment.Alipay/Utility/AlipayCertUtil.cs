@@ -18,12 +18,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <summary>
         /// 提取根证书序列号
         /// </summary>
-        /// <param name="rootCertContent">根证书文本</param>
-        public static string GetRootCertSN(string rootCertContent)
+        /// <param name="rootCertificate">根证书</param>
+        public static string GetRootCertSN(string rootCertificate)
         {
             var rootCertSN = string.Empty;
 
-            var certs = ReadPemCertChain(rootCertContent);
+            var certs = ReadPemCertChain(rootCertificate);
             foreach (var cert in certs)
             {
                 var sigAlgOid = string.Empty;
@@ -96,28 +96,28 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <summary>
         /// 校验证书链是否可信
         /// </summary>
-        /// <param name="certContent">需要验证的目标证书或者证书链文本</param>
-        /// <param name="rootCertContent">可信根证书列表文本</param>
-        public static bool IsTrusted(string certContent, string rootCertContent)
+        /// <param name="certificate">需要验证的目标证书或者证书链</param>
+        /// <param name="rootCertificate">可信根证书</param>
+        public static bool IsTrusted(string certificate, string rootCertificate)
         {
-            var rootCertificate = ReadPemCertChain(rootCertContent);
-            var certificate = ReadPemCertChain(certContent);
-
-            foreach (var cert in certificate)
+            var rootCertificates = ReadPemCertChain(rootCertificate);
+            var certificates = ReadPemCertChain(certificate);
+            foreach (var cert in certificates)
             {
-                var chain = new X509Chain();
-
-                foreach (var root in rootCertificate)
+                using (var chain = X509Chain.Create())
                 {
-                    chain.ChainPolicy.ExtraStore.Add(root);
-                }
+                    foreach (var rootCert in rootCertificates)
+                    {
+                        chain.ChainPolicy.ExtraStore.Add(rootCert);
+                    }
 
-                chain.ChainPolicy.VerificationFlags = X509VerificationFlags.AllowUnknownCertificateAuthority;
-                chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
+                    chain.ChainPolicy.VerificationFlags = X509VerificationFlags.AllowUnknownCertificateAuthority;
+                    chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
 
-                if (!chain.Build(cert))
-                {
-                    return false;
+                    if (!chain.Build(cert))
+                    {
+                        return false;
+                    }
                 }
             }
 
@@ -125,13 +125,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         }
 
         /// <summary>
-        /// 从证书链文本反序列化证书链集合
+        /// 从证书链反序列化证书链集合
         /// </summary>
-        /// <param name="certificate">证书链文本</param>
+        /// <param name="certificate">证书链</param>
         private static List<X509Certificate2> ReadPemCertChain(string certificate)
         {
-            var certString = File.Exists(certificate) ? File.ReadAllText(certificate, Encoding.ASCII) : Encoding.ASCII.GetString(Convert.FromBase64String(certificate));
-            var certStringArr = certString.Replace("\r\n-----", "-----")
+            var certChainStr = File.Exists(certificate) ? File.ReadAllText(certificate, Encoding.ASCII) : Encoding.ASCII.GetString(Convert.FromBase64String(certificate));
+            var certStrArr = certChainStr.Replace("\r\n-----", "-----")
                 .Replace("-----\r\n", "-----")
                 .Replace("\n-----", "-----")
                 .Replace("-----\n", "-----")
@@ -139,8 +139,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
                 .Split("-----END CERTIFICATE-----");
 
             var certs = new List<X509Certificate2>();
-
-            foreach (var certStr in certStringArr)
+            foreach (var certStr in certStrArr)
             {
                 if (!string.IsNullOrEmpty(certStr))
                 {
