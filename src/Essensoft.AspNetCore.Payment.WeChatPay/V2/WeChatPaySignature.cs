@@ -2,7 +2,7 @@
 using System.Text;
 using Essensoft.AspNetCore.Payment.Security;
 
-namespace Essensoft.AspNetCore.Payment.WeChatPay
+namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 {
     public static class WeChatPaySignature
     {

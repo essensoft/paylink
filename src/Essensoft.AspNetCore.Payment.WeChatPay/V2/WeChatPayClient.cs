@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 
         #region IWeChatPayClient Members
 
-        public async Task<T> ExecuteAsync<T>(V2.IWeChatPayRequest<T> request, WeChatPayOptions options) where T : V2.WeChatPayResponse
+        public async Task<T> ExecuteAsync<T>(IWeChatPayRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
         {
             if (options == null)
             {
@@ -70,7 +70,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 
         #region IWeChatPayClient Members
 
-        public Task<T> PageExecuteAsync<T>(V2.IWeChatPayRequest<T> request, WeChatPayOptions options) where T : V2.WeChatPayResponse
+        public Task<T> PageExecuteAsync<T>(IWeChatPayRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
         {
             if (options == null)
             {
@@ -116,7 +116,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 
         #region IWeChatPayClient Members
 
-        public async Task<T> ExecuteAsync<T>(V2.IWeChatPayCertRequest<T> request, WeChatPayOptions options) where T : V2.WeChatPayResponse
+        public async Task<T> ExecuteAsync<T>(IWeChatPayCertRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
         {
             if (options == null)
             {
@@ -170,7 +170,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 
         #region IWeChatPayClient Members
 
-        public Task<WeChatPayDictionary> ExecuteAsync(V2.IWeChatPaySdkRequest request, WeChatPayOptions options)
+        public Task<WeChatPayDictionary> ExecuteAsync(IWeChatPaySdkRequest request, WeChatPayOptions options)
         {
             if (options == null)
             {
@@ -203,7 +203,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 
         #region Check Response Method
 
-        private void CheckResponseSign(V2.WeChatPayResponse response, WeChatPayOptions options, WeChatPaySignType signType)
+        private void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options, WeChatPaySignType signType)
         {
             if (string.IsNullOrEmpty(response.Body))
             {
