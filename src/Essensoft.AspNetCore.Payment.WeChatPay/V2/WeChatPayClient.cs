@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Essensoft.AspNetCore.Payment.WeChatPay.Extensions;
+using Essensoft.AspNetCore.Payment.WeChatPay.V2.Extensions;
 using Essensoft.AspNetCore.Payment.WeChatPay.V2.Parser;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
