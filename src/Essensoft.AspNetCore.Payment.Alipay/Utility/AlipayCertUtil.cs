@@ -131,20 +131,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         private static List<X509Certificate2> ReadPemCertChain(string certificate)
         {
             var certChainStr = File.Exists(certificate) ? File.ReadAllText(certificate, Encoding.ASCII) : Encoding.ASCII.GetString(Convert.FromBase64String(certificate));
-            var certStrArr = certChainStr.Replace("\r\n-----", "-----")
-                .Replace("-----\r\n", "-----")
-                .Replace("\n-----", "-----")
-                .Replace("-----\n", "-----")
-                .Replace("-----BEGIN CERTIFICATE-----", string.Empty)
-                .Split("-----END CERTIFICATE-----");
+            var certStrArr = certChainStr.Split("-----END CERTIFICATE-----", StringSplitOptions.RemoveEmptyEntries);
 
             var certs = new List<X509Certificate2>();
             foreach (var certStr in certStrArr)
             {
-                if (!string.IsNullOrEmpty(certStr))
-                {
-                    certs.Add(new X509Certificate2(Encoding.ASCII.GetBytes(certStr)));
-                }
+                certs.Add(new X509Certificate2(Encoding.ASCII.GetBytes(certStr + "-----END CERTIFICATE-----")));
             }
 
             return certs;
