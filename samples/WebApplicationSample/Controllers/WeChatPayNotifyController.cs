@@ -29,7 +29,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteV2Async<WeChatPayUnifiedOrderNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.ExecuteAsync<WeChatPayUnifiedOrderNotify>(Request, _optionsAccessor.Value);
                 if (notify.ReturnCode == WeChatPayCode.Success)
                 {
                     if (notify.ResultCode == WeChatPayCode.Success)
@@ -57,7 +57,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteV2Async<WeChatPayRefundNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.ExecuteAsync<WeChatPayRefundNotify>(Request, _optionsAccessor.Value);
                 if (notify.ReturnCode == WeChatPayCode.Success)
                 {
                     if (notify.RefundStatus == WeChatPayCode.Success)

@@ -29,7 +29,7 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                var notify = await _client.ExecuteV3Async<WeChatPayTransactionsNotify>(Request, _optionsAccessor.Value);
+                var notify = await _client.ExecuteAsync<WeChatPayTransactionsNotify>(Request, _optionsAccessor.Value);
                 if (notify.TradeState == WeChatPayTradeState.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);

@@ -27,7 +27,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
         #region IWeChatPayNotifyClient Members
 
 #if NETCOREAPP3_1
-        public async Task<T> ExecuteV3Async<T>(Microsoft.AspNetCore.Http.HttpRequest request, WeChatPayOptions options) where T : WeChatPayNotify
+        public async Task<T> ExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, WeChatPayOptions options) where T : WeChatPayNotify
         {
             if (options == null)
             {
@@ -61,7 +61,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
                 signature = signatureValues.ElementAt(0);
             }
 
-            return await ExecuteV3Async<T>(body, serial, timestamp, nonce, signature, options);
+            return await ExecuteAsync<T>(body, serial, timestamp, nonce, signature, options);
         }
 #endif
 
@@ -69,7 +69,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 
         #region IWeChatPayNotifyClient Members
 
-        public async Task<T> ExecuteV3Async<T>(string body, string serial, string timestamp, string nonce, string signature, WeChatPayOptions options) where T : WeChatPayNotify
+        public async Task<T> ExecuteAsync<T>(string body, string serial, string timestamp, string nonce, string signature, WeChatPayOptions options) where T : WeChatPayNotify
         {
             if (options == null)
             {

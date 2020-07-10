@@ -15,7 +15,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
         /// <param name="request">控制器的请求</param>
         /// <param name="options">配置选项</param>
         /// <returns>领域对象</returns>
-        Task<T> ExecuteV2Async<T>(Microsoft.AspNetCore.Http.HttpRequest request, WeChatPayOptions options) where T : V2.WeChatPayNotify;
+        Task<T> ExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, WeChatPayOptions options) where T : WeChatPayNotify;
 #endif
         /// <summary>
         /// 执行 WeChatPay V2 通知请求解析
@@ -24,6 +24,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
         /// <param name="body">通知内容</param>
         /// <param name="options">配置选项</param>
         /// <returns>领域对象</returns>
-        Task<T> ExecuteV2Async<T>(string body, WeChatPayOptions options) where T : V2.WeChatPayNotify;
+        Task<T> ExecuteAsync<T>(string body, WeChatPayOptions options) where T : WeChatPayNotify;
     }
 }

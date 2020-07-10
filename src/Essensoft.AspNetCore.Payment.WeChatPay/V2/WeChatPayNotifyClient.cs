@@ -22,7 +22,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
         #region IWeChatPayNotifyClient Members
 
 #if NETCOREAPP3_1
-        public async Task<T> ExecuteV2Async<T>(Microsoft.AspNetCore.Http.HttpRequest request, WeChatPayOptions options) where T : V2.WeChatPayNotify
+        public async Task<T> ExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, WeChatPayOptions options) where T : WeChatPayNotify
         {
             if (request == null)
             {
@@ -30,7 +30,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
             }
 
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
-            return await ExecuteV2Async<T>(body, options);
+            return await ExecuteAsync<T>(body, options);
         }
 #endif
 
@@ -38,7 +38,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 
         #region IWeChatPayNotifyClient Members
 
-        public Task<T> ExecuteV2Async<T>(string body, WeChatPayOptions options) where T : V2.WeChatPayNotify
+        public Task<T> ExecuteAsync<T>(string body, WeChatPayOptions options) where T : WeChatPayNotify
         {
             if (string.IsNullOrEmpty(body))
             {
@@ -57,10 +57,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 
             var parser = new WeChatPayNotifyXmlParser<T>();
             var notify = parser.Parse(body);
-            if (notify is V2.Notify.WeChatPayRefundNotify)
+            if (notify is Notify.WeChatPayRefundNotify)
             {
                 var key = MD5.Compute(options.Key).ToLowerInvariant();
-                var data = AES.Decrypt((notify as V2.Notify.WeChatPayRefundNotify).ReqInfo, key, CipherMode.ECB, PaddingMode.PKCS7);
+                var data = AES.Decrypt((notify as Notify.WeChatPayRefundNotify).ReqInfo, key, CipherMode.ECB, PaddingMode.PKCS7);
                 notify = parser.Parse(body, data);
             }
             else
@@ -75,7 +75,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 
         #region Common Method
 
-        private void CheckNotifySign(V2.WeChatPayNotify notify, WeChatPayOptions options)
+        private void CheckNotifySign(WeChatPayNotify notify, WeChatPayOptions options)
         {
             if (string.IsNullOrEmpty(notify.Body))
             {
