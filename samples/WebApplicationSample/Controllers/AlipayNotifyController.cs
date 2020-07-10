@@ -82,11 +82,11 @@ namespace WebApplicationSample.Controllers
                         }
                 }
 
-                return NoContent();
+                return AlipayNotifyResult.Failure;
             }
             catch
             {
-                return NoContent();
+                return AlipayNotifyResult.Failure;
             }
         }
 
@@ -106,11 +106,12 @@ namespace WebApplicationSample.Controllers
 
                     return AlipayNotifyResult.Success;
                 }
-                return NoContent();
+
+                return AlipayNotifyResult.Failure;
             }
             catch
             {
-                return NoContent();
+                return AlipayNotifyResult.Failure;
             }
         }
 
@@ -130,11 +131,12 @@ namespace WebApplicationSample.Controllers
 
                     return AlipayNotifyResult.Success;
                 }
-                return NoContent();
+
+                return AlipayNotifyResult.Failure;
             }
             catch
             {
-                return NoContent();
+                return AlipayNotifyResult.Failure;
             }
         }
 
@@ -154,11 +156,12 @@ namespace WebApplicationSample.Controllers
 
                     return AlipayNotifyResult.Success;
                 }
-                return NoContent();
+
+                return AlipayNotifyResult.Failure;
             }
             catch
             {
-                return NoContent();
+                return AlipayNotifyResult.Failure;
             }
         }
 
@@ -178,11 +181,12 @@ namespace WebApplicationSample.Controllers
 
                     return AlipayNotifyResult.Success;
                 }
-                return NoContent();
+
+                return AlipayNotifyResult.Failure;
             }
             catch
             {
-                return NoContent();
+                return AlipayNotifyResult.Failure;
             }
         }
 
@@ -202,11 +206,12 @@ namespace WebApplicationSample.Controllers
 
                     return AlipayNotifyResult.Success;
                 }
-                return NoContent();
+
+                return AlipayNotifyResult.Failure;
             }
             catch
             {
-                return NoContent();
+                return AlipayNotifyResult.Failure;
             }
         }
     }
