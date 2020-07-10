@@ -2,7 +2,7 @@
 using System.Net.Http;
 using Microsoft.Extensions.Http;
 
-namespace Essensoft.AspNetCore.Payment.WeChatPay
+namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 {
     public class WeChatPayHttpMessageHandlerBuilderFilter : IHttpMessageHandlerBuilderFilter
     {
