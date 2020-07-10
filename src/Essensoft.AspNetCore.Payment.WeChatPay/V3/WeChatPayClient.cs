@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Security;
 using Essensoft.AspNetCore.Payment.WeChatPay.Extensions;
 using Essensoft.AspNetCore.Payment.WeChatPay.V3.Parser;
+using Essensoft.AspNetCore.Payment.WeChatPay.V3.Request;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 {
@@ -166,7 +167,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
             }
 
             // 否则重新下载新的平台证书
-            var request = new Request.WeChatPayCertificatesRequest();
+            var request = new WeChatPayCertificatesRequest();
             var response = await ExecuteAsync(request, options);
             foreach (var certificate in response.Certificates)
             {
