@@ -1,4 +1,4 @@
-﻿namespace Essensoft.AspNetCore.Payment.WeChatPay
+﻿namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 {
     /// <summary>
     /// 签名类型

@@ -1,4 +1,4 @@
-﻿namespace Essensoft.AspNetCore.Payment.WeChatPay
+﻿namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 {
     /// <summary>
     /// 交易状态
