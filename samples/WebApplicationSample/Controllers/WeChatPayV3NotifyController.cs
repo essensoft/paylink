@@ -35,11 +35,12 @@ namespace WebApplicationSample.Controllers
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
                     return WeChatPayNotifyResult.Success;
                 }
-                return NoContent();
+
+                return WeChatPayNotifyResult.Failure;
             }
             catch
             {
-                return NoContent();
+                return WeChatPayNotifyResult.Failure;
             }
         }
     }
