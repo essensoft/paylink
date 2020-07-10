@@ -4,7 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Security;
-using Essensoft.AspNetCore.Payment.WeChatPay.Extensions;
+using Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions;
 using Essensoft.AspNetCore.Payment.WeChatPay.V3.Parser;
 using Essensoft.AspNetCore.Payment.WeChatPay.V3.Request;
 
@@ -85,13 +85,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
             }
 
             var client = _httpClientFactory.CreateClient(Name);
-            var (serial, timestamp, nonce, signature, body, statusCode) = await client.GetAsync(request, options);
+            var (headers, body, statusCode) = await client.GetAsync(request, options);
             var parser = new WeChatPayResponseJsonParser<T>();
             var response = parser.Parse(body, statusCode);
 
             if (request.GetNeedCheckSign())
             {
-                await CheckV3ResponseSignAsync(options, serial, timestamp, nonce, signature, body);
+                await CheckV3ResponseSignAsync(headers, body, options);
             }
 
             return response;
@@ -119,11 +119,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
             }
 
             var client = _httpClientFactory.CreateClient(Name);
-            var (serial, timestamp, nonce, signature, body, statusCode) = await client.PostAsync(request, options);
+            var (headers, body, statusCode) = await client.PostAsync(request, options);
             var parser = new WeChatPayResponseJsonParser<T>();
             var response = parser.Parse(body, statusCode);
 
-            await CheckV3ResponseSignAsync(options, serial, timestamp, nonce, signature, body);
+            await CheckV3ResponseSignAsync(headers, body, options);
 
             return response;
         }
@@ -132,22 +132,22 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 
         #region Check Response Method
 
-        private async Task CheckV3ResponseSignAsync(WeChatPayOptions options, string serial, string timestamp, string nonce, string signature, string body)
+        private async Task CheckV3ResponseSignAsync(WeChatPayHeaders headers, string body, WeChatPayOptions options)
         {
-            if (string.IsNullOrEmpty(serial))
+            if (string.IsNullOrEmpty(headers.Serial))
             {
-                throw new WeChatPayException($"sign check fail: {nameof(serial)} is empty!");
+                throw new WeChatPayException($"sign check fail: {nameof(headers.Serial)} is empty!");
             }
 
-            if (string.IsNullOrEmpty(signature))
+            if (string.IsNullOrEmpty(headers.Signature))
             {
-                throw new WeChatPayException($"sign check fail: {nameof(signature)} is empty!");
+                throw new WeChatPayException($"sign check fail: {nameof(headers.Signature)} is empty!");
             }
 
-            var cert = await LoadPlatformCertificateAsync(serial, options);
-            var signatureSourceData = BuildSignatureSourceData(timestamp, nonce, body);
+            var cert = await LoadPlatformCertificateAsync(headers.Serial, options);
+            var signatureSourceData = BuildSignatureSourceData(headers.Timestamp, headers.Nonce, body);
 
-            if (!SHA256WithRSA.Verify(cert.GetRSAPublicKey(), signatureSourceData, signature))
+            if (!SHA256WithRSA.Verify(cert.GetRSAPublicKey(), signatureSourceData, headers.Signature))
             {
                 throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
             }

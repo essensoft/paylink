@@ -35,34 +35,37 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
                 throw new ArgumentNullException(nameof(options));
             }
 
+            var headers = GetWeChatPayHeadersFromRequest(request);
             var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
 
-            var serial = string.Empty;
-            var timestamp = string.Empty;
-            var nonce = string.Empty;
-            var signature = string.Empty;
+            return await ExecuteAsync<T>(headers, body, options);
+        }
 
-            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Serial, out var serialValues) && serialValues.Count() == 1)
+        private WeChatPayHeaders GetWeChatPayHeadersFromRequest(Microsoft.AspNetCore.Http.HttpRequest request)
+        {
+            var headers = new WeChatPayHeaders();
+
+            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Serial, out var serialValues))
             {
-                serial = serialValues.ElementAt(0);
+                headers.Serial = serialValues.First();
             }
 
-            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Timestamp, out var timestampValues) && timestampValues.Count() == 1)
+            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Timestamp, out var timestampValues))
             {
-                timestamp = timestampValues.ElementAt(0);
+                headers.Timestamp = timestampValues.First();
             }
 
-            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Nonce, out var nonceValues) && nonceValues.Count() == 1)
+            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Nonce, out var nonceValues))
             {
-                nonce = nonceValues.ElementAt(0);
+                headers.Nonce = nonceValues.First();
             }
 
-            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Signature, out var signatureValues) && signatureValues.Count() == 1)
+            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Signature, out var signatureValues))
             {
-                signature = signatureValues.ElementAt(0);
+                headers.Signature = signatureValues.First();
             }
 
-            return await ExecuteAsync<T>(body, serial, timestamp, nonce, signature, options);
+            return headers;
         }
 #endif
 
@@ -70,7 +73,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 
         #region IWeChatPayNotifyClient Members
 
-        public async Task<T> ExecuteAsync<T>(string body, string serial, string timestamp, string nonce, string signature, WeChatPayOptions options) where T : WeChatPayNotify
+        public async Task<T> ExecuteAsync<T>(WeChatPayHeaders headers, string body, WeChatPayOptions options) where T : WeChatPayNotify
         {
             if (options == null)
             {
@@ -82,7 +85,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
                 throw new ArgumentNullException(nameof(options.V3Key));
             }
 
-            await CheckNotifySignAsync(body, serial, timestamp, nonce, signature, options);
+            await CheckNotifySignAsync(headers, body, options);
 
             var parser = new WeChatPayNotifyJsonParser<T>();
             var notify = parser.Parse(body, options.V3Key);
@@ -94,27 +97,27 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 
         #region Check Notify Method
 
-        private async Task CheckNotifySignAsync(string body, string serial, string timestamp, string nonce, string signature, WeChatPayOptions options)
+        private async Task CheckNotifySignAsync(WeChatPayHeaders headers, string body, WeChatPayOptions options)
         {
+            if (string.IsNullOrEmpty(headers.Serial))
+            {
+                throw new WeChatPayException($"sign check fail: {nameof(headers.Serial)} is empty!");
+            }
+
+            if (string.IsNullOrEmpty(headers.Signature))
+            {
+                throw new WeChatPayException($"sign check fail: {nameof(headers.Signature)} is empty!");
+            }
+
             if (string.IsNullOrEmpty(body))
             {
                 throw new WeChatPayException("sign check fail: body is empty!");
             }
 
-            if (string.IsNullOrEmpty(serial))
-            {
-                throw new WeChatPayException($"sign check fail: {nameof(serial)} is empty!");
-            }
+            var cert = await LoadPlatformCertificateAsync(headers.Serial, options);
+            var signatureSourceData = BuildSignatureSourceData(headers.Timestamp, headers.Nonce, body);
 
-            if (string.IsNullOrEmpty(signature))
-            {
-                throw new WeChatPayException($"sign check fail: {nameof(signature)} is empty!");
-            }
-
-            var cert = await LoadPlatformCertificateAsync(serial, options);
-            var signatureSourceData = BuildSignatureSourceData(timestamp, nonce, body);
-
-            if (!SHA256WithRSA.Verify(cert.GetRSAPublicKey(), signatureSourceData, signature))
+            if (!SHA256WithRSA.Verify(cert.GetRSAPublicKey(), signatureSourceData, headers.Signature))
             {
                 throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
             }
