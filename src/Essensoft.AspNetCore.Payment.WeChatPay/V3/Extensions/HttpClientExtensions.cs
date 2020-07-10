@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
     {
         private static readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 
-        public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> GetAsync<T>(this HttpClient client, V3.IWeChatPayGetRequest<T> request, WeChatPayOptions options) where T : V3.WeChatPayResponse
+        public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> GetAsync<T>(this HttpClient client, IWeChatPayGetRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
         {
             var url = request.GetRequestUrl();
             var token = BuildToken(url, "GET", null, options);
@@ -35,7 +35,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
             }
         }
 
-        public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> PostAsync<T>(this HttpClient client, V3.IWeChatPayPostRequest<T> request, WeChatPayOptions options) where T : V3.WeChatPayResponse
+        public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> PostAsync<T>(this HttpClient client, IWeChatPayPostRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
         {
             var url = request.GetRequestUrl();
             var content = SerializeQueryModel(request);
@@ -58,7 +58,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
             }
         }
 
-        private static string SerializeQueryModel<T>(V3.IWeChatPayPostRequest<T> request) where T : V3.WeChatPayResponse
+        private static string SerializeQueryModel<T>(IWeChatPayPostRequest<T> request) where T : WeChatPayResponse
         {
             var queryModel = request.GetQueryModel();
             if (queryModel != null)

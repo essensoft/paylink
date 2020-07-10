@@ -7,7 +7,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Extensions
 {
     public static class HttpClientExtensions
     {
-        public static async Task<string> PostAsync<T>(this HttpClient client, V2.IWeChatPayRequest<T> request, IDictionary<string, string> textParams) where T : V2.WeChatPayResponse
+        public static async Task<string> PostAsync<T>(this HttpClient client, IWeChatPayRequest<T> request, IDictionary<string, string> textParams) where T : WeChatPayResponse
         {
             var url = request.GetRequestUrl();
             var content = WeChatPayUtility.BuildContent(textParams);
@@ -19,7 +19,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Extensions
             }
         }
 
-        public static async Task<string> PostAsync<T>(this HttpClient client, V2.IWeChatPayCertRequest<T> request, IDictionary<string, string> textParams) where T : V2.WeChatPayResponse
+        public static async Task<string> PostAsync<T>(this HttpClient client, IWeChatPayCertRequest<T> request, IDictionary<string, string> textParams) where T : WeChatPayResponse
         {
             var url = request.GetRequestUrl();
             var content = WeChatPayUtility.BuildContent(textParams);
