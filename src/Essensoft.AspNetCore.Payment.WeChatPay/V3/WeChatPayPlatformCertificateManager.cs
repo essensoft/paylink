@@ -1,9 +1,9 @@
 ﻿using System.Collections.Concurrent;
 using System.Security.Cryptography.X509Certificates;
 
-namespace Essensoft.AspNetCore.Payment.WeChatPay
+namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 {
-    public class WeChatPayClientCertificateManager
+    public class WeChatPayPlatformCertificateManager
     {
         private readonly ConcurrentDictionary<string, X509Certificate2> _certificateDictionary = new ConcurrentDictionary<string, X509Certificate2>();
 

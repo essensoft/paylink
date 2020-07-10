@@ -1,5 +1,4 @@
-﻿using Essensoft.AspNetCore.Payment.WeChatPay;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+﻿using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Http;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -8,14 +7,16 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static void AddWeChatPay(this IServiceCollection services)
         {
-            services.AddHttpClient(nameof(WeChatPayClient));
+            services.AddHttpClient(Essensoft.AspNetCore.Payment.WeChatPay.V2.WeChatPayClient.Name);
+            services.TryAddEnumerable(ServiceDescriptor.Singleton<IHttpMessageHandlerBuilderFilter, Essensoft.AspNetCore.Payment.WeChatPay.V2.WeChatPayHttpMessageHandlerBuilderFilter>());
+            services.AddSingleton<Essensoft.AspNetCore.Payment.WeChatPay.V2.WeChatPayClientCertificateManager>();
+            services.AddSingleton<Essensoft.AspNetCore.Payment.WeChatPay.V2.IWeChatPayClient, Essensoft.AspNetCore.Payment.WeChatPay.V2.WeChatPayClient>();
+            services.AddSingleton<Essensoft.AspNetCore.Payment.WeChatPay.V2.IWeChatPayNotifyClient, Essensoft.AspNetCore.Payment.WeChatPay.V2.WeChatPayNotifyClient>();
 
-            services.TryAddEnumerable(ServiceDescriptor.Singleton<IHttpMessageHandlerBuilderFilter, WeChatPayHttpMessageHandlerBuilderFilter>());
-
-            services.AddSingleton<WeChatPayClientCertificateManager>();
-            services.AddSingleton<WeChatPayPlatformCertificateManager>();
-            services.AddSingleton<IWeChatPayClient, WeChatPayClient>();
-            services.AddSingleton<IWeChatPayNotifyClient, WeChatPayNotifyClient>();
+            services.AddHttpClient(Essensoft.AspNetCore.Payment.WeChatPay.V3.WeChatPayClient.Name);
+            services.AddSingleton<Essensoft.AspNetCore.Payment.WeChatPay.V3.WeChatPayPlatformCertificateManager>();
+            services.AddSingleton<Essensoft.AspNetCore.Payment.WeChatPay.V3.IWeChatPayClient, Essensoft.AspNetCore.Payment.WeChatPay.V3.WeChatPayClient>();
+            services.AddSingleton<Essensoft.AspNetCore.Payment.WeChatPay.V3.IWeChatPayNotifyClient, Essensoft.AspNetCore.Payment.WeChatPay.V3.WeChatPayNotifyClient>();
         }
     }
 }
