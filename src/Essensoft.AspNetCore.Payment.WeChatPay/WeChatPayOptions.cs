@@ -2,6 +2,7 @@
 using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using Essensoft.AspNetCore.Payment.Security;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
@@ -69,9 +70,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 {
                     certificate = value;
 
-                    Certificate2 = File.Exists(certificate) ?
-                        new X509Certificate2(certificate, CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet) :
-                        new X509Certificate2(Convert.FromBase64String(certificate), CertificatePassword, X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.MachineKeySet);
+                    Certificate2 = File.Exists(certificate) ? new X509Certificate2(certificate, CertificatePassword)
+                        : Base64Util.IsBase64String(certificate) ? new X509Certificate2(Convert.FromBase64String(certificate), CertificatePassword)
+                        : throw new WeChatPayException("证书文件不存在或证书的Base64String不正确！");
 
                     CertificateSerialNo = Certificate2.GetSerialNumberString();
                     CertificateRSAPrivateKey = Certificate2.GetRSAPrivateKey();
