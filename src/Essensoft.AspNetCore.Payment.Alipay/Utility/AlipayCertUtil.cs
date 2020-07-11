@@ -6,6 +6,7 @@ using System.Linq;
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
+using Essensoft.AspNetCore.Payment.Security;
 using MD5 = Essensoft.AspNetCore.Payment.Security.MD5;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Utility
@@ -58,7 +59,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <param name="certificate">证书</param>
         public static X509Certificate2 Parse(string certificate)
         {
-            return File.Exists(certificate) ? new X509Certificate2(certificate) : new X509Certificate2(Convert.FromBase64String(certificate));
+            return File.Exists(certificate) ? new X509Certificate2(certificate)
+                : Base64Util.IsBase64String(certificate) ? new X509Certificate2(Convert.FromBase64String(certificate))
+                : throw new AlipayException("证书文件不存在或证书的Base64String不正确！");
         }
 
         /// <summary>
@@ -130,7 +133,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <param name="certificate">证书链</param>
         private static List<X509Certificate2> ReadPemCertChain(string certificate)
         {
-            var certChainStr = File.Exists(certificate) ? File.ReadAllText(certificate, Encoding.ASCII) : Encoding.ASCII.GetString(Convert.FromBase64String(certificate));
+            var certChainStr = File.Exists(certificate) ? File.ReadAllText(certificate)
+                : Base64Util.IsBase64String(certificate) ? Encoding.ASCII.GetString(Convert.FromBase64String(certificate))
+                : throw new AlipayException("证书文件不存在或证书的Base64String不正确！");
+
             var certStrArr = certChainStr.Split("-----END CERTIFICATE-----", StringSplitOptions.RemoveEmptyEntries);
 
             var certs = new List<X509Certificate2>();
