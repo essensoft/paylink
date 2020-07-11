@@ -23,13 +23,33 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 
 ## 支持渠道
 
-### 支付宝 [文档中心](https://docs.open.alipay.com/catalog)
+1. 支付宝 [文档中心](https://openhome.alipay.com/docCenter/docCenter.htm?from=openhomemenu)
 
 * 同步 [alipay-sdk-net-all](https://github.com/alipay/alipay-sdk-net-all) 所有API.
 
-### 微信支付 [开发文档](https://pay.weixin.qq.com/wiki/doc/api/index.html)
+2. 微信支付
 
-* 付款码支付(刷卡)、JSAPI支付(公众号)、Native支付(扫码)、APP支付、H5支付、小程序支付、企业付款(零钱/银行卡)、现金红包、酒店押金、人脸支付、委托扣款、分账
+* V2版 [开发文档](https://pay.weixin.qq.com/wiki/doc/api/index.html)
+    - 付款码支付(刷卡)
+    - JSAPI支付(公众号)
+    - Native支付(扫码)
+    - APP支付
+    - H5支付
+    - 小程序支付
+    - 刷脸支付
+    - 现金红包
+    - 企业付款(零钱/银行卡)
+    - 分账
+    - 酒店押金
+    - 委托扣款
+    - ..
+
+* V3版 [开发文档](https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pages/Overview.shtml)
+    - 基础支付
+        * 普通支付（直连模式）
+        * 普通支付（服务商模式）
+        * 合单支付
+        * 账单
 
 ## 开发环境
 * Windows 10
@@ -39,6 +59,10 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 ## 使用方式
 
 * [查看示例项目](samples/WebApplicationSample)
+
+## 常见问题
+
+* [常见问题及解决方法](https://github.com/essensoft/payment/issues/86)
 
 ## 捐赠
 
@@ -51,7 +75,7 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 ## 项目地址
 
 - [GitHub](https://github.com/essensoft/payment)
-- [Gitee镜像](https://gitee.com/essensoft/payment)
+- [Gitee](https://gitee.com/essensoft/payment)
 
 ## 开源协议
 
