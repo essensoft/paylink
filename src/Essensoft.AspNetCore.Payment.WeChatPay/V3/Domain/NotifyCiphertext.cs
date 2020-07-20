@@ -46,5 +46,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// </summary>
         [JsonPropertyName("resource")]
         public Resource Resource { get; set; }
+
+        /// <summary>
+        /// 概要
+        /// 示例值：支付成功
+        /// </summary>
+        [JsonPropertyName("summary")]
+        public string Summary { get; set; }
     }
 }
