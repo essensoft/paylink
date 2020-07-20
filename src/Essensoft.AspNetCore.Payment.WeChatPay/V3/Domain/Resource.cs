@@ -8,6 +8,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
     public class Resource : WeChatPayObject
     {
         /// <summary>
+        /// 原始类型
+        /// 示例值：transaction
+        /// </summary>
+        [JsonPropertyName("original_type")]
+        public string OriginalType { get; set; }
+
+        /// <summary>
         /// 加密算法类型
         /// 对开启结果数据进行加密的加密算法，目前只支持AEAD_AES_256_GCM
         /// 示例值：AEAD_AES_256_GCM
