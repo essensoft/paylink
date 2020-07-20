@@ -126,8 +126,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// 支付者
         /// 示例值：见请求示例
         /// </summary>
-        [JsonPropertyName("combine_payer_info")]
-        public PartnerPayerInfo CombinePayerInfo { get; set; }
+        [JsonPropertyName("payer")]
+        public PartnerPayerInfo Payer { get; set; }
 
         /// <summary>
         /// 订单金额
