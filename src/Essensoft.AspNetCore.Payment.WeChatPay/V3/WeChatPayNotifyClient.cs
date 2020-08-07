@@ -35,10 +35,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
                 throw new ArgumentNullException(nameof(options));
             }
 
+            request.Body.Seek(0, SeekOrigin.Begin);
             var headers = GetWeChatPayHeadersFromRequest(request);
-            var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
-
-            return await ExecuteAsync<T>(headers, body, options);
+            using (var reader = new StreamReader(request.Body, Encoding.UTF8))
+            {
+                var body = await reader.ReadToEndAsync();
+                return await ExecuteAsync<T>(headers, body, options);
+            }
         }
 
         private WeChatPayHeaders GetWeChatPayHeadersFromRequest(Microsoft.AspNetCore.Http.HttpRequest request)
