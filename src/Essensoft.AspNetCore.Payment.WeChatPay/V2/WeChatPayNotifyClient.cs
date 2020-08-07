@@ -29,8 +29,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
                 throw new ArgumentNullException(nameof(request));
             }
 
-            var body = await new StreamReader(request.Body, Encoding.UTF8).ReadToEndAsync();
-            return await ExecuteAsync<T>(body, options);
+            request.Body.Seek(0, SeekOrigin.Begin);
+            using (var reader = new StreamReader(request.Body, Encoding.UTF8))
+            {
+                var body = await reader.ReadToEndAsync();
+                return await ExecuteAsync<T>(body, options);
+            }
         }
 #endif
 
