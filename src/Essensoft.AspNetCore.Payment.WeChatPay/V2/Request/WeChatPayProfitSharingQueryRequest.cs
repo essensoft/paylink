@@ -14,9 +14,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
         public string TransactionId { get; set; }
 
         /// <summary>
-        /// 商户订单号
+        /// 商户分账单号
         /// </summary>
-        public string OutTradeNo { get; set; }
+        public string OutOrderNo { get; set; }
 
         #region IWeChatPayRequest Members
 
@@ -30,7 +30,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
             var parameters = new WeChatPayDictionary
             {
                 { "transaction_id", TransactionId },
-                { "out_trade_no", OutTradeNo }
+                { "out_order_no", OutOrderNo }
             };
             return parameters;
         }
