@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
     {
         #region IWeChatPayCertificateRequest Members
 
-        private string requestUrl ="https://fraud.mch.weixin.qq.com/risk/getpublickey";
+        private string requestUrl = "https://fraud.mch.weixin.qq.com/risk/getpublickey";
 
         public string GetRequestUrl()
         {

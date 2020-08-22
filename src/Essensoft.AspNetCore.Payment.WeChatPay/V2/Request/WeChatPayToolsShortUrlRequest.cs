@@ -15,7 +15,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
 
         #region IWeChatPayRequest Members
 
-        private string requestUrl ="https://api.mch.weixin.qq.com/tools/shorturl";
+        private string requestUrl = "https://api.mch.weixin.qq.com/tools/shorturl";
 
         public string GetRequestUrl()
         {

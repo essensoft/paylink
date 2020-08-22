@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
 
         #region IWeChatPayRequest Members
 
-        private string requestUrl ="https://api.mch.weixin.qq.com/pay/orderquery";
+        private string requestUrl = "https://api.mch.weixin.qq.com/pay/orderquery";
 
         public string GetRequestUrl()
         {
