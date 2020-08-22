@@ -55,7 +55,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
 
         #region IWeChatPayCertificateRequest Members
 
-        private string requestUrl ="https://api.mch.weixin.qq.com/secapi/pay/refund";
+        private string requestUrl = "https://api.mch.weixin.qq.com/secapi/pay/refund";
 
         public string GetRequestUrl()
         {

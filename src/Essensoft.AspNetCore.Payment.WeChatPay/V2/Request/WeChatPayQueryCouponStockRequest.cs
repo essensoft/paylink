@@ -35,7 +35,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
 
         #region IWeChatPayRequest Members
 
-        private string requestUrl ="https://api.mch.weixin.qq.com/mmpaymkttransfers/query_coupon_stock";
+        private string requestUrl = "https://api.mch.weixin.qq.com/mmpaymkttransfers/query_coupon_stock";
 
         public string GetRequestUrl()
         {

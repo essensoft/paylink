@@ -60,7 +60,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
 
         #region IWeChatPayCertificateRequest Members
 
-        private string requestUrl ="https://api.mch.weixin.qq.com/mmpaymkttransfers/sendworkwxredpack";
+        private string requestUrl = "https://api.mch.weixin.qq.com/mmpaymkttransfers/sendworkwxredpack";
 
         public string GetRequestUrl()
         {

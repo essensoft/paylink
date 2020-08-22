@@ -84,7 +84,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
 
         #region IWeChatPayRequest Members
 
-        private string requestUrl ="https://api.mch.weixin.qq.com/deposit/facepay";
+        private string requestUrl = "https://api.mch.weixin.qq.com/deposit/facepay";
 
         public string GetRequestUrl()
         {

@@ -17,7 +17,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
         /// 设置请求接口地址
         /// </summary>
         void SetRequestUrl(string url);
-        
+
         /// <summary>
         /// 获取文本请求参数字典
         /// </summary>
