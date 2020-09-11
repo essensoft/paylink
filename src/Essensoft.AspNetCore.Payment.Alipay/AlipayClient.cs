@@ -560,10 +560,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         private string BuildHtmlRequest(IDictionary<string, string> dictionary, string serverUrl, string strMethod)
         {
             var sb = new StringBuilder();
-            sb.Append($"<form id='submit' name='submit' action='{serverUrl}' method='{strMethod}' accept-charset='UTF-8' style='display:none;'>");
+            sb.Append($"<form id='submit' name='submit' action='{serverUrl}?charset=utf-8' method='{strMethod}' style='display:none;'>");
             foreach (var iter in dictionary)
             {
-                sb.Append("<input  name='" + iter.Key + "' value='" + iter.Value + "'/>");
+                sb.Append($"<input name='{iter.Key}' value='{iter.Value}'/>");
             }
             sb.Append("<input type='submit' style='display:none;'></form>");
             sb.Append("<script>document.forms['submit'].submit();</script>");
