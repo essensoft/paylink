@@ -28,8 +28,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
                 {
                     if (builder.Name.Contains(WeChatPayClient.Prefix))
                     {
-                        var hash = builder.Name.RemovePreFix(WeChatPayClient.Prefix);
-                        if (_clientCertificateManager.TryGetValue(hash, out var clientCertificate))
+                        var certificateSerialNo = builder.Name.RemovePreFix(WeChatPayClient.Prefix);
+                        if (_clientCertificateManager.TryGetValue(certificateSerialNo, out var clientCertificate))
                         {
                             handler.ClientCertificates.Add(clientCertificate);
                         }
