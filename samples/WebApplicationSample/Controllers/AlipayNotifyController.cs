@@ -80,9 +80,9 @@ namespace WebApplicationSample.Controllers
                             var notify = await _client.CertificateExecuteAsync<AlipayTradeSettleSuccessNotify>(Request, _optionsAccessor.Value);
                             return AlipayNotifyResult.Success;
                         }
+                    default:
+                        return AlipayNotifyResult.Failure;
                 }
-
-                return AlipayNotifyResult.Failure;
             }
             catch
             {
