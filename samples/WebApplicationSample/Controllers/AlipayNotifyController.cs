@@ -100,14 +100,16 @@ namespace WebApplicationSample.Controllers
             try
             {
                 var notify = await _client.CertificateExecuteAsync<AlipayTradePrecreateNotify>(Request, _optionsAccessor.Value);
-                if (notify.TradeStatus == AlipayTradeStatus.Success)
+                switch (notify.TradeStatus)
                 {
-                    Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
-
-                    return AlipayNotifyResult.Success;
+                    case AlipayTradeStatus.Wait: // 等待付款
+                        return AlipayNotifyResult.Success;
+                    case AlipayTradeStatus.Success: // 支付成功
+                        Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
+                        return AlipayNotifyResult.Success;
+                    default:
+                        return AlipayNotifyResult.Failure;
                 }
-
-                return AlipayNotifyResult.Failure;
             }
             catch
             {
