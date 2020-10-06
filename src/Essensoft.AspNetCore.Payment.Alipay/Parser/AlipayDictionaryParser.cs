@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text.Encodings.Web;
 using System.Text.Json;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 {
     public static class AlipayDictionaryParser
     {
-        private static readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
-
         public static T Parse<T>(IDictionary<string, string> dictionary) where T : AlipayObject
         {
             if (dictionary == null || dictionary.Count == 0)
@@ -20,8 +17,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
             try
             {
-                var jsonText = JsonSerializer.Serialize(dictionary, jsonSerializerOptions);
-                result = JsonSerializer.Deserialize<T>(jsonText, jsonSerializerOptions);
+                var jsonText = JsonSerializer.Serialize(dictionary, JsonParser.JsonSerializerOptions);
+                result = JsonSerializer.Deserialize<T>(jsonText, JsonParser.JsonSerializerOptions);
             }
             catch { }
 
