@@ -687,8 +687,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         #region Model Serialize
 
-        private static readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
-
         private AlipayDictionary SerializeBizModel<T>(AlipayDictionary requestParams, IAlipayRequest<T> request) where T : AlipayResponse
         {
             var result = requestParams;
@@ -696,7 +694,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             var bizModel = request.GetBizModel();
             if (isBizContentEmpty && bizModel != null)
             {
-                var content = JsonSerializer.Serialize(bizModel, bizModel.GetType(), jsonSerializerOptions);
+                var content = JsonSerializer.Serialize(bizModel, bizModel.GetType(), JsonParser.JsonSerializerOptions);
                 result.Add(AlipayConstants.BIZ_CONTENT, content);
             }
 
