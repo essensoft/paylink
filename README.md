@@ -53,8 +53,8 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 
 ## 开发环境
 * Windows 10
-* VS 2019 16.6.x
-* .NET Core 3.1
+* VS 2019 16.8.x
+* .NET 5.0
 
 ## 使用方式
 
@@ -85,7 +85,3 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 
 [Varorbc](https://github.com/Varorbc)
 [Alipay](https://github.com/alipay)
-
-## JetBrains
-
-[![JetBrains](img/jetbrains.png)](https://www.jetbrains.com/?from=payment)
