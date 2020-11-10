@@ -27,7 +27,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 
         #region IWeChatPayNotifyClient Members
 
-#if NETCOREAPP3_1
+#if NETCOREAPP3_1 || NET5_0
         public async Task<T> ExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, WeChatPayOptions options) where T : WeChatPayNotify
         {
             if (options == null)
