@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 {
     /// <summary>
     /// APP支付 调起支付
-    /// 最新更新时间：2020.05.26
+    /// 最新更新时间：2020.09.29
     /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_8.shtml
     /// </summary>
     public class WeChatPayAppSdkRequest : IWeChatPaySdkRequest
@@ -53,7 +53,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
             sortedTxtParams.Add(WeChatPayConsts.timestamp, WeChatPayUtility.GetTimeStamp());
 
             var signatureSourceData = BuildSignatureSourceData(sortedTxtParams);
-            sortedTxtParams.Add(WeChatPayConsts.sign, SHA256WithRSA.Sign(options.CertificateRSAPrivateKey, signatureSourceData));
+            sortedTxtParams.Add(WeChatPayConsts.paySign, SHA256WithRSA.Sign(options.CertificateRSAPrivateKey, signatureSourceData));
         }
 
         private static string BuildSignatureSourceData(WeChatPayDictionary sortedTxtParams)
