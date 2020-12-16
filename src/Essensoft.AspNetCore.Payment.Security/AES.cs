@@ -25,7 +25,7 @@ namespace Essensoft.AspNetCore.Payment.Security
 
             using (var aes = Aes.Create())
             {
-                aes.Key = Encoding.UTF8.GetBytes(key);
+                aes.Key = Convert.FromBase64String(key);
                 aes.IV = iv;
                 aes.Mode = cipherMode;
                 aes.Padding = paddingMode;
@@ -57,7 +57,7 @@ namespace Essensoft.AspNetCore.Payment.Security
 
             using (var aes = Aes.Create())
             {
-                aes.Key = Encoding.UTF8.GetBytes(key);
+                aes.Key = Convert.FromBase64String(key);
                 aes.IV = iv;
                 aes.Mode = cipherMode;
                 aes.Padding = paddingMode;
