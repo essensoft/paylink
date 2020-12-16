@@ -97,12 +97,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             string body;
 
             // 是否需要上传文件
-            if (request is IAlipayUploadRequest<T> uploadRequest)
+            if (request is IAlipayUploadRequest<T> uRequest)
             {
-                var fileParams = AlipayUtility.CleanupDictionary(uploadRequest.GetFileParameters());
+                var fileParams = AlipayUtility.CleanupDictionary(uRequest.GetFileParameters());
 
                 var client = _httpClientFactory.CreateClient(nameof(AlipayClient));
-                body = await client.PostAsync(options.ServerUrl, txtParams, fileParams);
+                body = await client.PostAsync(options.ServerUrl + "?" + AlipayConstants.CHARSET + "=" + options.Charset, txtParams, fileParams);
             }
             else
             {
@@ -160,7 +160,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 throw new ArgumentNullException(nameof(options));
             }
 
-            if (!string.IsNullOrEmpty(options.AppCert) || !string.IsNullOrEmpty(options.AlipayPublicCert)|| !string.IsNullOrEmpty(options.AlipayRootCert))
+            if (!string.IsNullOrEmpty(options.AppCert) || !string.IsNullOrEmpty(options.AlipayPublicCert) || !string.IsNullOrEmpty(options.AlipayRootCert))
             {
                 throw new AlipayException("检测到证书相关参数已初始化，证书模式下请改为调用CertificateExecuteAsync。");
             }
@@ -261,11 +261,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             {
                 var fileParams = AlipayUtility.CleanupDictionary(uRequest.GetFileParameters());
 
-                body = await client.PostAsync(options.ServerUrl, txtParams, fileParams);
+                body = await client.PostAsync(options.ServerUrl + "?" + AlipayConstants.CHARSET + "=" + options.Charset, txtParams, fileParams);
             }
             else
             {
-                body = await client.PostAsync(options.ServerUrl, txtParams);
+                body = await client.PostAsync(options.ServerUrl + "?" + AlipayConstants.CHARSET + "=" + options.Charset, txtParams);
             }
 
             var parser = new AlipayJsonParser<T>();
@@ -441,11 +441,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             {
                 var fileParams = AlipayUtility.CleanupDictionary(uRequest.GetFileParameters());
 
-                body = await client.PostAsync(options.ServerUrl, txtParams, fileParams);
+                body = await client.PostAsync(options.ServerUrl + "?" + AlipayConstants.CHARSET + "=" + options.Charset, txtParams, fileParams);
             }
             else
             {
-                body = await client.PostAsync(options.ServerUrl, txtParams);
+                body = await client.PostAsync(options.ServerUrl + "?" + AlipayConstants.CHARSET + "=" + options.Charset, txtParams);
             }
 
             var parser = new AlipayJsonParser<T>();
