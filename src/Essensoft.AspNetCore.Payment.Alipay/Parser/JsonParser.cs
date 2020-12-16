@@ -1,5 +1,6 @@
 ﻿using System.Text.Encodings.Web;
 using System.Text.Json;
+using Essensoft.AspNetCore.Payment.Alipay.Parser.JsonConverters;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 {
@@ -9,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
         static JsonParser()
         {
-            JsonSerializerOptions.Converters.Add(new StringConverter());
+            JsonSerializerOptions.Converters.Add(new NumberToStringConverter());
         }
     }
 }
