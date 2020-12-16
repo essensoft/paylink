@@ -22,7 +22,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             {
                 if (!string.IsNullOrEmpty(iter.Value))
                 {
-                    sb.Append(iter.Key).Append("=").Append(iter.Value).Append("&");
+                    sb.Append(iter.Key).Append('=').Append(iter.Value).Append('&');
                 }
             }
 
@@ -52,6 +52,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         public static string AESEncrypt(string data, string encyptKey)
         {
             return AES.Encrypt(data, encyptKey, AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
+        }
+
+        public static string AESDencrypt(string data, string encyptKey)
+        {
+            return AES.Decrypt(data, encyptKey, AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
         }
 
         private static byte[] InitIv(int blockSize)
