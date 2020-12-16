@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
     public class AlipayOpenAgentMiniCreateRequest : IAlipayUploadRequest<AlipayOpenAgentMiniCreateResponse>
     {
         /// <summary>
-        /// 小程序应用类目，参数格式：一级类目_二级类目。  应用类目参考文档：https://docs.alipay.com/isv/10325
+        /// 小程序类目，必填，可以支持最多三个类目，最少一个，参数格式：一级类目1_二级类目1;一级类目2_二级类目2。 类目可以通过以下接口查询：alipay.open.mini.category.query
         /// </summary>
         public string AppCategoryIds { get; set; }
 
@@ -43,6 +43,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// ISV 代商家操作事务编号，通过事务开启接口alipay.open.agent.create调用返回。
         /// </summary>
         public string BatchNo { get; set; }
+
+        /// <summary>
+        /// 新小程序前台类目，格式为 第一个一级类目_第一个二级类目;第二个一级类目_第二个二级类目_第二个三级类目，详细类目可以通过 https://docs.open.alipay.com/api_49/alipay.open.mini.category.query接口查询mini_category_list。使用后不再读取app_category_ids值，老前台类目将废弃 
+        /// </summary>
+        public string MiniCategoryIds { get; set; }
 
         /// <summary>
         /// 商家小程序客服邮箱  商家小程序客服电话和邮箱，可以二选一填写，但不能同时为空
@@ -150,6 +155,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
                 { "app_name", AppName },
                 { "app_slogan", AppSlogan },
                 { "batch_no", BatchNo },
+                { "mini_category_ids", MiniCategoryIds },
                 { "service_email", ServiceEmail },
                 { "service_phone", ServicePhone }
             };

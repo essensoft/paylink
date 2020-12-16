@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayOpenMiniCategoryQueryModel : AlipayObject
     {
         /// <summary>
-        /// 是否需要过滤不可用类目
+        /// 是否过滤小程序不可用类目
         /// </summary>
         [JsonPropertyName("is_filter")]
         public bool IsFilter { get; set; }

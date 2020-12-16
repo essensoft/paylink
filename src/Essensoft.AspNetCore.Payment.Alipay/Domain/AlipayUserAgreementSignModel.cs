@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -56,6 +57,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ExternalLogonId { get; set; }
 
         /// <summary>
+        /// 业务透传参数
+        /// </summary>
+        [JsonPropertyName("pass_params")]
+        public string PassParams { get; set; }
+
+        /// <summary>
+        /// 周期管控规则参数period_rule_params，在签约周期扣款产品（如CYCLE_PAY_AUTH_P）时必传，在签约其他产品时无需传入。 周期扣款产品，会按照这里传入的参数提示用户，并对发起扣款的时间、金额、次数等做相应限制。
+        /// </summary>
+        [JsonPropertyName("period_rule_params")]
+        public PeriodRuleParams PeriodRuleParams { get; set; }
+
+        /// <summary>
         /// 个人签约产品码，商户和支付宝签约时确定，商户可咨询技术支持。
         /// </summary>
         [JsonPropertyName("personal_product_code")]
@@ -96,6 +109,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("sign_validity_period")]
         public string SignValidityPeriod { get; set; }
+
+        /// <summary>
+        /// 商户希望该协议在代扣支付时指定使用的资产列表，如指定只能使用余额支付
+        /// </summary>
+        [JsonPropertyName("specified_channel")]
+        public List<SpecifiedChannelParam> SpecifiedChannel { get; set; }
 
         /// <summary>
         /// 此参数用于传递子商户信息，目前商户代扣、海外代扣、淘旅行信用住产品支持传入该参数(销售方案中是否允许自定义子商户信息选是)；  目前支持四个key值：  sub_merchant_id (子商户id)  sub_merchant_name (子商户名称)  sub_merchant_service_name (子商户服务名称)  sub_merchant_service_description (子商户服务描述)

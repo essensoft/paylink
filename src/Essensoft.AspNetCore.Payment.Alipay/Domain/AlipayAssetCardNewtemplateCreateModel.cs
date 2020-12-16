@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -97,5 +98,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("settle_user_id")]
         public string SettleUserId { get; set; }
+
+        /// <summary>
+        /// 商户资金签约主体
+        /// </summary>
+        [JsonPropertyName("sign_principal")]
+        public string SignPrincipal { get; set; }
     }
 }

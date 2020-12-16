@@ -56,6 +56,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutBizNo { get; set; }
 
         /// <summary>
+        /// 当需要指定奖品抽奖的时候传入
+        /// </summary>
+        [JsonPropertyName("prize_id")]
+        public string PrizeId { get; set; }
+
+        /// <summary>
+        /// 淘宝账号
+        /// </summary>
+        [JsonPropertyName("taobao_id")]
+        public string TaobaoId { get; set; }
+
+        /// <summary>
         /// 支付宝用户uid：支付宝用户唯一标识。该参数用于已知支付宝账号的活动触发。user_id、login_id、bind_mobile三个参数至少有一个非空。
         /// </summary>
         [JsonPropertyName("user_id")]

@@ -20,5 +20,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonPropertyName("tree_datas")]
         public List<TreeData> TreeDatas { get; set; }
+
+        /// <summary>
+        /// 种树详细信息
+        /// </summary>
+        [JsonPropertyName("tree_detail_data")]
+        public List<TreeDetailData> TreeDetailData { get; set; }
     }
 }

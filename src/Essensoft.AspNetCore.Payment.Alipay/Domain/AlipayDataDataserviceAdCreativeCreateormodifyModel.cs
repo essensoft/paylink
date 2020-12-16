@@ -21,6 +21,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ActionType { get; set; }
 
         /// <summary>
+        /// 转化监控URL，如留资等
+        /// </summary>
+        [JsonPropertyName("action_url")]
+        public string ActionUrl { get; set; }
+
+        /// <summary>
+        /// 创意补充资质
+        /// </summary>
+        [JsonPropertyName("attachment_list")]
+        public List<OuterAttachment> AttachmentList { get; set; }
+
+        /// <summary>
         /// 创意分组标识，多个创意可按业务逻辑标识为一个分组
         /// </summary>
         [JsonPropertyName("batch_tag")]
@@ -31,6 +43,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("biz_token")]
         public string BizToken { get; set; }
+
+        /// <summary>
+        /// 点击监控URL
+        /// </summary>
+        [JsonPropertyName("click_track_url")]
+        public string ClickTrackUrl { get; set; }
 
         /// <summary>
         /// 外部平台导入广告库后，广告投放创意对应的外部资源ID
@@ -49,6 +67,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("group_outer_id")]
         public string GroupOuterId { get; set; }
+
+        /// <summary>
+        /// 展现监控URL
+        /// </summary>
+        [JsonPropertyName("impression_track_url")]
+        public string ImpressionTrackUrl { get; set; }
 
         /// <summary>
         /// 门店LBS信息，目前仅口碑使用，格式为：经度:纬度:半径(单位:KM,无半径限制直接设置为0)

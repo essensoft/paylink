@@ -86,6 +86,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string MiniAppId { get; set; }
 
         /// <summary>
+        /// 新小程序前台类目，格式为 第一个一级类目_第一个二级类目;第二个一级类目_第二个二级类目_第二个三级类目，详细类目可以通过 https://docs.open.alipay.com/api_49/alipay.open.mini.category.query接口查询mini_category_list，如果不填默认采用当前小程序应用类目。使用默认应用类目后不需要再次上传营业执照号、营业执照名、营业执照截图、营业执照有效期。使用后不再读取app_category_ids值，老前台类目将废弃
+        /// </summary>
+        [JsonPropertyName("mini_category_ids")]
+        public string MiniCategoryIds { get; set; }
+
+        /// <summary>
         /// 小程序开发者ID，可不传，不传取基础信息中的小程序开发者ID
         /// </summary>
         [JsonPropertyName("pid")]

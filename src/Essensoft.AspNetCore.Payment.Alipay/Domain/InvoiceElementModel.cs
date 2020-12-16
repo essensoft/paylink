@@ -15,6 +15,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ExpenseStatus { get; set; }
 
         /// <summary>
+        /// 扩展字段
+        /// </summary>
+        [JsonPropertyName("extend_fields")]
+        public string ExtendFields { get; set; }
+
+        /// <summary>
         /// 发票是否有pdf文件
         /// </summary>
         [JsonPropertyName("has_pdf_file")]
@@ -27,7 +33,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public bool HasRisk { get; set; }
 
         /// <summary>
-        /// 发票金额
+        /// 发票金额，含税
         /// </summary>
         [JsonPropertyName("invoice_amount")]
         public string InvoiceAmount { get; set; }
@@ -93,6 +99,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string MName { get; set; }
 
         /// <summary>
+        /// 发票金额，不含税
+        /// </summary>
+        [JsonPropertyName("out_tax_amount")]
+        public string OutTaxAmount { get; set; }
+
+        /// <summary>
         /// 销方名称
         /// </summary>
         [JsonPropertyName("payee_name")]
@@ -121,6 +133,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("pdf_url")]
         public string PdfUrl { get; set; }
+
+        /// <summary>
+        /// 表示发票来源，由发票回传方带入。例如：bz_gd，bz_ele，bz_tmall等
+        /// </summary>
+        [JsonPropertyName("source")]
+        public string Source { get; set; }
 
         /// <summary>
         /// 该发票对应的交易

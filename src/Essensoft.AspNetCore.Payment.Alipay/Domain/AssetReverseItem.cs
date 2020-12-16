@@ -74,6 +74,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OriginalApplyOrderItemId { get; set; }
 
         /// <summary>
+        /// 原配送单id
+        /// </summary>
+        [JsonPropertyName("original_deliver_order_id")]
+        public string OriginalDeliverOrderId { get; set; }
+
+        /// <summary>
+        /// 原配送明细id
+        /// </summary>
+        [JsonPropertyName("original_deliver_order_item_id")]
+        public string OriginalDeliverOrderItemId { get; set; }
+
+        /// <summary>
         /// 原配送单物料号
         /// </summary>
         [JsonPropertyName("original_delivery_assign_item_id")]
@@ -96,6 +108,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("ou_name")]
         public string OuName { get; set; }
+
+        /// <summary>
+        /// 逆向申请单ID
+        /// </summary>
+        [JsonPropertyName("reverse_apply_order_id")]
+        public string ReverseApplyOrderId { get; set; }
+
+        /// <summary>
+        /// 逆向申请单明细ID
+        /// </summary>
+        [JsonPropertyName("reverse_apply_order_item_id")]
+        public string ReverseApplyOrderItemId { get; set; }
 
         /// <summary>
         /// 逆向类型

@@ -34,6 +34,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string GmtRefundPay { get; set; }
 
         /// <summary>
+        /// 是否有银行卡冲退
+        /// </summary>
+        [JsonPropertyName("has_deposit_back")]
+        public string HasDepositBack { get; set; }
+
+        /// <summary>
         /// 买家支付宝用户号，该参数已废弃，请不要使用
         /// </summary>
         [JsonPropertyName("open_id")]

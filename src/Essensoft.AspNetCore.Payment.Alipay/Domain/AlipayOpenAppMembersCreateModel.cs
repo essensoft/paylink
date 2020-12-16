@@ -8,13 +8,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayOpenAppMembersCreateModel : AlipayObject
     {
         /// <summary>
-        /// 支付宝登录账号ID
+        /// 支付宝登录账号。
         /// </summary>
         [JsonPropertyName("logon_id")]
         public string LogonId { get; set; }
 
         /// <summary>
-        /// 成员的角色类型，DEVELOPER-开发者，EXPERIENCER-体验者
+        /// 为成员添加的角色类型，支持： DEVELOPER-开发者； EXPERIENCER-体验者。
         /// </summary>
         [JsonPropertyName("role")]
         public string Role { get; set; }

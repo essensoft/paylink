@@ -171,6 +171,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string TaxAmount { get; set; }
 
         /// <summary>
+        /// 交易内容，非必填但是不可以传空值，如果无需回传trade_list则不需要传该对象
+        /// </summary>
+        [JsonPropertyName("trade_list")]
+        public List<EinvTrade> TradeList { get; set; }
+
+        /// <summary>
         /// 支付宝用户userId，当发送红字发票时，即invoice_type＝RED时，可选填；或者apply_id不为空的时候，可选填；其他情况必填。
         /// </summary>
         [JsonPropertyName("user_id")]

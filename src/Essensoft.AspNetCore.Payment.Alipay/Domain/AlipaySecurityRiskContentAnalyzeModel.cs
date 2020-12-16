@@ -81,6 +81,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Text { get; set; }
 
         /// <summary>
+        /// 文本类型
+        /// </summary>
+        [JsonPropertyName("text_type")]
+        public string TextType { get; set; }
+
+        /// <summary>
         /// 进行识别的视频地址列表
         /// </summary>
         [JsonPropertyName("video_urls")]

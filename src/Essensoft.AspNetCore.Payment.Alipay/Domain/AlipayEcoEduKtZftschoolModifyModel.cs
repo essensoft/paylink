@@ -45,7 +45,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string CertNo { get; set; }
 
         /// <summary>
-        /// 商户证件类型，取值范围：201：营业执照；2011:营业执照(统一社会信用代码)；218：事业单位法人证书
+        /// 商户证件类型，201：营业执照；204 民办非企业单位登记证书；2011:营业执照(统一社会信用代码)；218：事业单位法人证书。   对应merchant_type规则，可参考： 01对应201或2011； 02对应218 办学许可证、事业单位法人证书、办园许可证、学前教育机构登记证、登记注册合格证； 03对应204 民办非企业单位登记证书  07对应 201 或 2011 
         /// </summary>
         [JsonPropertyName("cert_type")]
         public string CertType { get; set; }
@@ -105,7 +105,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Mcc { get; set; }
 
         /// <summary>
-        /// 商家类型：01：企业；02：事业单位；07：个体工商户
+        /// 商家类型：01：企业；02：事业单位；03：民办非企业组织，07：个体工商户。   对应cert_type规则，可参考： 01对应201或2011； 02对应218 办学许可证、事业单位法人证书、办园许可；证、学前教育机构登记证、登记注册合格证 03对应204 民办非企业单位登记证书； 07对应 201 或 2011
         /// </summary>
         [JsonPropertyName("merchant_type")]
         public string MerchantType { get; set; }

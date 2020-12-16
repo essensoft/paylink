@@ -10,6 +10,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     public class AlipayTradeFastpayRefundQueryResponse : AlipayResponse
     {
         /// <summary>
+        /// 银行卡冲退信息
+        /// </summary>
+        [JsonPropertyName("deposit_back_info")]
+        public DepositBackInfo DepositBackInfo { get; set; }
+
+        /// <summary>
         /// 退款失败错误码。只在使用异步退款接口情况下才会返回该字段
         /// </summary>
         [JsonPropertyName("error_code")]

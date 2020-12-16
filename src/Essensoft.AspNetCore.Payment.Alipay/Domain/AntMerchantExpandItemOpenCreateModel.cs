@@ -21,7 +21,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<ItemExtInfo> ExtInfo { get; set; }
 
         /// <summary>
-        /// 素材列表（最多3个）
+        /// 素材列表（最多3个），素材内容为素材key（素材key获取方式参照：https://opendocs.alipay.com/apis/api_4/alipay.merchant.item.file.upload）
         /// </summary>
         [JsonPropertyName("material_list")]
         public List<MaterialCreateInfo> MaterialList { get; set; }
@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<ItemPropertyInfo> PropertyList { get; set; }
 
         /// <summary>
-        /// 场景码（具体值请参见产品文档）
+        /// 场景码（小程序商品：APP_ORDER）
         /// </summary>
         [JsonPropertyName("scene")]
         public string Scene { get; set; }
@@ -51,7 +51,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<SkuCreateInfo> SkuList { get; set; }
 
         /// <summary>
-        /// 商品所属标准类目ID（具体值请参见产品文档）
+        /// 商品所属标准类目ID（参考：https://opendocs.alipay.com/mini/011lxt）
         /// </summary>
         [JsonPropertyName("standard_category_id")]
         public string StandardCategoryId { get; set; }

@@ -8,6 +8,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class MybankCreditSceneprodLoanQueryModel : AlipayObject
     {
         /// <summary>
+        /// 网商申请单号
+        /// </summary>
+        [JsonPropertyName("app_seq_no")]
+        public string AppSeqNo { get; set; }
+
+        /// <summary>
         /// 机构编码，机构接入场景金融平台时分配，固定值
         /// </summary>
         [JsonPropertyName("org_code")]

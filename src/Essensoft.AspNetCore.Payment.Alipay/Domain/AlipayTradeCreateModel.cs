@@ -141,7 +141,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public SubMerchant SubMerchant { get; set; }
 
         /// <summary>
-        /// 订单标题
+        /// 商品标题/交易标题/订单标题/订单关键字等。 注意：不可使用特殊字符，如 /，=，& 等。
         /// </summary>
         [JsonPropertyName("subject")]
         public string Subject { get; set; }

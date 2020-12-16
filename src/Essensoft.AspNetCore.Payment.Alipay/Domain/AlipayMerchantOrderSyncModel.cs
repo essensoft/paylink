@@ -111,6 +111,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string SellerId { get; set; }
 
         /// <summary>
+        /// 是否需要小程序订单代理发送模版消息，Y代表需要发送，N代表不需要发送，不传默认不发送
+        /// </summary>
+        [JsonPropertyName("send_msg")]
+        public string SendMsg { get; set; }
+
+        /// <summary>
         /// 门店信息
         /// </summary>
         [JsonPropertyName("shop_info")]

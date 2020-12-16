@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -17,7 +18,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// 结果
         /// </summary>
         [JsonPropertyName("data")]
-        public MetroOdItem Data { get; set; }
+        public List<MetroOdItem> Data { get; set; }
 
         /// <summary>
         /// 消息描述

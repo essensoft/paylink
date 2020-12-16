@@ -67,7 +67,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 定向开放场景中，可能同时支持多个业务场景，允许各业务场景自定义个性化提交的数据。数据格式请提前与业务接口人确定
         /// </summary>
         [JsonPropertyName("extra_info")]
-        public FixExtData ExtraInfo { get; set; }
+        public List<FixExtData> ExtraInfo { get; set; }
 
         /// <summary>
         /// 工单中包含的文件信息，可以通过download_url下载到文件内容

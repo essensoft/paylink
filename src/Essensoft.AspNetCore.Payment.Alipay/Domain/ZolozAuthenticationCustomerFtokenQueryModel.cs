@@ -24,5 +24,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("ftoken")]
         public string Ftoken { get; set; }
+
+        /// <summary>
+        /// 刷脸初始化流程中产生的zimId值
+        /// </summary>
+        [JsonPropertyName("zim_id")]
+        public string ZimId { get; set; }
     }
 }

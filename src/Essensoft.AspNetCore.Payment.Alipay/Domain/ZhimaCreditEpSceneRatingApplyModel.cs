@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class ZhimaCreditEpSceneRatingApplyModel : AlipayObject
     {
         /// <summary>
-        /// 发起申请的环境，支持以下值：  PC：PC端浏览器,  ALIPAY_H5，支付宝移动端H5,  XIAOCHENGXU:支付宝小程序,  MINIAPP:小程序JSAPI调用方式  默认ALIPAY_H5
+        /// 发起申请的环境，支持以下值： PC：PC端浏览器, ALIPAY_H5，支付宝移动端H5, XIAOCHENGXU:支付宝小程序,  MINIAPP:小程序JSAPI调用方式 默认ALIPAY_H5
         /// </summary>
         [JsonPropertyName("apply_environment")]
         public string ApplyEnvironment { get; set; }

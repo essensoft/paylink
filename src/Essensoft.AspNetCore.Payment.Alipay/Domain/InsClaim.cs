@@ -55,5 +55,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("reject_reason")]
         public string RejectReason { get; set; }
+
+        /// <summary>
+        /// 流水号
+        /// </summary>
+        [JsonPropertyName("trade_no")]
+        public string TradeNo { get; set; }
     }
 }

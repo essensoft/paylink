@@ -43,5 +43,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("transaction_id")]
         public string TransactionId { get; set; }
+
+        /// <summary>
+        /// 用户uid
+        /// </summary>
+        [JsonPropertyName("uid")]
+        public string Uid { get; set; }
     }
 }

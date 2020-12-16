@@ -38,7 +38,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public bool NeedOutDoorPic { get; set; }
 
         /// <summary>
-        /// 是否需要营业执照
+        /// 是否需要特许营业执照
         /// </summary>
         [JsonPropertyName("need_special_license")]
         public bool NeedSpecialLicense { get; set; }

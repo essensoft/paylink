@@ -63,6 +63,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ExtInfo { get; set; }
 
         /// <summary>
+        /// 物料商品ID
+        /// </summary>
+        [JsonPropertyName("item_mall_id")]
+        public string ItemMallId { get; set; }
+
+        /// <summary>
         /// 备注
         /// </summary>
         [JsonPropertyName("memo")]

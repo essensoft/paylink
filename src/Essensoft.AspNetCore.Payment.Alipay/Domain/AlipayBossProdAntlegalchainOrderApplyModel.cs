@@ -15,6 +15,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BizCode { get; set; }
 
         /// <summary>
+        /// 关联业务名称
+        /// </summary>
+        [JsonPropertyName("biz_name")]
+        public string BizName { get; set; }
+
+        /// <summary>
         /// 业务数据请求唯一标识,唯一
         /// </summary>
         [JsonPropertyName("biz_unique_id")]
@@ -103,6 +109,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("request_token")]
         public string RequestToken { get; set; }
+
+        /// <summary>
+        /// 签约顺序, 1表示我方先签约; 2表示对方先签约. （可传，若不传，默认值为1，即“我方先签约”）
+        /// </summary>
+        [JsonPropertyName("sign_order")]
+        public long SignOrder { get; set; }
 
         /// <summary>
         /// 发起签约时间/我方签约时间

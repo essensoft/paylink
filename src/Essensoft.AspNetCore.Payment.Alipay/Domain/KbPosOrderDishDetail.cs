@@ -69,7 +69,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public long DishVersion { get; set; }
 
         /// <summary>
-        /// 扩展信息，json对象格式，key和value都为字符串。目前包含内容为1、outItemId表示外部菜品id，2、outSkuId外部菜品sku id，3、defaultInCarts开台必点菜。4、cookVersion菜谱版本
+        /// 扩展信息，json对象格式，key和value都为字符串。目前包含内容为1、outItemId表示外部菜品id，2、outSkuId外部菜品sku id，3、defaultInCarts开台必点菜。4、cookVersion菜谱版本，5、costInclusive 是否包含在套餐基础价；6、costPrice 原价(以元为单位，精度到分)；7、groupSort：套餐分组排序值；8、isProperty：加料是否为属性字段，值为true／false；
         /// </summary>
         [JsonPropertyName("ext_info")]
         public string ExtInfo { get; set; }

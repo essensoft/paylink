@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -60,5 +62,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonPropertyName("sign_validity")]
         public long SignValidity { get; set; }
+
+        /// <summary>
+        /// 签署人列表及签署状态
+        /// </summary>
+        [JsonPropertyName("signers")]
+        public List<FlowSigner> Signers { get; set; }
     }
 }

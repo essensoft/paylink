@@ -39,10 +39,10 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<FixExtData> Extra { get; set; }
 
         /// <summary>
-        /// 如果工单包含图片等附件信息，首先通过文件上传接口进行文件上传，并从接口返回中获得id。此处构造的FixFileInfo对象只需包含id即可。
+        /// 如果工单包含图片等附件信息，首先通过文件上传接口进行文件上传，并从接口返回中获得id。此处构造的fileIds多个之间用英文","分隔。
         /// </summary>
-        [JsonPropertyName("files")]
-        public List<FixFileInfo> Files { get; set; }
+        [JsonPropertyName("file_ids")]
+        public string FileIds { get; set; }
 
         /// <summary>
         /// 特殊场景下需要直接指定任务处理方时使用（非必须）。 通常需要和问题分类id配合使用。

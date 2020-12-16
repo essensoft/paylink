@@ -8,6 +8,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class QueryRecord : AlipayObject
     {
         /// <summary>
+        /// 区块在账本中的数据地址
+        /// </summary>
+        [JsonPropertyName("block_addr")]
+        public string BlockAddr { get; set; }
+
+        /// <summary>
+        /// 上链内容所在区块高度
+        /// </summary>
+        [JsonPropertyName("block_height")]
+        public string BlockHeight { get; set; }
+
+        /// <summary>
         /// 企业编号
         /// </summary>
         [JsonPropertyName("corp_code")]
@@ -18,6 +30,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("corp_name")]
         public string CorpName { get; set; }
+
+        /// <summary>
+        /// 上链状态  SYNCHING：上链中；SYNCHED：上链完成
+        /// </summary>
+        [JsonPropertyName("notary_status")]
+        public string NotaryStatus { get; set; }
 
         /// <summary>
         /// 操作人(经办人/实际签约人)姓名
@@ -48,5 +66,17 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("sign_type_code")]
         public string SignTypeCode { get; set; }
+
+        /// <summary>
+        /// 上链时间
+        /// </summary>
+        [JsonPropertyName("syn_time")]
+        public string SynTime { get; set; }
+
+        /// <summary>
+        /// 签约步骤上链哈希值
+        /// </summary>
+        [JsonPropertyName("tx_hash_code")]
+        public string TxHashCode { get; set; }
     }
 }

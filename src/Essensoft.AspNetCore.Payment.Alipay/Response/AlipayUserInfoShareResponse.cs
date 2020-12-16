@@ -34,13 +34,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string BusinessScope { get; set; }
 
         /// <summary>
-        /// 【证件号码】结合证件类型使用. 【注意】只有is_certified为T的时候才有意义，否则不保证准确性.
+        /// 【证件号码】结合证件类型使用.【注意】只is_certified为T的时候才有意义，否则不保证准确性.
         /// </summary>
         [JsonPropertyName("cert_no")]
         public string CertNo { get; set; }
 
         /// <summary>
-        /// 【证件类型】 0:身份证 1:护照 2:军官证 3:士兵证 4:回乡证 5:临时身份证 6:户口簿 7:警官证 8:台胞证 9:营业执照 10:其它证件 11:港澳居民来往内地通行证 12:台湾居民来往大陆通行证 【注意】只有is_certified为T的时候才有意义，否则不保证准确性.
+        /// 【证件类型】0:身份证 1:护照 2:军官证 3:士兵证 4:回乡证 5:临时身份证 6:户口簿 7:警官证 8:台胞证 9:营业执照10:其它证件 11:港澳居民来往内地通行证 12:台湾居民来往大陆通行证 13:台湾居民居住证 14:港澳居民居住证  15:港澳身份证【注意】只有is_certified为T的时候才有意义，否则不保证准确性.
         /// </summary>
         [JsonPropertyName("cert_type")]
         public string CertType { get; set; }
@@ -274,7 +274,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string UserId { get; set; }
 
         /// <summary>
-        /// 若用户是个人用户，则是用户的真实姓名；若是企业用户，则是企业名称。 【注意】只有is_certified为T的时候才有意义，否则不保证准确性.
+        /// 若用户是个人用户，则是用户的真实姓名；若是企业用户，则是企业名称。【注意】只有is_certified为T的时候才有意义，否则不保证准确性.
         /// </summary>
         [JsonPropertyName("user_name")]
         public string UserName { get; set; }

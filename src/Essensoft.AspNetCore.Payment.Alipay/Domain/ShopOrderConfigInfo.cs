@@ -39,6 +39,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OrderStatus { get; set; }
 
         /// <summary>
+        /// 预点餐（轻快餐自提）相关设置。若字段为空，表示无需修改。
+        /// </summary>
+        [JsonPropertyName("pre_order_config")]
+        public PreOrderConfigInfo PreOrderConfig { get; set; }
+
+        /// <summary>
         /// 口碑门店ID
         /// </summary>
         [JsonPropertyName("shop_id")]

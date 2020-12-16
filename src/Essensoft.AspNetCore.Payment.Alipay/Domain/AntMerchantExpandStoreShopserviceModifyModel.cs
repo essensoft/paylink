@@ -9,6 +9,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AntMerchantExpandStoreShopserviceModifyModel : AlipayObject
     {
         /// <summary>
+        /// true/false, 是否有效，默认为true
+        /// </summary>
+        [JsonPropertyName("is_valid")]
+        public bool IsValid { get; set; }
+
+        /// <summary>
         /// 测试的场景服务名称
         /// </summary>
         [JsonPropertyName("name")]

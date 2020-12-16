@@ -28,7 +28,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string AuthAppId { get; set; }
 
         /// <summary>
-        /// 应用授权令牌的有效时间（从接口调用时间作为起始时间），单位到秒
+        /// 该字段已作废，应用令牌长期有效，接入方不需要消费该字段
         /// </summary>
         [JsonPropertyName("expires_in")]
         public string ExpiresIn { get; set; }

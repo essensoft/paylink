@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -7,6 +8,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     /// </summary>
     public class PublicMessageInfo : AlipayObject
     {
+        /// <summary>
+        /// 内容信息
+        /// </summary>
+        [JsonPropertyName("articles")]
+        public List<ImageTextItem> Articles { get; set; }
+
         /// <summary>
         /// 消息id
         /// </summary>

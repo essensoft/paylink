@@ -21,7 +21,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BuildAppType { get; set; }
 
         /// <summary>
-        /// 扩展信息，比如adaptorName、tinycliVersion、tinycliName、import-module、allowPrecompile、extJson、allowInstallDependency、aggregationMainAppId
+        /// 扩展信息，比如adaptorName、tinycliVersion、tinycliName、import-module、allowPrecompile、extJson、allowInstallDependency、aggregationMainAppId，如果没有特殊要求，tinycliVersion版本请用最新的： https://registry.npm.alibaba-inc.com/@alipay/tiny-cli/huoban-prod
         /// </summary>
         [JsonPropertyName("build_extra_info")]
         public string BuildExtraInfo { get; set; }
@@ -87,6 +87,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BuildQcloudInfo { get; set; }
 
         /// <summary>
+        /// 已经构建加签过的包地址
+        /// </summary>
+        [JsonPropertyName("build_signed_pkg_url")]
+        public string BuildSignedPkgUrl { get; set; }
+
+        /// <summary>
         /// 源码包大小
         /// </summary>
         [JsonPropertyName("build_source_pkg_size")]
@@ -111,7 +117,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BuildVersion { get; set; }
 
         /// <summary>
-        /// 一个端的标识，用于区分不同的客户端，每接入一个客户端，都需要向小程序应用中心申请bundelId入驻
+        /// 一个端的标识，用于区分不同的客户端，每接入一个客户端，都需要向小程序应用中心申请bundleId入驻
         /// </summary>
         [JsonPropertyName("bundle_id")]
         public string BundleId { get; set; }
@@ -135,7 +141,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string MiniAppId { get; set; }
 
         /// <summary>
-        /// 小程序代码中引用的插件列表，包含插件id和插件版本信息
+        /// 小程序代码中引用的插件列表，包含插件id和插件版本信息，业务方需要自行解析源码包的app.json里面的plugins信息
         /// </summary>
         [JsonPropertyName("plugin_refs")]
         public List<MiniAppPluginReference> PluginRefs { get; set; }

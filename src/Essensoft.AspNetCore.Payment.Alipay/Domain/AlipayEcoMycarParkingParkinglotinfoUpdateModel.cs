@@ -62,6 +62,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string EquipmentName { get; set; }
 
         /// <summary>
+        /// 是否支持电子发票，0-不支持，1支持
+        /// </summary>
+        [JsonPropertyName("is_support_invoice")]
+        public string IsSupportInvoice { get; set; }
+
+        /// <summary>
+        /// ISV电话，传入original_isv_pid、original_isv_appid时，此处为服务商电话
+        /// </summary>
+        [JsonPropertyName("isv_mobile")]
+        public string IsvMobile { get; set; }
+
+        /// <summary>
         /// 该参数废弃
         /// </summary>
         [JsonPropertyName("latitude")]
@@ -78,6 +90,30 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("mchnt_id")]
         public string MchntId { get; set; }
+
+        /// <summary>
+        /// ISV的APPID,服务商调用必传，由ISV提供给服务商
+        /// </summary>
+        [JsonPropertyName("original_isv_appid")]
+        public string OriginalIsvAppid { get; set; }
+
+        /// <summary>
+        /// ISV电话，此值与isv_mobile组合使用
+        /// </summary>
+        [JsonPropertyName("original_isv_mobile")]
+        public string OriginalIsvMobile { get; set; }
+
+        /// <summary>
+        /// ISV的名称，服务商调用必传，由ISV提供给服务商
+        /// </summary>
+        [JsonPropertyName("original_isv_name")]
+        public string OriginalIsvName { get; set; }
+
+        /// <summary>
+        /// ISV的PID，服务商调用必传,由ISV提供给服务商
+        /// </summary>
+        [JsonPropertyName("original_isv_pid")]
+        public string OriginalIsvPid { get; set; }
 
         /// <summary>
         /// 该参数废弃
@@ -102,6 +138,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("parking_fee_description")]
         public string ParkingFeeDescription { get; set; }
+
+        /// <summary>
+        /// 商户在停车平台露出的停车价格图片；注意：该图片为PNG格式内容为BASE64的字符串，大小不要超过1MB
+        /// </summary>
+        [JsonPropertyName("parking_fee_description_img")]
+        public string ParkingFeeDescriptionImg { get; set; }
 
         /// <summary>
         /// 支付宝返回停车场id，系统唯一
@@ -168,6 +210,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("shopingmall_id")]
         public string ShopingmallId { get; set; }
+
+        /// <summary>
+        /// 停车场车位数
+        /// </summary>
+        [JsonPropertyName("sum_space")]
+        public string SumSpace { get; set; }
+
+        /// <summary>
+        /// 是否支持先离后付, Y-支持，N-不支持，默认为空不支持，此参数适用于签约信用代扣的商户
+        /// </summary>
+        [JsonPropertyName("support_after_pay")]
+        public string SupportAfterPay { get; set; }
 
         /// <summary>
         /// 用户支付未离场的超时时间(以分钟为单位)

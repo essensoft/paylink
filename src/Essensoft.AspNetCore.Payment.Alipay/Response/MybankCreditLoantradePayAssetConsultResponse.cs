@@ -16,6 +16,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public List<CreditPayBillAssetVO> BillAssets { get; set; }
 
         /// <summary>
+        /// 担保资产视图，如果未咨询担保资产，可能为空
+        /// </summary>
+        [JsonPropertyName("guarantee_assets")]
+        public List<CreditPayGuaranteeAssetVO> GuaranteeAssets { get; set; }
+
+        /// <summary>
+        /// 引导模型
+        /// </summary>
+        [JsonPropertyName("guide_info")]
+        public CreditPayGuideVO GuideInfo { get; set; }
+
+        /// <summary>
         /// 分期资产视图，如果未咨询分期资产，可能为空
         /// </summary>
         [JsonPropertyName("installment_assets")]

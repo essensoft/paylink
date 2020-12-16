@@ -8,6 +8,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class MiniAppBaseInfoQueryResponse : AlipayObject
     {
         /// <summary>
+        /// 应用别名，简称
+        /// </summary>
+        [JsonPropertyName("app_alias_name")]
+        public string AppAliasName { get; set; }
+
+        /// <summary>
         /// 小程序应用描述
         /// </summary>
         [JsonPropertyName("app_desc")]

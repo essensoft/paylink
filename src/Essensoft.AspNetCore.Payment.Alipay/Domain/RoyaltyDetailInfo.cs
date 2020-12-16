@@ -20,19 +20,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Desc { get; set; }
 
         /// <summary>
-        /// 分账转入账户id。当分账账户id类型是cardSerialNo时，本参数为用户在支付宝绑定的卡编号；当分账账户id类型是userId时，本参数为用户的支付宝账号对应的支付宝唯一用户号；当分账账户id类型是loginName时，本参数为用户的支付宝登录号
+        /// 分账转入账户id。当分账账户id类型是cardSerialNo时，本参数为用户在支付宝绑定的卡编号；当分账账户id类型是userId时，本参数为用户的支付宝账号对应的支付宝唯一用户号；当分账账户id类型是loginName时，本参数为用户的支付宝登录号; 当 trans_in_account_type 为defaultSettle时，本参数必须为空
         /// </summary>
         [JsonPropertyName("trans_in_account_id")]
         public string TransInAccountId { get; set; }
 
         /// <summary>
-        /// 分账转入账户id类型。 当settle_account_type 为bankCard时，本参数为cardSerialNo，表示分账账户id是银行卡编号; 当settle_account_type 为alipayBalance时，本参数为userId或者loginName，其中userId表示分账账户id是支付宝唯一用户号，loginName表示分账账户id是支付宝登录号
+        /// 分账转入账户id类型。 当trans_in_account_type 为bankCard时，本参数为cardSerialNo，表示分账账户id是银行卡编号; 当trans_in_account_type 为alipayBalance时，本参数为userId或者loginName，其中userId表示分账账户id是支付宝唯一用户号，loginName表示分账账户id是支付宝登录号; 当 trans_in_account_type 为 defaultSettle 时，本参数必须为空
         /// </summary>
         [JsonPropertyName("trans_in_account_id_type")]
         public string TransInAccountIdType { get; set; }
 
         /// <summary>
-        /// 分账账 户类型。 bankCard: 分账账户为银行卡； alipayBalance: 分账账户为支付宝余额户
+        /// 分账账户类型。 bankCard: 分账账户为银行卡； alipayBalance: 分账账户为支付宝余额户; defaultSettle: 按默认结算规则分账
         /// </summary>
         [JsonPropertyName("trans_in_account_type")]
         public string TransInAccountType { get; set; }

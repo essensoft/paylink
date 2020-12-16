@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayFundTransUniTransferModel : AlipayObject
     {
         /// <summary>
-        /// 描述特定的业务场景，可传的参数如下： PERSONAL_COLLECTION：C2C现金红包-领红包； DIRECT_TRANSFER：B2C现金红包、单笔无密转账到支付宝/银行卡
+        /// 描述特定的业务场景，可传的参数如下： DIRECT_TRANSFER：单笔无密转账到支付宝/银行卡, B2C现金红包; PERSONAL_COLLECTION：C2C现金红包-领红包
         /// </summary>
         [JsonPropertyName("biz_scene")]
         public string BizScene { get; set; }
@@ -62,7 +62,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public Participant PayerInfo { get; set; }
 
         /// <summary>
-        /// 业务产品码， 收发现金红包固定为：STD_RED_PACKET； 单笔无密转账到支付宝账户固定为：TRANS_ACCOUNT_NO_PWD； 单笔无密转账到银行卡固定为：TRANS_BANKCARD_NO_PWD
+        /// 业务产品码， 单笔无密转账到支付宝账户固定为: TRANS_ACCOUNT_NO_PWD； 单笔无密转账到银行卡固定为: TRANS_BANKCARD_NO_PWD; 收发现金红包固定为: STD_RED_PACKET；
         /// </summary>
         [JsonPropertyName("product_code")]
         public string ProductCode { get; set; }

@@ -24,5 +24,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("mini_app_id")]
         public string MiniAppId { get; set; }
+
+        /// <summary>
+        /// 业务幂等号，规则为商品id+appOrigin+requestId 作为幂等流水号 非必填,不传则默认生成一个8位requestId
+        /// </summary>
+        [JsonPropertyName("request_id")]
+        public string RequestId { get; set; }
     }
 }

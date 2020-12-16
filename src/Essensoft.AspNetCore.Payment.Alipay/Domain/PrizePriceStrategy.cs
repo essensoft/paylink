@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string MinPrice { get; set; }
 
         /// <summary>
-        /// 定价策略值，根据不同的奖品类型填写不同的值，具体用法联系营销技术获取
+        /// 废弃-不再使用
         /// </summary>
         [JsonPropertyName("stragety_value")]
         public string StragetyValue { get; set; }
@@ -30,5 +30,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("strategy_type")]
         public string StrategyType { get; set; }
+
+        /// <summary>
+        /// 定价策略值，根据不同的奖品类型填写不同的值，具体用法联系营销技术获取
+        /// </summary>
+        [JsonPropertyName("strategy_value")]
+        public string StrategyValue { get; set; }
     }
 }

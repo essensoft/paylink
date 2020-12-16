@@ -8,6 +8,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayUserApplepayPbstatusQueryModel : AlipayObject
     {
         /// <summary>
+        /// 当前的状态
+        /// </summary>
+        [JsonPropertyName("current_state")]
+        public string CurrentState { get; set; }
+
+        /// <summary>
         /// 设备接受语言
         /// </summary>
         [JsonPropertyName("device_accept_language")]

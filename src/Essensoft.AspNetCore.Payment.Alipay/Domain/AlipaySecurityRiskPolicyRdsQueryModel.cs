@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipaySecurityRiskPolicyRdsQueryModel : AlipayObject
     {
         /// <summary>
-        /// 参数名称：RDS采集的行为数据；非唯一；参数作用：RDS系统通过行为数据做人机识别；如何获取：客户端集成RDS的SDK后自动会获取到该数据。
+        /// 具体需传递的参数请参考接入文档中的参数列表 https://yuque.antfin-inc.com/tecsec/rds/insertdoc
         /// </summary>
         [JsonPropertyName("rds_params")]
         public string RdsParams { get; set; }

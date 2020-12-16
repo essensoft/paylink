@@ -15,6 +15,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public long ApplyAmount { get; set; }
 
         /// <summary>
+        /// 订单计费模式 BILL（计费），NON_BILL（非计费）
+        /// </summary>
+        [JsonPropertyName("billed")]
+        public string Billed { get; set; }
+
+        /// <summary>
         /// itemId
         /// </summary>
         [JsonPropertyName("item_id")]
@@ -31,6 +37,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("model_number")]
         public string ModelNumber { get; set; }
+
+        /// <summary>
+        /// 销售单价 保留两位小数
+        /// </summary>
+        [JsonPropertyName("selling_price")]
+        public string SellingPrice { get; set; }
 
         /// <summary>
         /// sn列表

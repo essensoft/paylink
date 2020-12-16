@@ -32,6 +32,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string CognitionType { get; set; }
 
         /// <summary>
+        /// 图片组id 适用于垃圾桶等一次投递拍摄多张图片，一次投递一个id
+        /// </summary>
+        [JsonPropertyName("group_id")]
+        public string GroupId { get; set; }
+
+        /// <summary>
         /// 纬度
         /// </summary>
         [JsonPropertyName("latitude")]

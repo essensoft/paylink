@@ -8,6 +8,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class FinanceFileInfo : AlipayObject
     {
         /// <summary>
+        /// 文件内容hash
+        /// </summary>
+        [JsonPropertyName("file_hash")]
+        public string FileHash { get; set; }
+
+        /// <summary>
         /// 上传文件生成的唯一id
         /// </summary>
         [JsonPropertyName("file_id")]

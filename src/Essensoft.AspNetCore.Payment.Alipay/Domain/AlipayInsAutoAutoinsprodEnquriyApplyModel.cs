@@ -68,6 +68,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public InsPerson Insured { get; set; }
 
         /// <summary>
+        /// 名单id，新电焊模式必传
+        /// </summary>
+        [JsonPropertyName("leads_id")]
+        public string LeadsId { get; set; }
+
+        /// <summary>
         /// 外部询价申请业务单号（幂等字段）
         /// </summary>
         [JsonPropertyName("out_biz_no")]

@@ -12,5 +12,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("biz_no")]
         public string BizNo { get; set; }
+
+        /// <summary>
+        /// aa
+        /// </summary>
+        [JsonPropertyName("number")]
+        public string Number { get; set; }
     }
 }

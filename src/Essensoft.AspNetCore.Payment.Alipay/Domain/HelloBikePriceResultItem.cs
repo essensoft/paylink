@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string CardType { get; set; }
 
         /// <summary>
-        /// 排序优先级,数字越大,优先级越高,没有经过排序的卡类型默认返回-1
+        /// 排序优先级,数字越小,优先级越高,没有经过排序的卡类型默认返回-1
         /// </summary>
         [JsonPropertyName("priority")]
         public string Priority { get; set; }

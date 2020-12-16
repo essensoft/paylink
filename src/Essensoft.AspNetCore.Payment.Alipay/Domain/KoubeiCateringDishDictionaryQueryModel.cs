@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class KoubeiCateringDishDictionaryQueryModel : AlipayObject
     {
         /// <summary>
-        /// 业务字典类型.  定义如下: catetory 分类 ;unit 单位;spec 规格。
+        /// 业务字典类型.  定义如下: catetory 分类 ;unit 单位;spec 规格；virtual_category 虚拟类目。
         /// </summary>
         [JsonPropertyName("biz_type")]
         public string BizType { get; set; }

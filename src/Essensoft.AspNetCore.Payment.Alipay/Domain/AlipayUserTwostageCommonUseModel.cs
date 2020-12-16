@@ -14,6 +14,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string DynamicId { get; set; }
 
         /// <summary>
+        /// 传1表示 校验pid(pay_pid)和来支付的时候的pid一致性； 传2表示校验pid(pay_pid)和来支付的时候的pid一致性、校验scene_no和来支付时DYNAMIC_TOKEN_OUT_BIZ_NO属性一致；                        不传值和value=2的表现一致
+        /// </summary>
+        [JsonPropertyName("pay_check_strategy")]
+        public string PayCheckStrategy { get; set; }
+
+        /// <summary>
         /// 商家进行二阶段支付的PID信息。
         /// </summary>
         [JsonPropertyName("pay_pid")]

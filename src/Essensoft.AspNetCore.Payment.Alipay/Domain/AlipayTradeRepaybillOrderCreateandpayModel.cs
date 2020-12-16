@@ -8,13 +8,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayTradeRepaybillOrderCreateandpayModel : AlipayObject
     {
         /// <summary>
+        /// 还款协议号
+        /// </summary>
+        [JsonPropertyName("agreement_no")]
+        public string AgreementNo { get; set; }
+
+        /// <summary>
         /// 支付宝账单编号
         /// </summary>
         [JsonPropertyName("bill_no")]
         public string BillNo { get; set; }
 
         /// <summary>
-        /// 扩展参数。使用前需要和支付宝先约定key值。
+        /// 扩展参数，json格式字符串。使用前需要和支付宝先约定key值。
         /// </summary>
         [JsonPropertyName("extend_params")]
         public string ExtendParams { get; set; }
@@ -26,13 +32,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutOrderNo { get; set; }
 
         /// <summary>
+        /// json格式字符串，公用回传参数。如果请求时传递了该参数，则异步通知商户时会回传该参数
+        /// </summary>
+        [JsonPropertyName("passback_params")]
+        public string PassbackParams { get; set; }
+
+        /// <summary>
         /// 还款的付款uid
         /// </summary>
         [JsonPropertyName("payer_user_id")]
         public string PayerUserId { get; set; }
 
         /// <summary>
-        /// 还款金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]
+        /// 还款请求金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]
         /// </summary>
         [JsonPropertyName("repay_amount")]
         public string RepayAmount { get; set; }

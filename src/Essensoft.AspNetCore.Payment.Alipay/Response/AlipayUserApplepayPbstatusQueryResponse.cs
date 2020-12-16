@@ -19,5 +19,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonPropertyName("response_header")]
         public OpenApiResponseHeader ResponseHeader { get; set; }
+
+        /// <summary>
+        /// 状态
+        /// </summary>
+        [JsonPropertyName("state")]
+        public string State { get; set; }
     }
 }

@@ -45,6 +45,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ClaimReportNo { get; set; }
 
         /// <summary>
+        /// 报案类型
+        /// </summary>
+        [JsonPropertyName("claim_report_type")]
+        public string ClaimReportType { get; set; }
+
+        /// <summary>
         /// 赔案信息
         /// </summary>
         [JsonPropertyName("claims")]
@@ -67,6 +73,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("reporter")]
         public InsPerson Reporter { get; set; }
+
+        /// <summary>
+        /// 报案来源
+        /// </summary>
+        [JsonPropertyName("source")]
+        public string Source { get; set; }
 
         /// <summary>
         /// 案件状态
