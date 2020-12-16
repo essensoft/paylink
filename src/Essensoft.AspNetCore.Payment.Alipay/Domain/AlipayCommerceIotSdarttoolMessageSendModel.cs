@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public bool BiDa { get; set; }
 
         /// <summary>
-        /// 设备查询条件类型 supplierid+sn : (SUPPLIERID_SN) itemid + sn: ITEMID_SN
+        /// 设备查询条件类型 ；SUPPLIERID_SN:supplierid+sn ;  ITEMID_SN:itemid + sn; SN:sn
         /// </summary>
         [JsonPropertyName("device_query_type")]
         public string DeviceQueryType { get; set; }
@@ -56,7 +56,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public long MsgPriority { get; set; }
 
         /// <summary>
-        /// 消息类型(通用消息: xpaas_common;语音消息: audio_msg;云打印: cloud_print)
+        /// 消息类型：xpaas_common-小程序通用消息
         /// </summary>
         [JsonPropertyName("msg_type")]
         public string MsgType { get; set; }

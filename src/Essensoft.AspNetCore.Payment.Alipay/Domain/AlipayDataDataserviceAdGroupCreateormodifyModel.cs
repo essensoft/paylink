@@ -69,6 +69,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string PlanOuterId { get; set; }
 
         /// <summary>
+        /// 定向扩展信息
+        /// </summary>
+        [JsonPropertyName("targeting_extend_info")]
+        public string TargetingExtendInfo { get; set; }
+
+        /// <summary>
         /// 单元定向列表。目前支持的定向类型有：  REGION_LIST: 实时地址  AD_POS_LIST: 广告位定向  OUTER_KOUBEI_INTEREST_TAG_LIST: 口碑偏好  OUTER_KOUBEI_CROWD_TAG_LIST：口碑人群
         /// </summary>
         [JsonPropertyName("targeting_list")]

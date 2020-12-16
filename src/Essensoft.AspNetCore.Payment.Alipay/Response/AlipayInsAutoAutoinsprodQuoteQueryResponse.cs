@@ -214,6 +214,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string TrafficViolationRatio { get; set; }
 
         /// <summary>
+        /// 客户评级信息，辅助作业人员展业(具体内容以保司信息为准)
+        /// </summary>
+        [JsonPropertyName("user_level")]
+        public string UserLevel { get; set; }
+
+        /// <summary>
         /// 用户提醒code
         /// </summary>
         [JsonPropertyName("warn_code")]

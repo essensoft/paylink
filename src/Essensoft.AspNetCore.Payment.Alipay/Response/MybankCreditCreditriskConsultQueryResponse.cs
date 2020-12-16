@@ -30,5 +30,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonPropertyName("creditlmt_amt")]
         public string CreditlmtAmt { get; set; }
+
+        /// <summary>
+        /// 贷款年化利率
+        /// </summary>
+        [JsonPropertyName("loan_int_rate")]
+        public string LoanIntRate { get; set; }
     }
 }

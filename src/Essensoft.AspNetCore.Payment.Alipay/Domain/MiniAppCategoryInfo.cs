@@ -30,5 +30,17 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("second_category_name")]
         public string SecondCategoryName { get; set; }
+
+        /// <summary>
+        /// 三级类目id，可空
+        /// </summary>
+        [JsonPropertyName("third_category_id")]
+        public string ThirdCategoryId { get; set; }
+
+        /// <summary>
+        /// 三级类目名称，可空
+        /// </summary>
+        [JsonPropertyName("third_category_name")]
+        public string ThirdCategoryName { get; set; }
     }
 }

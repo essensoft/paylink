@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
     public class AlipayOpenMiniIndividualBusinessCertifyRequest : IAlipayRequest<AlipayOpenMiniIndividualBusinessCertifyResponse>
     {
         /// <summary>
-        /// 营业执照
+        /// 营业执照注册号即营业执照的编号。
         /// </summary>
         public string LicenseNo { get; set; }
 

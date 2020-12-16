@@ -18,5 +18,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("file_name")]
         public string FileName { get; set; }
+
+        /// <summary>
+        /// 用于标识某个文件
+        /// </summary>
+        [JsonPropertyName("file_uniq_id")]
+        public string FileUniqId { get; set; }
     }
 }

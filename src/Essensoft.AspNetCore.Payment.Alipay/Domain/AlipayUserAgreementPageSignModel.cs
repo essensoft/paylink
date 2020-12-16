@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AgreementEffectType { get; set; }
 
         /// <summary>
-        /// 是否允许花芝GO降级成原代扣（即销售方案指定的代扣产品），在花芝GO场景下才会使用该值。取值：true-允许降级，false-不允许降级。默认为false。
+        /// 是否允许花芝GO降级成原代扣（即销售方案指定的代扣产品），在花芝GO场景下才会使用该值。取值：true-允许降级，false-不允许降级。默认为true。
         /// </summary>
         [JsonPropertyName("allow_huazhi_degrade")]
         public string AllowHuazhiDegrade { get; set; }
@@ -54,6 +54,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("merchant_process_url")]
         public string MerchantProcessUrl { get; set; }
+
+        /// <summary>
+        /// 业务透传参数
+        /// </summary>
+        [JsonPropertyName("pass_params")]
+        public string PassParams { get; set; }
 
         /// <summary>
         /// 周期管控规则参数period_rule_params，在签约周期扣款产品（如CYCLE_PAY_AUTH_P）时必传，在签约其他产品时无需传入。 周期扣款产品，会按照这里传入的参数提示用户，并对发起扣款的时间、金额、次数等做相应限制。
@@ -96,6 +102,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("sign_validity_period")]
         public string SignValidityPeriod { get; set; }
+
+        /// <summary>
+        /// 商户指定优先扣款渠道
+        /// </summary>
+        [JsonPropertyName("specified_sort_channel_params")]
+        public SpecifiedChannelParam SpecifiedSortChannelParams { get; set; }
 
         /// <summary>
         /// 此参数用于传递子商户信息，无特殊需求时不用关注。目前商户代扣、海外代扣、淘旅行信用住产品支持传入该参数（在销售方案中“是否允许自定义子商户信息”需要选是）。

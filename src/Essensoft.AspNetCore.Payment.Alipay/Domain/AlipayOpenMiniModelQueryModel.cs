@@ -32,6 +32,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string DeployWindowModified { get; set; }
 
         /// <summary>
+        /// 租户类型，由应用中心分配
+        /// </summary>
+        [JsonPropertyName("inst_code")]
+        public string InstCode { get; set; }
+
+        /// <summary>
         /// 是否为压测流量，true为是，默认false
         /// </summary>
         [JsonPropertyName("load_test")]

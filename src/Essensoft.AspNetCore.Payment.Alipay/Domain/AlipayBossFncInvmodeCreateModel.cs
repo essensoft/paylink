@@ -8,6 +8,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayBossFncInvmodeCreateModel : AlipayObject
     {
         /// <summary>
+        /// 合同id
+        /// </summary>
+        [JsonPropertyName("ar_no")]
+        public string ArNo { get; set; }
+
+        /// <summary>
         /// 所属ou
         /// </summary>
         [JsonPropertyName("inst_id")]

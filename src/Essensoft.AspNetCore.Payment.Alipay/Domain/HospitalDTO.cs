@@ -8,6 +8,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class HospitalDTO : AlipayObject
     {
         /// <summary>
+        /// 医院ID
+        /// </summary>
+        [JsonPropertyName("hospital_id")]
+        public string HospitalId { get; set; }
+
+        /// <summary>
         /// 医院标准名称
         /// </summary>
         [JsonPropertyName("hospital_name")]

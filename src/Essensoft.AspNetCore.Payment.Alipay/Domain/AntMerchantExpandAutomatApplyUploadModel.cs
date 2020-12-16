@@ -74,7 +74,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public SmartAutomatScene Scene { get; set; }
 
         /// <summary>
-        /// 机具终端ID，由开发者生成，并需保证在开发者端不重复
+        /// 机具终端ID，由开发者生成，并需保证在开发者端不重复，长度限制最少6位
         /// </summary>
         [JsonPropertyName("terminal_id")]
         public string TerminalId { get; set; }

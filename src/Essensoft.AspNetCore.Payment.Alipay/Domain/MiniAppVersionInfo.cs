@@ -20,6 +20,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AppVersion { get; set; }
 
         /// <summary>
+        /// 审核包信息
+        /// </summary>
+        [JsonPropertyName("audit_package")]
+        public MiniAppPackageInfo AuditPackage { get; set; }
+
+        /// <summary>
         /// 小程序构建日志地址
         /// </summary>
         [JsonPropertyName("build_task_log")]

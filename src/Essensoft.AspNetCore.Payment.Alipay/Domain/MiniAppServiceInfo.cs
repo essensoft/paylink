@@ -8,6 +8,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class MiniAppServiceInfo : AlipayObject
     {
         /// <summary>
+        /// 插件发布状态码，暂存100，风控审核200，运营审核300，等待上架400，已预发上架500，已上架501，已下架600，已驳回700
+        /// </summary>
+        [JsonPropertyName("biz_status")]
+        public string BizStatus { get; set; }
+
+        /// <summary>
         /// 是否是内部标，true/false
         /// </summary>
         [JsonPropertyName("is_inner")]

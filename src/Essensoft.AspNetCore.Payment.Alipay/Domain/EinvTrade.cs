@@ -8,10 +8,34 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class EinvTrade : AlipayObject
     {
         /// <summary>
+        /// 订单编号
+        /// </summary>
+        [JsonPropertyName("bill_no")]
+        public string BillNo { get; set; }
+
+        /// <summary>
+        /// 下单时间
+        /// </summary>
+        [JsonPropertyName("bill_time")]
+        public string BillTime { get; set; }
+
+        /// <summary>
+        /// 商户所在城市(经营地址)
+        /// </summary>
+        [JsonPropertyName("city_name")]
+        public string CityName { get; set; }
+
+        /// <summary>
         /// 账单明细信息，酒店水单信息，行程单信息，餐饮小票信息
         /// </summary>
         [JsonPropertyName("detail_json")]
         public string DetailJson { get; set; }
+
+        /// <summary>
+        /// 账单明细信息，酒店水单，行程单，餐饮小票等pdf原件链接
+        /// </summary>
+        [JsonPropertyName("download_url")]
+        public string DownloadUrl { get; set; }
 
         /// <summary>
         /// 扩展参数  不同组的k-v通过换行符区分

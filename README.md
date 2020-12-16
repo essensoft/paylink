@@ -25,7 +25,7 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 
 1. 支付宝 [文档中心](https://openhome.alipay.com/docCenter/docCenter.htm?from=openhomemenu)
 
-* 同步 [alipay-sdk-net-all](https://github.com/alipay/alipay-sdk-net-all) 所有API.
+* 同步 [alipay-sdk-net-4.3.99.ALL](https://github.com/alipay/alipay-sdk-net-all) 所有API.
 
 2. 微信支付
 

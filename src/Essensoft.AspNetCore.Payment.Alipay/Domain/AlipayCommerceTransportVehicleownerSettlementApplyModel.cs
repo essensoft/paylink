@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string BizAgreementNo { get; set; }
 
         /// <summary>
-        /// 交易场景:  HIGHWAY 高速场景;  PARKING 车场停车场景;  PARKING_SPACE 车位停车场景;   GAS 加油场景;  BRIDGE 路桥场景;  BANK_REPAY_SETTLE 银行追款;
+        /// 交易场景: HIGHWAY 高速场景; PARKING 车场停车场景; PARKING_SPACE 车位停车场景;  GAS 加油场景; BRIDGE 路桥场景; BANK_REPAY_SETTLE 银行追款;
         /// </summary>
         [JsonPropertyName("biz_scene_code")]
         public string BizSceneCode { get; set; }

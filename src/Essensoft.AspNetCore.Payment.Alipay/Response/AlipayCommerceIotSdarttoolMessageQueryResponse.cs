@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string ConsumeErrMsg { get; set; }
 
         /// <summary>
-        /// 消息消费状态1-成功 2-失败
+        /// 消息消费状态1-未消费; 2-消费成功；3-消费失败
         /// </summary>
         [JsonPropertyName("consume_state")]
         public long ConsumeState { get; set; }

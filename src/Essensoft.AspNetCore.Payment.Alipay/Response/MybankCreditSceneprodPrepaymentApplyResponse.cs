@@ -14,6 +14,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string AcceptRepay { get; set; }
 
         /// <summary>
+        /// 枚举值 a.退车 loanCancel b.机构主动回购 activeRefund c.客户主动结清 repayByCust
+        /// </summary>
+        [JsonPropertyName("biz_type")]
+        public string BizType { get; set; }
+
+        /// <summary>
         /// 交易失败明细提示  提前还款结果查询时，如果tradeStatus=FAIL，failReason字段显示提前还款失败原因。
         /// </summary>
         [JsonPropertyName("fail_reason")]

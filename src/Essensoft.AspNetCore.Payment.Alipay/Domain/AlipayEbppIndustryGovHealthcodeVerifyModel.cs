@@ -18,5 +18,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("code_content")]
         public string CodeContent { get; set; }
+
+        /// <summary>
+        /// 区分验码的业务主体，医护天使: MEDICAL_ANGEL; 默认为健康码: HEALTH_CODE
+        /// </summary>
+        [JsonPropertyName("industry_type")]
+        public string IndustryType { get; set; }
     }
 }

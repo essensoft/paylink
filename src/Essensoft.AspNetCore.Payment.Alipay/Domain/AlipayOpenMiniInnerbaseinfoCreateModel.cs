@@ -92,6 +92,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string MiniAppId { get; set; }
 
         /// <summary>
+        /// 新小程序前台类目，一级与二级、三级用下划线隔开，最多可以选四个类目，类目之间;隔开。使用后不再读取app_category_ids值，老前台类目将废弃
+        /// </summary>
+        [JsonPropertyName("mini_category_ids")]
+        public string MiniCategoryIds { get; set; }
+
+        /// <summary>
         /// 应用主体
         /// </summary>
         [JsonPropertyName("owner_entity")]

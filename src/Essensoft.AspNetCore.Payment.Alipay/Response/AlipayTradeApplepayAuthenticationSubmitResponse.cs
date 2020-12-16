@@ -34,6 +34,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public List<string> RetryAuthenticationMechanisms { get; set; }
 
         /// <summary>
+        /// base64之后的证书
+        /// </summary>
+        [JsonPropertyName("signing_certificate")]
+        public string SigningCertificate { get; set; }
+
+        /// <summary>
+        /// 最新的鉴权明细信息
+        /// </summary>
+        [JsonPropertyName("updated_authentication_details")]
+        public UpdatedAuthenticationDetails UpdatedAuthenticationDetails { get; set; }
+
+        /// <summary>
         /// 交易状态
         /// </summary>
         [JsonPropertyName("updated_transaction_status")]

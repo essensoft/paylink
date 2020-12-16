@@ -14,5 +14,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonPropertyName("advert_list")]
         public List<Advert> AdvertList { get; set; }
+
+        /// <summary>
+        /// 广告组数量
+        /// </summary>
+        [JsonPropertyName("count")]
+        public long Count { get; set; }
     }
 }

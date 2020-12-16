@@ -35,7 +35,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string AppName { get; set; }
 
         /// <summary>
-        /// 来源的业务方
+        /// 来源的业务方，需要申请
         /// </summary>
         public string AppOrigin { get; set; }
 
@@ -63,6 +63,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         /// 一二方支持传入appId
         /// </summary>
         public string MiniAppId { get; set; }
+
+        /// <summary>
+        /// 新小程序前台类目，格式为 第一个一级类目_第一个二级类目;第二个一级类目_第二个二级类目_第二个三级类目，详细类目可以通过 https://docs.open.alipay.com/api_49/alipay.open.mini.category.query接口查询mini_category_list，如果不填默认采用当前小程序应用类目。使用默认应用类目后不需要再次上传营业执照号、营业执照名、营业执照截图、营业执照有效期。使用后不再读取app_category_ids值，老前台类目将废弃
+        /// </summary>
+        public string MiniCategoryIds { get; set; }
 
         /// <summary>
         /// 比如某种业务标准外部订单号,比如交易外部订单号，代表商户端自己订单号
@@ -179,6 +184,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
                 { "merchandise_id", MerchandiseId },
                 { "merchant_pid", MerchantPid },
                 { "mini_app_id", MiniAppId },
+                { "mini_category_ids", MiniCategoryIds },
                 { "out_biz_no", OutBizNo },
                 { "service_email", ServiceEmail },
                 { "service_phone", ServicePhone }

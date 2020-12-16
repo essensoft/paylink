@@ -38,6 +38,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OperateSceneType { get; set; }
 
         /// <summary>
+        /// 订单类型
+        /// </summary>
+        [JsonPropertyName("order_type")]
+        public string OrderType { get; set; }
+
+        /// <summary>
         /// 收方资产信息，内容是JSON格式，并用urlencode编码，按场景约定具体字段
         /// </summary>
         [JsonPropertyName("payee_fund_detail")]

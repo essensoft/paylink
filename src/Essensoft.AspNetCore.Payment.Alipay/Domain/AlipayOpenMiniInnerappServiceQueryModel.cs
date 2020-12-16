@@ -20,6 +20,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AppSubType { get; set; }
 
         /// <summary>
+        /// 是否需要展示offline状态插件，不传默认为false（不展示）
+        /// </summary>
+        [JsonPropertyName("include_offline")]
+        public bool IncludeOffline { get; set; }
+
+        /// <summary>
         /// 关键词
         /// </summary>
         [JsonPropertyName("keyword")]

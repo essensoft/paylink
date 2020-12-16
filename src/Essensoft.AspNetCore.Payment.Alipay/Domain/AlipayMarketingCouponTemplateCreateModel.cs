@@ -92,7 +92,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string VoucherUseScene { get; set; }
 
         /// <summary>
-        /// "ABSOLUTE", "start": "2017-01-10 00:00:00", "end": "2017-01-13 23:59:59"}。相对时间有3个key：type、duration、unit，type取值固定为"RELATIVE"，duration表示从发红包时间开始到往后推duration个单位时间为止作为红包的使用有效期，unit表示有效时间单位，有效时间单位可枚举：MINUTE, HOUR, DAY。示例：{"type": "RELATIVE", "duration": 1 , "unit": "DAY" }，如果此刻发红包，那么该红包从现在开始生效1(duration)天(unit)后失效。
+        /// 红包有效期，不能超过90天。type：红包有效期类型。支持 ABSOLUTE（绝对时间）、RELATIVE（相对时间）。ABSOLUTE（绝对时间）需传入 start （开始时间），end（结束时间）格式为yyyy-MM-dd HH:mm:ss。RELATIVE（相对时间）需传入 duration（有效时间）表示红包在发放后的duration个单位时间内有效，unit（有效时间单位）支持：MINUTE, HOUR, DAY，如"duration":1,"unit":"DAY"表示红包在发放开始的1天内有效。
         /// </summary>
         [JsonPropertyName("voucher_valid_period")]
         public string VoucherValidPeriod { get; set; }

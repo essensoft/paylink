@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class SettleDetailInfo : AlipayObject
     {
         /// <summary>
-        /// 结算的金额，单位为元。目前必须和交易金额相同
+        /// 结算的金额，单位为元。在创建订单和支付接口时必须和交易金额相同。在结算确认接口时必须等于交易金额减去已退款金额。
         /// </summary>
         [JsonPropertyName("amount")]
         public string Amount { get; set; }

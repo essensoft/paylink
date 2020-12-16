@@ -18,5 +18,23 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonPropertyName("policy_no")]
         public string PolicyNo { get; set; }
+
+        /// <summary>
+        /// 保费(分)
+        /// </summary>
+        [JsonPropertyName("premium")]
+        public long Premium { get; set; }
+
+        /// <summary>
+        /// 风险等级  1:正常  2:关注  3:高风险  4:极高风险
+        /// </summary>
+        [JsonPropertyName("risk_level")]
+        public string RiskLevel { get; set; }
+
+        /// <summary>
+        /// 保额(分)
+        /// </summary>
+        [JsonPropertyName("sum_insured")]
+        public long SumInsured { get; set; }
     }
 }

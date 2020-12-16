@@ -21,6 +21,36 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public BigCardData AlipayBigCardRealTimeData { get; set; }
 
         /// <summary>
+        /// 可存入缓存的卡片展示信息
+        /// </summary>
+        [JsonPropertyName("backup_display_info")]
+        public string BackupDisplayInfo { get; set; }
+
+        /// <summary>
+        /// 工具类或卡片类，single_tool或single_content
+        /// </summary>
+        [JsonPropertyName("backup_template_code")]
+        public string BackupTemplateCode { get; set; }
+
+        /// <summary>
+        /// 植入在手淘的埋点信息
+        /// </summary>
+        [JsonPropertyName("backup_track_info")]
+        public string BackupTrackInfo { get; set; }
+
+        /// <summary>
+        /// 按照淘宝约定的格式返回的卡片展示结果，json格式
+        /// </summary>
+        [JsonPropertyName("display_info")]
+        public string DisplayInfo { get; set; }
+
+        /// <summary>
+        /// 扩展字段备用
+        /// </summary>
+        [JsonPropertyName("ext_info")]
+        public string ExtInfo { get; set; }
+
+        /// <summary>
         /// 结果码
         /// </summary>
         [JsonPropertyName("result_code")]
@@ -43,5 +73,17 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonPropertyName("success")]
         public bool Success { get; set; }
+
+        /// <summary>
+        /// 工具类或卡片类，single_tool或single_content
+        /// </summary>
+        [JsonPropertyName("template_code")]
+        public string TemplateCode { get; set; }
+
+        /// <summary>
+        /// 植入在手淘的埋点信息
+        /// </summary>
+        [JsonPropertyName("track_info")]
+        public string TrackInfo { get; set; }
     }
 }

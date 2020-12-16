@@ -28,6 +28,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public long PrincipalId { get; set; }
 
         /// <summary>
+        /// 商户审核拒绝理由
+        /// </summary>
+        [JsonPropertyName("refuse_reason")]
+        public string RefuseReason { get; set; }
+
+        /// <summary>
         /// 状态：  ENABLE-生效  DISABLE-失效  CHECKING-待审核  FAILEDCHECK-审核未通过  INIT-初始化  RE_SIGN-待重签
         /// </summary>
         [JsonPropertyName("status")]

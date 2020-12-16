@@ -74,6 +74,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string LoginId { get; set; }
 
         /// <summary>
+        /// 营销金额，如转账中营销红包金额，收入为正，支出为负
+        /// </summary>
+        [JsonPropertyName("marketing_amount")]
+        public string MarketingAmount { get; set; }
+
+        /// <summary>
         /// 脱敏后的对方支付宝账号
         /// </summary>
         [JsonPropertyName("opp_login_id")]

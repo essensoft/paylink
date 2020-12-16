@@ -105,6 +105,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public long PrincipalId { get; set; }
 
         /// <summary>
+        /// 创意审核拒绝的扩展信息
+        /// </summary>
+        [JsonPropertyName("refuse_extend_info")]
+        public CreativeRefuseExtendInfo RefuseExtendInfo { get; set; }
+
+        /// <summary>
         /// 创意审核拒绝原因
         /// </summary>
         [JsonPropertyName("refuse_reason")]

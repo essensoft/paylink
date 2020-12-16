@@ -8,6 +8,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class MybankCreditLoantradeBillListQueryModel : AlipayObject
     {
         /// <summary>
+        /// 账单编号列表，最多支持20条记录查询
+        /// </summary>
+        [JsonPropertyName("bill_no_list")]
+        public string BillNoList { get; set; }
+
+        /// <summary>
         /// 账单状态，OVD逾期，CLE结清，NOR正常
         /// </summary>
         [JsonPropertyName("bill_status_list")]

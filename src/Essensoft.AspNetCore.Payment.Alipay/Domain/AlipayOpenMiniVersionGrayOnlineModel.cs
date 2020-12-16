@@ -8,19 +8,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayOpenMiniVersionGrayOnlineModel : AlipayObject
     {
         /// <summary>
-        /// 小程序版本号
+        /// 修改为商家小程序版本号，需为审核通过状态版本。
         /// </summary>
         [JsonPropertyName("app_version")]
         public string AppVersion { get; set; }
 
         /// <summary>
-        /// 小程序投放的端参数，例如投放到支付宝钱包是支付宝端。该参数可选，默认支付宝端，目前仅支持支付宝端，枚举列举：com.alipay.alipaywallet:支付宝端
+        /// 小程序投放的端参数，例如投放到支付宝钱包是支付宝端。默认支付宝端。支持： com.alipay.alipaywallet:支付宝端； com.alipay.iot.xpaas：支付宝IoT端。
         /// </summary>
         [JsonPropertyName("bundle_id")]
         public string BundleId { get; set; }
 
         /// <summary>
-        /// 小程序灰度策略值，支持p10，p30，p50，其中p10代表10%的用户，p30代表30%的用户，p50代表50%的用户
+        /// 小程序灰度策略值。枚举支持：p10、p30、p50。其中 p10 代表 10% 的用户，p30 代表 30% 的用户，p50 代表 50% 的用户。
         /// </summary>
         [JsonPropertyName("gray_strategy")]
         public string GrayStrategy { get; set; }

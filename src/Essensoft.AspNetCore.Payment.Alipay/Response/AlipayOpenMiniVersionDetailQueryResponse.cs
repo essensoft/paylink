@@ -94,6 +94,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public List<MiniAppCategoryInfo> MiniAppCategoryInfoList { get; set; }
 
         /// <summary>
+        /// 新小程序类目列表
+        /// </summary>
+        [JsonPropertyName("mini_category_info_list")]
+        public List<MiniAppCategoryInfo> MiniCategoryInfoList { get; set; }
+
+        /// <summary>
         /// 小程序功能包列表
         /// </summary>
         [JsonPropertyName("package_info_list")]

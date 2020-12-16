@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string RepayFundOrderNo { get; set; }
 
         /// <summary>
-        /// 订单还款状态 ("INIT", "初始"),("PROCESSING", "处理中")("SUCCESS", "成功"),("CLOSE", "关闭");
+        /// 订单还款状态，INIT：初始状态；PARTIAL_SUCCESS：部分还款成功；SUCCESS：全部还款成功；CLOSE：订单已经关闭
         /// </summary>
         [JsonPropertyName("repay_status")]
         public string RepayStatus { get; set; }

@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string CreateUser { get; set; }
 
         /// <summary>
-        /// 扩展字段
+        /// 扩展字段,星巴克萃取方式需设置特殊字段"StandardStandardAliFilter":{"StandardCoffeeAliFilter":"aaaaaa","DecafCoffeeAliFilter":"bbbbbb" }   key为out_material_id  value为标准/低因对应的新的poskey 组成的json
         /// </summary>
         [JsonPropertyName("ext_info")]
         public string ExtInfo { get; set; }

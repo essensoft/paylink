@@ -44,6 +44,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutOrderNo { get; set; }
 
         /// <summary>
+        /// 签约产品码
+        /// </summary>
+        [JsonPropertyName("product_code")]
+        public string ProductCode { get; set; }
+
+        /// <summary>
         /// 风险环境参数信息，json格式字符串，目前已知key如下：umid，设备指纹；imei，设备号；lbs，经纬度；ip，设备网络IP地址；wireless_mac，设备无线wifi mac；mac，设备网卡地址
         /// </summary>
         [JsonPropertyName("risk_info")]

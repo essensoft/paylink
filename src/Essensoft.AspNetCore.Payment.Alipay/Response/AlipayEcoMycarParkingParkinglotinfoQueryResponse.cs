@@ -62,6 +62,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string ParkingFeeDescription { get; set; }
 
         /// <summary>
+        /// 停车场价格明细图片
+        /// </summary>
+        [JsonPropertyName("parking_fee_description_img")]
+        public string ParkingFeeDescriptionImg { get; set; }
+
+        /// <summary>
         /// 支付宝返回停车场id，系统唯一
         /// </summary>
         [JsonPropertyName("parking_id")]

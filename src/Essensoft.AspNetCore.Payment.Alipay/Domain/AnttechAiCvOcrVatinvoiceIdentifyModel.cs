@@ -8,6 +8,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AnttechAiCvOcrVatinvoiceIdentifyModel : AlipayObject
     {
         /// <summary>
+        /// 目前只支持pdf、jpg两种file_type的识别能力，根据具体传入的发票的格式传入正确的值
+        /// </summary>
+        [JsonPropertyName("file_type")]
+        public string FileType { get; set; }
+
+        /// <summary>
         /// 文件二进制内容 + base64
         /// </summary>
         [JsonPropertyName("image_raw")]

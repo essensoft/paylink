@@ -20,10 +20,16 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Desc { get; set; }
 
         /// <summary>
-        /// 错误编码，SETTLE_ACCOUNT_ERROR：结算账户信息有误；BANK_DISHONOR：银行提现退票；UNKNOWN_ERROR：未知错误
+        /// 错误编码 BANK_CARD_ERROR：银行卡信息有误的场景，系统自动重试中 BANK_DISHONOR：银行退票
         /// </summary>
         [JsonPropertyName("error_code")]
         public string ErrorCode { get; set; }
+
+        /// <summary>
+        /// 错误描述
+        /// </summary>
+        [JsonPropertyName("error_desc")]
+        public string ErrorDesc { get; set; }
 
         /// <summary>
         /// ACCEPT_SUCCESS：受理成功； SUCCESS：结算成功； FAIL：结算失败；FAIL_RETRY：失败重试。
@@ -74,7 +80,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string TransOutEntityId { get; set; }
 
         /// <summary>
-        /// 分账转出主体类型。 SecondMerchant：结算主体为二级商户
+        /// 分账转出主体类型。 SecondMerchant：结算主体为二级商户，Store：结算主体为门店。
         /// </summary>
         [JsonPropertyName("trans_out_entity_type")]
         public string TransOutEntityType { get; set; }
