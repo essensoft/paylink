@@ -29,12 +29,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             if (string.IsNullOrEmpty(options.SignType))
             {
-                throw new ArgumentNullException(nameof(options.SignType));
+                throw new AlipayException("Options.SignType 不能为空。");
             }
 
             if (string.IsNullOrEmpty(options.AlipayPublicKey))
             {
-                throw new ArgumentNullException(nameof(options.AlipayPublicKey));
+                throw new AlipayException("Options.AlipayPublicKey 不能为空。");
             }
 
             var parameters = GetParameters(request);
@@ -92,12 +92,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             if (string.IsNullOrEmpty(options.SignType))
             {
-                throw new ArgumentNullException(nameof(options.SignType));
+                throw new AlipayException("Options.SignType 不能为空。");
             }
 
             if (string.IsNullOrEmpty(options.AlipayPublicKey))
             {
-                throw new ArgumentNullException(nameof(options.AlipayPublicKey));
+                throw new AlipayException("Options.AlipayPublicKey 不能为空。");
             }
 
             var notify = AlipayDictionaryParser.Parse<T>(parameters);
