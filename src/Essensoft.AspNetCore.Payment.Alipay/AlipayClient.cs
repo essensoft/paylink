@@ -160,6 +160,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 throw new ArgumentNullException(nameof(options));
             }
 
+            if (!string.IsNullOrEmpty(options.AppCert) || !string.IsNullOrEmpty(options.AlipayPublicCert)|| !string.IsNullOrEmpty(options.AlipayRootCert))
+            {
+                throw new AlipayException("检测到证书相关参数已初始化，证书模式下请改为调用CertificateExecuteAsync。");
+            }
+
             if (string.IsNullOrEmpty(options.AppId))
             {
                 throw new ArgumentNullException(nameof(options.AppId));
