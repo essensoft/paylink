@@ -151,7 +151,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
             var item = ParseEncryptData(request, body);
             var bodyIndexContent = body.Substring(0, item.startIndex);
-            var bodyEndexContent = body.Substring(item.endIndex);
+            var bodyEndexContent = body[item.endIndex..];
             var bizContent = AES.Decrypt(item.encryptContent, encryptKey, AlipaySignature.AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
 
             return bodyIndexContent + bizContent + bodyEndexContent;

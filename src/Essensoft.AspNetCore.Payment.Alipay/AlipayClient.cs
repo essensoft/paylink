@@ -87,7 +87,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 { AlipayConstants.APP_CERT_SN, options.AppCertSN }
             };
 
-            // 序列化BizModel
+            //字典排序
+            var sortedTxtParams = new SortedDictionary<string, string>(txtParams, StringComparer.Ordinal);
+            txtParams = new AlipayDictionary(sortedTxtParams);
+
+           // 序列化BizModel
             txtParams = SerializeBizModel(txtParams, request);
 
             // 添加签名参数
@@ -277,7 +281,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             return rsp;
         }
 
-        private void CheckResponseSign<T>(IAlipayRequest<T> request, string body, bool isError, IAlipayParser<T> parser, AlipayOptions options) where T : AlipayResponse
+        private static void CheckResponseSign<T>(IAlipayRequest<T> request, string body, bool isError, IAlipayParser<T> parser, AlipayOptions options) where T : AlipayResponse
         {
             var signItem = parser.GetSignItem(request, body);
             if (signItem == null)
@@ -331,6 +335,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             if (options == null)
             {
                 throw new ArgumentNullException(nameof(options));
+            }
+
+            if (string.IsNullOrEmpty(options.AppCert) || string.IsNullOrEmpty(options.AlipayPublicCert) || string.IsNullOrEmpty(options.AlipayRootCert))
+            {
+                throw new AlipayException("检测到证书相关参数未初始化，非证书模式下请改为调用ExecuteAsync。");
             }
 
             if (string.IsNullOrEmpty(options.AppId))
@@ -537,7 +546,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         #region Common Method
 
-        private ResponseParseItem ParseRespItem<T>(IAlipayRequest<T> request, string respBody, IAlipayParser<T> parser, string encryptKey, string encryptType) where T : AlipayResponse
+        private static ResponseParseItem ParseRespItem<T>(IAlipayRequest<T> request, string respBody, IAlipayParser<T> parser, string encryptKey, string encryptType) where T : AlipayResponse
         {
             string realContent;
             if (request.GetNeedEncrypt())
@@ -569,7 +578,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             return sb.ToString();
         }
 
-        private AlipayDictionary BuildRequestParams<T>(IAlipayRequest<T> request, string accessToken, string appAuthToken, AlipayOptions options) where T : AlipayResponse
+        private static AlipayDictionary BuildRequestParams<T>(IAlipayRequest<T> request, string accessToken, string appAuthToken, AlipayOptions options) where T : AlipayResponse
         {
             var apiVersion = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
 
@@ -663,7 +672,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             var requestParams = BuildRequestParams(request, null, appAuthToken, options);
 
             // 字典排序
-            var sortedParams = new SortedDictionary<string, string>(requestParams);
+            var sortedParams = new SortedDictionary<string, string>(requestParams, StringComparer.Ordinal);
             var sortedDic = new AlipayDictionary(sortedParams);
 
             // 参数签名
