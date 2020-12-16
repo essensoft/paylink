@@ -148,7 +148,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             var pos = api.IndexOf(".");
             if (pos != -1 && api.Length > pos)
             {
-                api = api.Substring(pos + 1).Replace('.', '_');
+                api = api[(pos + 1)..].Replace('.', '_');
             }
 
             return api + AlipayConstants.RESPONSE_SUFFIX;

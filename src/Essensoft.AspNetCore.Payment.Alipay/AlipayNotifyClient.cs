@@ -118,7 +118,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         #region Common Method
 
-        private void CheckNotifySign(IDictionary<string, string> dictionary, AlipayOptions options)
+        private static void CheckNotifySign(IDictionary<string, string> dictionary, AlipayOptions options)
         {
             if (dictionary == null || dictionary.Count == 0)
             {
