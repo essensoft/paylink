@@ -2,16 +2,18 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace Essensoft.AspNetCore.Payment.Alipay.Parser
+namespace Essensoft.AspNetCore.Payment.Alipay.Parser.JsonConverters
 {
-    public class StringConverter : JsonConverter<string>
+    public class NumberToStringConverter : JsonConverter<string>
     {
         public override string Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType == JsonTokenType.Number)
             {
-                var stringValue = reader.GetInt32();
-                return stringValue.ToString();
+                if (reader.TryGetInt64(out var l))
+                {
+                    return l.ToString();
+                }
             }
 
             return reader.GetString();
