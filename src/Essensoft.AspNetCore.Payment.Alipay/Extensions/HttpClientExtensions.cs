@@ -50,17 +50,17 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Extensions
                 // 组装文本请求参数
                 foreach (var iter in textParams)
                 {
-                    var streamContent = new StringContent(iter.Value, Encoding.UTF8, "text/plain");
-                    reqContent.Add(streamContent, iter.Key);
+                    reqContent.Add(new StringContent(iter.Value, Encoding.UTF8, "text/plain"), $@"""{iter.Key}""");
                 }
 
                 // 组装文件请求参数
                 foreach (var iter in fileParams)
                 {
+                    var name = iter.Key;
                     var fileItem = iter.Value;
                     var byteArrayContent = new ByteArrayContent(fileItem.GetContent());
                     byteArrayContent.Headers.ContentType = new MediaTypeHeaderValue(fileItem.GetMimeType());
-                    reqContent.Add(byteArrayContent, iter.Key, fileItem.GetFileName());
+                    reqContent.Add(byteArrayContent, @"""{name}""", @"""{ fileItem.GetFileName()}""");
                 }
 
                 using (var resp = await client.PostAsync(url, reqContent))
