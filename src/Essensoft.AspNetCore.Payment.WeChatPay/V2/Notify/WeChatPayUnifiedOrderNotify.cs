@@ -78,6 +78,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Notify
         public string Sign { get; set; }
 
         /// <summary>
+        /// 签名类型
+        /// </summary>
+        [XmlElement("sign_type")]
+        public string SignType { get; set; }
+
+        /// <summary>
         /// 业务结果
         /// </summary>
         [XmlElement("result_code")]
