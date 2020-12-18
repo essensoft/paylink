@@ -30,7 +30,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
             }
 
             request.Body.Seek(0, SeekOrigin.Begin);
-            using (var reader = new StreamReader(request.Body, Encoding.UTF8))
+            using (var reader = new StreamReader(request.Body, Encoding.UTF8, true, 1024, true))
             {
                 var body = await reader.ReadToEndAsync();
                 return await ExecuteAsync<T>(body, options);

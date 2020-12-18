@@ -37,7 +37,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 
             request.Body.Seek(0, SeekOrigin.Begin);
             var headers = GetWeChatPayHeadersFromRequest(request);
-            using (var reader = new StreamReader(request.Body, Encoding.UTF8))
+            using (var reader = new StreamReader(request.Body, Encoding.UTF8, true, 1024, true))
             {
                 var body = await reader.ReadToEndAsync();
                 return await ExecuteAsync<T>(headers, body, options);
