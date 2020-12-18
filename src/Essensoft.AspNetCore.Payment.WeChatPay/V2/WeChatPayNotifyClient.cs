@@ -21,7 +21,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 
         #region IWeChatPayNotifyClient Members
 
-#if NETCOREAPP3_1 || NET5_0
+#if NETCOREAPP
         public async Task<T> ExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, WeChatPayOptions options) where T : WeChatPayNotify
         {
             if (request == null)
@@ -30,11 +30,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
             }
 
             request.Body.Seek(0, SeekOrigin.Begin);
-            using (var reader = new StreamReader(request.Body, Encoding.UTF8))
-            {
-                var body = await reader.ReadToEndAsync();
-                return await ExecuteAsync<T>(body, options);
-            }
+            var reader = new StreamReader(request.Body, Encoding.UTF8);
+            var body = await reader.ReadToEndAsync();
+            return await ExecuteAsync<T>(body, options);
         }
 #endif
 
