@@ -100,24 +100,24 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         private void GetCertificateInfo()
         {
-            if (string.IsNullOrEmpty(certificate) || string.IsNullOrEmpty(certificatePassword))
+            if (string.IsNullOrEmpty(Certificate) || string.IsNullOrEmpty(CertificatePassword))
             {
                 return;
             }
 
-            if (File.Exists(certificate))
+            if (File.Exists(Certificate))
             {
-                Certificate2 = new X509Certificate2(certificate, certificatePassword);
+                Certificate2 = new X509Certificate2(Certificate, CertificatePassword);
             }
-            else if (Base64Util.IsBase64String(certificate))
+            else if (Base64Util.IsBase64String(Certificate))
             {
-                Certificate2 = new X509Certificate2(Convert.FromBase64String(certificate), certificatePassword);
+                Certificate2 = new X509Certificate2(Convert.FromBase64String(Certificate), CertificatePassword);
             }
             else
             {
                 try
                 {
-                    Certificate2 = new X509Certificate2(Encoding.ASCII.GetBytes(certificate), certificatePassword);
+                    Certificate2 = new X509Certificate2(Encoding.ASCII.GetBytes(Certificate), CertificatePassword);
                 }
                 catch (CryptographicException)
                 {
