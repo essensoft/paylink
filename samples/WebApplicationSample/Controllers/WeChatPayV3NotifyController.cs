@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.WeChatPay;
 using Essensoft.AspNetCore.Payment.WeChatPay.V3;
@@ -32,6 +33,7 @@ namespace WebApplicationSample.Controllers
             {
                 Request.EnableBuffering();
 
+                Request.Body.Seek(0, SeekOrigin.Begin);
                 var notify = await _client.ExecuteAsync<WeChatPayTransactionsNotify>(Request, _optionsAccessor.Value);
                 if (notify.TradeState == WeChatPayTradeState.Success)
                 {
