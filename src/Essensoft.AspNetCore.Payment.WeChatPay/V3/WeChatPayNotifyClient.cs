@@ -43,7 +43,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
             }
         }
 
-        private WeChatPayHeaders GetWeChatPayHeadersFromRequest(Microsoft.AspNetCore.Http.HttpRequest request)
+        private static WeChatPayHeaders GetWeChatPayHeadersFromRequest(Microsoft.AspNetCore.Http.HttpRequest request)
         {
             var headers = new WeChatPayHeaders();
 
@@ -84,7 +84,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 
             if (string.IsNullOrEmpty(options.V3Key))
             {
-                throw new ArgumentNullException(nameof(options.V3Key));
+                throw new WeChatPayException("options.V3Key is Empty!");
             }
 
             await CheckNotifySignAsync(headers, body, options);
@@ -123,11 +123,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
             {
                 throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
             }
-        }
-
-        private string BuildSignatureSourceData(string timestamp, string nonce, string body)
-        {
-            return $"{timestamp}\n{nonce}\n{body}\n";
         }
 
         private async Task<X509Certificate2> LoadPlatformCertificateAsync(string serial, WeChatPayOptions options)
@@ -170,6 +165,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
             {
                 throw new WeChatPayException("Download certificates failed!");
             }
+        }
+
+        private static string BuildSignatureSourceData(string timestamp, string nonce, string body)
+        {
+            return $"{timestamp}\n{nonce}\n{body}\n";
         }
 
         #endregion

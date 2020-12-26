@@ -55,7 +55,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 
             if (string.IsNullOrEmpty(options.Key))
             {
-                throw new ArgumentNullException(nameof(options.Key));
+                throw new WeChatPayException("options.Key is Empty!");
             }
 
             var parser = new WeChatPayNotifyXmlParser<T>();
@@ -78,7 +78,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 
         #region Common Method
 
-        private void CheckNotifySign(WeChatPayNotify notify, WeChatPayOptions options)
+        private static void CheckNotifySign(WeChatPayNotify notify, WeChatPayOptions options)
         {
             if (string.IsNullOrEmpty(notify.Body))
             {

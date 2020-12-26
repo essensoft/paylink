@@ -46,7 +46,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         /// <summary>
         /// API证书(.p12)
-        /// 证书文件路径/证书文件的base64字符串/证书文本内容
+        /// 可为 证书文件路径 / 证书文件的文本内容 / 证书文件的Base64编码
         /// </summary>
         public string Certificate
         {
@@ -105,24 +105,25 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 return;
             }
 
-            if (File.Exists(Certificate))
+            try
             {
-                Certificate2 = new X509Certificate2(Certificate, CertificatePassword);
-            }
-            else if (Base64Util.IsBase64String(Certificate))
-            {
-                Certificate2 = new X509Certificate2(Convert.FromBase64String(Certificate), CertificatePassword);
-            }
-            else
-            {
-                try
+                if (File.Exists(Certificate))
                 {
+                    Certificate2 = new X509Certificate2(Certificate, CertificatePassword);
+                }
+                else if (Base64Util.IsBase64String(Certificate))
+                {
+                    Certificate2 = new X509Certificate2(Convert.FromBase64String(Certificate), CertificatePassword);
+                }
+                else
+                {
+
                     Certificate2 = new X509Certificate2(Encoding.ASCII.GetBytes(Certificate), CertificatePassword);
                 }
-                catch (CryptographicException)
-                {
-                    throw new WeChatPayException("证书文件不存在或证书的Base64String不正确！");
-                }
+            }
+            catch (CryptographicException)
+            {
+                throw new WeChatPayException("反序列化证书失败，请确认是否为微信支付签发的有效PKCS#12格式证书。");
             }
 
             CertificateSerialNo = Certificate2.GetSerialNumberString();

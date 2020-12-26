@@ -40,22 +40,22 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             if (string.IsNullOrEmpty(options.AppId))
             {
-                throw new AlipayException("Options.AppId 不能为空。");
+                throw new AlipayException("options.AppId is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.SignType))
             {
-                throw new AlipayException("Options.SignType 不能为空。");
+                throw new AlipayException("options.SignType is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.AppPrivateKey))
             {
-                throw new AlipayException("Options.AppPrivateKey 不能为空。");
+                throw new AlipayException("options.AppPrivateKey is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.ServerUrl))
             {
-                throw new AlipayException("Options.ServerUrl 不能为空。");
+                throw new AlipayException("options.ServerUrl is Empty!");
             }
 
             var multiMediaDownloadRequest = (AlipayMobilePublicMultiMediaDownloadRequest)request;
