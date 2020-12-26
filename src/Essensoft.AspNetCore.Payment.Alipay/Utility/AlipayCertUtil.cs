@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Essensoft.AspNetCore.Payment.Security;
@@ -59,9 +60,25 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         /// <param name="certificate">证书</param>
         public static X509Certificate2 Parse(string certificate)
         {
-            return File.Exists(certificate) ? new X509Certificate2(certificate)
-                : Base64Util.IsBase64String(certificate) ? new X509Certificate2(Convert.FromBase64String(certificate))
-                : throw new AlipayException("证书文件不存在或证书的Base64String不正确！");
+            try
+            {
+                if (File.Exists(certificate))
+                {
+                    return new X509Certificate2(certificate);
+                }
+                else if (Base64Util.IsBase64String(certificate))
+                {
+                    return new X509Certificate2(Convert.FromBase64String(certificate));
+                }
+                else
+                {
+                    return new X509Certificate2(Encoding.ASCII.GetBytes(certificate));
+                }
+            }
+            catch (CryptographicException)
+            {
+                throw new AlipayException("反序列化证书失败，请确认是否为支付宝签发的有效证书。");
+            }
         }
 
         /// <summary>
@@ -135,14 +152,21 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         {
             var certChainStr = File.Exists(certificate) ? File.ReadAllText(certificate)
                 : Base64Util.IsBase64String(certificate) ? Encoding.ASCII.GetString(Convert.FromBase64String(certificate))
-                : throw new AlipayException("证书文件不存在或证书的Base64String不正确！");
+                : certificate;
 
             var certStrArr = certChainStr.Split("-----END CERTIFICATE-----", StringSplitOptions.RemoveEmptyEntries);
 
             var certs = new List<X509Certificate2>();
             foreach (var certStr in certStrArr)
             {
-                certs.Add(new X509Certificate2(Encoding.ASCII.GetBytes(certStr + "-----END CERTIFICATE-----")));
+                try
+                {
+                    certs.Add(new X509Certificate2(Encoding.ASCII.GetBytes(certStr + "-----END CERTIFICATE-----")));
+                }
+                catch (CryptographicException)
+                {
+                    throw new AlipayException("反序列化证书失败，请确认是否为支付宝签发的有效证书。");
+                }
             }
 
             return certs;

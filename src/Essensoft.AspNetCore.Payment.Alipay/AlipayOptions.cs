@@ -75,7 +75,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         /// <summary>
         /// 应用公钥证书
-        /// 可为文件路径 / 文件的base64字符串
+        /// 可为 证书文件路径 / 证书文件的文本内容 / 证书文件的Base64编码
         /// “公钥证书”方式时，必填
         /// “普通公钥”方式时，留空
         /// </summary>
@@ -95,7 +95,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         /// <summary>
         /// 支付宝公钥证书
-        /// 可为文件路径 / 文件的base64字符串
+        /// 可为 证书文件路径 / 证书文件的文本内容 / 证书文件的Base64编码
         /// “公钥证书”方式时，必填
         /// “普通公钥”方式时，留空
         /// </summary>
@@ -116,7 +116,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
         /// <summary>
         /// 支付宝根证书
-        /// 可为文件路径 / 文件的base64字符串
+        /// 可为 证书文件路径 / 证书文件的文本内容 / 证书文件的Base64编码
         /// “公钥证书”方式时，必填
         /// “普通公钥”方式时，留空
         /// </summary>
