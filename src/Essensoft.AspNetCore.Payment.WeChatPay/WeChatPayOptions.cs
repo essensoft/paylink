@@ -46,7 +46,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         /// <summary>
         /// API证书(.p12)
-        /// 可为 证书文件路径 / 证书文件的文本内容 / 证书文件的Base64编码
+        /// 可为 证书文件路径 / 证书文件的Base64编码
         /// </summary>
         public string Certificate
         {
@@ -111,14 +111,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                 {
                     Certificate2 = new X509Certificate2(Certificate, CertificatePassword);
                 }
-                else if (Base64Util.IsBase64String(Certificate))
-                {
-                    Certificate2 = new X509Certificate2(Convert.FromBase64String(Certificate), CertificatePassword);
-                }
                 else
                 {
-
-                    Certificate2 = new X509Certificate2(Encoding.ASCII.GetBytes(Certificate), CertificatePassword);
+                    Certificate2 = new X509Certificate2(Convert.FromBase64String(Certificate), CertificatePassword);
                 }
             }
             catch (CryptographicException)
