@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
     /// <summary>
     /// 合单查询订单API（电商平台、服务商、直连商户）
     /// 最新更新时间：2020.03.27
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/combine/chapter3_3.shtml
+    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_11.shtml
     /// </summary>
     public class WeChatPayCombineTransactionsOutTradeNoRequest : IWeChatPayGetRequest<WeChatPayCombineTransactionsOutTradeNoResponse>
     {
