@@ -56,10 +56,16 @@ namespace WebApplicationSample.Controllers
                             var notify = await _client.CertificateExecuteAsync<AlipayOpenMiniVersionAuditPassedNotify>(Request, _optionsAccessor.Value);
                             return AlipayNotifyResult.Success;
                         }
-                    // 用户授权取消消息
+                    // 小程序审核驳回通知
                     case "alipay.open.mini.version.audit.rejected":
                         {
                             var notify = await _client.CertificateExecuteAsync<AlipayOpenMiniVersionAuditRejectedNotify>(Request, _optionsAccessor.Value);
+                            return AlipayNotifyResult.Success;
+                        }
+                    // 收单退款冲退完成通知
+                    case "alipay.trade.refund.depositback.completed":
+                        {
+                            var notify = await _client.CertificateExecuteAsync<AlipayTradeRefundDepositbackCompletedNotify>(Request, _optionsAccessor.Value);
                             return AlipayNotifyResult.Success;
                         }
                     // 收单资金结算到银行账户，结算退票的异步通知
@@ -78,6 +84,12 @@ namespace WebApplicationSample.Controllers
                     case "alipay.trade.settle.success":
                         {
                             var notify = await _client.CertificateExecuteAsync<AlipayTradeSettleSuccessNotify>(Request, _optionsAccessor.Value);
+                            return AlipayNotifyResult.Success;
+                        }
+                    // 身份认证记录消息
+                    case "alipay.user.certify.open.notify.completed":
+                        {
+                            var notify = await _client.CertificateExecuteAsync<AlipayTradeRefundDepositbackCompletedNotify>(Request, _optionsAccessor.Value);
                             return AlipayNotifyResult.Success;
                         }
                     default:
