@@ -1,6 +1,6 @@
 ﻿namespace Essensoft.AspNetCore.Payment.WeChatPay
 {
-    internal class WeChatPayConsts
+    public class WeChatPayConsts
     {
         public const string appid = "appid";
         public const string sub_appid = "sub_appid";
