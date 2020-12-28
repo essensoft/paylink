@@ -1,6 +1,6 @@
 ﻿namespace Essensoft.AspNetCore.Payment.Alipay
 {
-    internal class AlipayConstants
+    public class AlipayConstants
     {
         public const string APP_ID = "app_id";
         public const string FORMAT = "format";
