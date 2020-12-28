@@ -89,7 +89,7 @@ namespace WebApplicationSample.Controllers
                     // 身份认证记录消息
                     case "alipay.user.certify.open.notify.completed":
                         {
-                            var notify = await _client.CertificateExecuteAsync<AlipayTradeRefundDepositbackCompletedNotify>(Request, _optionsAccessor.Value);
+                            var notify = await _client.CertificateExecuteAsync<AlipayUserCertifyOpenNotifyCompletedNotify>(Request, _optionsAccessor.Value);
                             return AlipayNotifyResult.Success;
                         }
                     default:
