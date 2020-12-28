@@ -3,9 +3,13 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// 关闭订单API-请求参数
+    /// 关单API-请求参数
     /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_6.shtml
+    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_3.shtml
+    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_3.shtml
+    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_3_3.shtml
+    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_4_3.shtml
+    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_3.shtml
     /// </summary>
     public class WeChatPayTransactionsOutTradeNoCloseModel : WeChatPayObject
     {

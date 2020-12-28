@@ -88,7 +88,7 @@ namespace WebApplicationSample.Controllers
                 var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
 
                 // 将参数(parameter)给 ios/android端 
-                // https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_7.shtml
+                // https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_4.shtml
                 ViewData["parameter"] = JsonSerializer.Serialize(parameter);
                 ViewData["response"] = response.Body;
                 return View();
@@ -140,7 +140,7 @@ namespace WebApplicationSample.Controllers
                 var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
 
                 // 将参数(parameter)给 公众号前端
-                // https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_8.shtml
+                // https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_4.shtml
                 ViewData["parameter"] = JsonSerializer.Serialize(parameter);
                 ViewData["response"] = response.Body;
                 return View();
@@ -220,6 +220,7 @@ namespace WebApplicationSample.Controllers
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
             // h5_url为拉起微信支付收银台的中间页面，可通过访问该url来拉起微信客户端，完成支付,h5_url的有效期为5分钟。
+            // https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_3_4.shtml
             ViewData["response"] = response.Body;
             return View();
         }
