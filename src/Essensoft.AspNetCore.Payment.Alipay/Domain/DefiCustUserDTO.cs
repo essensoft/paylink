@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,10 +9,22 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class DefiCustUserDTO : AlipayObject
     {
         /// <summary>
+        /// 管理员名称
+        /// </summary>
+        [JsonPropertyName("admin_name")]
+        public string AdminName { get; set; }
+
+        /// <summary>
         /// 会员信息
         /// </summary>
         [JsonPropertyName("member_info")]
         public DefiCustMemberDTO MemberInfo { get; set; }
+
+        /// <summary>
+        /// 角色
+        /// </summary>
+        [JsonPropertyName("role_types")]
+        public List<string> RoleTypes { get; set; }
 
         /// <summary>
         /// ACTIVE("ACTIVE", "激活状态"), FROZEN("FROZEN", "冻结状态"), DISABLED("DISABLED", "禁用状态"),;

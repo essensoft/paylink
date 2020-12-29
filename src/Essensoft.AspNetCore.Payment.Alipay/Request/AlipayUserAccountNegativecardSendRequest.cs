@@ -4,12 +4,12 @@ using Essensoft.AspNetCore.Payment.Alipay.Response;
 namespace Essensoft.AspNetCore.Payment.Alipay.Request
 {
     /// <summary>
-    /// alipay.user.charity.forest.send
+    /// alipay.user.account.negativecard.send
     /// </summary>
-    public class AlipayUserCharityForestSendRequest : IAlipayRequest<AlipayUserCharityForestSendResponse>
+    public class AlipayUserAccountNegativecardSendRequest : IAlipayRequest<AlipayUserAccountNegativecardSendResponse>
     {
         /// <summary>
-        /// 森林能量发放接口
+        /// 手机负一屏卡片发送接口
         /// </summary>
         public string BizContent { get; set; }
 
@@ -86,7 +86,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
 
         public string GetApiName()
         {
-            return "alipay.user.charity.forest.send";
+            return "alipay.user.account.negativecard.send";
         }
 
         public void SetApiVersion(string apiVersion)

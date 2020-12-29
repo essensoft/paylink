@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -55,5 +55,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("table")]
         public string Table { get; set; }
+
+        /// <summary>
+        /// 目标系统，BK_FINDATA代表数金金融数据库，null代表行情自己
+        /// </summary>
+        [JsonPropertyName("target_system")]
+        public string TargetSystem { get; set; }
     }
 }

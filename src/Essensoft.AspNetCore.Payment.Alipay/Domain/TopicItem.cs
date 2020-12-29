@@ -14,6 +14,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ImgUrl { get; set; }
 
         /// <summary>
+        /// 跳转类型，网页:HTTP、小程序:APP，不传默认HTTP
+        /// </summary>
+        [JsonPropertyName("link_type")]
+        public string LinkType { get; set; }
+
+        /// <summary>
         /// 跳转链接，点击营销位内容图片跳到的链接url
         /// </summary>
         [JsonPropertyName("link_url")]

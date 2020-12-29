@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -31,5 +31,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("settle_clauses")]
         public List<SettleClause> SettleClauses { get; set; }
+
+        /// <summary>
+        /// 结算方式，目前仅支持提前放款结算quickSettlement，提前放款结算需要商户开通快收服务，不填则为普通结算方式
+        /// </summary>
+        [JsonPropertyName("settle_type")]
+        public string SettleType { get; set; }
     }
 }

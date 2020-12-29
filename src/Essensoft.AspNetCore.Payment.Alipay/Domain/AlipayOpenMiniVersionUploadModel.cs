@@ -32,7 +32,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string TemplateId { get; set; }
 
         /// <summary>
-        /// 模板版本号，版本号必须满足 x.y.z, 且均为数字。不传默认使用最新在架模板版本。
+        /// 小程序模板版本号。版本号必须满足 x.y.z, 且均为数字。不传默认使用最新在架（已上架）模板版本。
         /// </summary>
         [JsonPropertyName("template_version")]
         public string TemplateVersion { get; set; }

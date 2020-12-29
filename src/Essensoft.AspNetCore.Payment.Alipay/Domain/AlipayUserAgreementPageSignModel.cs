@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayUserAgreementPageSignModel : AlipayObject
     {
         /// <summary>
-        /// 请按当前接入的方式进行填充，且输入值必须为文档中的参数取值范围。  扫码或者短信页面签约需要拼装http的请求地址访问中间页面，钱包h5页面签约可直接拼接schema的请求地址
+        /// 请按当前接入的方式进行填充，且输入值必须为文档中的参数取值范围。 扫码或者短信页面签约需要拼装http的请求地址访问中间页面，钱包h5页面签约可直接拼接scheme的请求地址
         /// </summary>
         [JsonPropertyName("access_params")]
         public AccessParams AccessParams { get; set; }

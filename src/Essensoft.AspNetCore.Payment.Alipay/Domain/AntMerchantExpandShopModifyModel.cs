@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -33,25 +33,25 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<ShopBusinessTime> BusinessTime { get; set; }
 
         /// <summary>
-        /// 营业执照图片url。其值为使用ant.merchant.expand.indirect.image.upload上传图片得到的一串oss key。当店铺类目为特殊行业时要求本信息项。若无需更新本信息项，可以不填写
+        /// 营业执照图片url。其值为使用ant.merchant.expand.indirect.image.upload上传图片得到的一串oss key。若无需更新本信息项，可以不填写
         /// </summary>
         [JsonPropertyName("cert_image")]
         public string CertImage { get; set; }
 
         /// <summary>
-        /// 营业执照名称，填写值为营业执照或统一社会信用代码证上的名称。当店铺类目是特殊类目是要求本信息项。若无需更新本信息项，可以不填写
+        /// 营业执照名称，填写值为营业执照或统一社会信用代码证上的名称。若无需更新本信息项，可以不填写
         /// </summary>
         [JsonPropertyName("cert_name")]
         public string CertName { get; set; }
 
         /// <summary>
-        /// 证件号码。请填写店铺营业执照号。当店铺类目是特殊类目是要求必填。若无需更新本信息项，可以不填写，以原有值为准
+        /// 证件号码。请填写店铺营业执照号。若无需更新本信息项，可以不填写，以原有值为准
         /// </summary>
         [JsonPropertyName("cert_no")]
         public string CertNo { get; set; }
 
         /// <summary>
-        /// 证件类型，取值范围：201：营业执照；2011:多证合一(统一社会信用代码)。当店铺类目是特殊类目是要求本信息项。若无需更新本信息项，可以不填写
+        /// 证件类型，取值范围：201：营业执照；2011:多证合一(统一社会信用代码)。若无需更新本信息项，可以不填写
         /// </summary>
         [JsonPropertyName("cert_type")]
         public string CertType { get; set; }
@@ -93,13 +93,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string LegalCertNo { get; set; }
 
         /// <summary>
-        /// 法人名称。如果要更新，必须和legal_name成对传入
+        /// 法人名称。如果要更新，必须和legal_cert_no成对传入
         /// </summary>
         [JsonPropertyName("legal_name")]
         public string LegalName { get; set; }
 
         /// <summary>
-        /// 营业执照授权函。其值为使用ant.merchant.expand.indirect.image.upload上传图片得到的一串oss key。当店铺类目是特殊行业时要求本信息项。若无需更新本信息项，可以不填写
+        /// 营业执照授权函。其值为使用ant.merchant.expand.indirect.image.upload上传图片得到的一串oss key。若无需更新本信息项，可以不填写
         /// </summary>
         [JsonPropertyName("license_auth_letter_image")]
         public string LicenseAuthLetterImage { get; set; }
@@ -111,13 +111,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Memo { get; set; }
 
         /// <summary>
-        /// 门头照，其值为使用ant.merchant.expand.indirect.image.upload上传图片得到的一串oss key。当店铺类目是特殊类目要求本信息项。若无需更新本信息项，可以不填写。若填写则会整体覆盖原有的门头照列表
+        /// 门头照，其值为使用ant.merchant.expand.indirect.image.upload上传图片得到的一串oss key。若无需更新本信息项，可以不填写。若填写则会整体覆盖原有的门头照列表
         /// </summary>
         [JsonPropertyName("out_door_images")]
         public List<string> OutDoorImages { get; set; }
 
         /// <summary>
-        /// 行业特殊资质。当店铺类目是特殊类目是要求本信息项。若无需更新本信息项，可以不填写。填写会按类型进行更新或补充
+        /// 行业特殊资质。若无需更新本信息项，可以不填写。填写会按类型进行更新或补充
         /// </summary>
         [JsonPropertyName("qualifications")]
         public List<IndustryQualificationInfo> Qualifications { get; set; }

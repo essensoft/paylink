@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -15,6 +15,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<string> AreaCodes { get; set; }
 
         /// <summary>
+        /// 类目属性列表
+        /// </summary>
+        [JsonPropertyName("category_attributes")]
+        public List<AppAttribute> CategoryAttributes { get; set; }
+
+        /// <summary>
         /// 类目
         /// </summary>
         [JsonPropertyName("category_ids")]
@@ -27,7 +33,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Icon { get; set; }
 
         /// <summary>
-        /// 关键字列表
+        /// 关键字列表；关键词数量最多5个，每个关键词长度在5个字符以内
         /// </summary>
         [JsonPropertyName("key_words")]
         public List<string> KeyWords { get; set; }
@@ -39,7 +45,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ServiceCode { get; set; }
 
         /// <summary>
-        /// 服务名称
+        /// 服务名称；长度范围在2到10个字符以内
         /// </summary>
         [JsonPropertyName("service_name")]
         public string ServiceName { get; set; }
@@ -63,7 +69,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<ServiceUrl> ServiceUrls { get; set; }
 
         /// <summary>
-        /// 短描述
+        /// 短描述；长度范围在5到16个字符以内
         /// </summary>
         [JsonPropertyName("short_desc")]
         public string ShortDesc { get; set; }

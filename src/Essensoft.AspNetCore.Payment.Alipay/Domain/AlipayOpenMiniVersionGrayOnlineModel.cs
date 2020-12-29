@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayOpenMiniVersionGrayOnlineModel : AlipayObject
     {
         /// <summary>
-        /// 修改为商家小程序版本号，需为审核通过状态版本。
+        /// 商家小程序版本号，需为审核通过状态的小程序版本。
         /// </summary>
         [JsonPropertyName("app_version")]
         public string AppVersion { get; set; }
