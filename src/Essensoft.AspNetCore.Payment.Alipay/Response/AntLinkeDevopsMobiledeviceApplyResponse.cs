@@ -38,6 +38,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string ExpireTime { get; set; }
 
         /// <summary>
+        /// image_info+唯一+镜像信息+结果信息
+        /// </summary>
+        [JsonPropertyName("image_info")]
+        public string ImageInfo { get; set; }
+
+        /// <summary>
         /// remote_port+唯一+远端请求的端口信息+返回结果
         /// </summary>
         [JsonPropertyName("remote_port")]

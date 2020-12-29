@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,6 +8,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     /// </summary>
     public class KbdishGroupSimplifyInfo : AlipayObject
     {
+        /// <summary>
+        /// 套餐组上的活动信息，属isv外部活动信息
+        /// </summary>
+        [JsonPropertyName("activity_info")]
+        public string ActivityInfo { get; set; }
+
         /// <summary>
         /// 套餐组明细
         /// </summary>

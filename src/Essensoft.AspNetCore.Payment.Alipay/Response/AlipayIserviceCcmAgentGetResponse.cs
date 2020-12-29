@@ -1,15 +1,16 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
-namespace Essensoft.AspNetCore.Payment.Alipay.Domain
+namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
     /// <summary>
-    /// AgentInfo Data Structure.
+    /// AlipayIserviceCcmAgentGetResponse.
     /// </summary>
-    public class AgentInfo : AlipayObject
+    public class AlipayIserviceCcmAgentGetResponse : AlipayResponse
     {
         /// <summary>
-        /// 热线接入方式
+        /// 热线接入方式： 0：话机 1：电脑耳机；2：webrtc
         /// </summary>
         [JsonPropertyName("answering_mode")]
         public string AnsweringMode { get; set; }
@@ -21,19 +22,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Avatar { get; set; }
 
         /// <summary>
-        /// 客服归属的部门id列表
+        /// 客服关联的数据权限id列表
         /// </summary>
         [JsonPropertyName("ccs_instance_ids")]
         public List<string> CcsInstanceIds { get; set; }
 
         /// <summary>
-        /// 在线技能组信息
+        /// 客服在线信息
         /// </summary>
         [JsonPropertyName("chat_config")]
         public List<AgentChatInfo> ChatConfig { get; set; }
 
         /// <summary>
-        /// 创建时间，  标准时间格式：yyyy-MM-dd HH:mm:ss
+        /// 创建时间，采用UTC时间，按照ISO8601标准表示，格式为：yyyy-MM-dd'T'HH:mm:ss'Z
         /// </summary>
         [JsonPropertyName("create_time")]
         public string CreateTime { get; set; }
@@ -45,49 +46,49 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string CreatorId { get; set; }
 
         /// <summary>
-        /// 钉钉user_id（绑定钉钉的用户该字段非空）
+        /// 钉钉user_id
         /// </summary>
         [JsonPropertyName("dingtalk_user_id")]
         public string DingtalkUserId { get; set; }
 
         /// <summary>
-        /// 客服邮箱
+        /// 邮箱
         /// </summary>
         [JsonPropertyName("email")]
         public string Email { get; set; }
 
         /// <summary>
-        /// 外部系统用户,比如金融云的用户id、支付宝账号id
+        /// 外部系统用户id,比如：金融云的用户id
         /// </summary>
         [JsonPropertyName("external_id")]
         public string ExternalId { get; set; }
 
         /// <summary>
-        /// 热线技能组信息
+        /// 客服热线信息
         /// </summary>
         [JsonPropertyName("hotline_config")]
         public List<AgentHotlineInfo> HotlineConfig { get; set; }
 
         /// <summary>
-        /// 客服唯一标识id
+        /// 客服id
         /// </summary>
         [JsonPropertyName("id")]
         public string Id { get; set; }
 
         /// <summary>
-        /// 客服工号
+        /// 工号
         /// </summary>
         [JsonPropertyName("job_number")]
         public string JobNumber { get; set; }
 
         /// <summary>
-        /// 最后登录时间,标准时间格式：yyyy-MM-dd HH:mm:ss
+        /// 客服上次登录时间 采用UTC时间，按照ISO8601标准表示，格式为：yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>
         [JsonPropertyName("last_login_time")]
         public string LastLoginTime { get; set; }
 
         /// <summary>
-        /// 客服手机号
+        /// 手机号
         /// </summary>
         [JsonPropertyName("mobile")]
         public string Mobile { get; set; }
@@ -111,13 +112,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string RealName { get; set; }
 
         /// <summary>
-        /// 客服角色id列表
+        /// 角色id列表
         /// </summary>
         [JsonPropertyName("role_ids")]
-        public List<string> RoleIds { get; set; }
+        public List<RoleId> RoleIds { get; set; }
 
         /// <summary>
-        /// 状态：NORMAL，DELETE
+        /// 客服状态：NORMAL，DELETE
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; }
@@ -129,7 +130,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Type { get; set; }
 
         /// <summary>
-        /// 最后修改时间，  标准时间格式：yyyy-MM-dd HH:mm:ss
+        /// 最后修改时间，采用UTC时间，按照ISO8601标准表示，格式为：yyyy-MM-dd'T'HH:mm:ss'Z'
         /// </summary>
         [JsonPropertyName("update_time")]
         public string UpdateTime { get; set; }

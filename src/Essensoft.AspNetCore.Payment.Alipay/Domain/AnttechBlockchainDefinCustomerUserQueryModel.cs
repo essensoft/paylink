@@ -20,6 +20,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string RoleType { get; set; }
 
         /// <summary>
+        /// 操作员邮箱
+        /// </summary>
+        [JsonPropertyName("user_email")]
+        public string UserEmail { get; set; }
+
+        /// <summary>
         /// user id
         /// </summary>
         [JsonPropertyName("user_id")]

@@ -26,6 +26,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string BuyerSceneId { get; set; }
 
         /// <summary>
+        /// 是否签约
+        /// </summary>
+        [JsonPropertyName("signed")]
+        public bool Signed { get; set; }
+
+        /// <summary>
         /// 授信额度
         /// </summary>
         [JsonPropertyName("total_amt")]

@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string AppEnglishName { get; set; }
 
         /// <summary>
-        /// 小程序logo图标，图片格式只支持 png、jpeg、jpg，建议上传像素为180*180 px，logo图片最大 256KB，图片高度与宽度必须一致。 如果不填默认采用当前小程序 logo 图标。
+        /// 小程序logo图标，图片格式仅支持 jpeg,png,jpg,PNG,JPG ,JPEG格式，不支持 bmp,gif,BMP,GIF格式。建议上传像素为180*180 px，logo图片最大 256KB，图片高度与宽度必须一致。 如果不填默认采用当前小程序 logo 图标。
         /// </summary>
         public FileItem AppLogo { get; set; }
 
@@ -51,37 +51,37 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string BundleId { get; set; }
 
         /// <summary>
-        /// 第五张营业执照照片，不能超过 4MB，图片格式只支持 jpg、png，最大宽度 2160 px，最大高度 3840 px。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 要求填写营业执照信息。 如果不填默认采用当前小程序第五张营业执照照片。
+        /// 第五张营业执照照片，不能超过 4MB，最大宽度 2160 px，最大高度 3840 px。图片格式仅支持 png,jpg,PNG,JPG 格式。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 要求填写营业执照信息。 如果不填默认采用当前小程序第五张营业执照照片。
         /// </summary>
         public FileItem FifthLicensePic { get; set; }
 
         /// <summary>
-        /// 小程序第五张应用截图，模板实例化的小程序可不传应用截图。 截图大小不能超过 4MB，最大宽度 2160px，最大高度3840px。图片格式仅支持jpg，png，小程序截图数量最小为2，最大为5。
+        /// 小程序第五张应用截图，模板实例化的小程序可不传应用截图。 截图大小不能超过 4MB，最大宽度 2160px，最大高度3840px。图片格式仅支持 png,jpg,PNG,JPG 格式。小程序截图数量最小为2，最大为5。
         /// </summary>
         public FileItem FifthScreenShot { get; set; }
 
         /// <summary>
-        /// 第一张营业执照照片，不能超过 4MB，图片格式只支持 jpg、png，最大宽度 2160 px，最大高度 3840 px。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 要求填写营业执照信息。 如果不填默认采用当前小程序第一张营业执照照片。
+        /// 第一张营业执照照片，不能超过 4MB，最大宽度 2160 px，最大高度 3840 px。图片格式仅支持 png,jpg,PNG,JPG 格式。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 要求填写营业执照信息。 如果不填默认采用当前小程序第一张营业执照照片。
         /// </summary>
         public FileItem FirstLicensePic { get; set; }
 
         /// <summary>
-        /// 小程序第一张应用截图，模板实例化的小程序可不传应用截图。 截图大小不能超过 4MB，最大宽度 2160px，最大高度 3840px。图片格式仅支持jpg，png，小程序截图数量最小为2，最大为5。 
+        /// 小程序第一张应用截图，模板实例化的小程序可不传应用截图。 截图大小不能超过 4MB，最大宽度 2160px，最大高度 3840px。图片格式仅支持 png,jpg,PNG,JPG 格式。小程序截图数量最小为2，最大为5。 
         /// </summary>
         public FileItem FirstScreenShot { get; set; }
 
         /// <summary>
-        /// 第一张特殊资质图片，不能超过4MB，最大宽度 2160px，最大高度3840px。图片格式仅支持jpg、png、jepg 格式。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 中是否需要提供特殊资质，如果不填默认采用当前小程序第一张特殊资质。
+        /// 第一张特殊资质图片，不能超过4MB，最大宽度 2160px，最大高度3840px。图片格式仅支持 png,jpg,PNG,JPG 格式。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 中是否需要提供特殊资质，如果不填默认采用当前小程序第一张特殊资质。
         /// </summary>
         public FileItem FirstSpecialLicensePic { get; set; }
 
         /// <summary>
-        /// 第四张营业执照照片，不能超过 4MB，图片格式只支持 jpg、png，最大宽度 2160 px，最大高度 3840 px。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 要求填写营业执照信息。 如果不填默认采用当前小程序第四张营业执照照片。
+        /// 第四张营业执照照片，不能超过 4MB，最大宽度 2160 px，最大高度 3840 px。图片格式仅支持 png,jpg,PNG,JPG 格式。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 要求填写营业执照信息。 如果不填默认采用当前小程序第四张营业执照照片。
         /// </summary>
         public FileItem FourthLicensePic { get; set; }
 
         /// <summary>
-        /// 小程序第四张应用截图，模板实例化的小程序可不传应用截图。 截图大小不能超过 4MB，最大宽度 2160px，最大高度3840px。图片格式仅支持jpg，png，小程序截图数量最小为2，最大为5。
+        /// 小程序第四张应用截图，模板实例化的小程序可不传应用截图。 截图大小不能超过 4MB，最大宽度 2160px，最大高度3840px。图片格式仅支持 png,jpg,PNG,JPG 格式。小程序截图数量最小为2，最大为5。
         /// </summary>
         public FileItem FourthScreenShot { get; set; }
 
@@ -111,7 +111,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string MiniCategoryIds { get; set; }
 
         /// <summary>
-        /// 门头照图片，不能超过 4MB，图片格式只支持 jpg、png，最大宽度 2160 px，最大高度 3840 px。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 要求上传门头照。 如果不填默认采用当前小程序门头照图片。
+        /// 门头照图片，不能超过 4MB，最大宽度 2160 px，最大高度 3840 px。图片格式仅支持 png,jpg,PNG,JPG 格式。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 要求上传门头照。 如果不填默认采用当前小程序门头照图片。
         /// </summary>
         public FileItem OutDoorPic { get; set; }
 
@@ -121,17 +121,17 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string RegionType { get; set; }
 
         /// <summary>
-        /// 第二张营业执照照片，不能超过 4MB，图片格式只支持 jpg、png，最大宽度 2160 px，最大高度 3840 px。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 要求填写营业执照信息。 如果不填默认采用当前小程序第二张营业执照照片。
+        /// 第二张营业执照照片，不能超过 4MB，最大宽度 2160 px，最大高度 3840 px。图片格式仅支持 png,jpg,PNG,JPG 格式。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 要求填写营业执照信息。 如果不填默认采用当前小程序第二张营业执照照片。
         /// </summary>
         public FileItem SecondLicensePic { get; set; }
 
         /// <summary>
-        /// 小程序第二张应用截图，模板实例化的小程序可不传应用截图。 截图大小不能超过 4MB，最大宽度 2160px，最大高度3840px。图片格式仅支持jpg，png，小程序截图数量最小为2，最大为5。
+        /// 小程序第二张应用截图，模板实例化的小程序可不传应用截图。 截图大小不能超过 4MB，最大宽度 2160px，最大高度3840px。图片格式仅支持 png,jpg,PNG,JPG 格式。小程序截图数量最小为2，最大为5。
         /// </summary>
         public FileItem SecondScreenShot { get; set; }
 
         /// <summary>
-        /// 第二张特殊资质图片文件，不能超过4MB，最大宽度 2160px，最大高度3840px，图片格式仅支持jpg、png、jepg 格式。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 中是否需要提供特殊资质，如果不填默认采用当前小程序第二张特殊资质图片。
+        /// 第二张特殊资质图片文件，不能超过4MB，最大宽度 2160px，最大高度3840px，图片格式仅支持 png,jpg,PNG,JPG 格式。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 中是否需要提供特殊资质，如果不填默认采用当前小程序第二张特殊资质图片。
         /// </summary>
         public FileItem SecondSpecialLicensePic { get; set; }
 
@@ -166,17 +166,17 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string TestPassword { get; set; }
 
         /// <summary>
-        /// 第三张营业执照照片，不能超过 4MB，图片格式只支持 jpg、png，最大宽度 2160 px，最大高度 3840 px。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 要求填写营业执照信息。 如果不填默认采用当前小程序第三张营业执照照片。
+        /// 第三张营业执照照片，不能超过 4MB，最大宽度 2160 px，最大高度 3840 px。图片格式仅支持 png,jpg,PNG,JPG 格式。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 要求填写营业执照信息。 如果不填默认采用当前小程序第三张营业执照照片。
         /// </summary>
         public FileItem ThirdLicensePic { get; set; }
 
         /// <summary>
-        /// 小程序第三张应用截图，模板实例化的小程序可不传应用截图。 截图大小不能超过 4MB，最大宽度 2160px，最大高度 3840px。图片格式仅支持jpg，png，小程序截图数量最小为2，最大为5。
+        /// 小程序第三张应用截图，模板实例化的小程序可不传应用截图。 截图大小不能超过 4MB，最大宽度 2160px，最大高度 3840px。图片格式仅支持 png,jpg,PNG,JPG 格式。小程序截图数量最小为2，最大为5。
         /// </summary>
         public FileItem ThirdScreenShot { get; set; }
 
         /// <summary>
-        /// 第三张特殊资质图片文件，不能超过4MB，最大宽度 2160px，最大高度3840px，图片格式只支持jpg、png、jepg格式。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 中是否需要提供特殊资质，如果不填默认采用当前小程序第三张特殊资质。
+        /// 第三张特殊资质图片文件，不能超过4MB，最大宽度 2160px，最大高度3840px，图片格式仅支持 png,jpg,PNG,JPG 格式。 部分小程序类目需要提交，参照https://opendocs.alipay.com/mini/operation/material 中是否需要提供特殊资质，如果不填默认采用当前小程序第三张特殊资质。
         /// </summary>
         public FileItem ThirdSpecialLicensePic { get; set; }
 

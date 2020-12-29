@@ -68,6 +68,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string RequestFrom { get; set; }
 
         /// <summary>
+        /// 安全所需参数，如IP，UMID等
+        /// </summary>
+        [JsonPropertyName("security_content")]
+        public string SecurityContent { get; set; }
+
+        /// <summary>
         /// 支付宝的用户id
         /// </summary>
         [JsonPropertyName("user_id")]

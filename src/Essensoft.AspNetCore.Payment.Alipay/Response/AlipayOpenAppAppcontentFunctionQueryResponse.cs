@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -20,6 +20,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonPropertyName("audit_status")]
         public string AuditStatus { get; set; }
+
+        /// <summary>
+        /// 类目属性列表
+        /// </summary>
+        [JsonPropertyName("category_attributes")]
+        public List<AppAttribute> CategoryAttributes { get; set; }
 
         /// <summary>
         /// 类目

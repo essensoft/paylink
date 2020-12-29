@@ -18,5 +18,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("loanarno")]
         public string Loanarno { get; set; }
+
+        /// <summary>
+        /// 用于场景角色的查询，默认不填 扫码付业务填 1
+        /// </summary>
+        [JsonPropertyName("roletype")]
+        public string Roletype { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public long GoodsCount { get; set; }
 
         /// <summary>
-        /// 商品缩略图url
+        /// 商品缩略图url，支持格式：bmp、jpg、jpeg、png、gif
         /// </summary>
         [JsonPropertyName("goods_img")]
         public string GoodsImg { get; set; }

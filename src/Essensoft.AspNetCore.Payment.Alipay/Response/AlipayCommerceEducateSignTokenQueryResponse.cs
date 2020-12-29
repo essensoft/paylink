@@ -26,6 +26,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string CertType { get; set; }
 
         /// <summary>
+        /// 家长支付宝账户的脱敏信息
+        /// </summary>
+        [JsonPropertyName("parent_logon_id")]
+        public string ParentLogonId { get; set; }
+
+        /// <summary>
+        /// 家长id，如是本人开通，当前id与用户id相同
+        /// </summary>
+        [JsonPropertyName("parent_user_id")]
+        public string ParentUserId { get; set; }
+
+        /// <summary>
         /// 学校内标
         /// </summary>
         [JsonPropertyName("school_code")]

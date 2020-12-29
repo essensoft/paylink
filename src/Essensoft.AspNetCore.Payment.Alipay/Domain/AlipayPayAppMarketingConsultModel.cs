@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayPayAppMarketingConsultModel : AlipayObject
     {
         /// <summary>
-        /// 业务场景，用于区分商户具体的咨场景，示例： OPENING_PAGE：开屏页营销咨询； ORDER_PAGE：下单页营销咨询
+        /// 业务场景，用于区分商户具体的咨场景，示例：ORDER_PAGE：下单页营销咨询；其他新场景接入时需与支付宝协商约定
         /// </summary>
         [JsonPropertyName("biz_scene")]
         public string BizScene { get; set; }
@@ -45,16 +45,46 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string EncryptedMobile { get; set; }
 
         /// <summary>
+        /// 订单包含的商品列表信息，json格式，其它说明详见商品明细说明；取值可参考alipay.trade.app.pay(app支付接口2.0)
+        /// </summary>
+        [JsonPropertyName("goods_detail")]
+        public List<GoodsDetail> GoodsDetail { get; set; }
+
+        /// <summary>
         /// 已废弃不支持
         /// </summary>
         [JsonPropertyName("mobile")]
         public string Mobile { get; set; }
 
         /// <summary>
+        /// 是否需要返回标签信息；默认为false不返回
+        /// </summary>
+        [JsonPropertyName("need_return_tag")]
+        public bool NeedReturnTag { get; set; }
+
+        /// <summary>
         /// 商户订单号,64个字符以内、可包含字母、数字、下划线；需保证在商户端不重复
         /// </summary>
         [JsonPropertyName("out_trade_no")]
         public string OutTradeNo { get; set; }
+
+        /// <summary>
+        /// 销售产品码，商家和支付宝签约的产品码
+        /// </summary>
+        [JsonPropertyName("product_code")]
+        public string ProductCode { get; set; }
+
+        /// <summary>
+        /// 优惠参数 注：仅与支付宝协商后可用；取值可参考alipay.trade.app.pay(app支付接口2.0)
+        /// </summary>
+        [JsonPropertyName("promo_params")]
+        public string PromoParams { get; set; }
+
+        /// <summary>
+        /// 收款支付宝账号对应的支付宝唯一用户号。 以2088开头的纯16位数字
+        /// </summary>
+        [JsonPropertyName("seller_id")]
+        public string SellerId { get; set; }
 
         /// <summary>
         /// 订单总金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]

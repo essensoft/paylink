@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
     public class AlipayOpenMiniMiniappBrandUploadRequest : IAlipayUploadRequest<AlipayOpenMiniMiniappBrandUploadResponse>
     {
         /// <summary>
-        /// 图片元数据，图片大小不能超过5MB
+        /// 图片元数据，图片大小不能超过5MB(当前只支持jpg, png, jpeg格式的本地图片)
         /// </summary>
         public FileItem FileContent { get; set; }
 
