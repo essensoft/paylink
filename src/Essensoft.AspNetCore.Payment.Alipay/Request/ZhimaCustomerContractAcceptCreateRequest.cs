@@ -1,6 +1,4 @@
-﻿using System;
-using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Response;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Request
@@ -32,8 +30,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
 
         public bool GetNeedEncrypt()
         {
-
-            return this.needEncrypt;
+            return needEncrypt;
         }
 
         public void SetNotifyUrl(string notifyUrl)
@@ -43,7 +40,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
 
         public string GetNotifyUrl()
         {
-            return this.notifyUrl;
+            return notifyUrl;
         }
 
         public void SetReturnUrl(string returnUrl)
@@ -53,7 +50,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
 
         public string GetReturnUrl()
         {
-            return this.returnUrl;
+            return returnUrl;
         }
 
         public void SetTerminalType(string terminalType)
@@ -63,7 +60,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
 
         public string GetTerminalType()
         {
-            return this.terminalType;
+            return terminalType;
         }
 
         public void SetTerminalInfo(string terminalInfo)
@@ -73,7 +70,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
 
         public string GetTerminalInfo()
         {
-            return this.terminalInfo;
+            return terminalInfo;
         }
 
         public void SetProdCode(string prodCode)
@@ -83,7 +80,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
 
         public string GetProdCode()
         {
-            return this.prodCode;
+            return prodCode;
         }
 
         public string GetApiName()
@@ -98,19 +95,21 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
 
         public string GetApiVersion()
         {
-            return this.apiVersion;
+            return apiVersion;
         }
 
         public IDictionary<string, string> GetParameters()
         {
-            var parameters = new AlipayDictionary();
-            parameters.Add("biz_content", this.BizContent);
+            var parameters = new AlipayDictionary
+            {
+                { "biz_content", BizContent }
+            };
             return parameters;
         }
 
         public AlipayObject GetBizModel()
         {
-            return this.bizModel;
+            return bizModel;
         }
 
         public void SetBizModel(AlipayObject bizModel)

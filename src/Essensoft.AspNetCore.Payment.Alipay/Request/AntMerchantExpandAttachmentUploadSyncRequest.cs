@@ -77,7 +77,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
 
         public bool GetNeedEncrypt()
         {
-
             return needEncrypt;
         }
 

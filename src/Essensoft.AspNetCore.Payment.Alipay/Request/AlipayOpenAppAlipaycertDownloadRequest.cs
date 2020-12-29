@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Essensoft.AspNetCore.Payment.Alipay.Response;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Request
 {
@@ -30,7 +29,6 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
 
         public bool GetNeedEncrypt()
         {
-
             return needEncrypt;
         }
 
