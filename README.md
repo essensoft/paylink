@@ -23,9 +23,9 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 
 ## 支持渠道
 
-1. 支付宝 [文档中心](https://openhome.alipay.com/docCenter/docCenter.htm?from=openhomemenu)
+1. 支付宝 [文档中心](https://openhome.alipay.com/docCenter/docCenter.htm)
 
-* 同步 [alipay-sdk-net-4.3.99.ALL](https://github.com/alipay/alipay-sdk-net-all) 所有API.
+* 同步 [alipay-sdk-net-all](https://github.com/alipay/alipay-sdk-net-all) 所有API.
 
 2. 微信支付
 
@@ -44,7 +44,7 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
     - 委托扣款
     - ..
 
-* V3版 [开发文档](https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pages/Overview.shtml)
+* V3版 [开发文档](https://pay.weixin.qq.com/wiki/doc/apiv3/index.shtml)
     - 基础支付
         * 普通支付（直连模式）
         * 普通支付（服务商模式）
