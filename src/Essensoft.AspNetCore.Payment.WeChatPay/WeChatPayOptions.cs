@@ -114,9 +114,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                     Certificate2 = new X509Certificate2(Convert.FromBase64String(Certificate), CertificatePassword);
                 }
             }
-            catch (CryptographicException)
+            catch (CryptographicException ex)
             {
-                throw new WeChatPayException("反序列化证书失败，请确认是否为微信支付签发的有效PKCS#12格式证书。");
+                throw new WeChatPayException($"反序列化证书失败，请确认是否为微信支付签发的有效PKCS#12格式证书。原始异常信息：{ex.Message}");
             }
 
             CertificateSerialNo = Certificate2.GetSerialNumberString();

@@ -75,9 +75,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
                     return new X509Certificate2(Encoding.ASCII.GetBytes(certificate));
                 }
             }
-            catch (CryptographicException)
+            catch (CryptographicException ex)
             {
-                throw new AlipayException("反序列化证书失败，请确认是否为支付宝签发的有效证书。");
+                throw new AlipayException($"反序列化证书失败，请确认是否为支付宝签发的有效证书。原始异常信息：{ex.Message}");
             }
         }
 
@@ -163,9 +163,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
                 {
                     certs.Add(new X509Certificate2(Encoding.ASCII.GetBytes(certStr + "-----END CERTIFICATE-----")));
                 }
-                catch (CryptographicException)
+                catch (CryptographicException ex)
                 {
-                    throw new AlipayException("反序列化证书失败，请确认是否为支付宝签发的有效证书。");
+                    throw new AlipayException($"反序列化证书失败，请确认是否为支付宝签发的有效证书。原始异常信息：{ex.Message}");
                 }
             }
 
