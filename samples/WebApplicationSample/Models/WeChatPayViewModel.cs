@@ -345,6 +345,7 @@ namespace WebApplicationSample.Models
 
     public class WeChatPayProfitSharingViewModel
     {
+        [Required]
         [Display(Name = "transaction_id")]
         public string TransactionId { get; set; }
 
