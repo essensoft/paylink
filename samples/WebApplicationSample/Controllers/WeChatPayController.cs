@@ -127,7 +127,8 @@ namespace WebApplicationSample.Controllers
                 TotalFee = viewModel.TotalFee,
                 SpBillCreateIp = viewModel.SpBillCreateIp,
                 NotifyUrl = viewModel.NotifyUrl,
-                TradeType = viewModel.TradeType
+                TradeType = viewModel.TradeType,
+                ProfitSharing = viewModel.ProfitSharing
             };
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
@@ -580,6 +581,56 @@ namespace WebApplicationSample.Controllers
                 return View();
             }
 
+            return View();
+        }
+
+        /// <summary>
+        /// 添加分账接收方
+        /// </summary>
+        [HttpGet]
+        public IActionResult ProfitSharingAddReceiver()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 添加分账接收方
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> ProfitSharingAddReceiver(WeChatPayProfitSharingAddReceiverViewModel viewModel)
+        {
+            var request = new WeChatPayProfitSharingAddReceiverRequest
+            {
+                Receiver = viewModel.Receiver
+            };
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 单次分账
+        /// </summary>
+        [HttpGet]
+        public IActionResult ProfitSharing()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 单次分账
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> ProfitSharing(WeChatPayProfitSharingViewModel viewModel)
+        {
+            var request = new WeChatPayProfitSharingRequest
+            {
+                TransactionId = viewModel.TransactionId,
+                OutOrderNo = viewModel.OutOrderNo,
+                Receivers = viewModel.Receivers
+            };
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
             return View();
         }
     }

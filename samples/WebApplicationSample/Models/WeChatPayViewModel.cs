@@ -81,6 +81,9 @@ namespace WebApplicationSample.Models
         [Required]
         [Display(Name = "trade_type")]
         public string TradeType { get; set; }
+
+        [Display(Name = "profit_sharing")]
+        public string ProfitSharing { get; set; }
     }
 
     public class WeChatPayAppPayViewModel
@@ -331,5 +334,26 @@ namespace WebApplicationSample.Models
         [Required]
         [Display(Name = "partner_trade_no")]
         public string PartnerTradeNo { get; set; }
+    }
+
+    public class WeChatPayProfitSharingAddReceiverViewModel
+    {
+        [Required]
+        [Display(Name = "receiver")]
+        public string Receiver { get; set; }
+    }
+
+    public class WeChatPayProfitSharingViewModel
+    {
+        [Display(Name = "transaction_id")]
+        public string TransactionId { get; set; }
+
+        [Required]
+        [Display(Name = "out_order_no")]
+        public string OutOrderNo { get; set; }
+
+        [Required]
+        [Display(Name = "receivers")]
+        public string Receivers { get; set; }
     }
 }
