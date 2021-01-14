@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
     {
         /// <summary>
         /// 用户终端IP
-        /// 调用微信支付API的机器IP，支持IPv4和IPv4两种格式的IP地址。
+        /// 调用微信支付API的机器IP，支持IPv4和IPv6两种格式的IP地址。
         /// 示例值：14.23.150.211
         /// </summary>
         [JsonPropertyName("payer_client_ip")]
