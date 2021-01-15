@@ -107,11 +107,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         public DateTimeOffset SuccessTime { get; set; }
 
         /// <summary>
-        /// 支付者
+        /// 支付者信息
         /// 示例值：见请求示例
         /// </summary>
-        [JsonPropertyName("combine_payer_info")]
-        public PayerInfo CombinePayerInfo { get; set; }
+        [JsonPropertyName("payer_info")]
+        public PayerInfo PayerInfo { get; set; }
 
         /// <summary>
         /// 订单金额
