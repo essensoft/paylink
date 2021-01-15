@@ -1,38 +1,38 @@
 <Project>
 
-  <PropertyGroup>
-    <Copyright>Copyright © Essensoft</Copyright>
-    <Authors>Essensoft</Authors>
-    <Product>Essensoft.Payment</Product>
-    <Version>3.2.3</Version>
-    <NoWarn>$(NoWarn);CS1570;CS1591</NoWarn>
-    <Description>Essensoft.AspNetCore.Payment</Description>
-    <PackageIcon>payment-nuget-logo.png</PackageIcon>
-    <PackageProjectUrl>https://github.com/essensoft/payment</PackageProjectUrl>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/essensoft/payment</RepositoryUrl>
-    <PackageLicenseFile>LICENSE</PackageLicenseFile>
-    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)payment.snk</AssemblyOriginatorKeyFile>
-  </PropertyGroup>
+	<PropertyGroup>
+		<Copyright>Copyright © Essensoft</Copyright>
+		<Authors>Essensoft</Authors>
+		<Product>Essensoft.Payment</Product>
+		<Version>3.2.3</Version>
+		<NoWarn>$(NoWarn);CS1570;CS1591</NoWarn>
+		<Description>Essensoft.AspNetCore.Payment</Description>
+		<PackageIcon>payment-nuget-logo.png</PackageIcon>
+		<PackageProjectUrl>https://github.com/essensoft/payment</PackageProjectUrl>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/essensoft/payment</RepositoryUrl>
+		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<EmbedUntrackedSources>true</EmbedUntrackedSources>
+		<IncludeSymbols>true</IncludeSymbols>
+		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
+		<SignAssembly>true</SignAssembly>
+		<AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)payment.snk</AssemblyOriginatorKeyFile>
+	</PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)' == 'Release' AND '$(IsPackable)' != 'false'">
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
-  </PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)' == 'Release' AND '$(IsPackable)' == 'true'">
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)img\payment-nuget-logo.png" Pack="true" PackagePath="\" />
-    <Content Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath="\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="$(MSBuildThisFileDirectory)img\payment-nuget-logo.png" Pack="true" PackagePath="\" />
+		<Content Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath="\" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+	</ItemGroup>
 
 </Project>
