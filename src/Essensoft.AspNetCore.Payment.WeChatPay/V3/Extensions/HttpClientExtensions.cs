@@ -19,7 +19,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
             var url = request.GetRequestUrl();
             var token = BuildToken(url, "GET", null, options);
 
-            client.DefaultRequestHeaders.Add(WeChatPayConsts.Wechatpay_Serial, options.CertificateSerialNo);
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("WECHATPAY2-SHA256-RSA2048", token);
             client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(new ProductHeaderValue("Unknown")));
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
@@ -35,13 +34,17 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
             }
         }
 
-        public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> PostAsync<T>(this HttpClient client, IWeChatPayPostRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
+        public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> PostAsync<T>(this HttpClient client, IWeChatPayPostRequest<T> request, WeChatPayOptions options, string serialNo = "") where T : WeChatPayResponse
         {
             var url = request.GetRequestUrl();
             var content = SerializeQueryModel(request);
             var token = BuildToken(url, "POST", content, options);
 
-            client.DefaultRequestHeaders.Add(WeChatPayConsts.Wechatpay_Serial, options.CertificateSerialNo);
+            if (!string.IsNullOrEmpty(serialNo))
+            {
+                client.DefaultRequestHeaders.Add(WeChatPayConsts.Wechatpay_Serial, serialNo);
+            }
+
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("WECHATPAY2-SHA256-RSA2048", token);
             client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(new ProductHeaderValue("Unknown")));
             client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));

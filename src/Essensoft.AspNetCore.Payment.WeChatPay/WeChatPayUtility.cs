@@ -105,6 +105,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
             return str.Substring(str.Length - len, len);
         }
+
+        public static string BuildSignatureSourceData(string timestamp, string nonce, string body)
+        {
+            return $"{timestamp}\n{nonce}\n{body}\n";
+        }
     }
 }
 
