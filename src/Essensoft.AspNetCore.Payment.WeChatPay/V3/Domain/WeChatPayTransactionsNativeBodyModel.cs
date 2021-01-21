@@ -4,43 +4,27 @@ using System.Text.Json.Serialization;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// APP下单API-请求参数（服务商）
+    /// Native支付-统一下单API - 请求JSON参数
     /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter5_1.shtml
+    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_4_1.shtml
     /// </summary>
-    public class WeChatPayPartnerTransactionsAppModel : WeChatPayObject
+    public class WeChatPayTransactionsNativeBodyModel : WeChatPayObject
     {
         /// <summary>
-        /// 服务商公众号ID
-        /// 服务商申请的公众号或移动应用appid。
-        /// 示例值：wx8888888888888888
+        /// 公众号ID
+        /// 直连商户申请的公众号或移动应用appid。
+        /// 示例值：wxd678efh567hg6787
         /// </summary>
-        [JsonPropertyName("sp_appid")]
-        public string SpAppId { get; set; }
+        [JsonPropertyName("appid")]
+        public string AppId { get; set; }
 
         /// <summary>
-        /// 服务商户号
-        /// 服务商户号，由微信支付生成并下发
+        /// 直连商户号
+        /// 直连商户的商户号，由微信支付生成并下发。
         /// 示例值：1230000109
         /// </summary>
-        [JsonPropertyName("sp_mchid")]
-        public string SpMchId { get; set; }
-
-        /// <summary>
-        /// 子商户公众号ID
-        /// 子商户申请的公众号或移动应用appid。
-        /// 示例值：wxd678efh567hg6999
-        /// </summary>
-        [JsonPropertyName("sub_appid")]
-        public string SubAppId { get; set; }
-
-        /// <summary>
-        /// 子商户号
-        /// 子商户的商户号，有微信支付生成并下发。
-        /// 示例值：1900000109
-        /// </summary>
-        [JsonPropertyName("sub_mchid")]
-        public string SubMchId { get; set; }
+        [JsonPropertyName("mchid")]
+        public string MchId { get; set; }
 
         /// <summary>
         /// 商品描述
@@ -91,13 +75,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// </summary>
         [JsonPropertyName("goods_tag")]
         public string GoodsTag { get; set; }
-
-        /// <summary>
-        /// 结算信息
-        /// 结算信息
-        /// </summary>
-        [JsonPropertyName("settle_info")]
-        public SettleInfo SettleInfo { get; set; }
 
         /// <summary>
         /// 订单金额

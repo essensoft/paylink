@@ -12,6 +12,17 @@
         string GetRequestUrl();
 
         /// <summary>
+        /// 获取QueryModel
+        /// </summary>
+        WeChatPayObject GetQueryModel();
+
+        /// <summary>
+        /// 设置QueryModel
+        /// </summary>
+        /// <param name="queryModel"></param>
+        void SetQueryModel(WeChatPayObject queryModel);
+
+        /// <summary>
         /// 是否需要检查响应内容签名
         /// </summary>
         bool GetNeedCheckSign()

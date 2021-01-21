@@ -1,4 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.WeChatPay.V3.Response;
+﻿using System;
+using Essensoft.AspNetCore.Payment.WeChatPay.V3.Response;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 {
@@ -19,6 +20,16 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
         public string GetRequestUrl()
         {
             return $"https://api.mch.weixin.qq.com/v3/combine-transactions/out-trade-no/{CombineOutTradeNo}";
+        }
+
+        public WeChatPayObject GetQueryModel()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SetQueryModel(WeChatPayObject queryModel)
+        {
+            throw new NotImplementedException();
         }
     }
 }

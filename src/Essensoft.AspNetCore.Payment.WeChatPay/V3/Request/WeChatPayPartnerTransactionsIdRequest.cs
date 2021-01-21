@@ -9,19 +9,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
     /// </summary>
     public class WeChatPayPartnerTransactionsIdRequest : IWeChatPayGetRequest<WeChatPayPartnerTransactionsIdResponse>
     {
-        /// <summary>
-        /// 服务商户号
-        /// 服务商户号，由微信支付生成并下发
-        /// 示例值：1230000109
-        /// </summary>
-        public string SpMchId { get; set; }
-
-        /// <summary>
-        /// 子商户号
-        /// 子商户的商户号，有微信支付生成并下发。
-        /// 示例值：1900000109
-        /// </summary>
-        public string SubMchId { get; set; }
+        private WeChatPayObject queryModel;
 
         /// <summary>
         /// 微信支付订单号
@@ -32,7 +20,17 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 
         public string GetRequestUrl()
         {
-            return $"https://api.mch.weixin.qq.com/v3/pay/partner/transactions/id/{TransactionId}?sp_mchid={SpMchId}&sub_mchid={SubMchId}";
+            return $"https://api.mch.weixin.qq.com/v3/pay/partner/transactions/id/{TransactionId}";
+        }
+
+        public WeChatPayObject GetQueryModel()
+        {
+            return queryModel;
+        }
+
+        public void SetQueryModel(WeChatPayObject queryModel)
+        {
+            this.queryModel = queryModel;
         }
     }
 }

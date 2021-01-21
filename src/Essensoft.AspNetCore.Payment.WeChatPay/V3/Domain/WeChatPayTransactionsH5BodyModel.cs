@@ -4,11 +4,11 @@ using System.Text.Json.Serialization;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// Native支付-统一下单API-请求参数
+    /// H5支付-统一下单API - 请求JSON参数
     /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_4_1.shtml
+    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_3_1.shtml
     /// </summary>
-    public class WeChatPayTransactionsNativeModel : WeChatPayObject
+    public class WeChatPayTransactionsH5BodyModel : WeChatPayObject
     {
         /// <summary>
         /// 公众号ID
