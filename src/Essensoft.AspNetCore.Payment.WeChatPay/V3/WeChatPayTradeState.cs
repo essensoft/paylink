@@ -39,5 +39,10 @@
         /// 支付失败(其他原因，如银行返回失败)
         /// </summary>
         public const string PayError = "PAYERROR";
+
+        /// <summary>
+        /// 已接收，等待扣款
+        /// </summary>
+        public const string Accept = "ACCEPT";
     }
 }

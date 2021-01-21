@@ -16,21 +16,21 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
         /// </summary>
         public string CombineOutTradeNo { get; set; }
 
-        private WeChatPayObject queryModel;
+        private WeChatPayObject bodyModel;
 
         public string GetRequestUrl()
         {
             return $"https://api.mch.weixin.qq.com/v3/combine-transactions/out-trade-no/{CombineOutTradeNo}/close";
         }
 
-        public WeChatPayObject GetQueryModel()
+        public WeChatPayObject GetBodyModel()
         {
-            return queryModel;
+            return bodyModel;
         }
 
-        public void SetQueryModel(WeChatPayObject queryModel)
+        public void SetBodyModel(WeChatPayObject bodyModel)
         {
-            this.queryModel = queryModel;
+            this.bodyModel = bodyModel;
         }
     }
 }

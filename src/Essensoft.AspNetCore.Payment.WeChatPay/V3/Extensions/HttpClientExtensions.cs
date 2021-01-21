@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -7,6 +8,8 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Security;
+using Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain;
+using Essensoft.AspNetCore.Payment.WeChatPay.V3.Request;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
 {
@@ -16,7 +19,33 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
 
         public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> GetAsync<T>(this HttpClient client, IWeChatPayGetRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
         {
-            var url = request.GetRequestUrl();
+            string url;
+
+            if (request is WeChatPayBillDownloadRequest && request.GetQueryModel() is WeChatPayBillDownloadQueryModel queryModel)
+            {
+                url = queryModel.DownloadUrl;
+            }
+
+            if (request is WeChatPayCertificatesRequest)
+            {
+                url = request.GetRequestUrl();
+            }
+            else
+            {
+                url = request.GetRequestUrl();
+
+                if (url.Contains("?"))
+                {
+                    var txtParams = QueryModelConvertToDictionary(request);
+                    url += "&" + WeChatPayUtility.BuildQuery(txtParams);
+                }
+                else
+                {
+                    var txtParams = QueryModelConvertToDictionary(request);
+                    url += "?" + WeChatPayUtility.BuildQuery(txtParams);
+                }
+            }
+
             var token = BuildToken(url, "GET", null, options);
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("WECHATPAY2-SHA256-RSA2048", token);
@@ -37,7 +66,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
         public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> PostAsync<T>(this HttpClient client, IWeChatPayPostRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
         {
             var url = request.GetRequestUrl();
-            var content = SerializeQueryModel(request);
+            var content = SerializeBodyModel(request);
             var token = BuildToken(url, "POST", content, options);
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("WECHATPAY2-SHA256-RSA2048", token);
@@ -59,7 +88,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
         public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> PostAsync<T>(this HttpClient client, IWeChatPayPrivacyPostRequest<T> request, WeChatPayOptions options, string serialNo) where T : WeChatPayResponse
         {
             var url = request.GetRequestUrl();
-            var content = SerializeQueryModel(request);
+            var content = SerializeBodyModel(request);
             var token = BuildToken(url, "POST", content, options);
 
             client.DefaultRequestHeaders.Add(WeChatPayConsts.Wechatpay_Serial, serialNo);
@@ -79,26 +108,39 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
             }
         }
 
-        private static string SerializeQueryModel<T>(IWeChatPayPostRequest<T> request) where T : WeChatPayResponse
+        private static IDictionary<string, string> QueryModelConvertToDictionary<T>(IWeChatPayGetRequest<T> request) where T : WeChatPayResponse
         {
             var queryModel = request.GetQueryModel();
             if (queryModel != null)
             {
-                return JsonSerializer.Serialize(queryModel, queryModel.GetType(), jsonSerializerOptions);
+                var str = JsonSerializer.Serialize(queryModel, queryModel.GetType(), jsonSerializerOptions);
+
+                return JsonSerializer.Deserialize<IDictionary<string, string>>(str, jsonSerializerOptions);
             }
 
             throw new WeChatPayException("QueryModel is null!");
         }
 
-        private static string SerializeQueryModel<T>(IWeChatPayPrivacyPostRequest<T> request) where T : WeChatPayResponse
+        private static string SerializeBodyModel<T>(IWeChatPayPostRequest<T> request) where T : WeChatPayResponse
         {
-            var queryModel = request.GetQueryModel();
-            if (queryModel != null)
+            var bodyModel = request.GetBodyModel();
+            if (bodyModel != null)
             {
-                return JsonSerializer.Serialize(queryModel, queryModel.GetType(), jsonSerializerOptions);
+                return JsonSerializer.Serialize(bodyModel, bodyModel.GetType(), jsonSerializerOptions);
             }
 
-            throw new WeChatPayException("QueryModel is null!");
+            throw new WeChatPayException("BodyModel is null!");
+        }
+
+        private static string SerializeBodyModel<T>(IWeChatPayPrivacyPostRequest<T> request) where T : WeChatPayResponse
+        {
+            var bodyModel = request.GetBodyModel();
+            if (bodyModel != null)
+            {
+                return JsonSerializer.Serialize(bodyModel, bodyModel.GetType(), jsonSerializerOptions);
+            }
+
+            throw new WeChatPayException("BodyModel is null!");
         }
 
         private static string BuildToken(string url, string method, string body, WeChatPayOptions options)

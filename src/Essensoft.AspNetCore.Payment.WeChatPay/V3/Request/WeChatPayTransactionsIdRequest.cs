@@ -9,12 +9,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
     /// </summary>
     public class WeChatPayTransactionsIdRequest : IWeChatPayGetRequest<WeChatPayTransactionsIdResponse>
     {
-        /// <summary>
-        /// 直连商户号
-        /// 直连商户的商户号，由微信支付生成并下发。
-        /// 示例值：1230000109
-        /// </summary>
-        public string MchId { get; set; }
+        private WeChatPayObject queryModel;
 
         /// <summary>
         /// 微信支付订单号
@@ -25,7 +20,17 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 
         public string GetRequestUrl()
         {
-            return $"https://api.mch.weixin.qq.com/v3/pay/transactions/id/{TransactionId}?mchid={MchId}";
+            return $"https://api.mch.weixin.qq.com/v3/pay/transactions/id/{TransactionId}";
+        }
+
+        public WeChatPayObject GetQueryModel()
+        {
+            return queryModel;
+        }
+
+        public void SetQueryModel(WeChatPayObject queryModel)
+        {
+            this.queryModel = queryModel;
         }
     }
 }

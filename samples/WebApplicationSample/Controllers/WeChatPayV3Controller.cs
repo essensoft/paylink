@@ -63,7 +63,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> AppPay(WeChatPayAppPayV3ViewModel viewModel)
         {
-            var model = new WeChatPayTransactionsAppModel
+            var model = new WeChatPayTransactionsAppBodyModel
             {
                 AppId = _optionsAccessor.Value.AppId,
                 MchId = _optionsAccessor.Value.MchId,
@@ -74,7 +74,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var request = new WeChatPayTransactionsAppRequest();
-            request.SetQueryModel(model);
+            request.SetBodyModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -114,7 +114,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> PubPay(WeChatPayPubPayV3ViewModel viewModel)
         {
-            var model = new WeChatPayTransactionsJsApiModel
+            var model = new WeChatPayTransactionsJsApiBodyModel
             {
                 AppId = _optionsAccessor.Value.AppId,
                 MchId = _optionsAccessor.Value.MchId,
@@ -126,7 +126,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var request = new WeChatPayTransactionsJsApiRequest();
-            request.SetQueryModel(model);
+            request.SetBodyModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -166,7 +166,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> QrCodePay(WeChatPayQrCodePayV3ViewModel viewModel)
         {
-            var model = new WeChatPayTransactionsNativeModel
+            var model = new WeChatPayTransactionsNativeBodyModel
             {
                 AppId = _optionsAccessor.Value.AppId,
                 MchId = _optionsAccessor.Value.MchId,
@@ -177,7 +177,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var request = new WeChatPayTransactionsNativeRequest();
-            request.SetQueryModel(model);
+            request.SetBodyModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -203,7 +203,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> H5Pay(WeChatPayH5PayV3ViewModel viewModel)
         {
-            var model = new WeChatPayTransactionsH5Model
+            var model = new WeChatPayTransactionsH5BodyModel
             {
                 AppId = _optionsAccessor.Value.AppId,
                 MchId = _optionsAccessor.Value.MchId,
@@ -215,7 +215,7 @@ namespace WebApplicationSample.Controllers
             };
 
             var request = new WeChatPayTransactionsH5Request();
-            request.SetQueryModel(model);
+            request.SetBodyModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -241,11 +241,17 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> QueryByTransactionId(WeChatPayQueryByTransactionIdViewModel viewModel)
         {
-            var request = new WeChatPayTransactionsIdRequest
+            var model = new WeChatPayTransactionsIdQueryModel
             {
-                TransactionId = viewModel.TransactionId,
                 MchId = _optionsAccessor.Value.MchId,
             };
+
+            var request = new WeChatPayTransactionsIdRequest
+            {
+                TransactionId = viewModel.TransactionId
+            };
+
+            request.SetQueryModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -269,11 +275,17 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> QueryByOutTradeNo(WeChatPayQueryByOutTradeNoViewModel viewModel)
         {
+            var model = new WeChatPayTransactionsOutTradeNoQueryModel
+            {
+                MchId = _optionsAccessor.Value.MchId,
+            };
+
             var request = new WeChatPayTransactionsOutTradeNoRequest
             {
                 OutTradeNo = viewModel.OutTradeNo,
-                MchId = _optionsAccessor.Value.MchId,
             };
+
+            request.SetQueryModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -297,7 +309,7 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> OutTradeNoClose(WeChatPayOutTradeNoCloseViewModel viewModel)
         {
-            var model = new WeChatPayTransactionsOutTradeNoCloseModel
+            var model = new WeChatPayTransactionsOutTradeNoCloseBodyModel
             {
                 MchId = _optionsAccessor.Value.MchId,
             };
@@ -307,7 +319,7 @@ namespace WebApplicationSample.Controllers
                 OutTradeNo = viewModel.OutTradeNo,
             };
 
-            request.SetQueryModel(model);
+            request.SetBodyModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -331,10 +343,14 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> TradeBill(WeChatPayTradeBillViewModel viewModel)
         {
-            var request = new WeChatPayBillTradeBillRequest
+            var model = new WeChatPayBillTradeBillQueryModel
             {
                 BillDate = viewModel.BillDate
             };
+
+            var request = new WeChatPayBillTradeBillRequest();
+
+            request.SetQueryModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -358,10 +374,13 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> FundflowBill(WeChatPayFundflowBillViewModel viewModel)
         {
-            var request = new WeChatPayBillFundflowBillRequest
+            var model = new WeChatPayBillFundflowBillQueryModel
             {
                 BillDate = viewModel.BillDate
             };
+
+            var request = new WeChatPayBillFundflowBillRequest();
+            request.SetQueryModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
@@ -385,10 +404,13 @@ namespace WebApplicationSample.Controllers
         [HttpPost]
         public async Task<IActionResult> BillDownload(WeChatPayBillDownloadViewModel viewModel)
         {
-            var request = new WeChatPayBillDownloadRequest
+            var model = new WeChatPayBillDownloadQueryModel()
             {
                 DownloadUrl = viewModel.DownloadUrl
             };
+
+            var request = new WeChatPayBillDownloadRequest();
+            request.SetQueryModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 

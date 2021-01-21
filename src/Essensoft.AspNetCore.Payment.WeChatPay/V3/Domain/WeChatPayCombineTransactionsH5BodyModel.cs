@@ -5,12 +5,11 @@ using System.Text.Json.Serialization;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// 合单JSAPI下单API、合单小程序下单API-请求参数（电商平台、服务商、直连商户）
-    /// 最新更新时间：2020.05.21
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_3.shtml
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_4.shtml
+    /// 合单H5下单API（电商平台、服务商、直连商户） - 请求JSON参数
+    /// 最新更新时间：2020.06.09
+    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_2.shtml
     /// </summary>
-    public class WeChatPayCombineTransactionsJsApiModel : WeChatPayObject
+    public class WeChatPayCombineTransactionsH5BodyModel : WeChatPayObject
     {
         /// <summary>
         /// 合单商户appid
@@ -41,7 +40,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// 支付场景描述
         /// </summary>
         [JsonPropertyName("scene_info")]
-        public CombineSceneInfo SceneInfo { get; set; }
+        public CombineH5SceneInfo SceneInfo { get; set; }
 
         /// <summary>
         /// 子单信息
@@ -49,13 +48,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// </summary>
         [JsonPropertyName("sub_orders")]
         public List<CombineSubOrderInfo> SubOrders { get; set; }
-
-        /// <summary>
-        /// 支付者
-        /// 支付者信息
-        /// </summary>
-        [JsonPropertyName("combine_payer_info")]
-        public PayerInfo CombinePayerInfo { get; set; }
 
         /// <summary>
         /// 交易起始时间

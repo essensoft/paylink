@@ -151,7 +151,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 
             var cert = await _platformCertificateManager.GetCertificateAsync(this, options);
 
-            EncryptPrivacyProperty(cert.Certificate.GetRSAPublicKey(), request.GetQueryModel());
+            EncryptPrivacyProperty(cert.Certificate.GetRSAPublicKey(), request.GetBodyModel());
 
             var client = _httpClientFactory.CreateClient(Name);
             var (headers, body, statusCode) = await client.PostAsync(request, options, cert.SerialNo);

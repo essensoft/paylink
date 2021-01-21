@@ -5,11 +5,11 @@ using System.Text.Json.Serialization;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// 合单Native下单API-请求参数（电商平台、服务商、直连商户）
-    /// 最新更新时间：2020.05.14
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_5.shtml
+    /// 合单APP下单API（电商平台、服务商、直连商户） - 请求JSON参数
+    /// 最新更新时间：2020.05.21
+    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_1.shtml
     /// </summary>
-    public class WeChatPayCombineTransactionsNativeModel : WeChatPayObject
+    public class WeChatPayCombineTransactionsAppBodyModel : WeChatPayObject
     {
         /// <summary>
         /// 合单商户appid
@@ -48,6 +48,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// </summary>
         [JsonPropertyName("sub_orders")]
         public List<CombineSubOrderInfo> SubOrders { get; set; }
+
+        /// <summary>
+        /// 支付者
+        /// 支付者信息
+        /// </summary>
+        [JsonPropertyName("combine_payer_info")]
+        public PayerInfo CombinePayerInfo { get; set; }
 
         /// <summary>
         /// 交易起始时间
