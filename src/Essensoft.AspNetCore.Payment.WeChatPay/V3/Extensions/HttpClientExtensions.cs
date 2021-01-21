@@ -34,16 +34,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
             }
         }
 
-        public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> PostAsync<T>(this HttpClient client, IWeChatPayPostRequest<T> request, WeChatPayOptions options, string serialNo = "") where T : WeChatPayResponse
+        public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> PostAsync<T>(this HttpClient client, IWeChatPayPostRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
         {
             var url = request.GetRequestUrl();
             var content = SerializeQueryModel(request);
             var token = BuildToken(url, "POST", content, options);
-
-            if (!string.IsNullOrEmpty(serialNo))
-            {
-                client.DefaultRequestHeaders.Add(WeChatPayConsts.Wechatpay_Serial, serialNo);
-            }
 
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("WECHATPAY2-SHA256-RSA2048", token);
             client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(new ProductHeaderValue("Unknown")));
@@ -61,7 +56,41 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
             }
         }
 
+        public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> PostAsync<T>(this HttpClient client, IWeChatPayPrivacyPostRequest<T> request, WeChatPayOptions options, string serialNo) where T : WeChatPayResponse
+        {
+            var url = request.GetRequestUrl();
+            var content = SerializeQueryModel(request);
+            var token = BuildToken(url, "POST", content, options);
+
+            client.DefaultRequestHeaders.Add(WeChatPayConsts.Wechatpay_Serial, serialNo);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("WECHATPAY2-SHA256-RSA2048", token);
+            client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(new ProductHeaderValue("Unknown")));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            using (var reqContent = new StringContent(content, Encoding.UTF8, "application/json"))
+            using (var resp = await client.PostAsync(url, reqContent))
+            using (var respContent = resp.Content)
+            {
+                var headers = GetWeChatPayHeadersFromResponse(resp);
+                var body = await respContent.ReadAsStringAsync();
+                var statusCode = (int)resp.StatusCode;
+
+                return (headers, body, statusCode);
+            }
+        }
+
         private static string SerializeQueryModel<T>(IWeChatPayPostRequest<T> request) where T : WeChatPayResponse
+        {
+            var queryModel = request.GetQueryModel();
+            if (queryModel != null)
+            {
+                return JsonSerializer.Serialize(queryModel, queryModel.GetType(), jsonSerializerOptions);
+            }
+
+            throw new WeChatPayException("QueryModel is null!");
+        }
+
+        private static string SerializeQueryModel<T>(IWeChatPayPrivacyPostRequest<T> request) where T : WeChatPayResponse
         {
             var queryModel = request.GetQueryModel();
             if (queryModel != null)
