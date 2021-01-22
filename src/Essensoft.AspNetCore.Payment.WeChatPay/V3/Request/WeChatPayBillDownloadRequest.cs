@@ -10,6 +10,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
     /// </summary>
     public class WeChatPayBillDownloadRequest : IWeChatPayGetRequest<WeChatPayBillDownloadResponse>
     {
+        private WeChatPayObject queryModel;
+
         public string GetRequestUrl()
         {
             throw new NotImplementedException();
@@ -17,12 +19,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 
         public WeChatPayObject GetQueryModel()
         {
-            throw new NotImplementedException();
+            return queryModel;
         }
 
         public void SetQueryModel(WeChatPayObject queryModel)
         {
-            throw new NotImplementedException();
+            this.queryModel = queryModel;
         }
 
         public bool GetNeedCheckSign()
