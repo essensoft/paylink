@@ -25,8 +25,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
             {
                 url = queryModel.DownloadUrl;
             }
-
-            if (request is WeChatPayCertificatesRequest)
+            else if (request is WeChatPayCertificatesRequest)
             {
                 url = request.GetRequestUrl();
             }
