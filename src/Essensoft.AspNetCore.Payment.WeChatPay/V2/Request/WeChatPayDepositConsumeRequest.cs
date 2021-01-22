@@ -33,7 +33,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
         /// </summary>
         public string FeeType { get; set; }
 
-
         #region IWeChatPayRequest Members
 
         private string requestUrl = "https://api.mch.weixin.qq.com/deposit/consume";
