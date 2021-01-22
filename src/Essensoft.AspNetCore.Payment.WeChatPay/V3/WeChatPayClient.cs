@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net.Http;
-using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
@@ -194,45 +193,110 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 
         private static void EncryptPrivacyProperty(RSA rsa, WeChatPayObject model)
         {
-            var modelType = model.GetType();
-            var props0 = modelType.GetProperties();
+            var props0 = model.GetType().GetProperties();
             foreach (var prop0 in props0)
             {
-                var obj0 = prop0.GetValue(model, null);
-                if (prop0.PropertyType == typeof(string) && prop0.IsDefined(typeof(WeChatPayPrivacyPropertyAttribute)))
+                if (prop0.PropertyType.IsValueType) // 跳过值类型
                 {
-                    if (obj0 is string str)
+                    continue;
+                }
+
+                if (prop0.PropertyType == typeof(string)) // 为 string 类型
+                {
+                    if (prop0.IsDefined(typeof(WeChatPayPrivacyPropertyAttribute), false))
                     {
-                        var encStr = OaepSHA1WithRSA.Encrypt(rsa, str);
-                        prop0.SetValue(model, encStr, null);
+                        var obj0 = prop0.GetValue(model, null);
+                        if (obj0 is string str && !string.IsNullOrEmpty(str))
+                        {
+                            var encStr = OaepSHA1WithRSA.Encrypt(rsa, str);
+                            prop0.SetValue(model, encStr, null);
+                        }
                     }
                 }
                 else if (prop0.PropertyType.IsClass)
                 {
+                    var obj0 = prop0.GetValue(model, null);
+                    if (obj0 is null) // 跳过空值
+                    {
+                        continue;
+                    }
+
                     var props1 = prop0.PropertyType.GetProperties();
                     foreach (var prop1 in props1)
                     {
-                        var obj1 = prop1.GetValue(obj0, null);
-                        if (prop1.PropertyType == typeof(string) && prop1.IsDefined(typeof(WeChatPayPrivacyPropertyAttribute)))
+                        if (prop1.PropertyType.IsValueType) // 跳过值类型
                         {
-                            if (obj1 is string str)
+                            continue;
+                        }
+
+                        if (prop1.PropertyType == typeof(string)) // 为 string 类型
+                        {
+                            if (prop1.IsDefined(typeof(WeChatPayPrivacyPropertyAttribute), false))
                             {
-                                var encStr = OaepSHA1WithRSA.Encrypt(rsa, str);
-                                prop1.SetValue(obj0, encStr, null);
+                                var obj1 = prop1.GetValue(obj0, null);
+                                if (obj1 is string str && !string.IsNullOrEmpty(str))
+                                {
+                                    var encStr = OaepSHA1WithRSA.Encrypt(rsa, str);
+                                    prop1.SetValue(obj0, encStr, null);
+                                }
                             }
                         }
                         else if (prop1.PropertyType.IsClass)
                         {
+                            var obj1 = prop1.GetValue(obj0, null);
+                            if (obj1 is null) // 跳过空值
+                            {
+                                continue;
+                            }
+
                             var props2 = prop1.PropertyType.GetProperties();
                             foreach (var prop2 in props2)
                             {
-                                var obj2 = prop2.GetValue(obj1, null);
-                                if (prop2.PropertyType == typeof(string) && prop2.IsDefined(typeof(WeChatPayPrivacyPropertyAttribute)))
+                                if (prop2.PropertyType.IsValueType) // 跳过值类型
                                 {
-                                    if (obj2 is string str)
+                                    continue;
+                                }
+
+                                if (prop2.PropertyType == typeof(string)) // 为 string 类型
+                                {
+                                    if (prop2.IsDefined(typeof(WeChatPayPrivacyPropertyAttribute), false))
                                     {
-                                        var encStr = OaepSHA1WithRSA.Encrypt(rsa, str);
-                                        prop2.SetValue(obj1, encStr, null);
+                                        var obj2 = prop2.GetValue(obj1, null);
+                                        if (obj2 is string str && !string.IsNullOrEmpty(str))
+                                        {
+                                            var encStr = OaepSHA1WithRSA.Encrypt(rsa, str);
+                                            prop2.SetValue(obj1, encStr, null);
+                                        }
+                                    }
+                                }
+                                else if (prop2.PropertyType.IsClass)
+                                {
+                                    var obj2 = prop2.GetValue(obj1, null);
+                                    if (obj2 is null) // 跳过空值
+                                    {
+                                        continue;
+                                    }
+
+                                    var props3 = prop2.PropertyType.GetProperties();
+                                    foreach (var prop3 in props3)
+                                    {
+                                        if (prop3.PropertyType.IsValueType) // 跳过值类型
+                                        {
+                                            continue;
+                                        }
+
+                                        if (prop3.PropertyType == typeof(string)) // 为 string 类型
+                                        {
+                                            if (prop3.IsDefined(typeof(WeChatPayPrivacyPropertyAttribute), false))
+                                            {
+                                                var obj3 = prop3.GetValue(obj2, null);
+                                                if (obj3 is string str && !string.IsNullOrEmpty(str))
+                                                {
+                                                    var encStr = OaepSHA1WithRSA.Encrypt(rsa, str);
+                                                    prop3.SetValue(obj2, encStr, null);
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
