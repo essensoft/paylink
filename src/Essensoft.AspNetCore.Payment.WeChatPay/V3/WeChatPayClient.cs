@@ -192,7 +192,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 
         #region Helper
 
-        public static void EncryptPrivacyProperty(RSA rsa, WeChatPayObject model)
+        private static void EncryptPrivacyProperty(RSA rsa, WeChatPayObject model)
         {
             var modelType = model.GetType();
             var props0 = modelType.GetProperties();
