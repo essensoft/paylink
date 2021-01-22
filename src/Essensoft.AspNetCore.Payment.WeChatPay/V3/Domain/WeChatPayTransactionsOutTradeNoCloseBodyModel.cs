@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// 关单API - 请求JSON参数
+    /// 关单API- 请求JSON参数
     /// 最新更新时间：2020.05.26
     /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_3.shtml
     /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_3.shtml

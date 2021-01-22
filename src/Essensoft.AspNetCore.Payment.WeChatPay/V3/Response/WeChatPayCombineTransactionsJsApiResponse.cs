@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Response
 {
     /// <summary>
-    /// 合单JSAPI支付API、合单小程序支付API-返回参数（电商平台、服务商、直连商户）
+    /// 合单JSAPI支付API、合单小程序支付API（电商平台、服务商、直连商户）- 返回参数
     /// 最新更新时间：2020.05.21
     /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_3.shtml
     /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_4.shtml
