@@ -1,5 +1,4 @@
-﻿using System.Text;
-using Essensoft.AspNetCore.Payment.Alipay;
+﻿using Essensoft.AspNetCore.Payment.Alipay;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
