@@ -7,8 +7,6 @@ namespace Microsoft.Extensions.DependencyInjection
     {
         public static void AddAlipay(this IServiceCollection services)
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
             services.AddHttpClient(nameof(AlipayClient));
             services.AddHttpClient(nameof(AlipayMobilePublicMultiMediaClient));
 
