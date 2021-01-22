@@ -4,7 +4,7 @@ using Essensoft.AspNetCore.Payment.WeChatPay.V3.Response;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 {
     /// <summary>
-    /// 查询申请单状态API（普通服务商）
+    /// 商户进件 - 查询申请单状态API（普通服务商）
     /// 最新更新时间：2020.2.11
     /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/tool/applyment4sub/chapter3_2.shtml
     /// </summary>
