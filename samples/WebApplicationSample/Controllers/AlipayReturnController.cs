@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Alipay;
 using Essensoft.AspNetCore.Payment.Alipay.Notify;
 using Microsoft.AspNetCore.Mvc;
@@ -31,8 +32,9 @@ namespace WebApplicationSample.Controllers
                 ViewData["response"] = "支付成功";
                 return View();
             }
-            catch
+            catch (AlipayException ex)
             {
+                Console.WriteLine("出现异常: " + ex.Message);
                 ViewData["response"] = "出现错误";
                 return View();
             }
@@ -51,8 +53,9 @@ namespace WebApplicationSample.Controllers
                 ViewData["response"] = "支付成功";
                 return View();
             }
-            catch
+            catch (AlipayException ex)
             {
+                Console.WriteLine("出现异常: " + ex.Message);
                 ViewData["response"] = "出现错误";
                 return View();
             }

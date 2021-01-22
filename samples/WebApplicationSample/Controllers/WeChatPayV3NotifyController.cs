@@ -43,8 +43,9 @@ namespace WebApplicationSample.Controllers
 
                 return WeChatPayNotifyResult.Failure;
             }
-            catch
+            catch (WeChatPayException ex)
             {
+                Console.WriteLine("出现异常: " + ex.Message);
                 return WeChatPayNotifyResult.Failure;
             }
         }
