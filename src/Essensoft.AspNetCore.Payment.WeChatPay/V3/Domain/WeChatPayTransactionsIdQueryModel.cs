@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// 查询订单API - 微信支付订单号查询 - 请求URL参数
+    /// 查询订单API - 微信支付订单号查询- 请求URL参数
     /// 最新更新时间：2021.1.14
     /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_2.shtml
     /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_2.shtml

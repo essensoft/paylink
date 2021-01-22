@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// 合单JSAPI下单API、合单小程序下单API（电商平台、服务商、直连商户） - 请求JSON参数
+    /// 合单JSAPI下单API、合单小程序下单API（电商平台、服务商、直连商户）- 请求JSON参数
     /// 最新更新时间：2020.05.21
     /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_3.shtml
     /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_4.shtml
