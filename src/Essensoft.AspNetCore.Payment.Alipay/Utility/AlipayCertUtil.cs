@@ -88,7 +88,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         public static string GetCertSN(X509Certificate2 certificate)
         {
             // 删除逗号后面的空格
-            var issuer = certificate.Issuer.ToString().Replace(", ", ",");
+            var issuer = certificate.Issuer.Replace(", ", ",");
 
             //提取出的证书的issuerDN本身是以CN开头的，则无需逆序，直接返回
             if (issuer.StartsWith("CN", StringComparison.Ordinal))
