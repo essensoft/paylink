@@ -19,8 +19,12 @@ namespace Essensoft.AspNetCore.Payment.Security
 
             using (var hmacSha256 = new System.Security.Cryptography.HMACSHA256(Encoding.UTF8.GetBytes(key)))
             {
-                var hsah = hmacSha256.ComputeHash(Encoding.UTF8.GetBytes(data));
-                return BitConverter.ToString(hsah).Replace("-", "");
+                var hash = hmacSha256.ComputeHash(Encoding.UTF8.GetBytes(data));
+#if NET5_0
+                return Convert.ToHexString(hash);
+#else
+                return BitConverter.ToString(hash).Replace("-", "");
+#endif
             }
         }
     }

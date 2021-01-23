@@ -14,8 +14,12 @@ namespace Essensoft.AspNetCore.Payment.Security
 
             using (var md5 = System.Security.Cryptography.MD5.Create())
             {
-                var hsah = md5.ComputeHash(Encoding.UTF8.GetBytes(data));
-                return BitConverter.ToString(hsah).Replace("-", "");
+                var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(data));
+#if NET5_0
+                return Convert.ToHexString(hash);
+#else
+                return BitConverter.ToString(hash).Replace("-", "");
+#endif
             }
         }
     }
