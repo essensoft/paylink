@@ -7,7 +7,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
     /// 最新更新时间：最新更新时间：2019.09.09
     /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/tool/applyment4sub/chapter3_3.shtml
     /// </summary>
-    public class WeChatPayApply4SubSubMerchantsSubMchIdModifySettlementBodyModel
+    public class WeChatPayApply4SubSubMerchantsSubMchIdModifySettlementBodyModel : WeChatPayObject
     {
         /// <summary>
         /// 账户类型
