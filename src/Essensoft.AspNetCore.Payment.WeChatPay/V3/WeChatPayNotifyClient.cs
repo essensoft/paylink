@@ -116,9 +116,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
             }
 
             var cert = await _platformCertificateManager.LoadCertificateAsync(_client, options, headers.Serial);
-            var signatureSourceData = WeChatPayUtility.BuildSignatureSourceData(headers.Timestamp, headers.Nonce, body);
-
-            if (!SHA256WithRSA.Verify(cert.Certificate.GetRSAPublicKey(), signatureSourceData, headers.Signature))
+            var signSourceData = WeChatPayUtility.BuildSignatureSourceData(headers.Timestamp, headers.Nonce, body);
+            var signCheck = SHA256WithRSA.Verify(cert.Certificate.GetRSAPublicKey(), signSourceData, headers.Signature);
+            if (!signCheck)
             {
                 throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
             }
