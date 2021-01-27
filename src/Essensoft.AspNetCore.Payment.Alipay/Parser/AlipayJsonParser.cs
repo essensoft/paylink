@@ -150,9 +150,9 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
             }
 
             var item = ParseEncryptData(request, body);
-            var bodyIndexContent = body.Substring(0, item.startIndex);
-            var bodyEndexContent = body[item.endIndex..];
-            var bizContent = AES.Decrypt(item.encryptContent, encryptKey, AlipaySignature.AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
+            var bodyIndexContent = body[0..item.StartIndex];
+            var bodyEndexContent = body[item.EndIndex..];
+            var bizContent = AES.Decrypt(item.EncryptContent, encryptKey, AlipaySignature.AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
 
             return bodyIndexContent + bizContent + bodyEndexContent;
         }
@@ -195,15 +195,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
                 signDataEndIndex = body.Length - 1;
             }
 
-            var length = signDataEndIndex - signDataStartIndex;
-
-            var encyptContent = body.Substring(signDataStartIndex + 1, length - 2);
-
             var item = new EncryptParseItem
             {
-                encryptContent = encyptContent,
-                startIndex = signDataStartIndex,
-                endIndex = signDataEndIndex
+                EncryptContent = body[(signDataStartIndex + 1)..(signDataEndIndex - 1)],
+                StartIndex = signDataStartIndex,
+                EndIndex = signDataEndIndex
             };
             return item;
         }
