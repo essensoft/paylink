@@ -14,15 +14,21 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// <returns>XML格式的请求数据</returns>
         public static string BuildContent(IDictionary<string, string> dictionary)
         {
-            var content = new StringBuilder("<xml>");
+            if (dictionary == null || dictionary.Count == 0)
+            {
+                throw new ArgumentNullException(nameof(dictionary));
+            }
+
+            var sb = new StringBuilder("<xml>");
             foreach (var iter in dictionary)
             {
                 if (!string.IsNullOrEmpty(iter.Value))
                 {
-                    content.Append("<" + iter.Key + ">" + "<![CDATA[" + iter.Value + "]]></" + iter.Key + ">");
+                    sb.Append("<" + iter.Key + ">" + "<![CDATA[" + iter.Value + "]]></" + iter.Key + ">");
                 }
             }
-            return content.Append("</xml>").ToString();
+
+            return sb.Append("</xml>").ToString();
         }
 
         /// <summary>
@@ -45,7 +51,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
                     sb.Append(iter.Key + "=" + WebUtility.UrlEncode(iter.Value) + "&");
                 }
             }
-            return sb.ToString().Substring(0, sb.Length - 1);
+
+            return sb.ToString()[0..^1];
         }
 
         public static string GetTimeStamp()
@@ -60,17 +67,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
 
         public static string RemovePreFix(this string str, params string[] preFixes)
         {
-            if (str == null)
-            {
-                return null;
-            }
-
             if (string.IsNullOrEmpty(str))
             {
                 return string.Empty;
             }
 
-            if (preFixes.IsNullOrEmpty())
+            if (preFixes == null || preFixes.Length <= 0)
             {
                 return str;
             }
@@ -79,31 +81,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             {
                 if (str.StartsWith(preFix))
                 {
-                    return str.Right(str.Length - preFix.Length);
+                    return str[preFix.Length..];
                 }
             }
 
             return str;
-        }
-
-        public static bool IsNullOrEmpty<T>(this ICollection<T> source)
-        {
-            return source == null || source.Count <= 0;
-        }
-
-        public static string Right(this string str, int len)
-        {
-            if (str == null)
-            {
-                throw new ArgumentNullException(nameof(str));
-            }
-
-            if (str.Length < len)
-            {
-                throw new ArgumentException("len argument can not be bigger than given string's length!");
-            }
-
-            return str.Substring(str.Length - len, len);
         }
 
         public static string BuildSignatureSourceData(string timestamp, string nonce, string body)

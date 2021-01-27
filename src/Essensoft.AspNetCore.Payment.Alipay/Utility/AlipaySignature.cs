@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
                 }
             }
 
-            return sb.Remove(sb.Length - 1, 1).ToString();
+            return sb.ToString()[0..^1];
         }
 
         public static string RSASignContent(string data, string privateKey, string signType)
@@ -101,6 +101,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
             {
                 ++beginPosition;
             }
+
             return beginPosition;
         }
 
@@ -128,6 +129,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
                     return index + 1;
                 }
             }
+
             //如果没有找到第2个双引号，说明验签内容片段提取失败，直接尝试选取剩余整个响应字符串进行验签
             return responseString.Length;
         }

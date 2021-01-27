@@ -1,9 +1,11 @@
 ﻿namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 {
-    internal class EncryptParseItem
+    public class EncryptParseItem
     {
-        public string encryptContent;
-        public int endIndex;
-        public int startIndex;
+        public string EncryptContent { get; set; }
+
+        public int EndIndex { get; set; }
+
+        public int StartIndex { get; set; }
     }
 }

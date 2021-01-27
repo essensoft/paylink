@@ -22,15 +22,16 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
                 throw new ArgumentNullException(nameof(dictionary));
             }
 
-            var content = new StringBuilder();
+            var sb = new StringBuilder();
             foreach (var iter in dictionary)
             {
                 if (!string.IsNullOrEmpty(iter.Value))
                 {
-                    content.Append(iter.Key + "=" + WebUtility.UrlEncode(iter.Value) + "&");
+                    sb.Append(iter.Key + "=" + WebUtility.UrlEncode(iter.Value) + "&");
                 }
             }
-            return content.ToString().Substring(0, content.Length - 1);
+
+            return sb.ToString()[0..^1];
         }
 
         /// <summary>
@@ -48,6 +49,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
                     dic.Add(kv.Key, kv.Value);
                 }
             }
+
             return dic;
         }
 
