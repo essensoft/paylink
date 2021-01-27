@@ -103,7 +103,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
         private static string GetSignSourceData(IAlipayRequest<T> request, string body)
         {
-            var rootNode = request.GetApiName().Replace(".", "_") + AlipayConstants.RESPONSE_SUFFIX;
+            var rootNode = request.GetApiName().Replace('.', '_') + AlipayConstants.RESPONSE_SUFFIX;
             var errorRootNode = AlipayConstants.ERROR_RESPONSE;
 
             var indexOfRootNode = body.IndexOf(rootNode, StringComparison.Ordinal);
@@ -164,7 +164,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
         /// <param name="body"></param>
         private static EncryptParseItem ParseEncryptData(IAlipayRequest<T> request, string body)
         {
-            var rootNode = request.GetApiName().Replace(".", "_") + AlipayConstants.RESPONSE_SUFFIX;
+            var rootNode = request.GetApiName().Replace('.', '_') + AlipayConstants.RESPONSE_SUFFIX;
             var errorRootNode = AlipayConstants.ERROR_RESPONSE;
 
             var indexOfRootNode = body.IndexOf(rootNode, StringComparison.Ordinal);
@@ -186,14 +186,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
         private static EncryptParseItem ParseEncryptItem(string body, string rootNode, int indexOfRootNode)
         {
             var signDataStartIndex = indexOfRootNode + rootNode.Length + 2;
-            var indexOfSign = body.IndexOf($"\"{AlipayConstants.SIGN}\"", StringComparison.Ordinal);
-
-            var signDataEndIndex = indexOfSign - 1;
-
-            if (signDataEndIndex < 0)
-            {
-                signDataEndIndex = body.Length - 1;
-            }
+            var signDataEndIndex = body.IndexOf('\"', signDataStartIndex + 1) + 1;
 
             var item = new EncryptParseItem
             {
