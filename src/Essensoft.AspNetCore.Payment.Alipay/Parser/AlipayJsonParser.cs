@@ -185,14 +185,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 
         private static EncryptParseItem ParseEncryptItem(string body, string rootNode, int indexOfRootNode)
         {
-            var signDataStartIndex = indexOfRootNode + rootNode.Length + 2;
-            var signDataEndIndex = body.IndexOf('\"', signDataStartIndex + 1) + 1;
+            var encryptContentStartIndex = indexOfRootNode + rootNode.Length + 2;
+            var encryptContentEndIndex = body.IndexOf('\"', encryptContentStartIndex + 1) + 1;
 
             var item = new EncryptParseItem
             {
-                EncryptContent = body[(signDataStartIndex + 1)..(signDataEndIndex - 1)],
-                StartIndex = signDataStartIndex,
-                EndIndex = signDataEndIndex
+                EncryptContent = body[(encryptContentStartIndex + 1)..(encryptContentEndIndex - 1)],
+                StartIndex = encryptContentStartIndex,
+                EndIndex = encryptContentEndIndex
             };
             return item;
         }
