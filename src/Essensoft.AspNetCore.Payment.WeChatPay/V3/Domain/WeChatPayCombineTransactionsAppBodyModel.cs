@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
@@ -62,7 +61,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// 示例值：2019-12-31T15:59:60+08:00
         /// </summary>
         [JsonPropertyName("time_start")]
-        public DateTimeOffset TimeStart { get; set; }
+        public string TimeStart { get; set; }
 
         /// <summary>
         /// 交易结束时间
@@ -70,7 +69,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// 示例值：2019-12-31T15:59:60+08:00
         /// </summary>
         [JsonPropertyName("time_expire")]
-        public DateTimeOffset TimeExpire { get; set; }
+        public string TimeExpire { get; set; }
 
         /// <summary>
         /// 通知地址

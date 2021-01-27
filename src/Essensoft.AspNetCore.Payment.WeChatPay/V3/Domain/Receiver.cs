@@ -1,5 +1,4 @@
-﻿using System;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
@@ -41,6 +40,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// 成功时间，Rfc3339标准
         /// </summary>
         [JsonPropertyName("success_time")]
-        public DateTimeOffset SuccessTime { get; set; }
+        public string SuccessTime { get; set; }
     }
 }
