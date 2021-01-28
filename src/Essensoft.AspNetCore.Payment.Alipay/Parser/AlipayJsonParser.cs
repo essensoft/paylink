@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Security.Cryptography;
 using System.Text.Json;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
-using Essensoft.AspNetCore.Payment.Security;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Parser
 {
@@ -150,11 +148,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
             }
 
             var item = ParseEncryptData(request, body);
-            var bodyIndexContent = body[0..item.StartIndex];
-            var bodyEndexContent = body[item.EndIndex..];
-            var bizContent = AES.Decrypt(item.EncryptContent, encryptKey, AlipaySignature.AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
+            var bodyStartContent = body[0..item.StartIndex];
+            var bodyEndContent = body[item.EndIndex..];
+            var bizContent = AlipaySignature.AESDencrypt(item.EncryptContent, encryptKey);
 
-            return bodyIndexContent + bizContent + bodyEndexContent;
+            return bodyStartContent + bizContent + bodyEndContent;
         }
 
         /// <summary>
