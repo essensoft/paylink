@@ -3,9 +3,9 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 {
     /// <summary>
-    /// 商户进件 - 提交申请单API（普通服务商）
+    /// 商户进件（普通服务商）- 提交申请单API
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/tool/applyment4sub/chapter3_1.shtml">提交申请单API</a></para>
     /// 最新更新时间：2019.04.10
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/tool/applyment4sub/chapter3_1.shtml
     /// </summary>
     public class WeChatPayApplyment4SubApplymentRequest : IWeChatPayPrivacyPostRequest<WeChatPayApplyment4SubApplymentResponse>
     {

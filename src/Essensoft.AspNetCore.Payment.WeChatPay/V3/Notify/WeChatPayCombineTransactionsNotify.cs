@@ -5,9 +5,9 @@ using Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
 {
     /// <summary>
-    /// 合单支付-支付通知API (电商平台、服务商、直连商户)
+    /// 合单支付 - 支付通知API (电商平台、服务商、直连商户)
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/combine/chapter3_7.shtml">合单支付 - 支付通知API</a></para>
     /// 最新更新时间：2019.09.10
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/combine/chapter3_7.shtml
     /// </summary>
     public class WeChatPayCombineTransactionsNotify : WeChatPayNotify
     {

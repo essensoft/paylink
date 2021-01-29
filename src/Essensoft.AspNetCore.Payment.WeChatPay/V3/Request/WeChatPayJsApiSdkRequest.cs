@@ -4,9 +4,9 @@ using Essensoft.AspNetCore.Payment.Security;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 {
     /// <summary>
-    /// JS调起支付API（服务商、直连商户、电商平台）
+    /// 基础支付 - JSAPI支付 - JS调起支付API（服务商、直连商户、电商平台）
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_4.shtml">JS调起支付API</a></para>
     /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_4.shtml
     /// </summary>
     public class WeChatPayJsApiSdkRequest : IWeChatPaySdkRequest
     {

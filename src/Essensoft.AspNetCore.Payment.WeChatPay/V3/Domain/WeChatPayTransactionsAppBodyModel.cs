@@ -3,9 +3,9 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// APP支付-统一下单API- 请求JSON参数
+    /// 基础支付 - APP支付 - 统一下单API - 请求JSON参数
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_1.shtml">统一下单API</a></para>
     /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_1.shtml
     /// </summary>
     public class WeChatPayTransactionsAppBodyModel : WeChatPayObject
     {

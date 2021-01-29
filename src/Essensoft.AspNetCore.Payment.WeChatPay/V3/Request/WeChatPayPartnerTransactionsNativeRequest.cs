@@ -3,9 +3,9 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 {
     /// <summary>
-    /// Native下单API（服务商）
-    /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter5_3.shtml
+    /// 基础支付（服务商）- Native下单API
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter5_3.shtml">Native下单API</a></para>
+    /// 最新更新时间：2020.11.12
     /// </summary>
     public class WeChatPayPartnerTransactionsNativeRequest : IWeChatPayPostRequest<WeChatPayPartnerTransactionsNativeResponse>
     {

@@ -5,9 +5,9 @@ using Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Response
 {
     /// <summary>
-    /// 合单查询订单API（电商平台、服务商、直连商户）- 返回参数
+    /// 基础支付 - 合单支付 - 合单查询订单API（电商平台、服务商、直连商户）- 返回参数
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_11.shtml">合单查询订单API</a></para>
     /// 最新更新时间：2020.03.27
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/combine/chapter3_3.shtml
     /// </summary>
     public class WeChatPayCombineTransactionsOutTradeNoResponse : WeChatPayResponse
     {

@@ -16,13 +16,5 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// </summary>
         [JsonPropertyName("profit_sharing")]
         public bool ProfitSharing { get; set; }
-
-        /// <summary>
-        /// 补差金额	
-        /// SettleInfo.profit_sharing为true时，该金额才生效。
-        /// 示例值：10
-        /// </summary>
-        [JsonPropertyName("subsidy_amount")]
-        public string SubsidyAmount { get; set; }
     }
 }

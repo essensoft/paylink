@@ -3,9 +3,9 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// 查询订单API - 商户订单号查询（服务商）- 请求URL参数
+    /// 基础支付（服务商）- 查询订单API - 商户订单号查询 - 请求URL参数
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_5.shtml">商户订单号查询</a></para>
     /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_5.shtml
     /// </summary>
     public class WeChatPayPartnerTransactionsOutTradeNoQueryModel : WeChatPayObject
     {

@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 {
     /// <summary>
     /// 获取平台证书列表
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay5_1.shtml
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay5_1.shtml">获取平台证书列表</a></para>
     /// </summary>
     public class WeChatPayCertificatesRequest : IWeChatPayGetRequest<WeChatPayCertificatesResponse>
     {

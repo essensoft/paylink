@@ -3,9 +3,9 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 {
     /// <summary>
-    /// 查询订单API - 微信支付订单号查询（服务商）
+    /// 基础支付（服务商）- 查询订单API - 微信支付订单号查询
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter5_5.shtml">查询订单API - 微信支付订单号查询</a></para>
     /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter5_5.shtml
     /// </summary>
     public class WeChatPayPartnerTransactionsIdRequest : IWeChatPayGetRequest<WeChatPayPartnerTransactionsIdResponse>
     {

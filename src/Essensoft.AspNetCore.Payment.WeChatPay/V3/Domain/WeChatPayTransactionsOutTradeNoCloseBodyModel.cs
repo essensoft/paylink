@@ -3,13 +3,13 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// 关单API- 请求JSON参数
+    /// 基础支付 - 关单API - 请求JSON参数
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_3.shtml">JSAPI支付 - 关单API</a></para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_3.shtml">APP支付 - 关单API</a></para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_3_3.shtml">H5支付 - 关单API</a></para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_4_3.shtml">Native支付 - 关单API</a></para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_3.shtml">小程序 - 关单API</a></para>
     /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_3.shtml
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_3.shtml
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_3_3.shtml
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_4_3.shtml
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_3.shtml
     /// </summary>
     public class WeChatPayTransactionsOutTradeNoCloseBodyModel : WeChatPayObject
     {
