@@ -5,9 +5,13 @@ using Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Response
 {
     /// <summary>
-    /// 查询订单API-商户订单号查询-返回参数
-    /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_5.shtml
+    /// 基础支付 - 商户订单号查询
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_2.shtml">JSAPI支付 - 查询订单API - 商户订单号查询</a></para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_2.shtml">APP支付 - 查询订单API - 商户订单号查询</a></para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_3_2.shtml">H5支付 - 查询订单API - 商户订单号查询</a></para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_4_2.shtml">Native支付 - 查询订单API - 商户订单号查询</a></para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_2.shtml">小程序支付 - 查询订单API - 商户订单号查询</a></para>
+    /// 最新更新时间：2021.1.14
     /// </summary>
     public class WeChatPayTransactionsOutTradeNoResponse : WeChatPayResponse
     {
@@ -68,6 +72,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Response
         /// REVOKED：已撤销（付款码支付）
         /// USERPAYING：用户支付中（付款码支付）
         /// PAYERROR：支付失败(其他原因，如银行返回失败)
+        /// ACCEPT：已接收，等待扣款
         /// 示例值：SUCCESS
         /// </summary>
         [JsonPropertyName("trade_state")]
