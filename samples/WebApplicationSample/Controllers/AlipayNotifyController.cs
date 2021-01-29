@@ -96,7 +96,7 @@ namespace WebApplicationSample.Controllers
                         return AlipayNotifyResult.Failure;
                 }
             }
-            catch(AlipayException ex)
+            catch (AlipayException ex)
             {
                 Console.WriteLine("出现异常: " + ex.Message);
                 return AlipayNotifyResult.Failure;

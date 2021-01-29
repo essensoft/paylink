@@ -1,10 +1,8 @@
 ﻿using System;
-using System.IO;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.WeChatPay;
 using Essensoft.AspNetCore.Payment.WeChatPay.V3;
 using Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 
@@ -31,11 +29,34 @@ namespace WebApplicationSample.Controllers
         {
             try
             {
-                Request.EnableBuffering();
-
-                Request.Body.Seek(0, SeekOrigin.Begin);
                 var notify = await _client.ExecuteAsync<WeChatPayTransactionsNotify>(Request, _optionsAccessor.Value);
                 if (notify.TradeState == WeChatPayTradeState.Success)
+                {
+                    Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
+                    return WeChatPayNotifyResult.Success;
+                }
+
+                return WeChatPayNotifyResult.Failure;
+            }
+            catch (WeChatPayException ex)
+            {
+                Console.WriteLine("出现异常: " + ex.Message);
+                return WeChatPayNotifyResult.Failure;
+            }
+        }
+
+
+        /// <summary>
+        /// 退款结果通知
+        /// </summary>
+        [Route("refund")]
+        [HttpPost]
+        public async Task<IActionResult> Refund()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<WeChatPayRefundDomesticRefundsNotify>(Request, _optionsAccessor.Value);
+                if (notify.RefundStatus == WeChatPayRefundStatus.Success)
                 {
                     Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
                     return WeChatPayNotifyResult.Success;
