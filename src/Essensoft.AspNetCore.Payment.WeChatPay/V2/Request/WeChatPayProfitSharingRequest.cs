@@ -23,6 +23,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
         /// </summary>
         public string Receivers { get; set; }
 
+        /// <summary>
+        /// 品牌主商户号
+        /// </summary>
+        public string BrandMchId { get; set; }
+
         #region IWeChatPayCertificateRequest Members
 
         private string requestUrl = "https://api.mch.weixin.qq.com/secapi/pay/profitsharing";
@@ -44,6 +49,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
                 { "transaction_id", TransactionId },
                 { "out_order_no", OutOrderNo },
                 { "receivers", Receivers },
+                { "brand_mch_id", BrandMchId },
             };
             return parameters;
         }
