@@ -3,9 +3,9 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// 关闭订单API（服务商）- 请求JSON参数
+    /// 基础支付（服务商）- 关闭订单API - 请求JSON参数
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter5_6.shtml">Native下单API</a></para>
     /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter5_6.shtml
     /// </summary>
     public class WeChatPayPartnerTransactionsOutTradeNoCloseBodyModel : WeChatPayObject
     {

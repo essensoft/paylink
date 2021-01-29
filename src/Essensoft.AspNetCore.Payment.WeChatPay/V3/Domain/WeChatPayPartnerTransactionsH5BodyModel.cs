@@ -3,9 +3,9 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// H5下单API（服务商）- 请求JSON参数
-    /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter5_4.shtml
+    /// 基础支付（服务商）- H5下单API - 请求JSON参数
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter5_4.shtml">H5下单API</a></para>
+    /// 最新更新时间：2020.11.12
     /// </summary>
     public class WeChatPayPartnerTransactionsH5BodyModel : WeChatPayObject
     {

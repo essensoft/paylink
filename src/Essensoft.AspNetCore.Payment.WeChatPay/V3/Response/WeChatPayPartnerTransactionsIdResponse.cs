@@ -5,10 +5,9 @@ using Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Response
 {
     /// <summary>
-    /// 查询订单API-微信支付订单号查询（服务商）- 返回参数
-    /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter5_5.shtml
-    /// </summary>
+    /// 基础支付（服务商）- 查询订单API - 微信支付订单号查询 - 返回参数
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter5_5.shtml">查询订单API - 微信支付订单号查询</a></para>
+    /// 最新更新时间：2020.05.26    /// </summary>
     public class WeChatPayPartnerTransactionsIdResponse : WeChatPayResponse
     {
         /// <summary>

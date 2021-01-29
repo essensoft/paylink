@@ -4,10 +4,10 @@ using System.Text.Json.Serialization;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// 合单JSAPI下单API、合单小程序下单API（电商平台、服务商、直连商户）- 请求JSON参数
+    /// 基础支付 - 合单支付 - JSAPI下单API、小程序下单API（电商平台、服务商、直连商户）- 请求JSON参数
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_3.shtml">合单支付 - 合单JSAPI下单API</a></para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_4.shtml">合单支付 - 合单小程序下单API</a></para>
     /// 最新更新时间：2020.05.21
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_3.shtml
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_4.shtml
     /// </summary>
     public class WeChatPayCombineTransactionsJsApiBodyModel : WeChatPayObject
     {

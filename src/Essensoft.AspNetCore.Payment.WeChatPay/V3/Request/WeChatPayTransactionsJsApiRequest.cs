@@ -3,9 +3,9 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 {
     /// <summary>
-    /// JSAPI下单API
+    /// 基础支付 - JSAPI下单API
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_2.shtml">JSAPI下单API</a></para>
     /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_2.shtml
     /// </summary>
     public class WeChatPayTransactionsJsApiRequest : IWeChatPayPostRequest<WeChatPayTransactionsJsApiResponse>
     {

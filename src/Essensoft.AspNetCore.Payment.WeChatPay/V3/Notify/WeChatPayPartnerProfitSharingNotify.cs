@@ -4,8 +4,8 @@ using Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
 {
     /// <summary>
-    /// 分账动账通知 (服务商)
-    /// https://pay.weixin.qq.com/wiki/doc/api/allocation_sl.php?chapter=25_9&index=9
+    /// 服务商分账 - 分账动账通知
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/api/allocation_sl.php?chapter=25_9&index=9">服务商分账 - 分账动账通知</a></para>
     /// </summary>
     public class WeChatPayPartnerProfitSharingNotify : WeChatPayNotify
     {

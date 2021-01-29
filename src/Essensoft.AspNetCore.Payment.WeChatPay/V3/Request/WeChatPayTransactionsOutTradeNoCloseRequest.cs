@@ -3,9 +3,9 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 {
     /// <summary>
-    /// 关闭订单API
+    /// 基础支付 - 关闭订单API
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_6.shtml">关单API</a></para>
     /// 最新更新时间：2020.05.26
-    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter3_6.shtml
     /// </summary>
     public class WeChatPayTransactionsOutTradeNoCloseRequest : IWeChatPayPostRequest<WeChatPayTransactionsOutTradeNoCloseResponse>
     {
