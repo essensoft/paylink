@@ -32,6 +32,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         public string EventType { get; set; }
 
         /// <summary>
+        /// 概要
+        /// 示例值：支付成功
+        /// </summary>
+        [JsonPropertyName("summary")]
+        public string Summary { get; set; }
+
+        /// <summary>
         /// 通知数据类型
         /// 通知的资源数据类型，支付成功通知为encrypt-resource
         /// 示例值：encrypt-resource
@@ -46,12 +53,5 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// </summary>
         [JsonPropertyName("resource")]
         public Resource Resource { get; set; }
-
-        /// <summary>
-        /// 概要
-        /// 示例值：支付成功
-        /// </summary>
-        [JsonPropertyName("summary")]
-        public string Summary { get; set; }
     }
 }
