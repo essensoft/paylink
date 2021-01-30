@@ -10,6 +10,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Parser
     {
         private static readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 
+        /// <summary>
+        /// 将加密报文解密并反序列化
+        /// https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay4_2.shtml
+        /// </summary>
         public T Parse(string body, string v3key)
         {
             T result = null;
