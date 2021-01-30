@@ -5,19 +5,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 {
     public class AlipayMobilePublicMultiMediaDownloadRequest : IAlipayRequest<AlipayMobilePublicMultiMediaDownloadResponse>
     {
-
         public string BizContent { get; set; }
 
         public Stream Stream { set; get; }
 
         #region IAopRequest Members
+
+        private bool needEncrypt = false;
+        private string notifyUrl;
+        private string returnUrl;
         private string apiVersion = "1.0";
         private string terminalType;
         private string terminalInfo;
         private string prodCode;
-        private string notifyUrl;
-        private string returnUrl;
-        private bool needEncrypt = false;
         private AlipayObject bizModel;
 
         public void SetNeedEncrypt(bool needEncrypt)
