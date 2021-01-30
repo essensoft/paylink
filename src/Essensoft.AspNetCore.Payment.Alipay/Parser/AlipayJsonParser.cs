@@ -123,7 +123,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Parser
         private static string ParseSignSourceData(string body, string rootNode, int indexOfRootNode)
         {
             var signDataStartIndex = indexOfRootNode + rootNode.Length + 2;
-            var indexOfSign = body.IndexOf($"\"{AlipayConstants.SIGN}\"", StringComparison.Ordinal);
+            var indexOfSign = body.IndexOf($@"""{AlipayConstants.SIGN}""", StringComparison.Ordinal);
             if (indexOfSign < 0)
             {
                 return null;
