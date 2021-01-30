@@ -19,12 +19,9 @@
 		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
 		<SignAssembly>true</SignAssembly>
 		<AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)payment.snk</AssemblyOriginatorKeyFile>
+		<GenerateDocumentationFile Condition="'$(Configuration)' == 'Release'">true</GenerateDocumentationFile>
+		<GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
 		<LangVersion>9.0</LangVersion>
-	</PropertyGroup>
-
-	<PropertyGroup Condition="'$(Configuration)' == 'Release' AND '$(IsPackable)' == 'true'">
-		<GenerateDocumentationFile>true</GenerateDocumentationFile>
-		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>

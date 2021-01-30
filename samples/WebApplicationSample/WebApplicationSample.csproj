@@ -4,7 +4,8 @@
 		<TargetFramework>net5.0</TargetFramework>
 		<UserSecretsId>a59ca38e-9b52-44fe-b3d2-8cb5a1641623</UserSecretsId>
 		<SignAssembly>false</SignAssembly>
-		<IsPackable>false</IsPackable>
+		<GenerateDocumentationFile>false</GenerateDocumentationFile>
+		<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
 	</PropertyGroup>
 
 	<ItemGroup>
