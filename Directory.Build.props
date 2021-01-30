@@ -4,7 +4,7 @@
 		<Copyright>Copyright © Essensoft</Copyright>
 		<Authors>Essensoft</Authors>
 		<Product>Essensoft.Payment</Product>
-		<Version>3.2.3</Version>
+		<Version>3.3.0</Version>
 		<NoWarn>$(NoWarn);CS1570;CS1591</NoWarn>
 		<Description>Essensoft.AspNetCore.Payment</Description>
 		<PackageIcon>payment-nuget-logo.png</PackageIcon>
