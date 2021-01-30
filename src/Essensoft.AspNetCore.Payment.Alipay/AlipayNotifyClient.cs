@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         #region IAlipayNotifyClient Members
 
 #if NETCOREAPP3_1 || NET5_0
-        public Task<T> ExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, AlipayOptions options) where T : AlipayNotify
+        public async Task<T> ExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, AlipayOptions options) where T : AlipayNotify
         {
             if (options == null)
             {
@@ -37,8 +37,8 @@ namespace Essensoft.AspNetCore.Payment.Alipay
                 throw new AlipayException("options.AlipayPublicKey is Empty!");
             }
 
-            var parameters = GetParameters(request);
-            return ExecuteAsync<T>(parameters, options);
+            var parameters = await GetParametersAsync(request);
+            return await ExecuteAsync<T>(parameters, options);
         }
 #endif
 
@@ -58,12 +58,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         #region IAlipayNotifyClient Members
 
 #if NETCOREAPP3_1 || NET5_0
-        public IDictionary<string, string> GetParameters(Microsoft.AspNetCore.Http.HttpRequest request)
+        public async Task<IDictionary<string, string>> GetParametersAsync(Microsoft.AspNetCore.Http.HttpRequest request)
         {
             var parameters = new Dictionary<string, string>();
             if (request.Method == "POST")
             {
-                foreach (var iter in request.Form)
+                var form = await request.ReadFormAsync();
+                foreach (var iter in form)
                 {
                     parameters.Add(iter.Key, iter.Value);
                 }
