@@ -193,6 +193,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 
         /// <summary>
         /// 加密标记敏感信息的属性
+        /// https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay4_3.shtml
         /// </summary>
         private static void EncryptRequestPrivacyProperty(RSA rsa, object obj)
         {

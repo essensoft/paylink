@@ -1,7 +1,8 @@
 ﻿namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 {
     /// <summary>
-    /// 微信Http头信息
+    /// 微信支付的应答、通知Http头信息
+    /// https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay4_1.shtml
     /// </summary>
     public class WeChatPayHeaders
     {
