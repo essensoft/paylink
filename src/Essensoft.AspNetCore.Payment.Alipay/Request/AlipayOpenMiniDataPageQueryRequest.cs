@@ -9,6 +9,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
     public class AlipayOpenMiniDataPageQueryRequest : IAlipayRequest<AlipayOpenMiniDataPageQueryResponse>
     {
         #region IAlipayRequest Members
+
         private bool needEncrypt = false;
         private string apiVersion = "1.0";
         private string terminalType;

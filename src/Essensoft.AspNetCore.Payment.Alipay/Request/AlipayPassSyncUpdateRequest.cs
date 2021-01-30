@@ -44,6 +44,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string VerifyType { get; set; }
 
         #region IAlipayRequest Members
+
         private bool needEncrypt = false;
         private string apiVersion = "1.0";
         private string terminalType;

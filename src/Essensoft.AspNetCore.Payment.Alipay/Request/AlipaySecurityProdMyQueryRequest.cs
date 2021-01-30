@@ -9,6 +9,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
     public class AlipaySecurityProdMyQueryRequest : IAlipayRequest<AlipaySecurityProdMyQueryResponse>
     {
         #region IAlipayRequest Members
+
         private bool needEncrypt = false;
         private string apiVersion = "1.0";
         private string terminalType;
