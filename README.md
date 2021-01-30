@@ -45,8 +45,9 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
     - ..
 
 * V3版 [开发文档](https://pay.weixin.qq.com/wiki/doc/apiv3/index.shtml)
-    - 基础支付（直连模式）
-    - 基础支付（服务商模式）
+    - 基础支付
+    - 基础支付（服务商）
+    - 商户进件（服务商）
 
 ## 开发环境
 * Windows 10
