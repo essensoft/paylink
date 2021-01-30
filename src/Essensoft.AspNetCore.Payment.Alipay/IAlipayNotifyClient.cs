@@ -31,7 +31,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         /// 获取通知参数
         /// </summary>
         /// <param name="request"></param>
-        IDictionary<string, string> GetParameters(Microsoft.AspNetCore.Http.HttpRequest request);
+        Task<IDictionary<string, string>> GetParametersAsync(Microsoft.AspNetCore.Http.HttpRequest request);
 #endif
 
         /// <summary>
