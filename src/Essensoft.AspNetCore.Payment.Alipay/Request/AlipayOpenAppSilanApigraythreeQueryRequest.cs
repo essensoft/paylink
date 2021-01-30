@@ -9,6 +9,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
     public class AlipayOpenAppSilanApigraythreeQueryRequest : IAlipayRequest<AlipayOpenAppSilanApigraythreeQueryResponse>
     {
         #region IAlipayRequest Members
+
         private bool needEncrypt = true;
         private string apiVersion = "1.0";
         private string terminalType;
