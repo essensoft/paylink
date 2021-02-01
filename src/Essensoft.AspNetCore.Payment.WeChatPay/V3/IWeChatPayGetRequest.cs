@@ -29,5 +29,13 @@
         {
             return true;
         }
+
+        /// <summary>
+        /// 是否需要URL参数
+        /// </summary>
+        bool GetNeedQueryModel()
+        {
+            return true;
+        }
     }
 }

@@ -31,5 +31,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
         {
             throw new NotImplementedException();
         }
+
+        public bool GetNeedQueryModel()
+        {
+            return false;
+        }
     }
 }

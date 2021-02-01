@@ -1,4 +1,5 @@
-﻿using Essensoft.AspNetCore.Payment.WeChatPay.V3.Response;
+﻿using System;
+using Essensoft.AspNetCore.Payment.WeChatPay.V3.Response;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 {
@@ -13,8 +14,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
     /// </summary>
     public class WeChatPayRefundDomesticRefundsOutRefundNoRequest : IWeChatPayGetRequest<WeChatPayRefundDomesticRefundsOutRefundNoResponse>
     {
-        private WeChatPayObject queryModel;
-
         /// <summary>
         /// 商户退款单号
         /// 商户系统内部的退款单号，商户系统内部唯一，只能是数字、大小写字母_-|*@ ，同一退款单号多次请求只退一笔。
@@ -29,12 +28,17 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 
         public WeChatPayObject GetQueryModel()
         {
-            return queryModel;
+            throw new NotImplementedException();
         }
 
         public void SetQueryModel(WeChatPayObject queryModel)
         {
-            this.queryModel = queryModel;
+            throw new NotImplementedException();
+        }
+
+        public bool GetNeedQueryModel()
+        {
+            return false;
         }
     }
 }
