@@ -446,5 +446,32 @@ namespace WebApplicationSample.Controllers
             ViewData["response"] = response.Body;
             return View();
         }
+
+        /// <summary>
+        /// 查询单笔退款
+        /// </summary>
+        [HttpGet]
+        public IActionResult RefundQuery()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 查询单笔退款
+        /// </summary>
+        /// <param name="viewModel"></param>
+        [HttpPost]
+        public async Task<IActionResult> RefundQuery(WeChatPayV3RefundQueryViewModel viewModel)
+        {
+            var request = new WeChatPayRefundDomesticRefundsOutRefundNoRequest
+            {
+                OutRefundNo = viewModel.OutRefundNo
+            };
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+
+            ViewData["response"] = response.Body;
+            return View();
+        }
     }
 }
