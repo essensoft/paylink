@@ -14,11 +14,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Parser
         /// 将加密报文解密并反序列化
         /// https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay4_2.shtml
         /// </summary>
-        public T Parse(string body, string v3key)
+        public T Parse(string body, string v3Key)
         {
             T result = null;
-            var notifyCiphertext = default(NotifyCiphertext);
-            var resourcePlaintext = string.Empty;
+            NotifyCiphertext notifyCiphertext = default;
+            string resourcePlaintext;
 
             try
             {
@@ -33,7 +33,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Parser
             {
                 case nameof(AEAD_AES_256_GCM):
                     {
-                        resourcePlaintext = AEAD_AES_256_GCM.Decrypt(notifyCiphertext.Resource.Nonce, notifyCiphertext.Resource.Ciphertext, notifyCiphertext.Resource.AssociatedData, v3key);
+                        resourcePlaintext = AEAD_AES_256_GCM.Decrypt(notifyCiphertext.Resource.Nonce, notifyCiphertext.Resource.Ciphertext, notifyCiphertext.Resource.AssociatedData, v3Key);
                     }
                     break;
                 default:
