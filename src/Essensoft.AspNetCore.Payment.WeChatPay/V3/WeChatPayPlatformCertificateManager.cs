@@ -66,7 +66,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
         public async Task<WeChatPayPlatformCertificate> GetCertificateAsync(IWeChatPayClient client, WeChatPayOptions options)
         {
             // 如果证书序列号已缓存，则直接使用缓存的
-            var platformCert = _certDictionary.Values.Where(cert => cert.EffectiveTime < DateTime.Now && cert.ExpireTime > DateTime.Now).FirstOrDefault();
+            var platformCert = _certDictionary.Values.FirstOrDefault(cert => cert.EffectiveTime < DateTime.Now && cert.ExpireTime > DateTime.Now);
             if (platformCert != null)
             {
                 return platformCert;
@@ -104,7 +104,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
             }
 
             // 重新从缓存获取
-            platformCert = _certDictionary.Values.Where(cert => cert.EffectiveTime < DateTime.Now && cert.ExpireTime > DateTime.Now).FirstOrDefault();
+            platformCert = _certDictionary.Values.FirstOrDefault(cert => cert.EffectiveTime < DateTime.Now && cert.ExpireTime > DateTime.Now);
             if (platformCert != null)
             {
                 return platformCert;
