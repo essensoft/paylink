@@ -8,8 +8,6 @@ using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.Security;
-using Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain;
-using Essensoft.AspNetCore.Payment.WeChatPay.V3.Request;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
 {
@@ -19,20 +17,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
 
         public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> GetAsync<T>(this HttpClient client, IWeChatPayGetRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
         {
-            string url;
+            var url = request.GetRequestUrl();
 
-            if (request is WeChatPayBillDownloadRequest && request.GetQueryModel() is WeChatPayBillDownloadQueryModel queryModel)
+            if (request.GetNeedQueryModel())
             {
-                url = queryModel.DownloadUrl;
-            }
-            else if (request is WeChatPayCertificatesRequest)
-            {
-                url = request.GetRequestUrl();
-            }
-            else
-            {
-                url = request.GetRequestUrl();
-
                 if (url.Contains("?"))
                 {
                     var txtParams = QueryModelConvertToDictionary(request);
@@ -129,7 +117,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Extensions
                 return JsonSerializer.Deserialize<IDictionary<string, string>>(str, jsonSerializerOptions);
             }
 
-            throw new WeChatPayException("QueryModel is null!");
+            throw new WeChatPayException("request.QueryModel is null!");
         }
 
         private static string BuildToken(string url, string method, string body, WeChatPayOptions options)
