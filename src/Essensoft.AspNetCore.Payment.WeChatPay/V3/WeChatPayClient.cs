@@ -11,7 +11,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 {
     public class WeChatPayClient : IWeChatPayClient
     {
-        public const string Name = "WeChatPay.V3.WeChatPayClient";
+        public const string Name = "WeChatPay.V3.Client";
 
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly WeChatPayPlatformCertificateManager _platformCertificateManager;

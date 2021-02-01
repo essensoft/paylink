@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
 {
     public class WeChatPayClient : IWeChatPayClient
     {
-        public const string Name = "WeChatPay.V2.WeChatPayClient";
+        public const string Name = "WeChatPay.V2.Client";
         public const string Prefix = Name + ".";
 
         private readonly IHttpClientFactory _httpClientFactory;
