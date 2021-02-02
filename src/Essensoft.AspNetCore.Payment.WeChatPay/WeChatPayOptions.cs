@@ -107,11 +107,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
             {
                 if (File.Exists(Certificate))
                 {
-                    Certificate2 = new X509Certificate2(Certificate, CertificatePassword);
+                    Certificate2 = new X509Certificate2(Certificate, CertificatePassword, X509KeyStorageFlags.MachineKeySet);
                 }
                 else
                 {
-                    Certificate2 = new X509Certificate2(Convert.FromBase64String(Certificate), CertificatePassword);
+                    Certificate2 = new X509Certificate2(Convert.FromBase64String(Certificate), CertificatePassword, X509KeyStorageFlags.MachineKeySet);
                 }
             }
             catch (CryptographicException ex)
