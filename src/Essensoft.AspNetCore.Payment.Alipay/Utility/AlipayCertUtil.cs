@@ -122,18 +122,20 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
         {
             var rootCertificates = ReadPemCertChain(rootCertificate);
             var certificates = ReadPemCertChain(certificate);
-            foreach (var cert in certificates)
+
+            using (var chain = X509Chain.Create())
             {
-                using (var chain = X509Chain.Create())
+                chain.ChainPolicy.VerificationFlags = X509VerificationFlags.AllFlags;
+                chain.ChainPolicy.RevocationFlag = X509RevocationFlag.ExcludeRoot;
+                chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
+
+                foreach (var rootCert in rootCertificates)
                 {
-                    foreach (var rootCert in rootCertificates)
-                    {
-                        chain.ChainPolicy.ExtraStore.Add(rootCert);
-                    }
+                    chain.ChainPolicy.ExtraStore.Add(rootCert);
+                }
 
-                    chain.ChainPolicy.VerificationFlags = X509VerificationFlags.AllowUnknownCertificateAuthority;
-                    chain.ChainPolicy.RevocationMode = X509RevocationMode.NoCheck;
-
+                foreach (var cert in certificates)
+                {
                     if (!chain.Build(cert))
                     {
                         return false;
@@ -154,14 +156,14 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Utility
                 : Base64Util.IsBase64String(certificate) ? Encoding.ASCII.GetString(Convert.FromBase64String(certificate))
                 : certificate;
 
-            var certStrArr = certChainStr.Split("-----END CERTIFICATE-----", StringSplitOptions.RemoveEmptyEntries);
+            var certStrArr = certChainStr.Split("\r\n\r\n", StringSplitOptions.RemoveEmptyEntries);
 
             var certs = new List<X509Certificate2>();
             foreach (var certStr in certStrArr)
             {
                 try
                 {
-                    certs.Add(new X509Certificate2(Encoding.ASCII.GetBytes(certStr + "-----END CERTIFICATE-----")));
+                    certs.Add(new X509Certificate2(Encoding.ASCII.GetBytes(certStr)));
                 }
                 catch (CryptographicException ex)
                 {
