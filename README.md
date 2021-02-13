@@ -5,7 +5,7 @@
 Payment 是基于 .NET Core / ASP.NET Core 开发，支持多商户的跨平台支付SDK集。
 简化了API调用及相关通知的处理流程。
 
-[![Build status](https://dev.azure.com/essensoft/payment/_apis/build/status/payment-Dev-CI)](https://dev.azure.com/essensoft/payment/_build/latest?definitionId=18)
+[![Build status](https://github.com/essensoft/payment/workflows/.NET/badge.svg?branch=dev)](https://github.com/essensoft/payment/actions?query=branch%3Adev)
 
 ## Package
 
