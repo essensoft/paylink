@@ -171,7 +171,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
 
         public IDictionary<string, FileItem> GetFileParameters()
         {
-            IDictionary<string, FileItem> parameters = new Dictionary<string, FileItem>
+            var parameters = new Dictionary<string, FileItem>
             {
                 { "business_license_pic", BusinessLicensePic },
                 { "shop_sign_board_pic", ShopSignBoardPic },
