@@ -143,7 +143,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
 
         public IDictionary<string, FileItem> GetFileParameters()
         {
-            IDictionary<string, FileItem> parameters = new Dictionary<string, FileItem>
+            var parameters = new Dictionary<string, FileItem>
             {
                 { "coeffecient_table_content", CoeffecientTableContent }
             };
