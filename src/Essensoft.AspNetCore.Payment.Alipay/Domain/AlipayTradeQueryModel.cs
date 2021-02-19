@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -21,7 +21,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutTradeNo { get; set; }
 
         /// <summary>
-        /// 查询选项，商户通过上送该参数来定制同步需要额外返回的信息字段，数组格式。如：["trade_settle_info","fund_bill_list","voucher_detail_list","discount_goods_detail"]
+        /// 查询选项，商户传入该参数可定制本接口同步响应额外返回的信息字段，数组格式。支持枚举如下：trade_settle_info：返回的交易结算信息，包含分账、补差等信息。 fund_bill_list：交易支付使用的资金渠道。
         /// </summary>
         [JsonPropertyName("query_options")]
         public List<string> QueryOptions { get; set; }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class MybankFinanceYulibaoAccountQueryModel : AlipayObject
     {
         /// <summary>
-        /// 基金代码，必填。目前默认填001529，代表余利宝
+        /// 基金代码。余利宝场景固定为 001529。
         /// </summary>
         [JsonPropertyName("fund_code")]
         public string FundCode { get; set; }

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -70,13 +70,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string FailReason { get; set; }
 
         /// <summary>
-        /// 批次处理完成时间
+        /// 批次处理完成时间，精确到分钟
         /// </summary>
         [JsonPropertyName("gmt_finish")]
         public string GmtFinish { get; set; }
 
         /// <summary>
-        /// 批次支付完成时间
+        /// 批次支付完成时间，精确到分钟
         /// </summary>
         [JsonPropertyName("gmt_pay_finish")]
         public string GmtPayFinish { get; set; }

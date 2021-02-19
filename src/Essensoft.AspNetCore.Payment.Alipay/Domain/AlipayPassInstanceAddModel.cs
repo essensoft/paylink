@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string RecognitionInfo { get; set; }
 
         /// <summary>
-        /// Alipass添加对象识别类型：1–订单信息
+        /// Alipass添加对象识别类型，枚举如下： 1：订单信息； 2：基于用户信息识别。 说明：支付宝卡包场景暂仅支持 2。
         /// </summary>
         [JsonPropertyName("recognition_type")]
         public string RecognitionType { get; set; }

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -49,6 +49,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("buyer_telephone")]
         public string BuyerTelephone { get; set; }
+
+        /// <summary>
+        /// 是否可以关联账单
+        /// </summary>
+        [JsonPropertyName("can_link")]
+        public bool CanLink { get; set; }
 
         /// <summary>
         /// 创建人
@@ -165,6 +171,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string LastModer { get; set; }
 
         /// <summary>
+        /// 已关联账单金额
+        /// </summary>
+        [JsonPropertyName("linked_amt")]
+        public MultiCurrencyMoneyOpenApi LinkedAmt { get; set; }
+
+        /// <summary>
         /// 发票开出后的邮寄状态，具体状态说明  01：待邮寄，02：已邮寄，03：退回中，04：已退回
         /// </summary>
         [JsonPropertyName("mail_status")]
@@ -175,6 +187,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("memo")]
         public string Memo { get; set; }
+
+        /// <summary>
+        /// 是否是无账单发票 Y：是  N：不是
+        /// </summary>
+        [JsonPropertyName("no_bill_invoice_flag")]
+        public string NoBillInvoiceFlag { get; set; }
 
         /// <summary>
         /// 是否为点在发票  true：是， false：不是

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -57,10 +57,16 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutGoodsId { get; set; }
 
         /// <summary>
-        /// 外部店铺ID，对于特定行业可选，比如GOL线上商品的场景非必填。app_id、out_shop_id、out_goods_id唯一标识一个商品请求。
+        /// 过期参数，从1.1以后，该参数不再使用。建议使用参数out_shop_ids
         /// </summary>
         [JsonPropertyName("out_shop_id")]
         public string OutShopId { get; set; }
+
+        /// <summary>
+        /// 外部店铺ID列表，对于特定行业可选，比如GOL线上商品的场景非必填。对于线下店铺，该参数必填。 连锁商户，一种商品可以挂接到多个店铺上,该参数支持传输店铺列表。
+        /// </summary>
+        [JsonPropertyName("out_shop_ids")]
+        public List<string> OutShopIds { get; set; }
 
         /// <summary>
         /// 商品现价，币种遵循 ISO 4217 标准，金额数值为正整数且精确到货币最小单位
@@ -73,6 +79,24 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("recommend")]
         public string Recommend { get; set; }
+
+        /// <summary>
+        /// 销售截止时间。标准时间格式：yyyy-MM-dd HH:mm:ss 如果不填代表长期有效，与sale_start_time配合使用
+        /// </summary>
+        [JsonPropertyName("sale_end_time")]
+        public string SaleEndTime { get; set; }
+
+        /// <summary>
+        /// 销售开始时间。标准时间格式：yyyy-MM-dd HH:mm:ss 如果不填代表长期有效，与sale_end_time配合使用
+        /// </summary>
+        [JsonPropertyName("sale_start_time")]
+        public string SaleStartTime { get; set; }
+
+        /// <summary>
+        /// 外部平台商品销量
+        /// </summary>
+        [JsonPropertyName("sales_volume")]
+        public GoodsSalesVolume SalesVolume { get; set; }
 
         /// <summary>
         /// 业务场景，可传入一个或多个,该字段用来标识商品的适用业务场景。

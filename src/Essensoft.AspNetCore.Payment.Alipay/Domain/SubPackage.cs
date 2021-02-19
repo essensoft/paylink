@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -12,6 +12,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("build_package_url")]
         public string BuildPackageUrl { get; set; }
+
+        /// <summary>
+        /// 构建结果地址
+        /// </summary>
+        [JsonPropertyName("new_build_package_url")]
+        public string NewBuildPackageUrl { get; set; }
 
         /// <summary>
         /// 分包路径

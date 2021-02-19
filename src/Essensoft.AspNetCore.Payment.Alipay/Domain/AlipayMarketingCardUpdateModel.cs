@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -27,19 +27,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public McardStylInfo McardStyleInfo { get; set; }
 
         /// <summary>
-        /// 卡信息变更通知消息  1、在列表中定义的消息，才会发送给用户，消息格式一定。  2、根据卡信息变更情况，一次可发送多个消息
+        /// 注意：此字段已废弃。 卡信息变更通知消息 1、在列表中定义的消息，才会发送给用户，消息格式一定。 2、根据卡信息变更情况，一次可发送多个消息
         /// </summary>
         [JsonPropertyName("notify_messages")]
         public List<McardNotifyMessage> NotifyMessages { get; set; }
 
         /// <summary>
-        /// 标识业务发生的时间
+        /// 标识业务发生的时间。 时间格式：yyyy-MM-dd HH:mm:ss 。 
         /// </summary>
         [JsonPropertyName("occur_time")]
         public string OccurTime { get; set; }
 
         /// <summary>
-        /// 支付宝业务卡号，即开卡接口返回结果中的card_info.biz_card_no
+        /// 支付宝业务卡号，即 alipay.marketing.card.open(会员卡开卡)返回结果中的card_info#biz_card_no。
         /// </summary>
         [JsonPropertyName("target_card_no")]
         public string TargetCardNo { get; set; }

@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -12,6 +13,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("agent_id")]
         public string AgentId { get; set; }
+
+        /// <summary>
+        /// 车场业务归属列表
+        /// </summary>
+        [JsonPropertyName("business_isv")]
+        public List<BusinessItem> BusinessIsv { get; set; }
 
         /// <summary>
         /// 该参数废弃
@@ -62,7 +69,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string EquipmentName { get; set; }
 
         /// <summary>
-        /// 是否支持电子发票，0-不支持，1支持
+        /// 是否支持电子发票。枚举支持： 0：表示不支持。 1：表示支持。
         /// </summary>
         [JsonPropertyName("is_support_invoice")]
         public string IsSupportInvoice { get; set; }
@@ -158,7 +165,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ParkingMobile { get; set; }
 
         /// <summary>
-        /// 停车场名称
+        /// 停车场名称，由ISV定义，尽量与高德地图上的一致。
         /// </summary>
         [JsonPropertyName("parking_name")]
         public string ParkingName { get; set; }
@@ -188,7 +195,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ParkingType { get; set; }
 
         /// <summary>
-        /// 支付方式（1为支付宝在线缴费，2为支付宝代扣缴费，3当面付)，如支持多种方式以','进行间隔
+        /// 支付方式。枚举支持： 1：表示支付宝在线缴费。 2：表示支付宝代扣缴费。 3：表示当面付。 说明：如支持多种方式以 ',' 进行分隔。
         /// </summary>
         [JsonPropertyName("pay_type")]
         public string PayType { get; set; }
@@ -212,7 +219,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string SumSpace { get; set; }
 
         /// <summary>
-        /// 是否支持先离后付, Y-支持，N-不支持，默认为空不支持，此参数适用于签约信用代扣的商户
+        /// 是否支持先离后付。枚举支持： Y：支持。 N：不支持。 说明：默认为空不支持，此参数适用于签约信用代扣的商户。
         /// </summary>
         [JsonPropertyName("support_after_pay")]
         public string SupportAfterPay { get; set; }

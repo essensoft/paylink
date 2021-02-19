@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -27,7 +27,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AlipayStoreId { get; set; }
 
         /// <summary>
-        /// 支付授权码，25~30开头的长度为16~24位的数字，实际字符串长度以开发者获取的付款码长度为准
+        /// 支付授权码，25~30开头的长度为16~24位的数字，实际字符串长度以开发者获取的付款码长度为准。 周期扣款（CYCLE_PAY_AUTH ）场景必填，传入用户签约号 agreement_no。 支付宝预授权（PRE_AUTH_ONLINE）、新当面资金授权（PRE_AUTH）场景不填，需替换为 auth_no 传入资金授权订单号。
         /// </summary>
         [JsonPropertyName("auth_code")]
         public string AuthCode { get; set; }
@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AuthConfirmMode { get; set; }
 
         /// <summary>
-        /// 预授权号，预授权转交易请求中传入，适用于预授权转交易业务使用，目前只支持FUND_TRADE_FAST_PAY（资金订单即时到帐交易）、境外预授权产品（OVERSEAS_AUTH_PAY）两个产品。
+        /// 支付宝的资金授权订单号，预授权转交易场景必填。目前仅支持 支付宝预授权（PRE_AUTH_ONLINE）、新当面资金授权（PRE_AUTH）场景使用。
         /// </summary>
         [JsonPropertyName("auth_no")]
         public string AuthNo { get; set; }
@@ -57,7 +57,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public BusinessParams BusinessParams { get; set; }
 
         /// <summary>
-        /// 买家的支付宝用户 id，如果为空，会从传入的码值信息中获取买家 ID
+        /// 买家的支付宝用户 ID，若为空，则从传入的码值信息中获取用户 ID 新当面资金授权场景必填。
         /// </summary>
         [JsonPropertyName("buyer_id")]
         public string BuyerId { get; set; }
@@ -87,7 +87,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public ExtendParams ExtendParams { get; set; }
 
         /// <summary>
-        /// 订单包含的商品列表信息，json格式，其它说明详见商品明细说明
+        /// 订单包含的商品列表信息，json格式。
         /// </summary>
         [JsonPropertyName("goods_detail")]
         public List<GoodsDetail> GoodsDetail { get; set; }
@@ -105,19 +105,25 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string MerchantOrderNo { get; set; }
 
         /// <summary>
-        /// 商户操作员编号
+        /// 商户操作员编号。 新当面资金授权场景必填。
         /// </summary>
         [JsonPropertyName("operator_id")]
         public string OperatorId { get; set; }
 
         /// <summary>
-        /// 商户订单号,64个字符以内、可包含字母、数字、下划线；需保证在商户端不重复
+        /// 商户订单号，由商家自定义，64个字符以内，仅支持字母、数字、下划线且需保证在商户端不重复。
         /// </summary>
         [JsonPropertyName("out_trade_no")]
         public string OutTradeNo { get; set; }
 
         /// <summary>
-        /// 销售产品码
+        /// 公用回传参数，如果请求时传递了该参数，则返回给商户时会回传该参数。支付宝只会在同步返回（包括跳转回商户网站）和异步通知时将该参数原样返回。本参数必须进行UrlEncode之后才可以发送给支付宝。
+        /// </summary>
+        [JsonPropertyName("passback_params")]
+        public string PassbackParams { get; set; }
+
+        /// <summary>
+        /// 产品码，默认 FACE_TO_FACE_PAYMENT（当面付），枚举支持： PRE_AUTH_ONLINE：支付宝预授权。 PRE_AUTH：新当面资金授权。 CYCLE_PAY_AUTH ：周期扣款。
         /// </summary>
         [JsonPropertyName("product_code")]
         public string ProductCode { get; set; }
@@ -147,13 +153,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public RoyaltyInfo RoyaltyInfo { get; set; }
 
         /// <summary>
-        /// 支付场景  条码支付，取值：bar_code  声波支付，取值：wave_code
+        /// 支付场景。条码支付场景固定为：bar_code。 周期扣款后续代扣时必填，固定为 deduct_pay； 新当面资金授权场景固定为 bar_code。 支付宝预授权景无需传入。 
         /// </summary>
         [JsonPropertyName("scene")]
         public string Scene { get; set; }
 
         /// <summary>
-        /// 如果该值为空，则默认为商户签约账号对应的支付宝用户ID
+        /// 如果该值为空，则默认为商户签约账号对应的支付宝用户ID。 新当面资金授权场景必填。
         /// </summary>
         [JsonPropertyName("seller_id")]
         public string SellerId { get; set; }
@@ -171,7 +177,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public SettleInfo SettleInfo { get; set; }
 
         /// <summary>
-        /// 商户门店编号
+        /// 商户门店编号。 新当面资金授权场景必填。
         /// </summary>
         [JsonPropertyName("store_id")]
         public string StoreId { get; set; }
@@ -201,7 +207,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string TerminalParams { get; set; }
 
         /// <summary>
-        /// 该笔订单允许的最晚付款时间，逾期将关闭交易。取值范围：1m～15d。m-分钟，h-小时，d-天，1c-当天（1c-当天的情况下，无论交易何时创建，都在0点关闭）。 该参数数值不接受小数点， 如 1.5h，可转换为 90m
+        /// 该笔订单允许的最晚付款时间，逾期将关闭交易。取值范围：1m～15d。m-分钟，h-小时，d-天，1c-当天（1c-当天的情况下，无论交易何时创建，都在0点关闭）。 该参数数值不接受小数点， 如 1.5h，可转换为 90m。 当面付场景默认超时时间为3h，且最大时间不超过 3h。若当面付场景设置timeout_express>3h，接口不报错，但是订单将在3小时关闭。
         /// </summary>
         [JsonPropertyName("timeout_express")]
         public string TimeoutExpress { get; set; }

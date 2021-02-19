@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -57,7 +57,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<GoodsDetail> GoodsDetail { get; set; }
 
         /// <summary>
-        /// 商品主类型 :0-虚拟类商品,1-实物类商品
+        /// 商品主类型，取值如下： 0：虚拟类商品； 1：实物类商品。
         /// </summary>
         [JsonPropertyName("goods_type")]
         public string GoodsType { get; set; }
@@ -75,7 +75,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string MerchantOrderNo { get; set; }
 
         /// <summary>
-        /// 商户网站唯一订单号
+        /// 商户网站订单号，由商家自定义，需保证商家系统中唯一。仅支持数字、字母、下划线。
         /// </summary>
         [JsonPropertyName("out_trade_no")]
         public string OutTradeNo { get; set; }
@@ -159,7 +159,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string TimeoutExpress { get; set; }
 
         /// <summary>
-        /// 订单总金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]
+        /// 订单总金额，单位为人民币（元），取值范围为 0.01~100000000.00，精确到小数点后两位。
         /// </summary>
         [JsonPropertyName("total_amount")]
         public string TotalAmount { get; set; }

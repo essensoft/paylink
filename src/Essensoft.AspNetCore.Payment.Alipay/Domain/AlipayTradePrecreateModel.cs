@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string DisablePayChannels { get; set; }
 
         /// <summary>
-        /// 可打折金额. 参与优惠计算的金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000] 如果该值未传入，但传入了【订单总金额】和【不可打折金额】，则该值默认为【订单总金额】-【不可打折金额】
+        /// 可打折金额. 参与优惠计算的金额，单位为人民币（元），取值范围为 0.01~100000000.00，精确到小数点后两位。 注意：如果该值未传入，但传入了【订单总金额】和【不可打折金额】，则该值默认为【订单总金额】-【不可打折金额】
         /// </summary>
         [JsonPropertyName("discountable_amount")]
         public string DiscountableAmount { get; set; }
@@ -87,13 +87,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutTradeNo { get; set; }
 
         /// <summary>
-        /// 销售产品码。 如果签约的是当面付快捷版，则传OFFLINE_PAYMENT; 其它支付宝当面付产品传FACE_TO_FACE_PAYMENT； 不传默认使用FACE_TO_FACE_PAYMENT；
+        /// 公用回传参数，如果请求时传递了该参数，则返回给商户时会回传该参数。支付宝只会在同步返回（包括跳转回商户网站）和异步通知时将该参数原样返回。本参数必须进行UrlEncode之后才可以发送给支付宝。
+        /// </summary>
+        [JsonPropertyName("passback_params")]
+        public string PassbackParams { get; set; }
+
+        /// <summary>
+        /// 销售产品码。 如果签约的是当面付快捷版，则传 OFFLINE_PAYMENT； 其它支付宝当面付产品传 FACE_TO_FACE_PAYMENT； 不传默认使用 FACE_TO_FACE_PAYMENT。
         /// </summary>
         [JsonPropertyName("product_code")]
         public string ProductCode { get; set; }
 
         /// <summary>
-        /// 该笔订单允许的最晚付款时间，逾期将关闭交易，从生成二维码开始计时。取值范围：1m～15d。m-分钟，h-小时，d-天，1c-当天（1c-当天的情况下，无论交易何时创建，都在0点关闭）。 该参数数值不接受小数点， 如 1.5h，可转换为 90m。
+        /// 该笔订单允许的最晚付款时间，逾期将关闭交易，从生成二维码开始计时，默认有效期2h。 取值范围：1m～15d。m-分钟，h-小时，d-天，1c-当天（1c-当天的情况下，无论交易何时创建，都在0点关闭）。 该参数数值不接受小数点， 如 1.5h，可转换为 90m。 当面付场景最大有效期为2h，该场景下本参数设置超过2h，订单将在2h时关闭。
         /// </summary>
         [JsonPropertyName("qr_code_timeout_express")]
         public string QrCodeTimeoutExpress { get; set; }
@@ -147,7 +153,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string TimeoutExpress { get; set; }
 
         /// <summary>
-        /// 订单总金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000] 如果同时传入了【打折金额】，【不可打折金额】，【订单总金额】三者，则必须满足如下条件：【订单总金额】=【打折金额】+【不可打折金额】
+        /// 订单总金额，单位为人民币（元），取值范围为 0.01~100000000.00，精确到小数点后两位。 注意：如果同时传入了【打折金额】，【不可打折金额】，【订单总金额】三者，则必须满足如下条件：【订单总金额】=【打折金额】+【不可打折金额】
         /// </summary>
         [JsonPropertyName("total_amount")]
         public string TotalAmount { get; set; }

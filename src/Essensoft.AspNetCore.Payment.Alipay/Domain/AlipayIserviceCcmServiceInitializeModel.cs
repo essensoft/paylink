@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -15,19 +15,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Description { get; set; }
 
         /// <summary>
-        /// 服务图标url
+        /// 服务图标url。支持 http(s) 链接。
         /// </summary>
         [JsonPropertyName("icon")]
         public string Icon { get; set; }
 
         /// <summary>
-        /// 服务编码
+        /// 服务编码。可在服务上架后，在服务市场上查询此信息。
         /// </summary>
         [JsonPropertyName("service_code")]
         public string ServiceCode { get; set; }
 
         /// <summary>
-        /// 服务名称
+        /// 服务名称。可在服务上架后，在服务市场上查询此信息。
         /// </summary>
         [JsonPropertyName("service_name")]
         public string ServiceName { get; set; }

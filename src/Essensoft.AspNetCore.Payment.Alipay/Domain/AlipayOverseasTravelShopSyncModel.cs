@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -91,6 +91,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("promotion_text")]
         public string PromotionText { get; set; }
+
+        /// <summary>
+        /// 店铺评分
+        /// </summary>
+        [JsonPropertyName("rating")]
+        public ShopRating Rating { get; set; }
 
         /// <summary>
         /// 推荐标识。Y:代表推荐,N代表不置顶推荐。当同一个外铺平台中的店铺以列表形式露出时，推荐标识为Y的店铺排序会有权重提升

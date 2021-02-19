@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -33,19 +33,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string FloorAmount { get; set; }
 
         /// <summary>
-        /// 所有商品最多可享折扣数量。 当用户购买多件时，最多可以对几件特价支付。假设券类型为无资金单品特价券(ITEM_CASHLESS_SPE_VOUCHER)，商品编码填写A、B，此参数传入2，则订单中不管是A或者B，一共只能优惠2件，第3件以上原价。必须是整数，最低数量为1，最高99。券类型为无资金单品折扣券(ITEM_CASHLESS_DISCOUNT_VOUCHER)和无资金单品特价券(ITEM_CASHLESS_SPE_VOUCHER)时必填，无资金单品代金券下此值必须为0。 特别注意：此字段折扣数量的计算方式，相对老版本版本发生了变化。老版本的计算方式如下： 同样假设券类型为无资金单品特价券（ITEM_CASHLESS_SPE_VOUCHER），商品编码填写A、B，此参数传入3，则订单中A、B两个单品分别最多3件特价X元，第4件以上原价。必须是整数，最低数量为1，最高99。 voucher_type为无资金单品折扣券（ITEM_CASHLESS_DISCOUNT_VOUCHER）和无资金单品特价券（ITEM_CASHLESS_SPE_VOUCHER）时必填，无资金单品代金券下此值必须为0。可以直接通过产品文档说明中的API的版本信息或者创建券模板返回结果中的的最大优惠字段（voucher_discount_limit）来确认具体使用的哪种折扣方式。
+        /// 所有商品最多可享折扣数量。 当用户购买多件时，最多可以对几件特价支付。假设券类型为无资金单品特价券(ITEM_CASHLESS_SPE_VOUCHER)，商品编码填写A、B，此参数传入2，则订单中不管是A或者B，一共只能优惠2件，第3件以上原价。必须是整数，最低数量为1，最高99。券类型为无资金单品折扣券(ITEM_CASHLESS_DISCOUNT_VOUCHER)和无资金单品特价券(ITEM_CASHLESS_SPE_VOUCHER)时必填，无资金单品代金券下此值必须为0。 特别注意：此字段折扣数量的计算方式，相对老版本发生了变化。老版本的计算方式如下： 同样假设券类型为无资金单品特价券（ITEM_CASHLESS_SPE_VOUCHER），商品编码填写A、B，此参数传入3，则订单中A、B两个单品分别最多3件特价X元，第4件以上原价。必须是整数，最低数量为1，最高99。 voucher_type为无资金单品折扣券（ITEM_CASHLESS_DISCOUNT_VOUCHER）和无资金单品特价券（ITEM_CASHLESS_SPE_VOUCHER）时必填，无资金单品代金券下此值必须为0。可以直接通过产品文档说明中的API的版本信息或者创建券模板返回结果中的的最大优惠字段（voucher_discount_limit）来确认具体使用的哪种折扣方式。
         /// </summary>
         [JsonPropertyName("goods_ceiling_quantity")]
         public string GoodsCeilingQuantity { get; set; }
 
         /// <summary>
-        /// 单品券封面图片。 请先通过 https://opendocs.alipay.com/pre-apis/00a8ae（图片上传接口）上传图片。通过图片上传接口获取获得图片资源ID以后，将该图片资源ID传入，单张大小不超过2MB，格式支持png、gif、jpg、jpeg、bmp，尺寸为800X600。
+        /// 单品券封面图片。 请先通过 <a href="https://opendocs.alipay.com/pre-apis/00a8ae">alipay.marketing.material.image.upload</a>(营销图片资源上传接口)上传图片。通过图片上传接口获得图片资源ID以后，将该图片资源ID传入，单张大小不超过2MB，格式支持png、gif、jpg、jpeg、bmp，尺寸为800X600。
         /// </summary>
         [JsonPropertyName("goods_cover_image_id")]
         public string GoodsCoverImageId { get; set; }
 
         /// <summary>
-        /// 单品券详情图片。 请先通过 https://opendocs.alipay.com/pre-apis/00a8ae（图片上传接口）上传图片。通过图片上传接口获取获得图片资源ID以后，将该图片资源ID传入，单张大小不超过2MB，格式支持png、gif、jpg、jpeg、bmp，尺寸为800X600。 最多支持3张单品详情图片，图片资源ID用英文逗号分隔，不可含有重复资源ID。
+        /// 单品券详情图片。 请先通过 <a href="https://opendocs.alipay.com/pre-apis/00a8ae">alipay.marketing.material.image.upload</a>(营销图片资源上传接口)上传图片。通过图片上传接口获得图片资源ID以后，将该图片资源ID传入，单张大小不超过2MB，格式支持png、gif、jpg、jpeg、bmp，尺寸为800X600。 最多支持3张单品详情图片，图片资源ID用英文逗号分隔，不可含有重复资源ID。
         /// </summary>
         [JsonPropertyName("goods_detail_image_ids")]
         public string GoodsDetailImageIds { get; set; }

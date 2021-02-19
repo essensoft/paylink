@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string CardSpecTag { get; set; }
 
         /// <summary>
-        /// 卡类型为固定枚举类型，可选类型如下：  OUT_MEMBER_CARD：外部权益卡
+        /// 卡类型。可选类型如下： OUT_MEMBER_CARD：外部权益卡
         /// </summary>
         [JsonPropertyName("card_type")]
         public string CardType { get; set; }
@@ -75,7 +75,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<PubChannelDTO> PubChannels { get; set; }
 
         /// <summary>
-        /// 请求ID，由开发者生成并保证唯一性
+        /// 请求ID，商家自定义且并保证唯一性。
         /// </summary>
         [JsonPropertyName("request_id")]
         public string RequestId { get; set; }

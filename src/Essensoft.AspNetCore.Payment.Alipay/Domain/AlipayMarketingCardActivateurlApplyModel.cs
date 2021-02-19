@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayMarketingCardActivateurlApplyModel : AlipayObject
     {
         /// <summary>
-        /// 会员卡开卡表单提交后回调地址。  1.该地址不可带参数，如需回传参数，可设置out_string入参。
+        /// 会员卡开卡表单提交后回调地址。 说明： 1.该地址不可带参数，如需回传参数，可设置out_string入参。 2.小程序应用无需传入。
         /// </summary>
         [JsonPropertyName("callback")]
         public string Callback { get; set; }

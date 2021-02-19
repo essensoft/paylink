@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string OrderStatus { get; set; }
 
         /// <summary>
-        /// 同步订单记录id
+        /// 同步订单记录id （同步小程序订单成功必返回record_id）
         /// </summary>
         [JsonPropertyName("record_id")]
         public string RecordId { get; set; }

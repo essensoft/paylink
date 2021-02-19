@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -26,19 +26,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AlipayUserId { get; set; }
 
         /// <summary>
-        /// 代扣协议中标示用户的唯一签约号(确保在商户系统中  唯一)。  格式规则:支持大写小写字 母和数字，最长 32 位。
+        /// 代扣协议中标示用户的唯一签约号(确保在商户系统中 唯一)。 格式规则:支持大写小写字母和数字，最长 32 位。
         /// </summary>
         [JsonPropertyName("external_agreement_no")]
         public string ExternalAgreementNo { get; set; }
 
         /// <summary>
-        /// 协议产品码，商户和支付宝签约时确定，商户可咨询技术支持。
+        /// 协议产品码，商户和支付宝签约时确定，商户可咨询技术支持。周期扣款场景固定为：CYCLE_PAY_AUTH_P。
         /// </summary>
         [JsonPropertyName("personal_product_code")]
         public string PersonalProductCode { get; set; }
 
         /// <summary>
-        /// 签约协议场景，商户和支付宝签约时确定，商户可咨询技术支持。 当传入商户签约号 external_agreement_no 时，场景不能为空或默认值 DEFAULT|DEFAULT。 该值需要与系统/页面签约接口调用时传入的值保持一 致。
+        /// 签约场景码，该值需要与系统/页面签约接口调用时传入的值保持一 致。如：周期扣款场景与调用 alipay.user.agreement.page.sign(支付宝个人协议页面签约接口) 签约时的 sign_scene 相同。  注意：当传入商户签约号 external_agreement_no 时，该值不能为空或默认值 DEFAULT|DEFAULT。 
         /// </summary>
         [JsonPropertyName("sign_scene")]
         public string SignScene { get; set; }

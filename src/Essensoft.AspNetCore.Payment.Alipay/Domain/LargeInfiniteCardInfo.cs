@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -7,6 +7,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     /// </summary>
     public class LargeInfiniteCardInfo : AlipayObject
     {
+        /// <summary>
+        /// 账户余额,单位:元,精确到小数点后两位
+        /// </summary>
+        [JsonPropertyName("account_balance")]
+        public string AccountBalance { get; set; }
+
         /// <summary>
         /// 无限付产品转账的转入卡账户名称，支付宝分配。
         /// </summary>

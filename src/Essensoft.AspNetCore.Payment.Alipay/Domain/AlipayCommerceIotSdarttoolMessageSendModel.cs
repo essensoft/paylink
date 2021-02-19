@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -32,7 +32,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ItemId { get; set; }
 
         /// <summary>
-        /// 消息内容(xpaas_common:{"contentParams":["消息内容"]};audio_msg:{"contentParams":["语音内容"]};cloud_print:{"contentParams":["打印内容"],"target":"打印编号-可选默认第一个","instructionFormat":"template或cmd"})
+        /// 消息内容
         /// </summary>
         [JsonPropertyName("msg_content")]
         public string MsgContent { get; set; }
@@ -56,7 +56,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public long MsgPriority { get; set; }
 
         /// <summary>
-        /// 消息类型：xpaas_common-小程序通用消息
+        /// 消息类型： xpaas_common-小程序消息； ruyi_ordermsg-如意订单消息
         /// </summary>
         [JsonPropertyName("msg_type")]
         public string MsgType { get; set; }

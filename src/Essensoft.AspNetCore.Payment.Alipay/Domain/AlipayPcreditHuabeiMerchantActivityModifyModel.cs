@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -49,6 +49,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("end_time")]
         public string EndTime { get; set; }
+
+        /// <summary>
+        /// 出资的资金类型，默认值=MONEY，商户积分=MERCHANT_POINT
+        /// </summary>
+        [JsonPropertyName("fund_type")]
+        public string FundType { get; set; }
 
         /// <summary>
         /// 花呗分期数集合，如3，6，12

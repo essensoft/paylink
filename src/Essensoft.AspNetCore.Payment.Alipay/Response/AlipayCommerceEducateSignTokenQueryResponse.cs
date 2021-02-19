@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -44,7 +44,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string SchoolCode { get; set; }
 
         /// <summary>
-        /// 学校外标
+        /// 学校外标（即学校的统一信用编码）
         /// </summary>
         [JsonPropertyName("school_stdcode")]
         public string SchoolStdcode { get; set; }

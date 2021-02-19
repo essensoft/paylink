@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -43,5 +43,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("task_id")]
         public string TaskId { get; set; }
+
+        /// <summary>
+        /// 请求页面的总时间，单位是 ms
+        /// </summary>
+        [JsonPropertyName("total_time")]
+        public string TotalTime { get; set; }
     }
 }

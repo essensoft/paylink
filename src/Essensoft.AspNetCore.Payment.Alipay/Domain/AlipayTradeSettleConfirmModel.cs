@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutRequestNo { get; set; }
 
         /// <summary>
-        /// 描述结算信息，json格式，详见结算参数说明
+        /// 描述结算信息，json格式。
         /// </summary>
         [JsonPropertyName("settle_info")]
         public SettleInfo SettleInfo { get; set; }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string EnablePayChannels { get; set; }
 
         /// <summary>
-        /// 业务扩展参数，用于商户的特定业务信息的传递，json格式。 1.授权业务对应的类目，key为category，value由支付宝分配，比如充电桩业务传 "CHARGE_PILE_CAR"若使用信用预授权，则该值必传； 2. 外部商户的门店编号，key为outStoreCode，可选； 3. 外部商户的门店简称，key为outStoreAlias，可选; 4. 外部商户的门店简称，key为outStoreAlias，可选; 5.间联模式必须传入二级商户所属机构id，key为requestOrgId；6.信用服务Id，key为serviceId，信用场景下必传，具体值需要联系芝麻客服。
+        /// 业务扩展参数，用于商户的特定业务信息的传递，json格式。 1.授权业务对应的类目，key为category，value由支付宝分配，比如充电桩业务传 "CHARGE_PILE_CAR"若使用信用预授权，则该值必传； 2. 外部商户的门店编号，key为outStoreCode，可选； 3. 外部商户的门店简称，key为outStoreAlias，可选; 4. 外部商户的门店简称，key为outStoreAlias，可选; 5.间联模式必须传入二级商户所属机构id，key为requestOrgId；6.信用服务Id，key为serviceId，信用场景下必传，具体值需要联系芝麻客服https://cshall.alipay.com/enterprise/index.htm?sourceId=pc_zhima（右上角“有问题点我”进入咨询）。
         /// </summary>
         [JsonPropertyName("extra_param")]
         public string ExtraParam { get; set; }
@@ -38,13 +38,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OrderTitle { get; set; }
 
         /// <summary>
-        /// 商户授权资金订单号 ,不能包含除中文、英文、数字以外的字符，创建后不能修改，需要保证在商户端不重复。
+        /// 商户授权资金订单号，商家自定义需保证在商户端不重复。不能包含除中文、英文、数字以外的字符，创建后不能修改。
         /// </summary>
         [JsonPropertyName("out_order_no")]
         public string OutOrderNo { get; set; }
 
         /// <summary>
-        /// 商户本次资金操作的请求流水号，用于标示请求流水的唯一性，不能包含除中文、英文、数字以外的字符，需要保证在商户端不重复。
+        /// 商户本次资金操作的请求流水号，用于标示请求流水的唯一性，商家自定义需保证在商户端不重复。不能包含除中文、英文、数字以外的字符。
         /// </summary>
         [JsonPropertyName("out_request_no")]
         public string OutRequestNo { get; set; }
@@ -68,7 +68,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string PayeeUserId { get; set; }
 
         /// <summary>
-        /// 销售产品码，新接入线上预授权的业务，支付宝预授权产品取值PRE_AUTH_ONLINE，境外预授权产品取值OVERSEAS_INSTORE_AUTH 。
+        /// 销售产品码。新接入线上预授权的业务，支付宝预授权产品固定为 PRE_AUTH_ONLINE；境外预授权产品固定为 OVERSEAS_INSTORE_AUTH 。
         /// </summary>
         [JsonPropertyName("product_code")]
         public string ProductCode { get; set; }

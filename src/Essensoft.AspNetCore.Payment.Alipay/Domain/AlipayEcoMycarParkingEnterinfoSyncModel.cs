@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public bool AgreementQuery { get; set; }
 
         /// <summary>
-        /// 车牌颜色，可选蓝-BLUE、绿-GREEN、黄-YELLOW、白-WHITE、黑-BLACK、黄绿色-LIMEGREEN
+        /// 车牌颜色，车牌颜色，枚举支持： *BLUE：蓝。 *GREEN：绿。 *YELLOW：黄。 *WHITE：白。 *BLACK：黑。 *LIMEGREEN：黄绿色。
         /// </summary>
         [JsonPropertyName("car_color")]
         public string CarColor { get; set; }
@@ -38,7 +38,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string InTime { get; set; }
 
         /// <summary>
-        /// 支付宝停车场ID ，系统唯一
+        /// 支付宝停车平台ID，由支付宝定义的该停车场标识，同一个isv或商户范围内唯一。通过 <a href="https://opendocs.alipay.com/apis/api_19/alipay.eco.mycar.parking.parkinglotinfo.create">alipay.eco.mycar.parking.parkinglotinfo.create</a>(录入停车场信息)接口获取。
         /// </summary>
         [JsonPropertyName("parking_id")]
         public string ParkingId { get; set; }

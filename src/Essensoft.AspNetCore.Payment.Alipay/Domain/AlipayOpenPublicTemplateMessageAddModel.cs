@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -15,7 +15,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<PublicMsgKeyword> KeywordList { get; set; }
 
         /// <summary>
-        /// 消息母板id，登陆生活号后台(fuwu.alipay.com)，点击菜单“模板消息”，点击“模板库”，即可看到相应模板的消息母板id
+        /// 消息母板id，登录 <a href="https://fuwu.alipay.com/platform/spa/merchant/main/index">生活号后台</a>，点击【消息与互动】菜单【模板消息】，即可看到/领取模板的消息母板id。
         /// </summary>
         [JsonPropertyName("lib_code")]
         public string LibCode { get; set; }

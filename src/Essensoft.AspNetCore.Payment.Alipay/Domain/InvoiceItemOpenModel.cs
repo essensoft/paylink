@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ItemNo { get; set; }
 
         /// <summary>
-        /// 数量，可精确到两位小数
+        /// 数量； 1.当row_type=0或2且item_unit_price为空，可空； 2.可精确到小数点后6位
         /// </summary>
         [JsonPropertyName("item_quantity")]
         public long ItemQuantity { get; set; }
@@ -62,7 +62,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ItemUnit { get; set; }
 
         /// <summary>
-        /// 不含税单价，可精确到8位小数
+        /// 不含税单价; 1.当row_type=0或2且item_quantity为空，可空 2.可精确到小数点后8位；
         /// </summary>
         [JsonPropertyName("item_unit_price")]
         public string ItemUnitPrice { get; set; }

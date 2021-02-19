@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayOpenMiniItemPageQueryModel : AlipayObject
     {
         /// <summary>
-        /// 商家侧商品ID列表，即导入商品信息时商家自定义商品ID。
+        /// 商家侧商品 id 列表，最多可传入 20 个。导入商品信息时传入的商户自定义商品 id（item_id），传入后仅分页查询出对应商品信息。
         /// </summary>
         [JsonPropertyName("item_id_list")]
         public List<string> ItemIdList { get; set; }

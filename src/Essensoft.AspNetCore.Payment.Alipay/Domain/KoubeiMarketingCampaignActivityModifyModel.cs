@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -21,7 +21,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public BudgetInfo BudgetInfo { get; set; }
 
         /// <summary>
-        /// 活动id
+        /// 活动id，通过 <a href="https://opendocs.alipay.com/apis/api_5/koubei.marketing.campaign.activity.create">koubei.marketing.campaign.activity.create</a>(活动创建接口)获取。
         /// </summary>
         [JsonPropertyName("camp_id")]
         public string CampId { get; set; }
@@ -33,13 +33,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public ConstraintInfo ConstraintInfo { get; set; }
 
         /// <summary>
-        /// 活动详细说明  不允许修改，必须与活动详情查询的结果保持一致
+        /// 活动详细说明。  注意：本参数不允许修改，必须与  <a href="https://opendocs.alipay.com/apis/api_5/koubei.marketing.campaign.activity.query">koubei.marketing.campaign.activity.query</a>(活动详情查询)接口查询结果保持一致。
         /// </summary>
         [JsonPropertyName("desc")]
         public string Desc { get; set; }
 
         /// <summary>
-        /// 活动结束时间  活动结束时间只允许延长
+        /// 活动结束时间，格式为"yyyy-MM-dd HH:mm:ss"。 注意：活动结束时间只允许延长
         /// </summary>
         [JsonPropertyName("end_time")]
         public string EndTime { get; set; }
@@ -51,7 +51,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ExtInfo { get; set; }
 
         /// <summary>
-        /// 活动名称  不允许修改，必须与活动详情查询的结果保持一致
+        /// 活动名称。 注意：本参数不允许修改，必须与  <a href="https://opendocs.alipay.com/apis/api_5/koubei.marketing.campaign.activity.query">koubei.marketing.campaign.activity.query</a>(活动详情查询)接口查询结果保持一致。
         /// </summary>
         [JsonPropertyName("name")]
         public string Name { get; set; }
@@ -63,13 +63,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OperatorId { get; set; }
 
         /// <summary>
-        /// 操作人类型,有以下值可填：MER（外部商户），MER_OPERATOR（外部商户操作员），PROVIDER（外部服务商），PROVIDER_STAFF（外部服务商员工），默认不需要填这个字段，默认为MER
+        /// 操作人类型，不填默认为 MER（外部商户）。支持枚举值如下： * MER：外部商户。 * MER_OPERATOR：外部商户操作员。 * PROVIDER：外部服务商。 * PROVIDER_STAFF：外部服务商员工。
         /// </summary>
         [JsonPropertyName("operator_type")]
         public string OperatorType { get; set; }
 
         /// <summary>
-        /// 外部批次ID，用户指定,每次请求保持唯一
+        /// 外部批次ID。需保证同一账户下唯一，控制幂等。
         /// </summary>
         [JsonPropertyName("out_biz_no")]
         public string OutBizNo { get; set; }
@@ -93,13 +93,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public RecruitTool RecruitTool { get; set; }
 
         /// <summary>
-        /// 活动开始时间  不允许修改，必须与活动详情查询的结果保持一致
+        /// 活动开始时间，格式为"yyyy-MM-dd HH:mm:ss"。 注意：本参数不允许修改，必须与  <a href="https://opendocs.alipay.com/apis/api_5/koubei.marketing.campaign.activity.query">koubei.marketing.campaign.activity.query</a>(活动详情查询)接口查询结果保持一致。
         /// </summary>
         [JsonPropertyName("start_time")]
         public string StartTime { get; set; }
 
         /// <summary>
-        /// 活动类型  不允许修改，必须与活动详情查询的结果保持一致
+        /// 活动类型。  注意：本参数不允许修改，必须与  <a href="https://opendocs.alipay.com/apis/api_5/koubei.marketing.campaign.activity.query">koubei.marketing.campaign.activity.query</a>(活动详情查询)接口查询结果保持一致。
         /// </summary>
         [JsonPropertyName("type")]
         public string Type { get; set; }

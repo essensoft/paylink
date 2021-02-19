@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,10 +8,28 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class FinExtParams : AlipayObject
     {
         /// <summary>
+        /// 机构的appid
+        /// </summary>
+        [JsonPropertyName("inst_appid")]
+        public string InstAppid { get; set; }
+
+        /// <summary>
+        /// isv编码
+        /// </summary>
+        [JsonPropertyName("isv_code")]
+        public string IsvCode { get; set; }
+
+        /// <summary>
         /// 返回的url
         /// </summary>
         [JsonPropertyName("page_return_url")]
         public string PageReturnUrl { get; set; }
+
+        /// <summary>
+        /// 订单来源
+        /// </summary>
+        [JsonPropertyName("source")]
+        public string Source { get; set; }
 
         /// <summary>
         /// 超时时间

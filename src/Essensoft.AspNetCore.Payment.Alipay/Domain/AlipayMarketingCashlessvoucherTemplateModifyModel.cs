@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string RuleConf { get; set; }
 
         /// <summary>
-        /// 券模板ID ，参数值通过调用alipay.marketing.cashlessvoucher.template.create接口返回
+        /// 券模板ID ，参数值可通过调用<a href="https://opendocs.alipay.com/apis/009zu9">alipay.marketing.cashlessvoucher.template.create</a>（无资金券模板创建接口）创建券模板获取。
         /// </summary>
         [JsonPropertyName("template_id")]
         public string TemplateId { get; set; }

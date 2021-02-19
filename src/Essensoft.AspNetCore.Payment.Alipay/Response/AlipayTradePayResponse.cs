@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -152,6 +152,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonPropertyName("receipt_amount")]
         public string ReceiptAmount { get; set; }
+
+        /// <summary>
+        /// 收款资金类型，当交易收款资金为数字人民币时返回值为“DC”，否则不返回该字段。
+        /// </summary>
+        [JsonPropertyName("receipt_currency_type")]
+        public string ReceiptCurrencyType { get; set; }
 
         /// <summary>
         /// 结算币种订单金额

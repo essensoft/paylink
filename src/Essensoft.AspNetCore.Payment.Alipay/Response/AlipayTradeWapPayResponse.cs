@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string MerchantOrderNo { get; set; }
 
         /// <summary>
-        /// 商户网站唯一订单号
+        /// 商户网站订单号，由商家自定义。
         /// </summary>
         [JsonPropertyName("out_trade_no")]
         public string OutTradeNo { get; set; }
@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string SellerId { get; set; }
 
         /// <summary>
-        /// 该笔订单的资金总额，单位为RMB-Yuan。取值范围为[0.01，100000000.00]，精确到小数点后两位。
+        /// 该笔订单的资金总额，单位为人民币（元），取值范围为 0.01~100000000.00，精确到小数点后两位。
         /// </summary>
         [JsonPropertyName("total_amount")]
         public string TotalAmount { get; set; }

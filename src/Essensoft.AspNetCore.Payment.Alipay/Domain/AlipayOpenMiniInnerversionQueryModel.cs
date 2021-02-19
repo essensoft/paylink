@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -13,6 +13,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("bundle_id")]
         public string BundleId { get; set; }
+
+        /// <summary>
+        /// 多个端集合
+        /// </summary>
+        [JsonPropertyName("bundle_ids")]
+        public List<string> BundleIds { get; set; }
 
         /// <summary>
         /// 排序字段

@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OrigRequestNo { get; set; }
 
         /// <summary>
-        /// 标识一笔交易多次请求，同一笔交易多次信息同步时需要保证唯一
+        /// 外部请求号，商家自定义。标识一笔交易多次请求，同一笔交易多次信息同步时需要保证唯一。
         /// </summary>
         [JsonPropertyName("out_request_no")]
         public string OutRequestNo { get; set; }

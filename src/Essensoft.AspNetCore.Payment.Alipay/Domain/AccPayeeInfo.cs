@@ -18,5 +18,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("payee_name")]
         public string PayeeName { get; set; }
+
+        /// <summary>
+        /// 收款账户类型，支付宝账户（USER_ID）或银行卡（BANK_CARD_NO）等。
+        /// </summary>
+        [JsonPropertyName("payee_type")]
+        public string PayeeType { get; set; }
     }
 }

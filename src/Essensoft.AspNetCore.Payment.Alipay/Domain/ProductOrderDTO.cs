@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -60,6 +60,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("ps_code")]
         public string PsCode { get; set; }
+
+        /// <summary>
+        /// 签约活动
+        /// </summary>
+        [JsonPropertyName("sign_activity_dto")]
+        public SignActivityDTO SignActivityDto { get; set; }
 
         /// <summary>
         /// 合约状态

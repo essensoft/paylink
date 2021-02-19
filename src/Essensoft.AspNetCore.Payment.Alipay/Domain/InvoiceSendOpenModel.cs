@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -45,16 +45,22 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ExtendFields { get; set; }
 
         /// <summary>
-        /// 下载文件类型，需要回传文件下载链接的情况下必传，PDF:下载文件类型为pdf;JPG:下载的文件类型为jpg。
+        /// 下载版式文件类型，需要回传文件下载链接的情况下必传， 取值范围：PDF，JPG，OFD
         /// </summary>
         [JsonPropertyName("file_download_type")]
         public string FileDownloadType { get; set; }
 
         /// <summary>
-        /// 发票的pdf或者jpg文件下载地址。
+        /// 发票版式文件下载地址。
         /// </summary>
         [JsonPropertyName("file_download_url")]
         public string FileDownloadUrl { get; set; }
+
+        /// <summary>
+        /// 财政电子票据子类型，当tax_type=FINANCIAL_ELECTRONIC_BILL时要求必填 可选值如下： 01:非税收入通用票据 02:非税收入专用票据 03:非税收入一般缴款书 04:资金往来结算票据 05:公益事业捐赠票据 06:医疗收费票据 07:社会团体会费票据 08:社会保险基金票据 09:工会经费收入票据 99:其他财政票据
+        /// </summary>
+        [JsonPropertyName("financial_electronic_type")]
+        public string FinancialElectronicType { get; set; }
 
         /// <summary>
         /// 发票代码，该字段与invoice_no构成一张发票的唯一标识。
@@ -75,7 +81,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string InvoiceDate { get; set; }
 
         /// <summary>
-        /// 标识发票的类型，PLAIN:增值税电子普通发票;SPECIAL:增值税专用发票;PLAIN_INVOICE:增值税普通发票;SALSE_INVOICE:机动车销售统一发票  ;PAPER_INVOICE:增值税普通发票(卷式)。
+        /// 标识发票的类型， PLAIN:增值税电子普通发票; SPECIAL:增值税专用发票; PLAIN_INVOICE:增值税普通发票; FINANCIAL_ELECTRONIC_BILL:财政电子票据;
         /// </summary>
         [JsonPropertyName("invoice_kind")]
         public string InvoiceKind { get; set; }

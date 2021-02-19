@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -22,7 +22,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string ErrorCode { get; set; }
 
         /// <summary>
-        /// 退款时间；  默认不返回该信息，需与支付宝约定后配置返回；
+        /// 退款时间。
         /// </summary>
         [JsonPropertyName("gmt_refund_pay")]
         public string GmtRefundPay { get; set; }
