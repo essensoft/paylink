@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<TemplateColumnInfoDTO> ColumnInfoList { get; set; }
 
         /// <summary>
-        /// 字段规则列表，会员卡开卡过程中，会员卡信息的生成规则，  例如：卡有效期为开卡后两年内有效，则设置为：DATE_IN_FUTURE
+        /// 字段规则列表，会员卡开卡过程中，会员卡信息的生成规则， 例如：卡有效期为开卡后两年内有效，则设置为：DATE_IN_FUTURE 注意：商户会员卡场景不支持修改该内容。 
         /// </summary>
         [JsonPropertyName("field_rule_list")]
         public List<TemplateFieldRuleDTO> FieldRuleList { get; set; }
@@ -63,13 +63,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<PubChannelDTO> PubChannels { get; set; }
 
         /// <summary>
-        /// 请求ID，由开发者生成并保证唯一性
+        /// 请求 ID，商户自定义且需确保每次请求唯一。
         /// </summary>
         [JsonPropertyName("request_id")]
         public string RequestId { get; set; }
 
         /// <summary>
-        /// 会员卡上架门店id（支付宝门店id），既发放会员卡的商家门店id
+        /// 会员卡上架门店 id（支付宝门店id），即发放会员卡的商家门店id。不传则保持创建模板时信息。 注意：不支持删除已有shop_id，仅支持新增。
         /// </summary>
         [JsonPropertyName("shop_ids")]
         public List<string> ShopIds { get; set; }
@@ -81,7 +81,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<TemplateBenefitInfoDTO> TemplateBenefitInfo { get; set; }
 
         /// <summary>
-        /// 支付宝卡模板ID（模板创建接口返回的支付宝端模板ID）
+        /// 会员卡模板id。调用alipay.marketing.card.template.create（会员卡模板创建接口）创建模板后同步返回。
         /// </summary>
         [JsonPropertyName("template_id")]
         public string TemplateId { get; set; }

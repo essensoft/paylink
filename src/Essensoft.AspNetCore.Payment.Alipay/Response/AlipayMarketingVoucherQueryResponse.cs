@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -52,7 +52,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string Name { get; set; }
 
         /// <summary>
-        /// 券状态(ENABLED:可用,DISABLED:不可用,DELETE:删除状态,TRANS:发放中,TRANSFER:已转增,UNC:未领取,USED:已使用,USING:使用中,REFUNDED:已退款,REFUNDING:使用中,UNACTIVE:未激活,EXPIRED:已过期)
+        /// 券状态。枚举值如下： ENABLED：可用； DISABLED：不可用； DELETE：删除状态； TRANS：发放中； TRANSFER：已转增； UNC：未领取； USED：已使用； USING：使用中； REFUNDED：已退款； REFUNDING：退款中； UNACTIVE：未激活； EXPIRED：已过期。
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; }

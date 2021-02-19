@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,6 +8,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     /// </summary>
     public class ZhimaCreditPeZmgoTemplateCreateModel : AlipayObject
     {
+        /// <summary>
+        /// 使用权益跳转链接
+        /// </summary>
+        [JsonPropertyName("benefit_url")]
+        public string BenefitUrl { get; set; }
+
         /// <summary>
         /// 业务号，控制幂等
         /// </summary>

@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -26,7 +26,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string AccountType { get; set; }
 
         /// <summary>
-        /// 蚂蚁统一会员ID
+        /// 支付宝会员 id。
         /// </summary>
         [JsonPropertyName("alipay_user_id")]
         public string AlipayUserId { get; set; }

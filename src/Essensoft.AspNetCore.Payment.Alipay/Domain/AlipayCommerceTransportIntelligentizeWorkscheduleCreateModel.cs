@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -61,6 +61,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("timetable_direction")]
         public string TimetableDirection { get; set; }
+
+        /// <summary>
+        /// 单个车次结束后的驻站时长（单位：分钟），不传则由算法自行决策驻站时长
+        /// </summary>
+        [JsonPropertyName("trip_break_time")]
+        public long TripBreakTime { get; set; }
 
         /// <summary>
         /// 上行首站的临时停车容量，大于等于0整数

@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -12,6 +12,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("amt")]
         public MultiCurrencyMoneyOpenApi Amt { get; set; }
+
+        /// <summary>
+        /// 免税标识
+        /// </summary>
+        [JsonPropertyName("duty_free_flag")]
+        public string DutyFreeFlag { get; set; }
+
+        /// <summary>
+        /// 含税单价
+        /// </summary>
+        [JsonPropertyName("incl_tax_unit_amt")]
+        public long InclTaxUnitAmt { get; set; }
 
         /// <summary>
         /// 关联的发票ID

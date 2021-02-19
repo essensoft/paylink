@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -22,7 +22,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string AuditStatus { get; set; }
 
         /// <summary>
-        /// 地级市编码，国标码，详见国家统计局数据 <a href="http://aopsdkdownload.cn-hangzhou.alipay-pub.aliyun-inc.com/doc/2016.xls">点此下载</a>。
+        /// 地级市编码，国标码，详见国家统计局数据 <a href="https://gw.alipayobjects.com/os/bmw-prod/ecac67e2-ff88-4b74-8dbe-33a6cbecfee0.xls">点此下载</a>。
         /// </summary>
         [JsonPropertyName("city_code")]
         public string CityCode { get; set; }
@@ -58,7 +58,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string CommunityStatus { get; set; }
 
         /// <summary>
-        /// 区县编码，国标码，详见国家统计局数据 <a href="http://aopsdkdownload.cn-hangzhou.alipay-pub.aliyun-inc.com/doc/2016.xls">点此下载</a>。
+        /// 区县编码，国标码，详见国家统计局数据 <a href="https://gw.alipayobjects.com/os/bmw-prod/ecac67e2-ff88-4b74-8dbe-33a6cbecfee0.xls">点此下载</a>。
         /// </summary>
         [JsonPropertyName("district_code")]
         public string DistrictCode { get; set; }
@@ -112,7 +112,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string OutCommunityId { get; set; }
 
         /// <summary>
-        /// 省份编码，国标码，详见国家统计局数据 <a href="http://aopsdkdownload.cn-hangzhou.alipay-pub.aliyun-inc.com/doc/2016.xls">点此下载</a>。
+        /// 省份编码，国标码，详见国家统计局数据 <a href="https://gw.alipayobjects.com/os/bmw-prod/ecac67e2-ff88-4b74-8dbe-33a6cbecfee0.xls">点此下载</a>。
         /// </summary>
         [JsonPropertyName("province_code")]
         public string ProvinceCode { get; set; }

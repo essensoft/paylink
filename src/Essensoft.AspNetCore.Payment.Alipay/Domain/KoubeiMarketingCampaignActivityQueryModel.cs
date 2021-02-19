@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class KoubeiMarketingCampaignActivityQueryModel : AlipayObject
     {
         /// <summary>
-        /// 活动id
+        /// 活动id。通过 <a href="https://opendocs.alipay.com/apis/api_5/koubei.marketing.campaign.activity.create">koubei.marketing.campaign.activity.create</a>(活动创建接口)获取。
         /// </summary>
         [JsonPropertyName("camp_id")]
         public string CampId { get; set; }
@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OperatorId { get; set; }
 
         /// <summary>
-        /// 操作人类型,有以下值可填：MER（外部商户），MER_OPERATOR（外部商户操作员），PROVIDER（外部服务商），PROVIDER_STAFF（外部服务商员工），默认不需要填这个字段，默认为MER
+        /// 操作人类型，不填默认为 MER（外部商户）。支持枚举值如下： * MER：外部商户。 * MER_OPERATOR：外部商户操作员。 * PROVIDER：外部服务商。 * PROVIDER_STAFF：外部服务商员工。
         /// </summary>
         [JsonPropertyName("operator_type")]
         public string OperatorType { get; set; }

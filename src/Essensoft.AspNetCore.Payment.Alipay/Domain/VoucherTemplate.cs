@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,31 +9,43 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class VoucherTemplate : AlipayObject
     {
         /// <summary>
-        /// 劵有效期时间类型 (绝对时间:ABSOLUTE 相对时间:RELATIVE)
+        /// 券可使用时间规则
+        /// </summary>
+        [JsonPropertyName("available_time_rule")]
+        public List<VoucherTimeRule> AvailableTimeRule { get; set; }
+
+        /// <summary>
+        /// 时间类型： 绝对时间(ABSOLUTE)，相对时间(RELATIVE)， 相对时间按天(RELATIVE_BY_DAY)
         /// </summary>
         [JsonPropertyName("date_type")]
         public string DateType { get; set; }
 
         /// <summary>
-        /// 过期时间，绝对时间格式为：yyyy-MM-dd HH:mm:ss，相对时间格式为：20，为使用截止时间
+        /// 券可使用过期时间： 1）绝对时间，格式为：yyyy-MM-dd HH:mm:ss 2）相对时间，格式为：N，如100，即相对于领取时间之后的分钟数 3）相对时间按天，格式为：N，如100，即相对于领取时间当日0点之后的分钟数
         /// </summary>
         [JsonPropertyName("expire_time")]
         public string ExpireTime { get; set; }
 
         /// <summary>
-        /// 满减类型：券面额  折扣类型：折扣；单次封顶优惠金额；  减至：减至金额；
+        /// 单品券信息
+        /// </summary>
+        [JsonPropertyName("item_info")]
+        public VoucherSingleItemInfo ItemInfo { get; set; }
+
+        /// <summary>
+        /// 优惠规则： 1）满减类型：券面额  2）折扣类型：折扣；单次封顶优惠金额 3）减至类型：减至金额
         /// </summary>
         [JsonPropertyName("promo_info")]
         public PromoInfo PromoInfo { get; set; }
 
         /// <summary>
-        /// 优惠类型：代金\折扣\减至
+        /// 优惠类型： 代金(FIX),折扣(DISCOUNT),减至(SPECIAL)
         /// </summary>
         [JsonPropertyName("promo_type")]
         public string PromoType { get; set; }
 
         /// <summary>
-        /// 发券时间，绝对时间格式为：yyyy-MM-dd HH:mm:ss，相对时间格式为：10，为使用开始时间
+        /// 券可使用开始时间： 1）绝对时间，格式为：yyyy-MM-dd HH:mm:ss 2）相对时间，格式为：N，如100，即相对于领取时间之后的分钟数 3）相对时间按天，格式为：N，如100，即相对于领取时间当日0点之后的分钟数
         /// </summary>
         [JsonPropertyName("send_time")]
         public string SendTime { get; set; }
@@ -50,13 +63,25 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ThresholdAmount { get; set; }
 
         /// <summary>
+        /// 券不可使用时间规则
+        /// </summary>
+        [JsonPropertyName("unavailable_time_rule")]
+        public List<VoucherTimeRule> UnavailableTimeRule { get; set; }
+
+        /// <summary>
         /// 优惠券名称
         /// </summary>
         [JsonPropertyName("voucher_name")]
         public string VoucherName { get; set; }
 
         /// <summary>
-        /// 优惠归属为商家优惠时，优惠类型包括：商家全场券（ALIPAY_BIZ_VOUCHER）、单品优惠券(ALIPAY_COMMON_ITEM_VOUCHER)
+        /// 券总张数
+        /// </summary>
+        [JsonPropertyName("voucher_quantity")]
+        public string VoucherQuantity { get; set; }
+
+        /// <summary>
+        /// 券类型： 1）商家全场优惠券(ALIPAY_BIZ_VOUCHER) 2）商家单品优惠券(ALIPAY_COMMON_ITEM_VOUCHER)
         /// </summary>
         [JsonPropertyName("voucher_type")]
         public string VoucherType { get; set; }

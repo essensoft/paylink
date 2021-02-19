@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,6 +8,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     /// </summary>
     public class PetProfile : AlipayObject
     {
+        /// <summary>
+        /// 算法识别的宠物种类code编码
+        /// </summary>
+        [JsonPropertyName("algorithm_pet_species_code")]
+        public string AlgorithmPetSpeciesCode { get; set; }
+
+        /// <summary>
+        /// 宠物毛色
+        /// </summary>
+        [JsonPropertyName("coat_color")]
+        public string CoatColor { get; set; }
+
         /// <summary>
         /// 宠物资料是否齐全 0 不齐全 1 齐全
         /// </summary>

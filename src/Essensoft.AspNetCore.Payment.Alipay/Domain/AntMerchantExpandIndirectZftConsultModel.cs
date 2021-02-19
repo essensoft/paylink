@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -9,25 +9,25 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AntMerchantExpandIndirectZftConsultModel : AlipayObject
     {
         /// <summary>
-        /// 商户别名
+        /// 商户别名。支付宝账单中的商户名称会展示此处设置的别名，如果涉及支付宝APP内的支付，支付结果页也会展示该别名
         /// </summary>
         [JsonPropertyName("alias_name")]
         public string AliasName { get; set; }
 
         /// <summary>
-        /// 商户支付宝账号，用作结算账号。与银行卡对象字段二选一必填
+        /// 结算支付宝账号，结算账号使用支付宝账号时必填。本字段要求与商户名称name同名，且是实名认证支付宝账户(个体工商户可以与name或cert_name相同)
         /// </summary>
         [JsonPropertyName("alipay_logon_id")]
         public string AlipayLogonId { get; set; }
 
         /// <summary>
-        /// 二级商户支付宝账户，用于协议确认。目前商业场景（除医疗、中小学教育等）下必填。本字段要求与商户名称name同名，且是实名认证支付宝账户
+        /// 签约支付宝账户，用于协议确认，及后续二级商户增值产品服务签约时使用。本字段要求与商户名称name同名，且是实名认证支付宝账户
         /// </summary>
         [JsonPropertyName("binding_alipay_logon_id")]
         public string BindingAlipayLogonId { get; set; }
 
         /// <summary>
-        /// 商户结算卡信息。本业务当前只允许传入一张结算卡。与支付宝账号字段二选一必填
+        /// 结算银行卡，如果结算到支付宝账号，则不需要填写。本业务当前只允许传入一张结算卡
         /// </summary>
         [JsonPropertyName("biz_cards")]
         public List<SettleCardInfo> BizCards { get; set; }
@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public AddressInfo BusinessAddress { get; set; }
 
         /// <summary>
-        /// 营业执照图片url，本业务接口中，如果是特殊行业必填。其值为使用ant.merchant.expand.indirect.image.upload上传图片得到的一串oss key。
+        /// 商户证件图片url，本业务接口中，如果是特殊行业必填。其值为使用ant.merchant.expand.indirect.image.upload上传图片得到的一串oss key。
         /// </summary>
         [JsonPropertyName("cert_image")]
         public string CertImage { get; set; }
@@ -57,25 +57,25 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string CertName { get; set; }
 
         /// <summary>
-        /// 商户证件编号（企业或者个体工商户提供营业执照，事业单位提供事证号）
+        /// 商户证件编号，按商户类型merchant_type的说明提供对应的证件编号
         /// </summary>
         [JsonPropertyName("cert_no")]
         public string CertNo { get; set; }
 
         /// <summary>
-        /// 商户证件类型，取值范围：201：营业执照；2011:营业执照(统一社会信用代码)；218：事业单位法人证书
+        /// 商户证件类型，按商户类型merchant_type的说明提供对应的证件类型。如果不传则以存量数据为准
         /// </summary>
         [JsonPropertyName("cert_type")]
         public string CertType { get; set; }
 
         /// <summary>
-        /// 商户联系人信息。在本业务中，ContactInfo对象中名称，类型、手机号必填，其他选填
+        /// 商户联系人信息。在本业务中，ContactInfo对象中联系人姓名、手机号必填，其他选填
         /// </summary>
         [JsonPropertyName("contact_infos")]
         public List<ContactInfo> ContactInfos { get; set; }
 
         /// <summary>
-        /// 默认结算规则。在收单时不做特别指定规则时，将使用本对象设置的结算规则进行结算。其详细描述及收单接口传参示例参考功能包文档
+        /// 默认结算规则。当调用收单接口，结算条款中设置默认结算规则时，交易资金将结算至此处设置的默认结算目标账户中。其详细描述及收单接口传参示例参考功能包文档
         /// </summary>
         [JsonPropertyName("default_settle_rule")]
         public DefaultSettleRule DefaultSettleRule { get; set; }
@@ -123,13 +123,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string LegalName { get; set; }
 
         /// <summary>
-        /// c6c0c7a1-b9d5-4e5d-b9d4-9eed39f00e65.jpg   营业执照授权函。其值为使用ant.merchant.expand.indirect.image.upload上传图片得到的一串oss key。当商户名与结算卡户名不一致时必填
+        /// 授权函。其值为使用ant.merchant.expand.indirect.image.upload上传图片得到的一串oss key。当商户名与结算卡户名不一致（模板参考https://gw.alipayobjects.com/os/skylark-tools/public/files/d5fcbe7463d7159a0d362da417d157ed.docx），或涉及外籍法人（这种情况上传任意能证明身份的图片）时必填
         /// </summary>
         [JsonPropertyName("license_auth_letter_image")]
         public string LicenseAuthLetterImage { get; set; }
 
         /// <summary>
-        /// 商户类别码mcc，参见附件描述中的“类目code”  https://gw.alipayobjects.com/os/basement_prod/82cb70f7-abbd-417a-91ba-73c1849f07ea.xlsx  如果要求资质一栏不为空，表明是特殊行业，会有人工审核。注：文档更新可能有滞后性，以实际为准
+        /// 商户类别码mcc，参见https://gw.alipayobjects.com/os/bmw-prod/e5dbb27b-1d8d-442e-be9e-6e52971ce7c3.xlsx 特殊行业要按照MCC说明中的资质一栏上传辅助资质，辅助资质要在qualifications中上传，会有人工审核。
         /// </summary>
         [JsonPropertyName("mcc")]
         public string Mcc { get; set; }

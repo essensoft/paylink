@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayEcoDoctemplateSettingurlQueryModel : AlipayObject
     {
         /// <summary>
-        /// 模板id
+        /// 合同模板id。通过<a href ="https://opendocs.alipay.com/apis/api_50/alipay.eco.doc.template.create">创建合同模版</a>（alipay.eco.doc.template.create）接口获取。
         /// </summary>
         [JsonPropertyName("template_id")]
         public string TemplateId { get; set; }

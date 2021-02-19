@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
     public class AlipayCommerceEducateFacefeatureDeleteResponse : AlipayResponse
     {
         /// <summary>
-        /// 出库失败的faceId集合
+        /// 出库失败的faceId集合。
         /// </summary>
         [JsonPropertyName("face_ids")]
         public List<string> FaceIds { get; set; }

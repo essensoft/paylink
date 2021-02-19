@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class ScenicFaceInfo : AlipayObject
     {
         /// <summary>
-        /// 用户场景下唯一标示码
+        /// 用户场景下唯一标示码。（注：请确保传入face_id的自然人维度全局唯一）
         /// </summary>
         [JsonPropertyName("face_id")]
         public string FaceId { get; set; }

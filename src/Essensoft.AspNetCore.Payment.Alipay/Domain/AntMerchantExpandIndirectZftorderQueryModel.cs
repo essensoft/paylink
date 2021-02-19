@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ExternalId { get; set; }
 
         /// <summary>
-        /// 进件接口返回的申请单id。与external_id二选一必填。若都传以order_id的查询为准。
+        /// 申请单id。通过 ant.merchant.expand.indirect.zft.create(直付通二级商户创建)接口返回。与 external_id 二选一必填，若同时传入将以 order_id 为准进行查询。
         /// </summary>
         [JsonPropertyName("order_id")]
         public string OrderId { get; set; }

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayMerchantOrderSyncModel : AlipayObject
     {
         /// <summary>
-        /// 订单金额，单位为元
+        /// 订单金额，单位为元。SERVICE_ORDER且不涉及金额可不传入该字段，其他场景必传
         /// </summary>
         [JsonPropertyName("amount")]
         public string Amount { get; set; }
@@ -33,7 +33,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string DiscountAmount { get; set; }
 
         /// <summary>
-        /// 扩展信息，请参见产品文档
+        /// 订单优惠信息
+        /// </summary>
+        [JsonPropertyName("discount_info_list")]
+        public List<DiscountInfoData> DiscountInfoList { get; set; }
+
+        /// <summary>
+        /// 扩展信息，请参见 <a href="https://opendocs.alipay.com/mini/introduce/ordercenter">小程序订单中心</a>；<a href="https://opendocs.alipay.com/mini/00nnt3">扫码点餐</a>产品文档。
         /// </summary>
         [JsonPropertyName("ext_info")]
         public List<OrderExtInfo> ExtInfo { get; set; }
@@ -43,6 +49,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("item_order_list")]
         public List<ItemOrderInfo> ItemOrderList { get; set; }
+
+        /// <summary>
+        /// 行程信息
+        /// </summary>
+        [JsonPropertyName("journey_order_list")]
+        public List<OrderJourneyInfo> JourneyOrderList { get; set; }
 
         /// <summary>
         /// 物流信息  列表最多支持物流信息个数，请参考产品文档  注：若该值不为空，且物流信息同步至我的快递，则在查询订单时可返回具体物流信息
@@ -61,6 +73,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("order_create_time")]
         public string OrderCreateTime { get; set; }
+
+        /// <summary>
+        /// 订单修改时间，一般不需要传入。用于订单状态或数据变化较快的顺序控制，order_modified_time较晚的同步会被最终存储，order_modified_time相同的两次同步可能会被幂等处理，SERVICE_ORDER按照行业标准化接入场景必须传入该字段控制乱序
+        /// </summary>
+        [JsonPropertyName("order_modified_time")]
+        public string OrderModifiedTime { get; set; }
 
         /// <summary>
         /// 订单支付时间 当pay_channel为非ALIPAY时，且订单状态已流转到“支付”或支付后时，需要将支付时间传入
@@ -87,7 +105,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string PartnerId { get; set; }
 
         /// <summary>
-        /// 支付金额 需要实际支付的金额
+        /// 支付金额，需要实际支付的金额。SERVICE_ORDER且不涉及金额可不传入该字段，其他场景必传
         /// </summary>
         [JsonPropertyName("pay_amount")]
         public string PayAmount { get; set; }
@@ -117,10 +135,16 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string SendMsg { get; set; }
 
         /// <summary>
-        /// 门店信息
+        /// 门店信息，扫码点餐获取返佣时必填。
         /// </summary>
         [JsonPropertyName("shop_info")]
         public OrderShopInfo ShopInfo { get; set; }
+
+        /// <summary>
+        /// 同步内容 -JOURNEY_ONLY 仅行程信息 -ALL 全部(默认)
+        /// </summary>
+        [JsonPropertyName("sync_content")]
+        public string SyncContent { get; set; }
 
         /// <summary>
         /// 凭证信息

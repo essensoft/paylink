@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,10 +8,22 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayEcoMycarParkingOrderPayModel : AlipayObject
     {
         /// <summary>
+        /// 先离后付订单：true； 普通先付后离订单：false
+        /// </summary>
+        [JsonPropertyName("after_pay_order")]
+        public bool AfterPayOrder { get; set; }
+
+        /// <summary>
         /// 代扣返佣的支付宝用户号。  以2088开头的纯16位数。
         /// </summary>
         [JsonPropertyName("agent_id")]
         public string AgentId { get; set; }
+
+        /// <summary>
+        /// 计费时长(以分为单位)
+        /// </summary>
+        [JsonPropertyName("billing_duration")]
+        public string BillingDuration { get; set; }
 
         /// <summary>
         /// 订单描述
@@ -32,6 +44,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string CarNumberColor { get; set; }
 
         /// <summary>
+        /// 停车时长（以分为单位）
+        /// </summary>
+        [JsonPropertyName("in_duration")]
+        public string InDuration { get; set; }
+
+        /// <summary>
+        /// 入场时间，格式"YYYY-MM-DD HH:mm:ss"，24小时制
+        /// </summary>
+        [JsonPropertyName("in_time")]
+        public string InTime { get; set; }
+
+        /// <summary>
         /// 车场服务商指定是否开启垫付功能（若需开启，须实现签约支付宝停车垫资协议）：  true开启，  false不开启(默认)
         /// </summary>
         [JsonPropertyName("is_advance")]
@@ -44,6 +68,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutParkingId { get; set; }
 
         /// <summary>
+        /// 出场时间，格式"YYYY-MM-DD HH:mm:ss"，24小时制
+        /// </summary>
+        [JsonPropertyName("out_time")]
+        public string OutTime { get; set; }
+
+        /// <summary>
         /// 支付宝合作商户网站唯一订单号
         /// </summary>
         [JsonPropertyName("out_trade_no")]
@@ -54,6 +84,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("parking_id")]
         public string ParkingId { get; set; }
+
+        /// <summary>
+        /// 版本号,最新版本为：3.0
+        /// </summary>
+        [JsonPropertyName("pay_version")]
+        public string PayVersion { get; set; }
 
         /// <summary>
         /// 卖家支付宝用户号  卖家支付宝账号对应的支付宝唯一用户号。  以2088开头的纯16位数。

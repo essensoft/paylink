@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AntMerchantExpandItemOpenBatchqueryModel : AlipayObject
     {
         /// <summary>
-        /// 商品ID列表
+        /// 商品ID列表，单次查询上限为 20。
         /// </summary>
         [JsonPropertyName("item_id_list")]
         public List<string> ItemIdList { get; set; }

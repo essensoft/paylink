@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -33,7 +33,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string MerchantName { get; set; }
 
         /// <summary>
-        /// 申请单状态。支持： 99:已完结； -1:失败； 031:已提交审核。
+        /// 申请单状态。枚举支持： 99：已完结； -1：失败； 031：已提交审核。
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; }

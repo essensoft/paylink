@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,6 +8,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     /// </summary>
     public class KoubeiCateringDishCreatedishSyncModel : AlipayObject
     {
+        /// <summary>
+        /// 菜品活动信息，属于isv外部活动信息
+        /// </summary>
+        [JsonPropertyName("activity_info")]
+        public KbdishBaseActivityInfo ActivityInfo { get; set; }
+
         /// <summary>
         /// 类目的名称，需要保证pid+分类名称唯一
         /// </summary>
@@ -19,6 +25,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("catetory_sort")]
         public string CatetorySort { get; set; }
+
+        /// <summary>
+        /// 菜品背景图片(非C端菜谱中的商品主图)，如combo加购页的顶层背景图，主图、附图、背景图尺寸不一
+        /// </summary>
+        [JsonPropertyName("dish_background_img")]
+        public string DishBackgroundImg { get; set; }
+
+        /// <summary>
+        /// 多图菜品的附图列表
+        /// </summary>
+        [JsonPropertyName("dish_detail_img_list")]
+        public List<string> DishDetailImgList { get; set; }
 
         /// <summary>
         /// 图片id
@@ -51,6 +69,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Name { get; set; }
 
         /// <summary>
+        /// 菜品是否不参与整单优惠，true(不参与)，false(参与)，不传默认为false
+        /// </summary>
+        [JsonPropertyName("non_whole_order_discount")]
+        public string NonWholeOrderDiscount { get; set; }
+
+        /// <summary>
         /// 外部菜品id
         /// </summary>
         [JsonPropertyName("out_dish_id")]
@@ -61,6 +85,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("out_shop_id")]
         public string OutShopId { get; set; }
+
+        /// <summary>
+        /// 时间规则
+        /// </summary>
+        [JsonPropertyName("period")]
+        public KbdishPeriodExtendInfo Period { get; set; }
 
         /// <summary>
         /// 属性列表
@@ -109,6 +139,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("type_big")]
         public string TypeBig { get; set; }
+
+        /// <summary>
+        /// 菜品子类型，在type_small基础上拓展出来的第三级，如packages/choosen/combo，表示combo类型可选套餐，不传则默认为非combo菜品
+        /// </summary>
+        [JsonPropertyName("type_sub")]
+        public string TypeSub { get; set; }
 
         /// <summary>
         /// 单位

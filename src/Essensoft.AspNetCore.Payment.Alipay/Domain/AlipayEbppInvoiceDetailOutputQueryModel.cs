@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string InvoiceNo { get; set; }
 
         /// <summary>
-        /// 获取发票明细应用场景  固定值：INVOICE_EXPENSE-发票报销
+        /// 获取发票明细应用场景。固定为 INVOICE_EXPENSE  表示发票报销。
         /// </summary>
         [JsonPropertyName("scene")]
         public string Scene { get; set; }
@@ -32,7 +32,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public bool SkipExpenseProgressSync { get; set; }
 
         /// <summary>
-        /// 支付宝用户id
+        /// 发票归属用户 id，用户在支付宝的唯一标识，以 2088 开头的 16 位纯数字组成。
         /// </summary>
         [JsonPropertyName("user_id")]
         public string UserId { get; set; }

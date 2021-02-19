@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -38,7 +38,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OrderNo { get; set; }
 
         /// <summary>
-        /// 设备商订单状态，0：成功，1：失败
+        /// 设备商订单状态，枚举支持： * 0：成功。 * 1：失败。
         /// </summary>
         [JsonPropertyName("order_status")]
         public string OrderStatus { get; set; }
@@ -56,19 +56,19 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutOrderNo { get; set; }
 
         /// <summary>
-        /// ISV停车场ID，由ISV提供，同一个isv或商户范围内唯一
+        /// ISV停车场ID，由ISV定义的停车场标识，同一个isv或商户范围内唯一。需与 <a href="https://opendocs.alipay.com/apis/api_19/alipay.eco.mycar.parking.parkinglotinfo.create">alipay.eco.mycar.parking.parkinglotinfo.create</a>(录入停车场信息)接口传入值一致。
         /// </summary>
         [JsonPropertyName("out_parking_id")]
         public string OutParkingId { get; set; }
 
         /// <summary>
-        /// 支付宝停车场id，系统唯一
+        /// 支付宝停车平台ID，由支付宝定义的该停车场标识，同一个isv或商户范围内唯一。通过 <a href="https://opendocs.alipay.com/apis/api_19/alipay.eco.mycar.parking.parkinglotinfo.create">alipay.eco.mycar.parking.parkinglotinfo.create</a>(录入停车场信息)接口获取。
         /// </summary>
         [JsonPropertyName("parking_id")]
         public string ParkingId { get; set; }
 
         /// <summary>
-        /// 停车场名称，由ISV定义，尽量与高德地图上的一致
+        /// 停车场名称，需与<a href="https://opendocs.alipay.com/apis/api_19/alipay.eco.mycar.parking.parkinglotinfo.create">alipay.eco.mycar.parking.parkinglotinfo.create</a>(录入停车场信息)接口传入值一致。
         /// </summary>
         [JsonPropertyName("parking_name")]
         public string ParkingName { get; set; }
@@ -86,13 +86,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string PayTime { get; set; }
 
         /// <summary>
-        /// 付款方式，1：支付宝在线缴费 ，2：支付宝代扣缴费
+        /// 付款方式，枚举支持： *1：支付宝在线缴费 。 *2：支付宝代扣缴费。
         /// </summary>
         [JsonPropertyName("pay_type")]
         public string PayType { get; set; }
 
         /// <summary>
-        /// 停车缴费支付宝用户的ID，请ISV保证用户ID的正确性，以免导致用户在停车平台查询不到相关的订单信息
+        /// 停车缴费用户 id，用户在支付宝的唯一标识，以 2088 开头的 16 位纯数字组成。 注意：ISV需保证用户 id的正确性，以免导致用户在停车平台查询不到相关的订单信息。
         /// </summary>
         [JsonPropertyName("user_id")]
         public string UserId { get; set; }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -14,7 +14,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string IntervalTime { get; set; }
 
         /// <summary>
-        /// 集点阈值，即当用户集点进度达到阙值后才会根据间隔时间下发召回唤醒
+        /// 针对每个用户而言的月召回次数上限，且必须不大于平台侧该值全局配置
+        /// </summary>
+        [JsonPropertyName("month_limit")]
+        public string MonthLimit { get; set; }
+
+        /// <summary>
+        /// 集点阈值，即当用户集点进度达到阈值后才会根据间隔时间下发召回唤醒通知，且必须不小于平台侧该值全局配置
         /// </summary>
         [JsonPropertyName("threshold")]
         public string Threshold { get; set; }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayTradeCloseModel : AlipayObject
     {
         /// <summary>
-        /// 卖家端自定义的的操作员 ID
+        /// 商家操作员编号 id，由商家自定义。
         /// </summary>
         [JsonPropertyName("operator_id")]
         public string OperatorId { get; set; }

@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -9,22 +9,34 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class InvoiceModelContent : AlipayObject
     {
         /// <summary>
+        /// 支付宝端的申请id。如果在开票过程中，是通过支付宝提交的申请到机构端，支付宝会带上开票申请在支付宝生成的申请id，机构在回传发票的时候只需要回传这个申请id，不用获取用户的uid，支付宝可以根据申请id将发票归集到对应的用户名下
+        /// </summary>
+        [JsonPropertyName("apply_id")]
+        public string ApplyId { get; set; }
+
+        /// <summary>
         /// key=value，每组键值对以回车分割
         /// </summary>
         [JsonPropertyName("extend_fields")]
         public string ExtendFields { get; set; }
 
         /// <summary>
-        /// 下载的发票文件类型  可选值：  pdf（发票原文件）  jpg（发票原文件缩略图）
+        /// 下载的发票文件类型 可选值： pdf（发票原文件） ofd (发票原文件） jpg（发票原文件缩略图）
         /// </summary>
         [JsonPropertyName("file_download_type")]
         public string FileDownloadType { get; set; }
 
         /// <summary>
-        /// 文件下载地址，当同步发票tax_type=PLAIN时，必传；  此处的链接请务必传入可下载PDF的链接
+        /// 发票原文件下载地址 1.当tax_type=PLAIN时， file_download_url必传 且file_download_type取值范围为pdf或ofd； 2.当tax_type=SPECIAL时， file_download_url必传 file_download_type可以传入pdf，ofd，jpg 3.当其他票种时，file_download_url可以不传
         /// </summary>
         [JsonPropertyName("file_download_url")]
         public string FileDownloadUrl { get; set; }
+
+        /// <summary>
+        /// 财政电子票据子类型，当tax_type=FINANCIAL_ELECTRONIC_BILL时要求必填 可选值如下： 01:非税收入通用票据  02:非税收入专用票据 03:非税收入一般缴款书 04:资金往来结算票据 05:公益事业捐赠票据 06:医疗收费票据 07:社会团体会费票据 08:社会保险基金票据 09:工会经费收入票据 99:其他财政票据
+        /// </summary>
+        [JsonPropertyName("financial_electronic_type")]
+        public string FinancialElectronicType { get; set; }
 
         /// <summary>
         /// 发票金额，大于0且精确到小数点两位，以元为单位  需要传入税价合计金额
@@ -57,7 +69,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string InvoiceFakeCode { get; set; }
 
         /// <summary>
-        /// 原始发票PDF文件流
+        /// 原始发票PDF/OFD文件流
         /// </summary>
         [JsonPropertyName("invoice_file_data")]
         public string InvoiceFileData { get; set; }
@@ -165,13 +177,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string TaxAmount { get; set; }
 
         /// <summary>
-        /// 税种  可选值：  PLAIN（普票的情况）  SPECIAL（专票的情况）
+        /// 税种 可选值： PLAIN：增值税电子普通发票 SPECIAL：增值税专用发票 PLAIN_INVOICE:增值税普通发票 FINANCIAL_ELECTRONIC_BILL:财政电子票据
         /// </summary>
         [JsonPropertyName("tax_type")]
         public string TaxType { get; set; }
 
         /// <summary>
-        /// 支付宝用户id,当同步的是蓝票时，必传。红票时不需传。
+        /// 支付宝用户id，支付宝端的申请id存在的时候也不需要传，其他情况下，当同步的是蓝票时，必传，红票时不需传。
         /// </summary>
         [JsonPropertyName("user_id")]
         public string UserId { get; set; }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public InvoicePDFSynModel InvoiceInfo { get; set; }
 
         /// <summary>
-        /// 开票商户品牌简称，与商户入驻时的品牌简称保持一致。
+        /// 开票商户品牌简称，与商户入驻时的品牌简称保持一致。详情参见 <a href="https://opendocs.alipay.com/open/10691/welcome-to-lark">电子发票</a>
         /// </summary>
         [JsonPropertyName("m_short_name")]
         public string MShortName { get; set; }

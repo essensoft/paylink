@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -21,7 +21,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string EndInvoiceDate { get; set; }
 
         /// <summary>
-        /// 查询票种列表  可选值  PLAIN：增值税电子普通发票  SPECIAL：增值税专用发票  PLAIN_INVOICE:增值税普通发票  PAPER_INVOICE:增值税普通发票（卷式）  SALSE_INVOICE:机动车销售统一发票
+        /// 查询票种列表。枚举值如下： *PLAIN：增值税电子普通发票； *SPECIAL：增值税专用发票； *PLAIN_INVOICE：增值税普通发票； *PAPER_INVOICE：增值税普通发票（卷式）； *SALSE_INVOICE：机动车销售统一发票。
         /// </summary>
         [JsonPropertyName("invoice_kind_list")]
         public List<string> InvoiceKindList { get; set; }
@@ -39,7 +39,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public long PageNum { get; set; }
 
         /// <summary>
-        /// 发票要素获取应用场景  INVOICE_EXPENSE－发票报销
+        /// 发票要素获取应用场景。<a href="https://opendocs.alipay.com/open/10691/bv8s88">"拉"模式报销</a> 固定为 INVOICE_EXPENSE 表示发票报销。
         /// </summary>
         [JsonPropertyName("scene")]
         public string Scene { get; set; }

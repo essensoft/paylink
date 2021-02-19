@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayTradeAppPayModel : AlipayObject
     {
         /// <summary>
-        /// 签约参数。如果希望在sdk中支付并签约，需要在这里传入签约信息。
+        /// 签约参数。如果希望在sdk中支付并签约，需要在这里传入签约信息。 周期扣款场景 product_code 为 CYCLE_PAY_AUTH 时必填。
         /// </summary>
         [JsonPropertyName("agreement_sign_params")]
         public SignParams AgreementSignParams { get; set; }
@@ -57,7 +57,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<GoodsDetail> GoodsDetail { get; set; }
 
         /// <summary>
-        /// 商品主类型 :0-虚拟类商品,1-实物类商品
+        /// 商品主类型，取值如下： 0：虚拟类商品； 1：实物类商品。
         /// </summary>
         [JsonPropertyName("goods_type")]
         public string GoodsType { get; set; }
@@ -75,7 +75,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string MerchantOrderNo { get; set; }
 
         /// <summary>
-        /// 商户网站唯一订单号
+        /// 商户订单号，由商家自定义，需保证商家系统中唯一。仅支持数字、字母、下划线。
         /// </summary>
         [JsonPropertyName("out_trade_no")]
         public string OutTradeNo { get; set; }
@@ -87,7 +87,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string PassbackParams { get; set; }
 
         /// <summary>
-        /// 销售产品码，商家和支付宝签约的产品码
+        /// 销售产品码，商家和支付宝签约的产品码，默认为 QUICK_MSECURITY_PAY（App支付）。枚举支持： QUICK_MSECURITY_PAY：App支付； CYCLE_PAY_AUTH：周期扣款。 周期扣款产品场景必填。
         /// </summary>
         [JsonPropertyName("product_code")]
         public string ProductCode { get; set; }
@@ -153,7 +153,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string TimeoutExpress { get; set; }
 
         /// <summary>
-        /// 订单总金额，单位为元，精确到小数点后两位，取值范围[0.01,100000000]
+        /// 订单总金额，单位为人民币（元），取值范围为 0.01~100000000.00，精确到小数点后两位。
         /// </summary>
         [JsonPropertyName("total_amount")]
         public string TotalAmount { get; set; }

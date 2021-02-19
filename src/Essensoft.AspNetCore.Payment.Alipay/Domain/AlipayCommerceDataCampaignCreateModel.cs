@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string EndTime { get; set; }
 
         /// <summary>
-        /// 集点活动配置业务扩展字段，json数组格式。具体值需要和支付宝约定
+        /// 集点活动配置业务扩展字段，json格式。具体值需要和支付宝约定，请查看集点营销集成文档中说明。
         /// </summary>
         [JsonPropertyName("ext_info")]
         public string ExtInfo { get; set; }
@@ -44,7 +44,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string MerchantPid { get; set; }
 
         /// <summary>
-        /// 集点活动中里程碑信息，json数组格式，其中：milestone_total_num:小里程碑目标次数 milestone_award:小里程碑奖品名称 小里程碑目标次数需要小于集点任务目标次数； 如果传入小里程碑奖品名称时，小里程碑目标次数必传。
+        /// 集点活动中里程碑信息，json数组格式，其中：milestone_total_num:小里程碑目标次数，milestone_award:小里程碑奖品名称。小里程碑目标次数需要小于集点任务目标次数； 如果传入小里程碑奖品名称时，小里程碑目标次数必传。
         /// </summary>
         [JsonPropertyName("milestone_list")]
         public string MilestoneList { get; set; }
@@ -62,7 +62,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string PushUnit { get; set; }
 
         /// <summary>
-        /// 集点活动展示变量，用于在集点通知服务提醒中进行展示
+        /// 集点活动展示变量，即被push_unit量词修饰的实体，用于在集点通知服务提醒中进行展示。
         /// </summary>
         [JsonPropertyName("push_unit_name")]
         public string PushUnitName { get; set; }

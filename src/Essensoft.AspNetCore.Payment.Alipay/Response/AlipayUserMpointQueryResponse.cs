@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -18,5 +19,11 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonPropertyName("grade")]
         public string Grade { get; set; }
+
+        /// <summary>
+        /// 会员的联名信息，简单枚举值
+        /// </summary>
+        [JsonPropertyName("joint_info")]
+        public List<string> JointInfo { get; set; }
     }
 }

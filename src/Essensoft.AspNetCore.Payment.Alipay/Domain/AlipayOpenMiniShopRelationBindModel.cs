@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayOpenMiniShopRelationBindModel : AlipayObject
     {
         /// <summary>
-        /// 门店信息，entity_id为平台侧门店id，property_list属性列表详见产品文档
+        /// 门店信息，entity_id为平台侧门店id，property_list属性列表详见 <a href="https://opendocs.alipay.com/mini/00nvud">绑定门店</a>。
         /// </summary>
         [JsonPropertyName("entity_info")]
         public List<MiniEntityBindInfo> EntityInfo { get; set; }

@@ -91,7 +91,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             var sortedTxtParams = new SortedDictionary<string, string>(txtParams, StringComparer.Ordinal);
             txtParams = new AlipayDictionary(sortedTxtParams);
 
-           // 序列化BizModel
+            // 序列化BizModel
             txtParams = SerializeBizModel(txtParams, request);
 
             // 添加签名参数

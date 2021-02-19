@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -32,7 +32,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string FundAccount { get; set; }
 
         /// <summary>
-        /// 红包变动异步通知地址，传入此字段后，红包的核销将会进行异步通知，通知具体内容见下方触发异步通知字段描述
+        /// 红包变动异步通知地址，传入此字段后，红包的核销将会进行异步通知。
         /// </summary>
         [JsonPropertyName("notify_uri")]
         public string NotifyUri { get; set; }
@@ -68,7 +68,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string RuleConf { get; set; }
 
         /// <summary>
-        /// 模板总金额。本次发放模板设置的总金额。币种为人民币，单位为元。该数值不能小于1.00元，小数点以后最多保留两位。
+        /// 模板总金额。本次发放模板设置的总金额。单位为人民币（元），取值范围为不小于1元，精确到小数点后两位
         /// </summary>
         [JsonPropertyName("total_amount")]
         public string TotalAmount { get; set; }
@@ -80,7 +80,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string VoucherDescription { get; set; }
 
         /// <summary>
-        /// 类型。可枚举，暂时只支持"红包"(COUPON)，使用示例voucher_type=COUPON。红包可以拆分多次使用，比如：1元红包，可以先用掉0.5元，剩余的0.5元可以继续使用；可以多个红包叠加使用，一笔支付最多叠加10个红包；红包被使用后发生退款，如果红包有效期还在，会退还给用户红包，如果有效期已过，就会将资金退回原红包模板出资账户。
+        /// 券类型。可枚举，暂时只支持"红包"(COUPON)，使用示例voucher_type=COUPON。红包可以拆分多次使用，比如：1元红包，可以先用掉0.5元，剩余的0.5元可以继续使用；可以多个红包叠加使用，一笔支付最多叠加10个红包；红包被使用后发生退款，如果红包有效期还在，会退还给用户红包，如果有效期已过，就会将资金退回原红包模板出资账户。
         /// </summary>
         [JsonPropertyName("voucher_type")]
         public string VoucherType { get; set; }

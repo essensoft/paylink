@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -56,13 +56,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Memo { get; set; }
 
         /// <summary>
-        /// 报销操作  传值固定：  EXPENSE_APPLY－用户已提交申请  EXPENSE_APPROVAL_PASS －报销审核通过  EXPENSE_FINISHED－报销完结  EXPENSE_CANCEL－报销撤回
+        /// 报销操作。枚举值如下： *EXPENSE_APPLY：用户已提交申请。*EXPENSE_APPROVAL_PASS：报销审核通过。 *EXPENSE_FINISHED：报销完结。 *EXPENSE_CANCEL：报销撤回。
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; }
 
         /// <summary>
-        /// 支付宝用户id
+        /// 发票归属用户 id，用户在支付宝的唯一标识，以 2088 开头的 16 位纯数字组成。
         /// </summary>
         [JsonPropertyName("user_id")]
         public string UserId { get; set; }

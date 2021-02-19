@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Response;
 using Essensoft.AspNetCore.Payment.Alipay.Utility;
 
@@ -10,7 +10,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
     public class AlipayOpenSpImageUploadRequest : IAlipayUploadRequest<AlipayOpenSpImageUploadResponse>
     {
         /// <summary>
-        /// 图片二进制字节流，最小50K，最大为5M，支持png/bmp/gif/jpg/jpeg格式
+        /// 图片二进制字节流，最小50K，最大为5M，支持png/bmp/gif/jpg/jpeg格式。不限制图片长宽。可根据示例代码使用支付宝提供的工具类传入图片本地路径进行转换。
         /// </summary>
         public FileItem ImageContent { get; set; }
 

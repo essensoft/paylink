@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -66,6 +66,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("taobao_id")]
         public string TaobaoId { get; set; }
+
+        /// <summary>
+        /// 终端id，用于计次控制
+        /// </summary>
+        [JsonPropertyName("term_id")]
+        public string TermId { get; set; }
 
         /// <summary>
         /// 支付宝用户uid：支付宝用户唯一标识。该参数用于已知支付宝账号的活动触发。user_id、login_id、bind_mobile三个参数至少有一个非空。

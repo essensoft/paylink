@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
+using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -24,7 +25,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// 门店列表数据。
         /// </summary>
         [JsonPropertyName("records")]
-        public MerchantShopDTO Records { get; set; }
+        public List<MerchantShopDTO> Records { get; set; }
 
         /// <summary>
         /// 总数量

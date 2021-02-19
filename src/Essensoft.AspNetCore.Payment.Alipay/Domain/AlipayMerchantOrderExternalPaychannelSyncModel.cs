@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayMerchantOrderExternalPaychannelSyncModel : AlipayObject
     {
         /// <summary>
-        /// 业务单号，微信、支付宝交易号
+        /// isv测的业务订单号，等同于支付接口spi.alipay.merchant.order.commonisv.pay 中的isv_order_no。
         /// </summary>
         [JsonPropertyName("biz_no")]
         public string BizNo { get; set; }
@@ -62,7 +62,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string NotifyType { get; set; }
 
         /// <summary>
-        /// 原始第三方支付结构的交易号，比如支付宝、微信交易号
+        /// 原始第三方支付结构的交易号，比如支付宝、微信交易号。等同于支付接口spi.alipay.merchant.order.commonisv.pay 中的channel_order_no
         /// </summary>
         [JsonPropertyName("origin_trade_no")]
         public string OriginTradeNo { get; set; }
@@ -80,7 +80,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OutRequestNo { get; set; }
 
         /// <summary>
-        /// 支付渠道，微信：wechat，支付宝：alipay - 仅针对支付
+        /// 支付通道类型，001：支付宝，002：微信，003：qq钱包，004：京东钱包，005：口碑，006：翼支付，007：银联二维码，008：和包支付（仅限和包通道），009：百度钱包，010：苏宁钱包，100：自动识别类型等
         /// </summary>
         [JsonPropertyName("pay_channel")]
         public string PayChannel { get; set; }

@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -36,6 +36,18 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("ext_info")]
         public string ExtInfo { get; set; }
+
+        /// <summary>
+        /// isv传给机构（如银行）的唯一uuid，可能是手机号，也可能是身份证号（盒马对接isv一网通）
+        /// </summary>
+        [JsonPropertyName("inst_uuid")]
+        public string InstUuid { get; set; }
+
+        /// <summary>
+        /// inst_uuid的类型，可能是手机号，也可能是身份证等
+        /// </summary>
+        [JsonPropertyName("inst_uuid_type")]
+        public string InstUuidType { get; set; }
 
         /// <summary>
         /// 用户在商家平台的会员id

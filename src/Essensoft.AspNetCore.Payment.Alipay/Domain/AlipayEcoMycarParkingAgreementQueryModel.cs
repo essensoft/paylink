@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -18,6 +18,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("car_number")]
         public string CarNumber { get; set; }
+
+        /// <summary>
+        /// 车场录入接口返回的parking_id字段
+        /// </summary>
+        [JsonPropertyName("parking_id")]
+        public string ParkingId { get; set; }
 
         /// <summary>
         /// 接口版本号，不填则默认为v2.0，建议使用最新版v2.1

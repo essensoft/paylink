@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -9,7 +9,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayOpenAppAppcontentFunctionCreateModel : AlipayObject
     {
         /// <summary>
-        /// 服务区域编码；默认值为1，表示全国范围；编码参考高德地图JS API相关下载中的行政区编码与城市编码表：https://lbs.amap.com/api/javascript-api/download/
+        /// 服务区域编码，默认值为 1，表示全国范围。 更多编码参考 <a href="https://lbs.amap.com/api/javascript-api/download/">高德地图 JS API 相关下载</a>中的行政区编码与城市编码表，填入表格中对应区域 adcode 内容即可。
         /// </summary>
         [JsonPropertyName("area_codes")]
         public List<string> AreaCodes { get; set; }
@@ -21,7 +21,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public List<AppAttribute> CategoryAttributes { get; set; }
 
         /// <summary>
-        /// 类目
+        /// 服务类目 ID。请填入 <a href="https://gw.alipayobjects.com/os/bmw-prod/7ac2b882-2e37-450c-a32e-0353e4f76178.xlsx">服务类目ID表</a> 中三级codeid。
         /// </summary>
         [JsonPropertyName("category_ids")]
         public List<string> CategoryIds { get; set; }

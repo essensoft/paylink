@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -24,6 +24,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("biz_budget_apply_code")]
         public string BizBudgetApplyCode { get; set; }
+
+        /// <summary>
+        /// 业务申请的时间，默认不填写为当前时间，填写后可以按照业务申请时间来进行预算申请有效期校验
+        /// </summary>
+        [JsonPropertyName("biz_date")]
+        public string BizDate { get; set; }
 
         /// <summary>
         /// 业务名称

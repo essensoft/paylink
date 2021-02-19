@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string Amount { get; set; }
 
         /// <summary>
-        /// 支付授权码，25~30开头的长度为16~24位的数字，实际字符串长度以开发者获取的付款码长度为准
+        /// 支付授权码 付款码场景下：       25~30开头的长度为16~24位的数字，实际字符串长度以开发者获取的付款码长度为准； 刷脸场景下存在两种可能：       1）fp开头的35位字符串；       2）300-700字符的随机字符串； 考虑到未来可能拓展更多格式，建议外围不必做规则拦截，由支付宝统一做有效性校验
         /// </summary>
         [JsonPropertyName("auth_code")]
         public string AuthCode { get; set; }

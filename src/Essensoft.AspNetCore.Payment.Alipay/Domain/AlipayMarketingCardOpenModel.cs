@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -44,7 +44,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string OpenCardChannelId { get; set; }
 
         /// <summary>
-        /// 外部商户流水号（商户需要确保唯一性控制，类似request_id唯一请求标识）
+        /// 外部商户流水号。由商户自定义，需保证商户系统中唯一。
         /// </summary>
         [JsonPropertyName("out_serial_no")]
         public string OutSerialNo { get; set; }

@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
+using System.Collections.Generic;
+using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
 {
@@ -18,6 +20,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         /// </summary>
         [JsonPropertyName("agent_id")]
         public string AgentId { get; set; }
+
+        /// <summary>
+        /// 车场业务归属列表
+        /// </summary>
+        [JsonPropertyName("business_isv")]
+        public List<BusinessItem> BusinessIsv { get; set; }
 
         /// <summary>
         /// 城市编码

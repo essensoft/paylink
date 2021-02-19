@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayOpenSpBlueseaactivityQueryModel : AlipayObject
     {
         /// <summary>
-        /// 申请单Id
+        /// 申请单 id。通过 <a href="https://opendocs.alipay.com/apis/01ebig">alipay.open.sp.blueseaactivity.create</a>接口获取
         /// </summary>
         [JsonPropertyName("order_id")]
         public string OrderId { get; set; }

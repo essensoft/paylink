@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -18,6 +18,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         /// </summary>
         [JsonPropertyName("bundle_id")]
         public string BundleId { get; set; }
+
+        /// <summary>
+        /// 多个规则逗号分隔
+        /// </summary>
+        [JsonPropertyName("gray_rule")]
+        public string GrayRule { get; set; }
 
         /// <summary>
         /// 租户code，alipay or taobao

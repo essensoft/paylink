@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
         public string ExtInfo { get; set; }
 
         /// <summary>
-        /// 商户端删卡业务流水号（商户确保流水号唯一性）
+        /// 商户端删卡业务流水号，商户自定义且需确保流水号唯一性。
         /// </summary>
         [JsonPropertyName("out_serial_no")]
         public string OutSerialNo { get; set; }

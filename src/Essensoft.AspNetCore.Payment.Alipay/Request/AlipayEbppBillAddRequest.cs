@@ -14,7 +14,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string BankBillNo { get; set; }
 
         /// <summary>
-        /// 账单的账期，例如201203表示2012年3月的账单。
+        /// 账单的账期，格式为 yyyyMMdd。例如：202012表示2020年12月的账单。
         /// </summary>
         public string BillDate { get; set; }
 
@@ -44,7 +44,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string Mobile { get; set; }
 
         /// <summary>
-        /// 支付宝订单类型。公共事业缴纳JF,信用卡还款HK
+        /// 支付宝订单类型。枚举支持： *JF：公共事业缴纳。 *WUYE：物业缴费。 *HK：信用卡还款。 *TX：通讯缴费。
         /// </summary>
         public string OrderType { get; set; }
 
@@ -54,7 +54,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string OwnerName { get; set; }
 
         /// <summary>
-        /// 缴费金额。用户支付的总金额。单位为：RMB Yuan。取值范围为[0.01，100000000.00]，精确到小数点后两位。
+        /// 缴费金额。用户支付的总金额。单位为 元（人民币）。取值范围为[0.01，100000000.00]，精确到小数点后两位。
         /// </summary>
         public string PayAmount { get; set; }
 
@@ -64,7 +64,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Request
         public string ServiceAmount { get; set; }
 
         /// <summary>
-        /// 子业务类型是业务类型的下一级概念，例如：WATER表示JF下面的水费，ELECTRIC表示JF下面的电费，GAS表示JF下面的燃气费。
+        /// 子业务类型是业务类型的下一级概念。枚举支持： *WATER：缴水费。 *ELECTRIC：缴电费。 *GAS：缴燃气费。 *COMMUN：缴固话宽带费。 *CATV：缴有线电视费。 *WUYE：缴物业费。 *RC：定期还车贷代扣。 *RH：定期还房贷代扣。 *RR：定期还房租代扣。 *RN：定期还网贷代扣。 *CZ：手机充值代扣。 例如：WATER表示JF下面的水费。
         /// </summary>
         public string SubOrderType { get; set; }
 

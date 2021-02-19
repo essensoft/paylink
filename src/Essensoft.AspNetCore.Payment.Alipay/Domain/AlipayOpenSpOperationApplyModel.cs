@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,25 +8,25 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayOpenSpOperationApplyModel : AlipayObject
     {
         /// <summary>
-        /// 接入的产品编号。 枚举如下： 操作类型为账号绑定时，填OPENAPI_BIND_DEFAULT。 操作类型为代运营授权时，填OPENAPI_AUTH_DEFAULT。
+        /// 接入的产品编号。 枚举如下： * OPENAPI_BIND_DEFAULT：操作类型为账号绑定。 * OPENAPI_AUTH_DEFAULT：操作类型为代运营授权时。
         /// </summary>
         [JsonPropertyName("access_product_code")]
         public string AccessProductCode { get; set; }
 
         /// <summary>
-        /// 支付宝登录账号。通常为手机号或者邮箱。 若被代运营者是间连商户，则alipay_account必填。 若为直连商户，则merchant_no和alipay_account不能同时为空，都有值优先取merchant_no。
+        /// 支付宝登录账号，通常为手机号或者邮箱。 间连场景必填。 直连场景选填，特别注意merchant_no和alipay_account不能同时为空，都有值优先取merchant_no。
         /// </summary>
         [JsonPropertyName("alipay_account")]
         public string AlipayAccount { get; set; }
 
         /// <summary>
-        /// 支付宝商户号。间连、直连商户均支持，特别注意仅支持2088开头的间连商户。 若被代运营者是间连商户，则merchant_no必填。 若为直连商户，则merchant_no和alipay_account不能同时为空，都有值优先取merchant_no。
+        /// 支付宝商户号。 间连场景，merchant_no必填，传入商户smid，特别注意仅支持2088开头的间连商户。 直连场景，merchant_no选填，传入商户支付宝pid，特别注意merchant_no和alipay_account不能同时为空，优先取merchant_no。
         /// </summary>
         [JsonPropertyName("merchant_no")]
         public string MerchantNo { get; set; }
 
         /// <summary>
-        /// 代运营操作类型。取值如下： ACCOUNT_BIND：账号绑定，仅对于间连商户。 OPERATION_AUTH：代运营授权，支持间连及直连商户。
+        /// 代运营操作类型。枚举如下： * ACCOUNT_BIND：代表绑定支付宝账号，仅对于间连商户。 * OPERATION_AUTH：代表代运营授权，支持间连和直连商户，其中间连场景包含绑定支付宝账号。
         /// </summary>
         [JsonPropertyName("operate_type")]
         public string OperateType { get; set; }

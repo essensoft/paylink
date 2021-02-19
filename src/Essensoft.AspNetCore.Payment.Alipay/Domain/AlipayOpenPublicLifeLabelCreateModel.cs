@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Domain
 {
@@ -8,13 +8,13 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Domain
     public class AlipayOpenPublicLifeLabelCreateModel : AlipayObject
     {
         /// <summary>
-        /// 标签值类型，目前只支持string（字符串类型），不传默认为"string"
+        /// 标签值类型，不填默认为 string 类型。 注意：目前只支持 string（字符串类型）。
         /// </summary>
         [JsonPropertyName("data_type")]
         public string DataType { get; set; }
 
         /// <summary>
-        /// 自定义标签名
+        /// 自定义标签名。 注意：每个生活号最多创建 100 个自定义标签。
         /// </summary>
         [JsonPropertyName("label_name")]
         public string LabelName { get; set; }

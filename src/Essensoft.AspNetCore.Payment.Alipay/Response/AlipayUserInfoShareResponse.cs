@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
+using System.Collections.Generic;
 using Essensoft.AspNetCore.Payment.Alipay.Domain;
 
 namespace Essensoft.AspNetCore.Payment.Alipay.Response
@@ -154,7 +154,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay.Response
         public string FirmType { get; set; }
 
         /// <summary>
-        /// 【注意】只有is_certified为T的时候才有意义，否则不保证准确性.  性别（F：女性；M：男性）。
+        /// 性别。枚举值如下： F：女性； M：男性。
         /// </summary>
         [JsonPropertyName("gender")]
         public string Gender { get; set; }
