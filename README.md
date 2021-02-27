@@ -48,6 +48,7 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
     - 基础支付
     - 基础支付（服务商）
     - 商户进件（服务商）
+    - 微信支付分
 
 ## 开发环境
 * Windows 10
