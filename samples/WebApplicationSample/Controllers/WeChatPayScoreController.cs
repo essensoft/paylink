@@ -140,7 +140,8 @@ namespace WebApplicationSample.Controllers
                 PostPayments = new List<PostPayment> {
                    new PostPayment{
                        Name = viewModel.Name,
-                       Amount = viewModel.Amount
+                       Amount = viewModel.Amount,
+                       Count = viewModel.Count
                    }
                 },
                 TotalAmount = viewModel.TotalAmount,
@@ -175,7 +176,8 @@ namespace WebApplicationSample.Controllers
                 PostPayments = new List<PostPayment> {
                    new PostPayment{
                        Name = viewModel.Name,
-                       Amount = viewModel.Amount
+                       Amount = viewModel.Amount,
+                       Count = viewModel.Count
                    }
                 },
                 TotalAmount = viewModel.TotalAmount
@@ -233,7 +235,10 @@ namespace WebApplicationSample.Controllers
             {
                 AppId = _optionsAccessor.Value.AppId,
                 ServiceId = _optionsAccessor.Value.PayScoreServiceId,
-                Type = viewModel.Type
+                Type = viewModel.Type,
+                Detail = new SyncDetail {
+                    PaidTime = viewModel.PaidTime
+                }
             };
             var request = new WeChatPayScoreServiceOrderSyncRequest();
             request.OutOrderNo = viewModel.OutOrderNo;
@@ -267,7 +272,8 @@ namespace WebApplicationSample.Controllers
                    new PostPayment{
                        Name = viewModel.PostPaymentName,
                        Amount = viewModel.PostPaymentAmount,
-                       Description = viewModel.PostPaymentDescription
+                       Description = viewModel.PostPaymentDescription,
+                       Count = viewModel.PostPaymentCount
                    }
                 },
                 TimeRange = new TimeRange
@@ -384,6 +390,7 @@ namespace WebApplicationSample.Controllers
         {
             var model = new WeChatPayScorePermissionsQueryForOpenIdModel
             {
+                AppId = _optionsAccessor.Value.AppId,
                 ServiceId = _optionsAccessor.Value.PayScoreServiceId
             };
             var request = new WeChatPayScorePermissionsQueryForOpenIdRequest();
@@ -410,6 +417,7 @@ namespace WebApplicationSample.Controllers
         {
             var model = new WeChatPayScorePermissionsTerminateForOpenIdModel
             {
+                AppId = _optionsAccessor.Value.AppId,
                 ServiceId = _optionsAccessor.Value.PayScoreServiceId,
                 Reason = viewModel.Reason
             };

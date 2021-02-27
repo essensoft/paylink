@@ -68,6 +68,10 @@ namespace WebApplicationSample.Models
         public long Amount { get; set; }
 
         [Required]
+        [Display(Name = "post_payment_count")]
+        public uint Count { get; set; }
+
+        [Required]
         [Display(Name = "total_amount")]
         public long TotalAmount { get; set; }
 
@@ -91,6 +95,10 @@ namespace WebApplicationSample.Models
         public long Amount { get; set; }
 
         [Required]
+        [Display(Name = "post_payment_count")]
+        public uint Count { get; set; }
+
+        [Required]
         [Display(Name = "total_amount")]
         public long TotalAmount { get; set; }
     }
@@ -111,6 +119,10 @@ namespace WebApplicationSample.Models
         [Required]
         [Display(Name = "type")]
         public string Type { get; set; }
+
+        [Required]
+        [Display(Name = "paid_time")]
+        public string PaidTime { get; set; }
     }
 
 
@@ -131,6 +143,10 @@ namespace WebApplicationSample.Models
         [Required]
         [Display(Name = "post_payment_amount")]
         public long PostPaymentAmount { get; set; }
+
+        [Required]
+        [Display(Name = "post_payment_count")]
+        public uint PostPaymentCount { get; set; }
 
         [Required]
         [Display(Name = "post_payment_description")]

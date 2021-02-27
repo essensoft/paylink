@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Payscore.Domain
     /// <summary>
     /// 同步订单-详情
     /// </summary>
-    public class SyncDetail
+    public class SyncDetail : WeChatPayObject
     {
         /// <summary>
         /// 收款成功时间

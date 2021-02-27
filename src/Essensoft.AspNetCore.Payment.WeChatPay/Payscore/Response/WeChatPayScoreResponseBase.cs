@@ -3,7 +3,7 @@ using Essensoft.AspNetCore.Payment.WeChatPay.V3;
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Payscore.Response
 {
-    public class WeChatPayScoreResponseBase : WeChatPayResponse
+    public abstract class WeChatPayScoreResponseBase : WeChatPayResponse
     {
         /// <summary>
         /// 商户订单号

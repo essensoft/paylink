@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Payscore.Domain
     /// <summary>
     /// 订单风险金
     /// </summary>
-    public class RiskFund
+    public class RiskFund : WeChatPayObject
     {
         /// <summary>
         /// 风险金名称       

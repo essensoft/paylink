@@ -20,7 +20,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Payscore.Request
 
         public string GetRequestUrl()
         {
-            return "https://api.mch.weixin.qq.com/v3/payscore/serviceorder/{OutOrderNo}/complete";
+            return $"https://api.mch.weixin.qq.com/v3/payscore/serviceorder/{OutOrderNo}/complete";
         }
 
         public void SetBodyModel(WeChatPayObject bodyModel)

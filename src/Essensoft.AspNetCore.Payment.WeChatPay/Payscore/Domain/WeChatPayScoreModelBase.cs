@@ -2,7 +2,7 @@
 
 namespace Essensoft.AspNetCore.Payment.WeChatPay.Payscore.Domain
 {
-    public class WeChatPayScoreModelBase : WeChatPayObject
+    public abstract class WeChatPayScoreModelBase : WeChatPayObject
     {
         /// <summary>
         /// AppId

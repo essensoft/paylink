@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Payscore.Domain
     /// <summary>
     /// 服务时间段
     /// </summary>
-    public class TimeRange
+    public class TimeRange : WeChatPayObject
     {
         /// <summary>
         /// 服务开始时间

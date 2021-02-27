@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Payscore.Domain
     /// <summary>
     /// 服务位置
     /// </summary>
-    public class Location
+    public class Location : WeChatPayObject
     {
         /// <summary>
         /// 服务开始地点

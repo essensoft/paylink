@@ -6,7 +6,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Payscore.Domain
     /// <summary>
     /// 收款信息，非0元完结后返回
     /// </summary>
-    public class Collection
+    public class Collection : WeChatPayObject
     {
         /// <summary>
         /// 收款状态

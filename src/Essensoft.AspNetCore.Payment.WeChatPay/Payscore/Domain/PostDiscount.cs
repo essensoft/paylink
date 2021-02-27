@@ -5,7 +5,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Payscore.Domain
     /// <summary>
     /// 后付费商户优惠
     /// </summary>
-    public class PostDiscount
+    public class PostDiscount : WeChatPayObject
     {
         /// <summary>
         /// 优惠名称       

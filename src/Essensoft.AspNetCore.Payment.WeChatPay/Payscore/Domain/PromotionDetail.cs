@@ -6,7 +6,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.Payscore.Domain
     /// <summary>
     /// 优惠功能
     /// </summary>
-    public class PromotionDetail
+    public class PromotionDetail : WeChatPayObject
     {
         /// <summary>
         /// 券ID
