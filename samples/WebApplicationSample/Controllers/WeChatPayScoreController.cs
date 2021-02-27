@@ -47,7 +47,8 @@ namespace WebApplicationSample.Controllers
                 OutOrderNo = viewModel.OutOrderNo,
                 ServiceIntroduction = viewModel.ServiceIntroduction,
                 TimeRange = new TimeRange {
-                    StartTime = viewModel.StartTime
+                    StartTime = viewModel.StartTime,
+                    EndTime = viewModel.EndTime
                 },
                 RiskFund = new RiskFund {
                     Name = viewModel.RiskFundName,

@@ -17,6 +17,10 @@ namespace WebApplicationSample.Models
         public string StartTime { get; set; }
 
         [Required]
+        [Display(Name = "end_time")]
+        public string EndTime { get; set; }
+
+        [Required]
         [Display(Name = "risk_fund_name")]
         public string RiskFundName { get; set; }
 

@@ -26,6 +26,10 @@
                 <input type="text" class="form-control" asp-for="StartTime" value="OnAccept" />
             </div>
             <div class="form-group">
+                <label asp-for="EndTime"></label>
+                <input type="text" class="form-control" asp-for="EndTime" value="@(DateTime.Now.AddMinutes(5).ToString("yyyyMMddHHmmss"))" />
+            </div>
+            <div class="form-group">
                 <label asp-for="RiskFundName"></label>
                 <input type="text" class="form-control" asp-for="RiskFundName" value="ESTIMATE_ORDER_COST" />
             </div>
@@ -35,8 +39,8 @@
             </div>
             <div class="form-group">
                 <label asp-for="NotifyUrl"></label>
-                <input type="text" class="form-control" asp-for="NotifyUrl" 
-                       value="https://domain.com/wechatpay/score/notify/orderconfirm" />
+                <input type="text" class="form-control" asp-for="NotifyUrl"
+                       value="https://domain.com/wechatpay/score/notify/confirmorpaid" />
             </div>
             <div class="form-group">
                 <label asp-for="OpenId"></label>

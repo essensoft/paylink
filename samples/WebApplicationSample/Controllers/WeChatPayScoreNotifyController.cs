@@ -34,7 +34,7 @@ namespace WebApplicationSample.Controllers
                 if (notify.UserServiceStatus == WeChatPayScoreUserServiceStatus.Opened ||
                     notify.UserServiceStatus == WeChatPayScoreUserServiceStatus.Closed)
                 {
-                    Console.WriteLine("out_request_no: " + notify.OutRequestNo);
+                    Console.WriteLine("Permissions body: " + notify.Body);
                     return WeChatPayNotifyResult.Success;
                 }
 
@@ -59,7 +59,7 @@ namespace WebApplicationSample.Controllers
                 var notify = await _client.ExecuteAsync<WeChatPayScoreServiceOrderConfirmNotify>(Request, _optionsAccessor.Value);
                 if (notify.State == ServiceOrderState.Doing)
                 {
-                    Console.WriteLine("out_order_no: " + notify.OutOrderNo);
+                    Console.WriteLine("ServiceOrderConfirm body: " + notify.Body);
                     return WeChatPayNotifyResult.Success;
                 }
 
@@ -84,7 +84,32 @@ namespace WebApplicationSample.Controllers
                 var notify = await _client.ExecuteAsync<WeChatPayScoreServiceOrderPaidNotify>(Request, _optionsAccessor.Value);
                 if (notify.State == ServiceOrderState.Done)
                 {
-                    Console.WriteLine("out_order_no: " + notify.OutOrderNo);
+                    Console.WriteLine("ServiceOrderPaid body: " + notify.Body);
+                    return WeChatPayNotifyResult.Success;
+                }
+
+                return WeChatPayNotifyResult.Failure;
+            }
+            catch (WeChatPayException ex)
+            {
+                Console.WriteLine("出现异常: " + ex.Message);
+                return WeChatPayNotifyResult.Failure;
+            }
+        }
+
+        /// <summary>
+        /// 订单 确认 或 支付成功 回调通知
+        /// </summary>
+        [Route("confirmorpaid")]
+        [HttpPost]
+        public async Task<IActionResult> ServiceOrderConfirmOrPaid()
+        {
+            try
+            {
+                var notify = await _client.ExecuteAsync<WeChatPayScoreServiceOrderPaidNotify>(Request, _optionsAccessor.Value);
+                if (notify.State == ServiceOrderState.Doing || notify.State == ServiceOrderState.Done)
+                {
+                    Console.WriteLine("ServiceOrderConfirmOrPaid body: " + notify.Body);
                     return WeChatPayNotifyResult.Success;
                 }
 
