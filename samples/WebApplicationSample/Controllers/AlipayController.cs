@@ -282,7 +282,6 @@ namespace WebApplicationSample.Controllers
             return View();
         }
 
-
         /// <summary>
         /// 交易关闭
         /// </summary>
