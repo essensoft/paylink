@@ -4,7 +4,11 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
     /// 单品列表信息
-    /// </summary>    
+    /// </summary>
+    /// <remarks>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_15.shtml">查询支付分订单API</a> - 最新更新时间：2020.05.25</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_22.shtml">支付成功回调通知API</a> - 最新更新时间：2020.05.25</para>
+    /// </remarks>
     public class PromotionGoodsDetail : WeChatPayObject
     {
         /// <summary>
@@ -21,7 +25,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// 示例值：1
         /// </summary>
         [JsonPropertyName("quantity")]
-        public int Quantity { get; set; }
+        public int? Quantity { get; set; }
 
         /// <summary>
         /// 商品单价
@@ -29,7 +33,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// 示例值：100
         /// </summary>
         [JsonPropertyName("unit_price")]
-        public int UnitPrice { get; set; }
+        public long? UnitPrice { get; set; }
 
         /// <summary>
         /// 商品优惠金额
@@ -37,7 +41,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// 示例值：0  
         /// </summary>
         [JsonPropertyName("discount_amount")]
-        public int DiscountAmount { get; set; }
+        public long? DiscountAmount { get; set; }
 
         /// <summary>
         /// 商品备注

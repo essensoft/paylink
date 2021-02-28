@@ -19,7 +19,6 @@
         /// <summary>
         /// 设置BodyModel
         /// </summary>
-        /// <param name="bodyModel"></param>
         void SetBodyModel(WeChatPayObject bodyModel);
     }
 }

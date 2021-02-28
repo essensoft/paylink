@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Essensoft.AspNetCore.Payment.WeChatPay;
 using Essensoft.AspNetCore.Payment.WeChatPay.V3;
@@ -473,5 +474,461 @@ namespace WebApplicationSample.Controllers
             ViewData["response"] = response.Body;
             return View();
         }
+
+        #region 微信支付分
+
+        /// <summary>
+        /// 支付分-创建支付分订单
+        /// </summary>
+        public IActionResult ServiceOrder()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-创建支付分订单
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> ServiceOrder(WeChatPayScoreServiceOrderViewModel viewModel)
+        {
+            var model = new WeChatPayScoreServiceOrderBodyModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                ServiceId = viewModel.ServiceId,
+                OutOrderNo = viewModel.OutOrderNo,
+                ServiceIntroduction = viewModel.ServiceIntroduction,
+                TimeRange = new TimeRange
+                {
+                    StartTime = viewModel.StartTime,
+                    EndTime = viewModel.EndTime
+                },
+                RiskFund = new RiskFund
+                {
+                    Name = viewModel.RiskFundName,
+                    Amount = viewModel.RiskFundAmount
+                },
+                NotifyUrl = viewModel.NotifyUrl,
+                OpenId = viewModel.OpenId
+            };
+
+            var request = new WeChatPayScoreServiceOrderRequest();
+            request.SetBodyModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-查询支付分订单
+        /// </summary>
+        public IActionResult ServiceOrderQuery()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-查询支付分订单
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> ServiceOrderQuery(WeChatPayScoreServiceOrderQueryViewModel viewModel)
+        {
+            var model = new WeChatPayScoreServiceOrderQueryModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                ServiceId = viewModel.ServiceId,
+                OutOrderNo = viewModel.OutOrderNo,
+                QueryId = viewModel.QueryId
+            };
+
+            var request = new WeChatPayScoreServiceOrderQueryRequest();
+            request.SetQueryModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-取消支付分订单
+        /// </summary>
+        public IActionResult ServiceOrderCancel()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-取消支付分订单
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> ServiceOrderCancel(WeChatPayScoreServiceOrderCancelViewModel viewModel)
+        {
+            var model = new WeChatPayScoreServiceOrderOutOrderNoCancelBodyModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                ServiceId = viewModel.ServiceId,
+                Reason = viewModel.Reason
+            };
+
+            var request = new WeChatPayScoreServiceOrderOutOrderNoCancelRequest
+            {
+                OutOrderNo = viewModel.OutOrderNo
+            };
+            request.SetBodyModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-修改支付分订单金额
+        /// </summary>
+        public IActionResult ServiceOrderModify()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-修改支付分订单金额
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> ServiceOrderModify(WeChatPayScoreServiceOrderModifyViewModel viewModel)
+        {
+            var model = new WeChatPayScoreServiceOrderOutOrderNoModifyBodyModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                ServiceId = viewModel.ServiceId,
+                PostPayments = new List<PostPayment> {
+                   new PostPayment{
+                       Name = viewModel.Name,
+                       Amount = viewModel.Amount,
+                       Count = viewModel.Count
+                   }
+                },
+                TotalAmount = viewModel.TotalAmount,
+                Reason = viewModel.Reason
+            };
+
+            var request = new WeChatPayScoreServiceOrderOutOrderNoModifyRequest
+            {
+                OutOrderNo = viewModel.OutOrderNo
+            };
+            request.SetBodyModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-完结支付分订单
+        /// </summary>
+        public IActionResult ServiceOrderComplete()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-完结支付分订单
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> ServiceOrderComplete(WeChatPayScoreServiceOrderCompleteViewModel viewModel)
+        {
+            var model = new WeChatPayScoreServiceOrderOutOrderNoCompleteBodyModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                ServiceId = viewModel.ServiceId,
+                PostPayments = new List<PostPayment>
+                {
+                   new PostPayment
+                   {
+                       Name = viewModel.Name,
+                       Amount = viewModel.Amount,
+                       Count = viewModel.Count
+                   }
+                },
+                TotalAmount = viewModel.TotalAmount
+            };
+
+            var request = new WeChatPayScoreServiceOrderOutOrderNoCompleteRequest
+            {
+                OutOrderNo = viewModel.OutOrderNo
+            };
+            request.SetBodyModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-商户发起催收扣款
+        /// </summary>
+        public IActionResult ServiceOrderPay()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-商户发起催收扣款
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> ServiceOrderPay(WeChatPayScoreServiceOrderPayViewModel viewModel)
+        {
+            var model = new WeChatPayScoreServiceOrderPayBodyModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                ServiceId = viewModel.ServiceId,
+            };
+
+            var request = new WeChatPayScoreServiceOrderPayRequest
+            {
+                OutOrderNo = viewModel.OutOrderNo
+            };
+            request.SetBodyModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-同步服务订单信息
+        /// </summary>
+        public IActionResult ServiceOrderSync()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-同步服务订单信息
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> ServiceOrderSync(WeChatPayScoreServiceOrderSyncViewModel viewModel)
+        {
+            var model = new WeChatPayScoreServiceOrderSyncBodyModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                ServiceId = viewModel.ServiceId,
+                Type = viewModel.Type,
+                Detail = new SyncDetail
+                {
+                    PaidTime = viewModel.PaidTime
+                }
+            };
+
+            var request = new WeChatPayScoreServiceOrderSyncRequest
+            {
+                OutOrderNo = viewModel.OutOrderNo
+            };
+            request.SetBodyModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-创单结单合并
+        /// </summary>
+        public IActionResult ServiceOrderDirectComplete()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-创单结单合并
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> ServiceOrderDirectComplete(WeChatPayScoreServiceOrderDirectCompleteViewModel viewModel)
+        {
+            var model = new WeChatPayScoreServiceOrderDirectCompleteBodyModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                ServiceId = viewModel.ServiceId,
+                OutOrderNo = viewModel.OutOrderNo,
+                ServiceIntroduction = viewModel.ServiceIntroduction,
+                PostPayments = new List<PostPayment> {
+                   new PostPayment{
+                       Name = viewModel.PostPaymentName,
+                       Amount = viewModel.PostPaymentAmount,
+                       Description = viewModel.PostPaymentDescription,
+                       Count = viewModel.PostPaymentCount
+                   }
+                },
+                TimeRange = new TimeRange
+                {
+                    StartTime = viewModel.StartTime,
+                    EndTime = viewModel.EndTime
+                },
+                TotalAmount = viewModel.TotalAmount,
+                NotifyUrl = viewModel.NotifyUrl,
+                OpenId = viewModel.OpenId
+            };
+
+            var request = new WeChatPayScoreServiceOrderDirectCompleteRequest();
+            request.SetBodyModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-商户预授权
+        /// </summary>
+        public IActionResult Permissions()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-商户预授权
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> Permissions(PermissionsViewModel viewModel)
+        {
+            var model = new WeChatPayScorePermissionsBodyModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                ServiceId = viewModel.ServiceId,
+                AuthorizationCode = viewModel.AuthorizationCode,
+                NotifyUrl = viewModel.NotifyUrl
+            };
+
+            var request = new WeChatPayScorePermissionsRequest();
+            request.SetBodyModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-查询用户授权记录（授权协议号）
+        /// </summary>
+        public IActionResult PermissionsQueryForAuthCode()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-查询用户授权记录（授权协议号）
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> PermissionsQueryForAuthCode(PermissionsQueryForAuthCodeViewModel viewModel)
+        {
+            var model = new WeChatPayScorePermissionsQueryForAuthCodeQueryModel
+            {
+                ServiceId = viewModel.ServiceId,
+            };
+
+            var request = new WeChatPayScorePermissionsQueryForAuthCodeRequest
+            {
+                AuthorizationCode = viewModel.AuthorizationCode
+            };
+            request.SetQueryModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-解除用户授权关系（授权协议号）
+        /// </summary>
+        public IActionResult PermissionsTerminateForAuthCode()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-解除用户授权关系（授权协议号）
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> PermissionsTerminateForAuthCode(PermissionsTerminateForAuthCodeViewModel viewModel)
+        {
+            var model = new WeChatPayScorePermissionsTerminateForAuthCodeBodyModel
+            {
+                ServiceId = viewModel.ServiceId,
+                Reason = viewModel.Reason
+            };
+
+            var request = new WeChatPayScorePermissionsTerminateForAuthCodeRequest
+            {
+                AuthorizationCode = viewModel.AuthorizationCode
+            };
+            request.SetBodyModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-查询用户授权记录（openid）
+        /// </summary>
+        public IActionResult PermissionsQueryForOpenId()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-查询用户授权记录（openid）
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> PermissionsQueryForOpenId(PermissionsQueryForOpenIdViewModel viewModel)
+        {
+            var model = new WeChatPayScorePermissionsQueryForOpenIdQueryModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                ServiceId = viewModel.ServiceId,
+            };
+
+            var request = new WeChatPayScorePermissionsQueryForOpenIdRequest
+            {
+                OpenId = viewModel.OpenId
+            };
+            request.SetQueryModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-解除用户授权关系（OpenId）
+        /// </summary>
+        public IActionResult PermissionsTerminateForOpenId()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 支付分-解除用户授权关系（OpenId）
+        /// </summary>
+        [HttpPost]
+        public async Task<IActionResult> PermissionsTerminateForOpenId(PermissionsTerminateForOpenIdViewModel viewModel)
+        {
+            var model = new WeChatPayScorePermissionsTerminateForOpenIdBodyModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                ServiceId = viewModel.ServiceId,
+                Reason = viewModel.Reason
+            };
+
+            var request = new WeChatPayScorePermissionsTerminateForOpenIdRequest
+            {
+                OpenId = viewModel.OpenId
+            };
+            request.SetBodyModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        #endregion
     }
 }
