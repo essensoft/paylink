@@ -132,7 +132,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Response
         /// 订单金额信息
         /// </summary>
         [JsonPropertyName("amount")]
-        public AmountResponse Amount { get; set; }
+        public Amount Amount { get; set; }
 
         /// <summary>
         /// 场景信息
