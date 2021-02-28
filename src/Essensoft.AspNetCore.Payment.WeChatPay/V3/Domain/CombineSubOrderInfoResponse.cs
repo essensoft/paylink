@@ -96,6 +96,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// 订单金额信息
         /// </summary>
         [JsonPropertyName("amount")]
-        public CombineAmountResponse Amount { get; set; }
+        public CombineAmount Amount { get; set; }
     }
 }
