@@ -1,6 +1,8 @@
 ﻿MIT License
 
-Copyright (c) 2017-2021 Essensoft
+Copyright (c) 2017-2021 Essensoft and Project contributors.
+
+All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
