@@ -1,7 +1,7 @@
 <Project>
 
 	<PropertyGroup>
-		<Copyright>Copyright © Essensoft</Copyright>
+		<Copyright>Copyright (c) Essensoft and Project contributors.</Copyright>
 		<Authors>Essensoft</Authors>
 		<Product>Essensoft.Payment</Product>
 		<Version>3.3.1</Version>
@@ -11,7 +11,7 @@
 		<PackageProjectUrl>https://github.com/essensoft/payment</PackageProjectUrl>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/essensoft/payment</RepositoryUrl>
-		<PackageLicenseFile>LICENSE</PackageLicenseFile>
+		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
 		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
 		<PublishRepositoryUrl>true</PublishRepositoryUrl>
 		<EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -26,7 +26,7 @@
 
 	<ItemGroup>
 		<Content Include="$(MSBuildThisFileDirectory)img\payment-nuget-logo.png" Pack="true" PackagePath="\" />
-		<Content Include="$(MSBuildThisFileDirectory)LICENSE" Pack="true" PackagePath="\" />
+		<Content Include="$(MSBuildThisFileDirectory)LICENSE.md" Pack="true" PackagePath="\" />
 	</ItemGroup>
 
 	<ItemGroup>
