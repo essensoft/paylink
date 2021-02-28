@@ -23,5 +23,21 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// </summary>
         [JsonPropertyName("currency")]
         public string Currency { get; set; }
+
+        /// <summary>
+        /// 现金支付金额
+        /// 订单现金支付金额。
+        /// 示例值： 10
+        /// </summary>
+        [JsonPropertyName("payer_amount")]
+        public int? PayerAmount { get; set; }
+
+        /// <summary>
+        /// 现金支付币种	
+        /// 货币类型，符合ISO 4217标准的三位字母代码，默认人民币：CNY。
+        /// 示例值： CNY
+        /// </summary>
+        [JsonPropertyName("payer_currency")]
+        public string PayerCurrency { get; set; }
     }
 }
