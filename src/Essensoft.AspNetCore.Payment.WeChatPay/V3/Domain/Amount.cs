@@ -3,7 +3,7 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// 订单金额信息
+    /// 订单金额
     /// </summary>    
     public class Amount : WeChatPayObject
     {
@@ -13,7 +13,15 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// 示例值：100
         /// </summary>
         [JsonPropertyName("total")]
-        public int Total { get; set; }
+        public int? Total { get; set; }
+
+        /// <summary>
+        /// 用户支付金额
+        /// 用户支付金额，单位为分。
+        /// 示例值：100
+        /// </summary>
+        [JsonPropertyName("payer_total")]
+        public int? PayerTotal { get; set; }
 
         /// <summary>
         /// 货币类型	
@@ -22,5 +30,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// </summary>
         [JsonPropertyName("currency")]
         public string Currency { get; set; }
+
+        /// <summary>
+        /// 用户支付币种	
+        /// 用户支付币种
+        /// 示例值：CNY
+        /// </summary>
+        [JsonPropertyName("payer_currency")]
+        public string PayerCurrency { get; set; }
     }
 }
