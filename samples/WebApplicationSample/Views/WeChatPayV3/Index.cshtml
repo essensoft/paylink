@@ -99,91 +99,79 @@
         <tr>
             <th scope="row">14</th>
             <td>支付分-创建支付分订单</td>
-            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_14.shtml" target="_blank">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_14.shtml</a></td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_14.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/payscore/serviceorder</a></td>
             <td><a asp-controller="WeChatPayV3" asp-action="ServiceOrder">立即测试</a></td>
         </tr>
         <tr>
             <th scope="row">15</th>
             <td>支付分-查询支付分订单</td>
-            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_15.shtml" target="_blank">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_15.shtml</a></td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_15.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/payscore/serviceorder</a></td>
             <td><a asp-controller="WeChatPayV3" asp-action="ServiceOrderQuery">立即测试</a></td>
         </tr>
         <tr>
             <th scope="row">16</th>
             <td>支付分-取消支付分订单</td>
-            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_16.shtml" target="_blank">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_16.shtml</a></td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_16.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/payscore/serviceorder/{out_order_no}/cancel</a></td>
             <td><a asp-controller="WeChatPayV3" asp-action="ServiceOrderCancel">立即测试</a></td>
         </tr>
         <tr>
             <th scope="row">17</th>
             <td>支付分-修改订单金额</td>
-            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_17.shtml" target="_blank">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_17.shtml</a></td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_17.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/payscore/serviceorder/{out_order_no}/modify</a></td>
             <td><a asp-controller="WeChatPayV3" asp-action="ServiceOrderModify">立即测试</a></td>
         </tr>
         <tr>
             <th scope="row">18</th>
             <td>支付分-完结支付分订单</td>
-            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_18.shtml" target="_blank">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_18.shtml</a></td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_18.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/payscore/serviceorder/{out_order_no}/complete</a></td>
             <td><a asp-controller="WeChatPayV3" asp-action="ServiceOrderComplete">立即测试</a></td>
         </tr>
         <tr>
             <th scope="row">19</th>
             <td>支付分-商户发起催收扣款</td>
-            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_19.shtml" target="_blank">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_19.shtml</a></td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_19.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/payscore/serviceorder/{out_order_no}/pay</a></td>
             <td><a asp-controller="WeChatPayV3" asp-action="ServiceOrderPay">立即测试</a></td>
         </tr>
         <tr>
             <th scope="row">20</th>
             <td>支付分-同步服务订单信息</td>
-            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_20.shtml" target="_blank">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_20.shtml</a></td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_20.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/payscore/serviceorder/{out_order_no}/sync</a></td>
             <td><a asp-controller="WeChatPayV3" asp-action="ServiceOrderSync">立即测试</a></td>
         </tr>
         <tr>
             <th scope="row">21</th>
-            <td>支付分-申请退款</td>
-            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_26.shtml" target="_blank">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_26.shtml</a></td>
-            <td><a asp-controller="WeChatPayV3" asp-action="Refund">立即测试</a></td>
-        </tr>
-        <tr>
-            <th scope="row">22</th>
-            <td>支付分-查询单笔退款</td>
-            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_27.shtml" target="_blank">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_27.shtml</a></td>
-            <td><a asp-controller="WeChatPayV3" asp-action="RefundQuery">立即测试</a></td>
-        </tr>
-        <tr>
-            <th scope="row">23</th>
             <td>支付分-创单结单合并</td>
-            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_1.shtml" target="_blank">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_1.shtml</a></td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_1.shtml" target="_blank">https://api.mch.weixin.qq.com/payscore/serviceorder/direct-complete</a></td>
             <td><a asp-controller="WeChatPayV3" asp-action="ServiceOrderDirectComplete">立即测试</a></td>
         </tr>
         <tr>
-            <th scope="row">24</th>
+            <th scope="row">22</th>
             <td>支付分-商户预授权</td>
-            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_2.shtml" target="_blank">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_2.shtml</a></td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_2.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/payscore/permissions</a></td>
             <td><a asp-controller="WeChatPayV3" asp-action="Permissions">立即测试</a></td>
         </tr>
         <tr>
-            <th scope="row">25</th>
+            <th scope="row">23</th>
             <td>支付分-查询用户授权记录（授权协议号）</td>
-            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_3.shtml" target="_blank">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_3.shtml</a></td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_3.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/payscore/permissions/authorization-code/{authorization_code}</a></td>
             <td><a asp-controller="WeChatPayV3" asp-action="PermissionsQueryForAuthCode">立即测试</a></td>
         </tr>
         <tr>
-            <th scope="row">26</th>
+            <th scope="row">24</th>
             <td>支付分-解除用户授权关系（授权协议号）</td>
-            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_4.shtml" target="_blank">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_4.shtml</a></td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_4.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/payscore/permissions/authorization-code/{authorization_code}/terminate</a></td>
             <td><a asp-controller="WeChatPayV3" asp-action="PermissionsTerminateForAuthCode">立即测试</a></td>
         </tr>
         <tr>
-            <th scope="row">27</th>
+            <th scope="row">25</th>
             <td>支付分-查询用户授权记录（openid）</td>
-            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_5.shtml" target="_blank">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_5.shtml</a></td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_5.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/payscore/permissions/openid/{openid}</a></td>
             <td><a asp-controller="WeChatPayV3" asp-action="PermissionsQueryForOpenId">立即测试</a></td>
         </tr>
         <tr>
-            <th scope="row">28</th>
+            <th scope="row">26</th>
             <td>支付分-解除用户授权关系（openid）</td>
-            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_6.shtml" target="_blank">https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_6.shtml</a></td>
+            <td><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_6.shtml" target="_blank">https://api.mch.weixin.qq.com/v3/payscore/permissions/openid/{openid}/terminate</a></td>
             <td><a asp-controller="WeChatPayV3" asp-action="PermissionsTerminateForOpenId">立即测试</a></td>
         </tr>
     </tbody>
