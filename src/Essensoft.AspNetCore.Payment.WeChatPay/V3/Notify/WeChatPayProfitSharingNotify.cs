@@ -14,6 +14,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 直连模式分账发起和出资商户
+        /// <para>示例值: 1900000100</para>
         /// </remarks>
         [JsonPropertyName("mchid")]
         public string MchId { get; set; }
@@ -23,6 +24,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 微信支付订单号
+        /// <para>示例值: 4200000000000000000000000000</para>
         /// </remarks>
         [JsonPropertyName("transaction_id")]
         public string TransactionId { get; set; }
@@ -32,6 +34,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 微信分账/回退单号
+        /// <para>示例值: 1217752501201407033233368018</para>
         /// </remarks>
         [JsonPropertyName("order_id")]
         public string OrderId { get; set; }
@@ -41,6 +44,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 分账方系统内部的分账/回退单号
+        /// <para>示例值: P20150806125346</para>
         /// </remarks>
         [JsonPropertyName("out_order_no")]
         public string OutOrderNo { get; set; }
@@ -59,6 +63,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 成功时间，Rfc3339标准
+        /// <para>示例值: 2018-06-08T10:34:56+08:00</para>
         /// </remarks>
         [JsonPropertyName("success_time")]
         public string SuccessTime { get; set; }
