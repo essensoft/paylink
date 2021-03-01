@@ -16,12 +16,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Remove="Payscore\**" />
-	  <EmbeddedResource Remove="Payscore\**" />
-	  <None Remove="Payscore\**" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\Essensoft.AspNetCore.Payment.Security\Essensoft.AspNetCore.Payment.Security.csproj" />
 	</ItemGroup>
 
