@@ -6,7 +6,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
     /// 微信支付分 - 开启/解除授权服务回调通知
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_10.shtml">开启/解除授权服务回调通知API</a> - 最新更新时间：2020.07.24</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_10.shtml">微信支付分 - 开启/解除授权服务回调通知API</a> - 最新更新时间：2020.07.24</para>
     /// </remarks>
     public class WeChatPayScoreUserOpenOrCloseNotify : WeChatPayNotify
     {
@@ -15,7 +15,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 调用授权服务接口提交的公众账号ID。
-        /// 示例值：wxd678efh567hg6787
+        /// <para>示例值：wxd678efh567hg6787</para>
         /// </remarks>
         [JsonPropertyName("appid")]
         public string AppId { get; set; }
@@ -25,7 +25,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 调用授权服务接口提交的商户号。
-        /// 示例值：1230000109
+        /// <para>示例值：1230000109</para>
         /// </remarks>
         [JsonPropertyName("mchid")]
         public string MchId { get; set; }
@@ -35,7 +35,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 调用授权服务接口提交的商户请求唯一标识（新签约的用户，且在授权签约中上传了该字段，则在解约授权回调通知中有返回）。
-        /// 示例值：1234323JKHDFE1243252
+        /// <para>示例值：1234323JKHDFE1243252</para>
         /// </remarks>
         [JsonPropertyName("out_request_no")]
         public string OutRequestNo { get; set; }
@@ -45,7 +45,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 调用授权服务接口提交的服务ID。
-        /// 示例值：1234323JKHDFE1243252
+        /// <para>示例值：1234323JKHDFE1243252</para>
         /// </remarks>
         [JsonPropertyName("service_id")]
         public string ServiceId { get; set; }
@@ -55,7 +55,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 微信用户在商户对应appid下的唯一标识。
-        /// 示例值：oUpF8uMuAJO_M2pxb1Q9zNjWeS6o
+        /// <para>示例值：oUpF8uMuAJO_M2pxb1Q9zNjWeS6o</para>
         /// </remarks>
         [JsonPropertyName("openid")]
         public string OpenId { get; set; }
@@ -66,7 +66,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// <remarks>
         /// 1、USER_OPEN_SERVICE：授权成功 
         /// 2、USER_CLOSE_SERVICE：解除授权成功
-        /// 示例值：USER_OPEN_SERVICE
+        /// <para>示例值：USER_OPEN_SERVICE</para>
         /// </remarks>
         [JsonPropertyName("user_service_status")]
         public string UserServiceStatus { get; set; }
@@ -76,7 +76,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 服务开启/解除授权成功时间。
-        /// 示例值：20180225112233
+        /// <para>示例值：20180225112233</para>
         /// </remarks>
         [JsonPropertyName("openorclose_time")]
         public string OpenOrCloseTime { get; set; }
@@ -86,7 +86,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 授权协议号，预授权时返回，非预授权不返回
-        /// 示例值：1275342195190894594
+        /// <para>示例值：1275342195190894594</para>
         /// </remarks>
         [JsonPropertyName("authorization_code")]
         public string AuthorizationCode { get; set; }

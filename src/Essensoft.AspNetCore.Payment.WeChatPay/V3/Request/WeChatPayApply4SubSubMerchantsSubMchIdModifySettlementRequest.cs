@@ -3,20 +3,23 @@
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 {
     /// <summary>
-    /// 商户进件（普通服务商）- 修改结算帐号API
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/tool/applyment4sub/chapter3_3.shtml">修改结算帐号API</a></para>
-    /// 最新更新时间：2019.09.09
+    /// 特约商户进件 - 修改结算帐号
     /// </summary>
+    /// <remarks>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/tool/applyment4sub/chapter3_3.shtml">特约商户进件 - 修改结算帐号API</a> - 最新更新时间：2019.09.09</para>
+    /// </remarks>
     public class WeChatPayApply4SubSubMerchantsSubMchIdModifySettlementRequest : IWeChatPayPrivacyPostRequest<WeChatPayApply4SubSubMerchantsSubMchIdModifySettlementResponse>
     {
         private WeChatPayObject bodyModel;
 
         /// <summary>
         /// 特约商户号
+        /// </summary>
+        /// <remarks>
         /// 请填写本服务商负责进件的特约商户号。
         /// 特殊规则：长度最小8个字节。
-        /// 示例值：1511101111
-        /// </summary>
+        /// <para>示例值：1511101111</para>
+        /// </remarks>
         public string SubMchId { get; set; }
 
         public string GetRequestUrl()

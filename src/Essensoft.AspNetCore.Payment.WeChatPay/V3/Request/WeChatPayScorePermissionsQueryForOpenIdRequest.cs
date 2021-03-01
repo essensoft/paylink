@@ -6,7 +6,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
     /// 微信支付分 - 查询用户授权记录（openid）
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_5.shtml">查询用户授权记录（openid）API</a> - 最新更新时间：2020.09.14</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_5.shtml">微信支付分 - 查询用户授权记录（openid）API</a> - 最新更新时间：2020.09.14</para>
     /// </remarks>
     public class WeChatPayScorePermissionsQueryForOpenIdRequest : IWeChatPayGetRequest<WeChatPayScorePermissionsQueryForOpenIdResponse>
     {
@@ -17,7 +17,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
         /// </summary>
         /// <remarks>
         /// 微信用户在商户对应appid下的唯一标识 
-        /// 示例值：oUpF8uMuAJO_M2pxb1Q9zNjWeS6o
+        /// <para>示例值：oUpF8uMuAJO_M2pxb1Q9zNjWeS6o</para>
         /// </remarks>
         public string OpenId { get; set; }
 

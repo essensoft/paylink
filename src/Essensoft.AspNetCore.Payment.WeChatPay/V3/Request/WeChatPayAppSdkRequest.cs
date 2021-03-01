@@ -4,24 +4,29 @@ using Essensoft.AspNetCore.Payment.Security;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 {
     /// <summary>
-    /// 基础支付 - APP支付 - 调起支付（服务商、直连商户、电商平台）
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_4.shtml">APP支付 - 调起支付</a></para>
-    /// 最新更新时间：2020.09.29
+    /// 基础支付 - APP支付 - APP调起支付
     /// </summary>
+    /// <remarks>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_4.shtml">APP支付 - APP调起支付API</a> - 最新更新时间：2020.09.29</para>
+    /// </remarks>
     public class WeChatPayAppSdkRequest : IWeChatPaySdkRequest
     {
         /// <summary>
         /// 预支付交易会话ID
-        /// 微信返回的支付交易会话id。
-        /// 示例值： WX1217752501201407033233368018
         /// </summary>
+        /// <remarks>
+        /// 微信返回的支付交易会话id。
+        /// <para>示例值：WX1217752501201407033233368018</para>
+        /// </remarks>
         public string PrepayId { get; set; }
 
         /// <summary>
         /// 订单详情扩展字符串
-        /// 暂填写固定值Sign=WXPay
-        /// 示例值：Sign=WXPay
         /// </summary>
+        /// <remarks>
+        /// 暂填写固定值Sign=WXPay
+        /// <para>示例值：Sign=WXPay</para>
+        /// </remarks>
         public string Package { get; set; } = "Sign=WXPay";
 
         #region IWeChatPaySdkRequest Members

@@ -4,7 +4,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
 {
     /// <summary>
     /// 错误详情
-    /// </summary>    
+    /// </summary>
     public class ErrorDetail : WeChatPayObject
     {
         [JsonPropertyName("location")]

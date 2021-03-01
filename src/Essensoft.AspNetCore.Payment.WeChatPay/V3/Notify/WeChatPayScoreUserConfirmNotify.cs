@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
     /// 微信支付分 - 确认订单回调通知
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_21.shtml">确认订单回调通知API</a> - 最新更新时间：2020.03.05</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_21.shtml">微信支付分 - 确认订单回调通知API</a> - 最新更新时间：2020.03.05</para>
     /// </remarks>
     public class WeChatPayScoreUserConfirmNotify : WeChatPayNotify
     {
@@ -17,7 +17,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 调用授权服务接口提交的公众账号ID。
-        /// 示例值：wxd678efh567hg6787
+        /// <para>示例值：wxd678efh567hg6787</para>
         /// </remarks>
         [JsonPropertyName("appid")]
         public string AppId { get; set; }
@@ -27,7 +27,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 调用授权服务接口提交的商户号。
-        /// 示例值：1230000109
+        /// <para>示例值：1230000109</para>
         /// </remarks>
         [JsonPropertyName("mchid")]
         public string MchId { get; set; }
@@ -37,7 +37,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 调用接口提交的商户服务订单号。
-        /// 示例值：1234323JKHDFE1243252
+        /// <para>示例值：1234323JKHDFE1243252</para>
         /// </remarks>
         [JsonPropertyName("out_order_no")]
         public string OutOrderNo { get; set; }
@@ -47,7 +47,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 调用授权服务接口提交的服务ID。
-        /// 示例值：500001
+        /// <para>示例值：500001</para>
         /// </remarks>
         [JsonPropertyName("service_id")]
         public string ServiceId { get; set; }
@@ -57,7 +57,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 微信用户在商户对应appid下的唯一标识。
-        /// 示例值：oUpF8uMuAJO_M2pxb1Q9zNjWeS6o
+        /// <para>示例值：oUpF8uMuAJO_M2pxb1Q9zNjWeS6o</para>
         /// </remarks>
         [JsonPropertyName("openid")]
         public string OpenId { get; set; }
@@ -69,7 +69,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// 表示当前单据状态。
         /// 枚举值：
         /// 1、DOING：服务订单进行中
-        /// 示例值：DOING
+        /// <para>示例值：DOING</para>
         /// </remarks>
         [JsonPropertyName("state")]
         public string State { get; set; }
@@ -80,7 +80,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// <remarks>
         /// 对服务订单"进行中"状态的附加说明。
         /// 1、USER_CONFIRM：用户确认
-        /// 示例值：USER_CONFIRM
+        /// <para>示例值：USER_CONFIRM</para>
         /// </remarks>
         [JsonPropertyName("state_description")]
         public string StateDescription { get; set; }
@@ -91,7 +91,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// <remarks>
         /// 总金额，大于等于0的数字，单位为分，只能为整数，详见支付金额。
         /// 此参数需满足：总金额=后付费项目金额之和-后付费商户优惠项目金额之和，且小于等于订单风险金额。取消订单时，该字段必须为0。
-        /// 示例值：40000
+        /// <para>示例值：40000</para>
         /// </remarks>
         [JsonPropertyName("total_amount")]
         public long? TotalAmount { get; set; }
@@ -102,7 +102,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// <remarks>
         /// 服务信息，用于介绍本订单所提供的服务
         /// 不超过20个字符，超出报错处理。
-        /// 示例值：嗨客餐厅用餐
+        /// <para>示例值：嗨客餐厅用餐</para>
         /// </remarks>
         [JsonPropertyName("service_introduction")]
         public string ServiceIntroduction { get; set; }
@@ -158,7 +158,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// <remarks>
         /// 商户数据包可存放本订单所需信息，需要先urlencode后传入。
         /// 当商户数据包总长度超出256字符时，报错处理。
-        /// 示例值：attach
+        /// <para>示例值：attach</para>
         /// </remarks>
         [JsonPropertyName("attach")]
         public string Attach { get; set; }
@@ -168,7 +168,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// </summary>
         /// <remarks>
         /// 微信支付服务订单号，每个微信支付服务订单号与商户号下对应的商户服务订单号一一对应。
-        /// 示例值：15646546545165651651
+        /// <para>示例值：15646546545165651651</para>
         /// </remarks>
         [JsonPropertyName("order_id")]
         public string OrderId { get; set; }
@@ -180,7 +180,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Notify
         /// 是否需要收款。
         /// true：微信支付分代收款
         /// false：无需微信支付分代收款
-        /// 示例值：true
+        /// <para>示例值：true</para>
         /// </remarks>
         [JsonPropertyName("need_collection")]
         public bool NeedCollection { get; set; }

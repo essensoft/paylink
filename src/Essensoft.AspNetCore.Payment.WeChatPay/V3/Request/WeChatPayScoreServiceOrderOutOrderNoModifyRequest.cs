@@ -6,7 +6,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
     /// 微信支付分 - 修改订单金额
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_17.shtml">修改订单金额API</a> - 最新更新时间：2020.03.05</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_17.shtml">微信支付分 - 修改订单金额API</a> - 最新更新时间：2020.03.05</para>
     /// </remarks>
     public class WeChatPayScoreServiceOrderOutOrderNoModifyRequest : IWeChatPayPostRequest<WeChatPayScoreServiceOrderOutOrderNoModifyResponse>
     {
@@ -17,7 +17,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
         /// </summary>
         /// <remarks>
         /// 商户系统内部订单号（不是交易单号），与创建订单时一致。
-        /// 示例值：1234323JKHDFE1243252
+        /// <para>示例值：1234323JKHDFE1243252</para>
         /// </remarks>
         public string OutOrderNo { get; set; }
 

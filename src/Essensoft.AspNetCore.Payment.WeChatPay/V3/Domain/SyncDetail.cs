@@ -5,9 +5,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
     /// <summary>
     /// 内容信息详情
     /// </summary>
-    /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_20.shtml">同步服务订单信息API</a> - 最新更新时间：2020.03.05</para>
-    /// </remarks
     public class SyncDetail : WeChatPayObject
     {
         /// <summary>
@@ -26,7 +23,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// ● 传入20091225091010表示2009年12月25日9点10分10秒。
         /// ● 传入20091225表示时间为2009年12月25日23点59分59秒。
         /// 注意：微信支付分会根据此时间更新用户侧的守约记录、负面记录信息；因此请务必如实填写用户实际付款成功时间，以免造成不必要的客诉。
-        /// 示例值：20091225091210
+        /// <para>示例值：20091225091210</para>
         /// </remarks>
         [JsonPropertyName("paid_time")]
         public string PaidTime { get; set; }

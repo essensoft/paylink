@@ -4,17 +4,20 @@ using Essensoft.AspNetCore.Payment.WeChatPay.V3.Response;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 {
     /// <summary>
-    /// 商户进件（普通服务商）- 查询结算账户API
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/tool/applyment4sub/chapter3_4.shtml">查询结算账户API</a></para>
-    /// 最新更新时间：2019.09.09
+    /// 特约商户进件 - 提交申请单
     /// </summary>
+    /// <remarks>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/tool/applyment4sub/chapter3_1.shtml">特约商户进件 - 提交申请单API</a> - 最新更新时间：2019.04.10</para>
+    /// </remarks>
     public class WeChatPayApply4SubSubMerchantsSubMchIdSettlementRequest : IWeChatPayGetRequest<WeChatPayApply4SubSubMerchantsSubMchIdSettlementResponse>
     {
         /// <summary>
-        /// 特约商户号	
-        /// 请输入本服务商进件、已签约的特约商户号。
-        /// 示例值：1900006491
+        /// 特约商户号
         /// </summary>
+        /// <remarks>
+        /// 请输入本服务商进件、已签约的特约商户号。
+        /// <para>示例值：1900006491</para>
+        /// </remarks>
         public string SubMchId { get; set; }
 
         public string GetRequestUrl()

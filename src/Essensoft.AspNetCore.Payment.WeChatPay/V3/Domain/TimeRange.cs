@@ -5,16 +5,6 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
     /// <summary>
     /// 服务时间段
     /// </summary>
-    /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_1.shtml">创单结单合并API</a> - 最新更新时间：2020.04.23</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_14.shtml">创建支付分订单API</a> - 最新更新时间：2020.03.05</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_15.shtml">查询支付分订单API</a> - 最新更新时间：2020.05.25</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_17.shtml">修改订单金额API</a> - 最新更新时间：2020.03.05</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_18.shtml">完结支付分订单API</a> - 最新更新时间：2020.06.02</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_20.shtml">同步服务订单信息API</a> - 最新更新时间：2020.03.05</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_21.shtml">确认订单回调通知API</a> - 最新更新时间：2020.03.05</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_22.shtml">支付成功回调通知API</a> - 最新更新时间：2020.05.25</para>
-    /// </remarks>
     public class TimeRange : WeChatPayObject
     {
         /// <summary>
@@ -34,7 +24,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// 【服务开始时间】不能早于调用接口时间。
         /// 【建议】
         ///   实际服务开始时间与创建订单填写的“服务开始时间”一致时，不填写
-        /// 示例值：20091225091010
+        /// <para>示例值：20091225091010</para>
         /// </remarks>
         [JsonPropertyName("start_time")]
         public string StartTime { get; set; }
@@ -46,7 +36,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// 服务开始时间备注说明。
         /// 1、服务开始时间有填时，可填写服务开始时间备注
         /// 2、若与【服务开始时间备注】不一致，则以【实际服务开始时间备注】为准，不超过20个字符，超出报错处理。
-        /// 示例值：出账日
+        /// <para>示例值：出账日</para>
         /// </remarks>
         [JsonPropertyName("start_time_remark")]
         public string StartTimeRemark { get; set; }
@@ -65,7 +55,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// ● 传入20091225默认认为时间为2009年12月25日
         /// 【建议】
         ///   实际服务结束实际和预计服务结束时间一致时，不填写
-        /// 示例值：20091225121010
+        /// <para>示例值：20091225121010</para>
         /// </remarks>
         [JsonPropertyName("end_time")]
         public string EndTime { get; set; }
@@ -77,7 +67,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// 服务结束时间备注说明。
         /// 1、服务结束时间有填时，可填写服务结束时间备注
         /// 2、若与【服务结束时间备注】不一致，则以【实际服务结束时间备注】为准，不超过20个字符，超出报错处理。
-        /// 示例值：结束租借时间
+        /// <para>示例值：结束租借时间</para>
         /// </remarks>
         [JsonPropertyName("end_time_remark")]
         public string EndTimeRemark { get; set; }

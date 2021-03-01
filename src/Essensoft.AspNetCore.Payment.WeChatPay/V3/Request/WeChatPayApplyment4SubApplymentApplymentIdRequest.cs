@@ -4,17 +4,20 @@ using Essensoft.AspNetCore.Payment.WeChatPay.V3.Response;
 namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
 {
     /// <summary>
-    /// 商户进件（普通服务商）- 查询申请单状态API
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/tool/applyment4sub/chapter3_2.shtml">查询申请单状态API</a></para>
-    /// 最新更新时间：2020.2.11
+    /// 特约商户进件 - 查询申请单状态
     /// </summary>
+    /// <remarks>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/tool/applyment4sub/chapter3_2.shtml">特约商户进件 - 查询申请单状态API</a> - 最新更新时间：2020.2.11</para>
+    /// </remarks>
     public class WeChatPayApplyment4SubApplymentApplymentIdRequest : IWeChatPayGetRequest<WeChatPayApplyment4SubApplymentApplymentIdResponse>
     {
         /// <summary>
-        /// 微信支付申请单号	
-        /// 微信支付分配的申请单号。
-        /// 示例值：2000001234567890
+        /// 微信支付申请单号
         /// </summary>
+        /// <remarks>
+        /// 微信支付分配的申请单号。
+        /// <para>示例值：2000001234567890</para>
+        /// </remarks>
         public string ApplymentId { get; set; }
 
         public string GetRequestUrl()

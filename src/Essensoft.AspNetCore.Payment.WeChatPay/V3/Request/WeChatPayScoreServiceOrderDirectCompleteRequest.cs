@@ -6,7 +6,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Request
     /// 微信支付分 - 创单结单合并
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_1.shtml">创单结单合并API</a> - 最新更新时间：2020.04.23</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_1.shtml">微信支付分 - 创单结单合并API</a> - 最新更新时间：2020.04.23</para>
     /// </remarks>
     public class WeChatPayScoreServiceOrderDirectCompleteRequest : IWeChatPayPostRequest<WeChatPayScoreServiceOrderDirectCompleteResponse>
     {
