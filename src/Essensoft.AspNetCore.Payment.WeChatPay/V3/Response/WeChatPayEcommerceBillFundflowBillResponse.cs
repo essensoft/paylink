@@ -17,7 +17,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Response
         /// </summary>
         /// <remarks>
         /// 下载信息总数
-        /// 示例值：1
+        /// <para>示例值：1</para>
         /// </remarks>
         [JsonPropertyName("download_bill_count")]
         public int DownloadBillCount { get; set; }

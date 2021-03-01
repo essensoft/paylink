@@ -12,8 +12,10 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Parser
 
         /// <summary>
         /// 将加密报文解密并反序列化
-        /// https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay4_2.shtml
         /// </summary>
+        /// <remarks>
+        /// <a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay4_2.shtml">证书和回调报文解密</a>
+        /// </remarks>
         public T Parse(string body, string v3Key)
         {
             T result = null;

@@ -16,7 +16,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// <remarks>
         /// 格式YYYY-MM-DD
         /// 仅支持三个月内的账单下载申请。
-        /// 示例值：2019-06-11
+        /// <para>示例值：2019-06-11</para>
         /// </remarks>
         [JsonPropertyName("bill_date")]
         public string BillDate { get; set; }
@@ -27,7 +27,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// <remarks>
         /// 枚举值：
         /// ALL：所有账户
-        /// 示例值：ALL
+        /// <para>示例值：ALL</para>
         /// </remarks>
         [JsonPropertyName("account_type")]
         public string AccountType { get; set; }
@@ -38,7 +38,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// <remarks>
         /// 不填则以不压缩的方式返回数据流，枚举值：
         /// GZIP：GZIP格式压缩
-        /// 示例值：GZIP
+        /// <para>示例值：GZIP</para>
         /// </remarks>
         [JsonPropertyName("tar_type")]
         public string TarType { get; set; }
@@ -49,7 +49,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// <remarks>
         /// 枚举值：
         /// AEAD_AES_256_GCM：AEAD_AES_256_GCM加密算法
-        /// 示例值：AEAD_AES_256_GCM
+        /// <para>示例值：AEAD_AES_256_GCM</para>
         /// </remarks>
         [JsonPropertyName("algorithm")]
         public string Algorithm { get; set; }
