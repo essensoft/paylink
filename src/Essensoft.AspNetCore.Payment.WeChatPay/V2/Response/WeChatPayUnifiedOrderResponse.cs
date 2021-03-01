@@ -72,7 +72,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string ErrCode { get; set; }
 
         /// <summary>
-        /// 错误描述	
+        /// 错误描述
         /// </summary>
         [XmlElement("err_code_des")]
         public string ErrCodeDes { get; set; }
@@ -84,19 +84,19 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string TradeType { get; set; }
 
         /// <summary>
-        /// 预支付交易会话标识	
+        /// 预支付交易会话标识
         /// </summary>
         [XmlElement("prepay_id")]
         public string PrepayId { get; set; }
 
         /// <summary>
-        /// 二维码链接	
+        /// 二维码链接
         /// </summary>
         [XmlElement("code_url")]
         public string CodeUrl { get; set; }
 
         /// <summary>
-        /// 支付跳转链接	
+        /// 支付跳转链接
         /// </summary>
         [XmlElement("mweb_url")]
         public string MwebUrl { get; set; }

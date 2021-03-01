@@ -33,7 +33,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string ErrCode { get; set; }
 
         /// <summary>
-        /// 错误描述	
+        /// 错误描述
         /// </summary>
         [XmlElement("err_code_des")]
         public string ErrCodeDes { get; set; }
@@ -75,43 +75,43 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string Sign { get; set; }
 
         /// <summary>
-        /// 微信订单号	
+        /// 微信订单号
         /// </summary>
         [XmlElement("transaction_id")]
         public string TransactionId { get; set; }
 
         /// <summary>
-        /// 商户订单号	
+        /// 商户订单号
         /// </summary>
         [XmlElement("out_trade_no")]
         public string OutTradeNo { get; set; }
 
         /// <summary>
-        /// 商户退款单号	
+        /// 商户退款单号
         /// </summary>
         [XmlElement("out_refund_no")]
         public string OutRefundNo { get; set; }
 
         /// <summary>
-        /// 微信退款单号	
+        /// 微信退款单号
         /// </summary>
         [XmlElement("refund_id")]
         public string RefundId { get; set; }
 
         /// <summary>
-        /// 申请退款金额	
+        /// 申请退款金额
         /// </summary>
         [XmlElement("refund_fee")]
         public int RefundFee { get; set; }
 
         /// <summary>
-        /// 退款金额	
+        /// 退款金额
         /// </summary>
         [XmlElement("settlement_refund_fee")]
         public int SettlementRefundFee { get; set; }
 
         /// <summary>
-        /// 订单金额	
+        /// 订单金额
         /// </summary>
         [XmlElement("total_fee")]
         public int TotalFee { get; set; }
@@ -129,25 +129,25 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string FeeType { get; set; }
 
         /// <summary>
-        /// 现金支付金额	
+        /// 现金支付金额
         /// </summary>
         [XmlElement("cash_fee")]
         public int CashFee { get; set; }
 
         /// <summary>
-        /// 现金退款金额	
+        /// 现金退款金额
         /// </summary>
         [XmlElement("cash_refund_fee")]
         public int CashRefundFee { get; set; }
 
         /// <summary>
-        /// 代金券退款总金额	
+        /// 代金券退款总金额
         /// </summary>
         [XmlElement("coupon_refund_fee")]
         public int RefundCount { get; set; }
 
         /// <summary>
-        /// 退款代金券使用数量	
+        /// 退款代金券使用数量
         /// </summary>
         [XmlElement("coupon_refund_count")]
         public int CouponRefundCount { get; set; }

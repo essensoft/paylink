@@ -81,7 +81,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Notify
         public string OperateTime { get; set; }
 
         /// <summary>
-        /// 委托代扣协议id	
+        /// 委托代扣协议id
         /// </summary>
         [XmlElement("contract_id")]
         public string ContractId { get; set; }

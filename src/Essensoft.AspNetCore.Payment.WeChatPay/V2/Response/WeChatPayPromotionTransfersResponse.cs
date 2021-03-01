@@ -54,7 +54,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string ErrCode { get; set; }
 
         /// <summary>
-        /// 错误描述	
+        /// 错误描述
         /// </summary>
         [XmlElement("err_code_des")]
         public string ErrCodeDes { get; set; }
@@ -72,7 +72,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string PaymentNo { get; set; }
 
         /// <summary>
-        /// 付款成功时间	
+        /// 付款成功时间
         /// </summary>
         [XmlElement("payment_time")]
         public string PaymentTime { get; set; }

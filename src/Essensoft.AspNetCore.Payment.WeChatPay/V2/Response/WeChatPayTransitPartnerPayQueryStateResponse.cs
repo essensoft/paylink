@@ -66,37 +66,37 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string ErrCode { get; set; }
 
         /// <summary>
-        /// 错误描述	
+        /// 错误描述
         /// </summary>
         [XmlElement("err_code_des")]
         public string ErrCodeDes { get; set; }
 
         /// <summary>
-        /// 用户状态	
+        /// 用户状态
         /// </summary>
         [XmlElement("user_state")]
         public string UserState { get; set; }
 
         /// <summary>
-        /// 委托代扣协议id	
+        /// 委托代扣协议id
         /// </summary>
         [XmlElement("contract_id")]
         public string ContractId { get; set; }
 
         /// <summary>
-        /// 签约模板id	
+        /// 签约模板id
         /// </summary>
         [XmlElement("plan_id")]
         public string PlanId { get; set; }
 
         /// <summary>
-        /// 签约协议号	
+        /// 签约协议号
         /// </summary>
         [XmlElement("contract_code")]
         public string ContractCode { get; set; }
 
         /// <summary>
-        /// 协议状态	
+        /// 协议状态
         /// </summary>
         [XmlElement("contract_state")]
         public string ContractState { get; set; }
