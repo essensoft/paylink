@@ -30,7 +30,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string ErrCode { get; set; }
 
         /// <summary>
-        /// 错误描述	
+        /// 错误描述
         /// </summary>
         [XmlElement("err_code_des")]
         public string ErrCodeDes { get; set; }
@@ -66,31 +66,31 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string Reason { get; set; }
 
         /// <summary>
-        /// 收款用户openid	
+        /// 收款用户openid
         /// </summary>
         [XmlElement("openid")]
         public string OpenId { get; set; }
 
         /// <summary>
-        /// 收款用户姓名	
+        /// 收款用户姓名
         /// </summary>
         [XmlElement("transfer_name")]
         public string TransferName { get; set; }
 
         /// <summary>
-        /// 付款金额	
+        /// 付款金额
         /// </summary>
         [XmlElement("payment_amount")]
         public string PaymentAmount { get; set; }
 
         /// <summary>
-        /// 转账时间	
+        /// 转账时间
         /// </summary>
         [XmlElement("transfer_time")]
         public string TransferTime { get; set; }
 
         /// <summary>
-        /// 付款描述	
+        /// 付款描述
         /// </summary>
         [XmlElement("desc")]
         public string Desc { get; set; }

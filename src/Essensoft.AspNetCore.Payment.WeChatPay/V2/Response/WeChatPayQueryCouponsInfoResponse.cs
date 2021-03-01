@@ -66,13 +66,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string ErrCode { get; set; }
 
         /// <summary>
-        /// 错误描述	
+        /// 错误描述
         /// </summary>
         [XmlElement("err_code_des")]
         public string ErrCodeDes { get; set; }
 
         /// <summary>
-        /// 批次ID	
+        /// 批次ID
         /// </summary>
         [XmlElement("coupon_stock_id")]
         public string CouponStockId { get; set; }
@@ -90,7 +90,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string CouponValue { get; set; }
 
         /// <summary>
-        /// 代金券使用门槛	
+        /// 代金券使用门槛
         /// </summary>
         [XmlElement("coupon_mininumn")]
         public string CouponMininumn { get; set; }
@@ -102,37 +102,37 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string CouponName { get; set; }
 
         /// <summary>
-        /// 代金券状态	
+        /// 代金券状态
         /// </summary>
         [XmlElement("coupon_state")]
         public string CouponState { get; set; }
 
         /// <summary>
-        /// 代金券描述	
+        /// 代金券描述
         /// </summary>
         [XmlElement("coupon_desc")]
         public string CouponDesc { get; set; }
 
         /// <summary>
-        /// 实际优惠金额	
+        /// 实际优惠金额
         /// </summary>
         [XmlElement("coupon_use_value")]
         public string CouponUseValue { get; set; }
 
         /// <summary>
-        /// 优惠剩余可用额	
+        /// 优惠剩余可用额
         /// </summary>
         [XmlElement("coupon_remain_value")]
         public string CouponRemainValue { get; set; }
 
         /// <summary>
-        /// 发放来源	
+        /// 发放来源
         /// </summary>
         [XmlElement("send_source")]
         public string SendSource { get; set; }
 
         /// <summary>
-        /// 是否允许部分使用	
+        /// 是否允许部分使用
         /// </summary>
         [XmlElement("is_partial_use")]
         public string IsPartialUse { get; set; }

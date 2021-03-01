@@ -33,7 +33,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string ErrCode { get; set; }
 
         /// <summary>
-        /// 错误描述	
+        /// 错误描述
         /// </summary>
         [XmlElement("err_code_des")]
         public string ErrCodeDes { get; set; }
@@ -87,7 +87,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string TransactionId { get; set; }
 
         /// <summary>
-        /// 商户订单号	
+        /// 商户订单号
         /// </summary>
         [XmlElement("out_trade_no")]
         public string OutTradeNo { get; set; }
@@ -111,7 +111,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string FeeType { get; set; }
 
         /// <summary>
-        /// 现金支付金额	
+        /// 现金支付金额
         /// </summary>
         [XmlElement("cash_fee")]
         public int CashFee { get; set; }

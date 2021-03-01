@@ -30,19 +30,19 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string ErrCode { get; set; }
 
         /// <summary>
-        /// 错误描述	
+        /// 错误描述
         /// </summary>
         [XmlElement("err_code_des")]
         public string ErrCodeDes { get; set; }
 
         /// <summary>
-        /// 商户号	
+        /// 商户号
         /// </summary>
         [XmlElement("mch_id")]
         public string MchId { get; set; }
 
         /// <summary>
-        /// 密钥	
+        /// 密钥
         /// </summary>
         [XmlElement("pub_key")]
         public string PubKey { get; set; }

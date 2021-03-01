@@ -51,13 +51,13 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Notify
         public string VehicleEventDes { get; set; }
 
         /// <summary>
-        /// 用户标识	
+        /// 用户标识
         /// </summary>
         [XmlElement("openid")]
         public string OpenId { get; set; }
 
         /// <summary>
-        /// 用户子标识	
+        /// 用户子标识
         /// </summary>
         [XmlElement("sub_openid")]
         public string SubOpenId { get; set; }

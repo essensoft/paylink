@@ -60,55 +60,55 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Response
         public string ErrCode { get; set; }
 
         /// <summary>
-        /// 错误描述	
+        /// 错误描述
         /// </summary>
         [XmlElement("err_code_des")]
         public string ErrCodeDes { get; set; }
 
         /// <summary>
-        /// 代金券批次id	
+        /// 代金券批次id
         /// </summary>
         [XmlElement("coupon_stock_id")]
         public string CouponStockId { get; set; }
 
         /// <summary>
-        /// 返回记录数	
+        /// 返回记录数
         /// </summary>
         [XmlElement("resp_count")]
         public string RespCount { get; set; }
 
         /// <summary>
-        /// 成功记录数	
+        /// 成功记录数
         /// </summary>
         [XmlElement("success_count")]
         public string SuccessCount { get; set; }
 
         /// <summary>
-        /// 失败记录数	
+        /// 失败记录数
         /// </summary>
         [XmlElement("failed_count")]
         public string FailedCount { get; set; }
 
         /// <summary>
-        /// 用户标识	
+        /// 用户标识
         /// </summary>
         [XmlElement("openid")]
         public string OpenId { get; set; }
 
         /// <summary>
-        /// 返回码	
+        /// 返回码
         /// </summary>
         [XmlElement("ret_code")]
         public string RetCode { get; set; }
 
         /// <summary>
-        /// 代金券id	
+        /// 代金券id
         /// </summary>
         [XmlElement("coupon_id")]
         public string CouponId { get; set; }
 
         /// <summary>
-        /// 返回信息	
+        /// 返回信息
         /// </summary>
         [XmlElement("ret_msg")]
         public string RetMsg { get; set; }
