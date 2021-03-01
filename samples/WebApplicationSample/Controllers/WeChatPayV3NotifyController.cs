@@ -85,7 +85,7 @@ namespace WebApplicationSample.Controllers
                 if (notify.UserServiceStatus == WeChatPayScoreUserServiceStatus.Opened ||
                     notify.UserServiceStatus == WeChatPayScoreUserServiceStatus.Closed)
                 {
-                    Console.WriteLine("Permissions body: " + notify.Body);
+                    Console.WriteLine("WeChatPayScoreUserOpenOrCloseNotify: " + notify.Body);
                     return WeChatPayNotifyResult.Success;
                 }
 
@@ -110,7 +110,7 @@ namespace WebApplicationSample.Controllers
                 var notify = await _client.ExecuteAsync<WeChatPayScoreUserConfirmNotify>(Request, _optionsAccessor.Value);
                 if (notify.State == WeChatPayServiceOrderState.Doing)
                 {
-                    Console.WriteLine("ServiceOrderConfirm body: " + notify.Body);
+                    Console.WriteLine("WeChatPayScoreUserConfirmNotify: " + notify.Body);
                     return WeChatPayNotifyResult.Success;
                 }
 
@@ -135,7 +135,7 @@ namespace WebApplicationSample.Controllers
                 var notify = await _client.ExecuteAsync<WeChatPayScoreUserPaidNotify>(Request, _optionsAccessor.Value);
                 if (notify.State == WeChatPayServiceOrderState.Done)
                 {
-                    Console.WriteLine("ServiceOrderPaid body: " + notify.Body);
+                    Console.WriteLine("WeChatPayScoreUserPaidNotify: " + notify.Body);
                     return WeChatPayNotifyResult.Success;
                 }
 
@@ -160,7 +160,7 @@ namespace WebApplicationSample.Controllers
                 var notify = await _client.ExecuteAsync<WeChatPayScoreUserPaidNotify>(Request, _optionsAccessor.Value);
                 if (notify.State == WeChatPayServiceOrderState.Doing || notify.State == WeChatPayServiceOrderState.Done)
                 {
-                    Console.WriteLine("ServiceOrderConfirmOrPaid body: " + notify.Body);
+                    Console.WriteLine("WeChatPayScoreUserPaidNotify: " + notify.Body);
                     return WeChatPayNotifyResult.Success;
                 }
 
