@@ -11,7 +11,8 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// 分账接收方类型
         /// </summary>
         /// <remarks>
-        /// MERCHANT_ID：商户ID
+        /// MERCHANT_ID：商户号（mch_id或者sub_mch_id）
+        /// <para>示例值: MERCHANT_ID</para>
         /// </remarks>
         [JsonPropertyName("type")]
         public int Type { get; set; }
@@ -21,6 +22,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// </summary>
         /// <remarks>
         /// 申请本功能商户号
+        /// <para>示例值: 1900000100</para>
         /// </remarks>
         [JsonPropertyName("account")]
         public string Account { get; set; }
@@ -30,6 +32,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// </summary>
         /// <remarks>
         /// 分账动账金额，单位为分，只能为整数
+        /// <para>示例值: 888</para>
         /// </remarks>
         [JsonPropertyName("amount")]
         public int Amount { get; set; }
@@ -39,17 +42,9 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain
         /// </summary>
         /// <remarks>
         /// 分账/回退描述
+        /// <para>示例值: 运费/交易分账/及时奖励</para>
         /// </remarks>
         [JsonPropertyName("description")]
         public string Description { get; set; }
-
-        /// <summary>
-        /// 成功时间
-        /// </summary>
-        /// <remarks>
-        /// 成功时间，Rfc3339标准
-        /// </remarks>
-        [JsonPropertyName("success_time")]
-        public string SuccessTime { get; set; }
     }
 }
