@@ -8,7 +8,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
     /// </summary>
     public class WeChatPayRiskGetPublicKeyRequest : IWeChatPayCertRequest<WeChatPayRiskGetPublicKeyResponse>
     {
-        #region IWeChatPayCertificateRequest Members
+        #region IWeChatPayCertRequest Members
 
         private string requestUrl = "https://fraud.mch.weixin.qq.com/risk/getpublickey";
 

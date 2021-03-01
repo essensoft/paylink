@@ -28,7 +28,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
         /// </summary>
         public uint Limit { get; set; }
 
-        #region IWeChatPayCertificateRequest Members
+        #region IWeChatPayCertRequest Members
 
         private string requestUrl = "https://api.mch.weixin.qq.com/billcommentsp/batchquerycomment";
 
