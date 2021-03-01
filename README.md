@@ -78,7 +78,7 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 
 ## 开源协议
 
-[MIT](LICENSE).
+[MIT](LICENSE.md).
 
 ## 致谢
 
