@@ -9,7 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0-solution-items", "0-solut
 		Directory.Build.props = Directory.Build.props
 		FUNDING.md = FUNDING.md
 		global.json = global.json
-		LICENSE = LICENSE
+		LICENSE.md = LICENSE.md
 		README.md = README.md
 	EndProjectSection
 EndProject
