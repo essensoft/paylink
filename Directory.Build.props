@@ -1,7 +1,7 @@
 <Project>
 
 	<PropertyGroup>
-		<Copyright>Copyright (c) Essensoft and Project contributors.</Copyright>
+		<Copyright>Copyright (c) Essensoft and Contributors</Copyright>
 		<Authors>Essensoft</Authors>
 		<Product>Essensoft.Payment</Product>
 		<Version>3.3.1</Version>

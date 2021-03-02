@@ -1,6 +1,6 @@
-﻿MIT License
+﻿The MIT License (MIT)
 
-Copyright (c) 2017-2021 Essensoft and Project contributors.
+Copyright (c) Essensoft and Contributors
 
 All rights reserved.
 
