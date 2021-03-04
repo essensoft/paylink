@@ -2,7 +2,7 @@
 
 ## 简介
 
-Paylink 基于 .NET Core 、 ASP.NET Core 开发，极大简化了API调用及通知的处理流程。
+Paylink 是基于 .NET Core 、 ASP.NET Core 开发的支付SDK集，它极大简化了API调用及通知的处理流程。
 
 [![Build status](https://github.com/essensoft/paylink/workflows/.NET/badge.svg?branch=dev)](https://github.com/essensoft/paylink/actions?query=branch%3Adev)
 
