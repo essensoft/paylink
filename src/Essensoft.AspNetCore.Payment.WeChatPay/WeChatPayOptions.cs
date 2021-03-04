@@ -79,12 +79,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay
         /// <summary>
         /// API密钥
         /// </summary>
-        public string Key { get; set; }
+        public string APIKey { get; set; }
 
         /// <summary>
         /// APIv3密钥
         /// </summary>
-        public string V3Key { get; set; }
+        public string APIv3Key { get; set; }
 
         /// <summary>
         /// RSA公钥

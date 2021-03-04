@@ -53,16 +53,16 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
                 throw new ArgumentNullException(nameof(options));
             }
 
-            if (string.IsNullOrEmpty(options.Key))
+            if (string.IsNullOrEmpty(options.APIKey))
             {
-                throw new WeChatPayException("options.Key is Empty!");
+                throw new WeChatPayException($"options.{nameof(WeChatPayOptions.APIKey)} is Empty!");
             }
 
             var parser = new WeChatPayNotifyXmlParser<T>();
             var notify = parser.Parse(body);
             if (notify is Notify.WeChatPayRefundNotify)
             {
-                var key = MD5.Compute(options.Key).ToLowerInvariant();
+                var key = MD5.Compute(options.APIKey).ToLowerInvariant();
                 var data = AES.Decrypt((notify as Notify.WeChatPayRefundNotify).ReqInfo, key, CipherMode.ECB, PaddingMode.PKCS7);
                 notify = parser.Parse(body, data);
             }
@@ -95,7 +95,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2
                 throw new WeChatPayException("sign check fail: sign is Empty!");
             }
 
-            var cal_sign = WeChatPaySignature.SignWithKey(notify.Parameters, options.Key, WeChatPaySignType.MD5);
+            var cal_sign = WeChatPaySignature.SignWithKey(notify.Parameters, options.APIKey, WeChatPaySignType.MD5);
             if (cal_sign != sign)
             {
                 throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
