@@ -29,12 +29,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             if (string.IsNullOrEmpty(options.SignType))
             {
-                throw new AlipayException("options.SignType is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.SignType)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.AlipayPublicKey))
             {
-                throw new AlipayException("options.AlipayPublicKey is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.AlipayPublicKey)} is Empty!");
             }
 
             var parameters = await GetParametersAsync(request);
@@ -93,12 +93,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             if (string.IsNullOrEmpty(options.SignType))
             {
-                throw new AlipayException("options.SignType is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.SignType)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.AlipayPublicKey))
             {
-                throw new AlipayException("options.AlipayPublicKey is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.AlipayPublicKey)} is Empty!");
             }
 
             var notify = AlipayDictionaryParser.Parse<T>(parameters);
@@ -123,12 +123,12 @@ namespace Essensoft.AspNetCore.Payment.Alipay
         {
             if (dictionary == null || dictionary.Count == 0)
             {
-                throw new AlipayException("sign check fail: dictionary is Empty!");
+                throw new AlipayException("sign check fail: dictionary)} is Empty!");
             }
 
             if (!dictionary.TryGetValue(AlipayConstants.SIGN, out var sign))
             {
-                throw new AlipayException("sign check fail: sign is Empty!");
+                throw new AlipayException("sign check fail: sign)} is Empty!");
             }
 
             dictionary.Remove(AlipayConstants.SIGN);
