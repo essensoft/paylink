@@ -1,8 +1,8 @@
 ﻿using System.Text;
 using System.Threading.Tasks;
-using Essensoft.AspNetCore.Payment.Alipay;
-using Essensoft.AspNetCore.Payment.Alipay.Domain;
-using Essensoft.AspNetCore.Payment.Alipay.Request;
+using Essensoft.Paylink.Alipay;
+using Essensoft.Paylink.Alipay.Domain;
+using Essensoft.Paylink.Alipay.Request;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using WebApplicationSample.Models;

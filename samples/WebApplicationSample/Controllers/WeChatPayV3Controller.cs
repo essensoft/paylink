@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Essensoft.AspNetCore.Payment.WeChatPay;
-using Essensoft.AspNetCore.Payment.WeChatPay.V3;
-using Essensoft.AspNetCore.Payment.WeChatPay.V3.Domain;
-using Essensoft.AspNetCore.Payment.WeChatPay.V3.Request;
+using Essensoft.Paylink.WeChatPay;
+using Essensoft.Paylink.WeChatPay.V3;
+using Essensoft.Paylink.WeChatPay.V3.Domain;
+using Essensoft.Paylink.WeChatPay.V3.Request;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using WebApplicationSample.Models;
