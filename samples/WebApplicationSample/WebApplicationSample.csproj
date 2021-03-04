@@ -13,8 +13,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.Alipay\Essensoft.AspNetCore.Payment.Alipay.csproj" />
-		<ProjectReference Include="..\..\src\Essensoft.AspNetCore.Payment.WeChatPay\Essensoft.AspNetCore.Payment.WeChatPay.csproj" />
+		<ProjectReference Include="..\..\src\Essensoft.Paylink.Alipay\Essensoft.Paylink.Alipay.csproj" />
+		<ProjectReference Include="..\..\src\Essensoft.Paylink.WeChatPay\Essensoft.Paylink.WeChatPay.csproj" />
 	</ItemGroup>
 
 </Project>

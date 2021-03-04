@@ -1,12 +1,12 @@
 ﻿# 捐赠名单
 
 * 不定期更新名单。
-* 每一笔捐赠都是对Payment项目的肯定和鼓励！
+* 每一笔捐赠都是对Paylink项目的肯定和鼓励！
 * 非常感谢大家！
 
 ---
 
-![QrCode](img/payment-qrcode.png)
+![QrCode](qrcode.png)
 
 ---
 

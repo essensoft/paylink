@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Essensoft.AspNetCore.Payment.Alipay;
-using Essensoft.AspNetCore.Payment.Alipay.Notify;
+using Essensoft.Paylink.Alipay;
+using Essensoft.Paylink.Alipay.Notify;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 

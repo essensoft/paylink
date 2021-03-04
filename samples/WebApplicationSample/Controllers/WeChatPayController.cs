@@ -1,8 +1,8 @@
 ﻿using System.Text.Json;
 using System.Threading.Tasks;
-using Essensoft.AspNetCore.Payment.WeChatPay;
-using Essensoft.AspNetCore.Payment.WeChatPay.V2;
-using Essensoft.AspNetCore.Payment.WeChatPay.V2.Request;
+using Essensoft.Paylink.WeChatPay;
+using Essensoft.Paylink.WeChatPay.V2;
+using Essensoft.Paylink.WeChatPay.V2.Request;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using WebApplicationSample.Models;

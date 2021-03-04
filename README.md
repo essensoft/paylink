@@ -1,25 +1,25 @@
-# Payment
+# Paylink
 
 ## 简介
 
-Payment 是基于 .NET Core / ASP.NET Core 开发，支持多商户的跨平台支付SDK集。
+Paylink 是基于 .NET Core / ASP.NET Core 开发，支持多商户的跨平台支付SDK集。
 简化了API调用及相关通知的处理流程。
 
-[![Build status](https://github.com/essensoft/payment/workflows/.NET/badge.svg?branch=dev)](https://github.com/essensoft/payment/actions?query=branch%3Adev)
+[![Build status](https://github.com/essensoft/paylink/workflows/.NET/badge.svg?branch=dev)](https://github.com/essensoft/paylink/actions?query=branch%3Adev)
 
-## Package
+## NuGet 包
 
 Package  | NuGet | Downloads
 -------- | :---- | :-------- 
-Essensoft.AspNetCore.Payment.Alipay | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Alipay?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Alipay) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.AspNetCore.Payment.Alipay?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Alipay)
-Essensoft.AspNetCore.Payment.WeChatPay | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.WeChatPay?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.WeChatPay) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.AspNetCore.Payment.WeChatPay?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.WeChatPay)
-Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Security?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Security) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.AspNetCore.Payment.Security?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Security)
+Essensoft.Paylink.Alipay | [![NuGet](https://img.shields.io/nuget/v/Essensoft.Paylink.Alipay?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.Alipay) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.Paylink.Alipay?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.Alipay)
+Essensoft.Paylink.WeChatPay | [![NuGet](https://img.shields.io/nuget/v/Essensoft.Paylink.WeChatPay?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.WeChatPay) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.Paylink.WeChatPay?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.WeChatPay)
+Essensoft.Paylink.Security | [![NuGet](https://img.shields.io/nuget/v/Essensoft.Paylink.Security?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.Security) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.Paylink.Security?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.Security)
 
 ## QQ群
 
-- [Payment 交流①群: 522457525](https://shang.qq.com/wpa/qunwpa?idkey=aac56c8f02f54893267d3ac90787c1794a7687f3c31a923812a36b67c4ee6271)
-- [Payment 交流②群: 204076462](https://shang.qq.com/wpa/qunwpa?idkey=a77c990f2a8fca61f7eaf87ad34eae1a4ac4ebb98968a2602514dfba0c23c108)
-- [Payment 交流③群: 755039581](https://shang.qq.com/wpa/qunwpa?idkey=ef1dcf99efe9fe2cbb596ec743daa748f9296c1206bd19c64090ffe35a5e0ff9)
+- [Paylink 交流①群: 522457525](https://shang.qq.com/wpa/qunwpa?idkey=aac56c8f02f54893267d3ac90787c1794a7687f3c31a923812a36b67c4ee6271)
+- [Paylink 交流②群: 204076462](https://shang.qq.com/wpa/qunwpa?idkey=a77c990f2a8fca61f7eaf87ad34eae1a4ac4ebb98968a2602514dfba0c23c108)
+- [Paylink 交流③群: 755039581](https://shang.qq.com/wpa/qunwpa?idkey=ef1dcf99efe9fe2cbb596ec743daa748f9296c1206bd19c64090ffe35a5e0ff9)
 
 ## 支持渠道
 
@@ -44,7 +44,7 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
     - 委托扣款
     - ..
 
-* V3版 [开发文档](https://pay.weixin.qq.com/wiki/doc/apiv3/index.shtml)
+* V3版 [开发者文档](https://pay.weixin.qq.com/wiki/doc/apiv3/index.shtml)
     - 基础支付
     - 基础支付（服务商）
     - 商户进件（服务商）
@@ -57,11 +57,12 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 
 ## 使用方式
 
-* [查看示例项目](samples/WebApplicationSample)
+* [示例项目](samples/WebApplicationSample)
 
-## 常见问题
+## 致谢
 
-* [常见问题及解决方法](https://github.com/essensoft/payment/issues/86)
+[Varorbc](https://github.com/Varorbc)
+[Alipay](https://github.com/alipay)
 
 ## 捐赠
 
@@ -69,18 +70,13 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 
 ---
 
-![QrCode](img/payment-qrcode.png)
+![QrCode](qrcode.png)
 
 ## 项目地址
 
-- [GitHub](https://github.com/essensoft/payment)
-- [Gitee](https://gitee.com/essensoft/payment)
+- [GitHub](https://github.com/essensoft/paylink)
+- [Gitee](https://gitee.com/essensoft/paylink)
 
-## 开源协议
+## 许可协议
 
 [MIT](LICENSE.md).
-
-## 致谢
-
-[Varorbc](https://github.com/Varorbc)
-[Alipay](https://github.com/alipay)
