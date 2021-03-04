@@ -92,7 +92,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
             sortedTxtParams.Add(WeChatPayConsts.sub_mch_id, options.SubMchId);
 
-            sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
+            sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.APIKey, signType));
         }
 
         #endregion

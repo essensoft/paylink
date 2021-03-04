@@ -37,17 +37,17 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 
             if (string.IsNullOrEmpty(options.AppId))
             {
-                throw new WeChatPayException("options.AppId is Empty!");
+                throw new WeChatPayException($"options.{nameof(WeChatPayOptions.AppId)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.MchId))
             {
-                throw new WeChatPayException("options.MchId is Empty!");
+                throw new WeChatPayException($"options.{nameof(WeChatPayOptions.MchId)} is Empty!");
             }
 
-            if (string.IsNullOrEmpty(options.V3Key))
+            if (string.IsNullOrEmpty(options.APIv3Key))
             {
-                throw new WeChatPayException("options.V3Key is Empty!");
+                throw new WeChatPayException($"options.{nameof(WeChatPayOptions.APIv3Key)} is Empty!");
             }
 
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
@@ -70,17 +70,17 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 
             if (string.IsNullOrEmpty(options.MchId))
             {
-                throw new WeChatPayException("options.MchId is Empty!");
+                throw new WeChatPayException($"options.{nameof(WeChatPayOptions.MchId)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.Certificate))
             {
-                throw new WeChatPayException("options.Certificate is Empty!");
+                throw new WeChatPayException($"options.{nameof(WeChatPayOptions.Certificate)} is Empty!");
             }
 
-            if (string.IsNullOrEmpty(options.V3Key))
+            if (string.IsNullOrEmpty(options.APIv3Key))
             {
-                throw new WeChatPayException("options.V3Key is Empty!");
+                throw new WeChatPayException($"options.{nameof(WeChatPayOptions.APIv3Key)} is Empty!");
             }
 
             var client = _httpClientFactory.CreateClient(Name);
@@ -109,12 +109,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 
             if (string.IsNullOrEmpty(options.MchId))
             {
-                throw new WeChatPayException("options.MchId is Empty!");
+                throw new WeChatPayException($"options.{nameof(WeChatPayOptions.MchId)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.Certificate))
             {
-                throw new WeChatPayException("options.Certificate is Empty!");
+                throw new WeChatPayException($"options.{nameof(WeChatPayOptions.Certificate)} is Empty!");
             }
 
             var client = _httpClientFactory.CreateClient(Name);
@@ -140,12 +140,12 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
 
             if (string.IsNullOrEmpty(options.MchId))
             {
-                throw new WeChatPayException("options.MchId is Empty!");
+                throw new WeChatPayException($"options.{nameof(WeChatPayOptions.MchId)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.Certificate))
             {
-                throw new WeChatPayException("options.Certificate is Empty!");
+                throw new WeChatPayException($"options.{nameof(WeChatPayOptions.Certificate)} is Empty!");
             }
 
             var cert = await _platformCertificateManager.GetCertificateAsync(this, options);

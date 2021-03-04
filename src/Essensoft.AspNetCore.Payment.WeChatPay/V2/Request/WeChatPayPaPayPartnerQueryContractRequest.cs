@@ -63,7 +63,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V2.Request
             sortedTxtParams.Add(WeChatPayConsts.sub_mch_id, options.SubMchId);
             sortedTxtParams.Add(WeChatPayConsts.timestamp, WeChatPayUtility.GetTimeStamp());
 
-            sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.Key, signType));
+            sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.APIKey, signType));
         }
 
         public bool GetNeedCheckSign()

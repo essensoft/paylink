@@ -81,15 +81,15 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
                 throw new ArgumentNullException(nameof(options));
             }
 
-            if (string.IsNullOrEmpty(options.V3Key))
+            if (string.IsNullOrEmpty(options.APIv3Key))
             {
-                throw new WeChatPayException("options.V3Key is Empty!");
+                throw new WeChatPayException($"options.{nameof(options.APIv3Key)} is Empty!");
             }
 
             await CheckNotifySignAsync(headers, body, options);
 
             var parser = new WeChatPayNotifyJsonParser<T>();
-            var notify = parser.Parse(body, options.V3Key);
+            var notify = parser.Parse(body, options.APIv3Key);
 
             return notify;
         }

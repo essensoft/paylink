@@ -33,7 +33,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
                     {
                         case nameof(AEAD_AES_256_GCM):
                             {
-                                var certStr = AEAD_AES_256_GCM.Decrypt(certificate.EncryptCertificate.Nonce, certificate.EncryptCertificate.Ciphertext, certificate.EncryptCertificate.AssociatedData, options.V3Key);
+                                var certStr = AEAD_AES_256_GCM.Decrypt(certificate.EncryptCertificate.Nonce, certificate.EncryptCertificate.Ciphertext, certificate.EncryptCertificate.AssociatedData, options.APIv3Key);
 
                                 var cert = new WeChatPayPlatformCertificate
                                 {
@@ -84,7 +84,7 @@ namespace Essensoft.AspNetCore.Payment.WeChatPay.V3
                     {
                         case nameof(AEAD_AES_256_GCM):
                             {
-                                var certStr = AEAD_AES_256_GCM.Decrypt(certificate.EncryptCertificate.Nonce, certificate.EncryptCertificate.Ciphertext, certificate.EncryptCertificate.AssociatedData, options.V3Key);
+                                var certStr = AEAD_AES_256_GCM.Decrypt(certificate.EncryptCertificate.Nonce, certificate.EncryptCertificate.Ciphertext, certificate.EncryptCertificate.AssociatedData, options.APIv3Key);
 
                                 var cert = new WeChatPayPlatformCertificate
                                 {
