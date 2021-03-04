@@ -46,22 +46,22 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             if (string.IsNullOrEmpty(options.AppId))
             {
-                throw new AlipayException("options.AppId is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.AppId)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.SignType))
             {
-                throw new AlipayException("options.SignType is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.SignType)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.AppPrivateKey))
             {
-                throw new AlipayException("options.AppPrivateKey is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.AppPrivateKey)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.ServerUrl))
             {
-                throw new AlipayException("options.ServerUrl is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.ServerUrl)} is Empty!");
             }
 
             var apiVersion = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
@@ -171,27 +171,27 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             if (string.IsNullOrEmpty(options.AppId))
             {
-                throw new AlipayException("options.AppId is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.AppId)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.SignType))
             {
-                throw new AlipayException("options.SignType is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.SignType)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.AlipayPublicKey))
             {
-                throw new AlipayException("options.AlipayPublicKey is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.AlipayPublicKey)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.AppPrivateKey))
             {
-                throw new AlipayException("options.AppPrivateKey is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.AppPrivateKey)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.ServerUrl))
             {
-                throw new AlipayException("options.ServerUrl is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.ServerUrl)} is Empty!");
             }
 
             var apiVersion = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
@@ -286,7 +286,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             var signItem = parser.GetSignItem(request, body);
             if (signItem == null)
             {
-                throw new AlipayException("sign check fail: Body is Empty!");
+                throw new AlipayException("sign check fail: Body)} is Empty!");
             }
 
             if (!isError || isError && !string.IsNullOrEmpty(signItem.Sign))
@@ -344,37 +344,37 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             if (string.IsNullOrEmpty(options.AppId))
             {
-                throw new AlipayException("options.AppId is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.AppId)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.SignType))
             {
-                throw new AlipayException("options.SignType is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.SignType)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.AppPrivateKey))
             {
-                throw new AlipayException("options.AppPrivateKey is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.AppPrivateKey)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.AppCert))
             {
-                throw new AlipayException("options.AppCert is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.AppCert)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.AlipayPublicCert))
             {
-                throw new AlipayException("options.AlipayPublicCert is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.AlipayPublicCert)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.AlipayRootCert))
             {
-                throw new AlipayException("options.AlipayRootCert is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.AlipayRootCert)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.ServerUrl))
             {
-                throw new AlipayException("options.ServerUrl is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.ServerUrl)} is Empty!");
             }
 
             var apiVersion = string.IsNullOrEmpty(request.GetApiVersion()) ? options.Version : request.GetApiVersion();
@@ -476,7 +476,7 @@ namespace Essensoft.AspNetCore.Payment.Alipay
             var certItem = parser.GetCertItem(request, body);
             if (certItem == null)
             {
-                throw new AlipayException("cert check fail: Body is Empty!");
+                throw new AlipayException("cert check fail: Body)} is Empty!");
             }
 
             if (!isError || isError && !string.IsNullOrEmpty(certItem.Sign))
@@ -650,22 +650,22 @@ namespace Essensoft.AspNetCore.Payment.Alipay
 
             if (string.IsNullOrEmpty(options.AppId))
             {
-                throw new AlipayException("options.AppId is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.AppId)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.SignType))
             {
-                throw new AlipayException("options.SignType is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.SignType)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.AppPrivateKey))
             {
-                throw new AlipayException("options.AppPrivateKey is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.AppPrivateKey)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.ServerUrl))
             {
-                throw new AlipayException("options.ServerUrl is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.ServerUrl)} is Empty!");
             }
 
             // 构造请求参数
