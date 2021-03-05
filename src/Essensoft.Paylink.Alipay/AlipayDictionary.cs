@@ -10,11 +10,13 @@ namespace Essensoft.Paylink.Alipay
     {
         private const string DATE_TIME_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
-        public AlipayDictionary() { }
+        public AlipayDictionary()
+        {
+        }
 
-        public AlipayDictionary(IDictionary<string, string> dictionary)
-            : base(dictionary)
-        { }
+        public AlipayDictionary(IDictionary<string, string> dictionary) : base(dictionary)
+        {
+        }
 
         /// <summary>
         /// 添加一个新的键值对。空键或者空值的键值对将会被忽略。
@@ -27,7 +29,7 @@ namespace Essensoft.Paylink.Alipay
 
             if (value == null)
             {
-                strValue = null;
+                return;
             }
             else if (value is string str)
             {
@@ -67,14 +69,9 @@ namespace Essensoft.Paylink.Alipay
                 strValue = value.ToString();
             }
 
-            Add(key, strValue);
-        }
-
-        public new void Add(string key, string value)
-        {
-            if (!string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(value))
+            if (!string.IsNullOrEmpty(strValue))
             {
-                base.Add(key, value);
+                base.Add(key, strValue);
             }
         }
     }

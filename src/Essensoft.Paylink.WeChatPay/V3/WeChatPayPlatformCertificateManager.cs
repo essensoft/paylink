@@ -11,12 +11,12 @@ namespace Essensoft.Paylink.WeChatPay.V3
 {
     public class WeChatPayPlatformCertificateManager
     {
-        private readonly ConcurrentDictionary<string, WeChatPayPlatformCertificate> _certDictionary = new ConcurrentDictionary<string, WeChatPayPlatformCertificate>();
+        private readonly ConcurrentDictionary<string, WeChatPayPlatformCertificate> _certs = new();
 
         public async Task<WeChatPayPlatformCertificate> LoadCertificateAsync(IWeChatPayClient client, WeChatPayOptions options, string serial)
         {
             // 如果证书序列号已缓存，则直接使用缓存的
-            if (_certDictionary.TryGetValue(serial, out var platformCert))
+            if (_certs.TryGetValue(serial, out var platformCert))
             {
                 return platformCert;
             }
@@ -27,7 +27,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
             foreach (var certificate in response.Certificates)
             {
                 // 若证书序列号未被缓存，解密证书并加入缓存
-                if (!_certDictionary.ContainsKey(certificate.SerialNo))
+                if (!_certs.ContainsKey(certificate.SerialNo))
                 {
                     switch (certificate.EncryptCertificate.Algorithm)
                     {
@@ -43,7 +43,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
                                     Certificate = new X509Certificate2(Encoding.ASCII.GetBytes(certStr))
                                 };
 
-                                _certDictionary.TryAdd(certificate.SerialNo, cert);
+                                _certs.TryAdd(certificate.SerialNo, cert);
                             }
                             break;
                         default:
@@ -53,7 +53,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
             }
 
             // 重新从缓存获取
-            if (_certDictionary.TryGetValue(serial, out platformCert))
+            if (_certs.TryGetValue(serial, out platformCert))
             {
                 return platformCert;
             }
@@ -66,7 +66,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
         public async Task<WeChatPayPlatformCertificate> GetCertificateAsync(IWeChatPayClient client, WeChatPayOptions options)
         {
             // 如果证书序列号已缓存，则直接使用缓存的
-            var platformCert = _certDictionary.Values.FirstOrDefault(cert => cert.EffectiveTime < DateTime.Now && cert.ExpireTime > DateTime.Now);
+            var platformCert = _certs.Values.FirstOrDefault(cert => cert.EffectiveTime < DateTime.Now && cert.ExpireTime > DateTime.Now);
             if (platformCert != null)
             {
                 return platformCert;
@@ -78,7 +78,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
             foreach (var certificate in response.Certificates)
             {
                 // 若证书序列号未被缓存，解密证书并加入缓存
-                if (!_certDictionary.ContainsKey(certificate.SerialNo))
+                if (!_certs.ContainsKey(certificate.SerialNo))
                 {
                     switch (certificate.EncryptCertificate.Algorithm)
                     {
@@ -94,7 +94,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
                                     Certificate = new X509Certificate2(Encoding.ASCII.GetBytes(certStr))
                                 };
 
-                                _certDictionary.TryAdd(certificate.SerialNo, cert);
+                                _certs.TryAdd(certificate.SerialNo, cert);
                             }
                             break;
                         default:
@@ -104,7 +104,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
             }
 
             // 重新从缓存获取
-            platformCert = _certDictionary.Values.FirstOrDefault(cert => cert.EffectiveTime < DateTime.Now && cert.ExpireTime > DateTime.Now);
+            platformCert = _certs.Values.FirstOrDefault(cert => cert.EffectiveTime < DateTime.Now && cert.ExpireTime > DateTime.Now);
             if (platformCert != null)
             {
                 return platformCert;
@@ -117,10 +117,10 @@ namespace Essensoft.Paylink.WeChatPay.V3
 
         public void RemoveExpireCertificates()
         {
-            var certs = _certDictionary.Values.Where(cert => cert.ExpireTime < DateTime.Now).ToList();
+            var certs = _certs.Values.Where(cert => cert.ExpireTime < DateTime.Now).ToList();
             foreach (var cert in certs)
             {
-                _certDictionary.TryRemove(cert.SerialNo, out _);
+                _certs.TryRemove(cert.SerialNo, out _);
             }
         }
     }

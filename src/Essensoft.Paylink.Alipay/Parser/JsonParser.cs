@@ -6,7 +6,7 @@ namespace Essensoft.Paylink.Alipay.Parser
 {
     public static class JsonParser
     {
-        public static readonly JsonSerializerOptions JsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, AllowTrailingCommas = true };
+        public static readonly JsonSerializerOptions JsonSerializerOptions = new() { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, AllowTrailingCommas = true };
 
         static JsonParser()
         {
