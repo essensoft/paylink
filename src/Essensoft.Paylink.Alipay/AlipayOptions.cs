@@ -7,7 +7,7 @@ namespace Essensoft.Paylink.Alipay
     /// </summary>
     public class AlipayOptions
     {
-        private string appCert;
+        private string appPublicCert;
         private string alipayPublicCert;
         private string alipayRootCert;
 
@@ -79,15 +79,15 @@ namespace Essensoft.Paylink.Alipay
         /// “公钥证书”方式时，必填
         /// “普通公钥”方式时，留空
         /// </summary>
-        public string AppCert
+        public string AppPublicCert
         {
-            get => appCert;
+            get => appPublicCert;
             set
             {
                 if (!string.IsNullOrEmpty(value))
                 {
-                    appCert = value;
-                    var appCertificate = AlipayCertUtil.Parse(appCert);
+                    appPublicCert = value;
+                    var appCertificate = AlipayCertUtil.Parse(appPublicCert);
                     AppCertSN = AlipayCertUtil.GetCertSN(appCertificate);
                 }
             }
