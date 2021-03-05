@@ -164,7 +164,7 @@ namespace Essensoft.Paylink.Alipay
                 throw new ArgumentNullException(nameof(options));
             }
 
-            if (!string.IsNullOrEmpty(options.AppCert) || !string.IsNullOrEmpty(options.AlipayPublicCert) || !string.IsNullOrEmpty(options.AlipayRootCert))
+            if (!string.IsNullOrEmpty(options.AppPublicCert) || !string.IsNullOrEmpty(options.AlipayPublicCert) || !string.IsNullOrEmpty(options.AlipayRootCert))
             {
                 throw new AlipayException("检测到证书相关参数已初始化，证书模式下请改为调用CertificateExecuteAsync。");
             }
@@ -337,7 +337,7 @@ namespace Essensoft.Paylink.Alipay
                 throw new ArgumentNullException(nameof(options));
             }
 
-            if (string.IsNullOrEmpty(options.AppCert) || string.IsNullOrEmpty(options.AlipayPublicCert) || string.IsNullOrEmpty(options.AlipayRootCert))
+            if (string.IsNullOrEmpty(options.AppPublicCert) || string.IsNullOrEmpty(options.AlipayPublicCert) || string.IsNullOrEmpty(options.AlipayRootCert))
             {
                 throw new AlipayException("检测到证书相关参数未初始化，非证书模式下请改为调用ExecuteAsync。");
             }
@@ -357,9 +357,9 @@ namespace Essensoft.Paylink.Alipay
                 throw new AlipayException($"options.{nameof(AlipayOptions.AppPrivateKey)} is Empty!");
             }
 
-            if (string.IsNullOrEmpty(options.AppCert))
+            if (string.IsNullOrEmpty(options.AppPublicCert))
             {
-                throw new AlipayException($"options.{nameof(AlipayOptions.AppCert)} is Empty!");
+                throw new AlipayException($"options.{nameof(AlipayOptions.AppPublicCert)} is Empty!");
             }
 
             if (string.IsNullOrEmpty(options.AlipayPublicCert))
