@@ -4,7 +4,7 @@ namespace Essensoft.Paylink.Alipay
 {
     public class AlipayPublicKeyManager
     {
-        private readonly ConcurrentDictionary<string, string> _publicKeyDictionary = new ConcurrentDictionary<string, string>();
+        private readonly ConcurrentDictionary<string, string> _publicKeyDictionary = new();
 
         public bool IsEmpty => _publicKeyDictionary.IsEmpty;
 

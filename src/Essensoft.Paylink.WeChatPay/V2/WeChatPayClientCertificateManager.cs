@@ -5,7 +5,7 @@ namespace Essensoft.Paylink.WeChatPay.V2
 {
     public class WeChatPayClientCertificateManager
     {
-        private readonly ConcurrentDictionary<string, X509Certificate2> _certificateDictionary = new ConcurrentDictionary<string, X509Certificate2>();
+        private readonly ConcurrentDictionary<string, X509Certificate2> _certificateDictionary = new();
 
         public bool ContainsKey(string serialNo) => _certificateDictionary.ContainsKey(serialNo);
 

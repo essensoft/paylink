@@ -13,7 +13,7 @@ namespace Essensoft.Paylink.WeChatPay.V2
             {
                 if (!string.IsNullOrEmpty(iter.Value) && iter.Key != WeChatPayConsts.sign)
                 {
-                    sb.Append(iter.Key).Append('=').Append(iter.Value).Append("&");
+                    sb.Append(iter.Key).Append('=').Append(iter.Value).Append('&');
                 }
             }
 
@@ -34,7 +34,7 @@ namespace Essensoft.Paylink.WeChatPay.V2
             {
                 if (!string.IsNullOrEmpty(iter.Value) && include.Contains(iter.Key))
                 {
-                    sb.Append(iter.Key).Append('=').Append(iter.Value).Append("&");
+                    sb.Append(iter.Key).Append('=').Append(iter.Value).Append('&');
                 }
             }
 

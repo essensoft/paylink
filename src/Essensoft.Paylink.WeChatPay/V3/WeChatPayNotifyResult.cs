@@ -9,8 +9,8 @@ namespace Essensoft.Paylink.WeChatPay.V3
     /// </summary>
     public static class WeChatPayNotifyResult
     {
-        private static readonly ContentResult success = new ContentResult { Content = "{\"code\":\"SUCCESS\",\"message\":\"SUCCESS\"}", ContentType = "application/json", StatusCode = 200 };
-        private static readonly ContentResult failure = new ContentResult { Content = "{\"code\":\"FAIL\",\"message\":\"FAIL\"}", ContentType = "application/json", StatusCode = 500 };
+        private static readonly ContentResult success = new() { Content = "{\"code\":\"SUCCESS\",\"message\":\"SUCCESS\"}", ContentType = "application/json", StatusCode = 200 };
+        private static readonly ContentResult failure = new() { Content = "{\"code\":\"FAIL\",\"message\":\"FAIL\"}", ContentType = "application/json", StatusCode = 500 };
 
         /// <summary>
         /// 成功

@@ -6,7 +6,7 @@ namespace Essensoft.Paylink.WeChatPay.V2.Parser
 {
     public class WeChatPayObjectJsonParser<T> where T : WeChatPayObject
     {
-        private static readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
+        private static readonly JsonSerializerOptions jsonSerializerOptions = new() { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 
         public T Parse(string body)
         {

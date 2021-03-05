@@ -8,7 +8,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Parser
 {
     public class WeChatPayNotifyJsonParser<T> where T : WeChatPayNotify
     {
-        private static readonly JsonSerializerOptions jsonSerializerOptions = new JsonSerializerOptions { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
+        private static readonly JsonSerializerOptions jsonSerializerOptions = new() { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 
         /// <summary>
         /// 将加密报文解密并反序列化

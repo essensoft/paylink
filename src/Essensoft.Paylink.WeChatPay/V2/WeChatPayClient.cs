@@ -203,7 +203,7 @@ namespace Essensoft.Paylink.WeChatPay.V2
 
         #region Check Response Method
 
-        private void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options, WeChatPaySignType signType)
+        private static void CheckResponseSign(WeChatPayResponse response, WeChatPayOptions options, WeChatPaySignType signType)
         {
             if (string.IsNullOrEmpty(response.Body))
             {
