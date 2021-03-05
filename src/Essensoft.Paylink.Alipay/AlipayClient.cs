@@ -481,7 +481,7 @@ namespace Essensoft.Paylink.Alipay
 
             if (!isError || isError && !string.IsNullOrEmpty(certItem.Sign))
             {
-                var currentAlipayPublicKey = await LoadAlipayPublicKeyAsync(certItem, options);
+                var currentAlipayPublicKey = await _publicKeyManager.LoadAlipayPublicKeyAsync(this, options, certItem.CertSN);
                 var rsaCheckContent = AlipaySignature.RSACheckContent(certItem.SignSourceData, certItem.Sign, currentAlipayPublicKey, options.SignType);
                 if (!rsaCheckContent)
                 {
@@ -500,46 +500,6 @@ namespace Essensoft.Paylink.Alipay
                     }
                 }
             }
-        }
-
-        private async Task<string> LoadAlipayPublicKeyAsync(CertItem certItem, AlipayOptions options)
-        {
-            // 为空时添加本地支付宝公钥证书密钥
-            if (_publicKeyManager.IsEmpty)
-            {
-                _publicKeyManager.TryAdd(options.AlipayPublicCertSN, options.AlipayPublicKey);
-            }
-
-            // 如果响应的支付宝公钥证书序号已经缓存过，则直接使用缓存的公钥
-            if (_publicKeyManager.TryGetValue(certItem.CertSN, out var publicKey))
-            {
-                return publicKey;
-            }
-
-            // 否则重新下载新的支付宝公钥证书并更新缓存
-            var request = new AlipayOpenAppAlipaycertDownloadRequest
-            {
-                BizContent = @"{""alipay_cert_sn"":""" + certItem.CertSN + "\"}"
-            };
-
-            var response = await CertificateExecuteAsync(request, options);
-            if (response.IsError)
-            {
-                throw new AlipayException("支付宝公钥证书校验失败，请确认是否为支付宝签发的有效公钥证书");
-            }
-
-            if (!AlipayCertUtil.IsTrusted(response.AlipayCertContent, options.AlipayRootCert))
-            {
-                throw new AlipayException("支付宝公钥证书校验失败，请确认是否为支付宝签发的有效公钥证书");
-            }
-
-            var alipayCert = AlipayCertUtil.Parse(response.AlipayCertContent);
-            var alipayCertSN = AlipayCertUtil.GetCertSN(alipayCert);
-            var alipayCertPublicKey = AlipayCertUtil.GetCertPublicKey(alipayCert);
-
-            _publicKeyManager.TryAdd(alipayCertSN, alipayCertPublicKey);
-
-            return alipayCertPublicKey;
         }
 
         #endregion
