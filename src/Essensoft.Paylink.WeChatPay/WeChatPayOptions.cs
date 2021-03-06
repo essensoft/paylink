@@ -92,11 +92,6 @@ namespace Essensoft.Paylink.WeChatPay
         /// </summary>
         public string RsaPublicKey { get; set; }
 
-        /// <summary>
-        /// 微信支付分服务ID(调用微信支付分接口必须配置)
-        /// </summary>
-        public string PayScoreServiceId { get; set; }
-
         internal X509Certificate2 Certificate2;
         internal RSA CertificateRSAPrivateKey;
         internal string CertificateSerialNo;
