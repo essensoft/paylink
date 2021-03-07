@@ -5,8 +5,10 @@ namespace Essensoft.Paylink.WeChatPay.V3.Notify
 {
     /// <summary>
     /// 服务商分账 - 分账动账通知
-    /// <para>示例值: <a href="https://pay.weixin.qq.com/wiki/doc/api/allocation_sl.php?chapter=25_9">服务商分账 - 分账动账通知</a></para>
     /// </summary>
+    /// <remarks>
+    /// <para>示例值: <a href="https://pay.weixin.qq.com/wiki/doc/api/allocation_sl.php?chapter=25_9">服务商分账 - 分账动账通知</a></para>
+    /// </remarks>
     public class WeChatPayPartnerProfitSharingNotify : WeChatPayNotify
     {
         /// <summary>
