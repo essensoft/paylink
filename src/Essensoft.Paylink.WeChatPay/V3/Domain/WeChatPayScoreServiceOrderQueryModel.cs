@@ -4,8 +4,10 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
 {
     /// <summary>
     /// 微信支付分 - 查询支付分订单 - 请求URL参数
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_15.shtml">微信支付分 - 查询支付分订单API</a></para>
     /// </summary>
+    /// <remarks>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_15.shtml">微信支付分 - 查询支付分订单API</a></para>
+    /// </remarks>
     public class WeChatPayScoreServiceOrderQueryModel : WeChatPayObject
     {
         /// <summary>
