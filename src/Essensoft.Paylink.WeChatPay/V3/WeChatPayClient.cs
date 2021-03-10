@@ -150,7 +150,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
 
             var cert = await _platformCertificateManager.GetCertificateAsync(this, options);
 
-            EncryptRequestPrivacyProperty(cert.Certificate.GetRSAPublicKey(), request.GetBodyModel());
+            EncryptPrivacyProperty(request.GetBodyModel(), cert.Certificate.GetRSAPublicKey());
 
             var client = _httpClientFactory.CreateClient(Name);
             var (headers, body, statusCode) = await client.PostAsync(request, options, cert.SerialNo);
@@ -192,10 +192,12 @@ namespace Essensoft.Paylink.WeChatPay.V3
         #region Helper
 
         /// <summary>
-        /// 加密标记敏感信息的属性
-        /// https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay4_3.shtml
+        /// 加密敏感信息字段
         /// </summary>
-        private static void EncryptRequestPrivacyProperty(RSA rsa, object obj)
+        /// <remarks>
+        /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay4_3.shtml">敏感信息加解密</a></para>
+        /// </remarks>
+        private static void EncryptPrivacyProperty(object obj, RSA rsa)
         {
             foreach (var prop in obj.GetType().GetProperties())
             {
@@ -235,7 +237,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
                         continue;
                     }
 
-                    EncryptRequestPrivacyProperty(rsa, subObj); // 继续加密子对象
+                    EncryptPrivacyProperty(subObj, rsa); // 继续加密子对象
                 }
             }
         }
