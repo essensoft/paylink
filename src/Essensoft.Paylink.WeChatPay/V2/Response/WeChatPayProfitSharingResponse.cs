@@ -48,6 +48,12 @@ namespace Essensoft.Paylink.WeChatPay.V2.Response
         public string SubMchId { get; set; }
 
         /// <summary>
+        /// 品牌主商户号
+        /// </summary>
+        [XmlElement("brand_mch_id")]
+        public string BrandMchId { get; set; }
+
+        /// <summary>
         /// 应用号
         /// </summary>
         [XmlElement("appid")]
