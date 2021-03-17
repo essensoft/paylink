@@ -61,7 +61,7 @@ namespace WebApplicationSample.Controllers
                 var notify = await _client.ExecuteAsync<WeChatPayRefundNotify>(Request, _optionsAccessor.Value);
                 if (notify.ReturnCode == WeChatPayCode.Success)
                 {
-                    if (notify.RefundStatus == WeChatPayCode.Success)
+                    if (notify.RefundStatus == WeChatPayRefundStatus.Success)
                     {
                         Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
                         return WeChatPayNotifyResult.Success;
