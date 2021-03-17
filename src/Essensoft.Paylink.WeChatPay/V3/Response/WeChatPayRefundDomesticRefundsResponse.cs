@@ -5,14 +5,20 @@ using Essensoft.Paylink.WeChatPay.V3.Domain;
 namespace Essensoft.Paylink.WeChatPay.V3.Response
 {
     /// <summary>
-    /// 基础支付 - JSAPI支付、APP支付、H5支付、Native支付、小程序支付 - 申请退款 - 返回参数
+    /// <para>基础支付 - JSAPI支付、APP支付、H5支付、Native支付、小程序支付 - 申请退款 - 返回参数</para>
+    /// <para>基础支付(服务商) - JSAPI支付、APP支付、H5支付、Native支付、小程序支付 - 申请退款 - 返回参数</para>
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_9.shtml">JSAPI支付 - 申请退款API</a> - 最新更新时间：2021.01.15</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_9.shtml">APP支付 - 申请退款API</a> - 最新更新时间：2021.01.15</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_3_9.shtml">H5支付 - 申请退款API</a> - 最新更新时间：2021.01.15</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_4_9.shtml">Native支付 - 申请退款API</a> - 最新更新时间：2021.01.15</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_9.shtml">小程序支付 - 申请退款API</a> - 最新更新时间：2021.01.15</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_9.shtml">基础支付 - JSAPI支付 - 申请退款API</a> - 最新更新时间：2021.01.15</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_9.shtml">基础支付 - APP支付 - 申请退款API</a> - 最新更新时间：2021.01.15</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_3_9.shtml">基础支付 - H5支付 - 申请退款API</a> - 最新更新时间：2021.01.15</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_4_9.shtml">基础支付 - Native支付 - 申请退款API</a> - 最新更新时间：2021.01.15</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_9.shtml">基础支付 - 小程序支付 - 申请退款API</a> - 最新更新时间：2021.01.15</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_1_9.shtml">基础支付(服务商) - JSAPI支付 - 申请退款API</a> - 最新更新时间：2021.01.15</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_2_9.shtml">基础支付(服务商) - APP支付 - 申请退款API</a> - 最新更新时间：2021.01.15</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_3_9.shtml">基础支付(服务商) - H5支付 - 申请退款API</a> - 最新更新时间：2021.01.15</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_4_9.shtml">基础支付(服务商) - Native支付 - 申请退款API</a> - 最新更新时间：2021.01.15</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_5_9.shtml">基础支付(服务商) - 小程序支付 - 申请退款API</a> - 最新更新时间：2021.01.15</para>
     /// </remarks>
     public class WeChatPayRefundDomesticRefundsResponse : WeChatPayResponse
     {
