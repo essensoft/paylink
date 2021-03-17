@@ -1,10 +1,10 @@
-﻿using System;
-using Essensoft.Paylink.WeChatPay.V3.Response;
+﻿using Essensoft.Paylink.WeChatPay.V3.Response;
 
 namespace Essensoft.Paylink.WeChatPay.V3.Request
 {
     /// <summary>
-    /// 基础支付 - JSAPI支付、APP支付、H5支付、Native支付、小程序支付 - 查询单笔退款
+    /// <para>基础支付 - JSAPI支付、APP支付、H5支付、Native支付、小程序支付 - 查询单笔退款</para>
+    /// <para>基础支付(服务商) - JSAPI支付、APP支付、H5支付、Native支付、小程序支付 - 查询单笔退款</para>
     /// </summary>
     /// <remarks>
     /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_10.shtml">JSAPI支付 - 查询单笔退款API</a> - 最新更新时间：2021.1.15</para>
@@ -15,6 +15,8 @@ namespace Essensoft.Paylink.WeChatPay.V3.Request
     /// </remarks>
     public class WeChatPayRefundDomesticRefundsOutRefundNoRequest : IWeChatPayGetRequest<WeChatPayRefundDomesticRefundsOutRefundNoResponse>
     {
+        private WeChatPayObject queryModel;
+
         /// <summary>
         /// 商户退款单号
         /// </summary>
@@ -31,12 +33,12 @@ namespace Essensoft.Paylink.WeChatPay.V3.Request
 
         public WeChatPayObject GetQueryModel()
         {
-            throw new NotImplementedException();
+            return queryModel;
         }
 
         public void SetQueryModel(WeChatPayObject queryModel)
         {
-            throw new NotImplementedException();
+            this.queryModel = queryModel;
         }
 
         public bool GetNeedQueryModel()
