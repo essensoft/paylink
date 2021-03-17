@@ -5,15 +5,19 @@ using Essensoft.Paylink.WeChatPay.V3.Domain;
 namespace Essensoft.Paylink.WeChatPay.V3.Response
 {
     /// <summary>
-    /// 基础支付（服务商）- 查询订单API - 微信支付订单号查询 - 返回参数
+    /// 基础支付(服务商) - JSAPI支付、APP支付、H5支付、Native支付、小程序支付 - 查询订单 - 微信支付订单号查询 - 返回参数
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter5_5.shtml">查询订单API</a> - 最新更新时间：2020.05.26</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_1_2.shtml">JSAPI支付 - 查询订单API - 微信支付订单号查询</a> - 最新更新时间：2021.1.14</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_2_2.shtml">APP支付 - 查询订单API - 微信支付订单号查询</a> - 最新更新时间：2021.1.14</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_2_2.shtml">H5支付 - 查询订单API - 微信支付订单号查询</a> - 最新更新时间：2021.1.14</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_2_2.shtml">Native支付 - 查询订单API - 微信支付订单号查询</a> - 最新更新时间：2021.1.14</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_2_2.shtml">小程序支付 - 查询订单API - 微信支付订单号查询</a> - 最新更新时间：2021.1.14</para>
     /// </remarks>
     public class WeChatPayPartnerTransactionsIdResponse : WeChatPayResponse
     {
         /// <summary>
-        /// 服务商公众号ID
+        /// 服务商应用ID
         /// </summary>
         /// <remarks>
         /// 服务商申请的公众号或移动应用appid。

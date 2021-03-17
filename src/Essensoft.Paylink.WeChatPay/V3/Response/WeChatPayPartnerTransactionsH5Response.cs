@@ -3,10 +3,10 @@
 namespace Essensoft.Paylink.WeChatPay.V3.Response
 {
     /// <summary>
-    /// 基础支付（服务商）- H5下单 - 返回参数
+    /// 基础支付(服务商) - H5支付 - 统一下单 - 返回参数
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter5_4.shtml">H5下单API</a> - 最新更新时间：2020.11.12</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_3_1.shtml">H5支付 - 统一下单API</a> - 最新更新时间：2020.11.12</para>
     /// </remarks>
     public class WeChatPayPartnerTransactionsH5Response : WeChatPayResponse
     {
