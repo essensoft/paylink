@@ -49,8 +49,8 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 * V3版 [开发者文档](https://pay.weixin.qq.com/wiki/doc/apiv3/index.shtml)
     - 基础支付
     - 微信支付分
-    - 基础支付（服务商）
     - 商户进件（服务商）
+    - 基础支付（服务商）
 
 ## 开发环境
 * Windows 10
