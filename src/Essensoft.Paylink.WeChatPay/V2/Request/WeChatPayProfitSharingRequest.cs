@@ -63,6 +63,7 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
         {
             sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(WeChatPayConsts.appid, options.AppId);
+            sortedTxtParams.Add(WeChatPayConsts.sub_appid, options.SubAppId);
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
             sortedTxtParams.Add(WeChatPayConsts.sub_mch_id, options.SubMchId);
 
