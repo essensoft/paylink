@@ -136,7 +136,7 @@ namespace Essensoft.Paylink.Alipay
             var content = AlipaySignature.GetSignContent(dictionary);
             if (!AlipaySignature.RSACheckContent(content, sign, options.AlipayPublicKey, options.SignType))
             {
-                throw new AlipayException("sign check fail: check Sign Data Fail!");
+                throw new AlipayException("sign check fail: check Sign and Data Fail!");
             }
         }
 
