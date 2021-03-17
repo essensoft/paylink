@@ -8,11 +8,11 @@ namespace Essensoft.Paylink.WeChatPay.V3.Notify
     /// 基础支付 - JSAPI支付、APP支付、H5支付、Native支付、小程序支付 - 支付结果通知
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_5.shtml">JSAPI支付 - 支付结果通知</a> - 最新更新时间：2020.05.26</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_5.shtml">APP支付 - 支付结果通知</a> - 最新更新时间：2020.05.26</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_3_5.shtml">H5支付 - 支付结果通知</a> - 最新更新时间：2020.05.26</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_4_5.shtml">Native支付 - 支付结果通知</a> - 最新更新时间：2020.05.26</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_5.shtml">小程序支付 - 支付结果通知</a> - 最新更新时间：2020.05.26</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_1_5.shtml">JSAPI支付 - 支付通知API</a> - 最新更新时间：2020.05.26</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_2_5.shtml">APP支付 - 支付通知API</a> - 最新更新时间：2020.05.26</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_3_5.shtml">H5支付 - 支付通知API</a> - 最新更新时间：2020.05.26</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_4_5.shtml">Native支付 - 支付通知API</a> - 最新更新时间：2020.05.26</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_5.shtml">小程序支付 - 支付通知API</a> - 最新更新时间：2020.05.26</para>
     /// </remarks>
     public class WeChatPayTransactionsNotify : WeChatPayNotify
     {

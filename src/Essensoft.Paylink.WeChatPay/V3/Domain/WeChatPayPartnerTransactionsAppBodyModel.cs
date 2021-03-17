@@ -3,15 +3,15 @@
 namespace Essensoft.Paylink.WeChatPay.V3.Domain
 {
     /// <summary>
-    /// 基础支付（服务商）- APP下单 - 请求JSON参数
+    /// 基础支付(服务商) - APP支付 - 统一下单 - 请求JSON参数
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter5_1.shtml">APP下单API</a> - 最新更新时间：2020.11.12</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_2_1.shtml">APP支付 - 统一下单API</a> - 最新更新时间：2020.11.12</para>
     /// </remarks>
     public class WeChatPayPartnerTransactionsAppBodyModel : WeChatPayObject
     {
         /// <summary>
-        /// 服务商公众号ID
+        /// 服务商应用ID
         /// </summary>
         /// <remarks>
         /// 服务商申请的公众号或移动应用appid。

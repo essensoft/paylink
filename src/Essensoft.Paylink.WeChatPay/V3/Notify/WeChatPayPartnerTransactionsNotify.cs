@@ -5,15 +5,19 @@ using Essensoft.Paylink.WeChatPay.V3.Domain;
 namespace Essensoft.Paylink.WeChatPay.V3.Notify
 {
     /// <summary>
-    /// 基础支付（服务商）- 支付通知
+    /// 基础支付(服务商) - JSAPI支付、APP支付、H5支付、Native支付、小程序支付 - 支付结果通知
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/transactions/chapter5_11.shtml">支付通知API</a> - 最新更新时间：2020.05.26</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_1_5.shtml">JSAPI支付 - 支付通知API</a> - 最新更新时间：2020.05.26</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_2_5.shtml">APP支付 - 支付通知API</a> - 最新更新时间：2020.05.26</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_3_5.shtml">H5支付 - 支付通知API</a> - 最新更新时间：2020.05.26</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_4_5.shtml">Native支付 - 支付通知API</a> - 最新更新时间：2020.05.26</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_5_5.shtml">小程序支付 - 支付通知API</a> - 最新更新时间：2020.05.26</para>
     /// </remarks>
     public class WeChatPayPartnerTransactionsNotify : WeChatPayNotify
     {
         /// <summary>
-        /// 服务商公众号ID
+        /// 服务商应用ID
         /// </summary>
         /// <remarks>
         /// 服务商申请的公众号或移动应用appid。
