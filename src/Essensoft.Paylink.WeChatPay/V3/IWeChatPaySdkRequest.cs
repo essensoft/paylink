@@ -13,10 +13,10 @@ namespace Essensoft.Paylink.WeChatPay.V3
         IDictionary<string, string> GetParameters();
 
         /// <summary>
-        /// 请求参数处理器
+        /// 参数处理器
         /// </summary>
-        /// <param name="options"></param>
-        /// <param name="sortedTxtParams"></param>
-        void PrimaryHandler(WeChatPayOptions options, WeChatPayDictionary sortedTxtParams);
+        /// <param name="sortedTxtParams">排序文本参数</param>
+        /// <param name="options">配置选项</param>
+        void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options);
     }
 }

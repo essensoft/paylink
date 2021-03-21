@@ -65,7 +65,7 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
             return parameters;
         }
 
-        public void PrimaryHandler(WeChatPayOptions options, WeChatPaySignType signType, WeChatPayDictionary sortedTxtParams)
+        public void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPaySignType signType, WeChatPayOptions options)
         {
             if (string.IsNullOrEmpty(options.RsaPublicKey))
             {
