@@ -20,7 +20,7 @@
 		<AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Paylink.snk</AssemblyOriginatorKeyFile>
 		<GenerateDocumentationFile Condition="'$(Configuration)' == 'Release'">true</GenerateDocumentationFile>
 		<GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
-		<LangVersion>9.0</LangVersion>
+		<LangVersion>latest</LangVersion>
 	</PropertyGroup>
 
 	<ItemGroup>
