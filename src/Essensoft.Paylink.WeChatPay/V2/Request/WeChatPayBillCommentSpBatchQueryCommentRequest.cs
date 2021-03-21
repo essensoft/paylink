@@ -31,6 +31,7 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
         #region IWeChatPayCertRequest Members
 
         private string requestUrl = "https://api.mch.weixin.qq.com/billcommentsp/batchquerycomment";
+        private WeChatPaySignType signType = WeChatPaySignType.HMAC_SHA256;
 
         public string GetRequestUrl()
         {
@@ -54,7 +55,21 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
             return parameters;
         }
 
-        public void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPaySignType signType, WeChatPayOptions options)
+        public WeChatPaySignType GetSignType()
+        {
+            return signType;
+        }
+
+        public void SetSignType(WeChatPaySignType signType)
+        {
+            this.signType = signType switch
+            {
+                WeChatPaySignType.HMAC_SHA256 => signType,
+                _ => throw new WeChatPayException("api only support HMAC_SHA256!"),
+            };
+        }
+
+        public void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
         {
             sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(WeChatPayConsts.appid, options.AppId);

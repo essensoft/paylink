@@ -42,6 +42,7 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
         #region IWeChatPayCertRequest Members
 
         private string requestUrl = "https://api.mch.weixin.qq.com/mmpaysptrans/pay_bank";
+        private WeChatPaySignType signType = WeChatPaySignType.MD5;
 
         public string GetRequestUrl()
         {
@@ -65,11 +66,25 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
             return parameters;
         }
 
-        public void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPaySignType signType, WeChatPayOptions options)
+        public WeChatPaySignType GetSignType()
+        {
+            return signType;
+        }
+
+        public void SetSignType(WeChatPaySignType signType)
+        {
+            this.signType = signType switch
+            {
+                WeChatPaySignType.MD5 => signType,
+                _ => throw new WeChatPayException("api only support MD5!"),
+            };
+        }
+
+        public void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
         {
             if (string.IsNullOrEmpty(options.RsaPublicKey))
             {
-                throw new WeChatPayException($"{nameof(WeChatPayPayBankRequest)}.{nameof(PrimaryHandler)}: {nameof(options.RsaPublicKey)} is null or empty!");
+                throw new WeChatPayException($"{nameof(WeChatPayPayBankRequest)}.{nameof(PrimaryHandler)}: {nameof(options.RsaPublicKey)} is empty!");
             }
 
             sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());

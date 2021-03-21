@@ -14,6 +14,8 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
 
         #region IWeChatPaySdkRequest Members
 
+        private WeChatPaySignType signType = WeChatPaySignType.MD5;
+
         public IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
@@ -21,6 +23,16 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
                 { "package", Package }
             };
             return parameters;
+        }
+
+        public WeChatPaySignType GetSignType()
+        {
+            return signType;
+        }
+
+        public void SetSignType(WeChatPaySignType signType)
+        {
+            this.signType = signType;
         }
 
         public void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
@@ -37,8 +49,8 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
                 sortedTxtParams.Add(WeChatPayConsts.appId, options.AppId);
             }
 
-            sortedTxtParams.Add(WeChatPayConsts.signType, WeChatPayConsts.MD5);
-            sortedTxtParams.Add(WeChatPayConsts.paySign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.APIKey, WeChatPaySignType.MD5));
+            sortedTxtParams.Add(WeChatPayConsts.signType, signType.ToString());
+            sortedTxtParams.Add(WeChatPayConsts.paySign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.APIKey, signType));
         }
 
         #endregion

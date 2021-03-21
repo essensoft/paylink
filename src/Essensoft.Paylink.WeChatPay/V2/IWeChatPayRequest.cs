@@ -11,25 +11,32 @@ namespace Essensoft.Paylink.WeChatPay.V2
         /// <summary>
         /// 获取请求接口地址
         /// </summary>
+        /// <returns>接口地址</returns>
         string GetRequestUrl();
 
         /// <summary>
         /// 设置请求接口地址
         /// </summary>
+        /// <param name="url">接口地址</param>
         void SetRequestUrl(string url);
 
         /// <summary>
         /// 获取文本请求参数字典
         /// </summary>
+        /// <returns>文本请求参数字典</returns>
         IDictionary<string, string> GetParameters();
 
         /// <summary>
         /// 获取签名类型
         /// </summary>
-        WeChatPaySignType GetSignType()
-        {
-            return WeChatPaySignType.MD5;
-        }
+        /// <returns>签名类型</returns>
+        WeChatPaySignType GetSignType();
+
+        /// <summary>
+        /// 设置签名类型
+        /// </summary>
+        /// <param name="signType">签名类型</param>
+        void SetSignType(WeChatPaySignType signType);
 
         /// <summary>
         /// 参数处理器
@@ -37,11 +44,12 @@ namespace Essensoft.Paylink.WeChatPay.V2
         /// <param name="sortedTxtParams">排序文本参数</param>
         /// <param name="signType">签名类型</param>
         /// <param name="options">配置选项</param>
-        void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPaySignType signType, WeChatPayOptions options);
+        void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options);
 
         /// <summary>
-        /// 是否需要检查响应内容签名
+        /// 获取是否需要对响应内容验签
         /// </summary>
+        /// <returns>是否需要对响应内容验签</returns>
         bool GetNeedCheckSign()
         {
             return true;

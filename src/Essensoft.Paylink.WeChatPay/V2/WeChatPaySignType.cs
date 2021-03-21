@@ -5,7 +5,7 @@
     /// </summary>
     public enum WeChatPaySignType
     {
-        MD5 = 1,
-        HMAC_SHA256 = 2
+        MD5 = 0,
+        HMAC_SHA256 = 1
     }
 }

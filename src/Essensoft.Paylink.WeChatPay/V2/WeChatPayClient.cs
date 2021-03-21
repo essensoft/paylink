@@ -48,10 +48,8 @@ namespace Essensoft.Paylink.WeChatPay.V2
                 throw new WeChatPayException($"options.{nameof(WeChatPayOptions.APIKey)} is Empty!");
             }
 
-            var signType = request.GetSignType();
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
-
-            request.PrimaryHandler(sortedTxtParams, signType, options);
+            request.PrimaryHandler(sortedTxtParams, options);
 
             var client = _httpClientFactory.CreateClient(Name);
             var body = await client.PostAsync(request, sortedTxtParams);
@@ -60,6 +58,7 @@ namespace Essensoft.Paylink.WeChatPay.V2
 
             if (request.GetNeedCheckSign())
             {
+                var signType = request.GetSignType();
                 CheckResponseSign(response, options, signType);
             }
 
@@ -92,10 +91,8 @@ namespace Essensoft.Paylink.WeChatPay.V2
                 throw new WeChatPayException($"options.{nameof(WeChatPayOptions.APIKey)} is Empty!");
             }
 
-            var signType = request.GetSignType();
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
-
-            request.PrimaryHandler(sortedTxtParams, signType, options);
+            request.PrimaryHandler(sortedTxtParams, options);
 
             var url = request.GetRequestUrl();
             if (url.Contains("?"))
@@ -143,10 +140,8 @@ namespace Essensoft.Paylink.WeChatPay.V2
                 throw new WeChatPayException($"options.{nameof(WeChatPayOptions.Certificate)} is Empty!");
             }
 
-            var signType = request.GetSignType();
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
-
-            request.PrimaryHandler(sortedTxtParams, signType, options);
+            request.PrimaryHandler(sortedTxtParams, options);
 
             if (!_clientCertificateManager.ContainsKey(options.CertificateSerialNo))
             {
@@ -160,6 +155,7 @@ namespace Essensoft.Paylink.WeChatPay.V2
 
             if (request.GetNeedCheckSign())
             {
+                var signType = request.GetSignType();
                 CheckResponseSign(response, options, signType);
             }
 
@@ -193,7 +189,6 @@ namespace Essensoft.Paylink.WeChatPay.V2
             }
 
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
-
             request.PrimaryHandler(sortedTxtParams, options);
 
             return Task.FromResult(sortedTxtParams);
