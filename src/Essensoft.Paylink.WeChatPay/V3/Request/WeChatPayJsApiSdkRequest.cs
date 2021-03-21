@@ -31,7 +31,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Request
             return parameters;
         }
 
-        public void PrimaryHandler(WeChatPayOptions options, WeChatPayDictionary sortedTxtParams)
+        public void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
         {
             if (!string.IsNullOrEmpty(options.SubAppId))
             {

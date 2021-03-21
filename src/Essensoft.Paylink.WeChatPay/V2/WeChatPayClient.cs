@@ -51,7 +51,7 @@ namespace Essensoft.Paylink.WeChatPay.V2
             var signType = request.GetSignType();
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
 
-            request.PrimaryHandler(options, signType, sortedTxtParams);
+            request.PrimaryHandler(sortedTxtParams, signType, options);
 
             var client = _httpClientFactory.CreateClient(Name);
             var body = await client.PostAsync(request, sortedTxtParams);
@@ -95,7 +95,7 @@ namespace Essensoft.Paylink.WeChatPay.V2
             var signType = request.GetSignType();
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
 
-            request.PrimaryHandler(options, signType, sortedTxtParams);
+            request.PrimaryHandler(sortedTxtParams, signType, options);
 
             var url = request.GetRequestUrl();
             if (url.Contains("?"))
@@ -146,7 +146,7 @@ namespace Essensoft.Paylink.WeChatPay.V2
             var signType = request.GetSignType();
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
 
-            request.PrimaryHandler(options, signType, sortedTxtParams);
+            request.PrimaryHandler(sortedTxtParams, signType, options);
 
             if (!_clientCertificateManager.ContainsKey(options.CertificateSerialNo))
             {
@@ -194,7 +194,7 @@ namespace Essensoft.Paylink.WeChatPay.V2
 
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
 
-            request.PrimaryHandler(options, sortedTxtParams);
+            request.PrimaryHandler(sortedTxtParams, options);
 
             return Task.FromResult(sortedTxtParams);
         }

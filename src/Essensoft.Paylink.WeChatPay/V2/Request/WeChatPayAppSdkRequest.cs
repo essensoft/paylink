@@ -29,7 +29,7 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
             return parameters;
         }
 
-        public void PrimaryHandler(WeChatPayOptions options, WeChatPayDictionary sortedTxtParams)
+        public void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
         {
             sortedTxtParams.Add(WeChatPayConsts.noncestr, WeChatPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(WeChatPayConsts.timestamp, WeChatPayUtility.GetTimeStamp());

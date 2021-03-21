@@ -52,7 +52,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
 
             var sortedTxtParams = new WeChatPayDictionary(request.GetParameters());
 
-            request.PrimaryHandler(options, sortedTxtParams);
+            request.PrimaryHandler(sortedTxtParams, options);
 
             return Task.FromResult(sortedTxtParams);
         }
