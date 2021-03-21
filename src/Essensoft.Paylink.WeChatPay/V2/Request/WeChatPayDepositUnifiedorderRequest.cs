@@ -101,6 +101,7 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
         #region IWeChatPayRequest Members
 
         private string requestUrl = "https://api.mch.weixin.qq.com/deposit/unifiedorder";
+        private WeChatPaySignType signType = WeChatPaySignType.HMAC_SHA256;
 
         public string GetRequestUrl()
         {
@@ -140,10 +141,15 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
 
         public WeChatPaySignType GetSignType()
         {
-            return WeChatPaySignType.HMAC_SHA256;
+            return signType;
         }
 
-        public void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPaySignType signType, WeChatPayOptions options)
+        public void SetSignType(WeChatPaySignType signType)
+        {
+            this.signType = signType;
+        }
+
+        public void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
         {
             sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(WeChatPayConsts.appid, options.AppId);
@@ -151,11 +157,7 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
             sortedTxtParams.Add(WeChatPayConsts.sub_mch_id, options.SubMchId);
 
-            if (signType == WeChatPaySignType.HMAC_SHA256)
-            {
-                sortedTxtParams.Add(WeChatPayConsts.sign_type, WeChatPayConsts.HMAC_SHA256);
-            }
-
+            sortedTxtParams.Add(WeChatPayConsts.sign_type, signType.ToString());
             sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.APIKey, signType));
         }
 

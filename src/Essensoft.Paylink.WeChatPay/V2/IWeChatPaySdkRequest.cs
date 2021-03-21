@@ -10,7 +10,20 @@ namespace Essensoft.Paylink.WeChatPay.V2
         /// <summary>
         /// 获取文本请求参数字典
         /// </summary>
+        /// <returns>文本请求参数字典</returns>
         IDictionary<string, string> GetParameters();
+
+        /// <summary>
+        /// 获取签名类型
+        /// </summary>
+        /// <returns>签名类型</returns>
+        WeChatPaySignType GetSignType();
+
+        /// <summary>
+        /// 设置签名类型
+        /// </summary>
+        /// <param name="signType">签名类型</param>
+        void SetSignType(WeChatPaySignType signType);
 
         /// <summary>
         /// 参数处理器

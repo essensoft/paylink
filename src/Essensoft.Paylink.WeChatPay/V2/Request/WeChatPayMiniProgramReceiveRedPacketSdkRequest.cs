@@ -14,6 +14,8 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
 
         #region IWeChatPaySdkRequest Members
 
+        private WeChatPaySignType signType = WeChatPaySignType.MD5;
+
         public IDictionary<string, string> GetParameters()
         {
             var parameters = new WeChatPayDictionary
@@ -23,13 +25,27 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
             return parameters;
         }
 
+        public WeChatPaySignType GetSignType()
+        {
+            return signType;
+        }
+
+        public void SetSignType(WeChatPaySignType signType)
+        {
+            this.signType = signType switch
+            {
+                WeChatPaySignType.MD5 => signType,
+                _ => throw new WeChatPayException("api only support MD5!"),
+            };
+        }
+
         public void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options)
         {
             sortedTxtParams.Add(WeChatPayConsts.timeStamp, WeChatPayUtility.GetTimeStamp());
             sortedTxtParams.Add(WeChatPayConsts.nonceStr, WeChatPayUtility.GenerateNonceStr());
 
-            sortedTxtParams.Add(WeChatPayConsts.signType, WeChatPayConsts.MD5);
-            sortedTxtParams.Add(WeChatPayConsts.paySign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.APIKey, WeChatPaySignType.MD5));
+            sortedTxtParams.Add(WeChatPayConsts.signType, signType.ToString());
+            sortedTxtParams.Add(WeChatPayConsts.paySign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.APIKey, signType));
         }
 
         #endregion
