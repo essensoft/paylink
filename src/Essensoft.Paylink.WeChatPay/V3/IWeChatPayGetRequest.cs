@@ -9,30 +9,34 @@
         /// <summary>
         /// 获取请求接口地址
         /// </summary>
+        /// <returns>接口地址</returns>
         string GetRequestUrl();
 
         /// <summary>
-        /// 获取QueryModel
+        /// 获取URL参数模型
         /// </summary>
+        /// <returns>URL参数模型</returns>
         WeChatPayObject GetQueryModel();
 
         /// <summary>
-        /// 设置QueryModel
+        /// 设置URL参数模型
         /// </summary>
-        /// <param name="queryModel"></param>
+        /// <param name="queryModel">URL参数模型</param>
         void SetQueryModel(WeChatPayObject queryModel);
 
         /// <summary>
-        /// 是否需要检查响应内容签名
+        /// 获取是否需要验签
         /// </summary>
+        /// <returns>是否需要验签</returns>
         bool GetNeedCheckSign()
         {
             return true;
         }
 
         /// <summary>
-        /// 是否需要URL参数
+        /// 获取是否需要URL参数
         /// </summary>
+        /// <returns>是否需要URL参数</returns>
         bool GetNeedQueryModel()
         {
             return true;

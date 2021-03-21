@@ -8,9 +8,9 @@ namespace Essensoft.Paylink.WeChatPay.V2
     public interface IWeChatPaySdkRequest
     {
         /// <summary>
-        /// 获取文本请求参数字典
+        /// 获取文本参数字典
         /// </summary>
-        /// <returns>文本请求参数字典</returns>
+        /// <returns>文本参数字典</returns>
         IDictionary<string, string> GetParameters();
 
         /// <summary>
