@@ -21,9 +21,9 @@ namespace Essensoft.Paylink.WeChatPay.V2
         void SetRequestUrl(string url);
 
         /// <summary>
-        /// 获取文本请求参数字典
+        /// 获取文本参数字典
         /// </summary>
-        /// <returns>文本请求参数字典</returns>
+        /// <returns>文本参数字典</returns>
         IDictionary<string, string> GetParameters();
 
         /// <summary>
@@ -47,9 +47,9 @@ namespace Essensoft.Paylink.WeChatPay.V2
         void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options);
 
         /// <summary>
-        /// 获取是否需要对响应内容验签
+        /// 获取是否需要验签
         /// </summary>
-        /// <returns>是否需要对响应内容验签</returns>
+        /// <returns>是否需要验签</returns>
         bool GetNeedCheckSign()
         {
             return true;
