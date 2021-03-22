@@ -1,4 +1,4 @@
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 using Essensoft.Paylink.Alipay.Domain;
 
 namespace Essensoft.Paylink.Alipay.Response

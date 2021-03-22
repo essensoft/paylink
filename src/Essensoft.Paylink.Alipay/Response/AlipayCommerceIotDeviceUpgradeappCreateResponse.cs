@@ -1,4 +1,4 @@
-namespace Essensoft.Paylink.Alipay.Response
+﻿namespace Essensoft.Paylink.Alipay.Response
 {
     /// <summary>
     /// AlipayCommerceIotDeviceUpgradeappCreateResponse.

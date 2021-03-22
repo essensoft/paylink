@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Essensoft.Paylink.Alipay.Response;
 
 namespace Essensoft.Paylink.Alipay.Request
