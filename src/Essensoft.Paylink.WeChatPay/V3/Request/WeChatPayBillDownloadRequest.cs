@@ -22,7 +22,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Request
             return requestUrl;
         }
 
-        public void SetDownloadUrl(string url)
+        public void SetRequestUrl(string url)
         {
             requestUrl = url;
         }
