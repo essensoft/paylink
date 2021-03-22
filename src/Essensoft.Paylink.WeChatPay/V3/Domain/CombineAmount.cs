@@ -16,7 +16,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// <para>示例值：100</para>
         /// </remarks>
         [JsonPropertyName("total_amount")]
-        public int TotalAmount { get; set; }
+        public long TotalAmount { get; set; }
 
         /// <summary>
         /// 标价币种
@@ -36,7 +36,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// <para>示例值：10</para>
         /// </remarks>
         [JsonPropertyName("payer_amount")]
-        public int? PayerAmount { get; set; }
+        public long? PayerAmount { get; set; }
 
         /// <summary>
         /// 现金支付币种

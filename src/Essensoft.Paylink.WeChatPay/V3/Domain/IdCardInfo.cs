@@ -34,7 +34,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// </summary>
         /// <remarks>
         /// 1、请填写个体户经营者/法定代表人对应身份证的姓名，2~30个中文字符、英文字符、符号。
-        /// 2、该字段需进行加密处理，加密方法详见<a href="https://wechatpay-api.gitbook.io/wechatpay-api-v3/qian-ming-zhi-nan-1/min-gan-xin-xi-jia-mi">《敏感信息加密说明》</a>。(提醒：必须在HTTP头中上送Wechatpay-Serial)
+        /// 2、该字段需进行加密处理，加密方法详见<a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/wechatpay/wechatpay4_3.shtml">《敏感信息加密说明》</a>。(提醒：必须在HTTP头中上送Wechatpay-Serial)
         /// <para>示例值：pVd1HJ6zyvPedzGaV+X3qtmrq9bb9tPRDm2qhZ9evAM+Jv1z0NVa8MRtelw/wDa4SzfeespQO/0kjiwfqdfg==</para>
         /// </remarks>
         [WeChatPayPrivacyProperty]
@@ -46,7 +46,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// </summary>
         /// <remarks>
         /// 1、请填写个体户经营者/法定代表人对应身份证的号码。
-        /// 2、15位数字或17位数字+1位数字|X，该字段需进行加密处理，加密方法详见<a href="https://wechatpay-api.gitbook.io/wechatpay-api-v3/qian-ming-zhi-nan-1/min-gan-xin-xi-jia-mi">《敏感信息加密说明》</a>。(提醒：必须在HTTP头中上送Wechatpay-Serial)
+        /// 2、15位数字或17位数字+1位数字|X，该字段需进行加密处理，加密方法详见<a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/wechatpay/wechatpay4_3.shtml">《敏感信息加密说明》</a>。(提醒：必须在HTTP头中上送Wechatpay-Serial)
         /// <para>示例值：AOZdYGISxo4y44/UgZ69bdagEcGe+vLYiKrzcrodtkRJJp0/0eow96uY1Pk7Rq79Jtt7+I8juwEc4P4TG5xzchG/5IL9DBd+Z0zZXkw==</para>
         /// </remarks>
         [WeChatPayPrivacyProperty]

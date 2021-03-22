@@ -27,7 +27,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// <remarks>
         /// 1、选择“经营者个人银行卡”时，开户名称必须与“经营者证件姓名”一致。
         /// 2、选择“对公银行账户”时，开户名称必须与营业执照/登记证书的“商户名称”一致。
-        /// 3、该字段需进行加密处理，加密方法详见<a href="https://wechatpay-api.gitbook.io/wechatpay-api-v3/qian-ming-zhi-nan-1/min-gan-xin-xi-jia-mi">《敏感信息加密说明》</a>。(提醒：必须在HTTP头中上送Wechatpay-Serial)
+        /// 3、该字段需进行加密处理，加密方法详见<a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/wechatpay/wechatpay4_3.shtml">《敏感信息加密说明》</a>。(提醒：必须在HTTP头中上送Wechatpay-Serial)
         /// <para>示例值：AOZdYGISxo4y4+kyblK2FCCqQJJp0/0eow96uY1Pk7Rq79Jtt7+I8juwEc4P4TG5xzchG/5IL9DBd+Z0zZXkw==</para>
         /// </remarks>
         [WeChatPayPrivacyProperty]
@@ -81,7 +81,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// </summary>
         /// <remarks>
         /// 1、数字，长度遵循系统支持的卡号长度要求表。
-        /// 2、该字段需进行加密处理，加密方法详见<a href="https://wechatpay-api.gitbook.io/wechatpay-api-v3/qian-ming-zhi-nan-1/min-gan-xin-xi-jia-mi">《敏感信息加密说明》</a>。(提醒：必须在HTTP头中上送Wechatpay-Serial)
+        /// 2、该字段需进行加密处理，加密方法详见<a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/wechatpay/wechatpay4_3.shtml">《敏感信息加密说明》</a>。(提醒：必须在HTTP头中上送Wechatpay-Serial)
         /// <para>示例值：d+xT+MQCvrLHUVDWC1PHN4C7Rsu3WL8sPndjXTd75kPkyjqnoMRrEEaYQE8ZRGYoeorwC+w==</para>
         /// </remarks>
         [WeChatPayPrivacyProperty]

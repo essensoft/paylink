@@ -6,7 +6,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Request
     /// 特约商户进件 - 提交申请单
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/tool/applyment4sub/chapter3_1.shtml">特约商户进件 - 提交申请单API</a> - 最新更新时间：2019.04.10</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter11_1_1.shtml">特约商户进件 - 提交申请单API</a> - 最新更新时间：2019.04.10</para>
     /// </remarks>
     public class WeChatPayApplyment4SubApplymentRequest : IWeChatPayPrivacyPostRequest<WeChatPayApplyment4SubApplymentResponse>
     {

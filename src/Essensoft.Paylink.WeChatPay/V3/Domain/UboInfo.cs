@@ -63,7 +63,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// 受益人姓名
         /// </summary>
         /// <remarks>
-        /// 该字段需进行加密处理，加密方法详见<a href="https://wechatpay-api.gitbook.io/wechatpay-api-v3/qian-ming-zhi-nan-1/min-gan-xin-xi-jia-mi">《敏感信息加密说明》</a>。(提醒：必须在HTTP头中上送Wechatpay-Serial)
+        /// 该字段需进行加密处理，加密方法详见<a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/wechatpay/wechatpay4_3.shtml">《敏感信息加密说明》</a>。(提醒：必须在HTTP头中上送Wechatpay-Serial)
         /// <para>示例值：李四</para>
         /// </remarks>
         [WeChatPayPrivacyProperty]
@@ -74,7 +74,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// 证件号码
         /// </summary>
         /// <remarks>
-        /// 该字段需进行加密处理，加密方法详见<a href="https://wechatpay-api.gitbook.io/wechatpay-api-v3/qian-ming-zhi-nan-1/min-gan-xin-xi-jia-mi">《敏感信息加密说明》</a>。(提醒：必须在HTTP头中上送Wechatpay-Serial)
+        /// 该字段需进行加密处理，加密方法详见<a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/wechatpay/wechatpay4_3.shtml">《敏感信息加密说明》</a>。(提醒：必须在HTTP头中上送Wechatpay-Serial)
         /// <para>示例值：AOZdYGISxo4y44/Ug4P4TG5xzchG/5IL9DBd+Z0zZXkw==</para>
         /// </remarks>
         [WeChatPayPrivacyProperty]
