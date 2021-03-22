@@ -31,24 +31,6 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
-        /// 获取平台证书列表
-        /// </summary>
-        [HttpGet]
-        [HttpPost]
-        public async Task<IActionResult> GetCertificates()
-        {
-            if (Request.Method == "POST")
-            {
-                var request = new WeChatPayCertificatesRequest();
-                var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-                ViewData["response"] = response.Body;
-                return View();
-            }
-
-            return View();
-        }
-
-        /// <summary>
         /// APP支付-App下单API
         /// </summary>
         [HttpGet]
