@@ -6,6 +6,7 @@
         public const string sub_appid = "sub_appid";
         public const string mch_id = "mch_id";
         public const string sub_mch_id = "sub_mch_id";
+        public const string brand_mch_id = "brand_mch_id";
         public const string sign_type = "sign_type";
         public const string nonce_str = "nonce_str";
         public const string sign = "sign";
