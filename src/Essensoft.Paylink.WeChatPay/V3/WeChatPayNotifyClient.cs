@@ -115,7 +115,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
                 throw new WeChatPayException("sign check fail: body is empty!");
             }
 
-            var cert = await _platformCertificateManager.LoadCertificateAsync(_client, options, headers.Serial);
+            var cert = await _platformCertificateManager.GetCertificateAsync(_client, options, headers.Serial);
             var signSourceData = WeChatPayUtility.BuildSignatureSourceData(headers.Timestamp, headers.Nonce, body);
             var signCheck = SHA256WithRSA.Verify(cert.Certificate.GetRSAPublicKey(), signSourceData, headers.Signature);
             if (!signCheck)

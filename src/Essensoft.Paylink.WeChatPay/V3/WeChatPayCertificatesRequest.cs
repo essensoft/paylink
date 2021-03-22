@@ -1,7 +1,6 @@
 ﻿using System;
-using Essensoft.Paylink.WeChatPay.V3.Response;
 
-namespace Essensoft.Paylink.WeChatPay.V3.Request
+namespace Essensoft.Paylink.WeChatPay.V3
 {
     /// <summary>
     /// 获取平台证书列表

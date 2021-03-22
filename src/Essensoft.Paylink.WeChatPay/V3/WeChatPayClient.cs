@@ -150,6 +150,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
 
             var cert = await _platformCertificateManager.GetCertificateAsync(this, options);
 
+            // 加密敏感信息
             EncryptPrivacyProperty(request.GetBodyModel(), cert.Certificate.GetRSAPublicKey());
 
             var client = _httpClientFactory.CreateClient(Name);
@@ -178,7 +179,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
                 throw new WeChatPayException($"sign check fail: {nameof(headers.Signature)} is empty!");
             }
 
-            var cert = await _platformCertificateManager.LoadCertificateAsync(this, options, headers.Serial);
+            var cert = await _platformCertificateManager.GetCertificateAsync(this, options, headers.Serial);
             var signSourceData = WeChatPayUtility.BuildSignatureSourceData(headers.Timestamp, headers.Nonce, body);
             var signCheck = SHA256WithRSA.Verify(cert.Certificate.GetRSAPublicKey(), signSourceData, headers.Signature);
             if (!signCheck)
