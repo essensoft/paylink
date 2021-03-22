@@ -9,6 +9,11 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
     public class WeChatPayProfitSharingRemoveReceiverRequest : IWeChatPayRequest<WeChatPayProfitSharingRemoveReceiverResponse>
     {
         /// <summary>
+        /// 品牌主商户号
+        /// </summary>
+        public string BrandMchId { get; set; }
+
+        /// <summary>
         /// 分账接收方
         /// </summary>
         public string Receiver { get; set; }
@@ -32,6 +37,7 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
         {
             var parameters = new WeChatPayDictionary
             {
+                { "brand_mch_id", BrandMchId },
                 { "receiver", Receiver },
             };
             return parameters;
@@ -57,7 +63,11 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
             sortedTxtParams.Add(WeChatPayConsts.appid, options.AppId);
             sortedTxtParams.Add(WeChatPayConsts.sub_appid, options.SubAppId);
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
-            sortedTxtParams.Add(WeChatPayConsts.sub_mch_id, options.SubMchId);
+
+            if (string.IsNullOrEmpty(sortedTxtParams.GetValue(WeChatPayConsts.brand_mch_id)))
+            {
+                sortedTxtParams.Add(WeChatPayConsts.sub_mch_id, options.SubMchId);
+            }
 
             sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.APIKey, signType));
         }

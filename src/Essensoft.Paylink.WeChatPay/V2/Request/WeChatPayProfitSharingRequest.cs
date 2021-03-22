@@ -9,6 +9,11 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
     public class WeChatPayProfitSharingRequest : IWeChatPayCertRequest<WeChatPayProfitSharingResponse>
     {
         /// <summary>
+        /// 品牌主商户号
+        /// </summary>
+        public string BrandMchId { get; set; }
+
+        /// <summary>
         /// 微信订单号
         /// </summary>
         public string TransactionId { get; set; }
@@ -22,11 +27,6 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
         /// 分账接收方列表
         /// </summary>
         public string Receivers { get; set; }
-
-        /// <summary>
-        /// 品牌主商户号
-        /// </summary>
-        public string BrandMchId { get; set; }
 
         #region IWeChatPayCertRequest Members
 
@@ -47,10 +47,10 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
         {
             var parameters = new WeChatPayDictionary
             {
+                { "brand_mch_id", BrandMchId },
                 { "transaction_id", TransactionId },
                 { "out_order_no", OutOrderNo },
                 { "receivers", Receivers },
-                { "brand_mch_id", BrandMchId },
             };
             return parameters;
         }
