@@ -481,7 +481,7 @@ namespace Essensoft.Paylink.Alipay
 
             if (!isError || isError && !string.IsNullOrEmpty(certItem.Sign))
             {
-                var currentAlipayPublicKey = await _publicKeyManager.LoadAlipayPublicKeyAsync(this, options, certItem.CertSN);
+                var currentAlipayPublicKey = await _publicKeyManager.GetAlipayPublicKeyAsync(this, options, certItem.CertSN);
                 var rsaCheckContent = AlipaySignature.RSACheckContent(certItem.SignSourceData, certItem.Sign, currentAlipayPublicKey, options.SignType);
                 if (!rsaCheckContent)
                 {

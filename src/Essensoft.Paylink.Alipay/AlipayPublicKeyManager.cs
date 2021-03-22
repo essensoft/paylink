@@ -8,7 +8,14 @@ namespace Essensoft.Paylink.Alipay
     {
         private readonly ConcurrentDictionary<string, string> _publicKeys = new();
 
-        public async Task<string> LoadAlipayPublicKeyAsync(IAlipayClient client, AlipayOptions options, string certSN)
+        /// <summary>
+        /// 获取支付宝公钥证书
+        /// </summary>
+        /// <param name="client">Alipay 客户端</param>
+        /// <param name="options">配置选项</param>
+        /// <param name="certSN">证书序列号</param>
+        /// <returns>支付宝公钥证书</returns>
+        public async Task<string> GetAlipayPublicKeyAsync(IAlipayClient client, AlipayOptions options, string certSN)
         {
             // 为空时添加本地支付宝公钥证书密钥
             if (_publicKeys.IsEmpty)
