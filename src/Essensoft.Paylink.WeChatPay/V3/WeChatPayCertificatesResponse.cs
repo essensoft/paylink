@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Text.Json.Serialization;
-using Essensoft.Paylink.WeChatPay.V3.Domain;
 
-namespace Essensoft.Paylink.WeChatPay.V3.Response
+namespace Essensoft.Paylink.WeChatPay.V3
 {
     /// <summary>
     /// 获取平台证书列表 - 返回参数
