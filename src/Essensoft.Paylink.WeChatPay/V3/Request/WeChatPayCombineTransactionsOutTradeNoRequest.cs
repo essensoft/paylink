@@ -4,11 +4,11 @@ using Essensoft.Paylink.WeChatPay.V3.Response;
 namespace Essensoft.Paylink.WeChatPay.V3.Request
 {
     /// <summary>
-    /// 基础支付 - 合单支付 - 合单查询订单
+    /// 基础支付、基础支付(服务商) - 合单支付 - 合单查询订单
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_11.shtml">合单支付 - 合单查询订单API</a> - 最新更新时间：2020.03.27</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/combine/chapter3_3.shtml">合单查询订单API</a> - 最新更新时间：2020.03.27</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_11.shtml">基础支付 - 合单支付 -  合单查询订单API</a> - 最新更新时间：2020.03.27</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter5_1_11.shtml">基础支付(服务商) - 合单支付 -  合单查询订单API</a> - 最新更新时间：2020.03.27</para>
     /// </remarks>
     public class WeChatPayCombineTransactionsOutTradeNoRequest : IWeChatPayGetRequest<WeChatPayCombineTransactionsOutTradeNoResponse>
     {

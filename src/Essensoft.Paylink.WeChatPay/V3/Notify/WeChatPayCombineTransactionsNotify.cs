@@ -5,10 +5,11 @@ using Essensoft.Paylink.WeChatPay.V3.Domain;
 namespace Essensoft.Paylink.WeChatPay.V3.Notify
 {
     /// <summary>
-    /// 合单支付 - 支付通知
+    /// 基础支付、基础支付(服务商) - 合单支付 - 支付通知
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wxpay/pay/combine/chapter3_7.shtml">合单支付 - 支付通知API</a> - 最新更新时间：2019.09.10</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter5_1_13.shtml">基础支付 - 合单支付 - 支付通知API</a> - 最新更新时间：2019.09.10</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter5_1_13.shtml">基础支付(服务商) - 合单支付 - 支付通知API</a> - 最新更新时间：2019.09.10</para>
     /// </remarks>
     public class WeChatPayCombineTransactionsNotify : WeChatPayNotify
     {
