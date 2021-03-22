@@ -406,7 +406,7 @@ namespace WebApplicationSample.Controllers
         public async Task<IActionResult> BillDownload(WeChatPayBillDownloadViewModel viewModel)
         {
             var request = new WeChatPayBillDownloadRequest();
-            request.SetDownloadUrl(viewModel.DownloadUrl);
+            request.SetRequestUrl(viewModel.DownloadUrl);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
