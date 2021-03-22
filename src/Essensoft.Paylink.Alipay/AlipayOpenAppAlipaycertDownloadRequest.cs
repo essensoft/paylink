@@ -6,6 +6,8 @@ namespace Essensoft.Paylink.Alipay
     {
         public string BizContent { get; set; }
 
+        #region IAlipayRequest
+
         private bool needEncrypt = false;
         private string notifyUrl;
         private string returnUrl;
@@ -19,7 +21,6 @@ namespace Essensoft.Paylink.Alipay
         {
             this.needEncrypt = needEncrypt;
         }
-
 
         public bool GetNeedEncrypt()
         {
@@ -109,5 +110,7 @@ namespace Essensoft.Paylink.Alipay
         {
             this.bizModel = bizModel;
         }
+
+        #endregion
     }
 }
