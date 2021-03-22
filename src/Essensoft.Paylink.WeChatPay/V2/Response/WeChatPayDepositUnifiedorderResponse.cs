@@ -76,7 +76,7 @@ namespace Essensoft.Paylink.WeChatPay.V2.Response
         /// </summary>
         [XmlElement("err_code_des")]
         public string ErrCodeDes { get; set; }
- 
+
         /// <summary>
         /// 交易类型
         /// </summary>
