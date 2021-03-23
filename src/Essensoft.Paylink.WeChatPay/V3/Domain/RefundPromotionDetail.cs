@@ -56,7 +56,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// 优惠退款金额
         /// </summary>
         /// <remarks>
-        /// 优惠退款金额<=退款金额，退款金额-代金券或立减优惠退款金额为用户支付的现金，说明详见代金券或立减优惠，单位为分。
+        /// 优惠退款金额&#60;=退款金额，退款金额-代金券或立减优惠退款金额为用户支付的现金，说明详见代金券或立减优惠，单位为分。
         /// <para>示例值：100</para>
         /// </remarks>
         [JsonPropertyName("refund_amount")]

@@ -3,7 +3,7 @@ using Essensoft.Paylink.WeChatPay.V2.Response;
 
 namespace Essensoft.Paylink.WeChatPay.V2.Request
 {
-    // <summary>
+    /// <summary>
     /// 微信代扣 - H5签约 (服务商)
     /// </summary>
     public class WeChatPayPaPayPartnerH5EntrustWebRequest : IWeChatPayRequest<WeChatPayPaPayPartnerH5EntrustWebResponse>

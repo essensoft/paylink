@@ -51,7 +51,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// 应结退款金额
         /// </summary>
         /// <remarks>
-        /// 去掉非充值代金券退款金额后的退款金额，单位为分，退款金额=申请退款金额-非充值代金券退款金额，退款金额<=申请退款金额。
+        /// 去掉非充值代金券退款金额后的退款金额，单位为分，退款金额=申请退款金额-非充值代金券退款金额，退款金额&#60;=申请退款金额。
         /// <para>示例值：100</para>
         /// </remarks>
         [JsonPropertyName("settlement_refund")]
@@ -61,7 +61,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// 应结订单金额
         /// </summary>
         /// <remarks>
-        /// 应结订单金额=订单金额-免充值代金券金额，应结订单金额<=订单金额，单位为分。
+        /// 应结订单金额=订单金额-免充值代金券金额，应结订单金额&#60;=订单金额，单位为分。
         /// <para>示例值：100</para>
         /// </remarks>
         [JsonPropertyName("settlement_total")]
@@ -71,7 +71,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// 优惠退款金额
         /// </summary>
         /// <remarks>
-        /// 优惠退款金额<=退款金额，退款金额-代金券或立减优惠退款金额为现金，说明详见代金券或立减优惠，单位为分。
+        /// 优惠退款金额&#60;=退款金额，退款金额-代金券或立减优惠退款金额为现金，说明详见代金券或立减优惠，单位为分。
         /// <para>示例值：10</para>
         /// </remarks>
         [JsonPropertyName("discount_refund")]

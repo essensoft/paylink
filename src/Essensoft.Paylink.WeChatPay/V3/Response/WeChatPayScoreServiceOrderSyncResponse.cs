@@ -9,7 +9,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Response
     /// </summary>
     /// <remarks>
     /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_20.shtml">微信支付分 - 同步服务订单信息API</a> - 最新更新时间：2020.03.05</para>
-    /// </remarks
+    /// </remarks>
     public class WeChatPayScoreServiceOrderSyncResponse : WeChatPayResponse
     {
         /// <summary>
@@ -164,7 +164,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Response
         /// </summary>
         /// <remarks>
         /// 商户数据包可存放本订单所需信息，需要先urlencode后传入。 当商户数据包总长度超出256字符时，报错处理。
-        /// <para>示例值：Easdfowealsdkjfnlaksjdlfkwqoi&wl3l2sald</para>
+        /// <para>示例值：Easdfowealsdkjfnlaksjdlfkwqoi&#38;wl3l2sald</para>
         /// </remarks>
         [JsonPropertyName("attach")]
         public string Attach { get; set; }
