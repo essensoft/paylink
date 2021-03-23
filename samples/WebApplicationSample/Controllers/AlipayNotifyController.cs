@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Essensoft.Paylink.Alipay;
 using Essensoft.Paylink.Alipay.Notify;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace WebApplicationSample.Controllers
@@ -10,11 +10,13 @@ namespace WebApplicationSample.Controllers
     [Route("alipay/notify")]
     public class AlipayNotifyController : Controller
     {
+        private readonly ILogger<AlipayNotifyController> _logger;
         private readonly IAlipayNotifyClient _client;
         private readonly IOptions<AlipayOptions> _optionsAccessor;
 
-        public AlipayNotifyController(IAlipayNotifyClient client, IOptions<AlipayOptions> optionsAccessor)
+        public AlipayNotifyController(ILogger<AlipayNotifyController> logger, IAlipayNotifyClient client, IOptions<AlipayOptions> optionsAccessor)
         {
+            _logger = logger;
             _client = client;
             _optionsAccessor = optionsAccessor;
         }
@@ -98,7 +100,7 @@ namespace WebApplicationSample.Controllers
             }
             catch (AlipayException ex)
             {
-                Console.WriteLine("出现异常: " + ex.Message);
+                _logger.LogWarning("出现异常: " + ex.Message);
                 return AlipayNotifyResult.Failure;
             }
         }
@@ -116,9 +118,10 @@ namespace WebApplicationSample.Controllers
                 switch (notify.TradeStatus)
                 {
                     case AlipayTradeStatus.Wait: // 等待付款
+                        _logger.LogInformation("扫码支付异步通知-等待买家付款 => OutTradeNo: " + notify.OutTradeNo);
                         return AlipayNotifyResult.Success;
                     case AlipayTradeStatus.Success: // 支付成功
-                        Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
+                        _logger.LogInformation("扫码支付异步通知-交易支付成功 => OutTradeNo: " + notify.OutTradeNo);
                         return AlipayNotifyResult.Success;
                     default:
                         return AlipayNotifyResult.Failure;
@@ -126,7 +129,7 @@ namespace WebApplicationSample.Controllers
             }
             catch (AlipayException ex)
             {
-                Console.WriteLine("出现异常: " + ex.Message);
+                _logger.LogWarning("出现异常: " + ex.Message);
                 return AlipayNotifyResult.Failure;
             }
         }
@@ -143,8 +146,7 @@ namespace WebApplicationSample.Controllers
                 var notify = await _client.CertificateExecuteAsync<AlipayTradeAppPayNotify>(Request, _optionsAccessor.Value);
                 if (notify.TradeStatus == AlipayTradeStatus.Success)
                 {
-                    Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
-
+                    _logger.LogInformation("APP支付异步通知-交易支付成功 => OutTradeNo: " + notify.OutTradeNo);
                     return AlipayNotifyResult.Success;
                 }
 
@@ -152,7 +154,7 @@ namespace WebApplicationSample.Controllers
             }
             catch (AlipayException ex)
             {
-                Console.WriteLine("出现异常: " + ex.Message);
+                _logger.LogWarning("出现异常: " + ex.Message);
                 return AlipayNotifyResult.Failure;
             }
         }
@@ -169,8 +171,7 @@ namespace WebApplicationSample.Controllers
                 var notify = await _client.CertificateExecuteAsync<AlipayTradePagePayNotify>(Request, _optionsAccessor.Value);
                 if (notify.TradeStatus == AlipayTradeStatus.Success)
                 {
-                    Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
-
+                    _logger.LogInformation("电脑网站支付异步通知-交易支付成功 => OutTradeNo: " + notify.OutTradeNo);
                     return AlipayNotifyResult.Success;
                 }
 
@@ -178,7 +179,7 @@ namespace WebApplicationSample.Controllers
             }
             catch (AlipayException ex)
             {
-                Console.WriteLine("出现异常: " + ex.Message);
+                _logger.LogWarning("出现异常: " + ex.Message);
                 return AlipayNotifyResult.Failure;
             }
         }
@@ -195,8 +196,7 @@ namespace WebApplicationSample.Controllers
                 var notify = await _client.CertificateExecuteAsync<AlipayTradeWapPayNotify>(Request, _optionsAccessor.Value);
                 if (notify.TradeStatus == AlipayTradeStatus.Success)
                 {
-                    Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
-
+                    _logger.LogInformation("手机网站支付异步通知-交易支付成功 => OutTradeNo: " + notify.OutTradeNo);
                     return AlipayNotifyResult.Success;
                 }
 
@@ -204,7 +204,7 @@ namespace WebApplicationSample.Controllers
             }
             catch (AlipayException ex)
             {
-                Console.WriteLine("出现异常: " + ex.Message);
+                _logger.LogWarning("出现异常: " + ex.Message);
                 return AlipayNotifyResult.Failure;
             }
         }
@@ -219,9 +219,9 @@ namespace WebApplicationSample.Controllers
             try
             {
                 var notify = await _client.CertificateExecuteAsync<AlipayTradeCloseNotify>(Request, _optionsAccessor.Value);
-                if (notify.TradeStatus == AlipayTradeStatus.Wait)
+                if (notify.TradeStatus == AlipayTradeStatus.Closed)
                 {
-                    Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
+                    _logger.LogInformation("交易关闭异步通知 => OutTradeNo: " + notify.OutTradeNo);
 
                     return AlipayNotifyResult.Success;
                 }
@@ -230,7 +230,7 @@ namespace WebApplicationSample.Controllers
             }
             catch (AlipayException ex)
             {
-                Console.WriteLine("出现异常: " + ex.Message);
+                _logger.LogWarning("出现异常: " + ex.Message);
                 return AlipayNotifyResult.Failure;
             }
         }

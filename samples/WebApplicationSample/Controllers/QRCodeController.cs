@@ -1,6 +1,7 @@
 ﻿using System.Drawing;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using QRCoder;
 
 namespace WebApplicationSample.Controllers
@@ -9,6 +10,13 @@ namespace WebApplicationSample.Controllers
     [ApiController]
     public class QRCodeController : ControllerBase
     {
+        private readonly ILogger<QRCodeController> _logger;
+
+        public QRCodeController(ILogger<QRCodeController> logger)
+        {
+            _logger = logger;
+        }
+
         /// <summary>
         /// 生成二维码SVG
         /// </summary>

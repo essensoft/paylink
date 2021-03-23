@@ -4,6 +4,7 @@ using Essensoft.Paylink.Alipay;
 using Essensoft.Paylink.Alipay.Domain;
 using Essensoft.Paylink.Alipay.Request;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebApplicationSample.Models;
 
@@ -11,11 +12,13 @@ namespace WebApplicationSample.Controllers
 {
     public class AlipayController : Controller
     {
+        private readonly ILogger<AlipayController> _logger;
         private readonly IAlipayClient _client;
         private readonly IOptions<AlipayOptions> _optionsAccessor;
 
-        public AlipayController(IAlipayClient client, IOptions<AlipayOptions> optionsAccessor)
+        public AlipayController(ILogger<AlipayController> logger, IAlipayClient client, IOptions<AlipayOptions> optionsAccessor)
         {
+            _logger = logger;
             _client = client;
             _optionsAccessor = optionsAccessor;
         }
@@ -56,7 +59,11 @@ namespace WebApplicationSample.Controllers
             req.SetNotifyUrl(viewModel.NotifyUrl);
 
             var response = await _client.CertificateExecuteAsync(req, _optionsAccessor.Value);
-            ViewData["qrcode"] = response.QrCode;
+            if (!response.IsError)
+            {
+                ViewData["qrcode"] = response.QrCode;
+            }
+
             ViewData["response"] = response.Body;
             return View();
         }

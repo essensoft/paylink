@@ -6,6 +6,7 @@ using Essensoft.Paylink.WeChatPay.V3;
 using Essensoft.Paylink.WeChatPay.V3.Domain;
 using Essensoft.Paylink.WeChatPay.V3.Request;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebApplicationSample.Models;
 
@@ -13,11 +14,13 @@ namespace WebApplicationSample.Controllers
 {
     public class WeChatPayV3Controller : Controller
     {
+        private readonly ILogger<WeChatPayV3Controller> _logger;
         private readonly IWeChatPayClient _client;
         private readonly IOptions<WeChatPayOptions> _optionsAccessor;
 
-        public WeChatPayV3Controller(IWeChatPayClient client, IOptions<WeChatPayOptions> optionsAccessor)
+        public WeChatPayV3Controller(ILogger<WeChatPayV3Controller> logger, IWeChatPayClient client, IOptions<WeChatPayOptions> optionsAccessor)
         {
+            _logger = logger;
             _client = client;
             _optionsAccessor = optionsAccessor;
         }
@@ -163,9 +166,12 @@ namespace WebApplicationSample.Controllers
             request.SetBodyModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+            if (response.StatusCode == 200)
+            {
+                // response.CodeUrl 给前端生成二维码
+                ViewData["qrcode"] = response.CodeUrl;
+            }
 
-            // response.CodeUrl 给前端生成二维码
-            ViewData["qrcode"] = response.CodeUrl;
             ViewData["response"] = response.Body;
             return View();
         }

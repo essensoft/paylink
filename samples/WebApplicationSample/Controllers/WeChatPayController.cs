@@ -4,6 +4,7 @@ using Essensoft.Paylink.WeChatPay;
 using Essensoft.Paylink.WeChatPay.V2;
 using Essensoft.Paylink.WeChatPay.V2.Request;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using WebApplicationSample.Models;
 
@@ -11,11 +12,13 @@ namespace WebApplicationSample.Controllers
 {
     public class WeChatPayController : Controller
     {
+        private readonly ILogger<WeChatPayController> _logger;
         private readonly IWeChatPayClient _client;
         private readonly IOptions<WeChatPayOptions> _optionsAccessor;
 
-        public WeChatPayController(IWeChatPayClient client, IOptions<WeChatPayOptions> optionsAccessor)
+        public WeChatPayController(ILogger<WeChatPayController> logger, IWeChatPayClient client, IOptions<WeChatPayOptions> optionsAccessor)
         {
+            _logger = logger;
             _client = client;
             _optionsAccessor = optionsAccessor;
         }

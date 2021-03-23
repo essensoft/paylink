@@ -1,9 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Essensoft.Paylink.WeChatPay;
 using Essensoft.Paylink.WeChatPay.V2;
 using Essensoft.Paylink.WeChatPay.V2.Notify;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace WebApplicationSample.Controllers
@@ -11,11 +11,13 @@ namespace WebApplicationSample.Controllers
     [Route("wechatpay/notify")]
     public class WeChatPayNotifyController : Controller
     {
+        private readonly ILogger<WeChatPayNotifyController> _logger;
         private readonly IWeChatPayNotifyClient _client;
         private readonly IOptions<WeChatPayOptions> _optionsAccessor;
 
-        public WeChatPayNotifyController(IWeChatPayNotifyClient client, IOptions<WeChatPayOptions> optionsAccessor)
+        public WeChatPayNotifyController(ILogger<WeChatPayNotifyController> logger, IWeChatPayNotifyClient client, IOptions<WeChatPayOptions> optionsAccessor)
         {
+            _logger = logger;
             _client = client;
             _optionsAccessor = optionsAccessor;
         }
@@ -34,8 +36,7 @@ namespace WebApplicationSample.Controllers
                 {
                     if (notify.ResultCode == WeChatPayCode.Success)
                     {
-                        Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
-
+                        _logger.LogInformation("统一下单支付结果通知 => OutTradeNo: " + notify.OutTradeNo);
                         return WeChatPayNotifyResult.Success;
                     }
                 }
@@ -44,7 +45,7 @@ namespace WebApplicationSample.Controllers
             }
             catch (WeChatPayException ex)
             {
-                Console.WriteLine("出现异常: " + ex.Message);
+                _logger.LogWarning("出现异常: " + ex.Message);
                 return WeChatPayNotifyResult.Failure;
             }
         }
@@ -63,7 +64,7 @@ namespace WebApplicationSample.Controllers
                 {
                     if (notify.RefundStatus == WeChatPayRefundStatus.Success)
                     {
-                        Console.WriteLine("OutTradeNo: " + notify.OutTradeNo);
+                        _logger.LogInformation("退款结果通知 => OutTradeNo: " + notify.OutTradeNo);
                         return WeChatPayNotifyResult.Success;
                     }
                 }
@@ -72,7 +73,7 @@ namespace WebApplicationSample.Controllers
             }
             catch (WeChatPayException ex)
             {
-                Console.WriteLine("出现异常: " + ex.Message);
+                _logger.LogWarning("出现异常: " + ex.Message);
                 return WeChatPayNotifyResult.Failure;
             }
         }
