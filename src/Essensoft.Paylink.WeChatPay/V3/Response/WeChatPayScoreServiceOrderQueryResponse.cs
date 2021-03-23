@@ -6,6 +6,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Response
 {
     /// <summary>
     /// 微信支付分 - 查询支付分订单 - 返回参数
+    /// </summary>
     /// <remarks>
     /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_15.shtml">微信支付分 - 查询支付分订单API</a> - 最新更新时间：2020.05.25</para>
     /// </remarks>
@@ -151,7 +152,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Response
         /// <remarks>
         /// 商户数据包可存放本订单所需信息，需要先urlencode后传入。
         /// 当商户数据包总长度超出256字符时，报错处理。商户接收回包是根据场景，决定是否需要做安全过滤(XSS/CSRF)。
-        /// <para>示例值：Easdfowealsdkjfnlaksjdlfkwqoi&wl3l2sald</para>
+        /// <para>示例值：Easdfowealsdkjfnlaksjdlfkwqoi&#38;wl3l2sald</para>
         /// </remarks>
         [JsonPropertyName("attach")]
         public string Attach { get; set; }

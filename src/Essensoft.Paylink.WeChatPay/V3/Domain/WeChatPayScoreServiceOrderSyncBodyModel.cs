@@ -7,7 +7,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
     /// </summary>
     /// <remarks>
     /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter6_1_20.shtml">微信支付分 - 同步服务订单信息API</a> - 最新更新时间：2020.03.05</para>
-    /// </remarks
+    /// </remarks>
     public class WeChatPayScoreServiceOrderSyncBodyModel : WeChatPayObject
     {
         /// <summary>
