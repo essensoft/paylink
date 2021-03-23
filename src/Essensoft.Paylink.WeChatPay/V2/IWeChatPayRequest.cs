@@ -42,7 +42,6 @@ namespace Essensoft.Paylink.WeChatPay.V2
         /// 参数处理器
         /// </summary>
         /// <param name="sortedTxtParams">排序文本参数</param>
-        /// <param name="signType">签名类型</param>
         /// <param name="options">配置选项</param>
         void PrimaryHandler(WeChatPayDictionary sortedTxtParams, WeChatPayOptions options);
 
