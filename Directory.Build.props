@@ -5,7 +5,7 @@
 		<Authors>Essensoft</Authors>
 		<Product>Paylink</Product>
 		<Version>4.0.2</Version>
-		<NoWarn>$(NoWarn);CS1570;CS1591</NoWarn>
+		<NoWarn>$(NoWarn);CS1591</NoWarn>
 		<PackageIcon>Paylink.png</PackageIcon>
 		<PackageProjectUrl>https://github.com/essensoft/paylink</PackageProjectUrl>
 		<RepositoryType>git</RepositoryType>
