@@ -16,7 +16,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Response
         /// </summary>
         /// <remarks>
         /// 二维码链接
-        /// <para>示例值：weixin://pay.weixin.qq.com/bizpayurl/up?pr=NwY5Mz9&#38;groupid=00</para>
+        /// <para>示例值：weixin://pay.weixin.qq.com/bizpayurl/up?pr=NwY5Mz9&amp;groupid=00</para>
         /// </remarks>
         [JsonPropertyName("code_url")]
         public string CodeUrl { get; set; }

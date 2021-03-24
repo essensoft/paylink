@@ -16,7 +16,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Response
         /// <remarks>
         /// 此URL用于生成支付二维码，然后提供给用户扫码支付。
         /// 注意：code_url并非固定值，使用时按照URL格式转成二维码即可。
-        /// <para>示例值：weixin://wxpay/bizpayurl/up?pr=NwY5Mz9&#38;groupid=00</para>
+        /// <para>示例值：weixin://wxpay/bizpayurl/up?pr=NwY5Mz9&amp;groupid=00</para>
         /// </remarks>
         [JsonPropertyName("code_url")]
         public string CodeUrl { get; set; }

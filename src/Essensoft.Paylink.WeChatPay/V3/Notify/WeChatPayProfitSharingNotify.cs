@@ -7,7 +7,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Notify
     /// 普通直连分账 - 分账动账通知
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/api/allocation.php?chapter=27_9&#38;index=9">普通直连分账 - 支付通知API</a></para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/api/allocation.php?chapter=27_9&amp;index=9">普通直连分账 - 支付通知API</a></para>
     /// </remarks>
     public class WeChatPayProfitSharingNotify : WeChatPayNotify
     {
