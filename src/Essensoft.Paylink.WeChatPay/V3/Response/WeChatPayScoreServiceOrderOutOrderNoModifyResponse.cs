@@ -155,7 +155,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Response
         /// <remarks>
         /// 商户数据包可存放本订单所需信息，需要先urlencode后传入。
         /// 当商户数据包总长度超出256字符时，报错处理。商户接收回包是根据场景，决定是否需要做安全过滤(XSS/CSRF)。
-        /// <para>示例值：Easdfowealsdkjfnlaksjdlfkwqoi&#38;wl3l2sald</para>
+        /// <para>示例值：Easdfowealsdkjfnlaksjdlfkwqoi&amp;wl3l2sald</para>
         /// </remarks>
         [JsonPropertyName("attach")]
         public string Attach { get; set; }

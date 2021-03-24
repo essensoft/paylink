@@ -51,7 +51,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Response
         /// <remarks>
         /// 1、超级管理员用微信扫码，关注“微信支付商家助手”公众号后，公众号将自动发送签约消息；超管需点击消息，根据指引完成核对联系信息、账户验证、签约等操作。
         /// 2、超管完成核对联系信息，后续申请单进度可通过公众号自动通知超级管理员。
-        /// <para>示例值：https://pay.weixin.qq.com/public/apply4ec_sign/s?applymentId=2000002126198476&#38;sign=b207b673049a32c858f3aabd7d27c7ec</para>
+        /// <para>示例值：https://pay.weixin.qq.com/public/apply4ec_sign/s?applymentId=2000002126198476&amp;sign=b207b673049a32c858f3aabd7d27c7ec</para>
         /// </remarks>
         [JsonPropertyName("sign_url")]
         public string SignUrl { get; set; }
