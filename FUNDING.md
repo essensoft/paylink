@@ -6,7 +6,7 @@
 
 ---
 
-![QrCode](qrcode.png)
+![Pay](qrcode-pay.png)
 
 ---
 
