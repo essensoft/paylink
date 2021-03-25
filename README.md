@@ -5,7 +5,7 @@
 一套基于 .NET Core 开发的支付SDK集，它极大简化了API调用及通知的处理流程。
 
 [![Build status](https://img.shields.io/github/workflow/status/essensoft/paylink/.NET/dev?style=flat-square)](https://github.com/essensoft/paylink/actions?query=branch%3Adev)
-[![MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/essensoft/paylink/blob/main/LICENSE.md)
+[![MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE.md)
 
 </div>
 
@@ -19,6 +19,21 @@ Essensoft.Paylink.Security | [![NuGet](https://img.shields.io/nuget/v/Essensoft.
 Essensoft.AspNetCore.Payment.Alipay | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Alipay?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Alipay) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.AspNetCore.Payment.Alipay?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Alipay)
 Essensoft.AspNetCore.Payment.WeChatPay | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.WeChatPay?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.WeChatPay) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.AspNetCore.Payment.WeChatPay?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.WeChatPay)
 Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Security?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Security) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.AspNetCore.Payment.Security?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Security)
+
+## 开发环境
+
+* Windows 10
+* [Visual Studio 2019 16.9](https://visualstudio.microsoft.com)
+* [.NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
+
+## 运行环境
+
+- [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet/3.1)
+- [.NET 5](https://dotnet.microsoft.com/download/dotnet/5.0)
+
+## 使用方式
+
+* [示例项目](samples/WebApplicationSample)
 
 ## 捐赠
 
@@ -70,20 +85,10 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
     - 商户进件（服务商）
     - 基础支付（服务商）
 
-## 开发环境
-
-* Windows 10
-* [Visual Studio 2019 16.9](https://visualstudio.microsoft.com)
-* [.NET 5.0](https://dotnet.microsoft.com)
-
-## 使用方式
-
-* [示例项目](samples/WebApplicationSample)
-
 ## 致谢
 
-[Varorbc](https://github.com/Varorbc)
-[Alipay](https://github.com/alipay)
+- [Alipay](https://github.com/alipay)
+- [Varorbc](https://github.com/Varorbc)
 
 ## 项目地址
 
@@ -92,4 +97,4 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
 
 ## 许可协议
 
-[![MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](https://github.com/essensoft/paylink/blob/main/LICENSE.md)
+[![MIT](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE.md)
