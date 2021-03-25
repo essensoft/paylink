@@ -25,7 +25,10 @@ Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v
     - [Paylink 交流③群: 755039581](https://shang.qq.com/wpa/qunwpa?idkey=ef1dcf99efe9fe2cbb596ec743daa748f9296c1206bd19c64090ffe35a5e0ff9)
 
 * 钉钉群
-    - ![Dingtalk](qrcode-dingtalk.png)
+    <details>
+        <summary>显示二维码</summary>
+        <img src="https://cdn.jsdelivr.net/gh/essensoft/paylink@main/qrcode-dingtalk.png" width="300">
+    </details>
 
 ## 支持渠道
 
