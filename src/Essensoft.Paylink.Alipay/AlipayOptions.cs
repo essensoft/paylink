@@ -22,9 +22,11 @@ namespace Essensoft.Paylink.Alipay
 
         /// <summary>
         /// RSA 支付宝公钥
-        /// “公钥证书”方式时，留空
-        /// “普通公钥”方式时，必填
         /// </summary>
+        /// <remarks>
+        /// “公钥证书”方式时, 留空
+        /// “普通公钥”方式时, 必填
+        /// </remarks>
         public string AlipayPublicKey { get; set; }
 
         /// <summary>
@@ -34,38 +36,50 @@ namespace Essensoft.Paylink.Alipay
 
         /// <summary>
         /// 服务网关地址
-        /// 默认为："https://openapi.alipay.com/gateway.do"
         /// </summary>
+        /// <remarks>
+        /// 默认为正式环境："https://openapi.alipay.com/gateway.do"
+        /// </remarks>
         public string ServerUrl { get; set; } = "https://openapi.alipay.com/gateway.do";
 
         /// <summary>
         /// 数据格式
-        /// 默认为："json"
         /// </summary>
+        /// <remarks>
+        /// 默认为："json"
+        /// </remarks>
         public string Format { get; } = "json";
 
         /// <summary>
         /// 接口版本
-        /// 默认为："1.0"
         /// </summary>
+        /// <remarks>
+        /// 默认为："1.0"
+        /// </remarks>
         public string Version { get; set; } = "1.0";
 
         /// <summary>
         /// 签名方式
-        /// 默认为："RSA2"
         /// </summary>
+        /// <remarks>
+        /// 默认为："RSA2"
+        /// </remarks>
         public string SignType { get; set; } = "RSA2";
 
         /// <summary>
         /// 编码格式
-        /// 默认为："utf-8"
         /// </summary>
+        /// <remarks>
+        /// 默认为："utf-8"
+        /// </remarks>
         public string Charset { get; } = "utf-8";
 
         /// <summary>
         /// 加密方式
-        /// 默认为："AES"
         /// </summary>
+        /// <remarks>
+        /// 默认为："AES"
+        /// </remarks>
         public string EncyptType { get; } = "AES";
 
         /// <summary>
@@ -75,10 +89,12 @@ namespace Essensoft.Paylink.Alipay
 
         /// <summary>
         /// 应用公钥证书
-        /// 可为 证书文件路径 / 证书文件的文本内容 / 证书文件的Base64编码
+        /// </summary>
+        /// <remarks>
+        /// 可为 证书文件路径 / 证书文件的文本内容 / 证书文件的Base64编码。
         /// “公钥证书”方式时，必填
         /// “普通公钥”方式时，留空
-        /// </summary>
+        /// </remarks>
         public string AppPublicCert
         {
             get => appPublicCert;
@@ -95,10 +111,12 @@ namespace Essensoft.Paylink.Alipay
 
         /// <summary>
         /// 支付宝公钥证书
-        /// 可为 证书文件路径 / 证书文件的文本内容 / 证书文件的Base64编码
+        /// </summary>
+        /// <remarks>
+        /// 可为 证书文件路径 / 证书文件的文本内容 / 证书文件的Base64编码。
         /// “公钥证书”方式时，必填
         /// “普通公钥”方式时，留空
-        /// </summary>
+        /// </remarks>
         public string AlipayPublicCert
         {
             get => alipayPublicCert;
@@ -116,10 +134,12 @@ namespace Essensoft.Paylink.Alipay
 
         /// <summary>
         /// 支付宝根证书
-        /// 可为 证书文件路径 / 证书文件的文本内容 / 证书文件的Base64编码
+        /// </summary>
+        /// <remarks>
+        /// 可为 证书文件路径 / 证书文件的文本内容 / 证书文件的Base64编码。
         /// “公钥证书”方式时，必填
         /// “普通公钥”方式时，留空
-        /// </summary>
+        /// </remarks>
         public string AlipayRootCert
         {
             get => alipayRootCert;

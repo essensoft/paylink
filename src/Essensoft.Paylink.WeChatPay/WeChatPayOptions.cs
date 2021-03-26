@@ -15,37 +15,50 @@ namespace Essensoft.Paylink.WeChatPay
 
         /// <summary>
         /// 应用号
-        /// 如：公众平台AppId/开放平台AppId/小程序AppId/企业微信CorpId等
         /// </summary>
+        /// <remarks>
+        /// 公众号、移动应用、小程序AppId、企业微信CorpId。
+        /// </remarks>
         public string AppId { get; set; }
 
         /// <summary>
         /// 应用密钥
-        /// 如：目前仅调用"企业红包API"时，使用企业微信的AppSecret。
         /// </summary>
+        /// <remarks>
+        /// 企业微信AppSecret，目前仅调用"企业红包API"时使用。
+        /// </remarks>
         public string AppSecret { get; set; }
 
         /// <summary>
         /// 商户号
         /// </summary>
+        /// <remarks>
+        /// 商户号、服务商户号
+        /// </remarks>
         public string MchId { get; set; }
 
         /// <summary>
         /// 子商户应用号
-        /// 仅服务商使用
         /// </summary>
+        /// <remarks>
+        /// 目前仅调用服务商API时使用，子商户的公众号、移动应用AppId。
+        /// </remarks>
         public string SubAppId { get; set; }
 
         /// <summary>
         /// 子商户号
-        /// 仅服务商使用
         /// </summary>
+        /// <remarks>
+        /// 目前仅调用服务商API时使用，子商户的商户号。
+        /// </remarks>
         public string SubMchId { get; set; }
 
         /// <summary>
-        /// API证书(.p12)
-        /// 可为 证书文件路径 / 证书文件的Base64编码
+        /// API证书(.p12格式)
         /// </summary>
+        /// <remarks>
+        /// 可为 p.12证书文件路径、p.12证书文件的Base64编码
+        /// </remarks>
         public string Certificate
         {
             get => certificate;
@@ -61,8 +74,10 @@ namespace Essensoft.Paylink.WeChatPay
 
         /// <summary>
         /// API证书密码
-        /// 默认为商户号
         /// </summary>
+        /// <remarks>
+        /// 默认为商户号
+        /// </remarks>
         public string CertificatePassword
         {
             get => string.IsNullOrEmpty(certificatePassword) ? MchId : certificatePassword;
@@ -88,8 +103,10 @@ namespace Essensoft.Paylink.WeChatPay
 
         /// <summary>
         /// RSA公钥
-        /// 目前仅调用"企业付款到银行卡API"时使用，执行"获取RSA加密公钥API"即可获取。
         /// </summary>
+        /// <remarks>
+        /// 目前仅调用"企业付款到银行卡API"时使用，执行"获取RSA加密公钥API"即可获取。
+        /// </remarks>
         public string RsaPublicKey { get; set; }
 
         internal X509Certificate2 Certificate2;
