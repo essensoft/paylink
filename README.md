@@ -11,11 +11,20 @@
 
 ## NuGet 包
 
+Package  | NuGet | Downloads | TargetFrameworks
+-------- | :---- | :-------- | ---------------
+Essensoft.Paylink.Alipay | [![NuGet](https://img.shields.io/nuget/v/Essensoft.Paylink.Alipay?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.Alipay) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.Paylink.Alipay?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.Alipay)  | ![netstandard2.1][standard21Y] ![netcoreapp3.1][core31Y] ![net5.0][net50Y]
+Essensoft.Paylink.WeChatPay | [![NuGet](https://img.shields.io/nuget/v/Essensoft.Paylink.WeChatPay?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.WeChatPay) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.Paylink.WeChatPay?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.WeChatPay)  | ![netstandard2.1][standard21Y] ![netcoreapp3.1][core31Y] ![net5.0][net50Y]
+Essensoft.Paylink.Security | [![NuGet](https://img.shields.io/nuget/v/Essensoft.Paylink.Security?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.Security) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.Paylink.Security?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.Security) | ![netstandard2.1][standard21Y] ![net5.0][net50Y]
+
+[standard21Y]: https://img.shields.io/badge/standard2.1-Y-brightgreen.svg?style=flat-square
+[core31Y]: https://img.shields.io/badge/netcoreapp3.1-Y-brightgreen.svg?style=flat-square
+[net50Y]: https://img.shields.io/badge/net5.0-Y-brightgreen.svg?style=flat-square
+
+## 旧版本 NuGet 包
+
 Package  | NuGet | Downloads
 -------- | :---- | :-------- 
-Essensoft.Paylink.Alipay | [![NuGet](https://img.shields.io/nuget/v/Essensoft.Paylink.Alipay?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.Alipay) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.Paylink.Alipay?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.Alipay)
-Essensoft.Paylink.WeChatPay | [![NuGet](https://img.shields.io/nuget/v/Essensoft.Paylink.WeChatPay?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.WeChatPay) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.Paylink.WeChatPay?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.WeChatPay)
-Essensoft.Paylink.Security | [![NuGet](https://img.shields.io/nuget/v/Essensoft.Paylink.Security?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.Security) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.Paylink.Security?style=flat-square)](https://www.nuget.org/packages/Essensoft.Paylink.Security)
 Essensoft.AspNetCore.Payment.Alipay | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Alipay?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Alipay) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.AspNetCore.Payment.Alipay?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Alipay)
 Essensoft.AspNetCore.Payment.WeChatPay | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.WeChatPay?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.WeChatPay) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.AspNetCore.Payment.WeChatPay?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.WeChatPay)
 Essensoft.AspNetCore.Payment.Security | [![NuGet](https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Security?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Security) | [![Downloads](https://img.shields.io/nuget/dt/Essensoft.AspNetCore.Payment.Security?style=flat-square)](https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Security)
