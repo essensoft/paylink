@@ -4,7 +4,7 @@
 
 一套基于 .NET Core 开发的支付SDK集，它极大简化了API调用及通知的处理流程。
 
-[![Build status](https://img.shields.io/github/workflow/status/essensoft/paylink/.NET/dev.svg?style=flat-square)](https://github.com/essensoft/paylink/actions?query=branch%3Adev)
+[![Build status](https://img.shields.io/github/workflow/status/essensoft/paylink/build/main.svg?style=flat-square)](https://github.com/essensoft/paylink/actions/workflows/build.yml?query=branch%3Amain)
 [![MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square)](LICENSE.md)
 
 </div>
