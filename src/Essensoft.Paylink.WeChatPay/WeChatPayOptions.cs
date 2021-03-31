@@ -57,7 +57,7 @@ namespace Essensoft.Paylink.WeChatPay
         /// API证书(.p12格式)
         /// </summary>
         /// <remarks>
-        /// 可为 p.12证书文件路径、p.12证书文件的Base64编码
+        /// 可为 .p12证书文件路径、.p12证书文件的Base64编码
         /// </remarks>
         public string Certificate
         {
