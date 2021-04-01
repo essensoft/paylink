@@ -25,6 +25,9 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         [JsonPropertyName("issue")]
         public string Issue { get; set; }
 
+        /// <summary>
+        /// 错误定位
+        /// </summary>
         [JsonPropertyName("location")]
         public string Location { get; set; }
     }
