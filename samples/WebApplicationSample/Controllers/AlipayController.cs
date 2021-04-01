@@ -128,7 +128,9 @@ namespace WebApplicationSample.Controllers
             req.SetNotifyUrl(viewModel.NotifyUrl);
 
             var response = await _client.SdkExecuteAsync(req, _optionsAccessor.Value);
-            //将response.Body给 ios/android端 由其去调起支付宝APP(https://docs.open.alipay.com/204/105296/ https://docs.open.alipay.com/204/105295/)
+            // 将response.Body给 ios、android端，由其去完成调起支付宝APP。
+            // 客户端 Android 集成流程: https://opendocs.alipay.com/open/204/105296/
+            // 客户端 iOS 集成流程: https://opendocs.alipay.com/open/204/105295/
             ViewData["response"] = response.Body;
             return View();
         }
