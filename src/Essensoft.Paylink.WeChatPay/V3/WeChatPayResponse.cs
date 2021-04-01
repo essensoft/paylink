@@ -27,15 +27,15 @@ namespace Essensoft.Paylink.WeChatPay.V3
         public string Code { get; set; }
 
         /// <summary>
-        /// 错误详情
-        /// </summary>
-        [JsonPropertyName("detail")]
-        public ErrorDetail Detail { get; set; }
-
-        /// <summary>
         /// 错误信息
         /// </summary>
         [JsonPropertyName("message")]
         public string Message { get; set; }
+
+        /// <summary>
+        /// 错误详情
+        /// </summary>
+        [JsonPropertyName("detail")]
+        public ErrorDetail Detail { get; set; }
     }
 }
