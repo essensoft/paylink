@@ -12,7 +12,6 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<AlipayPublicKeyManager>();
             services.AddSingleton<IAlipayClient, AlipayClient>();
             services.AddSingleton<IAlipayMobilePublicMultiMediaClient, AlipayMobilePublicMultiMediaClient>();
-            services.AddSingleton<IAlipayNotifyClient, AlipayNotifyClient>();
         }
     }
 }
