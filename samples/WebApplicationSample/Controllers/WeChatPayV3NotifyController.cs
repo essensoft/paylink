@@ -12,10 +12,10 @@ namespace WebApplicationSample.Controllers
     public class WeChatPayV3NotifyController : Controller
     {
         private readonly ILogger<WeChatPayV3NotifyController> _logger;
-        private readonly IWeChatPayNotifyClient _client;
+        private readonly IWeChatPayClient _client;
         private readonly IOptions<WeChatPayOptions> _optionsAccessor;
 
-        public WeChatPayV3NotifyController(ILogger<WeChatPayV3NotifyController> logger, IWeChatPayNotifyClient client, IOptions<WeChatPayOptions> optionsAccessor)
+        public WeChatPayV3NotifyController(ILogger<WeChatPayV3NotifyController> logger, IWeChatPayClient client, IOptions<WeChatPayOptions> optionsAccessor)
         {
             _logger = logger;
             _client = client;

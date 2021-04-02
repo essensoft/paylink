@@ -11,10 +11,10 @@ namespace WebApplicationSample.Controllers
     public class AlipayNotifyController : Controller
     {
         private readonly ILogger<AlipayNotifyController> _logger;
-        private readonly IAlipayNotifyClient _client;
+        private readonly IAlipayClient _client;
         private readonly IOptions<AlipayOptions> _optionsAccessor;
 
-        public AlipayNotifyController(ILogger<AlipayNotifyController> logger, IAlipayNotifyClient client, IOptions<AlipayOptions> optionsAccessor)
+        public AlipayNotifyController(ILogger<AlipayNotifyController> logger, IAlipayClient client, IOptions<AlipayOptions> optionsAccessor)
         {
             _logger = logger;
             _client = client;
