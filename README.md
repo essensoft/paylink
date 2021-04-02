@@ -77,7 +77,7 @@ Package  | NuGet | Downloads
 
 ---
 
-![Pay](qrcode-pay.png)
+<img src="https://cdn.jsdelivr.net/gh/essensoft/paylink@main/qrcode-pay.png" width="600">
 
 ## 社区互助
 
