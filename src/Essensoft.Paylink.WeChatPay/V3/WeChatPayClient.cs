@@ -1,10 +1,7 @@
 ﻿using System;
-using System.IO;
-using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
 using Essensoft.Paylink.Security;
 using Essensoft.Paylink.WeChatPay.V3.Extensions;
@@ -93,7 +90,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
 
             if (request.GetNeedCheckSign())
             {
-                await CheckSignAsync(headers, body, options);
+                await CheckResponseSignAsync(headers, body, options);
             }
 
             return response;
@@ -125,7 +122,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
             var parser = new WeChatPayResponseJsonParser<T>();
             var response = parser.Parse(body, statusCode);
 
-            await CheckSignAsync(headers, body, options);
+            await CheckResponseSignAsync(headers, body, options);
 
             return response;
         }
@@ -161,88 +158,16 @@ namespace Essensoft.Paylink.WeChatPay.V3
             var parser = new WeChatPayResponseJsonParser<T>();
             var response = parser.Parse(body, statusCode);
 
-            await CheckSignAsync(headers, body, options);
+            await CheckResponseSignAsync(headers, body, options);
 
             return response;
         }
 
         #endregion
 
-        #region IWeChatPayClient Members
+        #region Check Response Method
 
-#if NETCOREAPP3_1 || NET5_0
-        public async Task<T> ExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, WeChatPayOptions options) where T : WeChatPayNotify
-        {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
-            var headers = GetWeChatPayHeadersFromRequest(request);
-            using (var reader = new StreamReader(request.Body, Encoding.UTF8, true, 1024, true))
-            {
-                var body = await reader.ReadToEndAsync();
-                return await ExecuteAsync<T>(headers, body, options);
-            }
-        }
-
-        private static WeChatPayHeaders GetWeChatPayHeadersFromRequest(Microsoft.AspNetCore.Http.HttpRequest request)
-        {
-            var headers = new WeChatPayHeaders();
-
-            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Serial, out var serialValues))
-            {
-                headers.Serial = serialValues.First();
-            }
-
-            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Timestamp, out var timestampValues))
-            {
-                headers.Timestamp = timestampValues.First();
-            }
-
-            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Nonce, out var nonceValues))
-            {
-                headers.Nonce = nonceValues.First();
-            }
-
-            if (request.Headers.TryGetValue(WeChatPayConsts.Wechatpay_Signature, out var signatureValues))
-            {
-                headers.Signature = signatureValues.First();
-            }
-
-            return headers;
-        }
-#endif
-
-        #endregion
-
-        #region IWeChatPayClient Members
-
-        public async Task<T> ExecuteAsync<T>(WeChatPayHeaders headers, string body, WeChatPayOptions options) where T : WeChatPayNotify
-        {
-            if (options == null)
-            {
-                throw new ArgumentNullException(nameof(options));
-            }
-
-            if (string.IsNullOrEmpty(options.APIv3Key))
-            {
-                throw new WeChatPayException($"options.{nameof(options.APIv3Key)} is Empty!");
-            }
-
-            await CheckSignAsync(headers, body, options);
-
-            var parser = new WeChatPayNotifyJsonParser<T>();
-            var notify = parser.Parse(body, options.APIv3Key);
-
-            return notify;
-        }
-
-        #endregion
-
-        #region Check Sign Method
-
-        private async Task CheckSignAsync(WeChatPayHeaders headers, string body, WeChatPayOptions options)
+        private async Task CheckResponseSignAsync(WeChatPayHeaders headers, string body, WeChatPayOptions options)
         {
             if (string.IsNullOrEmpty(headers.Serial))
             {
