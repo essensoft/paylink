@@ -38,7 +38,7 @@ Package  | NuGet | Downloads | TargetFrameworks
 
 ## Payment NuGet 包
 
-后续不再维护 Payment 包，请迁移至 Paylink。
+后续不再维护 Payment 包，请迁移至 Paylink 包。
  
 Package  | NuGet | Downloads
 -------- | :---- | :-------- 
@@ -90,7 +90,7 @@ Package  | NuGet | Downloads
 
 * 钉钉群
     - <details>
-        <summary>Paylink 交流群: 34090889(显示二维码)</summary>
+        <summary>Paylink 交流群: 34090889(点击显示二维码)</summary>
         <img src="https://cdn.jsdelivr.net/gh/essensoft/paylink@main/qrcode-dingtalk.png" width="300">
       </details>
 
