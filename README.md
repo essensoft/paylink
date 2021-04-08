@@ -1,3 +1,9 @@
+<p align="center">
+  <a href="https://github.com/essensoft/paylink">
+    <img width="96" src="https://cdn.jsdelivr.net/gh/essensoft/paylink@main/logo.png">
+  </a>
+</p>
+
 <h1 align="center">Paylink</h1>
 
 <div align="center">
