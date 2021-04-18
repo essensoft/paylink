@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Net.Http;
+using System.Reflection;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
@@ -198,47 +199,44 @@ namespace Essensoft.Paylink.WeChatPay.V3
         /// <remarks>
         /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/wechatpay/wechatpay4_3.shtml">敏感信息加解密</a></para>
         /// </remarks>
-        private static void EncryptPrivacyProperty(object obj, RSA rsa)
+        private static void EncryptPrivacyProperty(WeChatPayObject obj, RSA rsa)
         {
-            foreach (var prop in obj.GetType().GetProperties())
+            foreach (var propertyInfo in obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
-                if (prop.PropertyType == typeof(string)) // 为string类型
+                if (propertyInfo.PropertyType == typeof(string)) // 为string类型
                 {
-                    var val = prop.GetValue(obj, null); // 获取值
-                    if (val is null) // 跳过空值
+                    if (propertyInfo.IsDefined(typeof(WeChatPayPrivacyPropertyAttribute), false)) // 是否标记为敏感信息
                     {
-                        continue;
-                    }
-
-                    if (prop.IsDefined(typeof(WeChatPayPrivacyPropertyAttribute), false)) // 是否标记为敏感信息
-                    {
-                        if (val is string str)
+                        var value = propertyInfo.GetValue(obj, null); // 获取值
+                        if (value is string strValue)
                         {
-                            if (string.IsNullOrEmpty(str)) // 跳过空字符串
+                            if (string.IsNullOrEmpty(strValue))
                             {
-                                continue;
+                                continue; // 跳过空字符串
                             }
 
-                            // 加密并将加密串设置回对象。
-                            var encStr = OaepSHA1WithRSA.Encrypt(rsa, str);
-                            prop.SetValue(obj, encStr, null);
+                            // 加密并将加密串设置回对象
+                            var strEncrypted = OaepSHA1WithRSA.Encrypt(rsa, strValue);
+                            propertyInfo.SetValue(obj, strEncrypted, null);
                         }
                     }
                 }
-                else if (prop.PropertyType.IsClass)
+                else if (propertyInfo.PropertyType.IsClass)
                 {
-                    var subObj = prop.GetValue(obj, null); // 获取子对象
-                    if (subObj is null) // 跳过空值
+                    var value = propertyInfo.GetValue(obj, null); // 获取子对象
+                    if (value is null)
                     {
-                        continue;
+                        continue; // 跳过空值
                     }
 
-                    if (subObj is not WeChatPayObject) // 跳过除WeChatPayObject和基类为WeChatPayObject以外的一切类型。
+                    if (value is WeChatPayObject weChatPayObject)
                     {
-                        continue;
+                        EncryptPrivacyProperty(weChatPayObject, rsa); // 继续加密
                     }
-
-                    EncryptPrivacyProperty(subObj, rsa); // 继续加密子对象
+                    else
+                    {
+                        continue; // 跳过其他类型
+                    }
                 }
             }
         }
