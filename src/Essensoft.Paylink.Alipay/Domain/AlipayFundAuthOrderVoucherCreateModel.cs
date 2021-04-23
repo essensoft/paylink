@@ -14,7 +14,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string Amount { get; set; }
 
         /// <summary>
-        /// 商户可用该参数指定用户可使用的支付渠道，本期支持商户可支持三种支付渠道，余额宝（MONEY_FUND）、花呗（PCREDIT_PAY）以及芝麻信用（CREDITZHIMA）。商户可设置一种支付渠道，也可设置多种支付渠道。
+        /// 商户可用该参数指定禁止使用的支付渠道，本期支持两种禁用渠道：信用卡快捷（OPTIMIZED_MOTO）、信用卡卡通（BIGAMOUNT_CREDIT_CARTOON）。商户可设置一种支付渠道，也可设置多种支付渠道。与可用支付渠道不能同时传入
+        /// </summary>
+        [JsonPropertyName("disable_pay_channels")]
+        public string DisablePayChannels { get; set; }
+
+        /// <summary>
+        /// 商户可用该参数指定用户可使用的支付渠道，本期支持商户可支持三种支付渠道，余额宝（MONEY_FUND）、花呗（PCREDIT_PAY）以及芝麻信用（CREDITZHIMA）。商户可设置一种支付渠道，也可设置多种支付渠道。与禁用支付渠道不可同时传入
         /// </summary>
         [JsonPropertyName("enable_pay_channels")]
         public string EnablePayChannels { get; set; }

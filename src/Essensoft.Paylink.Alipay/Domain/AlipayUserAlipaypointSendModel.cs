@@ -20,7 +20,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string Memo { get; set; }
 
         /// <summary>
-        /// 接入方自己交易的唯一流水ID号，集分宝服务将依据该字段 + 用户账号(user_id或者user_account) 来进行幂等控制，需要慎重传递，否则可能会造成损失
+        /// 接入方自己交易的唯一流水ID号，不同交易请保证幂等号唯一性，集分宝服务将依据该字段来进行幂等控制，重试请求不要更换幂等号，需要慎重传递，否则可能会造成损失
         /// </summary>
         [JsonPropertyName("partner_biz_no")]
         public string PartnerBizNo { get; set; }

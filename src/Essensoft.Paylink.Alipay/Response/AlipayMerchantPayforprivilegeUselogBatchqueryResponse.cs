@@ -10,7 +10,7 @@ namespace Essensoft.Paylink.Alipay.Response
     public class AlipayMerchantPayforprivilegeUselogBatchqueryResponse : AlipayResponse
     {
         /// <summary>
-        /// 充享惠使用记录
+        /// 余额使用记录
         /// </summary>
         [JsonPropertyName("use_log_list")]
         public List<PayForPrivilegeRechargeCardUseLog> UseLogList { get; set; }

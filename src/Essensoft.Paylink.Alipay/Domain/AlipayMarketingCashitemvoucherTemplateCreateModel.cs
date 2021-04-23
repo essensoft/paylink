@@ -14,7 +14,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string Amount { get; set; }
 
         /// <summary>
-        /// 商家品牌名称。最多12个字符 商户自定义，在通用模板中展示在券LOGO下方。根据券使用场景的不同，该信息的展示位置可能会有不同。
+        /// 商家品牌名称，最多12个字符，由商户自定义。 说明：在通用模板中展示在券LOGO下方。根据券使用场景的不同，该信息的展示位置可能会有不同。
         /// </summary>
         [JsonPropertyName("brand_name")]
         public string BrandName { get; set; }
@@ -44,7 +44,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public long GoodsCeilingQuantity { get; set; }
 
         /// <summary>
-        /// 单品券封面图片。 请先通过图片上传接口：alipay.marketing.material.image.upload上传图片。通过图片上传接口获取获得图片资源id以后，将该图片资源id传入，单张大小不超过2MB，格式支持png、gif、jpg、jpeg、bmp，尺寸为800X600
+        /// 单品券封面图片。 需传入通过<a href="https://opendocs.alipay.com/apis/01sxqn">alipay.marketing.material.image.upload</a>（图片上传）接口上传图片获得的图片resource_id（资源id）。 说明：单张图片大小不能超过 2MB，格式支持 png、gif、jpg、jpeg、bmp，尺寸为 800X600。
         /// </summary>
         [JsonPropertyName("goods_cover_image_id")]
         public string GoodsCoverImageId { get; set; }
@@ -86,7 +86,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string NotifyUri { get; set; }
 
         /// <summary>
-        /// 外部业务单号。用作幂等控制。同一个pid下相同的外部业务单号作唯一键。
+        /// 外部业务单号，由商家自定义，用作幂等控制。需保证同一pid下该值唯一。
         /// </summary>
         [JsonPropertyName("out_biz_no")]
         public string OutBizNo { get; set; }
@@ -140,13 +140,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string VoucherQuantity { get; set; }
 
         /// <summary>
-        /// 有资金单品券券类型，目前仅支持有资金单品代金券（ITEM_BALANCE_FIX_VOUCHER）、有资金单品折扣券（ITEM_BALANCE_DISCOUNT_VOUCHER）、有资金单品特价券（ITEM_BALANCE_SPE_VOUCHER）
+        /// 有资金单品券券类型，暂仅支持： * ITEM_BALANCE_FIX_VOUCHER：有资金单品代金券； * ITEM_BALANCE_DISCOUNT_VOUCHER：有资金单品折扣券； * ITEM_BALANCE_SPE_VOUCHER：有资金单品特价券。
         /// </summary>
         [JsonPropertyName("voucher_type")]
         public string VoucherType { get; set; }
 
         /// <summary>
-        /// 券有效期。有两种类型：绝对时间和相对时间。使用JSON字符串表示。绝对时间有3个key：type、start、end，type取值固定为"ABSOLUTE"，start和end分别表示券生效时间和失效时间，格式为yyyy-MM-dd HH:mm:ss。绝对时间示例：{"type": "ABSOLUTE", "start": "2017-01-10 00:00:00", "end": "2017-01-13 23:59:59"}。相对时间有3个key：type、duration、unit，type取值固定为"RELATIVE"，duration表示从发券时间开始到往后推duration个单位时间为止作为券的使用有效期，unit表示有效时间单位，有效时间单位可枚举：MINUTE, HOUR, DAY。示例：{"type": "RELATIVE", "duration": 1 , "unit": "DAY" }，如果此刻发券，那么该券从现在开始生效1(duration)天(unit)后失效。
+        /// 券有效期。支持 绝对时间 和 相对时间，使用JSON字符串表示。 1. 绝对时间有3个key：type、start、end，type取值固定为"ABSOLUTE"，start和end分别表示券生效时间和失效时间，格式为yyyy-MM-dd HH:mm:ss。绝对时间示例：{"type": "ABSOLUTE", "start": "2020-01-10 00:00:00", "end": "2020-01-13 23:59:59"}。 2.相对时间有3个key：type、duration、unit，type 取值固定为"RELATIVE"，duration表示从发券时间开始到往后推duration个单位时间为止作为券的使用有效期，unit表示有效时间单位，有效时间单位可枚举：MINUTE, HOUR, DAY。相对时间示例：{"type": "RELATIVE", "duration": 1 , "unit": "DAY" }，如果此刻发券，那么该券从现在开始生效1(duration)天(unit)后失效。
         /// </summary>
         [JsonPropertyName("voucher_valid_period")]
         public string VoucherValidPeriod { get; set; }

@@ -56,7 +56,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public string OutRequestNo { get; set; }
 
         /// <summary>
-        /// 资金操作流水的状态  目前支持：  INIT：初始  SUCCESS：成功  CLOSED：关闭
+        /// 资金操作流水的状态 目前支持：SUCCESS：成功
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; }

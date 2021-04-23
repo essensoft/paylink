@@ -15,6 +15,12 @@ namespace Essensoft.Paylink.Alipay.Response
         public string PreOrderId { get; set; }
 
         /// <summary>
+        /// 预订单链接地址（小程序的链接地址）
+        /// </summary>
+        [JsonPropertyName("pre_order_link")]
+        public string PreOrderLink { get; set; }
+
+        /// <summary>
         /// 结果
         /// </summary>
         [JsonPropertyName("result")]

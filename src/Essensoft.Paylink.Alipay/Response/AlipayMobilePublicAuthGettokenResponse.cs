@@ -11,13 +11,13 @@ namespace Essensoft.Paylink.Alipay.Response
         /// 返回码。处理成功：200；处理失败：请参考返回码。
         /// </summary>
         [JsonPropertyName("code")]
-        public override string Code { get; set; }
+        public new string Code { get; set; }
 
         /// <summary>
         /// 支付宝返回的处理结果说明，请参考返回码
         /// </summary>
         [JsonPropertyName("msg")]
-        public override string Msg { get; set; }
+        public new string Msg { get; set; }
 
         /// <summary>
         /// 跳转到授权页面需要的Token

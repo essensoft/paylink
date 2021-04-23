@@ -8,13 +8,13 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayMerchantIotDeviceBindModel : AlipayObject
     {
         /// <summary>
-        /// 设备 ID ，device_id_type 为 ID 时填写。
+        /// 设备 ID ，仅device_id_type 为 ID 时填写。
         /// </summary>
         [JsonPropertyName("biz_tid")]
         public string BizTid { get; set; }
 
         /// <summary>
-        /// 可选方式 [ID,SN]。ID-使用biztid作为设备唯一识别标识；SN-使用supplier_id、device_sn联合作为设备唯一识别标识。由于不同机型的supplier_id不同，推荐使用 ID 。
+        /// 可选方式。枚举支持： *  ID：表示使用 biztid 作为设备唯一识别标识， *  SN：表示使用 supplier_id、device_sn联合作为设备唯一识别标识。 注意：由于不同机型的supplier_id不同，推荐使用 ID 。
         /// </summary>
         [JsonPropertyName("device_id_type")]
         public string DeviceIdType { get; set; }
@@ -26,7 +26,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string DeviceSn { get; set; }
 
         /// <summary>
-        /// 商户类型，直连商户填写direct，间连商户填写indirect
+        /// 商户类型。枚举支持： *  direct：直连商户； *  indirect：间连商户。
         /// </summary>
         [JsonPropertyName("merchant_type")]
         public string MerchantType { get; set; }

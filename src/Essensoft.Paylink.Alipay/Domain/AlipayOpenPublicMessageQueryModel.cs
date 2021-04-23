@@ -9,7 +9,7 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayOpenPublicMessageQueryModel : AlipayObject
     {
         /// <summary>
-        /// 消息id集，限制最多传入20个message_id。message_id在调用群发、组发消息接口时会返回，需调用方保存
+        /// 消息id集，最多传入20个message_id。 message_id 可在调用<a href="https://opendocs.alipay.com/apis/api_6/alipay.open.public.message.total.send">群发消息</a>、<a href="https://opendocs.alipay.com/apis/api_6/alipay.open.public.message.group.send">组发消息</a>接口时会返回，请注意保存留用。
         /// </summary>
         [JsonPropertyName("message_ids")]
         public List<string> MessageIds { get; set; }

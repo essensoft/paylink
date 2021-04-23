@@ -20,6 +20,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string PageRedirection { get; set; }
 
         /// <summary>
+        /// 匹配模式，用于描述通用的路由url格式，适用于同一个host下面存在大量路由的场景，主要用于提升路由性能，其中{0}、{1} 代表路径中的变量，注意，同一个host下面不能存在路径深度相同的匹配。
+        /// </summary>
+        [JsonPropertyName("route_pattern")]
+        public string RoutePattern { get; set; }
+
+        /// <summary>
         /// 二维码域名，须通过ICP备案验证，支持http、https、ftp开头的链接
         /// </summary>
         [JsonPropertyName("route_url")]

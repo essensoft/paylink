@@ -57,6 +57,18 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string MiniAppId { get; set; }
 
         /// <summary>
+        /// 构建参数-IDE 构建好的appx2.0包地址
+        /// </summary>
+        [JsonPropertyName("new_build_pkg_url")]
+        public string NewBuildPkgUrl { get; set; }
+
+        /// <summary>
+        /// 构建参数-IDE  构建好的plugin包地址，小程序插件的有两个构建产物client包和plugin包，该场景下client包地址通过build_pkg_url传递，plugin包地址通过本参数传递
+        /// </summary>
+        [JsonPropertyName("new_build_plugin_url")]
+        public string NewBuildPluginUrl { get; set; }
+
+        /// <summary>
         /// 小程序代码中引用的插件列表，包含插件id和插件版本信息
         /// </summary>
         [JsonPropertyName("plugin_refs")]

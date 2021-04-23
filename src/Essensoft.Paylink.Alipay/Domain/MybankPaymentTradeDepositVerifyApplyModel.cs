@@ -26,6 +26,36 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string BankCode { get; set; }
 
         /// <summary>
+        /// 打款认证结果通知地址
+        /// </summary>
+        [JsonPropertyName("callback_url")]
+        public string CallbackUrl { get; set; }
+
+        /// <summary>
+        /// 统一社会信用代码，按场景约定是否必填
+        /// </summary>
+        [JsonPropertyName("credit_code")]
+        public string CreditCode { get; set; }
+
+        /// <summary>
+        /// 法定代表人证件号，按场景约定是否必填
+        /// </summary>
+        [JsonPropertyName("legal_person_cert_no")]
+        public string LegalPersonCertNo { get; set; }
+
+        /// <summary>
+        /// 法定代表人证件类型，按场景约定是否必填  01 - 身份证号码 02 - 护照 03 - 港澳居民身份证 04 - 台湾同胞回乡证
+        /// </summary>
+        [JsonPropertyName("legal_person_cert_type")]
+        public string LegalPersonCertType { get; set; }
+
+        /// <summary>
+        /// 法定代表人姓名，按场景约定是否必填
+        /// </summary>
+        [JsonPropertyName("legal_person_name")]
+        public string LegalPersonName { get; set; }
+
+        /// <summary>
         /// 成员机构会员ID
         /// </summary>
         [JsonPropertyName("member_id")]

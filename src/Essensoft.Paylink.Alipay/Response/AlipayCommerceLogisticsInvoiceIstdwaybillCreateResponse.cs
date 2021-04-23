@@ -16,7 +16,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public string InvoiceFee { get; set; }
 
         /// <summary>
-        /// 开票的整体结果，0：处理中 1：已开票  2：开票失败
+        /// 整体的运单开票状态，0：处理中 1：开票成功 2：开票失败
         /// </summary>
         [JsonPropertyName("status")]
         public long Status { get; set; }

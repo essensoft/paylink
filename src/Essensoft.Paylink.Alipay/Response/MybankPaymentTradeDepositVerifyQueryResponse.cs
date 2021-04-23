@@ -50,6 +50,12 @@ namespace Essensoft.Paylink.Alipay.Response
         public long MaxMatchTimes { get; set; }
 
         /// <summary>
+        /// 打款失败原因
+        /// </summary>
+        [JsonPropertyName("reason")]
+        public string Reason { get; set; }
+
+        /// <summary>
         /// 打款验证当前状态： ACCEPT - 已受理 SUCCESS - 验证成功 FAIL - 验证失败 REMITTING - 打款中 REMITTED - 已打款，待验款 REMIT_REFUND - 打款失败（退汇） REMIT_FAIL - 打款失败 EXPIRED - 申请已过期失效
         /// </summary>
         [JsonPropertyName("status")]

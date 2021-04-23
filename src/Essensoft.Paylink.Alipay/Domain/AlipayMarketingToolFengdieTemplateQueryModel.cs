@@ -8,13 +8,13 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayMarketingToolFengdieTemplateQueryModel : AlipayObject
     {
         /// <summary>
-        /// 当前页数，默认为1
+        /// 当前页数，不填本参数默认为 1。
         /// </summary>
         [JsonPropertyName("page_number")]
         public long PageNumber { get; set; }
 
         /// <summary>
-        /// 每页记录数，不能超过50，默认为10
+        /// 查询结果每页记录数，最大不超过 50，不填本参数默认为 10。
         /// </summary>
         [JsonPropertyName("page_size")]
         public long PageSize { get; set; }

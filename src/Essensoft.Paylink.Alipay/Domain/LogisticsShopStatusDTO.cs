@@ -26,7 +26,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string LogisticsName { get; set; }
 
         /// <summary>
-        /// 门店状态，AUDITING:审核中，AUDIT_REJECT:审核驳回，VALID:已生效，UPDATING:更新中
+        /// 门店状态，AUDITING:审核中，AUDIT_REJECT:审核驳回，VALID:已生效，UPDATING:更新中，WAIT_CREATE:待开通(存量门店若需要支持后面新增的配送公司，需要调用门店更新接口发起申请)
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; }

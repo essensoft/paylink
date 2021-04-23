@@ -32,7 +32,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string ProvisionCode { get; set; }
 
         /// <summary>
-        /// 评估订单号。在用户完成信用评估后可以获取。信用评估流程关联接口见：zhima.credit.ep.scene.rating.initialize；zhima.credit.ep.scene.rating.apply。
+        /// 评估订单号。用户完成信用评估的芝麻信用评估订单号，即为<a href="https://opendocs.alipay.com/apis/api_8/zhima.credit.ep.scene.rating.initialize">zhima.credit.ep.scene.rating.initialize</a>接口初始化后返回的 order_no，初始化后还需调用<a href="https://opendocs.alipay.com/apis/api_8/zhima.credit.ep.scene.rating.apply">zhima.credit.ep.scene.rating.apply</a>接口发起信用评估。
         /// </summary>
         [JsonPropertyName("rating_order_no")]
         public string RatingOrderNo { get; set; }

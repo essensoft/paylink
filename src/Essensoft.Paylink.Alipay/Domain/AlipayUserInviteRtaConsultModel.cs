@@ -14,19 +14,19 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string EncryptType { get; set; }
 
         /// <summary>
-        /// (加密或明文的)手机号、imei或idfa等信息
+        /// 设备标识信息，包括IMEI，IDFA，OAID。 注意：IMEI必须为MD5加密类型
         /// </summary>
         [JsonPropertyName("principal")]
         public string Principal { get; set; }
 
         /// <summary>
-        /// 查询类型
+        /// 查询的设备类型（IMEI、IDFA、OAID）
         /// </summary>
         [JsonPropertyName("principal_type")]
         public string PrincipalType { get; set; }
 
         /// <summary>
-        /// 人群mode，运营分配，映射一个人群或几个人群的组合
+        /// 咨询策略组，包含一个或多个目标咨询策略的组合，由运营分配
         /// </summary>
         [JsonPropertyName("target_crowd_package_key")]
         public string TargetCrowdPackageKey { get; set; }

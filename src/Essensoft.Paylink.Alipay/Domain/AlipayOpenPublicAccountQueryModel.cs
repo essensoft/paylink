@@ -8,7 +8,7 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayOpenPublicAccountQueryModel : AlipayObject
     {
         /// <summary>
-        /// 支付宝账号userid，2088开头长度为16位的字符串
+        /// 用户的支付宝用户号，2088开头。
         /// </summary>
         [JsonPropertyName("user_id")]
         public string UserId { get; set; }

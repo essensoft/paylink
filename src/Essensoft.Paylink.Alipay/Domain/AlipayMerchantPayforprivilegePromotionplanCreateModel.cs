@@ -9,7 +9,7 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayMerchantPayforprivilegePromotionplanCreateModel : AlipayObject
     {
         /// <summary>
-        /// 充享惠方案权益金部分，最小为0，权益金不超过5000元
+        /// 充值方案权益金部分，最小为0，权益金不超过5000元
         /// </summary>
         [JsonPropertyName("benefit")]
         public string Benefit { get; set; }
@@ -27,13 +27,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string OutBizNo { get; set; }
 
         /// <summary>
-        /// 充享惠方案有偿券部分，消费者充值成功后自动发放，如果不需要有偿券，指定空列表；有偿券的总金额不得超过10000元，且不得超过本金的2倍
+        /// 充值方案有偿券部分，消费者充值成功后自动发放，如果不需要有偿券，指定空列表；有偿券的总金额不得超过10000元，且不得超过本金的2倍
         /// </summary>
         [JsonPropertyName("paid_voucher_list")]
         public List<PayForPrivilegePaidVoucherConfig> PaidVoucherList { get; set; }
 
         /// <summary>
-        /// 充享惠方案本金部分，单位元，必须大于0，本金不超过5000元
+        /// 充值方案本金部分，单位元，必须大于0，本金不超过5000元
         /// </summary>
         [JsonPropertyName("principal")]
         public string Principal { get; set; }

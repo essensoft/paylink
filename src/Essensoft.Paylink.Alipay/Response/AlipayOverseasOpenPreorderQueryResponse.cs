@@ -15,7 +15,13 @@ namespace Essensoft.Paylink.Alipay.Response
         public TuitionISVAgentInfoDTO AgentInfo { get; set; }
 
         /// <summary>
-        /// payment_info
+        /// 付款金额
+        /// </summary>
+        [JsonPropertyName("payment_amount")]
+        public TuitionISVAmountInfoDTO PaymentAmount { get; set; }
+
+        /// <summary>
+        /// payment_info（已废弃）
         /// </summary>
         [JsonPropertyName("payment_info")]
         public TuitionISVResponsePaymentInfoDTO PaymentInfo { get; set; }
@@ -27,19 +33,31 @@ namespace Essensoft.Paylink.Alipay.Response
         public string PreOrderId { get; set; }
 
         /// <summary>
+        /// 退款金额
+        /// </summary>
+        [JsonPropertyName("refund_amount")]
+        public TuitionISVAmountInfoDTO RefundAmount { get; set; }
+
+        /// <summary>
         /// 留学汇款对isv返回结果
         /// </summary>
         [JsonPropertyName("result")]
         public TuitionISVResult Result { get; set; }
 
         /// <summary>
-        /// 单据状态
+        /// 订单状态
+        /// </summary>
+        [JsonPropertyName("status")]
+        public TuitionISVOrderStatusDTO Status { get; set; }
+
+        /// <summary>
+        /// 单据状态（已废弃）
         /// </summary>
         [JsonPropertyName("status_code")]
         public string StatusCode { get; set; }
 
         /// <summary>
-        /// TuitionISVStudentInfoDTO
+        /// TuitionISVStudentInfoDTO（已废弃）
         /// </summary>
         [JsonPropertyName("student_info")]
         public TuitionISVStudentInfoDTO StudentInfo { get; set; }

@@ -13,7 +13,7 @@ namespace Essensoft.Paylink.Alipay.Response
         /// 结果码
         /// </summary>
         [JsonPropertyName("code")]
-        public override string Code { get; set; }
+        public new string Code { get; set; }
 
         /// <summary>
         /// 菜单唯一标识
@@ -25,7 +25,7 @@ namespace Essensoft.Paylink.Alipay.Response
         /// 结果描述
         /// </summary>
         [JsonPropertyName("msg")]
-        public override string Msg { get; set; }
+        public new string Msg { get; set; }
 
         /// <summary>
         /// 绑定账户列表

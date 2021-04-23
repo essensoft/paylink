@@ -33,6 +33,7 @@ namespace Essensoft.Paylink.Alipay.Request
         {
             return needEncrypt;
         }
+
         public void SetNotifyUrl(string notifyUrl)
         {
             this.notifyUrl = notifyUrl;

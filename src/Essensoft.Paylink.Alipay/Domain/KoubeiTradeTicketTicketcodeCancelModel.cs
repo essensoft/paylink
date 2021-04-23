@@ -8,7 +8,7 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class KoubeiTradeTicketTicketcodeCancelModel : AlipayObject
     {
         /// <summary>
-        /// 凭证码类型,INTERNAL_CODE(内部凭证码),EXTERNAL_CODE(外部凭证码),默认INTERNAL_CODE,外部券场景必填
+        /// 券码类型。默认INTERNAL_CODE。枚举值如下： INTERNAL_CODE：券码。 EXTERNAL_CODE：外部券码。 注意：外部券场景必填。
         /// </summary>
         [JsonPropertyName("code_type")]
         public string CodeType { get; set; }

@@ -21,7 +21,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public List<GoodsInfo> GoodsInfo { get; set; }
 
         /// <summary>
-        /// 唯一请求id，开放者请确保每次请求的唯一性
+        /// 唯一请求id，开放者请确保每次请求的唯一性。
         /// </summary>
         [JsonPropertyName("request_id")]
         public string RequestId { get; set; }
@@ -33,19 +33,19 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string ShopId { get; set; }
 
         /// <summary>
-        /// 订单总金额，单位元，精确到小数点后两位，取值范围[0.01,999999999]  如果同时传入了【不可打折金额】，【订单总金额】两者，则必须满足【不可打折金额】<=【订单总金额】
+        /// 订单总金额，单位元，精确到小数点后两位，取值范围[0.01,999999999]。 注意：如果同时传入了【不可打折金额】，【订单总金额】两者，则必须满足【不可打折金额】<=【订单总金额】。
         /// </summary>
         [JsonPropertyName("total_amount")]
         public string TotalAmount { get; set; }
 
         /// <summary>
-        /// 不可打折金额，单位为元，精确到小数点后两位，取值范围[0,999999999]  如果同时传入了【不可打折金额】、【订单总金额】，则必须满足【不可打折金额】<=【订单总金额】
+        /// 不参与优惠计算的金额，单位为元，精确到小数点后两位，取值范围[0,999999999]。 注意：如果同时传入了【不可打折金额】、【订单总金额】，则必须满足【不可打折金额】<=【订单总金额】。
         /// </summary>
         [JsonPropertyName("undiscountable_amount")]
         public string UndiscountableAmount { get; set; }
 
         /// <summary>
-        /// 支付宝用户Id
+        /// 支付宝用户 Id，用户在支付宝的唯一标识，以 2088 开头的 16 位纯数字组成。
         /// </summary>
         [JsonPropertyName("user_id")]
         public string UserId { get; set; }

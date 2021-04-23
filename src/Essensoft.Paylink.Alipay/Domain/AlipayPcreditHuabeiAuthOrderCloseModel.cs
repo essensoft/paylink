@@ -30,5 +30,11 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("out_request_no")]
         public string OutRequestNo { get; set; }
+
+        /// <summary>
+        /// 芝麻GO配置模板Id
+        /// </summary>
+        [JsonPropertyName("template_id")]
+        public string TemplateId { get; set; }
     }
 }

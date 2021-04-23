@@ -20,13 +20,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string FirstClass { get; set; }
 
         /// <summary>
-        /// 商品高度，单位为cm，精确到小数点后面两位
+        /// 商品高度，单位为cm
         /// </summary>
         [JsonPropertyName("height")]
         public long Height { get; set; }
 
         /// <summary>
-        /// 商品长度，单位为cm，精确到小数点后面两位
+        /// 商品长度，单位为cm
         /// </summary>
         [JsonPropertyName("length")]
         public long Length { get; set; }
@@ -53,10 +53,10 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// 货物重量，单位为kg，精确到小数点后两位
         /// </summary>
         [JsonPropertyName("weight")]
-        public long Weight { get; set; }
+        public string Weight { get; set; }
 
         /// <summary>
-        /// 商品宽度，单位为cm，精确到小数点后面两位
+        /// 商品宽度，单位为cm
         /// </summary>
         [JsonPropertyName("width")]
         public long Width { get; set; }

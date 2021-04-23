@@ -56,6 +56,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public long FaceTradeCnt { get; set; }
 
         /// <summary>
+        /// 扫脸金额
+        /// </summary>
+        [JsonPropertyName("face_trd_amt")]
+        public string FaceTrdAmt { get; set; }
+
+        /// <summary>
         /// 当日刷脸付笔数占比
         /// </summary>
         [JsonPropertyName("face_trd_cnt_rate")]

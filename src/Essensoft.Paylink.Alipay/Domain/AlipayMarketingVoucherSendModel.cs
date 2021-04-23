@@ -44,7 +44,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string TaobaoNick { get; set; }
 
         /// <summary>
-        /// 券模板ID
+        /// 券模板ID。如 <a href="https://opendocs.alipay.com/open/20170515180730063964/oe1vs5">无资金优惠券</a>、<a href="https://opendocs.alipay.com/open/20170320142638022200/fgxzva">现金抵价券</a> 创建的券模板id。
         /// </summary>
         [JsonPropertyName("template_id")]
         public string TemplateId { get; set; }

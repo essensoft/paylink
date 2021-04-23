@@ -9,7 +9,7 @@ namespace Essensoft.Paylink.Alipay.Response
     public class AlipayMerchantPayforprivilegeUserrelationQueryResponse : AlipayResponse
     {
         /// <summary>
-        /// 充享惠业务用户与商户的关系
+        /// 充值业务用户与商户的关系
         /// </summary>
         [JsonPropertyName("member_info")]
         public PayForPrivilegeUserRelation MemberInfo { get; set; }

@@ -9,7 +9,7 @@ namespace Essensoft.Paylink.Alipay.Response
     public class AlipayMerchantPayforprivilegePromotionplanCreateResponse : AlipayResponse
     {
         /// <summary>
-        /// 充享惠方案，当前接口创建的充享惠方案
+        /// 充值方案，当前接口创建的充值方案
         /// </summary>
         [JsonPropertyName("promotion_plan")]
         public PayForPrivilegePromotionPlanInfo PromotionPlan { get; set; }

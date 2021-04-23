@@ -14,6 +14,18 @@ namespace Essensoft.Paylink.Alipay.Domain
         public TuitionISVAgentInfoDTO AgentInfo { get; set; }
 
         /// <summary>
+        /// 是否完成自审
+        /// </summary>
+        [JsonPropertyName("finish_self_audit")]
+        public bool FinishSelfAudit { get; set; }
+
+        /// <summary>
+        /// 付款人信息
+        /// </summary>
+        [JsonPropertyName("payer_info")]
+        public TuitionISVPayerInfoDTO PayerInfo { get; set; }
+
+        /// <summary>
         /// 付款信息
         /// </summary>
         [JsonPropertyName("payment_info")]

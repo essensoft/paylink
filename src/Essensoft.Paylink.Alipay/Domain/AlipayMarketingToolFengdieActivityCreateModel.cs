@@ -14,7 +14,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public FengdieActivityCreateData Activity { get; set; }
 
         /// <summary>
-        /// 凤蝶模板包唯一id，从alipay.marketing.tool.fengdie.template.query接口中获取
+        /// 凤蝶模板包唯一id，通过<a href="https://opendocs.alipay.com/apis/api_5/alipay.marketing.tool.fengdie.template.query">alipay.marketing.tool.fengdie.template.query</a>接口中获取。
         /// </summary>
         [JsonPropertyName("template_id")]
         public long TemplateId { get; set; }

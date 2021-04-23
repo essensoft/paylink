@@ -8,6 +8,18 @@ namespace Essensoft.Paylink.Alipay.Response
     public class MybankCreditSceneprodFinanceConsultResponse : AlipayResponse
     {
         /// <summary>
+        /// 分行ipRoleid
+        /// </summary>
+        [JsonPropertyName("finance_branch_ip_role_id")]
+        public string FinanceBranchIpRoleId { get; set; }
+
+        /// <summary>
+        /// 分行名称
+        /// </summary>
+        [JsonPropertyName("finance_branch_name")]
+        public string FinanceBranchName { get; set; }
+
+        /// <summary>
         /// 资方编码
         /// </summary>
         [JsonPropertyName("finance_inst_code")]
@@ -32,7 +44,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public string RouteNo { get; set; }
 
         /// <summary>
-        /// 路由查询状态
+        /// 路由结果  SUCCESS:成功，同时route_no会有值  PROCESSING：咨询中，等待资方接口返回结果  FAIL: 匹配到的资方都拒绝准入
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; }

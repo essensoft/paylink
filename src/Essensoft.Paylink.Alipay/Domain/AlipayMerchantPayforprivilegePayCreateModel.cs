@@ -20,7 +20,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string OutBizNo { get; set; }
 
         /// <summary>
-        /// 充享惠方案ID
+        /// 充值方案ID
         /// </summary>
         [JsonPropertyName("promotion_plan_id")]
         public string PromotionPlanId { get; set; }

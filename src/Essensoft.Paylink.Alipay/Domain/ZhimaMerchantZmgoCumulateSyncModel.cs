@@ -20,7 +20,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public AmountTypeSyncData AmountTypeSyncData { get; set; }
 
         /// <summary>
-        /// 数据回传的动作类型，枚举值，为必传入参。 可取值： ("POSITIVE", "正向回传")，("REVERSE", "逆向回传")。 其中POSITIVE表示回传为正向的，即订单金额累加，优惠累加，任务次数累加；而REVERSE表示回传为逆向的，即订单金额退款，优惠退款，任务次数回退。
+        /// 数据回传的动作类型。枚举如下： * POSITIVE：正向回传，即订单金额累加，优惠累加，任务次数累加。 * REVERSE：逆向回传，即订单金额退款，优惠退款，任务次数回退。
         /// </summary>
         [JsonPropertyName("biz_action")]
         public string BizAction { get; set; }
@@ -50,7 +50,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string OutBizNo { get; set; }
 
         /// <summary>
-        /// 数据回传的商户ID，即和用户发生业务来往的PID主体。
+        /// 数据回传的商户 ID，即和用户发生业务来往的 PID 主体。商户账号在支付宝的唯一标识，以 2088 开头的 16 位纯数字组成。
         /// </summary>
         [JsonPropertyName("provider_pid")]
         public string ProviderPid { get; set; }
@@ -74,7 +74,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public TimesTypeSyncData TimesTypeSyncData { get; set; }
 
         /// <summary>
-        /// 用户支付宝userId，蚂蚁统一会员ID。
+        /// 用户 id，用户在支付宝的唯一标识，以 2088 开头的 16 位纯数字组成。 
         /// </summary>
         [JsonPropertyName("user_id")]
         public string UserId { get; set; }

@@ -10,7 +10,7 @@ namespace Essensoft.Paylink.Alipay.Request
     public class AlipayOpenPublicLifeAgentCreateRequest : IAlipayUploadRequest<AlipayOpenPublicLifeAgentCreateResponse>
     {
         /// <summary>
-        /// isv代开通生活号的商户支付宝账号或者商户支付宝账号pid（2088开头16位长度的字符串），账号需通过实名认证
+        /// 服务商代开通生活号的商户支付宝账号或商户支付宝账号 pid（2088开头16位长度的字符串）。 注意：账号需通过 <a href="https://opendocs.alipay.com/open/200/qyzfbsmrz">实名认证</a>。
         /// </summary>
         public string Account { get; set; }
 
@@ -55,12 +55,12 @@ namespace Essensoft.Paylink.Alipay.Request
         public FileItem LogoPic { get; set; }
 
         /// <summary>
-        /// 所属MCCCode，详情可参考  <a href="https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.INIZWb&articleId=105364&docType=1">商家经营类目</a> 中的“经营类目编码”
+        /// 所属MCCCode，详情可参考<a href="https://opendocs.alipay.com/open/01n22g#%E5%95%86%E5%AE%B6%E7%BB%8F%E8%90%A5%E7%B1%BB%E7%9B%AE">商家经营类目</a>中的“类目code”。
         /// </summary>
         public string MccCode { get; set; }
 
         /// <summary>
-        /// 外部入驻申请单据号，由开发者生成，并需保证在开发者端不重复。另，如果代创建被驳回，需更换新的申请号，原申请号不能再次使用
+        /// 外部入驻申请单据号，由开发者自行生成，并需保证在开发者端不重复。 注意：如果代创建申请被驳回，需更换新的申请号，原申请号不能再次使用。
         /// </summary>
         public string OutBizNo { get; set; }
 
@@ -90,7 +90,7 @@ namespace Essensoft.Paylink.Alipay.Request
         public FileItem ShopSignBoardPic { get; set; }
 
         /// <summary>
-        /// 企业特殊资质图片，可参考 <a href="https://doc.open.alipay.com/docs/doc.htm?spm=a219a.7629140.0.0.INIZWb&articleId=105364&docType=1">商家经营类目</a> 中的 “需要的特殊资质证书”
+        /// 企业特殊资质图片，可参考<a href="https://opendocs.alipay.com/open/01n22g#%E5%95%86%E5%AE%B6%E7%BB%8F%E8%90%A5%E7%B1%BB%E7%9B%AE">商家经营类目</a>中的 “所需资质”。
         /// </summary>
         public FileItem SpecialLicensePic { get; set; }
 

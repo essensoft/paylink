@@ -21,7 +21,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string OrderId { get; set; }
 
         /// <summary>
-        /// 蚂蚁统一会员ID
+        /// 用户支付宝唯一标识，2088开头。
         /// </summary>
         [JsonPropertyName("user_id")]
         public string UserId { get; set; }

@@ -16,7 +16,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public string FailCount { get; set; }
 
         /// <summary>
-        /// 失败列表，用于告知失败账单号和原有
+        /// 失败列表，用于告知失败账单号和原因
         /// </summary>
         [JsonPropertyName("fail_external_sync")]
         public List<FailExternalSync> FailExternalSync { get; set; }

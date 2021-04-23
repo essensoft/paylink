@@ -32,13 +32,19 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string TplParams { get; set; }
 
         /// <summary>
-        /// 核销码串值【当状态变更为USED时，建议传】。该值正常为模板中核销区域（Operation）对应的message值。
+        /// 支付宝用户ID，新接入商户必填，历史已接入商户请尽快补传
+        /// </summary>
+        [JsonPropertyName("user_id")]
+        public string UserId { get; set; }
+
+        /// <summary>
+        /// 历史遗留，已废弃。当状态变更为USED时，建议传，该值正常为模板中核销区域（Operation）对应的message值。
         /// </summary>
         [JsonPropertyName("verify_code")]
         public string VerifyCode { get; set; }
 
         /// <summary>
-        /// 核销方式，该值正常为模板中核销区域（Operation）对应的format值。verify_code和verify_type需同时传入。
+        /// 历史遗留，已废弃。核销方式，该值正常为模板中核销区域（Operation）对应的format值。verify_code和verify_type需同时传入。
         /// </summary>
         [JsonPropertyName("verify_type")]
         public string VerifyType { get; set; }

@@ -14,7 +14,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string CertNo { get; set; }
 
         /// <summary>
-        /// 证件类型，例如： IDENTITY_CARD — 身份证
+        /// 证件类型。暂仅支持 IDENTITY_CARD （身份证）。
         /// </summary>
         [JsonPropertyName("cert_type")]
         public string CertType { get; set; }
@@ -26,7 +26,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string ExtInfo { get; set; }
 
         /// <summary>
-        /// 登录名
+        /// 支付宝登录名
         /// </summary>
         [JsonPropertyName("logon_id")]
         public string LogonId { get; set; }
@@ -38,7 +38,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string Mobile { get; set; }
 
         /// <summary>
-        /// 姓名
+        /// 真实姓名
         /// </summary>
         [JsonPropertyName("user_name")]
         public string UserName { get; set; }

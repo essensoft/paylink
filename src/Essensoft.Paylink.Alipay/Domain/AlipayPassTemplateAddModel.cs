@@ -8,7 +8,7 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayPassTemplateAddModel : AlipayObject
     {
         /// <summary>
-        /// 模板内容信息，遵循JSON规范，详情参见tpl_content参数说明：https://opendocs.alipay.com/open/016d5g
+        /// 模板内容信息，遵循JSON规范，详情参见tpl_content <a href="https://opendocs.alipay.com/open/016d5g">参数详细说明</a>。
         /// </summary>
         [JsonPropertyName("tpl_content")]
         public string TplContent { get; set; }

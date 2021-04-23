@@ -48,7 +48,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// 即时配送订单扩展
         /// </summary>
         [JsonPropertyName("order_ext_istd")]
-        public OrderExtIstd OrderExtIstd { get; set; }
+        public OrderExtIstdForPreOrder OrderExtIstd { get; set; }
 
         /// <summary>
         /// 商家订单号

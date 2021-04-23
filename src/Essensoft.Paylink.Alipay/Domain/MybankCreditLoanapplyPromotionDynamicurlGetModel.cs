@@ -14,10 +14,22 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string ArrangementNo { get; set; }
 
         /// <summary>
+        /// 动态链接使用场景。地推工具外投必填字段 01-地推工具外投。 （机构特殊外投才需要，否则可以忽略该字段不需填入）
+        /// </summary>
+        [JsonPropertyName("biz_scene")]
+        public string BizScene { get; set; }
+
+        /// <summary>
         /// 部门编码，是网商机构门户内维护的组织结构中部门的唯一编号，由网商机构门户生成后提供给合作机构，参数staff_type为01或03时，此参数必填
         /// </summary>
         [JsonPropertyName("dept_code")]
         public string DeptCode { get; set; }
+
+        /// <summary>
+        /// 推广机构内部员工编号。（机构特殊外投才需要，否则可以忽略该字段不需填入）
+        /// </summary>
+        [JsonPropertyName("inst_staff_no")]
+        public string InstStaffNo { get; set; }
 
         /// <summary>
         /// 渠道编码，是网商机构门户内维护的推广渠道的唯一编号，由网商机构门户生成后提供给合作机构，参数staff_type为01或03时，此参数必填
@@ -56,7 +68,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string RecmdInstIpRoleId { get; set; }
 
         /// <summary>
-        /// 请求的实体ID，跟staff_type对应，若staff_type是01则为支付宝账号；若staff_type是02则为生活号在支付宝开放平台对应的app_id；若staff_type是03则为机构在支付宝开放平台对应的app_id
+        /// 请求的实体ID，跟staff_type对应，若staff_type是01则为支付宝账号；若staff_type是02则为生活号在支付宝开放平台对应的app_id；若staff_type是03则为机构在支付宝开放平台对应的app_id。 biz_scene有值则staff_id不需要校验，否则必填
         /// </summary>
         [JsonPropertyName("staff_id")]
         public string StaffId { get; set; }

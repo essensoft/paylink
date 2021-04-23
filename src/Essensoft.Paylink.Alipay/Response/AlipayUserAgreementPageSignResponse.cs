@@ -14,7 +14,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public string AgreementNo { get; set; }
 
         /// <summary>
-        /// 返回脱敏的支付宝账号，如需要返回不脱敏的支付宝用户账号，需要用户在签约页面上授权
+        /// 返回脱敏的支付宝账号。
         /// </summary>
         [JsonPropertyName("alipay_logon_id")]
         public string AlipayLogonId { get; set; }

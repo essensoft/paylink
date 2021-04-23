@@ -8,7 +8,7 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class ZhimaCreditEpSceneRatingInitializeModel : AlipayObject
     {
         /// <summary>
-        /// 申请的信用额度，单位为人民币分，整型。
+        /// 申请的信用额度，单位为分（人民币），整型。
         /// </summary>
         [JsonPropertyName("apply_amount")]
         public long ApplyAmount { get; set; }
@@ -38,7 +38,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string EpName { get; set; }
 
         /// <summary>
-        /// 评估类型。如果是对客户进行评估填写CUSTOMER；如果是对交易进行评估填写TRADE; 不填默认为CUSTOMER
+        /// 评估类型。为空时默认为 CUSTOMER（对客户进行评估）。枚举如下： * CUSTOMER：对客户进行评估。 * TRADE：对交易进行评估。
         /// </summary>
         [JsonPropertyName("evaluate_type")]
         public string EvaluateType { get; set; }
@@ -50,19 +50,19 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string MCategory { get; set; }
 
         /// <summary>
-        /// 会员类型。如果是评估的会员类型为企业填写ENTERPRISE；如果是商家填写INDIVIDUAL_BUSINESS。可空，如果为空则默认为INDIVIDUAL_BUSINESS即默认商家类型进行评估。
+        /// 会员类型。为空时默认为 INDIVIDUAL_BUSINESS（商家类型）进行评估。枚举如下： * ENTERPRISE：评估的会员类型为企业； * INDIVIDUAL_BUSINESS：评估的会员类型为商家。
         /// </summary>
         [JsonPropertyName("member_type")]
         public string MemberType { get; set; }
 
         /// <summary>
-        /// 商户请求订单号，必须唯一。用于唯一标识商户发起的一次请求。
+        /// 商户请求订单号，由商户自定义且必须在当前PID下唯一。用于唯一标识商户发起的一次请求。
         /// </summary>
         [JsonPropertyName("out_order_no")]
         public string OutOrderNo { get; set; }
 
         /// <summary>
-        /// 产品码。请填写示例值里提供的值。
+        /// 产品码。固定为 w1010100001000003531。
         /// </summary>
         [JsonPropertyName("product_code")]
         public string ProductCode { get; set; }

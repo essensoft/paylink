@@ -11,7 +11,7 @@ namespace Essensoft.Paylink.Alipay.Response
         /// 结果码
         /// </summary>
         [JsonPropertyName("code")]
-        public override string Code { get; set; }
+        public new string Code { get; set; }
 
         /// <summary>
         /// id字典，key为userId和老的openId，value为新的openId
@@ -23,6 +23,6 @@ namespace Essensoft.Paylink.Alipay.Response
         /// 结果描述
         /// </summary>
         [JsonPropertyName("msg")]
-        public override string Msg { get; set; }
+        public new string Msg { get; set; }
     }
 }

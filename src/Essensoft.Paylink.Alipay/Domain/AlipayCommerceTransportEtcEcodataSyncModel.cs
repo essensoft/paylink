@@ -98,7 +98,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string GrossMass { get; set; }
 
         /// <summary>
-        /// 订单状态； 1、INFO_SUBMIT：信息已提交； 2、CENSOR_PASS：审核通过； 3、CENSOR_BLOCK：审核驳回； 4、DELIVERYED：已发货； 5、RECEIVED：已收货； 6、ACTIVATED：已激活； 7、UNMOUNTED：已注销； 8、ADD_BLACK：拉黑； 9、REMOVE_BLACK：解黑；
+        /// 订单状态； 1、INFO_SUBMIT：信息已提交； 2、CENSOR_PASS：审核通过； 3、CENSOR_BLOCK：审核驳回； 4、DELIVERYED：已发货； 5、RECEIVED：已收货； 6、ACTIVATED：已激活； 7、UNMOUNTED：已注销； 8、ADD_BLACK：拉黑； 9、REMOVE_BLACK：解黑； 10、CANCEL：取消；
         /// </summary>
         [JsonPropertyName("order_status")]
         public string OrderStatus { get; set; }

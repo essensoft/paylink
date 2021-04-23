@@ -44,6 +44,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string BudgetStrategy { get; set; }
 
         /// <summary>
+        /// 币种
+        /// </summary>
+        [JsonPropertyName("currency")]
+        public string Currency { get; set; }
+
+        /// <summary>
         /// 预算周期结束时间
         /// </summary>
         [JsonPropertyName("end_cycle")]
@@ -72,6 +78,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("pool_code")]
         public string PoolCode { get; set; }
+
+        /// <summary>
+        /// 剩余可用金额
+        /// </summary>
+        [JsonPropertyName("remain_amount")]
+        public string RemainAmount { get; set; }
 
         /// <summary>
         /// 状态：CONFIG，CONFIG_DONE，CHECK，ACTIVE，HISTORY，CLOSE，DISCARD，INACTIVE
