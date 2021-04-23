@@ -8,6 +8,18 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class LoanContractInfo : AlipayObject
     {
         /// <summary>
+        /// 合同编码
+        /// </summary>
+        [JsonPropertyName("contract_code")]
+        public string ContractCode { get; set; }
+
+        /// <summary>
+        /// 合同结束时间
+        /// </summary>
+        [JsonPropertyName("contract_end_date")]
+        public string ContractEndDate { get; set; }
+
+        /// <summary>
         /// 房抵贷抵押合同
         /// </summary>
         [JsonPropertyName("contract_name")]
@@ -24,5 +36,17 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("contract_oss_url")]
         public string ContractOssUrl { get; set; }
+
+        /// <summary>
+        /// 合同签约时间
+        /// </summary>
+        [JsonPropertyName("contract_sign_date")]
+        public string ContractSignDate { get; set; }
+
+        /// <summary>
+        /// 合同版本
+        /// </summary>
+        [JsonPropertyName("contract_version")]
+        public string ContractVersion { get; set; }
     }
 }

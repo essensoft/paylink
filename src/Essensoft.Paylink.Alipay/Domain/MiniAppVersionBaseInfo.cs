@@ -68,6 +68,18 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string MiniAppId { get; set; }
 
         /// <summary>
+        /// 包地址
+        /// </summary>
+        [JsonPropertyName("new_package_url")]
+        public string NewPackageUrl { get; set; }
+
+        /// <summary>
+        /// 插件plugin包地址
+        /// </summary>
+        [JsonPropertyName("new_plugin_url")]
+        public string NewPluginUrl { get; set; }
+
+        /// <summary>
         /// 下架时间
         /// </summary>
         [JsonPropertyName("offline_time")]

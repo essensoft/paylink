@@ -15,7 +15,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string BuyerId { get; set; }
 
         /// <summary>
-        /// 清单明细
+        /// 发放的物品清单明细
         /// </summary>
         [JsonPropertyName("item_list")]
         public List<EnergyGoodRequest> ItemList { get; set; }

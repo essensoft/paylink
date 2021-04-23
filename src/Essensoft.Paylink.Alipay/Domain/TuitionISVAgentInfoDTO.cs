@@ -8,6 +8,12 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class TuitionISVAgentInfoDTO : AlipayObject
     {
         /// <summary>
+        /// 二级机构名称
+        /// </summary>
+        [JsonPropertyName("agent_sub_name")]
+        public string AgentSubName { get; set; }
+
+        /// <summary>
         /// 机构isv机构pid
         /// </summary>
         [JsonPropertyName("pid")]

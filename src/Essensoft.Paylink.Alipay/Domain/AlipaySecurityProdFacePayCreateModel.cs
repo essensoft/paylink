@@ -18,5 +18,11 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("aaaaaaaaaaaaa")]
         public string Aaaaaaaaaaaaa { get; set; }
+
+        /// <summary>
+        /// 1
+        /// </summary>
+        [JsonPropertyName("bbbbb")]
+        public string Bbbbb { get; set; }
     }
 }

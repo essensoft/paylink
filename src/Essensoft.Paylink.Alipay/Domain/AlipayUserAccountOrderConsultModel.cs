@@ -8,6 +8,12 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayUserAccountOrderConsultModel : AlipayObject
     {
         /// <summary>
+        /// 与场景码相关的扩展参数
+        /// </summary>
+        [JsonPropertyName("ext_info")]
+        public ConsultParams ExtInfo { get; set; }
+
+        /// <summary>
         /// 集团havana ID
         /// </summary>
         [JsonPropertyName("hid")]

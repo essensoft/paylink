@@ -20,7 +20,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string Memo { get; set; }
 
         /// <summary>
-        /// THIRD_PARTY_COMMUNITY_JIAOFEI:物业缴费 CENTRAL_SCAN_CODE_PASS:中心化扫码通行 THIRD_PARTY_SCAN_CODE_PASS:三方扫码通行
+        /// THIRD_PARTY_COMMUNITY_JIAOFEI:物业缴费 CENTRAL_SCAN_CODE_PASS:中心化扫码通行
         /// </summary>
         [JsonPropertyName("service_type")]
         public string ServiceType { get; set; }

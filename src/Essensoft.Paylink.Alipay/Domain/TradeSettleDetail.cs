@@ -26,7 +26,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string OperationSerialNo { get; set; }
 
         /// <summary>
-        /// 结算操作类型。包含replenish、replenish_refund、transfer、transfer_refund等类型
+        /// 结算操作类型。有以下几种类型： replenish(补差)、replenish_refund(退补差)、transfer(分账)、transfer_refund(退分账)、settle(结算)、settle_refund(退结算)、on_settle(待结算)。
         /// </summary>
         [JsonPropertyName("operation_type")]
         public string OperationType { get; set; }

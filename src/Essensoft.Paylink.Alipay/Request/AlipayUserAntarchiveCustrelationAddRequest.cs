@@ -15,18 +15,18 @@ namespace Essensoft.Paylink.Alipay.Request
 
         #region IAlipayRequest Members
 
-        private bool needEncrypt = false;
+		private bool  needEncrypt=false;
         private string apiVersion = "1.0";
-        private string terminalType;
-        private string terminalInfo;
+		private string terminalType;
+		private string terminalInfo;
         private string prodCode;
-        private string notifyUrl;
+		private string notifyUrl;
         private string returnUrl;
-        private AlipayObject bizModel;
+		private AlipayObject bizModel;
 
-        public void SetNeedEncrypt(bool needEncrypt)
+		public void SetNeedEncrypt(bool needEncrypt)
         {
-            this.needEncrypt = needEncrypt;
+             this.needEncrypt=needEncrypt;
         }
 
         public bool GetNeedEncrypt()
@@ -34,7 +34,7 @@ namespace Essensoft.Paylink.Alipay.Request
             return needEncrypt;
         }
 
-        public void SetNotifyUrl(string notifyUrl)
+		public void SetNotifyUrl(string notifyUrl)
         {
             this.notifyUrl = notifyUrl;
         }
@@ -54,29 +54,26 @@ namespace Essensoft.Paylink.Alipay.Request
             return returnUrl;
         }
 
-        public void SetTerminalType(string terminalType)
-        {
-            this.terminalType = terminalType;
-        }
+        public void SetTerminalType(string terminalType){
+			this.terminalType=terminalType;
+		}
 
-        public string GetTerminalType()
+    	public string GetTerminalType()
         {
-            return terminalType;
-        }
+    		return terminalType;
+    	}
 
-        public void SetTerminalInfo(string terminalInfo)
-        {
-            this.terminalInfo = terminalInfo;
-        }
+    	public void SetTerminalInfo(string terminalInfo){
+    		this.terminalInfo=terminalInfo;
+    	}
 
-        public string GetTerminalInfo()
+    	public string GetTerminalInfo()
         {
-            return terminalInfo;
-        }
+    		return terminalInfo;
+    	}
 
-        public void SetProdCode(string prodCode)
-        {
-            this.prodCode = prodCode;
+        public void SetProdCode(string prodCode){
+            this.prodCode=prodCode;
         }
 
         public string GetProdCode()
@@ -91,7 +88,7 @@ namespace Essensoft.Paylink.Alipay.Request
 
         public void SetApiVersion(string apiVersion)
         {
-            this.apiVersion = apiVersion;
+            this.apiVersion=apiVersion;
         }
 
         public string GetApiVersion()
@@ -108,7 +105,7 @@ namespace Essensoft.Paylink.Alipay.Request
             return parameters;
         }
 
-        public AlipayObject GetBizModel()
+		public AlipayObject GetBizModel()
         {
             return bizModel;
         }

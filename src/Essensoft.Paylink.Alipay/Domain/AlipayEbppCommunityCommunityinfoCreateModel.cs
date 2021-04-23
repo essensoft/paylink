@@ -57,6 +57,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string Name { get; set; }
 
         /// <summary>
+        /// 外部小区号
+        /// </summary>
+        [JsonPropertyName("out_community_id")]
+        public string OutCommunityId { get; set; }
+
+        /// <summary>
         /// 地理信息
         /// </summary>
         [JsonPropertyName("pois")]
@@ -69,7 +75,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string Province { get; set; }
 
         /// <summary>
-        /// 底座能力提供            SAAS 跳转模式支持            H5 ISV接口对接模式        REMOTE
+        /// 中心账单楼房号模式 REMOTE 中心账单户号模式 REMOTE_NO_ROOM 内部H5模式 H5 内部底座模式 SAAS 自运营账单-楼房号 EXTERNAL_BILL_ROOM 自运营账单-仅户号 EXTERNAL_BILL_BILLKEY 备注：1、中心账单楼房号模式会进行用户隐私校验     2、不确定使用哪种方式时请联系对应BD或开发
         /// </summary>
         [JsonPropertyName("support_type")]
         public string SupportType { get; set; }

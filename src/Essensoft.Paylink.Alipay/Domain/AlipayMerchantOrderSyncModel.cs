@@ -135,6 +135,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string SendMsg { get; set; }
 
         /// <summary>
+        /// 服务code：传入小程序后台提报的服务id，将订单与服务关联，有利于提高服务曝光机会；入参服务id的类目须与订单类型相符，若不相符将会报错；如订单类型为“外卖”，则入参的服务ID所对应的服务类目也必须得是”外卖“；service_code 通过 alipay.open.app.appcontent.function.create(小程序服务创建)接口创建服务后获取。
+        /// </summary>
+        [JsonPropertyName("service_code")]
+        public string ServiceCode { get; set; }
+
+        /// <summary>
         /// 门店信息，扫码点餐获取返佣时必填。
         /// </summary>
         [JsonPropertyName("shop_info")]

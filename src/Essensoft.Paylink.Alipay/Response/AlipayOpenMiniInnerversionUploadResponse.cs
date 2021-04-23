@@ -38,6 +38,12 @@ namespace Essensoft.Paylink.Alipay.Response
         public string NeedRotation { get; set; }
 
         /// <summary>
+        /// appx构建返回值
+        /// </summary>
+        [JsonPropertyName("new_build_package_url")]
+        public string NewBuildPackageUrl { get; set; }
+
+        /// <summary>
         /// 包管理包ID
         /// </summary>
         [JsonPropertyName("package_id")]

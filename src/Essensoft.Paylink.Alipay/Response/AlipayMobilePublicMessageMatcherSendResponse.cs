@@ -11,13 +11,13 @@ namespace Essensoft.Paylink.Alipay.Response
         /// 结果码
         /// </summary>
         [JsonPropertyName("code")]
-        public override string Code { get; set; }
+        public new string Code { get; set; }
 
         /// <summary>
         /// 结果描述
         /// </summary>
         [JsonPropertyName("msg")]
-        public override string Msg { get; set; }
+        public new string Msg { get; set; }
 
         /// <summary>
         /// 对应toUserId，标准Alipay UserId

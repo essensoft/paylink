@@ -9,6 +9,12 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class VoucherDetailVO : AlipayObject
     {
         /// <summary>
+        /// 券对应的活动id
+        /// </summary>
+        [JsonPropertyName("activity_id")]
+        public string ActivityId { get; set; }
+
+        /// <summary>
         /// 优惠金额
         /// </summary>
         [JsonPropertyName("amount")]

@@ -8,31 +8,31 @@ namespace Essensoft.Paylink.Alipay.Response
     public class MybankPaymentTradeNormalpayOperateQueryResponse : AlipayResponse
     {
         /// <summary>
-        /// 交易金额，请求支付或打款等操作时，传入的金额
+        /// 预期交易金额，交易请求时的金额，单位:分
         /// </summary>
         [JsonPropertyName("amount")]
         public string Amount { get; set; }
 
         /// <summary>
-        /// 外部平台的单据号，网商订单与外部平台订单一一对应
+        /// 外部平台的单据号
         /// </summary>
         [JsonPropertyName("biz_no")]
         public string BizNo { get; set; }
 
         /// <summary>
-        /// 币种
+        /// 币种，156=人民币
         /// </summary>
         [JsonPropertyName("currency_value")]
         public string CurrencyValue { get; set; }
 
         /// <summary>
-        /// 扩展参数，内容是JSON格式，并用urlconde编码，按场景约定具体字段
+        /// 扩展参数，内容是JSON格式，并用urlconde编码
         /// </summary>
         [JsonPropertyName("ext_info")]
         public string ExtInfo { get; set; }
 
         /// <summary>
-        /// 网商受理支付或打款等操作时返回的流水号
+        /// 网商支付、退款、打款等交易的流水号
         /// </summary>
         [JsonPropertyName("operate_no")]
         public string OperateNo { get; set; }
@@ -44,19 +44,19 @@ namespace Essensoft.Paylink.Alipay.Response
         public string OperateState { get; set; }
 
         /// <summary>
-        /// 操作类型，PAYMENT：支付，REMITANCE：打款
+        /// 操作类型，PAYMENT=支付，REFUND=退款，REMITANCE=打款
         /// </summary>
         [JsonPropertyName("operate_type")]
         public string OperateType { get; set; }
 
         /// <summary>
-        /// 网商创建的订单号
+        /// 网商订单号
         /// </summary>
         [JsonPropertyName("order_no")]
         public string OrderNo { get; set; }
 
         /// <summary>
-        /// 真实交易金额，操作达到终态时，该字段有值
+        /// 真实交易金额，交易达到成功或者失败时，该字段有值，单位:分
         /// </summary>
         [JsonPropertyName("real_amount")]
         public string RealAmount { get; set; }
@@ -68,13 +68,13 @@ namespace Essensoft.Paylink.Alipay.Response
         public string RequestAcceptTime { get; set; }
 
         /// <summary>
-        /// 请求流水号，表示外部一次请求
+        /// 请求流水号，外部平台在请求支付、退款、打款等操作时传入的流水号
         /// </summary>
         [JsonPropertyName("request_no")]
         public string RequestNo { get; set; }
 
         /// <summary>
-        /// 操作达到终态的时间，格式是yyyyMMddHHmmss
+        /// 交易达到成功、失败的时间，格式是yyyyMMddHHmmss
         /// </summary>
         [JsonPropertyName("trans_time")]
         public string TransTime { get; set; }

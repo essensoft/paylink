@@ -18,5 +18,11 @@ namespace Essensoft.Paylink.Alipay.Response
         /// </summary>
         [JsonPropertyName("deploy_version")]
         public string DeployVersion { get; set; }
+
+        /// <summary>
+        /// appx2.0构建报地址
+        /// </summary>
+        [JsonPropertyName("new_build_package_url")]
+        public string NewBuildPackageUrl { get; set; }
     }
 }

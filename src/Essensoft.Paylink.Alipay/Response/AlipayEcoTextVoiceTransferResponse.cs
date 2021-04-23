@@ -17,7 +17,7 @@ namespace Essensoft.Paylink.Alipay.Response
         /// 调用结果码
         /// </summary>
         [JsonPropertyName("code")]
-        public override string Code { get; set; }
+        public new string Code { get; set; }
 
         /// <summary>
         /// 调用结果描述

@@ -8,13 +8,13 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayEcoRebateBalanceQueryModel : AlipayObject
     {
         /// <summary>
-        /// 商户侧唯一商品id，查询商品的返利信息
+        /// 商户侧唯一商品id，查询该商品的返利信息。
         /// </summary>
         [JsonPropertyName("item_id")]
         public string ItemId { get; set; }
 
         /// <summary>
-        /// 蚂蚁统一会员ID
+        /// 用户支付宝唯一标识，2088开头。
         /// </summary>
         [JsonPropertyName("user_id")]
         public string UserId { get; set; }

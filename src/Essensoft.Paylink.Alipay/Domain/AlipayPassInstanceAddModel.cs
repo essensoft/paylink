@@ -8,7 +8,7 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayPassInstanceAddModel : AlipayObject
     {
         /// <summary>
-        /// 支付宝用户识别信息：uid发券组件。对接文档：https://docs.open.alipay.com/199/sy3hs4
+        /// 支付宝用户识别信息，详见 <a href="https://opendocs.alipay.com/open/199/popvoucher#%E7%AC%AC%E4%BA%94%E6%AD%A5%EF%BC%9A%E8%B0%83%E7%94%A8%E6%8E%A5%E5%8F%A3%E5%8F%91%E5%88%B8">调用接口发券</a>。
         /// </summary>
         [JsonPropertyName("recognition_info")]
         public string RecognitionInfo { get; set; }
@@ -20,13 +20,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string RecognitionType { get; set; }
 
         /// <summary>
-        /// 支付宝pass模版ID，即调用模板创建接口时返回的tpl_id。
+        ///  支付宝pass模版ID。通过<a href="https://opendocs.alipay.com/apis/api_24/alipay.pass.template.add">alipay.pass.template.add</a>(卡券模板创建接口)创建模板后返回的tpl_id。
         /// </summary>
         [JsonPropertyName("tpl_id")]
         public string TplId { get; set; }
 
         /// <summary>
-        /// 模版动态参数信息：对应模板中$变量名$的动态参数，见模板创建接口返回值中的tpl_params字段
+        /// 模版动态参数信息，对应模板中$变量名$的动态参数。对应<a href="https://opendocs.alipay.com/apis/api_24/alipay.pass.template.add">alipay.pass.template.add</a>(卡券模板创建接口)创建模板后返回tpl_params字段。
         /// </summary>
         [JsonPropertyName("tpl_params")]
         public string TplParams { get; set; }

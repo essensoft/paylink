@@ -9,7 +9,7 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AntMerchantExpandIndirectZftCreateModel : AlipayObject
     {
         /// <summary>
-        /// 商户别名。支付宝账单中的商户名称会展示此处设置的别名，如果涉及支付宝APP内的支付，支付结果页也会展示该别名
+        /// 商户别名。支付宝账单中的商户名称会展示此处设置的别名，如果涉及支付宝APP内的支付，支付结果页也会展示该别名。如果涉及当面付场景，请填写线下店铺名称
         /// </summary>
         [JsonPropertyName("alias_name")]
         public string AliasName { get; set; }
@@ -21,7 +21,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string AlipayLogonId { get; set; }
 
         /// <summary>
-        /// 签约支付宝账户，用于协议确认，及后续二级商户增值产品服务签约时使用。本字段要求与商户名称name同名，且是实名认证支付宝账户
+        /// 签约支付宝账户，用于协议确认，及后续二级商户增值产品服务签约时使用。本字段要求与商户名称name同名(个体工商户可以与name或cert_name相同)，且是实名认证支付宝账户
         /// </summary>
         [JsonPropertyName("binding_alipay_logon_id")]
         public string BindingAlipayLogonId { get; set; }
@@ -33,19 +33,19 @@ namespace Essensoft.Paylink.Alipay.Domain
         public List<SettleCardInfo> BizCards { get; set; }
 
         /// <summary>
-        /// 经营地址。地址对象中省、市、区、地址必填，其余选填
+        /// 经营地址。当使用当面付服务时，本字段要求必填。地址对象中省、市、区、地址必填，其余选填
         /// </summary>
         [JsonPropertyName("business_address")]
         public AddressInfo BusinessAddress { get; set; }
 
         /// <summary>
-        /// 商户证件图片url，本业务接口中，如果是特殊行业必填。其值为使用ant.merchant.expand.indirect.image.upload上传图片得到的一串oss key。
+        /// 商户证件图片url，本业务接口中，如果是特殊行业必填；使用当面付服务时，非个人必填，个人结算到卡时必填。其值为使用ant.merchant.expand.indirect.image.upload上传图片得到的一串oss key。
         /// </summary>
         [JsonPropertyName("cert_image")]
         public string CertImage { get; set; }
 
         /// <summary>
-        /// 证件反面图片。目前只有当商户类型是个人商户，主证件为身份证时才需填写
+        /// 证件反面图片。目前只有当商户类型是个人商户且使用当面付服务时才需填写
         /// </summary>
         [JsonPropertyName("cert_image_back")]
         public string CertImageBack { get; set; }
@@ -87,6 +87,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string ExternalId { get; set; }
 
         /// <summary>
+        /// 内景照，其值为使用ant.merchant.expand.indirect.image.upload上传图片得到的一串oss key。如果使用当面付服务则必填
+        /// </summary>
+        [JsonPropertyName("in_door_images")]
+        public List<string> InDoorImages { get; set; }
+
+        /// <summary>
         /// 开票资料信息
         /// </summary>
         [JsonPropertyName("invoice_info")]
@@ -105,7 +111,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string LegalCertFrontImage { get; set; }
 
         /// <summary>
-        /// 法人身份证号
+        /// 法人身份证号。非个人商户类型必填
         /// </summary>
         [JsonPropertyName("legal_cert_no")]
         public string LegalCertNo { get; set; }
@@ -117,7 +123,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string LegalCertType { get; set; }
 
         /// <summary>
-        /// 法人名称
+        /// 法人名称。非个人商户类型必填
         /// </summary>
         [JsonPropertyName("legal_name")]
         public string LegalName { get; set; }
@@ -129,7 +135,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string LicenseAuthLetterImage { get; set; }
 
         /// <summary>
-        /// 商户类别码mcc，参见https://gw.alipayobjects.com/os/bmw-prod/05c9a32e-42d1-436b-ace7-13101d91f672.xlsx 特殊行业要按照MCC说明中的资质一栏上传辅助资质，辅助资质要在qualifications中上传，会有人工审核。
+        /// 商户类别码mcc，参见https://gw.alipayobjects.com/os/bmw-prod/e5dbb27b-1d8d-442e-be9e-6e52971ce7c3.xlsx 特殊行业要按照MCC说明中的资质一栏上传辅助资质，辅助资质要在qualifications中上传，会有人工审核。
         /// </summary>
         [JsonPropertyName("mcc")]
         public string Mcc { get; set; }
@@ -141,13 +147,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string MerchantType { get; set; }
 
         /// <summary>
-        /// 进件的二级商户名称
+        /// 进件的二级商户名称。一般情况下要与证件的名称相同。个体工商户类型可以放宽到法人名称
         /// </summary>
         [JsonPropertyName("name")]
         public string Name { get; set; }
 
         /// <summary>
-        /// 外部业务号。比如某种业务标准外部订单号,比如交易外部订单号，代表服务商端自己订单号。用于做并发控制，防止一笔外部订单发起两次进件。非必要场景禁止传入本字段，如要使用务必理清场景及字段生成规则，与蚂蚁金服对接人咨询。
+        /// 外部业务号。目前已废弃。新接入场景禁止传入本字段，否则可能会产生无法新进件的情况
         /// </summary>
         [JsonPropertyName("out_biz_no")]
         public string OutBizNo { get; set; }
@@ -159,13 +165,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public List<string> OutDoorImages { get; set; }
 
         /// <summary>
-        /// 商户行业资质，当商户是特殊行业时必填
+        /// 商户行业资质，当商户是特殊行业时必填。每项行业资质信息中，industry_qualification_type和industry_qualification_image均必填
         /// </summary>
         [JsonPropertyName("qualifications")]
         public List<IndustryQualificationInfo> Qualifications { get; set; }
 
         /// <summary>
-        /// 商户使用服务，可选值有：当面付、app支付、wap支付、电脑支付
+        /// 商户使用服务，可选值有：当面付、app支付、wap支付、电脑支付、线上资金预授权、新当面资金授权、商户代扣、小程序支付。其值会影响其他字段必填性，详见其他字段描述
         /// </summary>
         [JsonPropertyName("service")]
         public List<string> Service { get; set; }

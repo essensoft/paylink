@@ -26,7 +26,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string IdentityParam { get; set; }
 
         /// <summary>
-        /// 商户个性化配置，格式为json，详细支持的字段说明为： return_url：需要回跳的目标地址，必填，一般指定为商户业务页面
+        /// 商户个性化配置，格式为json，详细支持的字段说明为： return_url：需要回跳的目标地址，必填，一般指定为商户业务页面。linked_merchant_app_id:商户的appid
         /// </summary>
         [JsonPropertyName("merchant_config")]
         public string MerchantConfig { get; set; }

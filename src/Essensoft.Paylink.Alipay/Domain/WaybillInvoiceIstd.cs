@@ -20,13 +20,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string ShopNo { get; set; }
 
         /// <summary>
-        /// 即时配送运单金额
+        /// 即时配送运单金额，waybill_invoce_status为1的情况下不能为空
         /// </summary>
         [JsonPropertyName("waybill_amount")]
         public string WaybillAmount { get; set; }
 
         /// <summary>
-        /// 配送单开票状态  0：处理中 1：已开票  2：开票失败
+        /// 明细的运单开票状态，1：开票成功 2：不可开票 3：可开票；整体开票状态为0的情况下，无开票明细；整体开票状态为1，明细开票状态全部是1；整体开票状态为2，明细开票状态为2或者3
         /// </summary>
         [JsonPropertyName("waybill_invoice_status")]
         public long WaybillInvoiceStatus { get; set; }

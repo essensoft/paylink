@@ -87,7 +87,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public List<string> ServiceLabelList { get; set; }
 
         /// <summary>
-        /// 会员卡上架门店id（支付宝门店id），既发放会员卡的商家门店id
+        /// 会员卡上架门店id（支付宝门店id），即发放会员卡的商家门店id
         /// </summary>
         [JsonPropertyName("shop_ids")]
         public List<string> ShopIds { get; set; }

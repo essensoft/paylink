@@ -32,7 +32,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string PrincipalTag { get; set; }
 
         /// <summary>
-        /// 推广页类型：COLLECT_INFO -  普通留资;TRADE - 交易留资
+        /// 推广页类型：COLLECT_INFO -  免费留资；TRADE - 付费留资； OPERATION_PAID - 运营商付费留资；待扩展
         /// </summary>
         [JsonPropertyName("type")]
         public string Type { get; set; }

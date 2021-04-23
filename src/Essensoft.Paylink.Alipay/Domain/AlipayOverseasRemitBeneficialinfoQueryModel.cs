@@ -44,10 +44,34 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string ReceiveCurrency { get; set; }
 
         /// <summary>
+        /// 用户的名，拼音
+        /// </summary>
+        [JsonPropertyName("receiver_first_name")]
+        public string ReceiverFirstName { get; set; }
+
+        /// <summary>
+        /// 用户的全名拼音
+        /// </summary>
+        [JsonPropertyName("receiver_full_name")]
+        public string ReceiverFullName { get; set; }
+
+        /// <summary>
+        /// 用户的姓，拼音
+        /// </summary>
+        [JsonPropertyName("receiver_last_name")]
+        public string ReceiverLastName { get; set; }
+
+        /// <summary>
         /// 接收端的ID
         /// </summary>
         [JsonPropertyName("receiver_mid")]
         public string ReceiverMid { get; set; }
+
+        /// <summary>
+        /// 用户中间的名字
+        /// </summary>
+        [JsonPropertyName("receiver_middle_name")]
+        public string ReceiverMiddleName { get; set; }
 
         /// <summary>
         /// 汇款用途

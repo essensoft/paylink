@@ -32,6 +32,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string IndustryRefluxInfo { get; set; }
 
         /// <summary>
+        /// 特殊场景下，允许商户指定交易展示的卖家名称
+        /// </summary>
+        [JsonPropertyName("specified_seller_name")]
+        public string SpecifiedSellerName { get; set; }
+
+        /// <summary>
         /// 系统商编号  该参数作为系统商返佣数据提取的依据，请填写系统商签约协议的PID
         /// </summary>
         [JsonPropertyName("sys_service_provider_id")]

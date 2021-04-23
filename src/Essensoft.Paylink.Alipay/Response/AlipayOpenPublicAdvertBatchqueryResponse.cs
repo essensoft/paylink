@@ -10,7 +10,7 @@ namespace Essensoft.Paylink.Alipay.Response
     public class AlipayOpenPublicAdvertBatchqueryResponse : AlipayResponse
     {
         /// <summary>
-        /// 广告位list ,目前只有一个广告位
+        /// 广告位列表 。目前只有一个广告位。
         /// </summary>
         [JsonPropertyName("advert_list")]
         public List<Advert> AdvertList { get; set; }

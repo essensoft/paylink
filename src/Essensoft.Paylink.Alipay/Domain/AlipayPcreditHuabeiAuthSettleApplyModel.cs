@@ -8,7 +8,7 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayPcreditHuabeiAuthSettleApplyModel : AlipayObject
     {
         /// <summary>
-        /// MERCHANT_SETTLE 结算（需要主动退出在发起结算）; QUIT_SETTLE 退出协议（解约协议）; PERIOD_SETTLE 分阶段结算（不解约协议）; 默认为 MERCHANT_SETTLE
+        /// 操作类型，默认为 MERCHANT_SETTLE（结算）。枚举值如下： *  MERCHANT_SETTLE：结算（需要主动退出在发起结算）; *  QUIT_SETTLE：退出协议（解约协议）; *  PERIOD_SETTLE：分阶段结算（不解约协议）。
         /// </summary>
         [JsonPropertyName("action_type")]
         public string ActionType { get; set; }
@@ -20,7 +20,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string AgreementNo { get; set; }
 
         /// <summary>
-        /// 买家在支付宝的用户id
+        /// 用户在支付宝的唯一标识，以 2088 开头的 16 位纯数字组成。
         /// </summary>
         [JsonPropertyName("alipay_user_id")]
         public string AlipayUserId { get; set; }
@@ -32,7 +32,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public ExtraParams ExtendParams { get; set; }
 
         /// <summary>
-        /// 该参数控制结算完成之后的操作，true或者不填代表解约，false代表不解约
+        /// 是否解约，该参数控制结算完成之后的操作，为空则表示结算后解约。枚举值如下： *  true：代表解约，默认为true。 *  false：代表不解约。
         /// </summary>
         [JsonPropertyName("need_terminated")]
         public string NeedTerminated { get; set; }
@@ -50,7 +50,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string PayAmount { get; set; }
 
         /// <summary>
-        /// 商户的支付宝用户id。如果该值为空，则默认为商户签约账号对应的支付宝用户ID。
+        /// 支付宝商家ID，即商家账号在支付宝的唯一标识，以 2088 开头的 16 位纯数字组成。 说明：若该值为空，则默认为商户签约账号对应的支付宝用户ID。
         /// </summary>
         [JsonPropertyName("seller_id")]
         public string SellerId { get; set; }

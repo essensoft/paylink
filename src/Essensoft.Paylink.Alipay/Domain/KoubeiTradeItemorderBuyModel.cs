@@ -57,7 +57,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string Subject { get; set; }
 
         /// <summary>
-        /// 该笔订单允许的最晚付款时间，逾期将关闭交易，取值范围:1m～30m(单位:分钟) 不传默认3m。
+        /// 该笔订单允许的最晚付款时间，逾期将关闭交易，不传默认3m。取值范围:1m～30m(单位:分钟) ，不支持小数。
         /// </summary>
         [JsonPropertyName("timeout")]
         public string Timeout { get; set; }

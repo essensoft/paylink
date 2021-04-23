@@ -81,7 +81,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string TicketModifiedTime { get; set; }
 
         /// <summary>
-        /// 门票规格列表
+        /// 门票规格列表，可选项：成人票, 全价票
         /// </summary>
         [JsonPropertyName("ticket_specs")]
         public List<string> TicketSpecs { get; set; }

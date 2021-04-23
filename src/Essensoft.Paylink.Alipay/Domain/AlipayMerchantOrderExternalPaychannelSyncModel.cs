@@ -8,7 +8,7 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayMerchantOrderExternalPaychannelSyncModel : AlipayObject
     {
         /// <summary>
-        /// isv测的业务订单号，等同于支付接口spi.alipay.merchant.order.commonisv.pay 中的isv_order_no。
+        /// isv侧的业务订单号，等同于支付接口spi.alipay.merchant.order.commonisv.pay 中的isv_order_no
         /// </summary>
         [JsonPropertyName("biz_no")]
         public string BizNo { get; set; }
@@ -68,7 +68,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string OriginTradeNo { get; set; }
 
         /// <summary>
-        /// 外部业务号
+        /// 外部业务号，等同于支付接口spi.alipay.merchant.order.commonisv.pay中的merchant_order_no
         /// </summary>
         [JsonPropertyName("out_biz_no")]
         public string OutBizNo { get; set; }

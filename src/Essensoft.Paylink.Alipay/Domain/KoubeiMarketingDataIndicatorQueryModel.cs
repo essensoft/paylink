@@ -14,7 +14,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string BeginDate { get; set; }
 
         /// <summary>
-        /// 业务类型，可选值有六个  1，MemberQuery 商户会员数据查询  2，MemberQueryByStore 门店会员数据查询  3，TradeQuery 商户交易数据查询  4，TradeQueryByStore 门店交易数据查询  5，CampaignQuery 商户活动数据查询  6，CampaignQueryByStore 门店活动数据查询
+        /// 业务类型，可选值有八个  1，MemberQuery 商户会员数据查询  2，MemberQueryByStore 门店会员数据查询  3，TradeQuery 商户交易数据查询  4，TradeQueryByStore 门店交易数据查询  5，CampaignQuery 商户活动数据查询  6，CampaignQueryByStore 门店活动数据查询  7, ConponsQuery 商户券数据查询  8,ConponsQueryByStore 门店券数据查询
         /// </summary>
         [JsonPropertyName("biz_type")]
         public string BizType { get; set; }

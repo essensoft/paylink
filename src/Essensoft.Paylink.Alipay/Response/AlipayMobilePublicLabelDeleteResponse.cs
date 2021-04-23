@@ -11,7 +11,7 @@ namespace Essensoft.Paylink.Alipay.Response
         /// 结果码
         /// </summary>
         [JsonPropertyName("code")]
-        public override string Code { get; set; }
+        public new string Code { get; set; }
 
         /// <summary>
         /// 标签编号
@@ -23,6 +23,6 @@ namespace Essensoft.Paylink.Alipay.Response
         /// 结果信息
         /// </summary>
         [JsonPropertyName("msg")]
-        public override string Msg { get; set; }
+        public new string Msg { get; set; }
     }
 }

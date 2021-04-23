@@ -9,6 +9,18 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class OuterGroup : AlipayObject
     {
         /// <summary>
+        /// 转化目标之转化事件id列表
+        /// </summary>
+        [JsonPropertyName("conversion_id_list")]
+        public List<string> ConversionIdList { get; set; }
+
+        /// <summary>
+        /// 计费点
+        /// </summary>
+        [JsonPropertyName("conversion_type")]
+        public string ConversionType { get; set; }
+
+        /// <summary>
         /// 业务扩展参数字段，根据第三方需要使用，投放端只做存储并向检索端透传
         /// </summary>
         [JsonPropertyName("extend_info")]
@@ -51,10 +63,22 @@ namespace Essensoft.Paylink.Alipay.Domain
         public List<string> ItemIdList { get; set; }
 
         /// <summary>
+        /// 是否使用OCPX智能出价，只再CPC场景下，支持开启OCPX： OPEN: 打开；CLOSE: 关闭
+        /// </summary>
+        [JsonPropertyName("ocpx_switch")]
+        public string OcpxSwitch { get; set; }
+
+        /// <summary>
         /// 外部唯一计划编号
         /// </summary>
         [JsonPropertyName("plan_outer_id")]
         public string PlanOuterId { get; set; }
+
+        /// <summary>
+        /// 转化目标成本，只有开启OCPX后才需要配置，单位为分
+        /// </summary>
+        [JsonPropertyName("target_cpa")]
+        public long TargetCpa { get; set; }
 
         /// <summary>
         /// 单元定向列表。目前支持的定向类型有：  REGION_LIST: 实时地址  AD_POS_LIST: 广告位定向  OUTER_KOUBEI_INTEREST_TAG_LIST: 口碑偏好  OUTER_KOUBEI_CROWD_TAG_LIST：口碑人群

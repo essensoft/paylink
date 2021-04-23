@@ -8,7 +8,7 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayOpenPublicGroupDeleteModel : AlipayObject
     {
         /// <summary>
-        /// 需要删除的用户分组的id
+        /// 分组ID，通过<a href="https://opendocs.alipay.com/apis/api_6/alipay.open.public.group.create">alipay.open.public.group.create</a>（用户分组创建接口) 创建用户分组获取。
         /// </summary>
         [JsonPropertyName("group_id")]
         public string GroupId { get; set; }

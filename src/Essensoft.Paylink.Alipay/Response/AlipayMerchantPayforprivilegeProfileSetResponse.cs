@@ -9,7 +9,7 @@ namespace Essensoft.Paylink.Alipay.Response
     public class AlipayMerchantPayforprivilegeProfileSetResponse : AlipayResponse
     {
         /// <summary>
-        /// 充享惠卡模板设置
+        /// 卡包充值卡面模板设置
         /// </summary>
         [JsonPropertyName("card_template_config")]
         public PayForPrivilegeCardTemplateConfig CardTemplateConfig { get; set; }

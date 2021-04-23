@@ -69,6 +69,18 @@ namespace Essensoft.Paylink.Alipay.Domain
         public List<VoucherTimeRule> UnavailableTimeRule { get; set; }
 
         /// <summary>
+        /// 券核销范围信息
+        /// </summary>
+        [JsonPropertyName("use_scope_info")]
+        public VoucherUseScopeInfo UseScopeInfo { get; set; }
+
+        /// <summary>
+        /// 券描述
+        /// </summary>
+        [JsonPropertyName("voucher_desc")]
+        public string VoucherDesc { get; set; }
+
+        /// <summary>
         /// 优惠券名称
         /// </summary>
         [JsonPropertyName("voucher_name")]

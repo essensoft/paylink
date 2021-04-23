@@ -33,19 +33,19 @@ namespace Essensoft.Paylink.Alipay.Domain
         public List<McardNotifyMessage> NotifyMessages { get; set; }
 
         /// <summary>
-        /// 标识业务发生的时间。 时间格式：yyyy-MM-dd HH:mm:ss 。 
+        /// 标识业务发生时间，时间格式为"yyyy-MM-dd HH:mm:ss"。
         /// </summary>
         [JsonPropertyName("occur_time")]
         public string OccurTime { get; set; }
 
         /// <summary>
-        /// 支付宝业务卡号，即 alipay.marketing.card.open(会员卡开卡)返回结果中的card_info#biz_card_no。
+        /// 支付宝业务卡号，即通过<a href="">alipay.marketing.card.open</a>(会员卡开卡)接口开卡后获取的 card_info.biz_card_no 值。
         /// </summary>
         [JsonPropertyName("target_card_no")]
         public string TargetCardNo { get; set; }
 
         /// <summary>
-        /// 卡号ID类型  BIZ_CARD：支付宝业务卡号
+        /// 卡号ID类型。支持： BIZ_CARD：支付宝业务卡号（商户会员卡场景使用）。
         /// </summary>
         [JsonPropertyName("target_card_no_type")]
         public string TargetCardNoType { get; set; }

@@ -20,7 +20,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public string MerchantPid { get; set; }
 
         /// <summary>
-        /// 支付宝商户入驻申请单状态，申请单状态包括：暂存、审核中、待商户确认、成功、失败。注:暂存是审核前的中间状态，如出现暂存请再次提交
+        /// 支付宝商户入驻申请单状态，申请单状态包括：暂存、审核中、待商户确认、成功、失败。 说明：暂存是审核前的中间状态，如出现暂存状态请再次提交代创建生活号申请。
         /// </summary>
         [JsonPropertyName("order_status_biz_desc")]
         public string OrderStatusBizDesc { get; set; }

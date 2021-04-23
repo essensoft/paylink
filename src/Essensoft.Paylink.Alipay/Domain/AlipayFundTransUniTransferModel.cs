@@ -38,7 +38,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string OriginalOrderId { get; set; }
 
         /// <summary>
-        /// 商户端的唯一订单号，对于同一笔转账请求，商户需保证该订单号唯一。
+        /// 商家侧唯一订单号，由商家自定义。对于不同转账请求，商家需保证该订单号在自身系统唯一。
         /// </summary>
         [JsonPropertyName("out_biz_no")]
         public string OutBizNo { get; set; }

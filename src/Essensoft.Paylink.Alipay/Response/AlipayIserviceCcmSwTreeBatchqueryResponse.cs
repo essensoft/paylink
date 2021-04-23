@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.Paylink.Alipay.Domain;
 
 namespace Essensoft.Paylink.Alipay.Response
@@ -12,6 +13,6 @@ namespace Essensoft.Paylink.Alipay.Response
         /// 类目集合
         /// </summary>
         [JsonPropertyName("trees")]
-        public TreeInfo Trees { get; set; }
+        public List<TreeInfo> Trees { get; set; }
     }
 }

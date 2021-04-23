@@ -35,13 +35,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// 纬度
         /// </summary>
         [JsonPropertyName("lat")]
-        public long Lat { get; set; }
+        public string Lat { get; set; }
 
         /// <summary>
         /// 经度
         /// </summary>
         [JsonPropertyName("lng")]
-        public long Lng { get; set; }
+        public string Lng { get; set; }
 
         /// <summary>
         /// 手机号

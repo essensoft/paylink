@@ -18,5 +18,11 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("page_size")]
         public string PageSize { get; set; }
+
+        /// <summary>
+        /// 券状态： 可用(ENABLED)，已核销(即完全使用，USED)，已过期(EXPIRED)，不可用(DISABLED)
+        /// </summary>
+        [JsonPropertyName("voucher_status")]
+        public string VoucherStatus { get; set; }
     }
 }

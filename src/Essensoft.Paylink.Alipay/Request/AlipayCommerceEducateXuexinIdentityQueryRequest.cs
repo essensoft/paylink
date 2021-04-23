@@ -8,6 +8,11 @@ namespace Essensoft.Paylink.Alipay.Request
     /// </summary>
     public class AlipayCommerceEducateXuexinIdentityQueryRequest : IAlipayRequest<AlipayCommerceEducateXuexinIdentityQueryResponse>
     {
+        /// <summary>
+        /// 支付宝标准用户学信网在校信息授权查询
+        /// </summary>
+        public string BizContent { get; set; }
+
         #region IAlipayRequest Members
 
         private bool needEncrypt = false;
@@ -96,7 +101,10 @@ namespace Essensoft.Paylink.Alipay.Request
 
         public IDictionary<string, string> GetParameters()
         {
-            var parameters = new AlipayDictionary();
+            var parameters = new AlipayDictionary
+            {
+                { "biz_content", BizContent }
+            };
             return parameters;
         }
 

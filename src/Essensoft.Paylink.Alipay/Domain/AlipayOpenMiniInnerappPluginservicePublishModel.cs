@@ -39,7 +39,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string DetailForClient { get; set; }
 
         /// <summary>
-        /// pc端详，用于能力中心展示
+        /// pc端详情，用于能力中心展示
         /// </summary>
         [JsonPropertyName("detail_for_pc")]
         public string DetailForPc { get; set; }
