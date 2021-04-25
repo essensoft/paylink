@@ -47,7 +47,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Request
 
         public bool GetNeedQueryModel()
         {
-            return false;
+            return true;
         }
     }
 }

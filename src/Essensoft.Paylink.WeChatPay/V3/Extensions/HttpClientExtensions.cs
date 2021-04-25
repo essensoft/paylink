@@ -21,15 +21,19 @@ namespace Essensoft.Paylink.WeChatPay.V3.Extensions
 
             if (request.GetNeedQueryModel())
             {
-                if (url.Contains("?"))
+                var queryModel = request.GetQueryModel();
+                if (queryModel != null)
                 {
-                    var txtParams = QueryModelConvertToDictionary(request);
-                    url += "&" + WeChatPayUtility.BuildQuery(txtParams);
-                }
-                else
-                {
-                    var txtParams = QueryModelConvertToDictionary(request);
-                    url += "?" + WeChatPayUtility.BuildQuery(txtParams);
+                    if (url.Contains("?"))
+                    {
+                        var txtParams = ConvertToDictionary(queryModel);
+                        url += "&" + WeChatPayUtility.BuildQuery(txtParams);
+                    }
+                    else
+                    {
+                        var txtParams = ConvertToDictionary(queryModel);
+                        url += "?" + WeChatPayUtility.BuildQuery(txtParams);
+                    }
                 }
             }
 
@@ -107,17 +111,10 @@ namespace Essensoft.Paylink.WeChatPay.V3.Extensions
             }
         }
 
-        private static IDictionary<string, string> QueryModelConvertToDictionary<T>(IWeChatPayGetRequest<T> request) where T : WeChatPayResponse
+        private static IDictionary<string, string> ConvertToDictionary(WeChatPayObject obj)
         {
-            var queryModel = request.GetQueryModel();
-            if (queryModel != null)
-            {
-                var str = JsonSerializer.Serialize(queryModel, queryModel.GetType(), jsonSerializerOptions);
-
-                return JsonSerializer.Deserialize<IDictionary<string, string>>(str, jsonSerializerOptions);
-            }
-
-            throw new WeChatPayException("request.QueryModel is null!");
+            var str = JsonSerializer.Serialize(obj, obj.GetType(), jsonSerializerOptions);
+            return JsonSerializer.Deserialize<IDictionary<string, string>>(str, jsonSerializerOptions);
         }
 
         private static string BuildToken(string url, string method, string body, WeChatPayOptions options)
