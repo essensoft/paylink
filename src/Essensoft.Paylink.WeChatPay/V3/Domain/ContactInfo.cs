@@ -38,9 +38,8 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// <remarks>
         /// 1、“超级管理员身份证件号码”与“超级管理员微信openid”，二选一必填。
         /// 2、超级管理员签约时，校验微信号是否与该微信openid一致。
-        /// <para>示例值：pVd1HJ6zyvPedzGaV+X/2C+xriudjD5APomty7/mYNxLMpRSvWKIjOv/69bD2qhZ9evAM+Jv1z0NVa8MRtelw/wDa4SzfeespQO/0kjiwfqdfg==</para>
+        /// <para>示例值：oUpF8uMuAJO_M2pxb1Q9zNjWeS6o</para>
         /// </remarks>
-        [WeChatPayPrivacyProperty]
         [JsonPropertyName("openid")]
         public string OpenId { get; set; }
 
