@@ -6,7 +6,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
     /// 特约商户进件 - 提交申请单 - 请求JSON参数
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter11_1_1.shtml">特约商户进件 - 提交申请单API</a> - 最新更新时间：2019.04.10</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter11_1_1.shtml">特约商户进件 - 提交申请单API</a> - 最新更新时间：2021.04.06</para>
     /// </remarks>
     public class WeChatPayApplyment4SubApplymentBodyModel : WeChatPayObject
     {
@@ -62,8 +62,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// 结算银行账户
         /// </summary>
         /// <remarks>
-        ///  1、请填写商家提现收款的银行账户信息。
-        ///  2、若结算规则id为“719、721、716、717、730、739、727、738、726”，可选填结算账户。
+        /// 请填写商家提现收款的银行账户信息。
         /// </remarks>
         [JsonPropertyName("bank_account_info")]
         public BankAccountInfo BankAccountInfo { get; set; }
