@@ -1,35 +1,35 @@
 <Project>
 
-	<PropertyGroup>
-		<Copyright>Copyright (c) Essensoft and Contributors</Copyright>
-		<Authors>Essensoft</Authors>
-		<Product>Paylink</Product>
-		<Version>4.0.4</Version>
-		<NoWarn>$(NoWarn);CS1591</NoWarn>
-		<PackageIcon>logo.png</PackageIcon>
-		<PackageProjectUrl>https://github.com/essensoft/paylink</PackageProjectUrl>
-		<RepositoryType>git</RepositoryType>
-		<RepositoryUrl>https://github.com/essensoft/paylink</RepositoryUrl>
-		<PackageLicenseFile>LICENSE.md</PackageLicenseFile>
-		<PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
-		<PublishRepositoryUrl>true</PublishRepositoryUrl>
-		<EmbedUntrackedSources>true</EmbedUntrackedSources>
-		<IncludeSymbols>true</IncludeSymbols>
-		<SymbolPackageFormat>snupkg</SymbolPackageFormat>
-		<SignAssembly>true</SignAssembly>
-		<AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Paylink.snk</AssemblyOriginatorKeyFile>
-		<GenerateDocumentationFile Condition="'$(Configuration)' == 'Release'">true</GenerateDocumentationFile>
-		<GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
-		<LangVersion>latest</LangVersion>
-	</PropertyGroup>
+  <PropertyGroup>
+    <Copyright>Copyright (c) Essensoft and Contributors</Copyright>
+    <Authors>Essensoft</Authors>
+    <Product>Paylink</Product>
+    <Version>4.0.4</Version>
+    <NoWarn>$(NoWarn);CS1591</NoWarn>
+    <PackageIcon>logo.png</PackageIcon>
+    <PackageProjectUrl>https://github.com/essensoft/paylink</PackageProjectUrl>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/essensoft/paylink</RepositoryUrl>
+    <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <IncludeSymbols>true</IncludeSymbols>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)Paylink.snk</AssemblyOriginatorKeyFile>
+    <GenerateDocumentationFile Condition="'$(Configuration)' == 'Release'">true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
 
-	<ItemGroup>
-		<None Include="$(MSBuildThisFileDirectory)logo.png" Pack="true" Visible="false" PackagePath="" />
-		<None Include="$(MSBuildThisFileDirectory)LICENSE.md" Pack="true" Visible="false" PackagePath="" />
-	</ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)logo.png" Pack="true" Visible="false" PackagePath="" />
+    <None Include="$(MSBuildThisFileDirectory)LICENSE.md" Pack="true" Visible="false" PackagePath="" />
+  </ItemGroup>
 
-	<ItemGroup>
-		<PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
-	</ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0" PrivateAssets="All" />
+  </ItemGroup>
 
 </Project>
