@@ -117,5 +117,14 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// </remarks>
         [JsonPropertyName("amount")]
         public CombineAmount Amount { get; set; }
+
+        /// <summary>
+        /// 优惠功能
+        /// </summary>
+        /// <remarks>
+        /// 优惠功能，子单有核销优惠券时有返回
+        /// </remarks>
+        [JsonPropertyName("promotion_detail")]
+        public PromotionDetail PromotionDetail { get; set; }
     }
 }
