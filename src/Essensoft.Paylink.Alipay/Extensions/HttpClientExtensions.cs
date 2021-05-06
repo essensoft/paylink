@@ -50,7 +50,7 @@ namespace Essensoft.Paylink.Alipay.Extensions
                 // 组装文本请求参数
                 foreach (var iter in textParams)
                 {
-                    reqContent.Add(new StringContent(iter.Value, Encoding.UTF8, "text/plain"), $@"""{iter.Key}""");
+                    reqContent.Add(new StringContent(iter.Value, Encoding.UTF8, "text/plain"), $"\"{iter.Key}\"");
                 }
 
                 // 组装文件请求参数
@@ -60,7 +60,7 @@ namespace Essensoft.Paylink.Alipay.Extensions
                     var fileItem = iter.Value;
                     var byteArrayContent = new ByteArrayContent(fileItem.GetContent());
                     byteArrayContent.Headers.ContentType = new MediaTypeHeaderValue(fileItem.GetMimeType());
-                    reqContent.Add(byteArrayContent, @"""{name}""", @"""{ fileItem.GetFileName()}""");
+                    reqContent.Add(byteArrayContent, $"\"{name}\"", $"\"{fileItem.GetFileName()}\"");
                 }
 
                 using (var resp = await client.PostAsync(url, reqContent))
