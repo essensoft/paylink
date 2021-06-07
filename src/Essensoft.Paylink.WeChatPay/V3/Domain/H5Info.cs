@@ -18,7 +18,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// <para>示例值：iOS</para>
         /// </remarks>
         [JsonPropertyName("type")]
-        public int Type { get; set; }
+        public string Type { get; set; }
 
         /// <summary>
         /// 应用名称

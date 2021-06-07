@@ -35,5 +35,14 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// </remarks>
         [JsonPropertyName("store_info")]
         public StoreInfo StoreInfo { get; set; }
+
+        /// <summary>
+        /// H5场景信息
+        /// </summary>
+        /// <remarks>
+        /// H5场景信息
+        /// </remarks>
+        [JsonPropertyName("h5_info")]
+        public H5Info H5Info { get; set; }
     }
 }
