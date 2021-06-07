@@ -6,8 +6,8 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
     /// 资金应用 - 分账 - 查询分账结果 - 请求URL参数
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter8_1_1.shtml">分账 - 查询分账结果API</a> - 最新更新时间：2021.05.11</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter8_1_1.shtml">分账(服务商) - 查询分账结果API</a> - 最新更新时间：2021.05.11</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter8_1_2.shtml">分账 - 查询分账结果API</a> - 最新更新时间：2021.05.11</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter8_1_2.shtml">分账(服务商) - 查询分账结果API</a> - 最新更新时间：2021.05.11</para>
     /// </remarks>
     public class WeChatPayProfitSharingOrdersOutOrderNoQueryModel : WeChatPayObject
     {
