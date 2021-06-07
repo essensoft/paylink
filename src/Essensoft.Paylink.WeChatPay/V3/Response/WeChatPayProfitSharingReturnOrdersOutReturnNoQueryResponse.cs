@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text.Json.Serialization;
-using Essensoft.Paylink.WeChatPay.V3.Domain;
+﻿using System.Text.Json.Serialization;
 
 namespace Essensoft.Paylink.WeChatPay.V3.Response
 {
