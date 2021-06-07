@@ -200,7 +200,7 @@ namespace WebApplicationSample.Controllers
                 Description = viewModel.Description,
                 NotifyUrl = viewModel.NotifyUrl,
                 OutTradeNo = viewModel.OutTradeNo,
-                SceneInfo = new SceneInfo { PayerClientIp = "127.0.0.1" }
+                SceneInfo = new SceneInfo { PayerClientIp = "127.0.0.1", H5Info = new H5Info { Type = "Wap" } }
             };
 
             var request = new WeChatPayTransactionsH5Request();
