@@ -4,13 +4,34 @@ using Essensoft.Paylink.WeChatPay.V3.Domain;
 namespace Essensoft.Paylink.WeChatPay.V3.Notify
 {
     /// <summary>
-    /// 普通直连分账 - 分账动账通知
+    /// 资金应用 - 分账 - 分账动账通知
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/api/allocation.php?chapter=27_9&amp;index=9">普通直连分账 - 支付通知API</a></para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter8_1_10.shtml">分账 - 分账动账通知</a> - 最新更新时间：2020.11.03</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter8_1_10.shtml">分账(服务商) - 分账动账通知</a> - 最新更新时间：2020.11.03</para>
     /// </remarks>
     public class WeChatPayProfitSharingNotify : WeChatPayNotify
     {
+        /// <summary>
+        /// 服务商商户号
+        /// </summary>
+        /// <remarks>
+        /// 服务商模式分账发起商户。
+        /// <para>示例值: 1900000100</para>
+        /// </remarks>
+        [JsonPropertyName("sp_mchid")]
+        public string SpMchId { get; set; }
+
+        /// <summary>
+        /// 子商户号
+        /// </summary>
+        /// <remarks>
+        /// 服务商模式分账出资商户。
+        /// <para>示例值: 1900000100</para>
+        /// </remarks>
+        [JsonPropertyName("sub_mchid")]
+        public string SubMchId { get; set; }
+
         /// <summary>
         /// 直连商户号
         /// </summary>

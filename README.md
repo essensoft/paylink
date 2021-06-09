@@ -125,10 +125,12 @@ Package  | NuGet | Downloads
 
 * V3版 [开发者文档](https://pay.weixin.qq.com/wiki/doc/apiv3/index.shtml)
     - 基础支付
+    - 分账
     - 微信支付分
     - 商户进件（服务商）
     - 基础支付（服务商）
-
+    - 分账（服务商）
+    
 ## 致谢
 
 - [Alipay](https://github.com/alipay)
