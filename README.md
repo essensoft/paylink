@@ -65,7 +65,7 @@ Package  | NuGet | Downloads
 ## 开发环境
 
 * Windows 10
-* [Visual Studio 2019 16.9](https://visualstudio.microsoft.com)
+* [Visual Studio 2019 16.10](https://visualstudio.microsoft.com)
 * [.NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
 
 ## 运行环境
