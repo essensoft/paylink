@@ -144,13 +144,20 @@ namespace WebApplicationSample.Controllers
             try
             {
                 var notify = await _client.CertificateExecuteAsync<AlipayTradeAppPayNotify>(Request, _optionsAccessor.Value);
-                if (notify.TradeStatus == AlipayTradeStatus.Success)
+                switch (notify.TradeStatus)
                 {
-                    _logger.LogInformation("APP支付异步通知-交易支付成功 => OutTradeNo: " + notify.OutTradeNo);
-                    return AlipayNotifyResult.Success;
+                    case AlipayTradeStatus.Success: // 支付成功
+                        _logger.LogInformation("APP支付异步通知-交易支付成功 => OutTradeNo: " + notify.OutTradeNo);
+                        return AlipayNotifyResult.Success;
+                    case AlipayTradeStatus.Closed: // 交易关闭
+                        _logger.LogInformation("APP支付异步通知-未付款交易超时关闭，或支付完成后全额退款 => OutTradeNo: " + notify.OutTradeNo);
+                        return AlipayNotifyResult.Success;
+                    case AlipayTradeStatus.Finished: // 交易完结
+                        _logger.LogInformation("APP支付异步通知-交易结束，不可退款 => OutTradeNo: " + notify.OutTradeNo);
+                        return AlipayNotifyResult.Success;
+                    default:
+                        return AlipayNotifyResult.Failure;
                 }
-
-                return AlipayNotifyResult.Failure;
             }
             catch (AlipayException ex)
             {
@@ -169,13 +176,20 @@ namespace WebApplicationSample.Controllers
             try
             {
                 var notify = await _client.CertificateExecuteAsync<AlipayTradePagePayNotify>(Request, _optionsAccessor.Value);
-                if (notify.TradeStatus == AlipayTradeStatus.Success)
+                switch (notify.TradeStatus)
                 {
-                    _logger.LogInformation("电脑网站支付异步通知-交易支付成功 => OutTradeNo: " + notify.OutTradeNo);
-                    return AlipayNotifyResult.Success;
+                    case AlipayTradeStatus.Success: // 支付成功
+                        _logger.LogInformation("电脑网站支付异步通知-交易支付成功 => OutTradeNo: " + notify.OutTradeNo);
+                        return AlipayNotifyResult.Success;
+                    case AlipayTradeStatus.Closed: // 交易关闭
+                        _logger.LogInformation("电脑网站支付异步通知-未付款交易超时关闭，或支付完成后全额退款 => OutTradeNo: " + notify.OutTradeNo);
+                        return AlipayNotifyResult.Success;
+                    case AlipayTradeStatus.Finished: // 交易完结
+                        _logger.LogInformation("电脑网站支付异步通知-交易结束，不可退款 => OutTradeNo: " + notify.OutTradeNo);
+                        return AlipayNotifyResult.Success;
+                    default:
+                        return AlipayNotifyResult.Failure;
                 }
-
-                return AlipayNotifyResult.Failure;
             }
             catch (AlipayException ex)
             {
@@ -194,13 +208,20 @@ namespace WebApplicationSample.Controllers
             try
             {
                 var notify = await _client.CertificateExecuteAsync<AlipayTradeWapPayNotify>(Request, _optionsAccessor.Value);
-                if (notify.TradeStatus == AlipayTradeStatus.Success)
+                switch (notify.TradeStatus)
                 {
-                    _logger.LogInformation("手机网站支付异步通知-交易支付成功 => OutTradeNo: " + notify.OutTradeNo);
-                    return AlipayNotifyResult.Success;
+                    case AlipayTradeStatus.Success: // 支付成功
+                        _logger.LogInformation("手机网站支付异步通知-交易支付成功 => OutTradeNo: " + notify.OutTradeNo);
+                        return AlipayNotifyResult.Success;
+                    case AlipayTradeStatus.Closed: // 交易关闭
+                        _logger.LogInformation("手机网站支付异步通知-未付款交易超时关闭，或支付完成后全额退款 => OutTradeNo: " + notify.OutTradeNo);
+                        return AlipayNotifyResult.Success;
+                    case AlipayTradeStatus.Finished: // 交易完结
+                        _logger.LogInformation("手机网站支付异步通知-交易结束，不可退款 => OutTradeNo: " + notify.OutTradeNo);
+                        return AlipayNotifyResult.Success;
+                    default:
+                        return AlipayNotifyResult.Failure;
                 }
-
-                return AlipayNotifyResult.Failure;
             }
             catch (AlipayException ex)
             {
