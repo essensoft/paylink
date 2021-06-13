@@ -44,7 +44,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string StudentName { get; set; }
 
         /// <summary>
-        /// 教育场景子业务
+        /// 教育场景子业务。SCHOOL_PAYMENT_REMOTE_OPEN_ACCOUNT：校园一脸通行集采邀请（生成的token用于集采邀请发送采集阶段）； SCHOOL_FACE_PASS_QUERY：校园一脸通行查询（生成的token用于查询同学的一脸通行开通状态）； SCHOOL_FACE_PASS_NAVIGATE：校园一脸通行跳转（生成的token用于个采开通阶段的用户信息填充）；
         /// </summary>
         [JsonPropertyName("sub_code")]
         public string SubCode { get; set; }

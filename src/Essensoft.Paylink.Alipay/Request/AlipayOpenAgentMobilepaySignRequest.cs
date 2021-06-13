@@ -11,6 +11,11 @@ namespace Essensoft.Paylink.Alipay.Request
     public class AlipayOpenAgentMobilepaySignRequest : IAlipayUploadRequest<AlipayOpenAgentMobilepaySignResponse>
     {
         /// <summary>
+        /// APP授权函图片，最小5KB，图片格式必须为：png、bmp、gif、jpg、jpeg
+        /// </summary>
+        public FileItem AppAuthPic { get; set; }
+
+        /// <summary>
         /// APP demo，格式为.apk；或者应用说明文档, 格式为.doc .docx .pdf格式
         /// </summary>
         public FileItem AppDemo { get; set; }
@@ -54,6 +59,11 @@ namespace Essensoft.Paylink.Alipay.Request
         /// 营业执照授权函图片，个体工商户如果使用总公司或其他公司的营业执照认证需上传该授权函图片，最小5KB，图片格式必须为：png、bmp、gif、jpg、jpeg
         /// </summary>
         public FileItem BusinessLicenseAuthPic { get; set; }
+
+        /// <summary>
+        /// 营业执照法人手机号码
+        /// </summary>
+        public string BusinessLicenseMobile { get; set; }
 
         /// <summary>
         /// 营业执照号码。
@@ -202,6 +212,7 @@ namespace Essensoft.Paylink.Alipay.Request
                 { "app_test_account_password", AppTestAccountPassword },
                 { "app_type", AppType },
                 { "batch_no", BatchNo },
+                { "business_license_mobile", BusinessLicenseMobile },
                 { "business_license_no", BusinessLicenseNo },
                 { "date_limitation", DateLimitation },
                 { "download_link", DownloadLink },
@@ -229,6 +240,7 @@ namespace Essensoft.Paylink.Alipay.Request
         {
             var parameters = new Dictionary<string, FileItem>
             {
+                { "app_auth_pic", AppAuthPic },
                 { "app_demo", AppDemo },
                 { "business_license_auth_pic", BusinessLicenseAuthPic },
                 { "business_license_pic", BusinessLicensePic },

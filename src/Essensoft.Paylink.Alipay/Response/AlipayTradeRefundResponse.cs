@@ -52,25 +52,25 @@ namespace Essensoft.Paylink.Alipay.Response
         public string OutTradeNo { get; set; }
 
         /// <summary>
-        /// 本次退款金额中买家退款金额
+        /// 本次退款金额中买家退款金额; 该字段默认不返回；
         /// </summary>
         [JsonPropertyName("present_refund_buyer_amount")]
         public string PresentRefundBuyerAmount { get; set; }
 
         /// <summary>
-        /// 本次退款金额中平台优惠退款金额
+        /// 本次退款金额中平台优惠退款金额； 该字段默认不返回；
         /// </summary>
         [JsonPropertyName("present_refund_discount_amount")]
         public string PresentRefundDiscountAmount { get; set; }
 
         /// <summary>
-        /// 本次退款金额中商家优惠退款金额
+        /// 本次退款金额中商家优惠退款金额； 该字段默认不返回；
         /// </summary>
         [JsonPropertyName("present_refund_mdiscount_amount")]
         public string PresentRefundMdiscountAmount { get; set; }
 
         /// <summary>
-        /// 本次退款针对收款方的退收费金额；  默认不返回该信息，需与支付宝约定后配置返回；
+        /// 本次退款针对收款方的退收费金额； 只在机构间联模式下返回，其它场景下不返回该字段；
         /// </summary>
         [JsonPropertyName("refund_charge_amount")]
         public string RefundChargeAmount { get; set; }
@@ -88,7 +88,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public List<TradeFundBill> RefundDetailItemList { get; set; }
 
         /// <summary>
-        /// 退款总金额
+        /// 退款总金额。 指该笔交易累计已经退款成功的金额。
         /// </summary>
         [JsonPropertyName("refund_fee")]
         public string RefundFee { get; set; }
@@ -100,7 +100,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public PresetPayToolInfo RefundPresetPaytoolList { get; set; }
 
         /// <summary>
-        /// 退款清算编号，用于清算对账使用；  只在银行间联交易场景下返回该信息；
+        /// 退款清算编号，用于清算对账使用； 只在机构间联模式下返回，其它场景下不返回该字段；
         /// </summary>
         [JsonPropertyName("refund_settlement_id")]
         public string RefundSettlementId { get; set; }

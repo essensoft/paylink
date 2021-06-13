@@ -33,7 +33,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string ReplierName { get; set; }
 
         /// <summary>
-        /// 用户：USER  商家：MERCHANT
+        /// 用户：USER  商家：MERCHANT 系统：SYSTEM 审核小二：AUDITOR 政府单位：GOVERNMENT
         /// </summary>
         [JsonPropertyName("replier_role")]
         public string ReplierRole { get; set; }

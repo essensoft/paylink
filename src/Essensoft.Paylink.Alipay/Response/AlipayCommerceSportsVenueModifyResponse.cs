@@ -73,13 +73,13 @@ namespace Essensoft.Paylink.Alipay.Response
         /// 联系电话
         /// </summary>
         [JsonPropertyName("phone")]
-        public string Phone { get; set; }
+        public List<string> Phone { get; set; }
 
         /// <summary>
         /// 场馆图片链接列表 最多5张
         /// </summary>
         [JsonPropertyName("picture_list")]
-        public string PictureList { get; set; }
+        public List<string> PictureList { get; set; }
 
         /// <summary>
         /// poi
@@ -97,7 +97,7 @@ namespace Essensoft.Paylink.Alipay.Response
         /// 场馆售卖产品类型集合，逗号隔开 calendar：价格日历 ticket：票券 course: 课程
         /// </summary>
         [JsonPropertyName("product_type_list")]
-        public string ProductTypeList { get; set; }
+        public List<string> ProductTypeList { get; set; }
 
         /// <summary>
         /// 省份code

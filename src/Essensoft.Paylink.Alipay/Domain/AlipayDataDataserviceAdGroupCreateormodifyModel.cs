@@ -15,10 +15,16 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string BizToken { get; set; }
 
         /// <summary>
-        /// 转化事件编号。若此字段不为空，则要求conversion_type也不为空，且此转化事件与转化事件类型conversion_type匹配
+        /// 转化事件编号（废弃）。若此字段不为空，则要求conversion_type也不为空，且此转化事件与转化事件类型conversion_type匹配
         /// </summary>
         [JsonPropertyName("conversion_id")]
         public string ConversionId { get; set; }
+
+        /// <summary>
+        /// 转化目标之转化事件id列表
+        /// </summary>
+        [JsonPropertyName("conversion_id_list")]
+        public List<string> ConversionIdList { get; set; }
 
         /// <summary>
         /// 转化事件类型： CPA_TAO_XI：淘系店铺关注 CPA_TMALL_MEMBER_JOIN：淘系店铺入会
@@ -63,10 +69,22 @@ namespace Essensoft.Paylink.Alipay.Domain
         public List<string> ItemIdList { get; set; }
 
         /// <summary>
+        /// 是否使用OCPX智能出价，只再CPC场景下，支持开启OCPX： OPEN: 打开；CLOSE: 关闭
+        /// </summary>
+        [JsonPropertyName("ocpx_switch")]
+        public string OcpxSwitch { get; set; }
+
+        /// <summary>
         /// 外部唯一计划编号
         /// </summary>
         [JsonPropertyName("plan_outer_id")]
         public string PlanOuterId { get; set; }
+
+        /// <summary>
+        /// 转化目标成本，只有开启OCPX后才需要配置，单位为分
+        /// </summary>
+        [JsonPropertyName("target_cpa")]
+        public long TargetCpa { get; set; }
 
         /// <summary>
         /// 定向扩展信息

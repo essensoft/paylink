@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Essensoft.Paylink.Alipay.Domain;
 using Essensoft.Paylink.Alipay.Response;
 using Essensoft.Paylink.Alipay.Utility;
 
@@ -14,6 +15,11 @@ namespace Essensoft.Paylink.Alipay.Request
         /// 代商户操作事务编号，通过alipay.open.agent.create接口进行创建。
         /// </summary>
         public string BatchNo { get; set; }
+
+        /// <summary>
+        /// 营业执照法人手机号码
+        /// </summary>
+        public string BusinessLicenseMobile { get; set; }
 
         /// <summary>
         /// 营业执照号码。若填写，请与以下营业执照图片、期限、一起提供。
@@ -31,6 +37,11 @@ namespace Essensoft.Paylink.Alipay.Request
         public string DateLimitation { get; set; }
 
         /// <summary>
+        /// 送货地址
+        /// </summary>
+        public SignAddressInfo DeliveryAddress { get; set; }
+
+        /// <summary>
         /// 营业期限是否长期有效
         /// </summary>
         public Nullable<bool> LongTerm { get; set; }
@@ -44,6 +55,21 @@ namespace Essensoft.Paylink.Alipay.Request
         /// 服务费率（%），0.38~3之间，精确到0.01
         /// </summary>
         public string Rate { get; set; }
+
+        /// <summary>
+        /// 店铺地址
+        /// </summary>
+        public SignAddressInfo ShopAddress { get; set; }
+
+        /// <summary>
+        /// 店铺名称
+        /// </summary>
+        public string ShopName { get; set; }
+
+        /// <summary>
+        /// 店铺内景照片，最小5KB，图片格式必须为：png、bmp、gif、jpg、jpeg
+        /// </summary>
+        public FileItem ShopScenePic { get; set; }
 
         /// <summary>
         /// 店铺门头照图片，需要包括招牌信息。最小5KB，图片格式必须为：png、bmp、gif、jpg、jpeg
@@ -146,11 +172,15 @@ namespace Essensoft.Paylink.Alipay.Request
             var parameters = new AlipayDictionary
             {
                 { "batch_no", BatchNo },
+                { "business_license_mobile", BusinessLicenseMobile },
                 { "business_license_no", BusinessLicenseNo },
                 { "date_limitation", DateLimitation },
+                { "delivery_address", DeliveryAddress },
                 { "long_term", LongTerm },
                 { "mcc_code", MccCode },
-                { "rate", Rate }
+                { "rate", Rate },
+                { "shop_address", ShopAddress },
+                { "shop_name", ShopName }
             };
             return parameters;
         }
@@ -174,6 +204,7 @@ namespace Essensoft.Paylink.Alipay.Request
             var parameters = new Dictionary<string, FileItem>
             {
                 { "business_license_pic", BusinessLicensePic },
+                { "shop_scene_pic", ShopScenePic },
                 { "shop_sign_board_pic", ShopSignBoardPic },
                 { "special_license_pic", SpecialLicensePic }
             };

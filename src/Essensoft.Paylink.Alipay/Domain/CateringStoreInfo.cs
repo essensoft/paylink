@@ -21,7 +21,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public CateringStoreDeliveryInfo DeliveryInfo { get; set; }
 
         /// <summary>
-        /// 人均消费
+        /// 人均消费。单位为元，精确到小数点后两位。
         /// </summary>
         [JsonPropertyName("per_consumption")]
         public string PerConsumption { get; set; }

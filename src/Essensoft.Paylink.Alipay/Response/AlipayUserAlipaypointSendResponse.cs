@@ -8,7 +8,7 @@ namespace Essensoft.Paylink.Alipay.Response
     public class AlipayUserAlipaypointSendResponse : AlipayResponse
     {
         /// <summary>
-        /// 发放记录号
+        /// 发放记录号。
         /// </summary>
         [JsonPropertyName("record_id")]
         public string RecordId { get; set; }

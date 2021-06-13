@@ -76,6 +76,18 @@ namespace Essensoft.Paylink.Alipay.Response
         public string ChargeFlags { get; set; }
 
         /// <summary>
+        /// 信用业务单号。信用支付场景才有值，先用后付产品里是芝麻订单号。
+        /// </summary>
+        [JsonPropertyName("credit_biz_order_id")]
+        public string CreditBizOrderId { get; set; }
+
+        /// <summary>
+        /// 信用支付模式。表示订单是采用信用支付方式（支付时买家没有出资，需要后续履约）。"creditAdvanceV2"表示芝麻先用后付模式，用户后续需要履约扣款。 此字段只有信用支付场景才有值，商户需要根据字段值单独处理。此字段以后可能扩展其他值，建议商户使用白名单方式识别，对于未识别的值做失败处理，并联系支付宝技术支持人员。
+        /// </summary>
+        [JsonPropertyName("credit_pay_mode")]
+        public string CreditPayMode { get; set; }
+
+        /// <summary>
         /// 平台优惠金额
         /// </summary>
         [JsonPropertyName("discount_amount")]

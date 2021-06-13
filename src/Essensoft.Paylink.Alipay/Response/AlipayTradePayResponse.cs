@@ -70,16 +70,28 @@ namespace Essensoft.Paylink.Alipay.Response
         public string CardBalance { get; set; }
 
         /// <summary>
-        /// 该笔交易针对收款方的收费金额；  默认不返回该信息，需与支付宝约定后配置返回；
+        /// 该笔交易针对收款方的收费金额； 只在机构间联模式下返回，其它场景下不返回该字段；
         /// </summary>
         [JsonPropertyName("charge_amount")]
         public string ChargeAmount { get; set; }
 
         /// <summary>
-        /// 费率活动标识，当交易享受活动优惠费率时，返回该活动的标识；  默认不返回该信息，需与支付宝约定后配置返回；  可能的返回值列表：  蓝海活动标识：bluesea_1
+        /// 费率活动标识，当交易享受活动优惠费率时，返回该活动的标识； 只在机构间联模式下返回，其它场景下不返回该字段； 可能的返回值列表： bluesea_1：蓝海活动标识; industry_special_00：行业特殊费率0； industry_special_01：行业特殊费率1；
         /// </summary>
         [JsonPropertyName("charge_flags")]
         public string ChargeFlags { get; set; }
+
+        /// <summary>
+        /// 信用业务单号。信用支付场景才有值。先用后付产品里是芝麻订单号。
+        /// </summary>
+        [JsonPropertyName("credit_biz_order_id")]
+        public string CreditBizOrderId { get; set; }
+
+        /// <summary>
+        /// 信用支付模式。表示订单是采用信用支付方式（支付时买家没有出资，需要后续履约）。"creditAdvanceV2"表示芝麻先用后付模式，用户后续需要履约扣款。 此字段只有信用支付场景才有值，商户需要根据字段值单独处理。此字段以后可能扩展其他值，建议商户使用白名单方式识别，对于未识别的值做失败处理，并联系支付宝技术支持人员。
+        /// </summary>
+        [JsonPropertyName("credit_pay_mode")]
+        public string CreditPayMode { get; set; }
 
         /// <summary>
         /// 平台优惠金额
@@ -178,7 +190,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public string SettleTransRate { get; set; }
 
         /// <summary>
-        /// 支付清算编号，用于清算对账使用；  只在银行间联交易场景下返回该信息；
+        /// 支付清算编号，用于清算对账使用； 只在机构间联模式下返回，其它场景下不返回该字段；
         /// </summary>
         [JsonPropertyName("settlement_id")]
         public string SettlementId { get; set; }

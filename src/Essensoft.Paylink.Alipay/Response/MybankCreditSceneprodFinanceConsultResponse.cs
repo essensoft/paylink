@@ -32,6 +32,12 @@ namespace Essensoft.Paylink.Alipay.Response
         public string FinanceInstName { get; set; }
 
         /// <summary>
+        /// 响应请求场景描述
+        /// </summary>
+        [JsonPropertyName("info")]
+        public string Info { get; set; }
+
+        /// <summary>
         /// 是否可重试
         /// </summary>
         [JsonPropertyName("retry")]

@@ -9,6 +9,12 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayTradeOrderSettleModel : AlipayObject
     {
         /// <summary>
+        /// 分账结算业务扩展参数
+        /// </summary>
+        [JsonPropertyName("extend_params")]
+        public SettleExtendParams ExtendParams { get; set; }
+
+        /// <summary>
         /// 操作员 ID，商家自定义操作员编号。
         /// </summary>
         [JsonPropertyName("operator_id")]

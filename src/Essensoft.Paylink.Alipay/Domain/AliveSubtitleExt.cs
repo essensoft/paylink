@@ -26,6 +26,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public long Index { get; set; }
 
         /// <summary>
+        /// PASSED("数据识别通过，可以在网站上正常显示"),      REJECTED("被拒绝的数据，比如内容出现违禁词；不能出现在我们网站上"),      REJECTED_CC("被拒绝的数据，但是展示效果为CC效果"),      CC("CC表示用户发表数据后，提示成功。"),      RECOVER("恢复数据，将误判断的内容，恢复回来"),      DELETE("删除数据, 为了不扩大化数据的传播，删除历史已经发出去的数据。");
+        /// </summary>
+        [JsonPropertyName("info_sec_result")]
+        public string InfoSecResult { get; set; }
+
+        /// <summary>
         /// 句子超始时间，单位为ms
         /// </summary>
         [JsonPropertyName("start_time")]

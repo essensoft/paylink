@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Essensoft.Paylink.Alipay.Domain;
 using Essensoft.Paylink.Alipay.Response;
 using Essensoft.Paylink.Alipay.Utility;
 
@@ -19,6 +20,11 @@ namespace Essensoft.Paylink.Alipay.Request
         /// 营业执照授权函图片，个体工商户如果使用总公司或其他公司的营业执照认证需上传该授权函图片，最小5KB，最大5M（暂不限制图片宽高），图片格式必须为：png、bmp、gif、jpg、jpeg
         /// </summary>
         public FileItem BusinessLicenseAuthPic { get; set; }
+
+        /// <summary>
+        /// 营业执照法人手机号码
+        /// </summary>
+        public string BusinessLicenseMobile { get; set; }
 
         /// <summary>
         /// 营业执照号码
@@ -49,6 +55,16 @@ namespace Essensoft.Paylink.Alipay.Request
         /// 服务费率（%），0.38~0.6 之间（小数点后两位，可取0.38%及0.6%）。 当签约且授权标识 sign_and_auth=true 时，该费率信息必填。
         /// </summary>
         public string Rate { get; set; }
+
+        /// <summary>
+        /// 店铺地址
+        /// </summary>
+        public SignAddressInfo ShopAddress { get; set; }
+
+        /// <summary>
+        /// 店铺名称
+        /// </summary>
+        public string ShopName { get; set; }
 
         /// <summary>
         /// 店铺内景图片，最小5KB，最大5M（暂不限制图片宽高），图片格式必须为：png、bmp、gif、jpg、jpeg
@@ -161,11 +177,14 @@ namespace Essensoft.Paylink.Alipay.Request
             var parameters = new AlipayDictionary
             {
                 { "batch_no", BatchNo },
+                { "business_license_mobile", BusinessLicenseMobile },
                 { "business_license_no", BusinessLicenseNo },
                 { "date_limitation", DateLimitation },
                 { "long_term", LongTerm },
                 { "mcc_code", MccCode },
                 { "rate", Rate },
+                { "shop_address", ShopAddress },
+                { "shop_name", ShopName },
                 { "sign_and_auth", SignAndAuth }
             };
             return parameters;

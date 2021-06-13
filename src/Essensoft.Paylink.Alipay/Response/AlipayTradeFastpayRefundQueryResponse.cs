@@ -10,7 +10,7 @@ namespace Essensoft.Paylink.Alipay.Response
     public class AlipayTradeFastpayRefundQueryResponse : AlipayResponse
     {
         /// <summary>
-        /// 银行卡冲退信息
+        /// 银行卡冲退信息。 该字段默认不返回；
         /// </summary>
         [JsonPropertyName("deposit_back_info")]
         public DepositBackInfo DepositBackInfo { get; set; }
@@ -46,19 +46,19 @@ namespace Essensoft.Paylink.Alipay.Response
         public string OutTradeNo { get; set; }
 
         /// <summary>
-        /// 本次退款金额中买家退款金额
+        /// 本次退款金额中买家退款金额。 该字段默认不返回；
         /// </summary>
         [JsonPropertyName("present_refund_buyer_amount")]
         public string PresentRefundBuyerAmount { get; set; }
 
         /// <summary>
-        /// 本次退款金额中平台优惠退款金额
+        /// 本次退款金额中平台优惠退款金额。 该字段默认不返回；
         /// </summary>
         [JsonPropertyName("present_refund_discount_amount")]
         public string PresentRefundDiscountAmount { get; set; }
 
         /// <summary>
-        /// 本次退款金额中商家优惠退款金额
+        /// 本次退款金额中商家优惠退款金额。 该字段默认不返回；
         /// </summary>
         [JsonPropertyName("present_refund_mdiscount_amount")]
         public string PresentRefundMdiscountAmount { get; set; }
@@ -70,7 +70,19 @@ namespace Essensoft.Paylink.Alipay.Response
         public string RefundAmount { get; set; }
 
         /// <summary>
-        /// 本次退款针对收款方的退收费金额；  默认不返回该信息，需与支付宝约定后配置返回；
+        /// 若支付渠道包含医保统筹、个账，则显示退款的渠道信息。如统筹OUTSIDEGOVCARD，个账OUTSIDEACCCARD
+        /// </summary>
+        [JsonPropertyName("refund_channel_list")]
+        public string RefundChannelList { get; set; }
+
+        /// <summary>
+        /// 若支付渠道包含医保统筹、个账，全渠道退款成功时返回SUCCESS，全失败时返回FAIL，部分成功时返回PART_SUCCESS
+        /// </summary>
+        [JsonPropertyName("refund_channel_status")]
+        public string RefundChannelStatus { get; set; }
+
+        /// <summary>
+        /// 本次退款针对收款方的退收费金额； 只在机构间联模式下返回，其它场景下不返回该字段；
         /// </summary>
         [JsonPropertyName("refund_charge_amount")]
         public string RefundChargeAmount { get; set; }
@@ -94,7 +106,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public List<RefundRoyaltyResult> RefundRoyaltys { get; set; }
 
         /// <summary>
-        /// 退款清算编号，用于清算对账使用；  只在银行间联交易场景下返回该信息；
+        /// 退款清算编号，用于清算对账使用； 只在机构间联模式下返回，其它场景下不返回该字段；
         /// </summary>
         [JsonPropertyName("refund_settlement_id")]
         public string RefundSettlementId { get; set; }

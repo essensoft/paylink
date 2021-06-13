@@ -44,6 +44,18 @@ namespace Essensoft.Paylink.Alipay.Response
         public string SchoolCode { get; set; }
 
         /// <summary>
+        /// 校园一脸通行开通状态。OPEN：开通，CLOSE：关闭
+        /// </summary>
+        [JsonPropertyName("school_face_pass_status")]
+        public string SchoolFacePassStatus { get; set; }
+
+        /// <summary>
+        /// 校园一脸通行刷脸支付开通状态。OPEN：开通，CLOSE：关闭
+        /// </summary>
+        [JsonPropertyName("school_face_payment_status")]
+        public string SchoolFacePaymentStatus { get; set; }
+
+        /// <summary>
         /// 学校外标（即学校的统一信用编码）
         /// </summary>
         [JsonPropertyName("school_stdcode")]
