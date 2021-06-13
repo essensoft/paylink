@@ -55,5 +55,11 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("scale")]
         public string Scale { get; set; }
+
+        /// <summary>
+        /// 物业公司简称
+        /// </summary>
+        [JsonPropertyName("short_company_name")]
+        public string ShortCompanyName { get; set; }
     }
 }

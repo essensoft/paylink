@@ -62,7 +62,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string TotalRealPayAmount { get; set; }
 
         /// <summary>
-        /// 芝麻GO任务开始到到期过程中和任务相关完成的任务次数，单位为：元（人民币），精确到小数点后两位。承诺模式下，需要穿这个字段。
+        /// 芝麻GO任务开始到到期过程中和任务相关完成的任务次数
         /// </summary>
         [JsonPropertyName("total_task_count")]
         public string TotalTaskCount { get; set; }

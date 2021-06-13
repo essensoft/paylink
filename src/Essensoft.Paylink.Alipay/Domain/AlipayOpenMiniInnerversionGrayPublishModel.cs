@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.Paylink.Alipay.Domain
 {
@@ -18,6 +19,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("app_version")]
         public string AppVersion { get; set; }
+
+        /// <summary>
+        /// 待邀测应用列表，灰度插件时使用，如无邀测必要请不要传入
+        /// </summary>
+        [JsonPropertyName("beta_app_id_list")]
+        public List<string> BetaAppIdList { get; set; }
 
         /// <summary>
         /// 端信息

@@ -8,7 +8,7 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class CateringStoreDeliveryInfo : AlipayObject
     {
         /// <summary>
-        /// 门店配送范围（单位：公里）。外卖场景必填，其余非必填。
+        /// 门店配送范围（单位：公里），数值型，精确至小数点两位。外卖场景必填，其余非必填。
         /// </summary>
         [JsonPropertyName("delivery_area")]
         public string DeliveryArea { get; set; }

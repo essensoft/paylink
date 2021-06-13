@@ -14,6 +14,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string ApplyStatus { get; set; }
 
         /// <summary>
+        /// 扩展信息JSON格式
+        /// </summary>
+        [JsonPropertyName("extend_info")]
+        public string ExtendInfo { get; set; }
+
+        /// <summary>
         /// 文件类型1：图片，2：视频
         /// </summary>
         [JsonPropertyName("file_type")]

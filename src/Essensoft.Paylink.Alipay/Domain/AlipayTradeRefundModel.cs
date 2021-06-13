@@ -27,13 +27,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string OrgPid { get; set; }
 
         /// <summary>
-        /// 标识一次退款请求，同一笔交易多次退款需要保证唯一，如需部分退款，则此参数必传。
+        /// 退款请求号。 标识一次退款请求，需要保证在交易号下唯一，如需部分退款，则此参数必传。 注：针对同一次退款请求，如果调用接口失败或异常了，重试时需要保证退款请求号不能变更，防止该笔交易重复退款。支付宝会保证同样的退款请求号多次请求只会退一次。 
         /// </summary>
         [JsonPropertyName("out_request_no")]
         public string OutRequestNo { get; set; }
 
         /// <summary>
-        /// 订单支付时传入的商户订单号，商家自定义且保证商家系统中唯一。与支付宝交易号 trade_no 不能同时为空。
+        /// 商户订单号。 订单支付时传入的商户订单号，商家自定义且保证商家系统中唯一。与支付宝交易号 trade_no 不能同时为空。
         /// </summary>
         [JsonPropertyName("out_trade_no")]
         public string OutTradeNo { get; set; }
@@ -45,7 +45,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public List<string> QueryOptions { get; set; }
 
         /// <summary>
-        /// 需要退款的金额，该金额不能大于订单金额,单位为元，支持两位小数
+        /// 退款金额。 需要退款的金额，该金额不能大于订单金额，单位为元，支持两位小数。 注：如果正向交易使用了营销，该退款金额包含营销金额，支付宝会按业务规则分配营销和买家自有资金分别退多少，默认优先退买家的自有资金。如交易总金额100元，用户使用了80元自有资金和20元营销券，则全额退款时应该传入的退款金额是100元。
         /// </summary>
         [JsonPropertyName("refund_amount")]
         public string RefundAmount { get; set; }
@@ -63,7 +63,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string RefundReason { get; set; }
 
         /// <summary>
-        /// 退分账明细信息。 注： 1.当面付无需传入退分账明细，系统自动按退款金额与订单金额的比率，从收款方和分账收入方退款，不支持指定退款金额与退款方。 2.电脑网站支付，手机 APP 支付，手机网站支付产品，须在退款请求中明确是否退分账，从哪个分账收入方退，退多少分账金额；如不明确，默认从收款方退款，收款方余额不足退款失败。不支持系统按比率退款。 
+        /// 退分账明细信息。  注： 1.当面付且非直付通模式无需传入退分账明细，系统自动按退款金额与订单金额的比率，从收款方和分账收入方退款，不支持指定退款金额与退款方。  2.直付通模式，电脑网站支付，手机 APP 支付，手机网站支付产品，须在退款请求中明确是否退分账，从哪个分账收入方退，退多少分账金额；如不明确，默认从收款方退款，收款方余额不足退款失败。不支持系统按比率退款。
         /// </summary>
         [JsonPropertyName("refund_royalty_parameters")]
         public List<OpenApiRoyaltyDetailInfoPojo> RefundRoyaltyParameters { get; set; }
@@ -81,7 +81,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string TerminalId { get; set; }
 
         /// <summary>
-        /// 支付宝交易号，和商户订单号 out_trade_no 不能同时为空。
+        /// 支付宝交易号。 和商户订单号 out_trade_no 不能同时为空。
         /// </summary>
         [JsonPropertyName("trade_no")]
         public string TradeNo { get; set; }

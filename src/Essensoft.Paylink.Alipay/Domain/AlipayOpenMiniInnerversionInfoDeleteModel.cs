@@ -26,13 +26,19 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string BundleId { get; set; }
 
         /// <summary>
+        /// 租户信息
+        /// </summary>
+        [JsonPropertyName("inst_code")]
+        public string InstCode { get; set; }
+
+        /// <summary>
         /// 小程序ID
         /// </summary>
         [JsonPropertyName("mini_app_id")]
         public string MiniAppId { get; set; }
 
         /// <summary>
-        /// 操作者ID
+        /// 操作者ID，支付宝租户必填
         /// </summary>
         [JsonPropertyName("pid")]
         public string Pid { get; set; }

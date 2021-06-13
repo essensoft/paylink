@@ -15,7 +15,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string AuthToken { get; set; }
 
         /// <summary>
-        /// 对一笔交易的具体描述信息。如果是多种商品，请将商品描述字符串累加传给body。
+        /// 订单描述
         /// </summary>
         [JsonPropertyName("body")]
         public string Body { get; set; }
@@ -27,13 +27,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string BusinessParams { get; set; }
 
         /// <summary>
-        /// 禁用渠道，用户不可用指定渠道支付  当有多个渠道时用“,”分隔  注，与enable_pay_channels互斥
+        /// 禁用渠道,用户不可用指定渠道支付，多个渠道以逗号分割 注，与enable_pay_channels互斥 <a href="https://docs.open.alipay.com/common/wifww7">渠道列表</a>
         /// </summary>
         [JsonPropertyName("disable_pay_channels")]
         public string DisablePayChannels { get; set; }
 
         /// <summary>
-        /// 可用渠道，优先推荐用户使用的支付渠道。 注：当有多个渠道时用“,”分隔注，与disable_pay_channels互斥。
+        /// 指定支付渠道。 用户只能使用指定的渠道进行支付，多个渠道以逗号分割。 与disable_pay_channels互斥，支持传入的值：<a target="_blank" href="https://docs.open.alipay.com/common/wifww7">渠道列表</a>。 注：如果传入了指定支付渠道，则用户只能用指定内的渠道支付，包括营销渠道也要指定才能使用。该参数可能导致用户支付受限，慎用。
         /// </summary>
         [JsonPropertyName("enable_pay_channels")]
         public string EnablePayChannels { get; set; }
@@ -69,25 +69,25 @@ namespace Essensoft.Paylink.Alipay.Domain
         public InvoiceInfo InvoiceInfo { get; set; }
 
         /// <summary>
-        /// 商户原始订单号，最大长度限制32位
+        /// 商户的原始订单号
         /// </summary>
         [JsonPropertyName("merchant_order_no")]
         public string MerchantOrderNo { get; set; }
 
         /// <summary>
-        /// 商户网站订单号，由商家自定义，需保证商家系统中唯一。仅支持数字、字母、下划线。
+        /// 商户订单号。 由商家自定义，64个字符以内，仅支持字母、数字、下划线且需保证在商户端不重复。
         /// </summary>
         [JsonPropertyName("out_trade_no")]
         public string OutTradeNo { get; set; }
 
         /// <summary>
-        /// 公用回传参数，如果请求时传递了该参数，则返回给商户时会回传该参数。支付宝只会在同步返回（包括跳转回商户网站）和异步通知时将该参数原样返回。本参数必须进行UrlEncode之后才可以发送给支付宝。
+        /// 公用回传参数。 如果请求时传递了该参数，支付宝会在异步通知时将该参数原样返回。 本参数必须进行UrlEncode之后才可以发送给支付宝。
         /// </summary>
         [JsonPropertyName("passback_params")]
         public string PassbackParams { get; set; }
 
         /// <summary>
-        /// 销售产品码，商家和支付宝签约的产品码
+        /// 产品码。 商家和支付宝签约的产品码。 枚举值（点击查看签约情况）： <a target="_blank" href="https://opensupport.alipay.com/support/codelab/detail/711/713">QUICK_WAP_WAY</a>：无线快捷支付产品。 默认值为QUICK_WAP_PAY。
         /// </summary>
         [JsonPropertyName("product_code")]
         public string ProductCode { get; set; }
@@ -111,7 +111,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public RoyaltyInfo RoyaltyInfo { get; set; }
 
         /// <summary>
-        /// 收款支付宝用户ID。 如果该值为空，则默认为商户签约账号对应的支付宝用户ID
+        /// 卖家支付宝用户ID。 当需要指定收款账号时，通过该参数传入，如果该值为空，则默认为商户签约账号对应的支付宝用户ID。 注：直付通和机构间联场景下seller_id无需传入或者保持跟pid一致； 如果传入的seller_id与pid不一致，需要联系支付宝小二配置收款关系；
         /// </summary>
         [JsonPropertyName("seller_id")]
         public string SellerId { get; set; }
@@ -123,43 +123,43 @@ namespace Essensoft.Paylink.Alipay.Domain
         public SettleInfo SettleInfo { get; set; }
 
         /// <summary>
-        /// 指定渠道，目前仅支持传入pcredit  若由于用户原因渠道不可用，用户可选择是否用其他渠道支付。  注：该参数不可与花呗分期参数同时传入
+        /// 指定单通道。 目前仅支持传入pcredit，若由于用户原因渠道不可用，用户可选择是否用其他渠道支付。 注：该参数不可与花呗分期参数同时传入
         /// </summary>
         [JsonPropertyName("specified_channel")]
         public string SpecifiedChannel { get; set; }
 
         /// <summary>
-        /// 商户门店编号
+        /// 商户门店编号。 指商户创建门店时输入的门店编号。
         /// </summary>
         [JsonPropertyName("store_id")]
         public string StoreId { get; set; }
 
         /// <summary>
-        /// 间连受理商户信息体，当前只对特殊银行机构特定场景下使用此字段
+        /// 二级商户信息。 直付通模式和机构间连模式下必传，其它场景下不需要传入。
         /// </summary>
         [JsonPropertyName("sub_merchant")]
         public SubMerchant SubMerchant { get; set; }
 
         /// <summary>
-        /// 商品标题/交易标题/订单标题/订单关键字等。  注意：不可使用特殊字符，如 /，=，& 等。
+        /// 订单标题。 注意：不可使用特殊字符，如 /，=，& 等。
         /// </summary>
         [JsonPropertyName("subject")]
         public string Subject { get; set; }
 
         /// <summary>
-        /// 绝对超时时间，格式为yyyy-MM-dd HH:mm。
+        /// 订单绝对超时时间。 格式为yyyy-MM-dd HH:mm。 注：time_express和timeout_express两者只需传入一个或者都不传，如果两者都传，优先使用time_expire。
         /// </summary>
         [JsonPropertyName("time_expire")]
         public string TimeExpire { get; set; }
 
         /// <summary>
-        /// 该笔订单允许的最晚付款时间，逾期将关闭交易。取值范围：5m～15d。m-分钟，h-小时，d-天，1c-当天（1c-当天的情况下，无论交易何时创建，都在0点关闭）。 该参数数值不接受小数点， 如 1.5h，可转换为 90m。
+        /// 订单相对超时时间。 该笔订单允许的最晚付款时间，逾期将关闭交易。取值范围：5m～15d。m-分钟，h-小时，d-天，1c-当天（1c-当天的情况下，无论交易何时创建，都在0点关闭）。 该参数数值不接受小数点， 如 1.5h，可转换为 90m。  注：无线支付场景最小值为5m，低于5m支付超时时间按5m计算。 注：time_express和timeout_express两者只需传入一个或者都不传，如果两者都传，优先使用time_expire。
         /// </summary>
         [JsonPropertyName("timeout_express")]
         public string TimeoutExpress { get; set; }
 
         /// <summary>
-        /// 订单总金额，单位为人民币（元），取值范围为 0.01~100000000.00，精确到小数点后两位。
+        /// 订单总金额。 单位为元，精确到小数点后两位，取值范围：[0.01,100000000] 。
         /// </summary>
         [JsonPropertyName("total_amount")]
         public string TotalAmount { get; set; }

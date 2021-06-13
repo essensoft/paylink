@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using Essensoft.Paylink.Alipay.Domain;
 
 namespace Essensoft.Paylink.Alipay.Response
 {
@@ -36,5 +38,11 @@ namespace Essensoft.Paylink.Alipay.Response
         /// </summary>
         [JsonPropertyName("reject_reason")]
         public string RejectReason { get; set; }
+
+        /// <summary>
+        /// 受限信息
+        /// </summary>
+        [JsonPropertyName("restrict_infos")]
+        public List<SignRestrictInfo> RestrictInfos { get; set; }
     }
 }

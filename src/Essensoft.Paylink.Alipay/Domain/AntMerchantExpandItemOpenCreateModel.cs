@@ -15,13 +15,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string Description { get; set; }
 
         /// <summary>
-        /// 商品扩展信息（具体KEY请参见产品文档）。 小程序订单中心场景参见 https://opendocs.alipay.com/mini/00u9ga
+        /// 商品扩展信息（具体KEY请参见产品文档）。 小程序订单中心场景接入参见  <a href="https://opendocs.alipay.com/mini/00u9ga">快速接入</a>。
         /// </summary>
         [JsonPropertyName("ext_info")]
         public List<ItemExtInfo> ExtInfo { get; set; }
 
         /// <summary>
-        /// 素材列表（最多3个），素材内容为素材key（素材key获取方式参照：https://opendocs.alipay.com/apis/api_4/alipay.merchant.item.file.upload）
+        /// 素材列表（最多3个），素材内容为素材key（素材key为<a href="https://opendocs.alipay.com/apis/api_4/alipay.merchant.item.file.upload">alipay.merchant.item.file.upload</a> 接口返回的 material_key）
         /// </summary>
         [JsonPropertyName("material_list")]
         public List<MaterialCreateInfo> MaterialList { get; set; }
@@ -51,7 +51,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public List<SkuCreateInfo> SkuList { get; set; }
 
         /// <summary>
-        /// 商品所属标准类目ID，当 type 为STANDARD_GOODS（标品）时必填。  请填入 https://opendocs.alipay.com/mini/011lxt  小程序商品类目表中三级类目ID。
+        /// 商品所属标准类目ID，标品及非标品都需传入。  请填入 <a href="https://opendocs.alipay.com/mini/011lxt">小程序商品类目表</a> 中三级类目ID。
         /// </summary>
         [JsonPropertyName("standard_category_id")]
         public string StandardCategoryId { get; set; }
@@ -69,7 +69,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string TargetType { get; set; }
 
         /// <summary>
-        /// 商品类型。枚举支持： STANDARD_GOODS：标品，一般是具有明确、标准规格、型号、参数的商品，如：手机、数码产品、大多数的家电 。 NON_STANDARD_GOODS：非标品等，，则是在这些方面没有统一的行业标准和参数规格的商品，如：服装、鞋袜等。
+        /// 商品类型。枚举支持： STANDARD_GOODS：标品，一般是具有明确、标准规格、型号、参数的商品，如：手机、数码产品、大多数的家电 。 NON_STANDARD_GOODS：非标品，则是在这些方面没有统一的行业标准和参数规格的商品，如：服装、鞋袜等。
         /// </summary>
         [JsonPropertyName("type")]
         public string Type { get; set; }

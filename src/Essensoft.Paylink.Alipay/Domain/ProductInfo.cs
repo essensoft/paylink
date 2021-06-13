@@ -15,7 +15,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public ProductBuyLimitRule CanBuyRule { get; set; }
 
         /// <summary>
-        /// 产品开始使用前多长时间(分钟)可退款，不传默认开始前5分钟都可退款
+        /// 是否支持退款，可退款为true，不可退款为false，不传默认true可退款
+        /// </summary>
+        [JsonPropertyName("can_refund")]
+        public bool CanRefund { get; set; }
+
+        /// <summary>
+        /// 产品开始使用前多长时间(分钟)可退款，不传默认开始前30分钟都可退款；产品不可退款(can_refund=false)时不需要传值。
         /// </summary>
         [JsonPropertyName("can_refund_minute")]
         public long CanRefundMinute { get; set; }

@@ -21,6 +21,18 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string City { get; set; }
 
         /// <summary>
+        /// 社区code，例如 清波门社区 330102001051
+        /// </summary>
+        [JsonPropertyName("community_adcode")]
+        public string CommunityAdcode { get; set; }
+
+        /// <summary>
+        /// 社区中文，如嘉绿苑社区
+        /// </summary>
+        [JsonPropertyName("community_adcode_name")]
+        public string CommunityAdcodeName { get; set; }
+
+        /// <summary>
         /// 小区编码，兼容迁移小区时所需；正常的非迁移的小区创建时不需要传
         /// </summary>
         [JsonPropertyName("community_short_name")]
@@ -31,6 +43,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("county")]
         public string County { get; set; }
+
+        /// <summary>
+        /// 区县中文，如西湖区
+        /// </summary>
+        [JsonPropertyName("county_name")]
+        public string CountyName { get; set; }
 
         /// <summary>
         /// 小区热线
@@ -73,6 +91,18 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("province")]
         public string Province { get; set; }
+
+        /// <summary>
+        /// 街道code，例如 清波街道 330102001000
+        /// </summary>
+        [JsonPropertyName("street_adcode")]
+        public string StreetAdcode { get; set; }
+
+        /// <summary>
+        /// 街道中文，如古荡街道
+        /// </summary>
+        [JsonPropertyName("street_adcode_name")]
+        public string StreetAdcodeName { get; set; }
 
         /// <summary>
         /// 中心账单楼房号模式 REMOTE 中心账单户号模式 REMOTE_NO_ROOM 内部H5模式 H5 内部底座模式 SAAS 自运营账单-楼房号 EXTERNAL_BILL_ROOM 自运营账单-仅户号 EXTERNAL_BILL_BILLKEY 备注：1、中心账单楼房号模式会进行用户隐私校验     2、不确定使用哪种方式时请联系对应BD或开发
