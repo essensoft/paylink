@@ -1,4 +1,6 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
+using Essensoft.Paylink.Alipay.Domain;
 
 namespace Essensoft.Paylink.Alipay.Response
 {
@@ -50,6 +52,12 @@ namespace Essensoft.Paylink.Alipay.Response
         public string PrizeId { get; set; }
 
         /// <summary>
+        /// 发奖流水
+        /// </summary>
+        [JsonPropertyName("prize_log_id")]
+        public string PrizeLogId { get; set; }
+
+        /// <summary>
         /// 奖品名称
         /// </summary>
         [JsonPropertyName("prize_name")]
@@ -60,6 +68,12 @@ namespace Essensoft.Paylink.Alipay.Response
         /// </summary>
         [JsonPropertyName("repeat_trigger_flag")]
         public string RepeatTriggerFlag { get; set; }
+
+        /// <summary>
+        /// 中奖流水：仅在中奖数量大于1条时生效；中奖数量为1条时读取同级数据。
+        /// </summary>
+        [JsonPropertyName("send_order_list")]
+        public List<MpPrizeSendOrder> SendOrderList { get; set; }
 
         /// <summary>
         /// 是否中奖结果状态，如果为true时返回的结果中的其他字段非空，否则返回的其他字段为空

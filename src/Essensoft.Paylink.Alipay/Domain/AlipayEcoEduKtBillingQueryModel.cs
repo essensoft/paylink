@@ -20,7 +20,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string OutTradeNo { get; set; }
 
         /// <summary>
-        /// 学校支付宝pid
+        /// 学校支付宝pid，直付通填写smid
         /// </summary>
         [JsonPropertyName("school_pid")]
         public string SchoolPid { get; set; }

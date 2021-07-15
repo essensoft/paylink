@@ -26,5 +26,11 @@ namespace Essensoft.Paylink.Alipay.Response
         /// </summary>
         [JsonPropertyName("engine_type")]
         public string EngineType { get; set; }
+
+        /// <summary>
+        /// 展位可用性结果，描述当前入参是否存在可用展位
+        /// </summary>
+        [JsonPropertyName("usable")]
+        public bool Usable { get; set; }
     }
 }

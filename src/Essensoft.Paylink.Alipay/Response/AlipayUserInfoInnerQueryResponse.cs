@@ -66,5 +66,11 @@ namespace Essensoft.Paylink.Alipay.Response
         /// </summary>
         [JsonPropertyName("user_status")]
         public string UserStatus { get; set; }
+
+        /// <summary>
+        /// 支付宝号，由字母和数字组成
+        /// </summary>
+        [JsonPropertyName("zid")]
+        public string Zid { get; set; }
     }
 }

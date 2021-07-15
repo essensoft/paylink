@@ -129,7 +129,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string Scene { get; set; }
 
         /// <summary>
-        /// 结算支付宝账号的登录号，需传入小程序归属账号。若需增加收款账号，可在创建门店后登录<a href="https://b.alipay.com/index2.htm">商家中心</a>  ，在 账户中心 > 经营信息 > 门店管理 中选择对应门店选择 更多 > 编辑 > 新增收款账号。 
+        /// 结算支付宝账号的登录号。
         /// </summary>
         [JsonPropertyName("settle_alipay_logon_id")]
         public string SettleAlipayLogonId { get; set; }

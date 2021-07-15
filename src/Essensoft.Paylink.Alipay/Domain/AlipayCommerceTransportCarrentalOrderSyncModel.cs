@@ -117,7 +117,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string SubServiceType { get; set; }
 
         /// <summary>
-        /// 支付宝交易号（一个订单可能存在多笔支付单，英文逗号隔开）示例：2021050622001425901452597134,2021050622001425901452597135  PAID_BEFORE_USE PARTIAL_PAID PAID_AFTER_USE REFUNDED FINISHED 状态下必传
+        /// 支付宝交易号（一个订单可能存在多笔支付单，英文逗号隔开）示例：2021050622001425901452597134,2021050622001425901452597135  PAID_BEFORE_USE PARTIAL_PAID PAID_AFTER_USE REFUNDED FINISHED 状态下如果使用支付宝支付则必传
         /// </summary>
         [JsonPropertyName("trade_no")]
         public string TradeNo { get; set; }

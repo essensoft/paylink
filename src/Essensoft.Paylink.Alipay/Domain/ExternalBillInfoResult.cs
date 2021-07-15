@@ -8,6 +8,12 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class ExternalBillInfoResult : AlipayObject
     {
         /// <summary>
+        /// 账单id
+        /// </summary>
+        [JsonPropertyName("alipay_bill_id")]
+        public string AlipayBillId { get; set; }
+
+        /// <summary>
         /// 账期金额,单位元
         /// </summary>
         [JsonPropertyName("bill_amount")]
@@ -44,7 +50,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string ExpiryDate { get; set; }
 
         /// <summary>
-        /// PROPERTY_MNG("PROPERTY_MNG", "物业费"), PROPERTY_WATER("PROPERTY_WATER", "代收水费"), PROPERTY_ELECTRIC("PROPERTY_ELECTRIC", "代收电费"), PROPERTY_SHARE("PROPERTY_SHARE", "公共维护金"), PROPERTY_PARK_MNG("PROPERTY_PARK_MNG", "车位管理费"), PROPERTY_PARK_LEASE("PROPERTY_PARK_LEASE", "车位租赁费"), PROPERTY_ROOM_LEASE("PROPERTY_ROOM_LEASE", "房屋租赁费"), PROPERTY_TEMP_PARK("PROPERTY_TEMP_PARK", "临时停车费");
+        /// PROPERTY_MNG/物业费， PROPERTY_WATER/代收水费， PROPERTY_ELECTRIC/代收电费， PROPERTY_SHARE/公共维护金， PROPERTY_PARK_MNG/车位管理费， PROPERTY_PARK_LEASE /车位租赁费， PROPERTY_ROOM_LEASE/房屋租赁费， PROPERTY_TEMP_PARK/临时停车费， PROPERTY_PUBLIC_ENERGY/公共能耗费， PROPERTY_GAS/代收燃气费， PROPERTY_MAINTENANCE/维修服务费， PROPERTY_HOUSEKEEPING/家政服务费， PROPERTY_GREENING/绿化服务费， PROPERTY_STORAGE_ROOM/储藏室物业费， PROPERTY_DECORATION_DEPOSIT/装修押金， PROPERTY_REFUSE_COLLECTION/垃圾清运费， PROPERTY_PAID_SERVICE/有偿服务费， PROPERTY_WATER_SHARING/水费公摊费， PROPERTY_ELECTRIC_SHARING/电费公摊费。
         /// </summary>
         [JsonPropertyName("fee_type")]
         public string FeeType { get; set; }
@@ -102,6 +108,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("service_amount")]
         public string ServiceAmount { get; set; }
+
+        /// <summary>
+        /// INIT("待缴") WAIT_PAY("处理中"), FINISH_PAY("已缴"), FAIL("支付失败"), REFUND("异常退款"), INVALID("失效"), CHANNEL_FINISH_PAY ("外部渠道支付");
+        /// </summary>
+        [JsonPropertyName("status")]
+        public string Status { get; set; }
 
         /// <summary>
         /// 子业务类型

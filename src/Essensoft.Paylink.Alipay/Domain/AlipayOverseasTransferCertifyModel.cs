@@ -56,6 +56,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string PayerAgentId { get; set; }
 
         /// <summary>
+        /// 汇款二级目的
+        /// </summary>
+        [JsonPropertyName("sub_transfer_purpose")]
+        public string SubTransferPurpose { get; set; }
+
+        /// <summary>
         /// 汇款的金额
         /// </summary>
         [JsonPropertyName("transfer_from_amount")]
@@ -66,6 +72,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("transfer_from_region")]
         public string TransferFromRegion { get; set; }
+
+        /// <summary>
+        /// 汇款目的
+        /// </summary>
+        [JsonPropertyName("transfer_purpose")]
+        public string TransferPurpose { get; set; }
 
         /// <summary>
         /// 收款的金额

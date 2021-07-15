@@ -57,6 +57,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public List<EnviromentalInfoDTO> EnvironmentalInfo { get; set; }
 
         /// <summary>
+        /// 对接电子小票/无纸化小票能量发放时，必填; 其它场景，无需该 字段; 字段含义: 是否接入支付宝电子小票; "0":不接入(商户自己 有电子小票终端)；"1":接入; 接入场景后，为确保为确保小票信息的真实性，需传小票必填字段证实为小票信息。如支付宝侧C端对小票信息进行展示，需消费者单独授权。; 不接入的 商户且商户自己有终端实现了电子小票, 可以对接无纸化小票能
+        /// </summary>
+        [JsonPropertyName("is_alipay_ticket")]
+        public string IsAlipayTicket { get; set; }
+
+        /// <summary>
         /// 商户商品信息列表; 电子小票场景时，必填
         /// </summary>
         [JsonPropertyName("item_order_list")]

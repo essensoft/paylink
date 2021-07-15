@@ -57,7 +57,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string OrderId { get; set; }
 
         /// <summary>
-        /// 支付宝小程序订单详情页链接
+        /// 订单详情页链接，必须是alipay://开头的小程序scheme链接，如何拼接小程序页面链接参考https://opensupport.alipay.com/support/helpcenter/142/201602496413。  注意：scheme链接中的page参数值必须做URL ENCODE，否则接口会报错！
         /// </summary>
         [JsonPropertyName("order_link")]
         public string OrderLink { get; set; }
@@ -177,7 +177,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string Source { get; set; }
 
         /// <summary>
-        /// ISV
+        /// 服务商的标识，需要ISV提前联系支付宝技术分配该值。配置时间较长，请提前联系
         /// </summary>
         [JsonPropertyName("source_system")]
         public string SourceSystem { get; set; }

@@ -14,7 +14,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string BrandName { get; set; }
 
         /// <summary>
-        /// 商家logo（上传logo图片返回的material_id）
+        /// 商家logo（上传logo图片返回的material_key）
         /// </summary>
         [JsonPropertyName("merchant_logo")]
         public string MerchantLogo { get; set; }

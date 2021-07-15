@@ -20,7 +20,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string FaceContrastPicture { get; set; }
 
         /// <summary>
-        /// 需要验证的身份信息(json)字段说明如下： identity_type：身份信息参数类型，固定为 CERT_INFO cert_name：真实姓名，必填 cert_no：证件号码，必填 cert_type：证件类型，必填，枚举支持： IDENTITY_CARD：身份证 HOME_VISIT_PERMIT_HK_MC：港澳通行证 HOME_VISIT_PERMIT_TAIWAN：台湾通行证 RESIDENCE_PERMIT_HK_MC：港澳居住证 RESIDENCE_PERMIT_TAIWAN：台湾居住证
+        /// 需要验证的身份信息(json)字段说明如下： identity_type： 身份信息参数类型，固定为 CERT_INFO cert_name：真实姓名，必填 cert_no：证件号码，必填 phone_no：手机号码，必填 cert_type：证件类型，必填，枚举支持： IDENTITY_CARD：身份证 HOME_VISIT_PERMIT_HK_MC：港澳通行证 HOME_VISIT_PERMIT_TAIWAN：台湾通行证 RESIDENCE_PERMIT_HK_MC：港澳居住证 RESIDENCE_PERMIT_TAIWAN：台湾居住证
         /// </summary>
         [JsonPropertyName("identity_param")]
         public string IdentityParam { get; set; }

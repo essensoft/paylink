@@ -20,6 +20,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string OutOrderNo { get; set; }
 
         /// <summary>
+        /// 分期期数
+        /// </summary>
+        [JsonPropertyName("period_num")]
+        public string PeriodNum { get; set; }
+
+        /// <summary>
         /// 订单金额
         /// </summary>
         [JsonPropertyName("trade_amount")]
