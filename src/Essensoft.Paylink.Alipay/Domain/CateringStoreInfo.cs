@@ -63,7 +63,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string StoreName { get; set; }
 
         /// <summary>
-        /// 门店联系方式
+        /// 门店联系方式，支持手机号和固定电话。请输入合法的手机号码或者固定号码，其中其中固定号码的区号3到4位，电话7到8位，分机号选填(例：固定电话：0834-1133567 或者 0834-1133567-1234）
         /// </summary>
         [JsonPropertyName("store_phone")]
         public string StorePhone { get; set; }

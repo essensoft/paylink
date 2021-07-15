@@ -8,6 +8,18 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AliveSubtitleExt : AlipayObject
     {
         /// <summary>
+        /// 字幕命中特殊行为逻辑，例如口播关注
+        /// </summary>
+        [JsonPropertyName("action_type")]
+        public string ActionType { get; set; }
+
+        /// <summary>
+        /// base64 url
+        /// </summary>
+        [JsonPropertyName("action_url")]
+        public string ActionUrl { get; set; }
+
+        /// <summary>
         /// 当前句子识别结果的置信度，取值范围：[0.0,1.0]。值越大表示置信度越高
         /// </summary>
         [JsonPropertyName("confidence")]

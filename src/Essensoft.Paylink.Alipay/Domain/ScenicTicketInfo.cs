@@ -27,7 +27,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string CloseTime { get; set; }
 
         /// <summary>
-        /// IDENTITY_CARD("IDENTITY_CARD_ONLY", "凭身份证入园"), QR_CODE("QR_CODE_ONLY", "凭二维码入园"), IDENTITY_CARD_AND_QR_CODE("IDENTITY_CARD_AND_QR_CODE", "凭二维码或身份证入园");
+        /// IDENTITY_CARD_ONLY：凭身份证入园， QR_CODE_ONLY：凭二维码入园， IDENTITY_CARD_AND_QR_CODE：凭二维码或身份证入园
         /// </summary>
         [JsonPropertyName("enter_way")]
         public string EnterWay { get; set; }
@@ -117,7 +117,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string TicketUseCode { get; set; }
 
         /// <summary>
-        /// 购票二维码图片
+        /// 购票凭证图片流的base64编码
         /// </summary>
         [JsonPropertyName("ticket_use_pic")]
         public string TicketUsePic { get; set; }

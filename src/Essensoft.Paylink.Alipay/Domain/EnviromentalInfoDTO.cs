@@ -14,7 +14,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string Environmental { get; set; }
 
         /// <summary>
-        /// environmental_info不为空时,必填; 环保行为内 容:huanbaojiansu;wuzhixiaopiao;zhiyishui.....
+        /// environmental_info不为空时,必填; 环保行为内容字典值: 减塑/不使用购物袋:huanbaojiansu;  无纸质小票(电子小票):dianzixiaopiao; 直饮水:zhiyinshui;   酒店六小件发放（减塑）:待定； 减碳-酒店不洗涤:待定;   景区订单-扫码购票:saomagoupiao;   高校订单:待定; 充电宝订单:chongdianbao; 物流订单:wangshangjijian
         /// </summary>
         [JsonPropertyName("environmental_ext")]
         public string EnvironmentalExt { get; set; }

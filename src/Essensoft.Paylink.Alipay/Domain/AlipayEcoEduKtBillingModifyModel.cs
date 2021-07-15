@@ -8,6 +8,12 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayEcoEduKtBillingModifyModel : AlipayObject
     {
         /// <summary>
+        /// 成功Y，失败N
+        /// </summary>
+        [JsonPropertyName("bank_success")]
+        public string BankSuccess { get; set; }
+
+        /// <summary>
         /// 退款时，支付宝返回的用户的登录id
         /// </summary>
         [JsonPropertyName("buyer_logon_id")]
@@ -32,7 +38,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string GmtRefund { get; set; }
 
         /// <summary>
-        /// 标识一次退款请求，同一笔交易多次退款需要保证唯一，如需部分退款，则此参数必传
+        /// 标识一次退款请求，同一笔交易多次退款需要保证唯一，如需部分退款，则此参数必传。（若退款时填写，则同步退款状态时也必须填写）
         /// </summary>
         [JsonPropertyName("out_request_no")]
         public string OutRequestNo { get; set; }
@@ -56,13 +62,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string RefundDetailItemList { get; set; }
 
         /// <summary>
-        /// 退款原因，商家根据客户实际退款原因填写
+        /// 退款原因，商家根据客户实际退款原因填写（若退款时填写，则同步退款状态时也必须填写）
         /// </summary>
         [JsonPropertyName("refund_reason")]
         public string RefundReason { get; set; }
 
         /// <summary>
-        /// 状态：1:缴费成功，2:关闭账单，3、退费  如果为退款状态，需要填写以下字段,字段都是支付宝退款返回的必填参数
+        /// 状态：1:缴费成功，2:关闭账单，3、退费  如果为退款状态，需要填写fund_change,   refund_amount, refund_reason,  out_request_no, buyer_logon_id,  gmt_refund,  buyer_user_id, refund_detail_item_list;  4、同步网商返回的状态,如果是网商银行的账单，bank_success这个字段必填
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; }

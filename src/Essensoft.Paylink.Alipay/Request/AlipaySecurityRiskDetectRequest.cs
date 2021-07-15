@@ -298,6 +298,7 @@ namespace Essensoft.Paylink.Alipay.Request
         private string notifyUrl;
         private string returnUrl;
         private AlipayObject bizModel;
+        private Dictionary<string, string> udfParams; //add user-defined text parameters
 
         public void SetNeedEncrypt(bool needEncrypt)
         {
@@ -374,6 +375,15 @@ namespace Essensoft.Paylink.Alipay.Request
             return apiVersion;
         }
 
+        public void PutOtherTextParam(string key, string value)
+        {
+            if (udfParams == null)
+            {
+                udfParams = new Dictionary<string, string>();
+            }
+            udfParams.Add(key, value);
+        }
+
         public IDictionary<string, string> GetParameters()
         {
             var parameters = new AlipayDictionary
@@ -435,6 +445,10 @@ namespace Essensoft.Paylink.Alipay.Request
                 { "seller_reg_moile", SellerRegMoile },
                 { "transport_type", TransportType }
             };
+            if (udfParams != null)
+            {
+                parameters.AddAll(udfParams);
+            }
             return parameters;
         }
 

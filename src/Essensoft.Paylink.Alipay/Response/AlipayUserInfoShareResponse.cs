@@ -22,7 +22,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public string Area { get; set; }
 
         /// <summary>
-        /// 用户头像地址
+        /// 用户头像地址。
         /// </summary>
         [JsonPropertyName("avatar")]
         public string Avatar { get; set; }
@@ -208,7 +208,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public string Mobile { get; set; }
 
         /// <summary>
-        /// 用户昵称
+        /// 用户昵称。
         /// </summary>
         [JsonPropertyName("nick_name")]
         public string NickName { get; set; }
@@ -256,7 +256,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public string Profession { get; set; }
 
         /// <summary>
-        /// 省份名称
+        /// 省份名称。
         /// </summary>
         [JsonPropertyName("province")]
         public string Province { get; set; }
@@ -268,7 +268,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public string TaobaoId { get; set; }
 
         /// <summary>
-        /// 支付宝用户的userId
+        /// 支付宝用户的userId。
         /// </summary>
         [JsonPropertyName("user_id")]
         public string UserId { get; set; }

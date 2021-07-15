@@ -38,5 +38,11 @@ namespace Essensoft.Paylink.Alipay.Response
         /// </summary>
         [JsonPropertyName("result_action")]
         public string ResultAction { get; set; }
+
+        /// <summary>
+        /// 命中标签用逗号分割
+        /// </summary>
+        [JsonPropertyName("risk_labels")]
+        public string RiskLabels { get; set; }
     }
 }

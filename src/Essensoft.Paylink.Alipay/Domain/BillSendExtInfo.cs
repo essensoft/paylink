@@ -8,6 +8,12 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class BillSendExtInfo : AlipayObject
     {
         /// <summary>
+        /// 账单唤起收银台的方式： 1-手机wap;2-当面付。默认值为1（不传值或传非数字值）
+        /// </summary>
+        [JsonPropertyName("order_pay_type")]
+        public string OrderPayType { get; set; }
+
+        /// <summary>
         /// 分账金额
         /// </summary>
         [JsonPropertyName("royalty_amount")]

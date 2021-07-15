@@ -8,6 +8,12 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayMarketingIotBoothQueryModel : AlipayObject
     {
         /// <summary>
+        /// 接口调用版本号
+        /// </summary>
+        [JsonPropertyName("api_version")]
+        public string ApiVersion { get; set; }
+
+        /// <summary>
         /// 客户端app信息，设备信息及sdk版本等信息加密后数据
         /// </summary>
         [JsonPropertyName("app_info")]

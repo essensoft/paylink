@@ -69,10 +69,16 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string OutSubVenueId { get; set; }
 
         /// <summary>
-        /// 收款方支付宝账户
+        /// 收款方支付宝账户(payment_method为account或空值时必传)
         /// </summary>
         [JsonPropertyName("payee_account")]
         public string PayeeAccount { get; set; }
+
+        /// <summary>
+        /// 收款方式  account：通过支付宝账号收款  smid：通过smid收款
+        /// </summary>
+        [JsonPropertyName("payment_method")]
+        public string PaymentMethod { get; set; }
 
         /// <summary>
         /// 收款方式（间连/直连）
@@ -123,10 +129,16 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string SubVenueId { get; set; }
 
         /// <summary>
-        /// 子场馆pid
+        /// 子场馆pid(payment_method为smid时必传)
         /// </summary>
         [JsonPropertyName("sub_venue_pid")]
         public string SubVenuePid { get; set; }
+
+        /// <summary>
+        /// 子场馆商户二级smid（payment_method为smid时必传）
+        /// </summary>
+        [JsonPropertyName("sub_venue_smid")]
+        public string SubVenueSmid { get; set; }
 
         /// <summary>
         /// 标签列表
