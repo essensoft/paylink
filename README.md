@@ -81,11 +81,6 @@ Package  | NuGet | Downloads
 
 [捐赠名单](FUNDING.md)
 
-## 活动推广
-
-- [阿里云-618活动](https://www.aliyun.com/activity/618/2021?userCode=g1nfdiq6)
-- [腾讯云-618活动](https://curl.qcloud.com/25sPVtie)
-
 ---
 
 <img src="https://cdn.jsdelivr.net/gh/essensoft/paylink@main/qrcode-pay.png" width="600">
