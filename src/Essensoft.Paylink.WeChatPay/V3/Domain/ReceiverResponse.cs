@@ -99,5 +99,15 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// </remarks>
         [JsonPropertyName("finish_time")]
         public string FinishTime { get; set; }
+
+        /// <summary>
+        /// 分账明细单号
+        /// </summary>
+        /// <remarks>
+        /// 微信分账明细单号，每笔分账业务执行的明细单号，可与资金账单对账使用
+        /// <para>示例值：36011111111111111111111</para>
+        /// </remarks>
+        [JsonPropertyName("detail_id")]
+        public string DetailId { get; set; }
     }
 }
