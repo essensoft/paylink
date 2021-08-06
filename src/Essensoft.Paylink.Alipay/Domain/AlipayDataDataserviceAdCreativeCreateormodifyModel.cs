@@ -99,6 +99,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public List<string> RegionList { get; set; }
 
         /// <summary>
+        /// 广告关联rta请求编号
+        /// </summary>
+        [JsonPropertyName("rta_id")]
+        public string RtaId { get; set; }
+
+        /// <summary>
         /// 创意状态，ENABLE-生效；PAUSE-暂停
         /// </summary>
         [JsonPropertyName("status")]

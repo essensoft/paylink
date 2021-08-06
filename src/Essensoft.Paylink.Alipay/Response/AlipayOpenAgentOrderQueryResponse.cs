@@ -34,6 +34,12 @@ namespace Essensoft.Paylink.Alipay.Response
         public string OrderStatus { get; set; }
 
         /// <summary>
+        /// 申请单中每个产品的签约状态
+        /// </summary>
+        [JsonPropertyName("product_agent_status_infos")]
+        public List<ProductAgentStatusInfo> ProductAgentStatusInfos { get; set; }
+
+        /// <summary>
         /// 审核失败的拒绝原因，只有审核失败才会返回该值
         /// </summary>
         [JsonPropertyName("reject_reason")]

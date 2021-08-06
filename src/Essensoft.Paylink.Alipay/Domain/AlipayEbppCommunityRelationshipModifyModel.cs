@@ -20,6 +20,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string AccountType { get; set; }
 
         /// <summary>
+        /// 物业费允许跳缴 （1允许，0不允许，默认1）  若服务商接口设置小区“不允许跳缴” ，则物业缴费单页，用户点击“完成选择”时，针对费用类型为“物业费、公共维护金、公共能耗费、水费公摊费、电费公摊费、储藏室物业费”的账单选择板块， 均新增逻辑判断 （如下判断是各费种各自独立判断）  1）若最早账期的账单已勾选、且勾选的账单月份连续、且服务商/物业设置的必勾选的账单均已勾选，则流程继续 2）若最早账期的账单未勾选、或者出现勾选的账单月份不连续的情况，则弹框提示“根据物业公司要求，部分费用类型的账单不允许跳缴（跳缴：跳过前序未缴费月份进行账单缴费）”、且无法进入下一步
+        /// </summary>
+        [JsonPropertyName("allow_skip_pay")]
+        public string AllowSkipPay { get; set; }
+
+        /// <summary>
         /// 外部户号查询跳转链接,占位符使用#xxx#模式，xxx为占位符枚举，目前支持的枚举值为:communityShortName
         /// </summary>
         [JsonPropertyName("billkey_url")]
@@ -50,7 +56,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public CommunityRelationshipExtendField ExtendField { get; set; }
 
         /// <summary>
-        /// 外部账单页面跳转链接，占位符使用#xxx#模式，xxx为占位符枚举，目前支持的枚举值为:communityShortName
+        /// 外部账单页面跳转链接，占位符使用#xxx#模式，xxx为占位符枚举，目前支持的枚举值为:communityShortName，roomId
         /// </summary>
         [JsonPropertyName("out_bill_url")]
         public string OutBillUrl { get; set; }

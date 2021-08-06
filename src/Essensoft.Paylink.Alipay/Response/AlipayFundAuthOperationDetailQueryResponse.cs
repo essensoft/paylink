@@ -62,6 +62,12 @@ namespace Essensoft.Paylink.Alipay.Response
         public string OperationType { get; set; }
 
         /// <summary>
+        /// 授权单状态：INIT（初始状态：已创建未授权）、AUTHORIZED（已授权状态：授权成功，可以进行转支付或解冻操作）、FINISHED（完成状态：转支付完成且无剩余冻结资金）、CLOSED（关闭状态：授权未完成超时关闭或冻结资金全额解冻）
+        /// </summary>
+        [JsonPropertyName("order_status")]
+        public string OrderStatus { get; set; }
+
+        /// <summary>
         /// 业务订单的简单描述，如商品名称等
         /// </summary>
         [JsonPropertyName("order_title")]

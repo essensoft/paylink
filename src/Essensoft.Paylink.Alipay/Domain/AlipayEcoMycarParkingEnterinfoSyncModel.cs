@@ -32,10 +32,22 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string EntranceId { get; set; }
 
         /// <summary>
+        /// 当前停车场的入场免费时长分钟数
+        /// </summary>
+        [JsonPropertyName("free_minutes")]
+        public long FreeMinutes { get; set; }
+
+        /// <summary>
         /// 车辆入场的时间，格式"YYYY-MM-DD HH:mm:ss"，24小时制，请保证服务器时间准确，入场时间不应晚于当前网络时间
         /// </summary>
         [JsonPropertyName("in_time")]
         public string InTime { get; set; }
+
+        /// <summary>
+        /// 智能助理当前的跳转链接
+        /// </summary>
+        [JsonPropertyName("isv_url")]
+        public string IsvUrl { get; set; }
 
         /// <summary>
         /// 支付宝停车平台ID，由支付宝定义的该停车场标识，同一个isv或商户范围内唯一。通过 <a href="https://opendocs.alipay.com/apis/api_19/alipay.eco.mycar.parking.parkinglotinfo.create">alipay.eco.mycar.parking.parkinglotinfo.create</a>(录入停车场信息)接口获取。

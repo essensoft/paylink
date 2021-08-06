@@ -15,6 +15,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string BizToken { get; set; }
 
         /// <summary>
+        /// 数据集id列表
+        /// </summary>
+        [JsonPropertyName("conversion_data_id_list")]
+        public List<string> ConversionDataIdList { get; set; }
+
+        /// <summary>
         /// 转化事件编号（废弃）。若此字段不为空，则要求conversion_type也不为空，且此转化事件与转化事件类型conversion_type匹配
         /// </summary>
         [JsonPropertyName("conversion_id")]

@@ -20,13 +20,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string BillNo { get; set; }
 
         /// <summary>
-        /// 账单类型（支付、退款、转账）
+        /// 账单类型（CONSUME-消费账单、REFUND-退款、TRANSFER-转账）
         /// </summary>
         [JsonPropertyName("bill_type")]
         public string BillType { get; set; }
 
         /// <summary>
-        /// 账单分类
+        /// 账单行业分类（交通出行，餐饮美食，商业服务，日用百货等等）
         /// </summary>
         [JsonPropertyName("category_name")]
         public string CategoryName { get; set; }
@@ -74,7 +74,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string PayeeName { get; set; }
 
         /// <summary>
-        /// 支付使用的项目号（成本中心）
+        /// 费控制度中的项目编号
+        /// </summary>
+        [JsonPropertyName("project_id")]
+        public string ProjectId { get; set; }
+
+        /// <summary>
+        /// 支付使用的项目号（成本中心）此字段废弃
         /// </summary>
         [JsonPropertyName("projiect_id")]
         public string ProjiectId { get; set; }

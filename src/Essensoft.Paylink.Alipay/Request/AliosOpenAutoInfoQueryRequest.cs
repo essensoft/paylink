@@ -1,6 +1,4 @@
-﻿using System;
-using Essensoft.Paylink.Alipay.Domain;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Essensoft.Paylink.Alipay.Response;
 
 namespace Essensoft.Paylink.Alipay.Request
@@ -17,19 +15,19 @@ namespace Essensoft.Paylink.Alipay.Request
 
         #region IAlipayRequest Members
 
-        private bool  needEncrypt=false;
+        private bool needEncrypt = false;
         private string apiVersion = "1.0";
-	    private string terminalType;
-	    private string terminalInfo;
+        private string terminalType;
+        private string terminalInfo;
         private string prodCode;
-	    private string notifyUrl;
+        private string notifyUrl;
         private string returnUrl;
-	    private AlipayObject bizModel;
+        private AlipayObject bizModel;
         private Dictionary<string, string> udfParams; //add user-defined text parameters
 
-		public void SetNeedEncrypt(bool needEncrypt)
+        public void SetNeedEncrypt(bool needEncrypt)
         {
-             this.needEncrypt=needEncrypt;
+            this.needEncrypt = needEncrypt;
         }
 
         public bool GetNeedEncrypt()
@@ -37,7 +35,7 @@ namespace Essensoft.Paylink.Alipay.Request
             return needEncrypt;
         }
 
-		public void SetNotifyUrl(string notifyUrl)
+        public void SetNotifyUrl(string notifyUrl)
         {
             this.notifyUrl = notifyUrl;
         }
@@ -57,26 +55,29 @@ namespace Essensoft.Paylink.Alipay.Request
             return returnUrl;
         }
 
-        public void SetTerminalType(string terminalType){
-			this.terminalType=terminalType;
-		}
-
-    	public string GetTerminalType()
+        public void SetTerminalType(string terminalType)
         {
-    		return terminalType;
-    	}
+            this.terminalType = terminalType;
+        }
 
-    	public void SetTerminalInfo(string terminalInfo){
-    		this.terminalInfo=terminalInfo;
-    	}
-
-    	public string GetTerminalInfo()
+        public string GetTerminalType()
         {
-    		return terminalInfo;
-    	}
+            return terminalType;
+        }
 
-        public void SetProdCode(string prodCode){
-            this.prodCode=prodCode;
+        public void SetTerminalInfo(string terminalInfo)
+        {
+            this.terminalInfo = terminalInfo;
+        }
+
+        public string GetTerminalInfo()
+        {
+            return terminalInfo;
+        }
+
+        public void SetProdCode(string prodCode)
+        {
+            this.prodCode = prodCode;
         }
 
         public string GetProdCode()
@@ -91,7 +92,7 @@ namespace Essensoft.Paylink.Alipay.Request
 
         public void SetApiVersion(string apiVersion)
         {
-            this.apiVersion=apiVersion;
+            this.apiVersion = apiVersion;
         }
 
         public string GetApiVersion()
@@ -99,9 +100,9 @@ namespace Essensoft.Paylink.Alipay.Request
             return apiVersion;
         }
 
-        public void PutOtherTextParam(string key, string value) 
+        public void PutOtherTextParam(string key, string value)
         {
-            if(udfParams == null) 
+            if (udfParams == null)
             {
                 udfParams = new Dictionary<string, string>();
             }
@@ -114,14 +115,14 @@ namespace Essensoft.Paylink.Alipay.Request
             {
                 { "biz_content", BizContent }
             };
-            if(udfParams != null) 
+            if (udfParams != null)
             {
                 parameters.AddAll(udfParams);
             }
             return parameters;
         }
 
-		public AlipayObject GetBizModel()
+        public AlipayObject GetBizModel()
         {
             return bizModel;
         }

@@ -33,7 +33,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string OutBizNo { get; set; }
 
         /// <summary>
-        /// 支付宝门店id
+        /// 用户核销优惠券的代运营商业关系门店id，调用接口alipay.business.relation.shop.create创建门店返回的real_shop_id。 限制: 传入的门店id必须是创建商家券customer_guide对象中real_shop_ids中的门店id。
+        /// </summary>
+        [JsonPropertyName("real_shop_id")]
+        public string RealShopId { get; set; }
+
+        /// <summary>
+        /// 用户核销优惠券的支付门店id,调用接口ant.merchant.expand.shop.create创建门店返回的门店id。 限制: 传入的门店id必须是创建商家券customer_guide对象中store_ids中的门店id
         /// </summary>
         [JsonPropertyName("store_id")]
         public string StoreId { get; set; }

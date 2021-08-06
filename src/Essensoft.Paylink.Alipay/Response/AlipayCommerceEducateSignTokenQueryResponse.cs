@@ -20,7 +20,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public string CertNo { get; set; }
 
         /// <summary>
-        /// 证件类型（"1","居民身份证"）
+        /// 证件类型（"1","居民身份证"，"X":"学工号"）
         /// </summary>
         [JsonPropertyName("cert_type")]
         public string CertType { get; set; }

@@ -47,7 +47,7 @@ namespace Essensoft.Paylink.Alipay.Request
         public Nullable<bool> LongTerm { get; set; }
 
         /// <summary>
-        /// 商家经营类目编码。详情可参考 <a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.59bgD2&treeId=222&articleId=105364&docType=1#s1">商家经营类目</a> 中的“经营类目编码”
+        /// 商家经营类目编码。详情可参考 <a href="https://opendocs.alipay.com/open/01n22g#%E5%95%86%E5%AE%B6%E7%BB%8F%E8%90%A5%E7%B1%BB%E7%9B%AE">商家经营类目</a> 中的“二级类目code”。
         /// </summary>
         public string MccCode { get; set; }
 
@@ -82,7 +82,7 @@ namespace Essensoft.Paylink.Alipay.Request
         public Nullable<bool> SignAndAuth { get; set; }
 
         /// <summary>
-        /// 企业特殊资质图片，当mcc_code为需要特殊资质类目时必填。可参考 <a href="https://doc.open.alipay.com/doc2/detail.htm?spm=a219a.7629140.0.0.59bgD2&treeId=222&articleId=105364&docType=1#s1">商家经营类目</a> 中的“需要的特殊资质证书”，最小5KB ，最大5M（暂不限制图片宽高），图片格式必须为：png、bmp、gif、jpg、jpeg
+        /// 企业特殊资质图片，当mcc_code为需要特殊资质类目时必填。可参考 <a href="https://opendocs.alipay.com/open/01n22g#%E5%95%86%E5%AE%B6%E7%BB%8F%E8%90%A5%E7%B1%BB%E7%9B%AE">商家经营类目</a> 中的“所需资质”，最小5KB ，最大5M（暂不限制图片宽高），图片格式必须为：png、bmp、gif、jpg、jpeg
         /// </summary>
         public FileItem SpecialLicensePic { get; set; }
 

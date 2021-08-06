@@ -8,6 +8,12 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class ZftSubMerchantOrder : AlipayObject
     {
         /// <summary>
+        /// 是否开通线上预授权
+        /// </summary>
+        [JsonPropertyName("app_pre_auth")]
+        public string AppPreAuth { get; set; }
+
+        /// <summary>
         /// 申请单创建时间
         /// </summary>
         [JsonPropertyName("apply_time")]
@@ -32,6 +38,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string ExternalId { get; set; }
 
         /// <summary>
+        /// 是否开通线下预授权
+        /// </summary>
+        [JsonPropertyName("face_pre_auth")]
+        public string FacePreAuth { get; set; }
+
+        /// <summary>
         /// 风控审核状态。CREATE：已创建待审批、SKIP：跳过风控审批步骤、PASS：风控审核通过、REJECT：风控审批拒绝
         /// </summary>
         [JsonPropertyName("fk_audit")]
@@ -42,6 +54,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("fk_audit_memo")]
         public string FkAuditMemo { get; set; }
+
+        /// <summary>
+        /// 判断个人当面付权限版本，返回TRUE时表示是标准版，返回FALSE表示受限版
+        /// </summary>
+        [JsonPropertyName("is_face_limit")]
+        public string IsFaceLimit { get; set; }
 
         /// <summary>
         /// 客资审核状态。CREATE：已创建待审批、SKIP：跳过客资审批步骤、PASS：客资审核通过、REJECT：客资审批拒绝
@@ -66,6 +84,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("order_id")]
         public string OrderId { get; set; }
+
+        /// <summary>
+        /// 申请单处理失败时，通过此此段返回具体的失败理由；与kf_audit_memo和kz_audit_memo配合使用
+        /// </summary>
+        [JsonPropertyName("reason")]
+        public string Reason { get; set; }
 
         /// <summary>
         /// 二级商户id。当总体申请状态status为99时，smid才算进件完成

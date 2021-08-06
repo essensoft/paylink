@@ -15,6 +15,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string BizNo { get; set; }
 
         /// <summary>
+        /// 转化金额，单位分
+        /// </summary>
+        [JsonPropertyName("conversion_amount")]
+        public string ConversionAmount { get; set; }
+
+        /// <summary>
         /// 转化事件ID
         /// </summary>
         [JsonPropertyName("conversion_id")]
@@ -39,6 +45,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string CreativeId { get; set; }
 
         /// <summary>
+        /// 数据集id
+        /// </summary>
+        [JsonPropertyName("data_id")]
+        public string DataId { get; set; }
+
+        /// <summary>
         /// 单元ID
         /// </summary>
         [JsonPropertyName("group_id")]
@@ -49,6 +61,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("plan_id")]
         public string PlanId { get; set; }
+
+        /// <summary>
+        /// 商户在灯火pb端的id, 可代替principal_tag
+        /// </summary>
+        [JsonPropertyName("principal_id")]
+        public string PrincipalId { get; set; }
 
         /// <summary>
         /// 商家标志
@@ -73,5 +91,11 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("uuid")]
         public string Uuid { get; set; }
+
+        /// <summary>
+        /// PID : 2088pid PHONE : 手机号
+        /// </summary>
+        [JsonPropertyName("uuid_type")]
+        public string UuidType { get; set; }
     }
 }

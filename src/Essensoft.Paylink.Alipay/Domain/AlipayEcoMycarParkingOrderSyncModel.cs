@@ -74,6 +74,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string ParkingName { get; set; }
 
         /// <summary>
+        /// 支付宝业务流水号，用于记录车辆从驶入到驶出的全流程。通过 alipay.eco.mycar.parking.enterinfo.sync(车辆驶入接口)接口获取。
+        /// </summary>
+        [JsonPropertyName("parking_record_id")]
+        public string ParkingRecordId { get; set; }
+
+        /// <summary>
         /// 缴费金额，保留小数点后两位
         /// </summary>
         [JsonPropertyName("pay_money")]
@@ -86,10 +92,16 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string PayTime { get; set; }
 
         /// <summary>
-        /// 付款方式，枚举支持： *1：支付宝在线缴费 。 *2：支付宝代扣缴费。
+        /// 付款方式，枚举支持： *1：支付宝在线缴费 。 *2：支付宝代扣缴费。 *FTF_IN_PARKINGLOT_PAY：用户通过支付宝场内主动扫码或者提前在线缴费。
         /// </summary>
         [JsonPropertyName("pay_type")]
         public string PayType { get; set; }
+
+        /// <summary>
+        /// 间连商户ID
+        /// </summary>
+        [JsonPropertyName("smid")]
+        public string Smid { get; set; }
 
         /// <summary>
         /// 停车缴费用户 id，用户在支付宝的唯一标识，以 2088 开头的 16 位纯数字组成。 注意：ISV需保证用户 id的正确性，以免导致用户在停车平台查询不到相关的订单信息。

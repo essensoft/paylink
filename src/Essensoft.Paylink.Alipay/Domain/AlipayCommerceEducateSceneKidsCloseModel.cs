@@ -14,7 +14,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string BizCode { get; set; }
 
         /// <summary>
-        /// 扩展参数。（当bizCode是SCHOOL_PAYMENT，cert_type,cert_no必传，当sub_biz_code是SCHOOL_PAYMENT_FACEPAY，agreement_no必传）
+        /// 扩展参数。（当bizCode是SCHOOL_PAYMENT，cert_type,cert_no必传，当sub_biz_code是SCHOOL_PAYMENT_FACEPAY，agreement_no必传） （cert_type枚举：1.身份证(IDENTITY_CARD)；2.学工号(STUDENT_NUMBER)）
         /// </summary>
         [JsonPropertyName("ext_info")]
         public string ExtInfo { get; set; }

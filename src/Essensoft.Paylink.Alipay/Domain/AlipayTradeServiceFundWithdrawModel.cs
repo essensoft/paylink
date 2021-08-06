@@ -36,5 +36,35 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("sub_biz_type")]
         public string SubBizType { get; set; }
+
+        /// <summary>
+        /// 待提现的银行卡账户名称
+        /// </summary>
+        [JsonPropertyName("withdraw_account_name")]
+        public string WithdrawAccountName { get; set; }
+
+        /// <summary>
+        /// 待提现的银行卡账号
+        /// </summary>
+        [JsonPropertyName("withdraw_account_no")]
+        public string WithdrawAccountNo { get; set; }
+
+        /// <summary>
+        /// 待提现的银行联行号
+        /// </summary>
+        [JsonPropertyName("withdraw_bank_branch_code")]
+        public string WithdrawBankBranchCode { get; set; }
+
+        /// <summary>
+        /// 提现的银行机构id
+        /// </summary>
+        [JsonPropertyName("withdraw_bank_inst_id")]
+        public string WithdrawBankInstId { get; set; }
+
+        /// <summary>
+        /// 待提现的银行卡类型 DC:借记卡 CC:贷记卡
+        /// </summary>
+        [JsonPropertyName("withdraw_card_type")]
+        public string WithdrawCardType { get; set; }
     }
 }

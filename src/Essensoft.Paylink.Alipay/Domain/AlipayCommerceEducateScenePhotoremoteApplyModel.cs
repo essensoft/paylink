@@ -14,7 +14,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string CertNo { get; set; }
 
         /// <summary>
-        /// 证件类型。{1:身份证，A:护照}
+        /// 证件类型。{1:身份证，X:学工号}
         /// </summary>
         [JsonPropertyName("cert_type")]
         public string CertType { get; set; }

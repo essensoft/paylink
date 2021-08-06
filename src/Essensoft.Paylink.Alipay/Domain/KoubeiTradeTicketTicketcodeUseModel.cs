@@ -14,6 +14,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string CodeType { get; set; }
 
         /// <summary>
+        /// 扩展信息，或落地到核销任务单上
+        /// </summary>
+        [JsonPropertyName("ext")]
+        public string Ext { get; set; }
+
+        /// <summary>
         /// 业务发生时间，默认为接口调用时间
         /// </summary>
         [JsonPropertyName("gmt_biz")]

@@ -118,9 +118,9 @@ namespace Essensoft.Paylink.Alipay.Request
         {
             var parameters = new AlipayDictionary
             {
-                { "biz_content", BizContent }
+                { "biz_content", BizContent },
+                { "ip_addr", IpAddr }
             };
-            parameters.Add("ip_addr", IpAddr);
             if (udfParams != null)
             {
                 parameters.AddAll(udfParams);

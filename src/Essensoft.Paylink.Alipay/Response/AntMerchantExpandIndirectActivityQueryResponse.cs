@@ -14,7 +14,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public string Rate { get; set; }
 
         /// <summary>
-        /// 费率审核通过此字段状态值为TRUE，反之为FALSE
+        /// 费率申请审核结果status的值：true（通过），false（拒绝），AUDITING（审核中）
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; }
