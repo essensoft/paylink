@@ -72,5 +72,11 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; }
+
+        /// <summary>
+        /// 体验包
+        /// </summary>
+        [JsonPropertyName("trial_package")]
+        public MiniAppPackageInfo TrialPackage { get; set; }
     }
 }

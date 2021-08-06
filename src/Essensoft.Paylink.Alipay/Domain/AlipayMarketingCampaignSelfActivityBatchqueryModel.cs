@@ -15,6 +15,18 @@ namespace Essensoft.Paylink.Alipay.Domain
         public List<string> NeedUseScopeInfo { get; set; }
 
         /// <summary>
+        /// 分页查询的当前页号，从1开始（默认1）
+        /// </summary>
+        [JsonPropertyName("page_number")]
+        public string PageNumber { get; set; }
+
+        /// <summary>
+        /// 分页查询的单页活动数量，不大于20（默认10）
+        /// </summary>
+        [JsonPropertyName("page_size")]
+        public string PageSize { get; set; }
+
+        /// <summary>
         /// 场景码：默认(DEFAULT)
         /// </summary>
         [JsonPropertyName("scene_code")]

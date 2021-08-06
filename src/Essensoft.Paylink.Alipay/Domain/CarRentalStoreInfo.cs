@@ -51,7 +51,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string StoreName { get; set; }
 
         /// <summary>
-        /// 门店联系方式
+        /// 门店电话 支持固话或者个人用户手机号
         /// </summary>
         [JsonPropertyName("store_phone")]
         public string StorePhone { get; set; }

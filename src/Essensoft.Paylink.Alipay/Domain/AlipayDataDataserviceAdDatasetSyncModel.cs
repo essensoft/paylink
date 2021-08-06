@@ -44,6 +44,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string DataType { get; set; }
 
         /// <summary>
+        /// 商户id
+        /// </summary>
+        [JsonPropertyName("principal_id")]
+        public string PrincipalId { get; set; }
+
+        /// <summary>
         /// 商户在支付宝灯火pb侧的唯一标志
         /// </summary>
         [JsonPropertyName("principal_tag")]

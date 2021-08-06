@@ -14,6 +14,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string Amount { get; set; }
 
         /// <summary>
+        /// 扩展参数
+        /// </summary>
+        [JsonPropertyName("extend_params")]
+        public OverseasExtendParams ExtendParams { get; set; }
+
+        /// <summary>
         /// 跨境结算的外币币种
         /// </summary>
         [JsonPropertyName("foreign_settle_currency")]

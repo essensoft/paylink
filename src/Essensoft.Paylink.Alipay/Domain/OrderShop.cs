@@ -74,7 +74,7 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string ShopName { get; set; }
 
         /// <summary>
-        /// 店铺营业时间(时间范围 00:00-23:59 )
+        /// 店铺营业时间(时间范围 00:00-24:00 )
         /// </summary>
         [JsonPropertyName("shop_open_time")]
         public string ShopOpenTime { get; set; }

@@ -8,6 +8,24 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class ContentRiskDetail : AlipayObject
     {
         /// <summary>
+        /// 规则编码
+        /// </summary>
+        [JsonPropertyName("code")]
+        public string Code { get; set; }
+
+        /// <summary>
+        /// 当前规则对应的扩展信息
+        /// </summary>
+        [JsonPropertyName("ext_properties")]
+        public string ExtProperties { get; set; }
+
+        /// <summary>
+        /// 当前规则对应的转换后的原始审核素材
+        /// </summary>
+        [JsonPropertyName("generated_file")]
+        public string GeneratedFile { get; set; }
+
+        /// <summary>
         /// 规则名称
         /// </summary>
         [JsonPropertyName("name")]

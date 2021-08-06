@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 using Essensoft.Paylink.Alipay.Domain;
 
 namespace Essensoft.Paylink.Alipay.Response
@@ -12,7 +13,7 @@ namespace Essensoft.Paylink.Alipay.Response
         /// 账单列表
         /// </summary>
         [JsonPropertyName("external_bill_list")]
-        public ExternalBillInfoResult ExternalBillList { get; set; }
+        public List<ExternalBillInfoResult> ExternalBillList { get; set; }
 
         /// <summary>
         /// 当前页码

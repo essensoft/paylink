@@ -39,6 +39,12 @@ namespace Essensoft.Paylink.Alipay.Response
         public BelongMerchantInfo BelongMerchantInfo { get; set; }
 
         /// <summary>
+        /// 商家券业务标签，影响商家券对C端用户的展示形式。 枚举值 兑换券团购场景 GROUP_BUY_EXCHANGE_VOUCHER 兑换券代金场景 FIX_EXCHANGE_VOUCHER
+        /// </summary>
+        [JsonPropertyName("biz_tag")]
+        public string BizTag { get; set; }
+
+        /// <summary>
         /// 用户引导相关配置
         /// </summary>
         [JsonPropertyName("customer_guide")]
@@ -75,7 +81,7 @@ namespace Essensoft.Paylink.Alipay.Response
         public VoucherSendRuleDetail VoucherSendRule { get; set; }
 
         /// <summary>
-        /// 券类型。    枚举值：  FIX_VOUCHER：满减券。
+        /// 券类型。  枚举值： FIX_VOUCHER：固定面额满减券 EXCHANGE_VOUCHER: 兑换券
         /// </summary>
         [JsonPropertyName("voucher_type")]
         public string VoucherType { get; set; }

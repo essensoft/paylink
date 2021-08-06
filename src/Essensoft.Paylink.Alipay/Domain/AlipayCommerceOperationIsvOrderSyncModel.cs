@@ -51,19 +51,19 @@ namespace Essensoft.Paylink.Alipay.Domain
         public CateringGoodsInfo GoodsInfo { get; set; }
 
         /// <summary>
-        /// 商品队列，前面排队的商品数量，如喜茶点单，前方还有66杯。
+        /// 商品队列。订单积压场景中，该订单前方还有多少商品待处理，如喜茶点单，前方还有99杯。选填、数值、精确到整数。
         /// </summary>
         [JsonPropertyName("goods_queue_num")]
         public long GoodsQueueNum { get; set; }
 
         /// <summary>
-        /// 开发票跳转链接
+        /// 开发票的跳转链接，用户点击可进入该笔订单开发票的页面（商户开票不一定和支付宝发票管家打通，而是商户小程序内的页面或三方开票的H5页面）。生成后订单生命周期内不可变更
         /// </summary>
         [JsonPropertyName("invoice_url")]
         public string InvoiceUrl { get; set; }
 
         /// <summary>
-        /// 环保标签，支持多标签，英文逗号隔开，目前支持标签：N_DISPOSABLE_CUP-自带杯；N_PACKAGED-不打包；N_STRAW-不用吸管；
+        /// 环保标签，支持多标签，英文逗号隔开，目前支持标签：N_PACKAGED：不打包 N_STRAW：不要吸管 N_DISPOSABLE_CUP：环保杯（用非一次性杯子如自带杯或用商户提供的马克杯）
         /// </summary>
         [JsonPropertyName("low_carbon_behavior")]
         public string LowCarbonBehavior { get; set; }
@@ -105,13 +105,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string OrderModifyTime { get; set; }
 
         /// <summary>
-        /// 订单队列，前面排队的订单数量
+        /// 订单队列。订单积压场景中，该订单前方还有多少订单待处理，如喜茶点单，前方还有60单。选填、数值、精确到整数。
         /// </summary>
         [JsonPropertyName("order_queue_num")]
         public long OrderQueueNum { get; set; }
 
         /// <summary>
-        /// 订单类型，枚举支持 ALIPAY_APPLETS：支付宝小程序产生的订单 ALIPAY_POS：收银POS产生的支付宝订单
+        /// 订单类型，枚举支持 ALIPAY_APPLETS：支付宝小程序产生的订单 ALIPAY_POS：收银POS产生的支付宝订单 MERCHANT_APP：APP交易产生的支付宝订单 OTHERS：其他渠道的支付宝交易
         /// </summary>
         [JsonPropertyName("order_source")]
         public string OrderSource { get; set; }
@@ -153,25 +153,25 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string RecordId { get; set; }
 
         /// <summary>
-        /// 再来一单跳转链接，用户点击可进入商家小程序直接将上次购物的商品加入购物车
+        /// 开发票跳转链接，用户点击可进入商家小程序直接将上次购物的商品加入购物车。生成后订单生命周期内不可变更
         /// </summary>
         [JsonPropertyName("reorder_url")]
         public string ReorderUrl { get; set; }
 
         /// <summary>
-        /// 服务标识
+        /// 服务标识（区分服务类型如  自提/外卖）
         /// </summary>
         [JsonPropertyName("service_code")]
         public string ServiceCode { get; set; }
 
         /// <summary>
-        /// 订单枚举。参考https://opendocs.alipay.com/pre-open/01vx42
+        /// 订单枚举。请参考产品文档场景说明。
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; }
 
         /// <summary>
-        /// 支付宝交易号
+        /// 支付宝交易号，自提、外卖场景 必填，不支持多个交易号。
         /// </summary>
         [JsonPropertyName("trade_no")]
         public string TradeNo { get; set; }

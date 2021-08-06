@@ -20,7 +20,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public string BizDt { get; set; }
 
         /// <summary>
-        /// 用户领券之后在服务商(商户)侧提供的券详情展示页面。在支付宝卡包中展示链接，用户点击可以跳转到服务商券详情页。  限制: 该字段在兑换券场景下必传。
+        /// 推广渠道信息。 由支付宝公私域跳转到服务商小程序时带入。例如 aalipays://platformapi/startapp?appId=2021002147682XXX&page=pages/main/mian&query=chInfo%3DchInfo_promotion  其中chInfo为支付宝带入投放渠道信息，需要在调用发券接口时传入
+        /// </summary>
+        [JsonPropertyName("ch_info")]
+        public string ChInfo { get; set; }
+
+        /// <summary>
+        /// 用户领券之后在服务商(商户)侧提供的券详情展示页面。在支付宝卡包中展示链接，用户点击可以跳转到服务商券详情页。  限制: 该字段在兑换券场景下必传。 链接必须是alipays开头的小程序链接，详见《小程序scheme链接介绍》https://opendocs.alipay.com/support/01rb18
         /// </summary>
         [JsonPropertyName("merchant_order_url")]
         public string MerchantOrderUrl { get; set; }

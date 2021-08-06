@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.Paylink.Alipay.Domain
 {
@@ -7,6 +8,30 @@ namespace Essensoft.Paylink.Alipay.Domain
     /// </summary>
     public class PluginUseRelationInfo : AlipayObject
     {
+        /// <summary>
+        /// 邀测驳回原因
+        /// </summary>
+        [JsonPropertyName("beta_memo")]
+        public string BetaMemo { get; set; }
+
+        /// <summary>
+        /// 邀测插件版本号
+        /// </summary>
+        [JsonPropertyName("beta_plugin_version")]
+        public string BetaPluginVersion { get; set; }
+
+        /// <summary>
+        /// 邀测二维码
+        /// </summary>
+        [JsonPropertyName("beta_qr_code_url")]
+        public string BetaQrCodeUrl { get; set; }
+
+        /// <summary>
+        /// WAITCHECK-待确认;CHECKED-确认;REJECT-拒绝
+        /// </summary>
+        [JsonPropertyName("beta_status")]
+        public string BetaStatus { get; set; }
+
         /// <summary>
         /// 激活时间
         /// </summary>
@@ -48,6 +73,12 @@ namespace Essensoft.Paylink.Alipay.Domain
         /// </summary>
         [JsonPropertyName("plugin_status")]
         public string PluginStatus { get; set; }
+
+        /// <summary>
+        /// 分端版本配置信息列表
+        /// </summary>
+        [JsonPropertyName("plugin_use_config_info_list")]
+        public List<PluginUseConfigInfo> PluginUseConfigInfoList { get; set; }
 
         /// <summary>
         /// 插件版本

@@ -51,13 +51,13 @@ namespace Essensoft.Paylink.Alipay.Domain
         public List<ExtraInfo> StoreExtraInfo { get; set; }
 
         /// <summary>
-        /// 商家门店id
+        /// 商家门店id（ISV内部门店唯一编号）
         /// </summary>
         [JsonPropertyName("store_id")]
         public string StoreId { get; set; }
 
         /// <summary>
-        /// 门店名称
+        /// 门店名称，比如：蚂蚁金服店，不需要“(”  “)”等辅助标记，与门店名称合并后对外展示如星巴克(蚂蚁金服店)
         /// </summary>
         [JsonPropertyName("store_name")]
         public string StoreName { get; set; }

@@ -32,6 +32,7 @@ namespace Essensoft.Paylink.Alipay.Request
 
         public bool GetNeedEncrypt()
         {
+
             return needEncrypt;
         }
 

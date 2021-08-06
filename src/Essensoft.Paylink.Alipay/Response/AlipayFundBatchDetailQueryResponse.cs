@@ -10,7 +10,7 @@ namespace Essensoft.Paylink.Alipay.Response
     public class AlipayFundBatchDetailQueryResponse : AlipayResponse
     {
         /// <summary>
-        /// 1）当批次状态为INIT状态时，明细信息还未落地，返回明细信息为空 2）如果以上都没有问题，返回明细为空，请检查是否以下情况导致： 1. 校验商户只能查询自己上传的批次信息，批次号不存在或者不是该商户上传的批次。 2. 查询条件没有查询到结果，包括总共5页，商户要求查询第6页的内容。 3. 查询的状态不存在。
+        /// 1）当批次状态为INIT状态时，明细信息还未落地，返回明细信息为空 2）如果以上都没有问题，返回明细为空，请检查是否以下情况导致：   1. 校验商户只能查询自己上传的批次信息，批次号不存在或者不是该商户上传的批次。   2. 查询条件没有查询到结果，包括总共5页，商户要求查询第6页的内容。   3. 查询的状态不存在。 3) 转账状态及错误码明细详情，参见 <a href="https://opendocs.alipay.com/pre-open/025fm2">批量转账状态及明细错误码说明</a> 。
         /// </summary>
         [JsonPropertyName("acc_detail_list")]
         public List<AccDetailModel> AccDetailList { get; set; }

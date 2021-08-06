@@ -8,7 +8,7 @@ namespace Essensoft.Paylink.Alipay.Domain
     public class AlipayMarketingCardActivateurlApplyModel : AlipayObject
     {
         /// <summary>
-        /// 会员卡开卡表单提交后回调地址。 说明： 1.该地址不可带参数，如需回传参数，可设置out_string入参。 2.小程序应用无需传入。
+        /// 会员卡开卡表单提交后回调地址。要求必须是单纯的服务端接收回调。 说明： 1.该地址不可带参数，如需回传参数，可设置out_string入参。
         /// </summary>
         [JsonPropertyName("callback")]
         public string Callback { get; set; }
