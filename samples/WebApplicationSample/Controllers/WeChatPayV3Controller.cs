@@ -215,6 +215,58 @@ namespace WebApplicationSample.Controllers
         }
 
         /// <summary>
+        /// 小程序支付-JSAPI下单
+        /// </summary>
+        [HttpGet]
+        public IActionResult MiniProgramPay()
+        {
+            return View();
+        }
+
+        /// <summary>
+        /// 小程序支付-JSAPI下单
+        /// </summary>
+        /// <param name="viewModel"></param>
+        [HttpPost]
+        public async Task<IActionResult> MiniProgramPay(WeChatPayPubPayV3ViewModel viewModel)
+        {
+            var model = new WeChatPayTransactionsJsApiBodyModel
+            {
+                AppId = _optionsAccessor.Value.AppId,
+                MchId = _optionsAccessor.Value.MchId,
+                Amount = new Amount { Total = viewModel.Total, Currency = "CNY" },
+                Description = viewModel.Description,
+                NotifyUrl = viewModel.NotifyUrl,
+                OutTradeNo = viewModel.OutTradeNo,
+                Payer = new PayerInfo { OpenId = viewModel.OpenId }
+            };
+
+            var request = new WeChatPayTransactionsJsApiRequest();
+            request.SetBodyModel(model);
+
+            var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
+
+            if (response.StatusCode == 200)
+            {
+                var req = new WeChatPayMiniProgramSdkRequest
+                {
+                    Package = "prepay_id=" + response.PrepayId
+                };
+
+                var parameter = await _client.ExecuteAsync(req, _optionsAccessor.Value);
+
+                // 将参数(parameter)给 小程序端
+                // https://pay.weixin.qq.com/wiki/doc/apiv3/apis/chapter3_5_4.shtml
+                ViewData["parameter"] = JsonSerializer.Serialize(parameter);
+                ViewData["response"] = response.Body;
+                return View();
+            }
+
+            ViewData["response"] = response.Body;
+            return View();
+        }
+
+        /// <summary>
         /// 微信支付订单号查询
         /// </summary>
         [HttpGet]
