@@ -19,7 +19,7 @@
 
 </div>
 
-## Paylink NuGet 包
+## NuGet 包
 
 Package  | NuGet | Downloads | TargetFrameworks
 -------- | :---- | :-------- | ---------------
@@ -39,28 +39,6 @@ Package  | NuGet | Downloads | TargetFrameworks
 [standard2.1-Y-image]: https://img.shields.io/badge/standard2.1-Y-brightgreen.svg?style=flat-square
 [netcoreapp3.1-Y-image]: https://img.shields.io/badge/netcoreapp3.1-Y-brightgreen.svg?style=flat-square
 [net5.0-Y-image]: https://img.shields.io/badge/net5.0-Y-brightgreen.svg?style=flat-square
-
----
-
-## Payment NuGet 包
-
-后续不再维护 Payment 包，请迁移至 Paylink 包。
- 
-Package  | NuGet | Downloads
--------- | :---- | :-------- 
-[Essensoft.AspNetCore.Payment.Alipay][nuget-pay-alipay-url] | ![NuGet][nuget-pay-alipay-v-image] | ![Downloads][nuget-pay-alipay-dt-image]
-[Essensoft.AspNetCore.Payment.WeChatPay][nuget-pay-wechatpay-url] | ![NuGet][nuget-pay.wechatpay-v-image] | ![Downloads][nuget-pay-wechatpay-dt-image]
-[Essensoft.AspNetCore.Payment.Security][nuget-pay-security-url] | ![NuGet][nuget-pay.security-v-image] | ![Downloads][nuget-pay-security-dt-image]
-
-[nuget-pay-alipay-url]: https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Alipay
-[nuget-pay-alipay-v-image]: https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Alipay.svg?style=flat-square
-[nuget-pay-alipay-dt-image]: https://img.shields.io/nuget/dt/Essensoft.AspNetCore.Payment.Alipay.svg?style=flat-square
-[nuget-pay-wechatpay-url]: https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.WeChatPay
-[nuget-pay.wechatpay-v-image]: https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.WeChatPay.svg?style=flat-square
-[nuget-pay-wechatpay-dt-image]: https://img.shields.io/nuget/dt/Essensoft.AspNetCore.Payment.WeChatPay.svg?style=flat-square
-[nuget-pay-security-url]: https://www.nuget.org/packages/Essensoft.AspNetCore.Payment.Security
-[nuget-pay.security-v-image]: https://img.shields.io/nuget/v/Essensoft.AspNetCore.Payment.Security.svg?style=flat-square
-[nuget-pay-security-dt-image]: https://img.shields.io/nuget/dt/Essensoft.AspNetCore.Payment.Security.svg?style=flat-square
 
 ## 开发环境
 
@@ -130,7 +108,8 @@ Package  | NuGet | Downloads
     - 商户进件（服务商）
     - 基础支付（服务商）
     - 分账（服务商）
-    
+    - ...
+
 ## 致谢
 
 - [Alipay](https://github.com/alipay)
