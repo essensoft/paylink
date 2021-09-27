@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.Paylink.WeChatPay.V3.Domain
 {
@@ -67,6 +68,6 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// 注：针对2020年5月27日10:00:00以后完结的订单生效
         /// </remarks>
         [JsonPropertyName("promotion_detail")]
-        public PromotionDetail PromotionDetail { get; set; }
+        public List<PromotionDetail> PromotionDetail { get; set; }
     }
 }
