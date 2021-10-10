@@ -59,6 +59,16 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         public string SubMchId { get; set; }
 
         /// <summary>
+        /// 订单优惠标记
+        /// </summary>
+        /// <remarks>
+        /// 订单优惠标记，使用代金券或立减优惠功能时需要的参数，说明详见代金券或立减优惠
+        /// <para>示例值：WXG</para>
+        /// </remarks>
+        [JsonPropertyName("goods_tag")]
+        public string GoodsTag { get; set; }
+
+        /// <summary>
         /// 商品描述
         /// </summary>
         /// <remarks>
