@@ -123,7 +123,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Extensions
             var timestamp = WeChatPayUtility.GetTimeStamp();
             var nonce = WeChatPayUtility.GenerateNonceStr();
             var message = BuildMessage(method, uri, timestamp, nonce, body);
-            var signature = SHA256WithRSA.Sign(options.CertificateRSAPrivateKey, message);
+            var signature = SHA256WithRSA.Sign(options.RSAPrivateKey, message);
 
             return $"mchid=\"{options.MchId}\",nonce_str=\"{nonce}\",timestamp=\"{timestamp}\",serial_no=\"{options.CertificateSerialNo}\",signature=\"{signature}\"";
         }
