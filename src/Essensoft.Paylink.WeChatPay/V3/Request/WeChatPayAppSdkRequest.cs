@@ -58,7 +58,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Request
             sortedTxtParams.Add(WeChatPayConsts.timestamp, WeChatPayUtility.GetTimeStamp());
 
             var signatureSourceData = BuildSignatureSourceData(sortedTxtParams);
-            sortedTxtParams.Add(WeChatPayConsts.sign, SHA256WithRSA.Sign(options.CertificateRSAPrivateKey, signatureSourceData));
+            sortedTxtParams.Add(WeChatPayConsts.sign, SHA256WithRSA.Sign(options.RSAPrivateKey, signatureSourceData));
         }
 
         private static string BuildSignatureSourceData(WeChatPayDictionary sortedTxtParams)

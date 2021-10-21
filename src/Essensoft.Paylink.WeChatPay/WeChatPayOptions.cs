@@ -12,6 +12,7 @@ namespace Essensoft.Paylink.WeChatPay
     {
         private string certificate;
         private string certificatePassword;
+        private string privateKey;
 
         /// <summary>
         /// 应用号
@@ -54,10 +55,10 @@ namespace Essensoft.Paylink.WeChatPay
         public string SubMchId { get; set; }
 
         /// <summary>
-        /// API证书(.p12格式)
+        /// 商户API证书
         /// </summary>
         /// <remarks>
-        /// 可为 .p12证书文件路径、.p12证书文件的Base64编码
+        /// 可为 证书文件路径、证书文件的Base64编码。
         /// </remarks>
         public string Certificate
         {
@@ -73,7 +74,7 @@ namespace Essensoft.Paylink.WeChatPay
         }
 
         /// <summary>
-        /// API证书密码
+        /// 商户API证书密码
         /// </summary>
         /// <remarks>
         /// 默认为商户号
@@ -92,12 +93,33 @@ namespace Essensoft.Paylink.WeChatPay
         }
 
         /// <summary>
-        /// API密钥
+        /// 商户API私钥
+        /// </summary>
+        /// <remarks>
+        /// 当配置了P12格式证书时，已包含私钥信息，不必再配置API私钥。PEM格式则必须配置。
+        /// </remarks>
+        public string APIPrivateKey
+        {
+            get => privateKey;
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    privateKey = value;
+                    var rsa = RSA.Create();
+                    rsa.ImportPkcs8PrivateKey(Convert.FromBase64String(privateKey), out var _);
+                    RSAPrivateKey = rsa;
+                }
+            }
+        }
+
+        /// <summary>
+        /// 商户API密钥
         /// </summary>
         public string APIKey { get; set; }
 
         /// <summary>
-        /// APIv3密钥
+        /// 商户APIv3密钥
         /// </summary>
         public string APIv3Key { get; set; }
 
@@ -105,12 +127,12 @@ namespace Essensoft.Paylink.WeChatPay
         /// RSA公钥
         /// </summary>
         /// <remarks>
-        /// 目前仅调用"企业付款到银行卡API"时使用，执行"获取RSA加密公钥API"即可获取。
+        /// 目前仅调用"企业付款到银行卡API [V2]"时使用，执行"获取RSA加密公钥API [V2]"即可获取。
         /// </remarks>
         public string RsaPublicKey { get; set; }
 
         internal X509Certificate2 Certificate2;
-        internal RSA CertificateRSAPrivateKey;
+        internal RSA RSAPrivateKey;
         internal string CertificateSerialNo;
 
         private void GetCertificateInfo()
@@ -137,7 +159,11 @@ namespace Essensoft.Paylink.WeChatPay
             }
 
             CertificateSerialNo = Certificate2.GetSerialNumberString();
-            CertificateRSAPrivateKey = Certificate2.GetRSAPrivateKey();
+
+            if (RSAPrivateKey == null)
+            {
+                RSAPrivateKey = Certificate2.GetRSAPrivateKey();
+            }
         }
     }
 }
