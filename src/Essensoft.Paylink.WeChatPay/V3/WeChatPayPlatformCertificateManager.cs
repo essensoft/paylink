@@ -48,7 +48,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
                                         SerialNo = certificate.SerialNo,
                                         EffectiveTime = DateTime.Parse(certificate.EffectiveTime),
                                         ExpireTime = DateTime.Parse(certificate.ExpireTime),
-                                        Certificate = new X509Certificate2(Encoding.ASCII.GetBytes(certStr))
+                                        Certificate = new X509Certificate2(Encoding.ASCII.GetBytes(certStr), string.Empty, X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable)
                                     };
 
                                     _certs.TryAdd(certificate.SerialNo, cert);
@@ -112,7 +112,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
                                         SerialNo = certificate.SerialNo,
                                         EffectiveTime = DateTime.Parse(certificate.EffectiveTime),
                                         ExpireTime = DateTime.Parse(certificate.ExpireTime),
-                                        Certificate = new X509Certificate2(Encoding.ASCII.GetBytes(certStr))
+                                        Certificate = new X509Certificate2(Encoding.ASCII.GetBytes(certStr), string.Empty, X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable)
                                     };
 
                                     _certs.TryAdd(certificate.SerialNo, cert);
