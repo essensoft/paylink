@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Net.Http;
 using System.Reflection;
 using System.Security.Cryptography;
@@ -241,6 +242,20 @@ namespace Essensoft.Paylink.WeChatPay.V3
                     if (value is WeChatPayObject weChatPayObject)
                     {
                         EncryptPrivacyProperty(weChatPayObject, rsa); // 继续加密
+                    }
+                    else if (value is IList list) // 获取列表对象
+                    {
+                        foreach (var item in list)
+                        {
+                            if (item is WeChatPayObject wcpObj)
+                            {
+                                EncryptPrivacyProperty(wcpObj, rsa); // 继续加密
+                            }
+                            else
+                            {
+                                break;
+                            }
+                        }
                     }
                     else
                     {
