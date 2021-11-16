@@ -15,7 +15,7 @@ namespace Essensoft.Paylink.Security
             using (var md5 = System.Security.Cryptography.MD5.Create())
             {
                 var hash = md5.ComputeHash(Encoding.UTF8.GetBytes(data));
-#if NET5_0
+#if NET5_0_OR_GREATER
                 return Convert.ToHexString(hash);
 #else
                 return BitConverter.ToString(hash).Replace("-", "");
