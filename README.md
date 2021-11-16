@@ -42,14 +42,15 @@ Package  | NuGet | Downloads | TargetFrameworks
 
 ## 开发环境
 
-* Windows 10
-* [Visual Studio 2019 16.10](https://visualstudio.microsoft.com)
-* [.NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
+* Windows 11
+* [Visual Studio 2022 17.0.0](https://visualstudio.microsoft.com)
+* [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
 
 ## 运行环境
 
 - [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet/3.1)
-- [.NET 5](https://dotnet.microsoft.com/download/dotnet/5.0)
+- [.NET 5.0](https://dotnet.microsoft.com/download/dotnet/5.0)
+- [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
 
 ## 使用方式
 

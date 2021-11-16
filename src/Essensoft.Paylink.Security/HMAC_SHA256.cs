@@ -20,7 +20,7 @@ namespace Essensoft.Paylink.Security
             using (var hmacSha256 = new System.Security.Cryptography.HMACSHA256(Encoding.UTF8.GetBytes(key)))
             {
                 var hash = hmacSha256.ComputeHash(Encoding.UTF8.GetBytes(data));
-#if NET5_0
+#if NET5_0_OR_GREATER
                 return Convert.ToHexString(hash);
 #else
                 return BitConverter.ToString(hash).Replace("-", "");

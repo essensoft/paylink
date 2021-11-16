@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text.Encodings.Web;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Essensoft.Paylink.Security;
 using Essensoft.Paylink.WeChatPay.V3.Domain;
 
@@ -8,7 +9,12 @@ namespace Essensoft.Paylink.WeChatPay.V3.Parser
 {
     public class WeChatPayNotifyJsonParser<T> where T : WeChatPayNotify
     {
+
+#if NET6_0_OR_GREATER
+        private static readonly JsonSerializerOptions jsonSerializerOptions = new() { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
+#else
         private static readonly JsonSerializerOptions jsonSerializerOptions = new() { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
+#endif
 
         /// <summary>
         /// 将加密报文解密并反序列化

@@ -1,4 +1,4 @@
-﻿#if NETCOREAPP3_1 || NET5_0
+﻿#if NETCOREAPP3_1_OR_GREATER
 
 using Microsoft.AspNetCore.Mvc;
 

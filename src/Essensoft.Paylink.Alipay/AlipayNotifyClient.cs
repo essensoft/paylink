@@ -19,7 +19,7 @@ namespace Essensoft.Paylink.Alipay
 
         #region IAlipayNotifyClient Members
 
-#if NETCOREAPP3_1 || NET5_0
+#if NETCOREAPP3_1_OR_GREATER
         public async Task<T> ExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, AlipayOptions options) where T : AlipayNotify
         {
             if (options == null)
@@ -46,7 +46,7 @@ namespace Essensoft.Paylink.Alipay
 
         #region IAlipayNotifyClient Members
 
-#if NETCOREAPP3_1 || NET5_0
+#if NETCOREAPP3_1_OR_GREATER
         public Task<T> CertificateExecuteAsync<T>(Microsoft.AspNetCore.Http.HttpRequest request, AlipayOptions options) where T : AlipayNotify
         {
             return ExecuteAsync<T>(request, options);
@@ -57,7 +57,7 @@ namespace Essensoft.Paylink.Alipay
 
         #region IAlipayNotifyClient Members
 
-#if NETCOREAPP3_1 || NET5_0
+#if NETCOREAPP3_1_OR_GREATER
         public async Task<IDictionary<string, string>> GetParametersAsync(Microsoft.AspNetCore.Http.HttpRequest request)
         {
             var parameters = new Dictionary<string, string>();
