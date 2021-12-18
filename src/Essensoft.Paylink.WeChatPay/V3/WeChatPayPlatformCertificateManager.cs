@@ -85,7 +85,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
         public async Task<WeChatPayPlatformCertificate> GetCertificateAsync(IWeChatPayClient client, WeChatPayOptions options)
         {
             // 如果证书已缓存，则直接使用缓存的证书
-            var platformCert = _certs.Values.Where(cert => cert.EffectiveTime < DateTime.Now && cert.ExpireTime > DateTime.Now).OrderByDescending(cert => cert.EffectiveTime).FirstOrDefault();
+            var platformCert = _certs.Values.Where(cert => cert.MchId == options.MchId && cert.EffectiveTime < DateTime.Now && cert.ExpireTime > DateTime.Now).OrderByDescending(cert => cert.EffectiveTime).FirstOrDefault();
             if (platformCert != null)
             {
                 return platformCert;
@@ -109,6 +109,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
 
                                     var cert = new WeChatPayPlatformCertificate
                                     {
+                                        MchId = options.MchId,
                                         SerialNo = certificate.SerialNo,
                                         EffectiveTime = DateTime.Parse(certificate.EffectiveTime),
                                         ExpireTime = DateTime.Parse(certificate.ExpireTime),
@@ -130,7 +131,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
             }
 
             // 重新从缓存获取证书
-            platformCert = _certs.Values.Where(cert => cert.EffectiveTime < DateTime.Now && cert.ExpireTime > DateTime.Now).OrderByDescending(cert => cert.EffectiveTime).FirstOrDefault();
+            platformCert = _certs.Values.Where(cert => cert.MchId == options.MchId && cert.EffectiveTime < DateTime.Now && cert.ExpireTime > DateTime.Now).OrderByDescending(cert => cert.EffectiveTime).FirstOrDefault();
             if (platformCert != null)
             {
                 return platformCert;

@@ -6,6 +6,11 @@ namespace Essensoft.Paylink.WeChatPay.V3
     public class WeChatPayPlatformCertificate
     {
         /// <summary>
+        /// 商户号
+        /// </summary>
+        public string MchId { get; set; }
+
+        /// <summary>
         /// 序列号
         /// </summary>
         public string SerialNo { get; set; }
