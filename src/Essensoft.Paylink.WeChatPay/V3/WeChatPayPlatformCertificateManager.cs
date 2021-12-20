@@ -45,6 +45,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
 
                                     var cert = new WeChatPayPlatformCertificate
                                     {
+                                        MchId = options.MchId,
                                         SerialNo = certificate.SerialNo,
                                         EffectiveTime = DateTime.Parse(certificate.EffectiveTime),
                                         ExpireTime = DateTime.Parse(certificate.ExpireTime),
