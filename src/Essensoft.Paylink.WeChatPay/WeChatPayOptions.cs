@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Net;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 
@@ -58,7 +59,7 @@ namespace Essensoft.Paylink.WeChatPay
         /// 商户API证书
         /// </summary>
         /// <remarks>
-        /// 可为 证书文件路径、证书文件的Base64编码。
+        /// 可为 证书文件物理路径、项目相对路径、网络路径、证书文件的Base64编码。
         /// </remarks>
         public string Certificate
         {
@@ -144,14 +145,29 @@ namespace Essensoft.Paylink.WeChatPay
 
             try
             {
+                //服务器物理路径
                 if (File.Exists(Certificate))
                 {
                     Certificate2 = new X509Certificate2(Certificate, CertificatePassword, X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
+                }
+                else if (File.Exists($"{AppContext.BaseDirectory}{Certificate}")) //项目相对路径
+                {
+                    Certificate2 = new X509Certificate2($"{AppContext.BaseDirectory}{Certificate}", CertificatePassword, X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
+                }
+                else if(Certificate.IndexOf("http") == 0 || Certificate.IndexOf("https") == 0 || Certificate.IndexOf("ftp") == 0)
+                {
+                    WebClient webClient = new WebClient();
+                    var bytes = webClient.DownloadData(Certificate);
+                    if(bytes != null && bytes.Length > 0)
+                    {
+                        Certificate = Convert.ToBase64String(bytes);
+                    }
                 }
                 else
                 {
                     Certificate2 = new X509Certificate2(Convert.FromBase64String(Certificate), CertificatePassword, X509KeyStorageFlags.MachineKeySet | X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
                 }
+               
             }
             catch (CryptographicException ex)
             {
