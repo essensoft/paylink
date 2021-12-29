@@ -130,7 +130,7 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
             sortedTxtParams.Add(WeChatPayConsts.appid, options.AppId);
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
 
-            sortedTxtParams.Add(WeChatPayConsts.sign_type, signType.ToString());
+            sortedTxtParams.Add(WeChatPayConsts.sign_type, signType);
             sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.APIKey, signType));
         }
 
