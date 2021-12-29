@@ -15,7 +15,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Extensions
     public static class HttpClientExtensions
     {
 
-#if NET6_0_OR_GREATER
+#if  NETSTANDARD2_1 || NET5_0_OR_GREATER
         private static readonly JsonSerializerOptions jsonSerializerOptions = new() { DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 #else
         private static readonly JsonSerializerOptions jsonSerializerOptions = new() { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
