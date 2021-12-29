@@ -44,7 +44,7 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
             sortedTxtParams.Add(WeChatPayConsts.timeStamp, WeChatPayUtility.GetTimeStamp());
             sortedTxtParams.Add(WeChatPayConsts.nonceStr, WeChatPayUtility.GenerateNonceStr());
 
-            sortedTxtParams.Add(WeChatPayConsts.signType, signType.ToString());
+            sortedTxtParams.Add(WeChatPayConsts.signType, signType);
             sortedTxtParams.Add(WeChatPayConsts.paySign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.APIKey, signType));
         }
 

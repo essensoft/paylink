@@ -57,7 +57,7 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
 
             if (signType == WeChatPaySignType.HMAC_SHA256)
             {
-                sortedTxtParams.Add(WeChatPayConsts.sign_type, signType.ToString());
+                sortedTxtParams.Add(WeChatPayConsts.sign_type, signType);
             }
 
             sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.APIKey, signType));

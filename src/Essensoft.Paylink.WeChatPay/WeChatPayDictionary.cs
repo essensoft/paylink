@@ -10,26 +10,51 @@ namespace Essensoft.Paylink.WeChatPay
             : base(dictionary)
         { }
 
-        public void Add(string key, int value)
+        public void Add(string key, object value)
         {
-            Add(key, value.ToString());
-        }
+            string strValue;
 
-        public void Add(string key, uint value)
-        {
-            Add(key, value.ToString());
-        }
-
-        public void Add(string key, long value)
-        {
-            Add(key, value.ToString());
-        }
-
-        public new void Add(string key, string value)
-        {
-            if (!string.IsNullOrEmpty(key) && !string.IsNullOrEmpty(value))
+            if (value == null)
             {
-                base.Add(key, value);
+                return;
+            }
+            else if (value is string str)
+            {
+                strValue = str;
+            }
+            else if (value is int?)
+            {
+                strValue = (value as int?).Value.ToString();
+            }
+            else if (value is long?)
+            {
+                strValue = (value as long?).Value.ToString();
+            }
+            else if (value is double?)
+            {
+                strValue = (value as double?).Value.ToString();
+            }
+            else if (value is bool?)
+            {
+                strValue = (value as bool?).Value.ToString().ToLowerInvariant();
+            }
+            else if (value is V2.WeChatPaySignType)
+            {
+                strValue = value switch
+                {
+                    V2.WeChatPaySignType.MD5 => WeChatPayConsts.MD5,
+                    V2.WeChatPaySignType.HMAC_SHA256 => WeChatPayConsts.HMAC_SHA256,
+                    _ => throw new WeChatPayException("未知签名类型！")
+                };
+            }
+            else
+            {
+                strValue = value.ToString();
+            }
+
+            if (!string.IsNullOrEmpty(strValue))
+            {
+                base.Add(key, strValue);
             }
         }
 
