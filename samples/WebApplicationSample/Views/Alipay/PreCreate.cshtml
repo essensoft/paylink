@@ -41,7 +41,7 @@
                 <label>QrCode:</label>
                 @if (!string.IsNullOrEmpty(ViewData["qrcode"] as string))
                 {
-                    <embed src="/api/qrcode?data=@ViewData["qrcode"]&size=180" class="shadow-sm p-3 mb-5 bg-white rounded mx-auto d-block" type="image/svg+xml" />
+                    <embed src="/api/qrcode?data=@ViewData["qrcode"]" class="shadow-sm p-3 mb-5 bg-white rounded mx-auto d-block" type="image/png" width="180" height="180" />
                 }
             </div>
             <div class="form-group">
