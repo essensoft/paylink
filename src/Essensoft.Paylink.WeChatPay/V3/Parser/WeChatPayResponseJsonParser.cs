@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Text.Encodings.Web;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -14,7 +15,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Parser
         private static readonly JsonSerializerOptions jsonSerializerOptions = new() { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 #endif
 
-        public T Parse(string body, int statusCode)
+        public T Parse(string body, HttpStatusCode statusCode)
         {
             T result = null;
 

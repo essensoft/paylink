@@ -64,7 +64,7 @@ namespace WebApplicationSample.Controllers
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
-            if (response.StatusCode == 200)
+            if (!response.IsError)
             {
                 var req = new WeChatPayAppSdkRequest
                 {
@@ -116,7 +116,7 @@ namespace WebApplicationSample.Controllers
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
-            if (response.StatusCode == 200)
+            if (!response.IsError)
             {
                 var req = new WeChatPayJsApiSdkRequest
                 {
@@ -166,7 +166,7 @@ namespace WebApplicationSample.Controllers
             request.SetBodyModel(model);
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
-            if (response.StatusCode == 200)
+            if (!response.IsError)
             {
                 // response.CodeUrl 给前端生成二维码
                 ViewData["qrcode"] = response.CodeUrl;
@@ -246,7 +246,7 @@ namespace WebApplicationSample.Controllers
 
             var response = await _client.ExecuteAsync(request, _optionsAccessor.Value);
 
-            if (response.StatusCode == 200)
+            if (!response.IsError)
             {
                 var req = new WeChatPayMiniProgramSdkRequest
                 {

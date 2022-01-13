@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -21,7 +22,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Extensions
         private static readonly JsonSerializerOptions jsonSerializerOptions = new() { IgnoreNullValues = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
 #endif
 
-        public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> GetAsync<T>(this HttpClient client, IWeChatPayGetRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
+        public static async Task<(WeChatPayHeaders headers, string body, HttpStatusCode statusCode)> GetAsync<T>(this HttpClient client, IWeChatPayGetRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
         {
             var url = request.GetRequestUrl();
 
@@ -54,13 +55,13 @@ namespace Essensoft.Paylink.WeChatPay.V3.Extensions
             {
                 var headers = GetWeChatPayHeadersFromResponse(resp);
                 var body = await respContent.ReadAsStringAsync();
-                var statusCode = (int)resp.StatusCode;
+                var statusCode = resp.StatusCode;
 
                 return (headers, body, statusCode);
             }
         }
 
-        public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> PostAsync<T>(this HttpClient client, IWeChatPayPostRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
+        public static async Task<(WeChatPayHeaders headers, string body, HttpStatusCode statusCode)> PostAsync<T>(this HttpClient client, IWeChatPayPostRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
         {
             var url = request.GetRequestUrl();
             var bodyModel = request.GetBodyModel();
@@ -82,13 +83,13 @@ namespace Essensoft.Paylink.WeChatPay.V3.Extensions
             {
                 var headers = GetWeChatPayHeadersFromResponse(resp);
                 var body = await respContent.ReadAsStringAsync();
-                var statusCode = (int)resp.StatusCode;
+                var statusCode = resp.StatusCode;
 
                 return (headers, body, statusCode);
             }
         }
 
-        public static async Task<(WeChatPayHeaders headers, string body, int statusCode)> PostAsync<T>(this HttpClient client, IWeChatPayPrivacyPostRequest<T> request, WeChatPayOptions options, string serialNo) where T : WeChatPayResponse
+        public static async Task<(WeChatPayHeaders headers, string body, HttpStatusCode statusCode)> PostAsync<T>(this HttpClient client, IWeChatPayPrivacyPostRequest<T> request, WeChatPayOptions options, string serialNo) where T : WeChatPayResponse
         {
             var url = request.GetRequestUrl();
             var bodyModel = request.GetBodyModel();
@@ -111,7 +112,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Extensions
             {
                 var headers = GetWeChatPayHeadersFromResponse(resp);
                 var body = await respContent.ReadAsStringAsync();
-                var statusCode = (int)resp.StatusCode;
+                var statusCode = resp.StatusCode;
 
                 return (headers, body, statusCode);
             }
