@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Net;
+using System.Text.Json.Serialization;
 using Essensoft.Paylink.WeChatPay.V3.Domain;
 
 namespace Essensoft.Paylink.WeChatPay.V3
@@ -8,18 +9,6 @@ namespace Essensoft.Paylink.WeChatPay.V3
     /// </summary>
     public abstract class WeChatPayResponse : WeChatPayObject
     {
-        /// <summary>
-        /// 原始内容
-        /// </summary>
-        [JsonIgnore]
-        public string Body { get; set; }
-
-        /// <summary>
-        /// HTTP状态码
-        /// </summary>
-        [JsonIgnore]
-        public int StatusCode { get; set; }
-
         /// <summary>
         /// 错误码
         /// </summary>
@@ -37,5 +26,23 @@ namespace Essensoft.Paylink.WeChatPay.V3
         /// </summary>
         [JsonPropertyName("detail")]
         public ErrorDetail Detail { get; set; }
+
+        /// <summary>
+        /// 原始内容
+        /// </summary>
+        [JsonIgnore]
+        public string Body { get; set; }
+
+        /// <summary>
+        /// HTTP状态码
+        /// </summary>
+        [JsonIgnore]
+        public HttpStatusCode StatusCode { get; set; }
+
+        /// <summary>
+        /// 响应结果是否错误
+        /// </summary>
+        [JsonIgnore]
+        public bool IsError => StatusCode is not (HttpStatusCode.OK or HttpStatusCode.Accepted or HttpStatusCode.NoContent);
     }
 }

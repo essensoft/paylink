@@ -92,7 +92,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
 
             if (request.GetNeedCheckSign())
             {
-                if (statusCode.ToString().StartsWith("2")) // HTTP状态码为2xx时才验签(200、202、204)。
+                if (!response.IsError)
                 {
                     await CheckResponseSignAsync(headers, body, options);
                 }
@@ -127,7 +127,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
             var parser = new WeChatPayResponseJsonParser<T>();
             var response = parser.Parse(body, statusCode);
 
-            if (statusCode.ToString().StartsWith("2")) // HTTP状态码为2xx时才验签(200、202、204)。
+            if (!response.IsError)
             {
                 await CheckResponseSignAsync(headers, body, options);
             }
@@ -166,7 +166,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
             var parser = new WeChatPayResponseJsonParser<T>();
             var response = parser.Parse(body, statusCode);
 
-            if (statusCode.ToString().StartsWith("2")) // HTTP状态码为2xx时才验签(200、202、204)。
+            if (!response.IsError)
             {
                 await CheckResponseSignAsync(headers, body, options);
             }
