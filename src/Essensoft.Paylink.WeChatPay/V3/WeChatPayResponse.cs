@@ -43,6 +43,6 @@ namespace Essensoft.Paylink.WeChatPay.V3
         /// 响应结果是否错误
         /// </summary>
         [JsonIgnore]
-        public bool IsError => StatusCode is not (HttpStatusCode.OK or HttpStatusCode.NoContent);
+        public bool IsError => (int)StatusCode is not (>= 200 and <= 299);
     }
 }
