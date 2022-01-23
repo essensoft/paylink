@@ -32,7 +32,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// 上述任一条件不满足将返回错误
         /// </remarks>
         [JsonPropertyName("from")]
-        public List<RefundAmountFrom> Form { get; set; }
+        public List<RefundAmountFrom> From { get; set; }
 
         /// <summary>
         /// 原订单金额
