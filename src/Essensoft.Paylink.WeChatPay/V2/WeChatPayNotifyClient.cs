@@ -95,12 +95,16 @@ namespace Essensoft.Paylink.WeChatPay.V2
                 throw new WeChatPayException("sign check fail: sign is Empty!");
             }
 
-            // 部分通知返回需要使用HMAC-SHA256验签
             string cal_sign;
-            if (notify.Parameters.TryGetValue("sign_type", out var sign_type) && sign_type == "HMAC-SHA256")
+            if (notify.Parameters.TryGetValue("sign_type", out var sign_type) && sign_type == WeChatPayConsts.HMAC_SHA256)
+            {
                 cal_sign = WeChatPaySignature.SignWithKey(notify.Parameters, options.APIKey, WeChatPaySignType.HMAC_SHA256);
+            }
             else
+            {
                 cal_sign = WeChatPaySignature.SignWithKey(notify.Parameters, options.APIKey, WeChatPaySignType.MD5);
+            }
+
             if (cal_sign != sign)
             {
                 throw new WeChatPayException("sign check fail: check Sign and Data Fail!");
