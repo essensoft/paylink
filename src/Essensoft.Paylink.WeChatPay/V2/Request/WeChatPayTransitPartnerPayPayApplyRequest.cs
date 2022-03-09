@@ -79,7 +79,7 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
         public string ProfitSharing { get; set; }
 
         #region IWeChatPayRequest Members
-        // Url修正：https://pay.weixin.qq.com/wiki/doc/api/pap_sl_jt_v2.php?chapter=19_99&index=5
+
         private string requestUrl = "https://api.mch.weixin.qq.com/transit/partnerpay/payapply";
         private WeChatPaySignType signType = WeChatPaySignType.HMAC_SHA256;
 
