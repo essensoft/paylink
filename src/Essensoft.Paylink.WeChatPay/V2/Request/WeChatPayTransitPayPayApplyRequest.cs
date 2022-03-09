@@ -1,12 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 using Essensoft.Paylink.WeChatPay.V2.Response;
 
 namespace Essensoft.Paylink.WeChatPay.V2.Request
 {
     /// <summary>
-    /// 微信代扣 - 乘车码代扣 - 申请扣款 (服务商)
+    /// 微信代扣 - 乘车码代扣 - 申请扣款 (直连)
     /// </summary>
-    public class WeChatPayTransitPartnerPayPayApplyRequest : IWeChatPayRequest<WeChatPayTransitPartnerPayPayApplyResponse>
+    public class WeChatPayTransitPayPayApplyRequest : IWeChatPayRequest<WeChatPayTransitPayPayApplyResponse>
     {
         /// <summary>
         /// 商品描述
@@ -79,8 +81,8 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
         public string ProfitSharing { get; set; }
 
         #region IWeChatPayRequest Members
-        // Url修正：https://pay.weixin.qq.com/wiki/doc/api/pap_sl_jt_v2.php?chapter=19_99&index=5
-        private string requestUrl = "https://api.mch.weixin.qq.com/transit/partnerpay/payapply";
+
+        private string requestUrl = "https://api.mch.weixin.qq.com/transit/pay/payapply";
         private WeChatPaySignType signType = WeChatPaySignType.HMAC_SHA256;
 
         public string GetRequestUrl()
@@ -133,9 +135,7 @@ namespace Essensoft.Paylink.WeChatPay.V2.Request
         {
             sortedTxtParams.Add(WeChatPayConsts.nonce_str, WeChatPayUtility.GenerateNonceStr());
             sortedTxtParams.Add(WeChatPayConsts.appid, options.AppId);
-            sortedTxtParams.Add(WeChatPayConsts.sub_appid, options.SubAppId);
             sortedTxtParams.Add(WeChatPayConsts.mch_id, options.MchId);
-            sortedTxtParams.Add(WeChatPayConsts.sub_mch_id, options.SubMchId);
 
             sortedTxtParams.Add(WeChatPayConsts.sign_type, signType);
             sortedTxtParams.Add(WeChatPayConsts.sign, WeChatPaySignature.SignWithKey(sortedTxtParams, options.APIKey, signType));
