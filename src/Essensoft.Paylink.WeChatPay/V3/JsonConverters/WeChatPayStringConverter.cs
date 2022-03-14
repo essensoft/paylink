@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Text.Json;
-using System.Text.Json.Nodes;
 using System.Text.Json.Serialization;
 
 namespace Essensoft.Paylink.WeChatPay.V3.JsonConverters
@@ -25,8 +24,13 @@ namespace Essensoft.Paylink.WeChatPay.V3.JsonConverters
                     }
                 case { TokenType: JsonTokenType.StartArray }:
                     {
-                        var element = JsonElement.ParseValue(ref reader);
-                        return JsonArray.Create(element)?.ToJsonString();
+#if NET6_0_OR_GREATER
+                        var node = System.Text.Json.Nodes.JsonNode.Parse(ref reader);
+                        return node?.ToJsonString();
+#else
+                        using var doc = JsonDocument.ParseValue(ref reader);
+                        return doc.RootElement.GetRawText();
+#endif
                     }
                 default:
                     return reader.GetString();
