@@ -1,4 +1,5 @@
 ﻿using System.Text.Json.Serialization;
+using Essensoft.Paylink.WeChatPay.V3.JsonConverters;
 
 namespace Essensoft.Paylink.WeChatPay.V3.Domain
 {
@@ -17,6 +18,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// 错误的值
         /// </summary>
         [JsonPropertyName("value")]
+        [JsonConverter(typeof(WeChatPayStringConverter))]
         public string Value { get; set; }
 
         /// <summary>
