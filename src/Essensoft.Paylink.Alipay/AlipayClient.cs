@@ -237,20 +237,20 @@ namespace Essensoft.Paylink.Alipay
                     throw new AlipayException("api request Fail ! The reason: encrypt request is not supported!");
                 }
 
-                if (string.IsNullOrEmpty(options.EncyptKey) || string.IsNullOrEmpty(options.EncyptType))
+                if (string.IsNullOrEmpty(options.EncryptKey) || string.IsNullOrEmpty(options.EncryptType))
                 {
                     throw new AlipayException("encryptType or encryptKey must not null!");
                 }
 
-                if (!"AES".Equals(options.EncyptType))
+                if (!"AES".Equals(options.EncryptType))
                 {
                     throw new AlipayException("api only support Aes!");
                 }
 
-                var encryptContent = AlipaySignature.AESEncrypt(txtParams[AlipayConstants.BIZ_CONTENT], options.EncyptKey);
+                var encryptContent = AlipaySignature.AESEncrypt(txtParams[AlipayConstants.BIZ_CONTENT], options.EncryptKey);
                 txtParams.Remove(AlipayConstants.BIZ_CONTENT);
                 txtParams.Add(AlipayConstants.BIZ_CONTENT, encryptContent);
-                txtParams.Add(AlipayConstants.ENCRYPT_TYPE, options.EncyptType);
+                txtParams.Add(AlipayConstants.ENCRYPT_TYPE, options.EncryptType);
             }
 
             // 添加签名参数
@@ -273,7 +273,7 @@ namespace Essensoft.Paylink.Alipay
             }
 
             var parser = new AlipayJsonParser<T>();
-            var item = ParseRespItem(request, body, parser, options.EncyptKey, options.EncyptType);
+            var item = ParseRespItem(request, body, parser, options.EncryptKey, options.EncryptType);
             var rsp = parser.Parse(item.RealContent);
 
             CheckResponseSign(request, item.RespContent, rsp.IsError, parser, options);
@@ -422,20 +422,20 @@ namespace Essensoft.Paylink.Alipay
                     throw new AlipayException("api request Fail ! The reason: encrypt request is not supported!");
                 }
 
-                if (string.IsNullOrEmpty(options.EncyptKey) || string.IsNullOrEmpty(options.EncyptType))
+                if (string.IsNullOrEmpty(options.EncryptKey) || string.IsNullOrEmpty(options.EncryptType))
                 {
                     throw new AlipayException("encryptType or encryptKey must not null!");
                 }
 
-                if (!"AES".Equals(options.EncyptType))
+                if (!"AES".Equals(options.EncryptType))
                 {
                     throw new AlipayException("api only support Aes!");
                 }
 
-                var encryptContent = AlipaySignature.AESEncrypt(txtParams[AlipayConstants.BIZ_CONTENT], options.EncyptKey);
+                var encryptContent = AlipaySignature.AESEncrypt(txtParams[AlipayConstants.BIZ_CONTENT], options.EncryptKey);
                 txtParams.Remove(AlipayConstants.BIZ_CONTENT);
                 txtParams.Add(AlipayConstants.BIZ_CONTENT, encryptContent);
-                txtParams.Add(AlipayConstants.ENCRYPT_TYPE, options.EncyptType);
+                txtParams.Add(AlipayConstants.ENCRYPT_TYPE, options.EncryptType);
             }
 
             // 添加签名参数
@@ -458,7 +458,7 @@ namespace Essensoft.Paylink.Alipay
             }
 
             var parser = new AlipayJsonParser<T>();
-            var item = ParseRespItem(request, body, parser, options.EncyptKey, options.EncyptType);
+            var item = ParseRespItem(request, body, parser, options.EncryptKey, options.EncryptType);
             var rsp = parser.Parse(item.RealContent);
 
             await CheckResponseCertSignAsync(request, item.RespContent, rsp.IsError, parser, options);
@@ -573,20 +573,20 @@ namespace Essensoft.Paylink.Alipay
                     throw new AlipayException("api request Fail ! The reason: encrypt request is not supported!");
                 }
 
-                if (string.IsNullOrEmpty(options.EncyptKey) || string.IsNullOrEmpty(options.EncyptType))
+                if (string.IsNullOrEmpty(options.EncryptKey) || string.IsNullOrEmpty(options.EncryptType))
                 {
                     throw new AlipayException("encryptType or encryptKey must not null!");
                 }
 
-                if (!"AES".Equals(options.EncyptType))
+                if (!"AES".Equals(options.EncryptType))
                 {
                     throw new AlipayException("api only support Aes!");
                 }
 
-                var encryptContent = AlipaySignature.AESEncrypt(result[AlipayConstants.BIZ_CONTENT], options.EncyptKey);
+                var encryptContent = AlipaySignature.AESEncrypt(result[AlipayConstants.BIZ_CONTENT], options.EncryptKey);
                 result.Remove(AlipayConstants.BIZ_CONTENT);
                 result.Add(AlipayConstants.BIZ_CONTENT, encryptContent);
-                result.Add(AlipayConstants.ENCRYPT_TYPE, options.EncyptType);
+                result.Add(AlipayConstants.ENCRYPT_TYPE, options.EncryptType);
             }
 
             return result;

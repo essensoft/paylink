@@ -80,12 +80,12 @@ namespace Essensoft.Paylink.Alipay
         /// <remarks>
         /// 默认为："AES"
         /// </remarks>
-        public string EncyptType { get; } = "AES";
+        public string EncryptType { get; } = "AES";
 
         /// <summary>
         /// 加密秘钥
         /// </summary>
-        public string EncyptKey { get; set; }
+        public string EncryptKey { get; set; }
 
         /// <summary>
         /// 应用公钥证书
