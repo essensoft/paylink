@@ -49,14 +49,14 @@ namespace Essensoft.Paylink.Alipay.Utility
             };
         }
 
-        public static string AESEncrypt(string data, string encyptKey)
+        public static string AESEncrypt(string data, string encryptKey)
         {
-            return AES.Encrypt(data, encyptKey, AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
+            return AES.Encrypt(data, encryptKey, AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
         }
 
-        public static string AESDencrypt(string data, string encyptKey)
+        public static string AESDencrypt(string data, string encryptKey)
         {
-            return AES.Decrypt(data, encyptKey, AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
+            return AES.Decrypt(data, encryptKey, AES_IV, CipherMode.CBC, PaddingMode.PKCS7);
         }
 
         private static byte[] InitIv(int blockSize)
