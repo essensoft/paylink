@@ -6,10 +6,6 @@
 
 ---
 
-<img src="https://cdn.jsdelivr.net/gh/essensoft/paylink@main/qrcode-pay.png" width="600">
-
----
-
 日期 | 名称 | 渠道 | 金额 | 留言
 --- | --- | --- | --- | ---
 2022-02-19 | *菜 | 微信 | 100.00 | 
