@@ -52,6 +52,6 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// <para>示例值：特殊情况，说明原因</para>
         /// </remarks>
         [JsonPropertyName("business_addition_msg")]
-        public List<string> BusinessAdditionMsg { get; set; }
+        public string BusinessAdditionMsg { get; set; }
     }
 }
