@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -25,7 +25,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// <para>示例值：SALES_SCENES_STORE</para>
         /// </remarks>
         [JsonPropertyName("sales_scenes_type")]
-        public BizStoreInfo BizStoreInfo { get; set; }
+        public List<string> SalesScenesType { get; set; }
 
         /// <summary>
         /// 线下场所场景
