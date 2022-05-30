@@ -31,5 +31,10 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// </remarks>
         [JsonPropertyName("service_phone")]
         public string ServicePhone { get; set; }
+        /// <summary>
+        /// 经营场景
+        /// </summary>
+        [JsonPropertyName("sales_info")]
+        public SaleInfo SaleInfo { get; set; }
     }
 }
