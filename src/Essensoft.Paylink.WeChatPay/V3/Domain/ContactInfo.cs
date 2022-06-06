@@ -112,7 +112,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// 3、结束时间大于开始时间。
         /// <para>示例值：2019-06-06</para>
         /// </remarks>
-        [JsonPropertyName("contact_period_End")]
+        [JsonPropertyName("contact_period_end")]
         public string ContactPeriodEnd { get; set; }
 
         /// <summary>
