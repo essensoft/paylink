@@ -65,6 +65,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// 3、该字段需进行加密处理，加密方法详见<a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/wechatpay/wechatpay4_3.shtml">敏感信息加密说明</a>。(提醒：必须在HTTP头中上送Wechatpay-Serial)
         /// <para>示例值：pVd1HJ6zyvPedzGaV+X3qtmrq9bb9tPROvwia4ibL+F6mfjbzQIzfb3HHLEjZ4YiR/cJiCrZxnAqi+pjeKIEdkwzXRAI7FUhrf2qhZ9evAM+Jv1z0NVa8MRtelw/wDa4SzfeespQO/0kjiwfqdfg==</para>
         /// </remarks>
+        [WeChatPayPrivacyProperty]
         [JsonPropertyName("id_doc_address")]
         public string IdDocAddress { get; set; }
 
