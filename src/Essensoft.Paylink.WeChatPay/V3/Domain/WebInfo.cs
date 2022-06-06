@@ -43,6 +43,6 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// <para>示例值：wx1234567890123456</para>
         /// </remarks>
         [JsonPropertyName("web_appid")]
-        public List<string> WebAppid { get; set; }
+        public string WebAppid { get; set; }
     }
 }
