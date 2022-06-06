@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Collections.Generic;
+using System.Text.Json.Serialization;
 
 namespace Essensoft.Paylink.WeChatPay.V3.Domain
 {
@@ -11,15 +12,29 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// 主体类型
         /// </summary>
         /// <remarks>
-        /// 主体类型需与营业执照/登记证书上一致，可参考《选择主体指引》
+        /// 主体类型需与营业执照/登记证书上一致，可参考选择主体指引。
         /// SUBJECT_TYPE_INDIVIDUAL（个体户）：营业执照上的主体类型一般为个体户、个体工商户、个体经营；
         /// SUBJECT_TYPE_ENTERPRISE（企业）：营业执照上的主体类型一般为有限公司、有限责任公司；
-        /// SUBJECT_TYPE_INSTITUTIONS（党政、机关及事业单位）：包括国内各级、各类政府机构、事业单位等（如：公安、党团、司法、交通、旅游、工商税务、市政、医疗、教育、学校等机构）；
-        /// SUBJECT_TYPE_OTHERS（其他组织）：不属于企业、政府/事业单位的组织机构（如社会团体、民办非企业、基金会），要求机构已办理组织机构代码证。
+        /// SUBJECT_TYPE_GOVERNMENT （政府机关）：包括各级、各类政府机关，如机关党委、税务、民政、人社、工商、商务、市监等；
+        /// SUBJECT_TYPE_INSTITUTIONS（事业单位）：包括国内各类事业单位，如：医疗、教育、学校等单位；
+        /// SUBJECT_TYPE_OTHERS（社会组织）： 包括社会团体、民办非企业、基金会、基层群众性自治组织、农村集体经济组织等组织。
         /// <para>示例值：SUBJECT_TYPE_ENTERPRISE</para>
         /// </remarks>
         [JsonPropertyName("subject_type")]
         public string SubjectType { get; set; }
+
+        /// <summary>
+        /// 是否是金融机构
+        /// </summary>
+        /// <remarks>
+        /// 选填，请根据申请主体的实际情况填写，可参考选择金融机构指引：
+        /// 1、若商户主体是金融机构，则填写：true。
+        /// 2、若商户主体不是金融机构，则填写：false。
+        /// 若未传入将默认填写：false。
+        /// <para>示例值：true</para>
+        /// </remarks>
+        [JsonPropertyName("finance_institution")]
+        public bool FinanceInstitution { get; set; }
 
         /// <summary>
         /// 营业执照
@@ -80,13 +95,15 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// 最终受益人信息(UBO]
         /// </summary>
         /// <remarks>
-        /// 若经营者/法人不是最终受益所有人，则需提填写受益所有人信息。
+        /// 仅企业需要填写。
+        /// 若经营者/法人不是最终受益所有人，则需补充受益所有人信息，最多上传4个。
+        /// 若经营者/法人是最终受益所有人之一，可在此添加其他受益所有人信息，最多上传3个。
         /// 根据国家相关法律法规，需要提供公司受益所有人信息，受益所有人需符合至少以下条件之一：
         /// 1、直接或者间接拥有超过25%公司股权或者表决权的自然人。
         /// 2、通过人事、财务等其他方式对公司进行控制的自然人。
         /// 3、公司的高级管理人员，包括公司的经理、副经理、财务负责人、上市公司董事会秘书和公司章程规定的其他人员。
         /// </remarks>
-        [JsonPropertyName("ubo_info")]
-        public UboInfo UboInfo { get; set; }
+        [JsonPropertyName("ubo_info_list")]
+        public List<UboInfo> UboInfoList { get; set; }
     }
 }
