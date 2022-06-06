@@ -33,6 +33,6 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// （2）若APPID主体与商家主体不一致，则商户签约时显示《联合营运承诺函》，并且 AppID的管理员需登录公众平台确认绑定意愿；（ 暂不支持绑定异主体的应用APPID）
         /// </summary>
         [JsonPropertyName("web_appid")]
-        public List<string> WebAppid { get; set; }
+        public string WebAppid { get; set; }
     }
 }
