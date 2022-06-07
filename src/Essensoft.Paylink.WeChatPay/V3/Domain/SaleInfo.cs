@@ -11,6 +11,22 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
     public class SaleInfo
     {
         /// <summary>
+        /// 经营场景类型
+        /// </summary>
+        /// <remarks>
+        /// 1、请勾选实际售卖商品/提供服务场景（至少一项），以便为你开通需要的支付权限。
+        /// 2、建议只勾选目前必须的场景，以便尽快通过入驻审核，其他支付权限可在入驻后再根据实际需要发起申请。
+        /// SALES_SCENES_STORE：线下场所
+        /// SALES_SCENES_MP：公众号
+        /// SALES_SCENES_MINI_PROGRAM：小程序
+        /// SALES_SCENES_WEB：互联网网站
+        /// SALES_SCENES_APP：APP
+        /// SALES_SCENES_WEWORK：企业微信
+        /// <para>示例值：SALES_SCENES_STORE</para>
+        /// </remarks>
+        [JsonPropertyName("sales_scenes_type")]
+        public List<string> SalesScenesType { get; set; }
+        /// <summary>
         /// 线下场所场景
         /// </summary>
         [JsonPropertyName("biz_store_info")]
@@ -42,7 +58,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// <summary>
         /// 企业微信场景
         /// </summary>
-        [JsonPropertyName("wework_info	")]
+        [JsonPropertyName("wework_info")]
         public WeworkInfo WeWorkInfo { get; set; }
     }
 }
