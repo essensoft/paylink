@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -8,7 +8,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
     /// <summary>
     /// 经营场景
     /// </summary>
-    public class SaleInfo
+    public class SaleInfo : WeChatPayObject
     {
         /// <summary>
         /// 经营场景类型
@@ -26,39 +26,65 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// </remarks>
         [JsonPropertyName("sales_scenes_type")]
         public List<string> SalesScenesType { get; set; }
+
         /// <summary>
         /// 线下场所场景
         /// </summary>
+        /// <remarks>
+        /// 1、审核通过后，服务商可帮商户发起付款码支付、JSAPI支付。
+        /// 2、当"经营场景类型"选择"SALES_SCENES_STORE"，该场景资料必填。
+        /// </remarks>
         [JsonPropertyName("biz_store_info")]
         public BizStoreInfo BizStoreInfo { get; set; }
+
         /// <summary>
         /// 公众号场景
         /// </summary>
+        /// <remarks>
+        /// 1、审核通过后，服务商可帮商家发起JSAPI支付
+        /// 2、当"经营场景类型"选择"SALES_SCENES_MP"，该场景资料必填。
+        /// </remarks>
         [JsonPropertyName("mp_info")]
         public MpInfo MpInfo { get; set; }
 
         /// <summary>
         /// 小程序场景
         /// </summary>
+        /// <remarks>
+        /// 1、审核通过后，服务商可帮商家发起JSAPI支付
+        /// 2、当"经营场景类型"选择"SALES_SCENES_MINI_PROGRAM"，该场景资料必填。
+        /// </remarks>
         [JsonPropertyName("mini_program_info")]
         public MiniProgramInfo MiniProgramInfo { get; set; }
 
         /// <summary>
         /// App场景
         /// </summary>
+        /// <remarks>
+        /// 1、审核通过后，服务商可帮商家发起App支付
+        /// 2、当"经营场景类型"选择"SALES_SCENES_APP"，该场景资料必填。
+        /// </remarks>
         [JsonPropertyName("app_info")]
         public AppInfo AppInfo { get; set; }
 
         /// <summary>
         /// 互联网网站场景
         /// </summary>
+        /// <remarks>
+        /// 1、审核通过后，服务商可帮商家发起JSAPI支付、Native支付
+        /// 2、当"经营场景类型"选择"SALES_SCENES_WEB"，该场景资料必填。
+        /// </remarks>
         [JsonPropertyName("web_info")]
         public WebInfo WebInfo { get; set; }
 
         /// <summary>
         /// 企业微信场景
         /// </summary>
+        /// <remarks>
+        /// 1、审核通过后，服务商可帮商家发起企业微信支付
+        /// 2、当"经营场景类型"选择"SALES_SCENES_WEWORK"，该场景资料必填。
+        /// </remarks>
         [JsonPropertyName("wework_info")]
-        public WeworkInfo WeWorkInfo { get; set; }
+        public WeWorkInfo WeWorkInfo { get; set; }
     }
 }

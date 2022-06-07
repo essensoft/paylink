@@ -49,5 +49,38 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// </remarks>
         [JsonPropertyName("legal_person")]
         public string LegalPerson { get; set; }
+        
+        /// <summary>
+        /// 注册地址
+        /// </summary>
+        /// <remarks>
+        /// 选填，请填写登记证书的注册地址。
+        /// <para>示例值：广东省深圳市南山区xx路xx号</para>
+        /// </remarks>
+        [JsonPropertyName("license_address")]
+        public string LicenseAddress { get; set; }
+        
+        /// <summary>
+        /// 有效期限开始日期
+        /// </summary>
+        /// <remarks>
+        /// 1、选填， 请参考示例值填写。
+        /// 2、开始日期，开始日期需大于当前日期。
+        /// <para>示例值：2019-08-01</para>
+        /// </remarks>
+        [JsonPropertyName("period_begin")]
+        public string PeriodBegin { get; set; }
+                
+        /// <summary>
+        /// 有效期限结束日期
+        /// </summary>
+        /// <remarks>
+        /// 1、选填，请参考示例值填写。
+        /// 2、若证件有效期为长期，请填写：长期。
+        /// 3、结束日期大于开始日期。
+        /// <para>示例值：2019-08-01</para>
+        /// </remarks>
+        [JsonPropertyName("period_end")]
+        public string PeriodEnd { get; set; }
     }
 }
