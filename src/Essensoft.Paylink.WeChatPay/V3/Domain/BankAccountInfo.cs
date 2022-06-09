@@ -87,5 +87,16 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         [WeChatPayPrivacyProperty]
         [JsonPropertyName("account_number")]
         public string AccountNumber { get; set; }
+
+
+        /// <summary>
+        /// 银行账户证明材料
+        /// </summary>
+        /// <remarks>
+        ///1. 当主体类型是“政府机关/事业单位”时或所属行业为“党费”时，支持在有合法资金管理关系的情况下结算账户设置为非同名。
+        ///2. 若结算账户设置为非同名，则需填写非同名证明材料，若结算账户为同名，则无需填写。
+        /// </remarks>
+        [JsonPropertyName("account_cert_info")]
+        public AccountCertInfo AccountCertInfo { get; set; }
     }
 }
