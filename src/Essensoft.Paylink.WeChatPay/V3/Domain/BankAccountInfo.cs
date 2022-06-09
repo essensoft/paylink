@@ -88,7 +88,6 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         [JsonPropertyName("account_number")]
         public string AccountNumber { get; set; }
 
-
         /// <summary>
         /// 银行账户证明材料
         /// </summary>
