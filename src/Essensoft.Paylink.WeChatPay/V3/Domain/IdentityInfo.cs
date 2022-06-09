@@ -19,7 +19,7 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// SUPER：经办人
         /// </remarks>
         [JsonPropertyName("id_holder_type")]
-        public IdCardInfo IdHolderType { get; set; }
+        public string IdHolderType { get; set; }
 
         /// <summary>
         /// 证件类型
