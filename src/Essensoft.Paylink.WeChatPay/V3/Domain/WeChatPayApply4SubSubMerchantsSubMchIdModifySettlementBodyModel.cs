@@ -81,5 +81,18 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         [WeChatPayPrivacyProperty]
         [JsonPropertyName("account_number")]
         public string AccountNumber { get; set; }
+
+        /// <summary>
+        /// 开户名称
+        /// </summary>
+        /// <remarks>
+        /// 1、不需要修改开户名称时，可以不填写或填写当前绑定的结算银行卡户名；
+        /// 2、支持将开户名称修改为当前商户对应的主体名称（对公银行账户）或经营者名称（个人银行账户），支持修改开户名称中括号的全半角；
+        /// 3、该字段需进行加密处理，加密方法详见<a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/wechatpay/wechatpay4_3.shtml">《敏感信息加密说明》</a>。(提醒：必须在HTTP头中上送Wechatpay-Serial)
+        /// <para>示例值：d+xT+MQCvrLHUVDWv/8MR/dB7TkXM2YYZlokmXzFsWs35NXUot7C0NcxIrUF5FnxqCJHkNgKtxa6RxEYyba1+VBRLnqKG2fSy/Y5qDN08Ej9zHCwJjq52Wg1VG8MRugli9YMI1fI83KGBxhuXyemgS/hqFKsfYGiOkJqjTUpgY5VqjtL2N4l4z11T0ECB/aSyVXUysOFGLVfSrUxMPZy6jWWYGvT1+4P633f+R+ki1gT4WF/2KxZOYmli385ZgVhcR30mr4/G3HBcxi13zp7FnEeOsLlvBmI1PHN4C7Rsu3WL8sPndjXTd75kPkyjqnoMRrEEaYQE8ZRGYoeorwC+w==</para>
+        /// </remarks>
+        [WeChatPayPrivacyProperty]
+        [JsonPropertyName("account_name")]
+        public string AccountName { get; set; }
     }
 }
