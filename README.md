@@ -43,7 +43,7 @@ Package  | NuGet | Downloads | TargetFrameworks
 ## 开发环境
 
 * Windows 11
-* [Visual Studio 2022 17.0.0](https://visualstudio.microsoft.com)
+* [Rider 2022](https://www.jetbrains.com/rider) / [Visual Studio 2022](https://visualstudio.microsoft.com)
 * [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
 
 ## 运行环境
