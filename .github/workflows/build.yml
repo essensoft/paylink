@@ -2,14 +2,29 @@ name: build
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - dev
+    paths:
+      - '**/*.props'
+      - 'global.json'
+      - 'src/**/*.cs'
+      - 'src/**/*.csproj'
+
   pull_request:
-    branches: [ main ]
+    paths:
+      - '**/*.props'
+      - 'global.json'
+      - 'src/**/*.cs'
+      - 'src/**/*.csproj'
+
+permissions:
+  contents: read
 
 jobs:
   build:
 
-    runs-on: windows-latest
+    runs-on: 'ubuntu-latest'
+    timeout-minutes: 10
 
     steps:
     - uses: actions/checkout@v2
