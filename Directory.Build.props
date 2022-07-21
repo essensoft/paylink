@@ -20,7 +20,7 @@
     <GenerateDocumentationFile Condition="'$(Configuration)' == 'Release'">true</GenerateDocumentationFile>
     <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
     <LangVersion>latest</LangVersion>
-    <SystemTextJsonPackageVersion>6.0.4</SystemTextJsonPackageVersion>
+    <SystemTextJsonPackageVersion>6.0.5</SystemTextJsonPackageVersion>
     <MicrosoftExtensionsHttpPackageVersion>6.0.0</MicrosoftExtensionsHttpPackageVersion>
   </PropertyGroup>
 
