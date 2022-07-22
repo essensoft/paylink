@@ -110,9 +110,10 @@ namespace Essensoft.Paylink.WeChatPay.V3.Response
         /// </summary>
         /// <remarks>
         /// 失败原因。包含以下枚举值：
-        /// ACCOUNT_ABNORMAL : 分账接收方账户异常
-        /// TIME_OUT_CLOSED : 超时关单
+        /// ACCOUNT_ABNORMAL：原分账接收方账户异常
+        /// TIME_OUT_CLOSED：超时关单
         /// PAYER_ACCOUNT_ABNORMAL：原分账分出方账户异常
+        /// INVALID_REQUEST: 描述参数设置失败
         /// <para>示例值：TIME_OUT_CLOSED</para>
         /// </remarks>
         [JsonPropertyName("fail_reason")]
