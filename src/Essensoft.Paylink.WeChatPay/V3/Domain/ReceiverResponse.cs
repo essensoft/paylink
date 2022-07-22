@@ -69,12 +69,16 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// 分账失败原因
         /// </summary>
         /// <remarks>
-        /// 分账失败原因。包含以下枚举值：
-        /// 1、ACCOUNT_ABNORMAL : 分账接收账户异常
-        /// 2、NO_RELATION : 分账关系已解除
-        /// 3、RECEIVER_HIGH_RISK : 高风险接收方
-        /// 4、RECEIVER_REAL_NAME_NOT_VERIFIED : 接收方未实名
-        /// 5、NO_AUTH : 分账权限已解除
+        /// 分账失败原因，当分账结果result为CLOSED（已关闭）时，返回该字段
+        /// 枚举值：
+        /// 1、ACCOUNT_ABNORMAL：分账接收账户异常
+        /// 2、NO_RELATION：分账关系已解除
+        /// 3、RECEIVER_HIGH_RISK：高风险接收方
+        /// 4、RECEIVER_REAL_NAME_NOT_VERIFIED：接收方未实名
+        /// 5、NO_AUTH：分账权限已解除
+        /// 6、RECEIVER_RECEIPT_LIMIT：接收方已达收款限额
+        /// 7、PAYER_ACCOUNT_ABNORMAL：分出方账户异常
+        /// 8、INVALID_REQUEST: 描述参数设置失败
         /// <para>示例值：ACCOUNT_ABNORMAL</para>
         /// </remarks>
         [JsonPropertyName("fail_reason")]
