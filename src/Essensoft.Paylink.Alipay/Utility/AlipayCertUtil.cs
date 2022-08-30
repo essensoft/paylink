@@ -156,6 +156,11 @@ namespace Essensoft.Paylink.Alipay.Utility
                 : Base64Util.IsBase64String(certificate) ? Encoding.ASCII.GetString(Convert.FromBase64String(certificate))
                 : certificate;
 
+#if NET5_0_OR_GREATER
+            var collection = new X509Certificate2Collection();
+            collection.ImportFromPem(certChainStr);
+            return collection.ToList();
+#else
             var certStrArr = certChainStr.Split("\r\n\r\n", StringSplitOptions.RemoveEmptyEntries);
 
             var certs = new List<X509Certificate2>();
@@ -172,6 +177,7 @@ namespace Essensoft.Paylink.Alipay.Utility
             }
 
             return certs;
+#endif
         }
     }
 }
