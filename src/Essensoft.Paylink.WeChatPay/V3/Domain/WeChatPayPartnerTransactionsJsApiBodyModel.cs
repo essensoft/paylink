@@ -6,8 +6,8 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
     /// 基础支付(服务商) - JSAPI支付、小程序支付 - 统一下单 - 请求JSON参数
     /// </summary>
     /// <remarks>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_1_1.shtml">JSAPI支付 - 统一下单API</a> - 最新更新时间：2020.05.26</para>
-    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_5_1.shtml">小程序支付 - 统一下单API</a> - 最新更新时间：2020.05.26</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_1_1.shtml">JSAPI支付 - 统一下单API</a> - 最新更新时间：2022.09.05</para>
+    /// <para><a href="https://pay.weixin.qq.com/wiki/doc/apiv3_partner/apis/chapter4_5_1.shtml">小程序支付 - 统一下单API</a> - 最新更新时间：2022.09.05</para>
     /// </remarks>
     public class WeChatPayPartnerTransactionsJsApiBodyModel : WeChatPayObject
     {
@@ -112,6 +112,18 @@ namespace Essensoft.Paylink.WeChatPay.V3.Domain
         /// </remarks>
         [JsonPropertyName("goods_tag")]
         public string GoodsTag { get; set; }
+
+        /// <summary>
+        /// 电子发票入口开放标识
+        /// </summary>
+        /// <remarks>
+        /// 传入true时，支付成功消息和支付详情页将出现开票入口。需要在微信支付商户平台或微信公众平台开通电子发票功能，传此字段才可生效。
+        /// true：是
+        /// false：否
+        /// <para>示例值：true</para>
+        /// </remarks>
+        [JsonPropertyName("support_fapiao")]
+        public bool? SupportFaPiao { get; set; }
 
         /// <summary>
         /// 结算信息
