@@ -32,7 +32,7 @@ namespace Essensoft.Paylink.Alipay
             // 否则重新下载新的支付宝公钥证书并更新缓存
             var request = new AlipayOpenAppAlipaycertDownloadRequest
             {
-                BizContent = @"{""alipay_cert_sn"":""" + certSN + "\"}"
+                BizContent = $"{{\"alipay_cert_sn\":\"{certSN}\"}}"
             };
 
             var response = await client.CertificateExecuteAsync(request, options);
