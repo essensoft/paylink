@@ -105,6 +105,7 @@ Package  | NuGet | Downloads | TargetFrameworks
 
 - [Alipay](https://github.com/alipay)
 - [Varorbc](https://github.com/Varorbc)
+- [JetBrains](https://jb.gg/OpenSourceSupport)
 
 ## 项目地址
 
