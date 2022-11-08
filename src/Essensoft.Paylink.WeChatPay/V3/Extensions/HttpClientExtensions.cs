@@ -126,7 +126,27 @@ namespace Essensoft.Paylink.WeChatPay.V3.Extensions
             var txtParameters = new Dictionary<string, string>();
             foreach (var kv in jsonElementParameters)
             {
-                txtParameters.Add(kv.Key, kv.Value.GetRawText());
+                switch (kv.Value.ValueKind)
+                {
+                    case JsonValueKind.Object:
+                    case JsonValueKind.Array:
+                        txtParameters.Add(kv.Key, kv.Value.GetRawText());
+                        continue;
+                    case JsonValueKind.String:
+                        txtParameters.Add(kv.Key, kv.Value.GetString()!);
+                        continue;
+                    case JsonValueKind.Number:
+                        txtParameters.Add(kv.Key, kv.Value.ToString());
+                        continue;
+                    case JsonValueKind.True:
+                    case JsonValueKind.False:
+                        txtParameters.Add(kv.Key, kv.Value.ToString().ToLowerInvariant());
+                        continue;
+                    case JsonValueKind.Null:
+                    case JsonValueKind.Undefined:
+                    default:
+                        continue;
+                }
             }
 
             return txtParameters;
