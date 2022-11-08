@@ -4,7 +4,7 @@
     <Copyright>Copyright (c) Essensoft and Contributors</Copyright>
     <Authors>Essensoft</Authors>
     <Product>Paylink</Product>
-    <Version>4.0.13</Version>
+    <Version>4.0.14</Version>
     <NoWarn>$(NoWarn);CS1591;CS1570</NoWarn>
     <PackageIcon>logo.png</PackageIcon>
     <PackageProjectUrl>https://github.com/essensoft/paylink</PackageProjectUrl>
