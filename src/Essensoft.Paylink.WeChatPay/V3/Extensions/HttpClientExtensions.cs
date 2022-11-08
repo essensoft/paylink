@@ -120,8 +120,16 @@ namespace Essensoft.Paylink.WeChatPay.V3.Extensions
 
         private static IDictionary<string, string> ConvertToDictionary(WeChatPayObject obj)
         {
-            var str = JsonSerializer.Serialize(obj, obj.GetType(), jsonSerializerOptions);
-            return JsonSerializer.Deserialize<IDictionary<string, string>>(str, jsonSerializerOptions);
+            var utf8Bytes = JsonSerializer.SerializeToUtf8Bytes(obj, obj.GetType(), jsonSerializerOptions);
+            var jsonElementParameters = JsonSerializer.Deserialize<IDictionary<string, JsonElement>>(utf8Bytes);
+
+            var txtParameters = new Dictionary<string, string>();
+            foreach (var kv in jsonElementParameters)
+            {
+                txtParameters.Add(kv.Key, kv.Value.GetRawText());
+            }
+
+            return txtParameters;
         }
 
         private static string BuildToken(string url, string method, string body, WeChatPayOptions options)
