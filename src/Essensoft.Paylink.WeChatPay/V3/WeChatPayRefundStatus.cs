@@ -13,7 +13,7 @@
         /// <summary>
         /// 退款关闭
         /// </summary>
-        public const string Close = "CLOSE";
+        public const string Closed = "CLOSED";
 
         /// <summary>
         /// 退款异常，退款到银行发现用户的卡作废或者冻结了，导致原路退款银行卡失败，可前往【服务商平台—>交易中心】，手动处理此笔退款
