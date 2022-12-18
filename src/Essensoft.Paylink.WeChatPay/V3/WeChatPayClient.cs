@@ -139,6 +139,56 @@ namespace Essensoft.Paylink.WeChatPay.V3
 
         #region IWeChatPayClient Members
 
+        public async Task<T> ExecuteAsync<T>(IWeChatPayPrivacyGetRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
+        {
+            if (options == null)
+            {
+                throw new ArgumentNullException(nameof(options));
+            }
+
+            if (string.IsNullOrEmpty(options.MchId))
+            {
+                throw new WeChatPayException($"options.{nameof(WeChatPayOptions.MchId)} is Empty!");
+            }
+
+            if (string.IsNullOrEmpty(options.Certificate))
+            {
+                throw new WeChatPayException($"options.{nameof(WeChatPayOptions.Certificate)} is Empty!");
+            }
+
+            if (string.IsNullOrEmpty(options.APIv3Key))
+            {
+                throw new WeChatPayException($"options.{nameof(WeChatPayOptions.APIv3Key)} is Empty!");
+            }
+
+            var cert = await _platformCertificateManager.GetCertificateAsync(this, options);
+
+            // 加密敏感信息
+            EncryptPrivacyProperty(request.GetQueryModel(), cert.Certificate.GetRSAPublicKey());
+
+            var client = _httpClientFactory.CreateClient(Name);
+            var (headers, body, statusCode) = await client.GetAsync(request, options, cert.SerialNo);
+            var parser = new WeChatPayResponseJsonParser<T>();
+            var response = parser.Parse(body, statusCode);
+
+            if (request.GetNeedCheckSign())
+            {
+                if (!response.IsError)
+                {
+                    await CheckResponseSignAsync(headers, body, options);
+                }
+            }
+
+            // 解密敏感信息
+            DecryptPrivacyProperty(response, options.APIPrivateKey);
+
+            return response;
+        }
+
+        #endregion
+
+        #region IWeChatPayClient Members
+
         public async Task<T> ExecuteAsync<T>(IWeChatPayPrivacyPostRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
         {
             if (options == null)
@@ -171,6 +221,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
                 await CheckResponseSignAsync(headers, body, options);
             }
 
+            // 解密敏感信息
             DecryptPrivacyProperty(response, options.APIPrivateKey);
 
             return response;
