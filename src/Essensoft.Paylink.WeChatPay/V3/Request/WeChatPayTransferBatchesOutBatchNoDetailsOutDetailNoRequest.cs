@@ -33,7 +33,7 @@ public class WeChatPayTransferBatchesOutBatchNoDetailsOutDetailNoRequest : IWeCh
 
     public string GetRequestUrl()
     {
-        return $"/v3/transfer/batches/out-batch-no/{OutBatchNo}/details/out-detail-no/{OutDetailNo}";
+        return $"https://api.mch.weixin.qq.com/v3/transfer/batches/out-batch-no/{OutBatchNo}/details/out-detail-no/{OutDetailNo}";
     }
 
     public WeChatPayObject GetQueryModel()

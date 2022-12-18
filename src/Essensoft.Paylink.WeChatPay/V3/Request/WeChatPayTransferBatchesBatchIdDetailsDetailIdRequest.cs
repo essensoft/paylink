@@ -33,7 +33,7 @@ public class WeChatPayTransferBatchesBatchIdDetailsDetailIdRequest : IWeChatPayP
 
     public string GetRequestUrl()
     {
-        return $"/v3/transfer/batches/batch-id/{BatchId}/details/detail-id/{DetailId}";
+        return $"https://api.mch.weixin.qq.com/v3/transfer/batches/batch-id/{BatchId}/details/detail-id/{DetailId}";
     }
 
     public WeChatPayObject GetQueryModel()
