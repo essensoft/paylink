@@ -89,6 +89,43 @@ namespace Essensoft.Paylink.WeChatPay.V3.Extensions
             }
         }
 
+        public static async Task<(WeChatPayHeaders headers, string body, HttpStatusCode statusCode)> GetAsync<T>(this HttpClient client, IWeChatPayPrivacyGetRequest<T> request, WeChatPayOptions options, string serialNo) where T : WeChatPayResponse
+        {
+            var url = request.GetRequestUrl();
+
+            var queryModel = request.GetQueryModel();
+            if (queryModel != null)
+            {
+                if (url.Contains("?"))
+                {
+                    var txtParams = ConvertToDictionary(queryModel);
+                    url += "&" + WeChatPayUtility.BuildQuery(txtParams);
+                }
+                else
+                {
+                    var txtParams = ConvertToDictionary(queryModel);
+                    url += "?" + WeChatPayUtility.BuildQuery(txtParams);
+                }
+            }
+
+            var token = BuildToken(url, "GET", null, options);
+
+            client.DefaultRequestHeaders.Add(WeChatPayConsts.Wechatpay_Serial, serialNo);
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("WECHATPAY2-SHA256-RSA2048", token);
+            client.DefaultRequestHeaders.UserAgent.Add(new ProductInfoHeaderValue(new ProductHeaderValue("Unknown")));
+            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            using (var resp = await client.GetAsync(url))
+            using (var respContent = resp.Content)
+            {
+                var headers = GetWeChatPayHeadersFromResponse(resp);
+                var body = await respContent.ReadAsStringAsync();
+                var statusCode = resp.StatusCode;
+
+                return (headers, body, statusCode);
+            }
+        }
+
         public static async Task<(WeChatPayHeaders headers, string body, HttpStatusCode statusCode)> PostAsync<T>(this HttpClient client, IWeChatPayPrivacyPostRequest<T> request, WeChatPayOptions options, string serialNo) where T : WeChatPayResponse
         {
             var url = request.GetRequestUrl();
