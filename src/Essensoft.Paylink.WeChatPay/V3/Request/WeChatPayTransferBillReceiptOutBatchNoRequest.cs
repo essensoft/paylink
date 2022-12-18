@@ -23,7 +23,7 @@ public class WeChatPayTransferBillReceiptOutBatchNoRequest : IWeChatPayGetReques
 
     public string GetRequestUrl()
     {
-        return $"/v3/transfer/bill-receipt/{OutBatchNo}";
+        return $"https://api.mch.weixin.qq.com/v3/transfer/bill-receipt/{OutBatchNo}";
     }
 
     public WeChatPayObject GetQueryModel()
