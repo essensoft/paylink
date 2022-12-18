@@ -44,12 +44,13 @@ Package  | NuGet | Downloads | TargetFrameworks
 
 * Windows 11
 * [Rider 2022](https://www.jetbrains.com/rider) / [Visual Studio 2022](https://visualstudio.microsoft.com)
-* [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
+* [.NET 7.0](https://dotnet.microsoft.com/download/dotnet/7.0)
 
 ## 运行环境
 
 - [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet/3.1)
 - [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
+- [.NET 7.0](https://dotnet.microsoft.com/download/dotnet/7.0)
 
 ## 使用方式
 
@@ -99,6 +100,7 @@ Package  | NuGet | Downloads | TargetFrameworks
     - 商户进件（服务商）
     - 基础支付（服务商）
     - 分账（服务商）
+    - 商家转账到零钱
     - ...
 
 ## 致谢
