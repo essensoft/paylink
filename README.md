@@ -13,7 +13,7 @@
 [![Build status][github-action-image]][github-action-url]
 [![MIT][license-image]](LICENSE.md)
 
-[github-action-image]: https://img.shields.io/github/workflow/status/essensoft/paylink/build/main.svg?style=flat-square
+[github-action-image]: https://img.shields.io/github/actions/workflow/status/essensoft/paylink/build.yml?branch=dev&style=flat-square
 [github-action-url]: https://github.com/essensoft/paylink/actions/workflows/build.yml?query=branch%3Amain
 [license-image]: https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square
 
