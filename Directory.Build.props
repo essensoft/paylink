@@ -11,6 +11,7 @@
     <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/essensoft/paylink</RepositoryUrl>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
@@ -27,6 +28,7 @@
   <ItemGroup>
     <None Include="$(MSBuildThisFileDirectory)logo.png" Pack="true" Visible="false" PackagePath="" />
     <None Include="$(MSBuildThisFileDirectory)LICENSE.md" Pack="true" Visible="false" PackagePath="" />
+    <None Include="$(MSBuildThisFileDirectory)README.md" Pack="true" Visible="false" PackagePath="" />
   </ItemGroup>
 
   <ItemGroup>
