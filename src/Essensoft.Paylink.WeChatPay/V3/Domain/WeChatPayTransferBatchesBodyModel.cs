@@ -62,7 +62,7 @@ public class WeChatPayTransferBatchesBodyModel : WeChatPayObject
     /// 转账总笔数
     /// </summary>
     /// <remarks>
-    /// 个转账批次单最多发起三千笔转账。转账总笔数必须与批次内所有明细之和保持一致，否则无法发起转账操作
+    /// 一个转账批次单最多发起一千笔转账。转账总笔数必须与批次内所有明细之和保持一致，否则无法发起转账操作
     /// <para>示例值：200</para>
     /// </remarks>
     [JsonPropertyName("total_num")]
@@ -72,8 +72,19 @@ public class WeChatPayTransferBatchesBodyModel : WeChatPayObject
     /// 转账明细列表
     /// </summary>
     /// <remarks>
-    /// 发起批量转账的明细列表，最多三千笔
+    /// 发起批量转账的明细列表，最多一千笔
     /// </remarks>
     [JsonPropertyName("transfer_detail_list")]
     public List<TransferDetail> TransferDetailList { get; set; }
+
+
+    /// <summary>
+    /// 转账场景ID
+    /// </summary>
+    /// <remarks>
+    /// 该批次转账使用的转账场景，如不填写则使用商家的默认场景，如无默认场景可为空，可前往“商家转账到零钱-前往功能”中申请。
+    /// 如：1001-现金营销
+    /// </remarks>
+    [JsonPropertyName("transfer_scene_id")]
+    public string TransferSceneId { get; set; }
 }
