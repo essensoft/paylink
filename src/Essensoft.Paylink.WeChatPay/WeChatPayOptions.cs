@@ -10,6 +10,7 @@ namespace Essensoft.Paylink.WeChatPay
     /// </summary>
     public class WeChatPayOptions
     {
+        private string mchId;
         private string certificate;
         private string certificatePassword;
         private string privateKey;
@@ -36,7 +37,18 @@ namespace Essensoft.Paylink.WeChatPay
         /// <remarks>
         /// 商户号、服务商户号
         /// </remarks>
-        public string MchId { get; set; }
+        public string MchId
+        {
+            get => mchId;
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                {
+                    mchId = value;
+                    GetCertificateInfo();
+                }
+            }
+        }
 
         /// <summary>
         /// 子商户应用号
