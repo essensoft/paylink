@@ -37,7 +37,7 @@ namespace Essensoft.Paylink.WeChatPay.V3
         /// <param name="request">请求对象</param>
         /// <param name="options">配置选项</param>
         /// <returns>响应对象</returns>
-        Task<T> ExecuteAsync<T>(IWeChatPayPrivacyGetRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse
+        Task<T> ExecuteAsync<T>(IWeChatPayPrivacyGetRequest<T> request, WeChatPayOptions options) where T : WeChatPayResponse;
 
         /// <summary>
         /// 执行 WeChatPay V3 Post敏感信息请求。
