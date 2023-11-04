@@ -11,6 +11,8 @@ on:
       - 'src/**/*.csproj'
 
   pull_request:
+    branches:
+      - dev
     paths:
       - '**/*.props'
       - 'global.json'
@@ -28,7 +30,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - uses: actions/setup-dotnet@v2
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v3
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
