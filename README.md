@@ -1,6 +1,6 @@
 <p align="center">
   <a href="https://github.com/essensoft/paylink">
-    <img width="96" src="https://cdn.jsdelivr.net/gh/essensoft/paylink@main/logo.png">
+    <img width="96" src="https://cdn.jsdelivr.net/gh/essensoft/paylink@dev/logo.png">
   </a>
 </p>
 
@@ -23,9 +23,9 @@
 
 Package  | NuGet | Downloads | TargetFrameworks
 -------- | :---- | :-------- | ---------------
-[Essensoft.Paylink.Alipay][nuget-alipay-url] | ![NuGet][nuget-alipay-v-image] | ![Downloads][nuget-alipay-dt-image] | ![netstandard2.1][standard2.1-Y-image] ![netcoreapp3.1][netcoreapp3.1-Y-image] ![net6.0][net6.0-Y-image] ![net7.0][net7.0-Y-image]
-[Essensoft.Paylink.WeChatPay][nuget-wechatpay-url] | ![NuGet][nuget-wechatpay-v-image] | ![Downloads][nuget-wechatpay-dt-image] | ![netstandard2.1][standard2.1-Y-image] ![netcoreapp3.1][netcoreapp3.1-Y-image] ![net6.0][net6.0-Y-image] ![net7.0][net7.0-Y-image]
-[Essensoft.Paylink.Security][nuget-security-url] | ![NuGet][nuget-security-v-image] | ![Downloads][nuget-security-dt-image] | ![netstandard2.1][standard2.1-Y-image] ![net6.0][net6.0-Y-image] ![net7.0][net7.0-Y-image]
+[Essensoft.Paylink.Alipay][nuget-alipay-url] | ![NuGet][nuget-alipay-v-image] | ![Downloads][nuget-alipay-dt-image] | ![netstandard2.1][standard2.1-Y-image] ![netcoreapp3.1][netcoreapp3.1-Y-image] ![net6.0][net6.0-Y-image] ![net7.0][net7.0-Y-image] ![net8.0][net8.0-Y-image]
+[Essensoft.Paylink.WeChatPay][nuget-wechatpay-url] | ![NuGet][nuget-wechatpay-v-image] | ![Downloads][nuget-wechatpay-dt-image] | ![netstandard2.1][standard2.1-Y-image] ![netcoreapp3.1][netcoreapp3.1-Y-image] ![net6.0][net6.0-Y-image] ![net7.0][net7.0-Y-image] ![net8.0][net8.0-Y-image]
+[Essensoft.Paylink.Security][nuget-security-url] | ![NuGet][nuget-security-v-image] | ![Downloads][nuget-security-dt-image] | ![netstandard2.1][standard2.1-Y-image] ![net6.0][net6.0-Y-image] ![net7.0][net7.0-Y-image] ![net8.0][net8.0-Y-image]
 
 [nuget-alipay-url]: https://www.nuget.org/packages/Essensoft.Paylink.Alipay
 [nuget-alipay-v-image]: https://img.shields.io/nuget/v/Essensoft.Paylink.Alipay.svg?style=flat-square
@@ -40,18 +40,20 @@ Package  | NuGet | Downloads | TargetFrameworks
 [netcoreapp3.1-Y-image]: https://img.shields.io/badge/netcoreapp3.1-Y-brightgreen.svg?style=flat-square
 [net6.0-Y-image]: https://img.shields.io/badge/net6.0-Y-brightgreen.svg?style=flat-square
 [net7.0-Y-image]: https://img.shields.io/badge/net7.0-Y-brightgreen.svg?style=flat-square
+[net8.0-Y-image]: https://img.shields.io/badge/net8.0-Y-brightgreen.svg?style=flat-square
 
 ## 开发环境
 
 * Windows 11
-* [Rider 2022](https://www.jetbrains.com/rider) / [Visual Studio 2022](https://visualstudio.microsoft.com)
-* [.NET 7.0](https://dotnet.microsoft.com/download/dotnet/7.0)
+* [Rider 2023](https://www.jetbrains.com/rider) / [Visual Studio 2022](https://visualstudio.microsoft.com)
+* [.NET 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
 
 ## 运行环境
 
 - [.NET Core 3.1](https://dotnet.microsoft.com/download/dotnet/3.1)
 - [.NET 6.0](https://dotnet.microsoft.com/download/dotnet/6.0)
 - [.NET 7.0](https://dotnet.microsoft.com/download/dotnet/7.0)
+- [.NET 8.0](https://dotnet.microsoft.com/download/dotnet/8.0)
 
 ## 使用方式
 

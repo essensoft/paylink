@@ -21,8 +21,8 @@
     <GenerateDocumentationFile Condition="'$(Configuration)' == 'Release'">true</GenerateDocumentationFile>
     <GeneratePackageOnBuild Condition="'$(Configuration)' == 'Release'">true</GeneratePackageOnBuild>
     <LangVersion>latest</LangVersion>
-    <SystemTextJsonPackageVersion>7.0.1</SystemTextJsonPackageVersion>
-    <MicrosoftExtensionsHttpPackageVersion>7.0.0</MicrosoftExtensionsHttpPackageVersion>
+    <SystemTextJsonPackageVersion>8.0.0</SystemTextJsonPackageVersion>
+    <MicrosoftExtensionsHttpPackageVersion>8.0.0</MicrosoftExtensionsHttpPackageVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>
