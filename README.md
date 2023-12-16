@@ -14,7 +14,7 @@
 [![MIT][license-image]](LICENSE.md)
 
 [github-action-image]: https://img.shields.io/github/actions/workflow/status/essensoft/paylink/build.yml?branch=dev&style=flat-square
-[github-action-url]: https://github.com/essensoft/paylink/actions/workflows/build.yml?query=branch%3Amain
+[github-action-url]: https://github.com/essensoft/paylink/actions/workflows/build.yml?query=branch%3Adev
 [license-image]: https://img.shields.io/badge/License-MIT-blue.svg?style=flat-square
 
 </div>
@@ -70,7 +70,7 @@ Package  | NuGet | Downloads | TargetFrameworks
 * 钉钉群
     - <details>
         <summary>Paylink 交流群: 34090889(点击显示二维码)</summary>
-        <img src="https://cdn.jsdelivr.net/gh/essensoft/paylink@main/qrcode-dingtalk.png" width="300">
+        <img src="https://cdn.jsdelivr.net/gh/essensoft/paylink@dev/qrcode-dingtalk.png" width="300">
       </details>
 
 ## 支持渠道
